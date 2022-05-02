@@ -64,8 +64,9 @@ export interface Row {
 	left: string;
 	right: string;
 	xp: number;
-	xpCumulative: number;
 	divider: boolean;
+	dividerText: string;
 	carryoverXp: number;
-	xpUnlock:boolean
+	xpUnlock: boolean
+	dividerXpCumulativeUnlock: boolean;
 }
