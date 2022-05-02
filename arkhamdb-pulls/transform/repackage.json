@@ -6,6 +6,7 @@
   },
   {
     "sources": ["dwl", "tmm", "tece", "bota", "uau", "wda", "litas"],
-    "addAlias": "The Dunwich Legacy Investigator Expansion"
+    "addAlias": "The Dunwich Legacy Investigator Expansion",
+    "addParentCode": "dwl"
   }
 ]

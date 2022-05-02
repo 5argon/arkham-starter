@@ -20,6 +20,18 @@ export interface AhdbTaboo {
   cards: TabooItem[];
 }
 
+export interface AhdbTabooProcessing {
+  id: number;
+  code: string;
+  name: string;
+  active: number;
+  date_start: string;
+  date_update: string;
+  cards: TabooItemString;
+}
+
+export type TabooItemString = string;
+
 export interface TabooItem {
   code: string;
   xp?: number;
@@ -34,6 +46,10 @@ export interface AhdbCard {
   type_name: string;
   faction_code: string;
   faction_name: string;
+  faction2_code?: string;
+  faction2_name?: string;
+  faction3_code?: string;
+  faction3_name?: string;
   duplicate_of_code?: string;
   duplicate_of_name?: string;
   position: number;
@@ -92,11 +108,13 @@ export interface Repackage {
   sources: string[];
   forwardTo?: string;
   addAlias?: string;
+  addParentCode?: string;
 }
 
 export interface RepackageMaps {
   packForwardMap: { [k: string]: string };
   packAliasMap: { [k: string]: string };
+  packParentCodeMap: { [k: string]: string };
 }
 
 export type CardList = { [k: string]: number } | null;
@@ -123,4 +141,30 @@ export interface AhdbDeck {
   tags: string;
   previous_deck: number | null;
   next_deck: number | null;
+}
+
+// export interface PopupDatabase {
+//   items: PopupDatabaseItem[];
+//   stringMapping: PopupDatabaseStringMapping;
+// }
+
+// export interface PopupDatabaseStringMapping {
+//   classToName: { [k: number]: string };
+//   packCodeToName: { [k: string]: string };
+//   subPackCodeToName: { [k: string]: string };
+// }
+
+export interface PopupDatabaseItem {
+  name: string;
+  subName: string;
+  packCode: string;
+  packName: string;
+  subPackName: string;
+  position: number;
+  class1: string;
+  class2?: string;
+  class3?: string;
+  xp: number;
+  xpTaboo: number;
+  exceptional: boolean;
 }
