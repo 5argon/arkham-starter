@@ -37,6 +37,7 @@ export interface TabooItem {
   xp?: number;
   text?: string;
   deck_limit?: number;
+  exceptional?: boolean;
 }
 
 export interface AhdbCard {
@@ -68,7 +69,7 @@ export interface AhdbCard {
   skill_agility?: number;
   skill_willpower?: number;
   skill_wild?: number;
-  xp: number;
+  xp?: number;
   health?: number;
   sanity?: number;
   health_per_investigator: boolean;
@@ -155,16 +156,21 @@ export interface AhdbDeck {
 // }
 
 export interface PopupDatabaseItem {
-  name: string;
-  subName: string;
-  packCode: string;
-  packName: string;
-  subPackName: string;
-  position: number;
-  class1: string;
-  class2?: string;
-  class3?: string;
-  xp: number;
-  xpTaboo: number;
-  exceptional: boolean;
+  id: string;
+  n: string;
+  sn: string;
+  pc: string;
+  pn: string;
+  spn: string;
+  ps: number;
+  pss: string;
+  c1: string;
+  c2?: string;
+  c3?: string;
+  xp?: number;
+  xpat: number;
+  xps: string;
+  xpts: string;
+  ex: boolean;
+  ext: boolean;
 }

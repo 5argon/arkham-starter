@@ -15,11 +15,14 @@ const taboos = await publicTaboos();
 const repackageMap = await createRepackageMaps();
 const latestTaboo: AhdbTaboo | null = taboos.length > 0 ? taboos[0] : null;
 const tabooXpMap: { [k: string]: number } = {};
+const tabooExceptionalMap: { [k: string]: boolean } = {};
 if (latestTaboo !== null) {
-  console.log(latestTaboo);
   latestTaboo.cards.forEach((x) => {
     if (x.xp !== undefined) {
       tabooXpMap[x.code] = x.xp;
+    }
+    if (x.exceptional !== undefined) {
+      tabooExceptionalMap[x.code] = x.exceptional;
     }
   });
 }
@@ -30,25 +33,35 @@ allCards.forEach((x) => {
     return;
   }
   popupDatabaseItems.push({
-    name: x.name,
-    subName: x.subname,
-    position: x.position,
-    packCode:
+    id: x.code,
+    n: x.name,
+    sn: x.subname,
+    ps: x.position,
+    pss: x.position.toString(),
+    pc:
       x.pack_code in repackageMap.packParentCodeMap
         ? repackageMap.packParentCodeMap[x.pack_code]
         : x.pack_code,
-    packName:
+    pn:
       x.pack_code in repackageMap.packParentCodeMap
         ? repackageMap.packAliasMap[x.pack_code]
         : x.pack_name,
-    subPackName:
-      x.pack_code in repackageMap.packParentCodeMap ? x.pack_name : "",
-    exceptional: x.exceptional,
+    spn: x.pack_code in repackageMap.packParentCodeMap ? x.pack_name : "",
+    ex: x.exceptional,
+    ext:
+      x.code in tabooExceptionalMap
+        ? tabooExceptionalMap[x.code]
+        : x.exceptional,
     xp: x.xp,
-    xpTaboo: x.code in tabooXpMap ? tabooXpMap[x.code] : 0,
-    class1: x.faction_code,
-    class2: x.faction2_code,
-    class3: x.faction3_code,
+    xpat: x.code in tabooXpMap ? tabooXpMap[x.code] : 0,
+    xps: x.xp?.toString() ?? "",
+    xpts:
+      x.xp === undefined
+        ? ""
+        : (x.xp + (x.code in tabooXpMap ? tabooXpMap[x.code] : 0)).toString(),
+    c1: x.faction_code,
+    c2: x.faction2_code,
+    c3: x.faction3_code,
   });
 });
 

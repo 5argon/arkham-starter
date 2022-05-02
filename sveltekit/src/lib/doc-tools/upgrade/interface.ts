@@ -26,6 +26,15 @@ export enum Alignment {
 	Right
 }
 
+export interface AllColumns {
+	mark: Column;
+	left: Column;
+	arrow: Column;
+	right: Column;
+	xp: Column;
+	xpCumulative: Column;
+}
+
 export interface Column {
 	title: string;
 	alignment: Alignment;
@@ -35,16 +44,12 @@ export interface Column {
 }
 
 export enum ColumnSpecial {
-	None,
+	Mark,
 	LeftSide,
 	RightSide,
-
-	/**
-	 * Disappear if only left side exists.
-	 * Disappear if right side is not a card.
-	 */
 	Arrow,
-	Xp
+	Xp,
+	XpCumulative
 }
 
 export interface UpgradeTableData {
@@ -55,5 +60,12 @@ export interface UpgradeTableData {
 }
 
 export interface Row {
-	data: string[];
+	mark: string;
+	left: string;
+	right: string;
+	xp: number;
+	xpCumulative: number;
+	divider: boolean;
+	carryoverXp: number;
+	xpUnlock:boolean
 }
