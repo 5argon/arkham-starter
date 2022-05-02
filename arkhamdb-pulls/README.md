@@ -9,7 +9,7 @@ This `decks` is an array of `number` of public deck IDs of that user that would 
 ## Initiating the pull
 
 ```
-deno run --allow-read --allow-write pull.ts
+deno run --allow-read --allow-write --allow-net pull.ts
 ```
 
 `pulls` folder will be cleaned up and repopulated with new data once it is done.

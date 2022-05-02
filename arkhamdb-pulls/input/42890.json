@@ -1,1 +1,11 @@
-{ "decks": [36513, 36402, 36548, 36538, 36478] }
+{
+  "id": 42890,
+  "username": "Valentin1331",
+  "deckGroups": [
+    {
+      "name": "Repackaged The Dunwich Legacy Campaign",
+      "decks": [36513, 36402, 36548, 36538, 36478]
+    }
+  ],
+  "decks": []
+}

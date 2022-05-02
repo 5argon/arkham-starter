@@ -1,21 +1,17 @@
 import { path } from "../mod.ts";
-import { deckDirectory } from "./constants.ts";
-import { UserDecks, UserJson } from "./interfaces.ts";
-
+import { inputDirectory } from "./constants.ts";
+import { UserDecks } from "./interfaces.ts";
 
 export async function readUserDecks(): Promise<UserDecks[]> {
   const userDecks: UserDecks[] = [];
 
-  for await(const dirEntry of Deno.readDir(deckDirectory)) {
-    if(dirEntry.isFile) {
+  for await (const dirEntry of Deno.readDir(inputDirectory)) {
+    if (dirEntry.isFile) {
       const jsonString = await Deno.readTextFile(
-        path.join(deckDirectory, dirEntry.name)
+        path.join(inputDirectory, dirEntry.name)
       );
-      const json = JSON.parse(jsonString) as UserJson;
-      userDecks.push({
-        id: parseInt(dirEntry.name.replace(".json", "")),
-        decks: json.decks,
-      });
+      const json = JSON.parse(jsonString) as UserDecks;
+      userDecks.push(json);
     }
   }
 

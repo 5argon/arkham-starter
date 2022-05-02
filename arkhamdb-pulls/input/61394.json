@@ -1,1 +1,15 @@
-{ "decks": [35838, 35693, 35460, 35588, 36153, 35511, 36127] }
+{
+  "id": 61394,
+  "username": "5argon",
+  "deckGroups": [
+    {
+      "name": "Edge of the Earth",
+      "decks": [35838, 35693, 35460, 35588, 35511]
+    },
+    {
+      "name": "Core Set Investigators in Edge of the Earth",
+      "decks": [36153, 36127]
+    }
+  ],
+  "decks": []
+}
