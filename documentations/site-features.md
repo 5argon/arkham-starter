@@ -8,9 +8,21 @@ Combined with a hard rule that deck must include a guide, this should ensure the
 
 Author can control what snippet of an entire guide is pulled to here by a special syntax they can include at the bottom of deck description.
 
-## Rich listing
+## Transformed card pool
 
-The listing heavily use icons based of that cycle, so beginners can see at glance which deck they could or could not build. The search and filter tool is also tuned for beginners.
+ArkhamDB is a "database" and has the most granular unit as each mythos packs, and also must account for encounter cards as well. This data organization is appropriate for that site but could be specialized by transforming them to be more suitable to new repackaged format.
+
+The site act as if old release format never existed, by providing some mapping or alias to ArkhamDB's database.
+
+For example, there is no "The Miskatonic Museum" pack anymore but rather "Dunwich Legacy Investigator Expansion". It also transforms all Core Set card IDs from ArkhamDB to Revised Core Set equivalent. The expanded cards of Revised Core Set is also preferred. e.g. Including Charisma from either then Dunwich cycle or Revised Core Set in ArkhamDB are all forwarded to Revised Core Set.
+
+## Rich deck listing
+
+Packs required is not visible in ArkhamDB forcing deck authors to include such information in the title. For beginners the boxes required is as important as everything else as they want to try what they could build.
+
+The listing here heavily use icons based of that cycle, so beginners can see at glance which deck they could or could not build. The search and filter tool is also tuned for beginners.
+
+The listing also offers a peek into the deck in an interesting way with many hard-coded enhancements, such as whether a deck is using deckbuilding permanents such as Underworld Support or not or choice chosen for the deckbuilding options.
 
 ## To-the-point deck name
 
@@ -35,12 +47,6 @@ For example, the interface can show all the 5 splash cards of Dunwich investigat
 Usage of Parallel Investigator is more obvious in the listing graphics, along with the choice of front and/or back, and whether to use Advanced cards or not.
 
 In ArkhamDB, investigator's signature card are automatically included and cannot be removed even if you intended the deck to work with Advanced version of that card. It can be added but would appear along with the original one (in the main deck or side deck) and maybe confusing to beginners. Here, the UI will try to explain better that Advanced version is preferred in this deck.
-
-## Transformed card pool
-
-Card list will be transformed to be based on repackaged format. The site act as if old release format never existed.
-
-For example, there is no "The Miskatonic Museum" pack anymore but rather "Dunwich Legacy Investigator Expansion". It also transforms all Core Set card IDs from ArkhamDB to Revised Core Set equivalent. The expanded cards of Revised Core Set is also preferred. e.g. Including Charisma from either then Dunwich cycle or Revised Core Set in ArkhamDB are all forwarded to Revised Core Set.
 
 ## URL includes author's username
 

@@ -10,6 +10,23 @@ export interface DeckGroup {
   decks: number[];
 }
 
+export interface AhdbTaboo {
+  id: number;
+  code: string;
+  name: string;
+  active: number;
+  date_start: string;
+  date_update: string;
+  cards: TabooItem[];
+}
+
+export interface TabooItem {
+  code: string;
+  xp?: number;
+  text?: string;
+  deck_limit?: number;
+}
+
 export interface AhdbCard {
   pack_code: string;
   pack_name: string;
@@ -17,6 +34,8 @@ export interface AhdbCard {
   type_name: string;
   faction_code: string;
   faction_name: string;
+  duplicate_of_code?: string;
+  duplicate_of_name?: string;
   position: number;
   exceptional: boolean;
   myriad: false;
@@ -49,7 +68,35 @@ export interface AhdbCard {
   double_sided: boolean;
   octgn_id: string;
   url: string;
-  imagesrc: string;
+  imagesrc?: string;
+  duplicated_by?: string[];
+}
+
+export interface AhdbPack {
+  name: string;
+  code: string;
+  position: number;
+  cycle_position: number;
+  available: string;
+  known: number;
+  total: number;
+  url: string;
+  id: number;
+}
+
+export interface Repackages {
+  repackages: Repackage[];
+}
+
+export interface Repackage {
+  sources: string[];
+  forwardTo?: string;
+  addAlias?: string;
+}
+
+export interface RepackageMaps {
+  packForwardMap: { [k: string]: string };
+  packAliasMap: { [k: string]: string };
 }
 
 export type CardList = { [k: string]: number } | null;

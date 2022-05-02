@@ -17,6 +17,11 @@ function gatherUniqueCardIdsInner(deck: AhdbDeck): string[] {
   g1.forEach((x) => set.add(x));
   g2.forEach((x) => set.add(x));
   g3.forEach((x) => set.add(x));
+  set.add(deck.investigator_code)
+
+  // All cards mentioned in the description should also be gathered.
+  
+
   return Array.from(set);
 }
 

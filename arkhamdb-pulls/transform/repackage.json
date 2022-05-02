@@ -1,0 +1,11 @@
+[
+  {
+    "sources": ["core"],
+    "forwardTo": "rcore",
+    "addAlias": "Revised Core Set"
+  },
+  {
+    "sources": ["dwl", "tmm", "tece", "bota", "uau", "wda", "litas"],
+    "addAlias": "The Dunwich Legacy Investigator Expansion"
+  }
+]

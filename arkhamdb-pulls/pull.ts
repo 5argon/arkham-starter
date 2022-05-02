@@ -8,6 +8,7 @@ import {
   writeCards,
   writeDecks,
 } from "./scripts/process-user-deck/write-json.ts";
+import { downloadImages } from "./scripts/process-user-deck/download-images.ts";
 
 const userDecksPromise = readUserDecks();
 const prepareOuterFoldersPromise = prepareOuterFolders();
@@ -29,3 +30,6 @@ const writeDeckPromises = writeDecks(decks);
 const writeCardPromises = writeCards(cards);
 await Promise.all([writeDeckPromises, writeCardPromises]);
 console.log("Finished writing fetched data.");
+
+await downloadImages(cards)
+console.log("Downloaded card images.");
