@@ -1,4 +1,6 @@
 <script>
+	import { CardPackIcon } from '$lib/design/interface/card-pack'
+
 	import { CardClass } from '../../interface/card-class'
 	import Story from '../../story/story.svelte'
 	import CardSpan from './CardSpan.svelte'
@@ -18,12 +20,7 @@
 </Story>
 
 <Story name="Neutral">
-	<CardSpan
-		amount={2}
-		text={'Neutral Card'}
-		class1={CardClass.Neutral}
-		color={true}
-	/>
+	<CardSpan amount={2} text={'Neutral Card'} class1={CardClass.Neutral} color={true} />
 </Story>
 
 <Story name="Guardian">
@@ -37,39 +34,19 @@
 </Story>
 
 <Story name="Seeker">
-	<CardSpan
-		amount={2}
-		text={'Seeker Card'}
-		class1={CardClass.Seeker}
-		color={true}
-	/>
+	<CardSpan amount={2} text={'Seeker Card'} class1={CardClass.Seeker} color={true} />
 </Story>
 
 <Story name="Rogue">
-	<CardSpan
-		amount={2}
-		text={'Rogue Card'}
-		class1={CardClass.Rogue}
-		color={true}
-	/>
+	<CardSpan amount={2} text={'Rogue Card'} class1={CardClass.Rogue} color={true} />
 </Story>
 
 <Story name="Mystic">
-	<CardSpan
-		amount={2}
-		text={'Mystic Card'}
-		class1={CardClass.Mystic}
-		color={true}
-	/>
+	<CardSpan amount={2} text={'Mystic Card'} class1={CardClass.Mystic} color={true} />
 </Story>
 
 <Story name="Survivor">
-	<CardSpan
-		amount={2}
-		text={'Survivor Card'}
-		class1={CardClass.Survivor}
-		color={true}
-	/>
+	<CardSpan amount={2} text={'Survivor Card'} class1={CardClass.Survivor} color={true} />
 </Story>
 
 <Story name="Two classes">
@@ -93,6 +70,16 @@
 	/>
 </Story>
 
+<Story name="No color">
+	<CardSpan
+		amount={2}
+		text={'No Color'}
+		class1={CardClass.Guardian}
+		class2={CardClass.Rogue}
+		class3={CardClass.Survivor}
+	/>
+</Story>
+
 <Story name="XP">
 	<CardSpan
 		text={'XP Test'}
@@ -101,5 +88,15 @@
 		xp={4}
 		xpTaboo={2}
 		exceptional={true}
+	/>
+</Story>
+
+<Story name="Pack">
+	<CardSpan
+		text={'From Edge of the Earth'}
+		class1={CardClass.Guardian}
+		color={true}
+		packIcon={CardPackIcon.EdgeOfTheEarth}
+		packNumber={123}
 	/>
 </Story>

@@ -49,19 +49,19 @@ export function getPackStaticUrl(pack: CardPackIcon, color: CardPackIconColor): 
 			break
 
 		case CardPackIcon.NathanielCho:
-			fileName = '_'
+			fileName = 'Nathaniel Cho'
 			break
 		case CardPackIcon.HarveyWalters:
-			fileName = ''
+			fileName = 'Harvey Walters'
 			break
 		case CardPackIcon.WinifredHabbamock:
-			fileName = ''
+			fileName = 'Winifred Habbamock'
 			break
 		case CardPackIcon.JacquelineFine:
-			fileName = ''
+			fileName = 'Jacqueline Fine'
 			break
 		case CardPackIcon.StellaClark:
-			fileName = ''
+			fileName = 'Stella Clark'
 			break
 
 		case CardPackIcon.TheDunwichLegacy:

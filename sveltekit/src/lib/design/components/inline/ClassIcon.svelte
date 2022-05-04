@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CardClass } from '$lib/design/interface/card-class'
-	import { imageIconPath } from '$lib/design/interface/path'
+	import { imageIconClassPath } from '$lib/design/interface/path'
 	export let cardClass: CardClass
 	let imagePath: string
 	let iconAlt: string
@@ -11,27 +11,44 @@
 				iconAlt = ''
 				break
 			case CardClass.Guardian:
-				imagePath = imageIconPath + 'guardian.png'
+				imagePath = imageIconClassPath + 'guardian.png'
 				iconAlt = 'Guardian class icon'
 				break
 			case CardClass.Seeker:
-				imagePath = imageIconPath + 'seeker.png'
+				imagePath = imageIconClassPath + 'seeker.png'
 				iconAlt = 'Seeker class icon'
 				break
 			case CardClass.Rogue:
-				imagePath = imageIconPath + 'rogue.png'
+				imagePath = imageIconClassPath + 'rogue.png'
 				iconAlt = 'Rogue class icon'
 				break
 			case CardClass.Mystic:
-				imagePath = imageIconPath + 'mystic.png'
+				imagePath = imageIconClassPath + 'mystic.png'
 				iconAlt = 'Mystic class icon'
 				break
 			case CardClass.Survivor:
-				imagePath = imageIconPath + 'survivor.png'
+				imagePath = imageIconClassPath + 'survivor.png'
 				iconAlt = 'Survivor class icon'
 				break
 		}
 	}
 </script>
 
-<img src={imagePath} alt={iconAlt} />
+{#if cardClass !== CardClass.Neutral}
+	<span class="outer-square">
+		<img class="class-icon" src={imagePath} alt={iconAlt} />
+	</span>
+{/if}
+
+<style>
+	.outer-square {
+		width: 15px;
+		height: 15px;
+	}
+
+	.class-icon {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+</style>
