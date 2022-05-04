@@ -3,7 +3,11 @@ export const allIcons = {
 	rightDouble: ic('angles-right-duotone'),
 	arrowUp: ic('arrow-up-solid'),
 	arrowDown: ic('arrow-down-solid'),
+	arrowLeftBordered: ic('left-regular'),
+	arrowRightBordered: ic('right-regular'),
 	delete: ic('trash-regular'),
+	unlock: ic('lock-open-regular'),
+	collapse: ic('arrows-to-line-regular'),
 }
 
 function ic(s: string): string {

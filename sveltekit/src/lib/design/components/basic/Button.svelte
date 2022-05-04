@@ -19,6 +19,6 @@
 	.button-span {
 		display: inline-flex;
 		margin: 0px 2px;
-		padding: 4px 4px;
+		padding: 2px 4px;
 	}
 </style>
