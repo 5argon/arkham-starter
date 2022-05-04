@@ -1,0 +1,1 @@
+export const imageIconPath = "/image/icon/"
