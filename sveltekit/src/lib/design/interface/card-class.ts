@@ -1,11 +1,5 @@
-export enum CardClass {
-	Neutral,
-	Guardian,
-	Seeker,
-	Rogue,
-	Mystic,
-	Survivor,
-}
+import { CardClass } from '$lib/core/card-class'
+export { CardClass }
 
 export function classToFontColorCss(
 	c1: CardClass | null,

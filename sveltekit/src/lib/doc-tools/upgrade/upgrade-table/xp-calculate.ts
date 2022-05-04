@@ -1,4 +1,4 @@
-import type { LazyPopupDatabase, PopupDatabase } from '$lib/popup-database'
+import type { LazyPopupDatabase, PopupDatabase } from '$lib/core/popup-database'
 import type { GlobalSettings, Row } from '../interface'
 
 export interface CalculatedXp {
@@ -11,7 +11,7 @@ export async function calculateXps(
 	rows: Row[],
 	gs: GlobalSettings,
 ): Promise<CalculatedXp> {
-	console.log("Calc!")
+	console.log('Calc!')
 	const db = await popupDatabase
 	let cumulative = 0
 	const costs: number[] = []
@@ -65,7 +65,7 @@ function findXpDifference(
 function findXp(card: string, db: PopupDatabase, gs: GlobalSettings): number {
 	const c = db.getById(card)
 	if (c !== null) {
-		return (c.xp ?? 0) + (gs.taboo ? c.xpat : 0)
+		return ((c.xp ?? 0) + (gs.taboo ? c.xpat : 0)) * (c.ex || c.ext ? 2 : 1)
 	} else {
 		return 0
 	}

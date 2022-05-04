@@ -1,29 +1,6 @@
-export enum CardPackIcon {
-	CoreSet,
-	RevisedCoreSet,
-	ParallelInvestigator,
-	Novella,
-
-	NathanielCho,
-	HarveyWalters,
-	WinifredHabbamock,
-	JacquelineFine,
-	StellaClark,
-
-	TheDunwichLegacy,
-	ThePathToCarcosa,
-	TheForgottenAge,
-	TheCircleUndone,
-	TheDreamEaters,
-	TheInsmouthConspiracy,
-	EdgeOfTheEarth,
-
-	ReturnToTheNightOfTheZealot,
-	ReturnToTheDunwichLegacy,
-	ReturnToThePathToCarcosa,
-	ReturnToTheCircleUndone,
-	ReturnToTheForgottenAge,
-}
+import { CardPack as CardPackIcon } from '$lib/core/card-pack'
+import { imageIconPackPath, imageIconPackPathBlack, imageIconPackPathWhite } from './path'
+export { CardPackIcon }
 
 export enum CardPackIconColor {
 	Black,
@@ -31,8 +8,9 @@ export enum CardPackIconColor {
 }
 
 export function getPackStaticUrl(pack: CardPackIcon, color: CardPackIconColor): string {
-	const base = '/image/icon/pack/'
-	const withColor = base + (color === CardPackIconColor.White ? 'white' : 'black')
+	const withColor =
+		imageIconPackPath +
+		(color === CardPackIconColor.White ? imageIconPackPathWhite : imageIconPackPathBlack)
 	let fileName: string
 	switch (pack) {
 		case CardPackIcon.CoreSet:

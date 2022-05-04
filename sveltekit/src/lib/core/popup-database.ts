@@ -1,4 +1,4 @@
-import pdb from './popupdb.json'
+import pdb from '../data/popupdb.json'
 export type LazyPopupDatabase = Promise<PopupDatabase>
 
 export class PopupDatabase {

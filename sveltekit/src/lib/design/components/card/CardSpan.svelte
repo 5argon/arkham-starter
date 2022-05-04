@@ -119,13 +119,13 @@
 		display: inline-flex;
 		align-items: center;
 		font-family: 'SerifText';
-		font-size: 0.8em;
+		font-size: 0.7em;
 		color: rgb(0.3, 0.3, 0.3);
 		margin-left: 4px;
 	}
 
 	.pack-icon {
-		width: 12px;
+		width: 10px;
 		margin-right:2px;
 	}
 </style>

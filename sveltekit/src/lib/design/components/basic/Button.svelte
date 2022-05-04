@@ -1,14 +1,19 @@
 <script context="module" lang="ts">
-	export interface CardBlockButtonProp {
+	export interface ButtonProp {
 		label: string
 		onClick: () => void
 	}
 </script>
 
 <script lang="ts">
-	import Button from '../basic/Button.svelte'
 	export let label: string
 	export let onClick: () => void
 </script>
 
-<Button {label} {onClick} />
+<input type="button" class="button-span" value={label} on:click={onClick} />
+
+<style>
+	.button-span {
+		margin: 0px 2px;
+	}
+</style>

@@ -1,31 +1,5 @@
-export enum TextIcon {
-	StatWillpower,
-	StatCombat,
-	StatIntellect,
-	StatAgility,
-	StatWild,
-
-	ClassGuardian,
-	ClassSeeker,
-	ClassRogue,
-	ClassMystic,
-	ClassSurvivor,
-
-	TokenSkull,
-	TokenCultist,
-	TokenTablet,
-	TokenElderThing,
-	TokenElderSign,
-	TokenAutoFail,
-
-	ActionTrigger,
-	ActionFast,
-	ActionReaction,
-
-	Unique,
-	PerInvestigator,
-	Weakness,
-}
+import { TextIcon } from '$lib/core/text-icon'
+export { TextIcon }
 
 export const textIconFontClass = 'arkham-icon-font'
 
