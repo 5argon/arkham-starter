@@ -24,7 +24,7 @@
 
 <div class="card-block-div">
 	{#each leftButtons as b}
-		<CardBlockButton label={b.label} onClick={b.onClick} />
+		<CardBlockButton label={b.label} iconPath={b.iconPath} onClick={b.onClick} />
 	{/each}
 	<span class="block">
 		<CardSpan
@@ -41,7 +41,7 @@
 		/>
 	</span>
 	{#each rightButtons as b}
-		<CardBlockButton label={b.label} onClick={b.onClick} />
+		<CardBlockButton label={b.label} iconPath={b.iconPath} onClick={b.onClick} />
 	{/each}
 </div>
 
@@ -56,6 +56,6 @@
 		border: 1px solid black;
 		padding: 2px 10px;
 		margin: 4px 2px;
-		box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.2);
+		box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.2);
 	}
 </style>

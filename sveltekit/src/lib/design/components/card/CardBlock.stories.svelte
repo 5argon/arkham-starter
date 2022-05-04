@@ -4,6 +4,7 @@
 	import { CardClass } from '../../interface/card-class'
 	import Story from '../../story/story.svelte'
 	import CardBlock from './CardBlock.svelte'
+	import UnknownCardBlock from './UnknownCardBlock.svelte'
 </script>
 
 <Story name="Block stacking">
@@ -76,4 +77,8 @@
 			},
 		]}
 	/>
+</Story>
+
+<Story name="Unknown">
+	<UnknownCardBlock cardId={12345}/>
 </Story>

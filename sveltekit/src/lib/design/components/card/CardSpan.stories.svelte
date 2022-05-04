@@ -4,6 +4,7 @@
 	import { CardClass } from '../../interface/card-class'
 	import Story from '../../story/story.svelte'
 	import CardSpan from './CardSpan.svelte'
+	import UnknownCardSpan from './UnknownCardSpan.svelte'
 </script>
 
 <Story name="No amount">
@@ -99,4 +100,8 @@
 		packIcon={CardPackIcon.EdgeOfTheEarth}
 		packNumber={123}
 	/>
+</Story>
+
+<Story name="Unknown">
+	<UnknownCardSpan cardId={12345}/>
 </Story>
