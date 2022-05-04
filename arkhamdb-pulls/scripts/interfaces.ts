@@ -142,6 +142,7 @@ export interface AhdbDeck {
   tags: string;
   previous_deck: number | null;
   next_deck: number | null;
+  problem: string | null;
 }
 
 // export interface PopupDatabase {

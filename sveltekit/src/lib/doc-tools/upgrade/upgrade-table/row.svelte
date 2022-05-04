@@ -3,7 +3,7 @@
 		ColumnSpecial,
 		type AllColumns,
 		type Column,
-		type Row
+		type Row,
 	} from '$lib/doc-tools/upgrade/interface'
 	import EditableCell from './editable-cell.svelte'
 	import Divider from './divider.svelte'
@@ -11,8 +11,11 @@
 	import RowActionFront from './row-action-front.svelte'
 	import RowActionBack from './row-action-back.svelte'
 	import type { RowActionEvents, RowEditEvents } from './row-events'
+	import HeaderRow from './header-row.svelte'
 
 	export let row: Row
+	export let calculatedXp: number
+	export let calculatedCumulativeXp: number
 	export let rowActionEvents: RowActionEvents
 	export let rowEditEvents: RowEditEvents
 	export let cols: AllColumns
@@ -20,7 +23,6 @@
 	function shouldDisableEditing(c: Column): boolean {
 		switch (c.special) {
 			case ColumnSpecial.Arrow:
-			case ColumnSpecial.XpCumulative:
 				return true
 			default:
 				return false
@@ -39,17 +41,30 @@
 	}
 </script>
 
-<tr>
+{#if row.divider}
+	<tr><td class="divider-padding" /></tr>
+	<HeaderRow {cols} />
+{/if}
+<tr class={row.divider ? 'divider-row' : ''}>
 	<RowActionFront
 		divider={row.divider}
 		onInsertTop={rowActionEvents.onAddAbove}
 		onInsertBottom={rowActionEvents.onAddBelow}
 		onDelete={rowActionEvents.onDelete}
+		onToggle={rowEditEvents.onDividerChanged}
 	/>
 	{#if row.divider}
-		<td colspan={8}>
-			<Divider />
-		</td>
+		<Divider
+			text={row.dividerText}
+			prefix={cols.xpCumulative.prefix}
+			suffix={cols.xpCumulative.suffix}
+			unlocked={row.dividerXpCumulativeUnlock}
+			onChange={(e) => {}}
+			onEndEdit={(e) => {
+				rowEditEvents.onDividerTextChanged(e)
+			}}
+			xpCarryover={calculatedCumulativeXp}
+		/>
 	{:else}
 		<td>
 			<EditableCell
@@ -63,6 +78,7 @@
 				onEndEdit={(e) => {
 					rowEditEvents.onMarkChanged(e)
 				}}
+				rightAlign={false}
 			/>
 		</td>
 		<td>
@@ -77,6 +93,7 @@
 				onEndEdit={(e) => {
 					rowEditEvents.onLeftChanged(e)
 				}}
+				rightAlign={false}
 			/>
 		</td>
 		<RowActionUpDown />
@@ -90,6 +107,7 @@
 				greyOutEditing={false}
 				onChange={(e) => {}}
 				onEndEdit={(e) => {}}
+				rightAlign={false}
 			/>
 		</td>
 		<td>
@@ -104,12 +122,13 @@
 				onEndEdit={(e) => {
 					rowEditEvents.onRightChanged(e)
 				}}
+				rightAlign={false}
 			/>
 		</td>
 		<RowActionUpDown />
 		<td>
 			<EditableCell
-				currentText={row.xp.toString()}
+				currentText={row.xpUnlock ? row.xp.toString() : calculatedXp.toString()}
 				prefixText={cols.xp.prefix}
 				suffixText={cols.xp.suffix}
 				disableEditing={shouldDisableEditing(cols.xp)}
@@ -117,23 +136,38 @@
 				greyOutEditing={!row.xpUnlock}
 				onChange={(e) => {}}
 				onEndEdit={(e) => {}}
+				rightAlign={true}
 			/>
 		</td>
 		<td>
 			<EditableCell
-				currentText={"0"}
+				currentText={calculatedCumulativeXp.toString()}
 				prefixText={cols.xpCumulative.prefix}
 				suffixText={cols.xpCumulative.suffix}
 				disableEditing={shouldDisableEditing(cols.xpCumulative)}
 				smallBox={shouldHaveSmallBox(cols.xpCumulative)}
-				greyOutEditing={false}
+				greyOutEditing={true}
 				onChange={(e) => {}}
 				onEndEdit={(e) => {}}
+				rightAlign={true}
 			/>
 		</td>
+	{/if}
+	{#if row.divider}
+		<RowActionBack
+			xpLock={row.dividerXpCumulativeUnlock}
+			onXpLockChanged={(e) => rowEditEvents.onXpCumulativeLockChanged(e)}
+		/>
+	{:else}
 		<RowActionBack
 			xpLock={row.xpUnlock}
 			onXpLockChanged={(e) => rowEditEvents.onXpLockChanged(e)}
 		/>
 	{/if}
 </tr>
+
+<style>
+	.divider-padding {
+		height: 10px;
+	}
+</style>

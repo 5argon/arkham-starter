@@ -70,3 +70,7 @@ export interface Row {
 	xpUnlock: boolean
 	dividerXpCumulativeUnlock: boolean;
 }
+
+export interface GlobalSettings {
+	taboo: boolean
+}

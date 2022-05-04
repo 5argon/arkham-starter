@@ -17,6 +17,9 @@ export interface TableRowEditEvents {
 	onXpChanged: (i: number, n: number) => void
 	onCarryoverXpChanged: (i: number, n: number) => void
 	onXpLockChanged: (i: number, n: boolean) => void
+	onXpCumulativeLockChanged: (i: number, n: boolean) => void
+	onDividerChanged: (i: number, n: boolean) => void
+	onDividerTextChanged: (i: number, n: string) => void
 	onLoseFocus: (i: number) => void
 }
 
@@ -39,5 +42,8 @@ export interface RowEditEvents {
 	onXpChanged: (n: number) => void
 	onCarryoverXpChanged: (n: number) => void
 	onXpLockChanged: (n: boolean) => void
+	onXpCumulativeLockChanged: (n: boolean) => void
+	onDividerChanged: (n: boolean) => void
+	onDividerTextChanged: (n: string) => void
 	onLoseFocus: () => void
 }

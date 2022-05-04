@@ -8,3 +8,8 @@ The repository have tooling that turns a series of **ArkhamDB deck IDs** into an
 
 After adding a new file or edit your existing file, make it a pull request and after I merged it, I will also manually rebuilt the site to include your decks.
 
+## What it will do to your deck
+
+- Core Set cards are all transformed to Revised Core Set equivalent.
+- Cards in cycle that has been repackaged receives an alias that they also belongs to that cycle's Investigator Expansion box.
+- Deckbuilding Options is analyzed from the included cards and maybe presented in higher level. (e.g. Which splash cards did you choose for Dunwich investigators.)

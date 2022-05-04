@@ -2,13 +2,16 @@
 
 ## Allowed card pool
 
-The biggest problem for beginners is that many decks in ArkhamDB are minmaxed and use cards from an entire collection, which is surely fun to build but they are impossible to follow for newcomers. Though you can craft a query to show possible decks from your limited card pool, it is not intuitive and has many gotchas. 
+The main point of this site is to specialize deck listing/searching UI for low pack count.
 
-Therefore this site has this most important restriction : In addition to a Revised Core Set, it only allows up to : 
+The biggest problem for beginners is that many decks in ArkhamDB are minmaxed and use cards from an entire collection, as little as 1-2 card from an entire pack/cycle. It is surely fun to build such a deck, but they are impossible to follow for newcomers because of entry cost.
 
-- 2 more Investigator Expansion boxes
-- 1 more Investigator Starter Deck
-- Any official print and play material (Parallel Investigators).
+Though you can craft a query to show possible decks from your limited card pool in ArkhamDB, it is not intuitive and has many gotchas.
+
+The most important restriction is that in addition to a Revised Core Set : 
+
+- Allows up to 2 more of Investigator Expansion boxes or Investigator Starter decks.
+- Any official print and play material (Parallel Investigators) is allowed.
 
 The filter UI when browsing the deck is heavily designed with this constraint in mind.
 
@@ -19,7 +22,7 @@ From that card pool constrint, the following 6 possible combinations will receiv
 - Revised Core Set + 2 Investigator Expansions.
 - Revised Core Set + 1 Investigator Starter Deck.
 - Revised Core Set + 1 Investigator Expansion + 1 Investigator Starter Deck.
-- Revised Core Set + 2 Investigator Expansion + 1 Investigator Starter Deck.
+- Revised Core Set + 2 Investigator Starter Decks.
 
 Using Parallel Investigator front or back will also be classified and possible to be filtered by visitor.
 
