@@ -47,8 +47,18 @@
 </script>
 
 {#await pdbp then pdb}
-	<Story name="Test">
+	<Story name="Expanded">
 		<StagingArea
+			popupDatabase={pdb}
+			stagingCards1={cards1}
+			stagingCards2={cards2}
+			stagingCards3={cards3}
+		/>
+	</Story>
+
+	<Story name="Collapsed">
+		<StagingArea
+			collapse={true}
 			popupDatabase={pdb}
 			stagingCards1={cards1}
 			stagingCards2={cards2}

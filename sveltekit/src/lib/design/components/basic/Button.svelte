@@ -1,24 +1,56 @@
-<script context="module" lang="ts">
-	export interface ButtonProp {
-		label: string
-		onClick: () => void
-	}
-</script>
-
 <script lang="ts">
 	export let label: string
 	export let onClick: () => void
+	export let block: boolean = false
+	export let big: boolean = false
+	export let center: boolean = false
+	export let labelAfterSlot: boolean = false
 </script>
 
 <!-- <input type="button" class="button-span" value={label} on:click={onClick} /> -->
-<button type="button" class="button-span" title={label} on:click={onClick}
-	><slot>{label}</slot></button
+<button
+	type="button"
+	class={(center ? 'center' : '') +
+		' ' +
+		'content-flex' +
+		' ' +
+		(block ? 'button-block' : 'button-span') +
+		' ' +
+		(big ? 'big' : '')}
+	title={label}
+	on:click={onClick}
 >
+	<slot>{label}</slot>
+	{#if labelAfterSlot}
+		{label}
+	{/if}
+</button>
 
 <style>
+	.center {
+		justify-content: center;
+	}
+
+	.content-flex {
+		display: inline-flex;
+		align-items: center;
+		vertical-align: middle;
+	}
+
+	.big {
+		height: 32px;
+	}
+
 	.button-span {
 		display: inline-flex;
-		margin: 0px 2px;
+		margin: 2px 2px;
+		padding: 2px 4px;
+	}
+
+	.button-block {
+		display: flex;
+		width: 100%;
+		margin: 2px 2px;
 		padding: 2px 4px;
 	}
 </style>

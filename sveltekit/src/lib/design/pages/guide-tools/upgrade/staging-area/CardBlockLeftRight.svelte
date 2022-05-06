@@ -4,7 +4,8 @@
 	import type { CardClass } from '$lib/design/interface/card-class'
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
 
-	export let text: string
+	export let text: string | null = null
+	export let collapse: boolean = false
 	export let onClickDelete: () => void = () => {
 		// do nothing
 	}
@@ -36,15 +37,17 @@
 	{packIcon}
 	{packNumber}
 	{restriction}
-	leftButtons={[
-		{
-			label: 'Delete',
-			iconPath: allIcons.delete,
-			onClick: () => {
-				onClickDelete()
-			},
-		},
-	]}
+	leftButtons={collapse
+		? []
+		: [
+				{
+					label: 'Delete',
+					iconPath: allIcons.delete,
+					onClick: () => {
+						onClickDelete()
+					},
+				},
+		  ]}
 	rightButtons={[
 		{
 			label: 'Add to left side',

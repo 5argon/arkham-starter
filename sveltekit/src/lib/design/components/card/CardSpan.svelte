@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	export interface CardSpanProp {
-		text: string
+		text: string | null
 		amount: number | null
 		color: boolean
 		class1: CardClass | null
@@ -35,7 +35,7 @@
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import ImageStrip from '$lib/design/pages/guide-tools/upgrade/staging-area/ImageStrip.svelte'
 
-	export let text: string
+	export let text: string | null = null
 	export let amount: number | null = null
 	export let color: boolean = false
 	export let class1: CardClass | null = null
@@ -78,35 +78,36 @@
 	}
 </script>
 
-<!-- <span>{0}x {text}</span> -->
 <span class="outer-span">
 	<ImageStrip {xp} {imageUrl} {imageBase64} {class1} {class2} {class3} />
 
-	{#if amount !== null}<span class="amount">{amount}x</span>{/if}
-	<span class="all-class-icons">
-		{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
-				cardClass={class2}
-			/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
-	</span>
-	<span class="card-name-container">
-		<span class={colorClass + ' ' + 'card-name'}>{text}</span>
-	</span>
-	{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}
-	{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}
-	{#if xpTaboo !== null && xpTaboo > 0}
-		<span class="pips taboo-pips">{tabooPips}</span>
-		<span title="Taboo" class={'pips ' + textIconFontClass}
-			>{textIconToFontCharacter(TextIcon.TokenTablet)}</span
-		>
-	{/if}{#if exceptional}<span title="Exceptional" class={'pips ' + textIconFontClass}
-			>{textIconToFontCharacter(TextIcon.TokenElderSign)}</span
-		>{/if}
-	{#if packIcon !== null || packNumber !== null}
-		<span class="pack-span"
-			>({#if packIcon !== null}<img class="pack-icon" src={packStaticUrl} alt="Pack icon" />
-			{/if}
-			{#if packNumber !== null}<span>{packNumber}</span>{/if})</span
-		>
+	{#if text !== null}
+		{#if amount !== null}<span class="amount">{amount}x</span>{/if}
+		<span class="all-class-icons">
+			{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
+					cardClass={class2}
+				/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
+		</span>
+		<span class="card-name-container">
+			<span class={colorClass + ' ' + 'card-name'}>{text}</span>
+		</span>
+		{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}
+		{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}
+		{#if xpTaboo !== null && xpTaboo > 0}
+			<span class="pips taboo-pips">{tabooPips}</span>
+			<span title="Taboo" class={'pips ' + textIconFontClass}
+				>{textIconToFontCharacter(TextIcon.TokenTablet)}</span
+			>
+		{/if}{#if exceptional}<span title="Exceptional" class={'pips ' + textIconFontClass}
+				>{textIconToFontCharacter(TextIcon.TokenElderSign)}</span
+			>{/if}
+		{#if packIcon !== null || packNumber !== null}
+			<span class="pack-span"
+				>({#if packIcon !== null}<img class="pack-icon" src={packStaticUrl} alt="Pack icon" />
+				{/if}
+				{#if packNumber !== null}<span>{packNumber}</span>{/if})</span
+			>
+		{/if}
 	{/if}
 </span>
 

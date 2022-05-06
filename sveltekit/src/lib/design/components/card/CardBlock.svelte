@@ -9,7 +9,7 @@
 
 	import CardSpan from './CardSpan.svelte'
 
-	export let text: string
+	export let text: string | null = null
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
 	export let class3: CardClass | null = null
