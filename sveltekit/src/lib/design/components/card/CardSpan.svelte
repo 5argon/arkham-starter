@@ -92,13 +92,13 @@
 		<span class={colorClass + ' ' + 'card-name'}>{text}</span>
 	</span>
 	{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}
-	{#if xp !== null && xp > 0}<span>{pips}</span>{/if}
+	{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}
 	{#if xpTaboo !== null && xpTaboo > 0}
-		<span class="taboo-pips">{tabooPips}</span>
-		<span title="Taboo" class={textIconFontClass}
+		<span class="pips taboo-pips">{tabooPips}</span>
+		<span title="Taboo" class={'pips ' + textIconFontClass}
 			>{textIconToFontCharacter(TextIcon.TokenTablet)}</span
 		>
-	{/if}{#if exceptional}<span title="Exceptional" class={textIconFontClass}
+	{/if}{#if exceptional}<span title="Exceptional" class={'pips ' + textIconFontClass}
 			>{textIconToFontCharacter(TextIcon.TokenElderSign)}</span
 		>{/if}
 	{#if packIcon !== null || packNumber !== null}
@@ -127,6 +127,10 @@
 		font-size: small;
 		margin: 0px 4px;
 		text-overflow: ellipsis;
+	}
+
+	.pips {
+		user-select: none;
 	}
 
 	.taboo-pips {

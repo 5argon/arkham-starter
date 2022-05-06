@@ -43,11 +43,12 @@
 <style>
 	.outer-square {
 		display: inline-block;
-		width: 16px;
-		height: 16px;
+		width: 14px;
+		height: 14px;
 	}
 
 	.class-icon {
+		user-select: none;
 		width: 100%;
 		height: 100%;
 		object-fit: contain;

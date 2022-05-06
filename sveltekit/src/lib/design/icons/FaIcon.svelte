@@ -6,6 +6,7 @@
 
 <style>
 	span {
+		user-select: none;
 		margin: 0px 2px;
 		display: inline-flex;
 		align-items: center;

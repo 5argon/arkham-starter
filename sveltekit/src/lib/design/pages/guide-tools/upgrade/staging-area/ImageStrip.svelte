@@ -63,6 +63,7 @@
 	}
 
 	.multi-icons {
+		user-select: none;
 		position: absolute;
 		top: 100%;
 		right: 0;
@@ -72,6 +73,7 @@
 	}
 
 	.pips {
+		user-select: none;
 		line-height: 3px;
 		font-size: 0.5em;
 		text-align: left;
