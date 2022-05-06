@@ -36,6 +36,9 @@ export interface AhdbCard {
 	real_slot: string
 	traits: string
 	real_traits: string
+	restrictions?: null | {
+		investigator: { [k: string]: string }
+	}
 	flavor?: string
 	illustrator: string
 	is_unique: boolean

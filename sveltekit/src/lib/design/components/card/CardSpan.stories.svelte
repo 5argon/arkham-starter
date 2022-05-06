@@ -102,6 +102,16 @@
 	/>
 </Story>
 
+<Story name="Restriction">
+	<CardSpan
+		text={'Greed'}
+		class1={CardClass.Neutral}
+		restriction={true}
+		packIcon={CardPackIcon.EdgeOfTheEarth}
+		packNumber={123}
+	/>
+</Story>
+
 <Story name="Unknown">
-	<UnknownCardSpan cardId={12345}/>
+	<UnknownCardSpan cardId={"12345"}/>
 </Story>

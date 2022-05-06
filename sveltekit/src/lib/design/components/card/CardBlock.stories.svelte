@@ -1,4 +1,5 @@
 <script>
+	import { allIcons } from '$lib/design/icons/all-icons'
 	import { CardPackIcon } from '$lib/design/interface/card-pack'
 
 	import { CardClass } from '../../interface/card-class'
@@ -60,6 +61,7 @@
 				onClick: () => {
 					// do nothing
 				},
+				iconPath: allIcons.arrowDown,
 			},
 		]}
 		rightButtons={[
@@ -68,17 +70,19 @@
 				onClick: () => {
 					// do nothing
 				},
+				iconPath: allIcons.arrowDown,
 			},
 			{
 				label: 'B',
 				onClick: () => {
 					// do nothing
 				},
+				iconPath: allIcons.arrowDown,
 			},
 		]}
 	/>
 </Story>
 
 <Story name="Unknown">
-	<UnknownCardBlock cardId={12345}/>
+	<UnknownCardBlock cardId={'12345'} />
 </Story>

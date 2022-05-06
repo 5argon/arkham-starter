@@ -4,7 +4,7 @@
 		type AllColumns,
 		type Column,
 		type Row,
-	} from '$lib/doc-tools/upgrade/interface'
+	} from '$lib/guide-tools/upgrade/interface'
 	import EditableCell from './editable-cell.svelte'
 	import Divider from './divider.svelte'
 	import RowActionUpDown from './row-action-up-down.svelte'

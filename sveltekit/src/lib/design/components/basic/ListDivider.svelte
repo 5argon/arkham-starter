@@ -10,9 +10,6 @@
 
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 
-	import FaRightDouble from '$lib/design/icons/FaRightDouble.svelte'
-	import FaRightSingle from '$lib/design/icons/FaRightSingle.svelte'
-
 	export let label: string
 	export let level: ListDividerLevel = ListDividerLevel.One
 </script>

@@ -18,6 +18,9 @@
 	export let exceptional: boolean = false
 	export let packIcon: CardPackIcon | null = null
 	export let packNumber: number | null = null
+	export let restriction: boolean = false
+	export let imageUrl: string | null = null
+	export let imageBase64: string | null = null
 	export let leftButtons: CardBlockButtonProp[] = []
 	export let rightButtons: CardBlockButtonProp[] = []
 </script>
@@ -37,6 +40,9 @@
 			{exceptional}
 			{packIcon}
 			{packNumber}
+			{restriction}
+			{imageUrl}
+			{imageBase64}
 			color={true}
 		/>
 	</span>
@@ -53,9 +59,10 @@
 
 	.block {
 		flex: 1;
-		border: 1px solid black;
+		border: 1px solid rgba(0, 0, 0, 0.108);
 		padding: 2px 10px;
-		margin: 4px 2px;
-		box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.2);
+		margin: 2px 2px;
+		box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.035);
+		display: flex;
 	}
 </style>

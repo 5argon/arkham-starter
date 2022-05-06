@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CardBlock from './CardBlock.svelte'
 
-	export let cardId: number
+	export let cardId: string
 </script>
 
 <CardBlock text={'(Unknown card ID ' + cardId + ')'} />

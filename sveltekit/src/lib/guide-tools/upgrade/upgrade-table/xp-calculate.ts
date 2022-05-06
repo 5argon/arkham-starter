@@ -59,7 +59,7 @@ function findXpDifference(
 	console.log(cardLeft)
 	const leftXp = cardLeft !== null ? findXp(cardLeft, db, gs) : 0
 	const rightXp = cardRight !== null ? findXp(cardRight, db, gs) : 0
-	return rightXp - leftXp
+	return Math.max(1, rightXp - leftXp)
 }
 
 function findXp(card: string, db: PopupDatabase, gs: GlobalSettings): number {

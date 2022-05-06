@@ -62,6 +62,7 @@ allCards.forEach((x) => {
     c1: x.faction_code,
     c2: x.faction2_code,
     c3: x.faction3_code,
+    ir: x.restrictions !== undefined && x.restrictions !== null 
   });
 });
 

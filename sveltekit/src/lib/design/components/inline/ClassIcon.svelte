@@ -35,15 +35,16 @@
 </script>
 
 {#if cardClass !== CardClass.Neutral}
-	<span class="outer-square">
+	<div class="outer-square">
 		<img class="class-icon" src={imagePath} alt={iconAlt} />
-	</span>
+	</div>
 {/if}
 
 <style>
 	.outer-square {
-		width: 15px;
-		height: 15px;
+		display: inline-block;
+		width: 16px;
+		height: 16px;
 	}
 
 	.class-icon {

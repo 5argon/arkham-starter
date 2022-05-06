@@ -1,14 +1,7 @@
 <script context="module" lang="ts" xmlns="http://www.w3.org/1999/html">
-	export const prerender = true
-</script>
-
-<script lang="ts">
-	import { columns } from '$lib/doc-tools/upgrade/upgrade-table/constants'
-	import type { Row } from '$lib/doc-tools/upgrade/interface'
-	import UpgradeTable from '$lib/doc-tools/upgrade/upgrade-table/table.svelte'
-	import { createRow } from '$lib/doc-tools/upgrade/upgrade-table/data'
-	import type { ToolbarEvents } from '$lib/doc-tools/upgrade/upgrade-table/table-events'
-	import type { TableRowEditEvents } from '$lib/doc-tools/upgrade/upgrade-table/row-events'
+	export const prerend$lib/guide-tools/upgrade/upgrade-table/constantst { columns } from '$lib/gui$lib/guide-tools/upgrade/interfaceonstants'
+	import type { Row } from '$lib/guide-tools/upgrade/interface'
+	import UpgradeTable from '$lib/guide$lib/guide-tools/upgrade/upgrade-table/data	import { createRow } from '$lib/guide$lib/guide-tools/upgrade/upgrade-table/table-eventsoolbarEvents } from '$lib/guide-tools/upgra$lib/guide-tools/upgrade/upgrade-table/row-eventsleRowEditEvents } from '$lib/guide-tools/upgrade/upgrade-table/row-events'
 	import { fetchPopupDatabase } from '$lib/popup-database'
 
 	const pdb = fetchPopupDatabase()

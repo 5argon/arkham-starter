@@ -8,10 +8,10 @@
 	export let onClickDelete: () => void = () => {
 		// do nothing
 	}
-	export let onClickUp: () => void = () => {
+	export let onClickLeft: () => void = () => {
 		// do nothing
 	}
-	export let onClickDown: () => void = () => {
+	export let onClickRight: () => void = () => {
 		// do nothing
 	}
 	export let class1: CardClass | null = null
@@ -22,6 +22,7 @@
 	export let exceptional: boolean = false
 	export let packIcon: CardPackIcon | null = null
 	export let packNumber: number | null = null
+	export let restriction: boolean = false
 </script>
 
 <CardBlock
@@ -34,6 +35,7 @@
 	{exceptional}
 	{packIcon}
 	{packNumber}
+	{restriction}
 	leftButtons={[
 		{
 			label: 'Delete',
@@ -48,14 +50,14 @@
 			label: 'Add to left side',
 			iconPath: allIcons.arrowLeftBordered,
 			onClick: () => {
-				onClickUp()
+				onClickLeft()
 			},
 		},
 		{
 			label: 'Add to right side',
 			iconPath: allIcons.arrowRightBordered,
 			onClick: () => {
-				onClickDown()
+				onClickRight()
 			},
 		},
 	]}

@@ -8,6 +8,7 @@ export const allIcons = {
 	delete: ic('trash-regular'),
 	unlock: ic('lock-open-regular'),
 	collapse: ic('arrows-to-line-regular'),
+	investigatorRestriction: ic('star-christmas-solid'),
 }
 
 function ic(s: string): string {

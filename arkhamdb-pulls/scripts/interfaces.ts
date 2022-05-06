@@ -73,6 +73,9 @@ export interface AhdbCard {
   health?: number;
   sanity?: number;
   health_per_investigator: boolean;
+  restrictions?: null | {
+    investigator: { [k: string]: string };
+  };
   deck_limit: number;
   slot: string;
   real_slot: string;
@@ -174,4 +177,5 @@ export interface PopupDatabaseItem {
   xpts: string;
   ex: boolean;
   ext: boolean;
+	ir: boolean
 }

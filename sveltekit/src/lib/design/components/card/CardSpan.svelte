@@ -11,6 +11,9 @@
 		exceptional: boolean
 		packIcon: CardPackIcon | null
 		packNumber: number | null
+		restriction: boolean
+		imageUrl: string | null
+		imageBase64: string | null
 	}
 </script>
 
@@ -28,6 +31,9 @@
 		textIconFontClass,
 	} from '$lib/design/interface/text-icon'
 	import { makePips } from '$lib/design/interface/string-util'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import { allIcons } from '$lib/design/icons/all-icons'
+	import ImageStrip from '$lib/design/pages/guide-tools/upgrade/staging-area/ImageStrip.svelte'
 
 	export let text: string
 	export let amount: number | null = null
@@ -40,6 +46,9 @@
 	export let exceptional: boolean = false
 	export let packIcon: CardPackIcon | null = null
 	export let packNumber: number | null = null
+	export let restriction: boolean = false
+	export let imageUrl: string | null = null
+	export let imageBase64: string | null = null
 
 	let colorClass: string
 	$: {
@@ -71,11 +80,18 @@
 
 <!-- <span>{0}x {text}</span> -->
 <span class="outer-span">
+	<ImageStrip {xp} {imageUrl} {imageBase64} {class1} {class2} {class3} />
+
 	{#if amount !== null}<span class="amount">{amount}x</span>{/if}
-	{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
-			cardClass={class2}
-		/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
-	<span class={colorClass + ' ' + 'card-name'}>{text}</span>
+	<span class="all-class-icons">
+		{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
+				cardClass={class2}
+			/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
+	</span>
+	<span class="card-name-container">
+		<span class={colorClass + ' ' + 'card-name'}>{text}</span>
+	</span>
+	{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}
 	{#if xp !== null && xp > 0}<span>{pips}</span>{/if}
 	{#if xpTaboo !== null && xpTaboo > 0}
 		<span class="taboo-pips">{tabooPips}</span>
@@ -108,7 +124,9 @@
 
 	.card-name {
 		font-weight: normal;
+		font-size: small;
 		margin: 0px 4px;
+		text-overflow: ellipsis;
 	}
 
 	.taboo-pips {
@@ -119,13 +137,18 @@
 		display: inline-flex;
 		align-items: center;
 		font-family: 'SerifText';
-		font-size: 0.7em;
+		font-size: xx-small;
 		color: rgb(0.3, 0.3, 0.3);
 		margin-left: 4px;
 	}
 
+	.all-class-icons {
+		height: 16px;
+		flex-shrink: 0;
+	}
+
 	.pack-icon {
 		width: 10px;
-		margin-right:2px;
+		margin-right: 2px;
 	}
 </style>

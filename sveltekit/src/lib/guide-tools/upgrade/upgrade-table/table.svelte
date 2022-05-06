@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Row as TRow, AllColumns, GlobalSettings } from '$lib/doc-tools/upgrade/interface'
+	import type { Row as TRow, AllColumns, GlobalSettings } from '$lib/guide-tools/upgrade/interface'
 	import type { LazyPopupDatabase } from '$lib/popup-database'
 	import HeaderRow from './header-row.svelte'
 	import type { TableRowActionEvents, TableRowEditEvents } from './row-events'

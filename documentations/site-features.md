@@ -24,6 +24,8 @@ The listing here heavily use icons based of that cycle, so beginners can see at 
 
 The listing also offers a peek into the deck in an interesting way with many hard-coded enhancements, such as whether a deck is using deckbuilding permanents such as Underworld Support or not or choice chosen for the deckbuilding options.
 
+Deck author is able to choose up to 3 representative cards from the deck to be shown in the listing along with the artwork of that investigator. This can communicate to the visitor at a glance the idea of this deck, especially if it aims to have fun with janky cards.
+
 ## To-the-point deck name
 
 Deck author no longer have to include a lot of "metadata" in the deck name such as "starter deck", "deck guide", "beginner", packs required, or even the character's name, as this entire site is already dedicated to these topics and will provide enough UI to describe your deck.
