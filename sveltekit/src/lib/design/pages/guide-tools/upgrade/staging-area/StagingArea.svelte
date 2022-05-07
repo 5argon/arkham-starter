@@ -66,7 +66,6 @@
 	onSubmit={async (n) => {
 		gettingCards = true
 		const deck = extractDeckFromUrl(n)
-		console.log(deck)
 		const cards = await getDeckCardIds(deck)
 		gettingCards = false
 		if (cards === null) {

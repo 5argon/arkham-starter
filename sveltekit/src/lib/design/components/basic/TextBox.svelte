@@ -25,7 +25,6 @@
 	export let placeholderText: string = ''
 	export let rightAlign: boolean = false
 	export let editingLevel: EditingLevel = EditingLevel.Editable
-	export let endEditAsSubmit: boolean = false
 	export let submitButtonText: string | null = null
 	export let enableNotice: boolean = false
 	export let noticeText: string | null = null
@@ -41,9 +40,12 @@
 		// do nothing
 	}
 
-	function inputCommitHandler(e: Event & { currentTarget: HTMLInputElement }) {
+	function inputEndEditHandler(e: Event & { currentTarget: HTMLInputElement }) {
 		onEndEdit(e.currentTarget.value)
-		if (endEditAsSubmit) {
+	}
+
+	function inputKeyboardHandler(e: KeyboardEvent & { currentTarget: HTMLInputElement }) {
+		if (e.key === 'Enter') {
 			onSubmit(e.currentTarget.value)
 		}
 	}
@@ -97,8 +99,9 @@
 			class={'text-box-input' + ' ' + rightAlignClass}
 			type="text"
 			placeholder={placeholderText}
-			on:change={inputCommitHandler}
+			on:change={inputChangeHandler}
 			on:input={inputChangeHandler}
+			on:keyup={inputKeyboardHandler}
 			value={currentText}
 		/>
 	{/if}
@@ -125,7 +128,7 @@
 	.notice-text {
 		height: 20px;
 	}
-	
+
 	.label {
 		font-weight: bold;
 	}

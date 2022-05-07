@@ -39,10 +39,8 @@
 			<TextBox
 				currentText={addCardTextboxText}
 				editingLevel={EditingLevel.Editable}
-				endEditAsSubmit={true}
 				label={'Add a card to this list'}
 				onChange={(n) => (addCardTextboxText = n)}
-				onEndEdit={(n) => onAddStagingCards(n)}
 				onSubmit={(n) => onAddStagingCards(n)}
 				placeholderText={'Use ArkhamDB card ID, for example 01016'}
 				rightAlign={false}
