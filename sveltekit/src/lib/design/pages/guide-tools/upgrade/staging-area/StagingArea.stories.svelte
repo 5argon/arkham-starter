@@ -5,7 +5,7 @@
 	import StagingArea from './StagingArea.svelte'
 
 	const pdbp = fetchPopupDatabase()
-	const cards1: string[] = [
+	let cards1: string[] = [
 		'01000',
 		'01550',
 		'01553',
@@ -31,7 +31,7 @@
 		'08116',
 		'08126',
 	]
-	const cards2: string[] = [
+	let cards2: string[] = [
 		'01595',
 		'01687',
 		'01688',
@@ -43,7 +43,7 @@
 		'08100',
 		'08115',
 	]
-	const cards3: string[] = []
+	let cards3: string[] = []
 </script>
 
 {#await pdbp then pdb}
@@ -53,6 +53,11 @@
 			stagingCards1={cards1}
 			stagingCards2={cards2}
 			stagingCards3={cards3}
+			onImportDeck={(d1, d2, d3) => {
+				cards1 = d1
+				cards2 = d2
+				cards3 = d3
+			}}
 		/>
 	</Story>
 

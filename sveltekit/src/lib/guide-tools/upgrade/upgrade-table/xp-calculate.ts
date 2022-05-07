@@ -76,7 +76,6 @@ function findXp(card: string, db: PopupDatabase, gs: GlobalSettings): number {
  */
 function extractCard(s: string): string | null {
 	const captureCardId = new RegExp(/\(\/card\/([^)]*)\)/gm)
-	s.match(captureCardId)
 	const result = captureCardId.exec(s)
 	if (result === null) {
 		return null

@@ -4,19 +4,33 @@
 		GreyedOut,
 		JustText,
 	}
+	export enum NoticeLevel {
+		Normal,
+		Success,
+		Error,
+	}
 </script>
 
 <script lang="ts">
+	import { allIcons } from '$lib/design/icons/all-icons'
+
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import { topCssTextError, topCssTextSuccess } from '$lib/design/interface/top-css-class'
+
 	import Button from './Button.svelte'
+	import SpinnerSpan from './SpinnerSpan.svelte'
 
 	export let currentText: string
 	export let label: string | null = null
 	export let placeholderText: string = ''
 	export let rightAlign: boolean = false
 	export let editingLevel: EditingLevel = EditingLevel.Editable
-	export let working: boolean = false
 	export let endEditAsSubmit: boolean = false
 	export let submitButtonText: string | null = null
+	export let enableNotice: boolean = false
+	export let noticeText: string | null = null
+	export let noticeLevel: NoticeLevel = NoticeLevel.Normal
+	export let spinnerText: string | null = null
 	export let onChange: (n: string) => void = () => {
 		// do nothing
 	}
@@ -39,6 +53,36 @@
 	}
 
 	$: rightAlignClass = rightAlign ? 'right-align' : ''
+
+	$: disabled = spinnerText !== null || editingLevel === EditingLevel.GreyedOut
+	let noticeIcon: string
+	$: {
+		switch (noticeLevel) {
+			case NoticeLevel.Normal:
+				noticeIcon = allIcons.noticeInfo
+				break
+			case NoticeLevel.Error:
+				noticeIcon = allIcons.noticeError
+				break
+			case NoticeLevel.Success:
+				noticeIcon = allIcons.noticeSuccess
+				break
+		}
+	}
+	let colorClass: string
+	$: {
+		switch (noticeLevel) {
+			case NoticeLevel.Normal:
+				colorClass = ''
+				break
+			case NoticeLevel.Error:
+				colorClass = topCssTextError
+				break
+			case NoticeLevel.Success:
+				colorClass = topCssTextSuccess
+				break
+		}
+	}
 </script>
 
 {#if label !== null}
@@ -49,7 +93,7 @@
 		<div>{currentText}</div>
 	{:else}
 		<input
-			disabled={working || editingLevel === EditingLevel.GreyedOut}
+			{disabled}
 			class={'text-box-input' + ' ' + rightAlignClass}
 			type="text"
 			placeholder={placeholderText}
@@ -59,11 +103,29 @@
 		/>
 	{/if}
 	{#if submitButtonText !== null}
-		<Button label={submitButtonText} onClick={() => onSubmit(currentText)} />
+		<Button {disabled} label={submitButtonText} onClick={() => onSubmit(currentText)} />
+	{/if}
+</div>
+
+<div class="below-text">
+	{#if spinnerText !== null}
+		<div class="spinner-text">
+			<SpinnerSpan text={spinnerText} />
+		</div>
+	{:else if enableNotice}
+		<div class={'notice-text' + ' ' + colorClass}>
+			{#if noticeText !== null}
+				<FaIcon path={noticeIcon} /> {noticeText}
+			{/if}
+		</div>
 	{/if}
 </div>
 
 <style>
+	.notice-text {
+		height: 20px;
+	}
+	
 	.label {
 		font-weight: bold;
 	}
@@ -89,5 +151,9 @@
 
 	.right-align {
 		text-align: right;
+	}
+
+	.below-text {
+		margin: 4px 0px;
 	}
 </style>

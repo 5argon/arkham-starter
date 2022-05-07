@@ -2,7 +2,6 @@
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
 	import TextBox, { EditingLevel } from '$lib/design/components/basic/TextBox.svelte'
-	import CardBlock from '$lib/design/components/card/CardBlock.svelte'
 	import UnknownCardBlock from '$lib/design/components/card/UnknownCardBlock.svelte'
 	import { defaultGlobalSettings, type GlobalSettings } from '$lib/guide-tools/upgrade/interface'
 	import CardBlockLeftRight from './CardBlockLeftRight.svelte'
@@ -51,14 +50,14 @@
 			/>
 		</div>
 	{/if}
-	{#each cards as c, i}
+	{#each cards as c, i (c?.id ?? 0)}
 		{#if c !== null}
 			{#if collapse}
 				<CardBlockLeftRight
 					collapse={true}
 					class1={c.c1}
-					class2={c.c2}
-					class3={c.c3}
+					class2={c.c2 ?? null}
+					class3={c.c3 ?? null}
 					xp={c.xp}
 					onClickLeft={() => onAddToLeftSide(c.id)}
 					onClickRight={() => onAddToRightSide(c.id)}
@@ -67,8 +66,8 @@
 				<CardBlockLeftRight
 					text={c.n}
 					class1={c.c1}
-					class2={c.c2}
-					class3={c.c3}
+					class2={c.c2 ?? null}
+					class3={c.c3 ?? null}
 					exceptional={globalSettings.taboo ? c.ext : c.ex}
 					restriction={c.ir}
 					xp={c.xp}

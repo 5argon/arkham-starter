@@ -5,11 +5,13 @@
 	export let big: boolean = false
 	export let center: boolean = false
 	export let labelAfterSlot: boolean = false
+	export let disabled: boolean = false
 </script>
 
 <!-- <input type="button" class="button-span" value={label} on:click={onClick} /> -->
 <button
 	type="button"
+	disabled={disabled}
 	class={(center ? 'center' : '') +
 		' ' +
 		'content-flex' +

@@ -55,7 +55,7 @@
 	color: #107116;
 }
 .font-mystic {
-	color: #4331b9;
+	color: #4c17a1;
 }
 .font-survivor {
 	color: #cc3038;
@@ -71,17 +71,25 @@
 	border-color: #2b80c5;
 }
 .border-color-seeker {
-	border-color: #ec8426;
+	border-color: #d17624;
 }
 .border-color-rogue {
 	border-color: #004d05;
 }
 .border-color-mystic {
-	border-color: #4331b9;
+	border-color: #611db0;
 }
 .border-color-survivor {
 	border-color: #870a11;
 }
 .border-color-multiclass {
 	border-color: #818107;
+}
+
+.text-success {
+	color: green;
+}
+
+.text-error {
+	color: red;
 }

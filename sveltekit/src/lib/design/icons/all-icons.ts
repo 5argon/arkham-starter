@@ -9,6 +9,10 @@ export const allIcons = {
 	unlock: ic('lock-open-regular'),
 	collapse: ic('arrows-to-line-regular'),
 	investigatorRestriction: ic('star-christmas-solid'),
+	noticeInfo: ic('circle-info-solid'),
+	noticeSuccess: ic('circle-check-solid'),
+	noticeError: ic('circle-exclamation-solid'),
+	loading: ic('spinner-third-duotone'),
 }
 
 function ic(s: string): string {
