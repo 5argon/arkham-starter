@@ -13,19 +13,32 @@
 	export let onMoveRowDown: () => void
 </script>
 
-<td>
-	<Checkbox
-		label="Toggle divider row"
-		checked={divider}
-		iconImagePath={allIcons.collapse}
-		onCheckChanged={onToggle}
+<!-- <div class="inline-flex">
+	<div class="check-box">
+		<Checkbox
+			label="Toggle divider row"
+			checked={divider}
+			iconImagePath={allIcons.collapse}
+			onCheckChanged={onToggle}
+		/>
+	</div>
+	<CardBlockButton
+		label="Insert a new row above"
+		iconPath={allIcons.arrowUpAdd}
+		onClick={onInsertTop}
 	/>
-	<CardBlockButton label="Insert a new row above" iconPath={allIcons.arrowUp} onClick={onInsertTop} />
 	<CardBlockButton
 		label="Insert a new row below"
-		iconPath={allIcons.arrowDown}
+		iconPath={allIcons.arrowDownAdd}
 		onClick={onInsertBottom}
 	/>
 	<CardBlockButton label="Delete row" iconPath={allIcons.delete} onClick={onDelete} />
-</td>
+</div> -->
 <RowActionUpDown onClickUp={onMoveRowUp} onClickDown={onMoveRowDown} />
+
+<style>
+	/* .inline-flex {
+		display: inline-flex;
+		align-items: center;
+	} */
+</style>

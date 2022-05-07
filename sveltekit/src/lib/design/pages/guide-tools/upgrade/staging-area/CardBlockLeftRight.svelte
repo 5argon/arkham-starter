@@ -4,6 +4,7 @@
 	import type { CardClass } from '$lib/design/interface/card-class'
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
 
+	export let showImageStrip: boolean = false
 	export let text: string | null = null
 	export let collapse: boolean = false
 	export let onClickDelete: () => void = () => {
@@ -27,6 +28,7 @@
 </script>
 
 <CardBlock
+	{showImageStrip}
 	{text}
 	{class1}
 	{class2}

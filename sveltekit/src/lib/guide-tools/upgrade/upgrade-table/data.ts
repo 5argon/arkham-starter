@@ -1,7 +1,6 @@
 import type { Row } from '../interface'
 import type { RowEditEvents, TableRowActionEvents, TableRowEditEvents } from './row-events'
 import type { ToolbarEvents } from './table-events'
-import { readable } from 'svelte/store'
 
 export interface UpgradeTableData {
 	rows: Row[]

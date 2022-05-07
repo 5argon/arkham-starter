@@ -34,15 +34,7 @@
 	{exceptional}
 	{packIcon}
 	{packNumber}
-	leftButtons={[
-		{
-			label: 'Delete',
-			iconPath: allIcons.delete,
-			onClick: () => {
-				onClickDelete()
-			},
-		},
-	]}
+	leftButtons={[]}
 	rightButtons={[
 		{
 			label: 'Move Up',
@@ -56,6 +48,13 @@
 			iconPath: allIcons.arrowDown,
 			onClick: () => {
 				onClickDown()
+			},
+		},
+		{
+			label: 'Delete',
+			iconPath: allIcons.delete,
+			onClick: () => {
+				onClickDelete()
 			},
 		},
 	]}

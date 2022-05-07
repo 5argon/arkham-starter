@@ -4,6 +4,7 @@
 	import { classToBorderColorCss, classToFontColorCss } from '$lib/design/interface/card-class'
 	import { makePips } from '$lib/design/interface/string-util'
 
+	export let showImageStrip: boolean
 	export let xp: number | null = null
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
@@ -28,19 +29,21 @@
 	}
 </script>
 
-<span class={'image-strip' + ' ' + colorClass}>
-	{#if xp !== null}
-		<div class="pips">{pips}</div>
-	{/if}
-	{#if showClasses}
-		<div class="multi-icons">
-			{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
-					cardClass={class2}
-				/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
-		</div>
-	{/if}
-	<div class="image-strip-inner" />
-</span>
+{#if showImageStrip}
+	<span class={'image-strip' + ' ' + colorClass}>
+		{#if xp !== null}
+			<div class="pips">{pips}</div>
+		{/if}
+		{#if showClasses}
+			<div class="multi-icons">
+				{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
+						cardClass={class2}
+					/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
+			</div>
+		{/if}
+		<div class="image-strip-inner" />
+	</span>
+{/if}
 
 <style>
 	.image-strip {

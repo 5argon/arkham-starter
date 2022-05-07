@@ -9,6 +9,7 @@
 
 	import CardSpan from './CardSpan.svelte'
 
+	export let showImageStrip: boolean = false
 	export let text: string | null = null
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
@@ -31,6 +32,7 @@
 	{/each}
 	<span class="block">
 		<CardSpan
+			{showImageStrip}
 			{text}
 			{class1}
 			{class2}

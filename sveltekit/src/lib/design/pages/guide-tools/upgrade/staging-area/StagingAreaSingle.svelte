@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
-	import TextBox, { EditingLevel } from '$lib/design/components/basic/TextBox.svelte'
+	import TextBox, { EditingLevel, NoticeLevel } from '$lib/design/components/basic/TextBox.svelte'
 	import UnknownCardBlock from '$lib/design/components/card/UnknownCardBlock.svelte'
 	import { defaultGlobalSettings, type GlobalSettings } from '$lib/guide-tools/upgrade/interface'
 	import CardBlockLeftRight from './CardBlockLeftRight.svelte'
@@ -30,6 +30,25 @@
 	export let onAddToRightSide: (cardId: string) => void = () => {
 		// do nothing
 	}
+
+	let cardNoticeString: string | null = null
+	let noticeLevel: NoticeLevel = NoticeLevel.Normal
+	function addCardInputHandling(s: string) {
+		s = s.trim()
+		if (s.length === 0) {
+			return
+		}
+		const card = popupDatabase.getById(s)
+		if (card !== null) {
+			cardNoticeString = 'Found and added a card : ' + card.n
+			noticeLevel = NoticeLevel.Success
+			onAddStagingCards(card.id)
+			addCardTextboxText = ''
+		} else {
+			cardNoticeString = 'Card with ID ' + s + ' not found.'
+			noticeLevel = NoticeLevel.Error
+		}
+	}
 </script>
 
 <div class="stack-padding">
@@ -39,9 +58,12 @@
 			<TextBox
 				currentText={addCardTextboxText}
 				editingLevel={EditingLevel.Editable}
-				label={'Add a card to this list'}
+				label={'Manually add a card to this list'}
 				onChange={(n) => (addCardTextboxText = n)}
-				onSubmit={(n) => onAddStagingCards(n)}
+				onSubmit={(n) => addCardInputHandling(n)}
+				{noticeLevel}
+				enableNotice
+				noticeText={cardNoticeString}
 				placeholderText={'Use ArkhamDB card ID, for example 01016'}
 				rightAlign={false}
 				submitButtonText={'Add'}
@@ -52,6 +74,7 @@
 		{#if c !== null}
 			{#if collapse}
 				<CardBlockLeftRight
+					showImageStrip={false}
 					collapse={true}
 					class1={c.c1}
 					class2={c.c2 ?? null}
@@ -62,6 +85,7 @@
 				/>
 			{:else}
 				<CardBlockLeftRight
+					showImageStrip={true}
 					text={c.n}
 					class1={c.c1}
 					class2={c.c2 ?? null}

@@ -35,6 +35,7 @@
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import ImageStrip from '$lib/design/pages/guide-tools/upgrade/staging-area/ImageStrip.svelte'
 
+	export let showImageStrip: boolean = false
 	export let text: string | null = null
 	export let amount: number | null = null
 	export let color: boolean = false
@@ -79,7 +80,7 @@
 </script>
 
 <span class="outer-span">
-	<ImageStrip {xp} {imageUrl} {imageBase64} {class1} {class2} {class3} />
+	<ImageStrip {showImageStrip} {xp} {imageUrl} {imageBase64} {class1} {class2} {class3} />
 
 	{#if text !== null}
 		{#if amount !== null}<span class="amount">{amount}x</span>{/if}
@@ -127,6 +128,8 @@
 		font-weight: normal;
 		font-size: small;
 		margin: 0px 4px;
+		white-space: nowrap;
+		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 

@@ -47,3 +47,83 @@ export interface RowEditEvents {
 	onDividerTextChanged: (n: string) => void
 	onLoseFocus: () => void
 }
+
+export function createEmptyRowActionEvents(): RowActionEvents {
+	return {
+		onAddAbove: () => {
+			// do nothing
+		},
+		onAddBelow: () => {
+			// do nothing
+		},
+		onDelete: () => {
+			// do nothing
+		},
+		onMoveUp: () => {
+			// do nothing
+		},
+		onMoveDown: () => {
+			// do nothing
+		},
+		onMoveUpLeft: () => {
+			// do nothing
+		},
+		onMoveDownLeft: () => {
+			// do nothing
+		},
+		onMoveUpRight: () => {
+			// do nothing
+		},
+		onMoveDownRight: () => {
+			// do nothing
+		},
+	}
+}
+
+export interface RowEditEvents {
+	onMarkChanged: (n: string) => void
+	onLeftChanged: (n: string) => void
+	onRightChanged: (n: string) => void
+	onXpChanged: (n: number) => void
+	onCarryoverXpChanged: (n: number) => void
+	onXpLockChanged: (n: boolean) => void
+	onXpCumulativeLockChanged: (n: boolean) => void
+	onDividerChanged: (n: boolean) => void
+	onDividerTextChanged: (n: string) => void
+	onLoseFocus: () => void
+}
+
+export function createEmptyRowEditEvents(): RowEditEvents {
+	return {
+		onMarkChanged: (n: string) => {
+			// do nothing
+		},
+		onLeftChanged: (n: string) => {
+			// do nothing
+		},
+		onRightChanged: (n: string) => {
+			// do nothing
+		},
+		onXpChanged: (n: number) => {
+			// do nothing
+		},
+		onCarryoverXpChanged: (n: number) => {
+			// do nothing
+		},
+		onXpLockChanged: (n: boolean) => {
+			// do nothing
+		},
+		onXpCumulativeLockChanged: (n: boolean) => {
+			// do nothing
+		},
+		onDividerChanged: (n: boolean) => {
+			// do nothing
+		},
+		onDividerTextChanged: (n: string) => {
+			// do nothing
+		},
+		onLoseFocus: () => {
+			// do nothing
+		},
+	}
+}

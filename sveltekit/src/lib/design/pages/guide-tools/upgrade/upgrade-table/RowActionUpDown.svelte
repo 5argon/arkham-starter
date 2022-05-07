@@ -9,7 +9,14 @@
 	}
 </script>
 
-<td>
+<div class="inline-flex">
 	<CardBlockButton label="Move Row Up" iconPath={allIcons.arrowUp} onClick={onClickUp} />
 	<CardBlockButton label="Move Row Down" iconPath={allIcons.arrowDown} onClick={onClickDown} />
-</td>
+</div>
+
+<style>
+	.inline-flex {
+		display: inline-flex;
+		align-items: center;
+	}
+</style>

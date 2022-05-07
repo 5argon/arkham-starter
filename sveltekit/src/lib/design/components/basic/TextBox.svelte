@@ -110,19 +110,21 @@
 	{/if}
 </div>
 
-<div class="below-text">
-	{#if spinnerText !== null}
-		<div class="spinner-text">
-			<SpinnerSpan text={spinnerText} />
-		</div>
-	{:else if enableNotice}
-		<div class={'notice-text' + ' ' + colorClass}>
-			{#if noticeText !== null}
-				<FaIcon path={noticeIcon} /> {noticeText}
-			{/if}
-		</div>
-	{/if}
-</div>
+{#if enableNotice}
+	<div class="below-text">
+		{#if spinnerText !== null}
+			<div class="spinner-text">
+				<SpinnerSpan text={spinnerText} />
+			</div>
+		{:else}
+			<div class={'notice-text' + ' ' + colorClass}>
+				{#if noticeText !== null}
+					<FaIcon path={noticeIcon} /> {noticeText}
+				{/if}
+			</div>
+		{/if}
+	</div>
+{/if}
 
 <style>
 	.notice-text {

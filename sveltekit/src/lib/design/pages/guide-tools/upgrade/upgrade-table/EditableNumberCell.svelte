@@ -1,45 +1,63 @@
 <script lang="ts">
-	export let currentText: string
-	export let prefixText: string
-	export let suffixText: string
-	export let rightAlign: boolean
-	export let disableEditing: boolean
-	export let greyOutEditing: boolean
-	export let onChange: (n: string) => void
-	export let onEndEdit: (n: string) => void
+	import { EditingLevel } from '$lib/design/components/basic/TextBox.svelte'
+	export let currentNumber: number
+	export let prefixText: string = ''
+	export let suffixText: string = ''
+	export let editingLevel: EditingLevel = EditingLevel.Editable
+	export let onEndEdit: (n: number) => void = () => {
+		// do nothing
+	}
+
+	function inputKeyboardHandler(e: KeyboardEvent & { currentTarget: HTMLInputElement }) {
+		if (e.key === 'Enter') {
+			e.currentTarget.blur()
+			const parsed = parseInt(e.currentTarget.value, 10)
+			if (!isNaN(parsed)) {
+				onEndEdit(parsed)
+			} else {
+				onEndEdit(0)
+			}
+		}
+	}
 
 	function inputCommitHandler(e: Event & { currentTarget: HTMLInputElement }) {
-		onEndEdit(e.currentTarget.value)
+		const parsed = parseInt(e.currentTarget.value, 10)
+		if (!isNaN(parsed)) {
+			onEndEdit(parsed)
+		} else {
+			onEndEdit(0)
+		}
 	}
 
-	function inputChangeHandler(e: Event & { currentTarget: HTMLInputElement }) {
-		onChange(e.currentTarget.value)
-	}
-
-	$: rightAlignClass = rightAlign ? 'right-align' : ''
+	const rightAlignClass = 'right-align'
 </script>
 
 <span class="prefix-suffix">{prefixText}</span>
-{#if disableEditing}
-	<span>{currentText}</span>
+{#if editingLevel === EditingLevel.JustText}
+	<span class="arkham-number">{currentNumber}</span>
 {:else}
 	<span>
 		<input
-			disabled={greyOutEditing}
-			class={'input-box-small' + ' ' + rightAlignClass}
+			disabled={editingLevel === EditingLevel.GreyedOut}
+			class={'input-box-small' + ' ' + rightAlignClass + ' ' + 'arkham-number'}
 			type="text"
 			on:change={inputCommitHandler}
-			on:input={inputChangeHandler}
-			value={currentText}
+			on:keyup={inputKeyboardHandler}
+			value={currentNumber}
 		/>
 	</span>
 {/if}
 <span class="prefix-suffix">{suffixText}</span>
 
 <style>
+	.arkham-number {
+		font-family: 'ArkhamNumber';
+	}
+
 	.prefix-suffix {
-		font-size: 0.7em;
+		font-size: x-small;
 		color: rgba(1, 1, 1, 0.2);
+		margin:0px 2px;
 	}
 
 	.input-box-small {
