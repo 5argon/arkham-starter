@@ -115,6 +115,7 @@ playerCards.forEach((x) => {
         : undefined,
     ir: x.restrictions !== undefined && x.restrictions !== null,
     wk: x.subtype_code !== undefined && x.subtype_code === "weakness",
+    cs: x.cost,
   });
 });
 

@@ -57,6 +57,14 @@
 			rows.splice(i, 1)
 			rows = [...rows]
 		},
+		onDeleteLeft: (i) => {
+			rows[i].left = null
+			rows = [...rows]
+		},
+		onDeleteRight: (i) => {
+			rows[i].right = null
+			rows = [...rows]
+		},
 		onMoveDown: (i) => {
 			rows = rowMoveDown(rows, i)
 		},

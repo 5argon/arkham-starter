@@ -6,6 +6,8 @@ export interface TableEvents {
 
 export interface TableRowActionEvents {
 	onDelete: (i: number) => void
+	onDeleteLeft: (i: number) => void
+	onDeleteRight: (i: number) => void
 	onMoveUp: (i: number) => void
 	onMoveDown: (i: number) => void
 	onMoveUpLeft: (i: number) => void
@@ -29,6 +31,8 @@ export interface TableRowEditEvents {
 
 export interface RowActionEvents {
 	onDelete: () => void
+	onDeleteLeft: () => void
+	onDeleteRight: () => void
 	onMoveUp: () => void
 	onMoveDown: () => void
 	onMoveUpLeft: () => void
@@ -53,6 +57,12 @@ export interface RowEditEvents {
 export function createEmptyRowActionEvents(): RowActionEvents {
 	return {
 		onDelete: () => {
+			// do nothing
+		},
+		onDeleteLeft: () => {
+			// do nothing
+		},
+		onDeleteRight: () => {
 			// do nothing
 		},
 		onMoveUp: () => {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PopupDatabase } from '$lib/core/popup-database'
-import type { GlobalSettings } from '$lib/guide-tools/script/common/settings';
+	import type { GlobalSettings } from '$lib/guide-tools/script/common/settings'
 
 	import type { Row } from '$lib/guide-tools/upgrade/interface'
 	import type {
@@ -34,6 +34,12 @@ import type { GlobalSettings } from '$lib/guide-tools/script/common/settings';
 			rowActionEvents={{
 				onDelete: () => {
 					rowActionEvents.onDelete(i)
+				},
+				onDeleteLeft: () => {
+					rowActionEvents.onDeleteLeft(i)
+				},
+				onDeleteRight: () => {
+					rowActionEvents.onDeleteRight(i)
 				},
 				onMoveUp: () => {
 					rowActionEvents.onMoveUp(i)

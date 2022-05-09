@@ -85,6 +85,11 @@ export interface PopupDatabaseItem {
   wk: boolean;
 
   /**
+   * Cost
+   */
+  cs?: number;
+
+  /**
    * Intellect
    */
   sit?: number;

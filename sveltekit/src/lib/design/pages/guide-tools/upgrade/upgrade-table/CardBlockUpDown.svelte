@@ -7,9 +7,9 @@
 	export let singleMode: boolean = false
 	export let cardId: string
 	export let text: string
-	// export let onClickDelete: () => void = () => {
-	// 	// do nothing
-	// }
+	export let onClickDelete: () => void = () => {
+		// do nothing
+	}
 	export let onClickUp: () => void = () => {
 		// do nothing
 	}
@@ -47,6 +47,13 @@
 		? []
 		: [
 				{
+					label: 'Delete',
+					iconPath: allIcons.delete,
+					onClick: () => {
+						onClickDelete()
+					},
+				},
+				{
 					label: 'Move Up',
 					iconPath: allIcons.arrowUp,
 					onClick: () => {
@@ -60,12 +67,5 @@
 						onClickDown()
 					},
 				},
-				// {
-				// 	label: 'Delete',
-				// 	iconPath: allIcons.delete,
-				// 	onClick: () => {
-				// 		onClickDelete()
-				// 	},
-				// },
 		  ]}
 />

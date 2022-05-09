@@ -147,6 +147,11 @@ export interface PopupDatabaseItemRaw {
 	wk: boolean
 
 	/**
+	 * Cost
+	 */
+	cs?: number
+
+	/**
 	 * Intellect
 	 */
 	sit?: number

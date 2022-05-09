@@ -69,6 +69,7 @@
 			{#if leftCard !== null}
 				<CardBlockUpDown
 					{singleMode}
+					cardId={leftCard.original.id}
 					text={leftCard.original.n}
 					class1={leftCard.class1}
 					class2={leftCard.class2 ?? null}
@@ -80,6 +81,7 @@
 					xpTaboo={leftCard.original.xpat}
 					onClickDown={rowActionEvents.onMoveDownLeft}
 					onClickUp={rowActionEvents.onMoveUpLeft}
+					onClickDelete={rowActionEvents.onDeleteLeft}
 				/>
 			{:else}
 				<div class="grey-empty-outer">
@@ -93,6 +95,7 @@
 				{#if rightCard !== null}
 					<CardBlockUpDown
 						{singleMode}
+						cardId={rightCard.original.id}
 						text={rightCard.original.n}
 						class1={rightCard.class1}
 						class2={rightCard.class2 ?? null}
@@ -104,6 +107,7 @@
 						xpTaboo={rightCard.original.xpat}
 						onClickDown={rowActionEvents.onMoveDownRight}
 						onClickUp={rowActionEvents.onMoveUpRight}
+						onClickDelete={rowActionEvents.onDeleteRight}
 					/>
 				{:else}
 					<div class="grey-empty-outer">
