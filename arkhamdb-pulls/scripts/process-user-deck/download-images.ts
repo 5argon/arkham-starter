@@ -225,7 +225,7 @@ async function processSingleCard(
   );
   const w2 = Deno.writeFile(
     p2,
-    await resize(await strip.encode(), { width: 48, height: 16 })
+    await resize(await strip.encode(), { width: 96, height: 32 })
   );
   const w3 = Deno.writeFile(
     p3,

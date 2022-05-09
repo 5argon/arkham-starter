@@ -45,6 +45,8 @@ export interface AhdbCard {
   pack_name: string;
   type_code: string;
   type_name: string;
+  subtype_code?:string;
+  subtype_name?:string;
   faction_code: string;
   faction_name: string;
   faction2_code?: string;

@@ -1,24 +1,35 @@
 import type { CardList } from '../deck'
-import { publicDeck } from './call'
+import { publicDeckPersonal, publicDeckPublished } from './call'
 
-export function extractDeckFromUrl(url: string): string {
+export interface ExtractResult {
+	deck: string
+	published: boolean
+}
+export function extractDeckFromUrl(url: string): ExtractResult {
 	{
-		const urlRegex = new RegExp(/view\/([^\/]*)/gm)
+		const urlRegex = new RegExp(/decklist\/view\/([^\/]*)/gm)
 		const matchResult = urlRegex.exec(url)
 		if (matchResult !== null) {
-			return matchResult[1]
+			return { deck: matchResult[1], published: true }
+		}
+	}
+	{
+		const urlRegex = new RegExp(/deck\/view\/([^\/]*)/gm)
+		const matchResult = urlRegex.exec(url)
+		if (matchResult !== null) {
+			return { deck: matchResult[1], published: false }
 		}
 	}
 	{
 		const urlRegex = new RegExp(/edit\/([^\/]*)/gm)
 		const matchResult = urlRegex.exec(url)
 		if (matchResult !== null) {
-			return matchResult[1]
+			return { deck: matchResult[1], published: false }
 		}
 	}
 
 	// If no match, assume the input is already deck code, hopefully.
-	return url
+	return { deck: url, published: true }
 }
 
 export interface GetDeckCardIdReturns {
@@ -28,14 +39,18 @@ export interface GetDeckCardIdReturns {
 	cards3: string[]
 }
 
-export async function getDeckCardIds(deck: string): Promise<GetDeckCardIdReturns | null> {
+export async function getDeckCardIds(
+	deck: string,
+	published: boolean,
+): Promise<GetDeckCardIdReturns | null> {
 	function cardListToArray(cl: CardList): string[] {
 		if (cl === null) {
 			return []
 		}
 		return Object.keys(cl)
 	}
-	const d = await publicDeck(deck)
+
+	const d = published ? await publicDeckPublished(deck) : await publicDeckPersonal(deck)
 	if (d === null) {
 		return null
 	}

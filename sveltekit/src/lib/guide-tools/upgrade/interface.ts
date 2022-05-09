@@ -1,7 +1,6 @@
 import type { CardInfoType } from '../script/common/settings'
 
 export interface Row {
-	rowId: number
 	mark: string
 	left: string | null
 	right: string | null

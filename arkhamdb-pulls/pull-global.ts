@@ -114,6 +114,7 @@ playerCards.forEach((x) => {
         ? classNameMap.toNum[x.faction3_code]
         : undefined,
     ir: x.restrictions !== undefined && x.restrictions !== null,
+    wk: x.subtype_code !== undefined && x.subtype_code === "weakness",
   });
 });
 

@@ -34,7 +34,9 @@
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import ImageStrip from '$lib/design/pages/guide-tools/upgrade/staging-area/ImageStrip.svelte'
+	import { randomBasicWeakness } from '$lib/ahdb/card'
 
+	export let cardId: string
 	export let showImageStrip: boolean = false
 	export let text: string | null = null
 	export let amount: number | null = null
@@ -48,6 +50,7 @@
 	export let packIcon: CardPackIcon | null = null
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
+	export let weakness: boolean = false
 	export let imageUrl: string | null = null
 	export let imageBase64: string | null = null
 
@@ -81,7 +84,18 @@
 </script>
 
 <span class="outer-span">
-	<ImageStrip {showImageStrip} {xp} {imageUrl} {imageBase64} {class1} {class2} {class3} />
+	{#if cardId !== randomBasicWeakness}
+		<ImageStrip
+			name={text}
+			{showImageStrip}
+			{xp}
+			{imageUrl}
+			{imageBase64}
+			{class1}
+			{class2}
+			{class3}
+		/>
+	{/if}
 
 	{#if text !== null}
 		{#if amount !== null}<span class="amount">{amount}x</span>{/if}
@@ -93,7 +107,9 @@
 		<span class="card-name-container">
 			<span class={colorClass + ' ' + 'card-name'}>{text}</span>
 		</span>
-		{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}
+		{#if weakness}<span title="Weakness" class={'pips ' + textIconFontClass}
+				>{textIconToFontCharacter(TextIcon.Weakness)}</span
+			>{/if}{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}
 		{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}
 		{#if xpTaboo !== null && xpTaboo > 0}
 			<span class="pips taboo-pips">{tabooPips}</span>
@@ -103,7 +119,7 @@
 		{/if}{#if exceptional}<span title="Exceptional" class={'pips ' + textIconFontClass}
 				>{textIconToFontCharacter(TextIcon.TokenElderSign)}</span
 			>{/if}
-		{#if packIcon !== null || packNumber !== null}
+		{#if packNumber !== 1000 && (packIcon !== null || packNumber !== null)}
 			<span class="pack-span"
 				>({#if packIcon !== null}<img class="pack-icon" src={packStaticUrl} alt="Pack icon" />
 				{/if}

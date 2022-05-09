@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { PopupDatabase } from '$lib/core/popup-database'
+import type { GlobalSettings } from '$lib/guide-tools/script/common/settings';
 
-	import type { GlobalSettings, Row } from '$lib/guide-tools/upgrade/interface'
+	import type { Row } from '$lib/guide-tools/upgrade/interface'
 	import type {
 		TableRowActionEvents,
 		TableRowEditEvents,

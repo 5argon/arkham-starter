@@ -15,7 +15,7 @@ export enum CardPack {
 	TheForgottenAge,
 	TheCircleUndone,
 	TheDreamEaters,
-	TheInsmouthConspiracy,
+	TheInnsmouthConspiracy,
 	EdgeOfTheEarth,
 
 	ReturnToTheNightOfTheZealot,

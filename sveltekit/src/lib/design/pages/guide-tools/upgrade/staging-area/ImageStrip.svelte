@@ -4,12 +4,13 @@
 	import { classToBorderColorCss, classToFontColorCss } from '$lib/design/interface/card-class'
 	import { makePips } from '$lib/design/interface/string-util'
 
+	export let name: string | null = null
 	export let showImageStrip: boolean
 	export let xp: number | null = null
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
 	export let class3: CardClass | null = null
-	// export let imageUrl: string | null = null
+	export let imageUrl: string | null = null
 	// export let imageBase64: string | null = null
 
 	let showClasses: boolean
@@ -31,6 +32,7 @@
 
 {#if showImageStrip}
 	<span class={'image-strip' + ' ' + colorClass}>
+		<img class="image-in-strip" src={'/image/card/strip/' + imageUrl + '.png'} alt={name} />
 		{#if xp !== null}
 			<div class="pips">{pips}</div>
 		{/if}
@@ -75,7 +77,21 @@
 		transform: translateY(-11px);
 	}
 
+	.image-in-strip {
+		position: absolute;
+		user-select: none;
+		width: 47px;
+		height: 15px;
+		border:solid 0.5px white;
+	}
+
 	.pips {
+		position: absolute;
+		top:1px;
+		left:1px;
+		color: white;
+		text-shadow: 0.3px 0.3px 1px black;
+		position: absolute;
 		user-select: none;
 		line-height: 3px;
 		font-size: 0.5em;

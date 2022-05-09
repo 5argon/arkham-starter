@@ -9,6 +9,7 @@
 
 	import CardSpan from './CardSpan.svelte'
 
+	export let cardId: string
 	export let showImageStrip: boolean = false
 	export let text: string | null = null
 	export let class1: CardClass | null = null
@@ -20,6 +21,7 @@
 	export let packIcon: CardPackIcon | null = null
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
+	export let weakness: boolean = false
 	export let imageUrl: string | null = null
 	export let imageBase64: string | null = null
 	export let leftButtons: CardBlockButtonProp[] = []
@@ -32,6 +34,7 @@
 	{/each}
 	<span class="block">
 		<CardSpan
+			{cardId}
 			{showImageStrip}
 			{text}
 			{class1}
@@ -42,6 +45,7 @@
 			{exceptional}
 			{packIcon}
 			{packNumber}
+			{weakness}
 			{restriction}
 			{imageUrl}
 			{imageBase64}

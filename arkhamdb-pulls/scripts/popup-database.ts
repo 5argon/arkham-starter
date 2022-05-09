@@ -80,6 +80,11 @@ export interface PopupDatabaseItem {
   ir: boolean;
 
   /**
+   * Weakness
+   */
+  wk: boolean;
+
+  /**
    * Intellect
    */
   sit?: number;

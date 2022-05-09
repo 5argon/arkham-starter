@@ -1,8 +1,11 @@
+export const randomBasicWeakness = '01000'
 export interface AhdbCard {
 	pack_code: string
 	pack_name: string
 	type_code: string
 	type_name: string
+	subtype_code?: string
+	subtype_name?: string
 	faction_code: string
 	faction_name: string
 	faction2_code?: string

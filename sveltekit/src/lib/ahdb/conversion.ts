@@ -1,6 +1,57 @@
 import { CardClass } from '$lib/core/card-class'
 import { CardPack } from '$lib/core/card-pack'
 
+export function iconToNewNameConversion(c: CardPack): string | null {
+	switch (c) {
+		case CardPack.CoreSet:
+			break
+		case CardPack.RevisedCoreSet:
+			break
+		case CardPack.ParallelInvestigator:
+			return 'Parallel Investigator'
+		case CardPack.Novella:
+			return 'Novella'
+
+		case CardPack.NathanielCho:
+			break
+		case CardPack.HarveyWalters:
+			break
+		case CardPack.WinifredHabbamock:
+			break
+		case CardPack.JacquelineFine:
+			break
+		case CardPack.StellaClark:
+			break
+
+		case CardPack.TheDunwichLegacy:
+			return 'The Dunwich Legacy Investigator Expansion'
+		case CardPack.ThePathToCarcosa:
+			return 'The Path to Carcosa Investigator Expansion'
+		case CardPack.TheForgottenAge:
+			return 'The Forgotten Age Investigator Expansion'
+		case CardPack.TheCircleUndone:
+			return 'The Circle Undone Investigator Expansion'
+		case CardPack.TheDreamEaters:
+			return 'The Dream-Eaters Investigator Expansion'
+		case CardPack.TheInnsmouthConspiracy:
+			return 'The Innsmouth Conspiracy Investigator Expansion'
+		case CardPack.EdgeOfTheEarth:
+			return 'Edge of the Earth Investigator Expansion'
+
+		case CardPack.ReturnToTheNightOfTheZealot:
+			break
+		case CardPack.ReturnToTheDunwichLegacy:
+			break
+		case CardPack.ReturnToThePathToCarcosa:
+			break
+		case CardPack.ReturnToTheCircleUndone:
+			break
+		case CardPack.ReturnToTheForgottenAge:
+			break
+	}
+	return null
+}
+
 export function packCodeToIconConversion(p: string): CardPack {
 	switch (p) {
 		case 'core':
@@ -82,7 +133,7 @@ export function packCodeToIconConversion(p: string): CardPack {
 		case 'lif':
 		case 'lod':
 		case 'itm':
-			return CardPack.TheInsmouthConspiracy
+			return CardPack.TheInnsmouthConspiracy
 		case 'eoep':
 			return CardPack.EdgeOfTheEarth
 

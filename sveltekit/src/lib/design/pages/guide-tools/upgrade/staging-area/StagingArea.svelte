@@ -50,7 +50,7 @@
 </div>
 <TextBox
 	enableNotice
-	placeholderText={"ArkhamDB Deck ID or the deck's URL (if unpublished, it must be public)."}
+	placeholderText={"Paste ArkhamDB's Deck URL here. (If unpublished, it must be public.)"}
 	submitButtonText={'Import'}
 	{noticeLevel}
 	{noticeText}
@@ -69,8 +69,8 @@
 			return
 		}
 		gettingCards = true
-		const deck = extractDeckFromUrl(n)
-		const cards = await getDeckCardIds(deck)
+		const extractResult = extractDeckFromUrl(n)
+		const cards = await getDeckCardIds(extractResult.deck, extractResult.published)
 		gettingCards = false
 		if (cards === null) {
 			noticeLevel = NoticeLevel.Error

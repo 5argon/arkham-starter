@@ -1,5 +1,5 @@
 import type { PopupDatabase } from '$lib/core/popup-database'
-import type { GlobalSettings, Row } from '../interface'
+import type { GlobalSettings } from '$lib/guide-tools/script/common/settings'
 
 export interface CalculatedXp {
 	costs: number[]
@@ -69,7 +69,10 @@ function findXpDifference(
 function findXp(card: string, db: PopupDatabase, gs: GlobalSettings): number {
 	const c = db.getById(card)
 	if (c !== null) {
-		return ((c.xp ?? 0) + (gs.taboo ? c.xpat : 0)) * (c.ex || (gs.taboo && c.ext) ? 2 : 1)
+		return (
+			((c.original.xp ?? 0) + (gs.taboo ? c.original.xpat : 0)) *
+			(c.original.ex || (gs.taboo && c.original.ext) ? 2 : 1)
+		)
 	} else {
 		return 0
 	}

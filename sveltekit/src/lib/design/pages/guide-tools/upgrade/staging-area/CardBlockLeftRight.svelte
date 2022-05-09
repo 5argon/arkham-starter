@@ -4,6 +4,7 @@
 	import type { CardClass } from '$lib/design/interface/card-class'
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
 
+	export let cardId: string
 	export let showImageStrip: boolean = false
 	export let text: string | null = null
 	export let collapse: boolean = false
@@ -25,9 +26,13 @@
 	export let packIcon: CardPackIcon | null = null
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
+	export let weakness: boolean = false
+	export let imageUrl: string | null = null
+	export let imageBase64: string | null = null
 </script>
 
 <CardBlock
+	{cardId}
 	{showImageStrip}
 	{text}
 	{class1}
@@ -39,6 +44,9 @@
 	{packIcon}
 	{packNumber}
 	{restriction}
+	{weakness}
+	{imageUrl}
+	{imageBase64}
 	leftButtons={collapse
 		? []
 		: [

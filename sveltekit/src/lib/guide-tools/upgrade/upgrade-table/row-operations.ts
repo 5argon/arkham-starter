@@ -87,7 +87,6 @@ export function addCardToList(rows: Row[], card: string, right: boolean): Row[] 
 
 export function createRow(divider: boolean): Row {
 	return {
-		rowId: Math.random(),
 		carryoverXp: 0,
 		divider: divider,
 		dividerText: '',

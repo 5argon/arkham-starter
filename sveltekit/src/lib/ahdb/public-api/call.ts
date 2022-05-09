@@ -1,10 +1,8 @@
 import type { AhdbCard } from '../card'
 import type { AhdbDeck } from '../deck'
-import { isNotAhdbError, type AhdbError, type Safe } from '../error'
 import type { AhdbPack } from '../pack'
 import type { AhdbTaboo, AhdbTabooProcessing, TabooItem } from '../taboo'
 import {
-	baseUrl,
 	publicApiCard,
 	publicApiCards,
 	publicApiDeck,
@@ -34,9 +32,19 @@ export async function publicAllCards(): Promise<AhdbCard[]> {
 	return c
 }
 
-export async function publicDeck(deckNumber: string): Promise<AhdbDeck | null> {
-	// Try both decklist (published) and personal deck that has been made public.
+export async function publicDeckPublished(deckNumber: string): Promise<AhdbDeck | null> {
 	const publicDecklist = joinPath(...publicApiDecklist, deckNumber)
+	try {
+		const ret = await fetchWithRetries(publicDecklist)
+		const s = (await ret.json()) as AhdbDeck
+		console.log(s)
+		return s
+	} catch {
+		return null
+	}
+}
+
+export async function publicDeckPersonal(deckNumber: string): Promise<AhdbDeck | null> {
 	const publicDeck = joinPath(...publicApiDeck, deckNumber)
 	try {
 		const ret2 = await fetchWithRetries(publicDeck)
@@ -44,14 +52,7 @@ export async function publicDeck(deckNumber: string): Promise<AhdbDeck | null> {
 		console.log(s2)
 		return s2
 	} catch {
-		try {
-			const ret = await fetchWithRetries(publicDecklist)
-			const s = (await ret.json()) as AhdbDeck
-			console.log(s)
-			return s
-		} catch {
-			return null
-		}
+		return null
 	}
 }
 

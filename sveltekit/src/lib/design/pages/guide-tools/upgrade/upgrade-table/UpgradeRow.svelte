@@ -69,13 +69,15 @@
 			{#if leftCard !== null}
 				<CardBlockUpDown
 					{singleMode}
-					text={leftCard.n}
-					class1={leftCard.c1}
-					class2={leftCard.c2 ?? null}
-					class3={leftCard.c3 ?? null}
-					exceptional={leftCard.ex}
-					xp={leftCard.xp}
-					xpTaboo={leftCard.xpat}
+					text={leftCard.original.n}
+					class1={leftCard.class1}
+					class2={leftCard.class2 ?? null}
+					class3={leftCard.class3 ?? null}
+					exceptional={leftCard.original.ex}
+					restriction={leftCard.original.ir}
+					weakness={leftCard.original.wk}
+					xp={leftCard.original.xp}
+					xpTaboo={leftCard.original.xpat}
 					onClickDown={rowActionEvents.onMoveDownLeft}
 					onClickUp={rowActionEvents.onMoveUpLeft}
 				/>
@@ -91,13 +93,15 @@
 				{#if rightCard !== null}
 					<CardBlockUpDown
 						{singleMode}
-						text={rightCard.n}
-						class1={rightCard.c1}
-						class2={rightCard.c2 ?? null}
-						class3={rightCard.c3 ?? null}
-						exceptional={rightCard.ex}
-						xp={rightCard.xp}
-						xpTaboo={rightCard.xpat}
+						text={rightCard.original.n}
+						class1={rightCard.class1}
+						class2={rightCard.class2 ?? null}
+						class3={rightCard.class3 ?? null}
+						exceptional={rightCard.original.ex}
+						restriction={rightCard.original.ir}
+						weakness={rightCard.original.wk}
+						xp={rightCard.original.xp}
+						xpTaboo={rightCard.original.xpat}
 						onClickDown={rowActionEvents.onMoveDownRight}
 						onClickUp={rowActionEvents.onMoveUpRight}
 					/>

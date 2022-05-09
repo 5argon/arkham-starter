@@ -57,7 +57,7 @@ export function getPackStaticUrl(pack: CardPackIcon, color: CardPackIconColor): 
 		case CardPackIcon.TheDreamEaters:
 			fileName = '_The Dream-Eaters'
 			break
-		case CardPackIcon.TheInsmouthConspiracy:
+		case CardPackIcon.TheInnsmouthConspiracy:
 			fileName = '_The Innsmouth Conspiracy'
 			break
 		case CardPackIcon.EdgeOfTheEarth:

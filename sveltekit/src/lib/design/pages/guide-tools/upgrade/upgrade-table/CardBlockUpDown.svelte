@@ -5,6 +5,7 @@
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
 
 	export let singleMode: boolean = false
+	export let cardId: string
 	export let text: string
 	// export let onClickDelete: () => void = () => {
 	// 	// do nothing
@@ -23,10 +24,13 @@
 	export let exceptional: boolean = false
 	export let packIcon: CardPackIcon | null = null
 	export let packNumber: number | null = null
+	export let restriction: boolean = false
+	export let weakness: boolean = false
 </script>
 
 <CardBlock
 	showImageStrip={singleMode}
+	{cardId}
 	{text}
 	{class1}
 	{class2}
@@ -36,6 +40,8 @@
 	{exceptional}
 	{packIcon}
 	{packNumber}
+	{restriction}
+	{weakness}
 	leftButtons={[]}
 	rightButtons={singleMode
 		? []
