@@ -35,6 +35,9 @@
 	let stagingCards1: string[] = []
 	let stagingCards2: string[] = []
 	let stagingCards3: string[] = []
+	let stagingAmounts1: (number | null)[] = []
+	let stagingAmounts2: (number | null)[] = []
+	let stagingAmounts3: (number | null)[] = []
 
 	let rows: Row[] = []
 
@@ -144,14 +147,20 @@
 					onAddToRightSide={(c) => {
 						rows = addCardToList(rows, c, true)
 					}}
-					onImportDeck={(a, b, c) => {
+					onImportDeck={(a, am, b, bm, c, cm) => {
 						stagingCards1 = a
+						stagingAmounts1 = am
 						stagingCards2 = b
+						stagingAmounts2 = bm
 						stagingCards3 = c
+						stagingAmounts3 = cm
 					}}
 					{stagingCards1}
 					{stagingCards2}
 					{stagingCards3}
+					{stagingAmounts1}
+					{stagingAmounts2}
+					{stagingAmounts3}
 				/>
 			</div>
 		</div>

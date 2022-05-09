@@ -47,7 +47,7 @@ input {
 
 @font-face {
 	font-family: 'ArkhamNumber';
-	src: url('/font/BoltonTitling.ttf') format('truetype');
+	src: url('/font/Bolton.ttf') format('truetype');
 }
 
 .font-guardian {

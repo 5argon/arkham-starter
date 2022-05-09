@@ -120,7 +120,7 @@
 				>{textIconToFontCharacter(TextIcon.TokenElderSign)}</span
 			>{/if}
 		{#if packNumber !== 1000 && (packIcon !== null || packNumber !== null)}
-			<span class="pack-span"
+			<span class="pips pack-span"
 				>({#if packIcon !== null}<img class="pack-icon" src={packStaticUrl} alt="Pack icon" />
 				{/if}
 				{#if packNumber !== null}<span>{packNumber}</span>{/if})</span
@@ -137,8 +137,11 @@
 	}
 
 	.amount {
+		user-select: none;
 		font-family: 'ArkhamNumber';
-		margin-right: 3px;
+		margin-right: 2px;
+		margin-top: 2px;
+		font-size: x-small;
 	}
 
 	.card-name {

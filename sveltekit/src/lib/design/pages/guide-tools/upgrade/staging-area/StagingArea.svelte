@@ -5,7 +5,14 @@
 	import StagingAreaSingle from './StagingAreaSingle.svelte'
 	import { extractDeckFromUrl, getDeckCardIds } from '$lib/ahdb/public-api/high-level'
 
-	export let onImportDeck: (cards1: string[], cards2: string[], cards3: string[]) => void = () => {
+	export let onImportDeck: (
+		cards1: string[],
+		amounts1: (number | null)[],
+		cards2: string[],
+		amounts2: (number | null)[],
+		cards3: string[],
+		amounts3: (number | null)[],
+	) => void = () => {
 		// do nothing
 	}
 
@@ -14,16 +21,19 @@
 	export let stagingCards1: string[] = []
 	export let stagingCards2: string[] = []
 	export let stagingCards3: string[] = []
+	export let stagingAmounts1: (number | null)[] = []
+	export let stagingAmounts2: (number | null)[] = []
+	export let stagingAmounts3: (number | null)[] = []
 	export let onCollapseChanged: (collapse: boolean) => void = () => {
 		// do nothing
 	}
-	export let onAddStagingCards1: (cardId: string) => void = () => {
+	export let onAddStagingCards1: (cardId: string, amount: number | null) => void = () => {
 		// do nothing
 	}
-	export let onAddStagingCards2: (cardId: string) => void = () => {
+	export let onAddStagingCards2: (cardId: string, amount: number | null) => void = () => {
 		// do nothing
 	}
-	export let onAddStagingCards3: (cardId: string) => void = () => {
+	export let onAddStagingCards3: (cardId: string, amount: number | null) => void = () => {
 		// do nothing
 	}
 	export let onAddToLeftSide: (cardId: string) => void = () => {
@@ -78,7 +88,14 @@
 				'Deck not found. If importing an unpublished deck, check your user settings to make it public.'
 			return
 		}
-		onImportDeck(cards.cards1, cards.cards2, cards.cards3)
+		onImportDeck(
+			cards.cards1,
+			cards.amounts1,
+			cards.cards2,
+			cards.amounts2,
+			cards.cards3,
+			cards.amounts3,
+		)
 		noticeLevel = NoticeLevel.Success
 		noticeText = 'Import successful : ' + cards.deck
 		exportedOnce = true
@@ -89,6 +106,7 @@
 	label={exportedOnce ? 'Deck' : 'Staging Area 1'}
 	{popupDatabase}
 	stagingCards={stagingCards1}
+	stagingAmounts={stagingAmounts1}
 	onAddStagingCards={onAddStagingCards1}
 	{onAddToLeftSide}
 	{onAddToRightSide}
@@ -98,6 +116,7 @@
 	label={exportedOnce ? 'Side Deck' : 'Staging Area 2'}
 	{popupDatabase}
 	stagingCards={stagingCards2}
+	stagingAmounts={stagingAmounts2}
 	onAddStagingCards={onAddStagingCards2}
 	{onAddToLeftSide}
 	{onAddToRightSide}
@@ -107,6 +126,7 @@
 	label={exportedOnce ? 'Ignore Deck Limit' : 'Staging Area 3'}
 	{popupDatabase}
 	stagingCards={stagingCards3}
+	stagingAmounts={stagingAmounts3}
 	onAddStagingCards={onAddStagingCards3}
 	{onAddToLeftSide}
 	{onAddToRightSide}

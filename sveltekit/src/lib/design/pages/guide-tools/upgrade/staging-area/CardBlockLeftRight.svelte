@@ -5,6 +5,7 @@
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
 
 	export let cardId: string
+	export let amount: number | null = null
 	export let showImageStrip: boolean = false
 	export let text: string | null = null
 	export let collapse: boolean = false
@@ -33,6 +34,7 @@
 
 <CardBlock
 	{cardId}
+	{amount}
 	{showImageStrip}
 	{text}
 	{class1}

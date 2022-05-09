@@ -15,6 +15,7 @@
 	export let label: string
 	export let popupDatabase: PopupDatabase
 	export let stagingCards: string[] = []
+	export let stagingAmounts: (number | null)[] = []
 
 	let addCardTextboxText: string = ''
 
@@ -22,7 +23,7 @@
 	$: {
 		cards = stagingCards.map((x) => popupDatabase.getById(x))
 	}
-	export let onAddStagingCards: (cardId: string) => void = () => {
+	export let onAddStagingCards: (cardId: string, amount: number | null) => void = () => {
 		// do nothing
 	}
 	export let onDelete: (cardId: string) => void = () => {
@@ -46,7 +47,7 @@
 		if (card !== null) {
 			cardNoticeString = 'Found and added a card : ' + card.original.n
 			noticeLevel = NoticeLevel.Success
-			onAddStagingCards(card.original.id)
+			onAddStagingCards(card.original.id, null)
 			addCardTextboxText = ''
 		} else {
 			cardNoticeString = 'Card with ID ' + s + ' not found.'
@@ -80,6 +81,7 @@
 				<div in:fly={{ y: -20, duration: 300 }}>
 					<CardBlockLeftRight
 						cardId={c.original.id}
+						amount={stagingAmounts[i]}
 						showImageStrip={true}
 						collapse={true}
 						text={c.original.n}
@@ -99,6 +101,7 @@
 				<div in:fly={{ x: -20, duration: 300 }}>
 					<CardBlockLeftRight
 						cardId={c.original.id}
+						amount={stagingAmounts[i]}
 						showImageStrip={true}
 						text={c.original.n}
 						class1={c.class1}

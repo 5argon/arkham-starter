@@ -37,6 +37,9 @@ export interface GetDeckCardIdReturns {
 	cards1: string[]
 	cards2: string[]
 	cards3: string[]
+	amounts1: number[]
+	amounts2: number[]
+	amounts3: number[]
 }
 
 export async function getDeckCardIds(
@@ -49,6 +52,12 @@ export async function getDeckCardIds(
 		}
 		return Object.keys(cl)
 	}
+	function cardListToAmounts(cl: CardList): number[] {
+		if (cl === null) {
+			return []
+		}
+		return Object.values(cl)
+	}
 
 	const d = published ? await publicDeckPublished(deck) : await publicDeckPersonal(deck)
 	if (d === null) {
@@ -59,5 +68,8 @@ export async function getDeckCardIds(
 		cards1: cardListToArray(d.slots),
 		cards2: cardListToArray(d.sideSlots),
 		cards3: cardListToArray(d.ignoreDeckLimitSlots),
+		amounts1: cardListToAmounts(d.slots),
+		amounts2: cardListToAmounts(d.sideSlots),
+		amounts3: cardListToAmounts(d.ignoreDeckLimitSlots),
 	}
 }
