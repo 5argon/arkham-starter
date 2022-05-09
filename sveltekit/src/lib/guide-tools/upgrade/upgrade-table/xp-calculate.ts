@@ -52,15 +52,13 @@ function findXpDifference(
 	let leftXp = 0
 	let rightXp = 0
 	if (cardLeft !== null) {
-		const leftC = extractCard(cardLeft)
-		leftXp = leftC !== null ? findXp(leftC, db, gs) : 0
+		leftXp = findXp(cardLeft, db, gs)
 	}
 	if (cardRight !== null) {
-		const rightC = extractCard(cardRight)
-		rightXp = rightC !== null ? findXp(rightC, db, gs) : 0
+		rightXp = findXp(cardRight, db, gs)
 	}
 	if (cardRight !== null && cardLeft === null) {
-		return rightXp
+		return Math.max(1, rightXp)
 	} else if (cardRight === null && cardLeft !== null) {
 		return 0
 	} else {
@@ -71,7 +69,7 @@ function findXpDifference(
 function findXp(card: string, db: PopupDatabase, gs: GlobalSettings): number {
 	const c = db.getById(card)
 	if (c !== null) {
-		return ((c.xp ?? 0) + (gs.taboo ? c.xpat : 0)) * (c.ex || c.ext ? 2 : 1)
+		return ((c.xp ?? 0) + (gs.taboo ? c.xpat : 0)) * (c.ex || (gs.taboo && c.ext) ? 2 : 1)
 	} else {
 		return 0
 	}
@@ -86,6 +84,5 @@ function extractCard(s: string): string | null {
 	if (result === null) {
 		return null
 	}
-	console.log(result)
 	return result[1]
 }

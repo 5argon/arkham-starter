@@ -53,6 +53,7 @@
 
 	let colorClass: string
 	$: {
+		console.log(class1 + ' ' + class2 + ' ' + class3)
 		if (color) {
 			colorClass = classToFontColorCss(class1, class2, class3)
 		} else {
@@ -156,7 +157,7 @@
 	}
 
 	.pack-icon {
-		width: 10px;
+		height: 10px;
 		margin-right: 2px;
 	}
 </style>

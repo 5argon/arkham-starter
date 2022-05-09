@@ -21,9 +21,9 @@
 	$: cx = calculateXps(db, rows, gs)
 </script>
 
-<table>
+<div class="wrapper">
 	<UpgradeToolbar {toolbarEvents} />
-	{#each rows as r, i (r)}
+	{#each rows as r, i (i)}
 		<UpgradeRow
 			popupDatabase={db}
 			{singleMode}
@@ -69,9 +69,9 @@
 				onCarryoverXpChanged: (n) => {
 					rowEditEvents.onCarryoverXpChanged(i, n)
 				},
-				onXpLockChanged: (n) => {
+				onXpLockChanged: (n, c) => {
 					console.log(n)
-					rowEditEvents.onXpLockChanged(i, n)
+					rowEditEvents.onXpLockChanged(i, n, c)
 				},
 				onLoseFocus: () => {
 					rowEditEvents.onLoseFocus(i)
@@ -82,10 +82,17 @@
 				onDividerTextChanged: (n) => {
 					rowEditEvents.onDividerTextChanged(i, n)
 				},
-				onXpCumulativeLockChanged: (n) => {
-					rowEditEvents.onXpCumulativeLockChanged(i, n)
+				onXpCumulativeLockChanged: (n, c) => {
+					rowEditEvents.onXpCumulativeLockChanged(i, n, c)
 				},
 			}}
 		/>
 	{/each}
-</table>
+</div>
+
+<style>
+	.wrapper {
+		margin: 0 auto;
+		max-width: 850px;
+	}
+</style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PopupDatabase } from '$lib/core/popup-database'
+	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import { EditingLevel } from '$lib/design/components/basic/TextBox.svelte'
 
 	import type { Row } from '$lib/guide-tools/upgrade/interface'
@@ -24,8 +24,14 @@
 	export let rowActionEvents: RowActionEvents
 	export let rowEditEvents: RowEditEvents
 
-	$: leftCard = row.left !== null ? popupDatabase.getById(row.left) : null
-	$: rightCard = row.right !== null ? popupDatabase.getById(row.right) : null
+	let leftCard: PopupDatabaseItem | null
+	let rightCard: PopupDatabaseItem | null
+	$: {
+		leftCard = row.left !== null ? popupDatabase.getById(row.left) : null
+	}
+	$: {
+		rightCard = row.right !== null ? popupDatabase.getById(row.right) : null
+	}
 </script>
 
 {#if row.divider}
@@ -65,14 +71,16 @@
 					{singleMode}
 					text={leftCard.n}
 					class1={leftCard.c1}
-					class2={leftCard.c2}
-					class3={leftCard.c3}
+					class2={leftCard.c2 ?? null}
+					class3={leftCard.c3 ?? null}
 					exceptional={leftCard.ex}
 					xp={leftCard.xp}
 					xpTaboo={leftCard.xpat}
 				/>
 			{:else}
-				<div class="grey-empty" />
+				<div class="grey-empty-outer">
+					<div class="grey-empty" />
+				</div>
 			{/if}
 		</div>
 		{#if !singleMode}
@@ -83,14 +91,16 @@
 						{singleMode}
 						text={rightCard.n}
 						class1={rightCard.c1}
-						class2={rightCard.c2}
-						class3={rightCard.c3}
+						class2={rightCard.c2 ?? null}
+						class3={rightCard.c3 ?? null}
 						exceptional={rightCard.ex}
 						xp={rightCard.xp}
 						xpTaboo={rightCard.xpat}
 					/>
 				{:else}
-					<div class="grey-empty" />
+					<div class="grey-empty-outer">
+						<div class="grey-empty" />
+					</div>
 				{/if}
 			</div>
 		{/if}
@@ -117,12 +127,13 @@
 			{#if row.divider}
 				<RowActionBack
 					xpLock={row.dividerXpCumulativeUnlock}
-					onXpLockChanged={(e) => rowEditEvents.onXpCumulativeLockChanged(e)}
+					onXpLockChanged={(e) =>
+						rowEditEvents.onXpCumulativeLockChanged(e, calculatedCumulativeXp)}
 				/>
 			{:else}
 				<RowActionBack
 					xpLock={row.xpUnlock}
-					onXpLockChanged={(e) => rowEditEvents.onXpLockChanged(e)}
+					onXpLockChanged={(e) => rowEditEvents.onXpLockChanged(e, calculatedXp)}
 				/>
 			{/if}
 		</div>
@@ -152,8 +163,15 @@
 		text-align: center;
 	}
 
+	.grey-empty-outer {
+		height: 26.5px;
+		display: flex;
+		align-items: center;
+	}
+
 	.grey-empty {
-		height: 14px;
+		flex: 1;
+		height: 12px;
 		background-color: rgba(0, 0, 0, 0.01);
 		border: 1px dashed rgba(0, 0, 0, 0.1);
 	}

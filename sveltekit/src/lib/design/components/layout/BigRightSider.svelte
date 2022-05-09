@@ -19,12 +19,12 @@
 	}
 
 	.left {
-		flex: 4;
+		flex: 3;
 		padding-right: 4px;
 	}
 
 	.right {
-		flex: 8;
+		flex: 9;
 		padding-left: 4px;
 	}
 </style>

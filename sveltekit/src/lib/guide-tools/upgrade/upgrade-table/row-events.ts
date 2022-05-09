@@ -20,8 +20,8 @@ export interface TableRowEditEvents {
 	onRightChanged: (i: number, n: string) => void
 	onXpChanged: (i: number, n: number) => void
 	onCarryoverXpChanged: (i: number, n: number) => void
-	onXpLockChanged: (i: number, n: boolean) => void
-	onXpCumulativeLockChanged: (i: number, n: boolean) => void
+	onXpLockChanged: (i: number, n: boolean, calc: number) => void
+	onXpCumulativeLockChanged: (i: number, n: boolean, calc: number) => void
 	onDividerChanged: (i: number, n: boolean) => void
 	onDividerTextChanged: (i: number, n: string) => void
 	onLoseFocus: (i: number) => void
@@ -43,8 +43,8 @@ export interface RowEditEvents {
 	onRightChanged: (n: string) => void
 	onXpChanged: (n: number) => void
 	onCarryoverXpChanged: (n: number) => void
-	onXpLockChanged: (n: boolean) => void
-	onXpCumulativeLockChanged: (n: boolean) => void
+	onXpLockChanged: (n: boolean, calc: number) => void
+	onXpCumulativeLockChanged: (n: boolean, calc: number) => void
 	onDividerChanged: (n: boolean) => void
 	onDividerTextChanged: (n: string) => void
 	onLoseFocus: () => void
@@ -52,12 +52,6 @@ export interface RowEditEvents {
 
 export function createEmptyRowActionEvents(): RowActionEvents {
 	return {
-		onAddAbove: () => {
-			// do nothing
-		},
-		onAddBelow: () => {
-			// do nothing
-		},
 		onDelete: () => {
 			// do nothing
 		},
@@ -80,19 +74,6 @@ export function createEmptyRowActionEvents(): RowActionEvents {
 			// do nothing
 		},
 	}
-}
-
-export interface RowEditEvents {
-	onMarkChanged: (n: string) => void
-	onLeftChanged: (n: string) => void
-	onRightChanged: (n: string) => void
-	onXpChanged: (n: number) => void
-	onCarryoverXpChanged: (n: number) => void
-	onXpLockChanged: (n: boolean) => void
-	onXpCumulativeLockChanged: (n: boolean) => void
-	onDividerChanged: (n: boolean) => void
-	onDividerTextChanged: (n: string) => void
-	onLoseFocus: () => void
 }
 
 export function createEmptyRowEditEvents(): RowEditEvents {

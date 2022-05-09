@@ -78,9 +78,12 @@
 					<CardBlockLeftRight
 						showImageStrip={true}
 						collapse={true}
+						text={c.n}
 						class1={c.c1}
 						class2={c.c2 ?? null}
 						class3={c.c3 ?? null}
+						exceptional={globalSettings.taboo ? c.ext : c.ex}
+						restriction={c.ir}
 						xp={c.xp}
 						onClickLeft={() => onAddToLeftSide(c.id)}
 						onClickRight={() => onAddToRightSide(c.id)}
@@ -98,6 +101,8 @@
 						restriction={c.ir}
 						xp={c.xp}
 						xpTaboo={globalSettings.taboo ? c.xpat : 0}
+						packNumber={c.ps}
+						packIcon={c.pc}
 						onClickDelete={() => onDelete(c.id)}
 						onClickLeft={() => onAddToLeftSide(c.id)}
 						onClickRight={() => onAddToRightSide(c.id)}

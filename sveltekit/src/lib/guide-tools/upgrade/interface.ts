@@ -28,6 +28,7 @@ export interface UpgradeTableData {
 }
 
 export interface Row {
+	rowId: number
 	mark: string
 	left: string | null
 	right: string | null

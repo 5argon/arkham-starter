@@ -13,7 +13,8 @@ function rowMove(rows: Row[], index: number, moveBy: number): Row[] {
 	const removed = rows.splice(index, 1)
 	const target = Math.max(0, index + moveBy)
 	rows.splice(target, 0, removed[0])
-	return rows
+	const final = [...rows]
+	return final
 }
 
 export function oneSideMoveDown(rows: Row[], index: number, right: boolean): Row[] {
@@ -40,7 +41,6 @@ function oneSideMove(rows: Row[], index: number, right: boolean, moveBy: number)
 		i += moveBy
 	}
 	target = Math.max(0, target)
-	console.log(target)
 	if (right) {
 		const a = rows[target].right
 		rows[target].right = rows[index].right
@@ -50,22 +50,44 @@ function oneSideMove(rows: Row[], index: number, right: boolean, moveBy: number)
 		rows[target].left = rows[index].left
 		rows[index].left = a
 	}
-	return rows
+	const final = [...rows]
+	return final
 }
 
-export function addRow(rows: Row[], add: string, right: boolean): Row[] {
+function addRow(rows: Row[], add: string, right: boolean): Row[] {
 	const newRow = createRow(false)
 	if (right) {
 		newRow.right = add
 	} else {
 		newRow.left = add
 	}
-	rows.push(newRow)
-	return rows
+	return [...rows, newRow]
+}
+
+export function addCardToList(rows: Row[], card: string, right: boolean): Row[] {
+	if (rows.length > 0) {
+		const foundIndex = rows.findIndex(
+			(x) => x.divider === false && ((right && x.right === null) || (!right && x.left === null)),
+		)
+
+		if (foundIndex !== -1) {
+			const found = rows[foundIndex]
+			const target = found
+			if (right) {
+				rows[foundIndex] = { ...target, right: card }
+				return [...rows]
+			} else {
+				rows[foundIndex] = { ...target, left: card }
+				return [...rows]
+			}
+		}
+	}
+	return addRow(rows, card, right)
 }
 
 export function createRow(divider: boolean): Row {
 	return {
+		rowId: Math.random(),
 		carryoverXp: 0,
 		divider: divider,
 		dividerText: '',

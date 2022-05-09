@@ -128,7 +128,7 @@
 
 <style>
 	.notice-text {
-		height: 20px;
+		min-height: 25px;
 	}
 
 	.label {

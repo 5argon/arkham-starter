@@ -21,9 +21,10 @@
 		rowMoveDown,
 		rowMoveUp,
 		createRow,
-		addRow,
+		addCardToList,
 	} from '$lib/guide-tools/upgrade/upgrade-table/row-operations'
 	import SpinnerSpan from '$lib/design/components/basic/SpinnerSpan.svelte'
+	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -50,10 +51,8 @@
 	}
 	const rowActionEvents: TableRowActionEvents = {
 		onDelete: (i) => {
-			console.log(i)
-			const neww = rows.splice(i)
-			console.log(neww)
-			rows = neww
+			rows.splice(i, 1)
+			rows = [...rows]
 		},
 		onMoveDown: (i) => {
 			rows = rowMoveDown(rows, i)
@@ -99,18 +98,25 @@
 		onXpChanged: (i, n) => {
 			rows[i].xp = n
 		},
-		onXpCumulativeLockChanged: (i, n) => {
+		onXpCumulativeLockChanged: (i, n, c) => {
+			if (n) {
+				rows[i].carryoverXp = c
+			}
 			rows[i].dividerXpCumulativeUnlock = n
 		},
-		onXpLockChanged: (i, n) => {
+		onXpLockChanged: (i, n, c) => {
+			if (n) {
+				rows[i].xp = c
+			}
 			rows[i].xpUnlock = n
 		},
 	}
 
 	let popupDatabase = fetchPopupDatabase()
-	let collapse: boolean = false
+	let collapse: boolean = true
 </script>
 
+<PageTitle title="Upgrade Planner" />
 {#await popupDatabase}
 	<SpinnerSpan text="Loading..." />
 {:then pdb}
@@ -132,10 +138,10 @@
 					stagingCards3 = [...stagingCards3, c]
 				}}
 				onAddToLeftSide={(c) => {
-					rows = addRow(rows, c, false)
+					rows = addCardToList(rows, c, false)
 				}}
 				onAddToRightSide={(c) => {
-					rows = addRow(rows, c, true)
+					rows = addCardToList(rows, c, true)
 				}}
 				onImportDeck={(a, b, c) => {
 					stagingCards1 = a

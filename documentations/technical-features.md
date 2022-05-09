@@ -1,6 +1,6 @@
 # Technical features
 
-- Created with Svelte and SvelteKit. The reason is just because I wanted some reasons to learn them.
+- Created with Svelte and SvelteKit. The reason is just because I wanted some reasons to learn them. Vite is also used for SvelteKit instead of Rollup previously used in Sapper, so that is a bonus of things I get to learn!
 - Like/popularity score and other numerical stats tied to the deck is not pulled from ArkhamDB. This new presentation is intended so user can focus on the content of the deck and the included guide. There is also randomization button to encourage deck discovery.
 - Card list gets a bit more graphical than ArkhamDB's minimal and clean style, to aid identifying card in the collection for beginners. (e.g. Not require hovering mouse to see the graphics, in the case of browsing on mobile device.)
 - UI is mobile first, such as user able to easily close the popup after inspecting the card name.
