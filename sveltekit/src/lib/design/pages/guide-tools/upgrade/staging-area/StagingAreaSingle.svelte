@@ -3,9 +3,12 @@
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
 	import TextBox, { EditingLevel, NoticeLevel } from '$lib/design/components/basic/TextBox.svelte'
 	import UnknownCardBlock from '$lib/design/components/card/UnknownCardBlock.svelte'
-	import { defaultGlobalSettings, type GlobalSettings } from '$lib/guide-tools/upgrade/interface'
 	import CardBlockLeftRight from './CardBlockLeftRight.svelte'
 	import { fly } from 'svelte/transition'
+	import {
+		defaultGlobalSettings,
+		type GlobalSettings,
+	} from '$lib/guide-tools/script/common/settings'
 
 	export let collapse: boolean = false
 	export let globalSettings: GlobalSettings = defaultGlobalSettings

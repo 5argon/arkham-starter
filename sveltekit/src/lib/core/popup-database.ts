@@ -38,78 +38,121 @@ export type PopupDatabaseItem = Omit<PopupDatabaseItemRaw, 'pc' | 'c1' | 'c2' | 
 	c1: CardClass
 	c2?: CardClass
 	c3?: CardClass
+	positionString: string
+	xpString: string
+	xpStringAfterTaboo: string
+}
+
+/**
+ * Compact database of all player cards that is enough to use in a quick popup
+ * and card listing. Preprocessed from full data from ArkhamDB with the latest
+ * taboo pre-applied.
+ */
+export interface PopupDatabase {
+	packNames: { [k: number]: string }
+	packCodes: { [k: number]: string }
+	classNames: { [k: number]: string }
+	traits: { [k: number]: string }
+	items: PopupDatabaseItem[]
 }
 
 export interface PopupDatabaseItemRaw {
 	id: string
+
 	/**
 	 * Name
 	 */
 	n: string
+
 	/**
 	 * Subname
 	 */
 	sn: string
+
 	/**
 	 * Pack code
 	 */
-	pc: string
+	pc: number
+
 	/**
 	 * Pack name
 	 */
-	pn: string
-	/**
-	 * Subpack name
-	 */
-	spn: string
+	pn: number
+
 	/**
 	 * Position
 	 */
 	ps: number
-	/**
-	 * Position string
-	 */
-	pss: string
+
 	/**
 	 * Class string 1
 	 */
-	c1: string
+	c1: number
+
 	/**
 	 * Class string 2
 	 */
-	c2?: string
+	c2?: number
+
 	/**
 	 * Class string 3
 	 */
-	c3?: string
+	c3?: number
+
 	/**
 	 * XP
 	 */
 	xp?: number
+
 	/**
 	 * XP added from taboo
 	 */
 	xpat: number
-	/**
-	 * XP string
-	 */
-	xps: string
-	/**
-	 * XP string after added from taboo
-	 */
-	xpts: string
+
 	/**
 	 * Exceptional
 	 */
 	ex: boolean
+
 	/**
 	 * Exceptional after taboo
 	 */
 	ext: boolean
+
 	/**
 	 * Investigator restriction
 	 */
 	ir: boolean
+
+	/**
+	 * Intellect
+	 */
+	sit?: number
+
+	/**
+	 * Combat
+	 */
+	scm?: number
+
+	/**
+	 * Wild
+	 */
+	swl?: number
+
+	/**
+	 * Agility
+	 */
+	sag?: number
+
+	/**
+	 * Willpower
+	 */
+	swi?: number
+
+	/**
+	 * Traits
+	 */
+	tra: number[]
 }
 
 export async function fetchPopupDatabase(): LazyPopupDatabase {

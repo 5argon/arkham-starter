@@ -32,7 +32,7 @@ function oneSideMove(rows: Row[], index: number, right: boolean, moveBy: number)
 	index = Math.max(0, Math.min(rows.length - 1, index))
 	let target: number = index
 	let i = index + moveBy
-	while (i > 0 && i < rows.length) {
+	while (i >= 0 && i < rows.length) {
 		const r = rows[i]
 		if (!r.divider) {
 			target = i

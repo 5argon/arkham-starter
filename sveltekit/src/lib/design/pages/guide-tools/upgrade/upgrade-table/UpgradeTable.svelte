@@ -93,6 +93,6 @@
 <style>
 	.wrapper {
 		margin: 0 auto;
-		max-width: 850px;
+		max-width: 950px;
 	}
 </style>

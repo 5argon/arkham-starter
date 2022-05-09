@@ -1,31 +1,4 @@
-export interface ExportOptions {
-	card: CardOptions
-}
-
-export interface ImportOptions {
-	arrow: string
-	suffix1Regex: string
-	suffix2Regex: string
-}
-
-export interface CardOptions {
-	taboo: boolean
-	pips: boolean
-	classIcon: boolean
-	pipStyle: PipStyle
-}
-
-export enum PipStyle {
-	None,
-	Number,
-	Pips,
-}
-
-export interface UpgradeTableData {
-	rows: Row[]
-	importOptions: ImportOptions
-	exportOptions: ExportOptions
-}
+import type { CardInfoType } from '../script/common/settings'
 
 export interface Row {
 	rowId: number
@@ -40,10 +13,6 @@ export interface Row {
 	dividerXpCumulativeUnlock: boolean
 }
 
-export interface GlobalSettings {
-	taboo: boolean
-}
-
 export interface TableSettings {
 	/**
 	 * Hides the arrow, right column, and both XP calculation columns.
@@ -52,15 +21,5 @@ export interface TableSettings {
 	 */
 	singleColumnMode: boolean
 
-	cardInfos: CardInfo[]
-}
-
-export enum CardInfo {
-	PlayCost,
-	CommitIcons,
-	Traits,
-}
-
-export const defaultGlobalSettings: GlobalSettings = {
-	taboo: true,
+	cardInfos: CardInfoType[]
 }

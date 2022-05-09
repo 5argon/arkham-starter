@@ -2,14 +2,23 @@ import type { CardList } from '../deck'
 import { publicDeck } from './call'
 
 export function extractDeckFromUrl(url: string): string {
-	const urlRegex = new RegExp(/view\/([^\/]*)/gm)
-	const matchResult = urlRegex.exec(url)
-	if (matchResult !== null) {
-		return matchResult[1]
-	} else {
-		// If no match, assume the input is already deck code, hopefully.
-		return url
+	{
+		const urlRegex = new RegExp(/view\/([^\/]*)/gm)
+		const matchResult = urlRegex.exec(url)
+		if (matchResult !== null) {
+			return matchResult[1]
+		}
 	}
+	{
+		const urlRegex = new RegExp(/edit\/([^\/]*)/gm)
+		const matchResult = urlRegex.exec(url)
+		if (matchResult !== null) {
+			return matchResult[1]
+		}
+	}
+
+	// If no match, assume the input is already deck code, hopefully.
+	return url
 }
 
 export interface GetDeckCardIdReturns {

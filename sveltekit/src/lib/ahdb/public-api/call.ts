@@ -26,8 +26,8 @@ export async function publicCard(cardNumber: string): Promise<AhdbCard> {
 	return c
 }
 
-export async function publicAllCards(additional: string): Promise<AhdbCard[]> {
-	const joinedPath = joinPath(...publicApiCards) + additional
+export async function publicAllCards(): Promise<AhdbCard[]> {
+	const joinedPath = joinPath(...publicApiCards)
 	const ret = await fetchWithRetries(joinedPath)
 	const c = (await ret.json()) as AhdbCard[]
 	//console.log(c);

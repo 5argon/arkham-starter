@@ -1,5 +1,7 @@
 # arkhamdb-pulls
 
+So that arkham-starters.com is not troubling ArkhamDB's server as much as possible while using, we preprocess data from ArkhamDB ahead of time and keep using our version serving from our server. This also save network roundtrip time since it came from the same location that serve the page.
+
 `pull.ts` is a Deno script that would gather required data from ArkhamDB to generate the static site. This should be the only time we need an internet connection when generating the site.
 
 Input in `input` folder is a `json` files named after user's ID in ArkhamDB, inside containing JSON object of a single field `decks`.

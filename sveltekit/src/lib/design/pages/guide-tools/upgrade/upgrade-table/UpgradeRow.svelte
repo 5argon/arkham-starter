@@ -76,6 +76,8 @@
 					exceptional={leftCard.ex}
 					xp={leftCard.xp}
 					xpTaboo={leftCard.xpat}
+					onClickDown={rowActionEvents.onMoveDownLeft}
+					onClickUp={rowActionEvents.onMoveUpLeft}
 				/>
 			{:else}
 				<div class="grey-empty-outer">
@@ -96,6 +98,8 @@
 						exceptional={rightCard.ex}
 						xp={rightCard.xp}
 						xpTaboo={rightCard.xpat}
+						onClickDown={rowActionEvents.onMoveDownRight}
+						onClickUp={rowActionEvents.onMoveUpRight}
 					/>
 				{:else}
 					<div class="grey-empty-outer">

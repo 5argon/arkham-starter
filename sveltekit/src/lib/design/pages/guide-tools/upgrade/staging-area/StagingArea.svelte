@@ -32,6 +32,7 @@
 	export let onAddToRightSide: (cardId: string) => void = () => {
 		// do nothing
 	}
+	let exportedOnce: boolean = false
 	let gettingCards: boolean = false
 	let noticeLevel: NoticeLevel = NoticeLevel.Normal
 	let noticeText: string | null = null
@@ -64,6 +65,9 @@
 		importText = t
 	}}
 	onSubmit={async (n) => {
+		if (n.trim() === '') {
+			return
+		}
 		gettingCards = true
 		const deck = extractDeckFromUrl(n)
 		const cards = await getDeckCardIds(deck)
@@ -77,11 +81,12 @@
 		onImportDeck(cards.cards1, cards.cards2, cards.cards3)
 		noticeLevel = NoticeLevel.Success
 		noticeText = 'Import successful : ' + cards.deck
+		exportedOnce = true
 	}}
 />
 <StagingAreaSingle
 	{collapse}
-	label={'Staging Area 1'}
+	label={exportedOnce ? 'Deck' : 'Staging Area 1'}
 	{popupDatabase}
 	stagingCards={stagingCards1}
 	onAddStagingCards={onAddStagingCards1}
@@ -90,7 +95,7 @@
 />
 <StagingAreaSingle
 	{collapse}
-	label={'Staging Area 2'}
+	label={exportedOnce ? 'Side Deck' : 'Staging Area 2'}
 	{popupDatabase}
 	stagingCards={stagingCards2}
 	onAddStagingCards={onAddStagingCards2}
@@ -99,7 +104,7 @@
 />
 <StagingAreaSingle
 	{collapse}
-	label={'Staging Area 3'}
+	label={exportedOnce ? 'Ignore Deck Limit' : 'Staging Area 3'}
 	{popupDatabase}
 	stagingCards={stagingCards3}
 	onAddStagingCards={onAddStagingCards3}

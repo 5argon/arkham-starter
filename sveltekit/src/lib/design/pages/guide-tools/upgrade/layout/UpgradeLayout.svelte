@@ -5,11 +5,6 @@
 
 	import StagingArea from '../staging-area/StagingArea.svelte'
 	import UpgradeTable from '../upgrade-table/UpgradeTable.svelte'
-	import {
-		defaultGlobalSettings,
-		type GlobalSettings,
-		type Row,
-	} from '$lib/guide-tools/upgrade/interface'
 	import type { ToolbarEvents } from '$lib/guide-tools/upgrade/upgrade-table/table-events'
 	import type {
 		TableRowActionEvents,
@@ -25,6 +20,11 @@
 	} from '$lib/guide-tools/upgrade/upgrade-table/row-operations'
 	import SpinnerSpan from '$lib/design/components/basic/SpinnerSpan.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+	import {
+		defaultGlobalSettings,
+		type GlobalSettings,
+	} from '$lib/guide-tools/script/common/settings'
+	import type { Row } from '$lib/guide-tools/upgrade/interface'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -122,36 +122,38 @@
 {:then pdb}
 	<BigRightSider viewingLeft={!collapse}>
 		<div slot="left">
-			<StagingArea
-				popupDatabase={pdb}
-				onCollapseChanged={(c) => {
-					collapse = c
-				}}
-				{collapse}
-				onAddStagingCards1={(c) => {
-					stagingCards1 = [...stagingCards1, c]
-				}}
-				onAddStagingCards2={(c) => {
-					stagingCards2 = [...stagingCards2, c]
-				}}
-				onAddStagingCards3={(c) => {
-					stagingCards3 = [...stagingCards3, c]
-				}}
-				onAddToLeftSide={(c) => {
-					rows = addCardToList(rows, c, false)
-				}}
-				onAddToRightSide={(c) => {
-					rows = addCardToList(rows, c, true)
-				}}
-				onImportDeck={(a, b, c) => {
-					stagingCards1 = a
-					stagingCards2 = b
-					stagingCards3 = c
-				}}
-				{stagingCards1}
-				{stagingCards2}
-				{stagingCards3}
-			/>
+			<div class="vertical-scroll">
+				<StagingArea
+					popupDatabase={pdb}
+					onCollapseChanged={(c) => {
+						collapse = c
+					}}
+					{collapse}
+					onAddStagingCards1={(c) => {
+						stagingCards1 = [...stagingCards1, c]
+					}}
+					onAddStagingCards2={(c) => {
+						stagingCards2 = [...stagingCards2, c]
+					}}
+					onAddStagingCards3={(c) => {
+						stagingCards3 = [...stagingCards3, c]
+					}}
+					onAddToLeftSide={(c) => {
+						rows = addCardToList(rows, c, false)
+					}}
+					onAddToRightSide={(c) => {
+						rows = addCardToList(rows, c, true)
+					}}
+					onImportDeck={(a, b, c) => {
+						stagingCards1 = a
+						stagingCards2 = b
+						stagingCards3 = c
+					}}
+					{stagingCards1}
+					{stagingCards2}
+					{stagingCards3}
+				/>
+			</div>
 		</div>
 		<div slot="right">
 			<UpgradeTable
@@ -166,3 +168,11 @@
 		</div>
 	</BigRightSider>
 {/await}
+
+<style>
+	.vertical-scroll {
+		height: calc(100vh - 220px);
+		overflow: scroll;
+		padding-right: 18px;
+	}
+</style>

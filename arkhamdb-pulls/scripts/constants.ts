@@ -10,8 +10,10 @@ export const pullsUtils = "utils";
 export const pullsImagesFull = "full";
 export const pullsImagesSquare = "square";
 export const pullsImagesStrip = "strip";
+export const pullsImagesSquareSmall ="square-small";
 
 export const pullsUtilsPopupDatabase = "popupdb.json";
+export const pullsUtilsPlayerDatabase = "playerdb.json";
 
 export const transformRepackage = "repackage.json"
 

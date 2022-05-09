@@ -79,8 +79,8 @@ export interface AhdbCard {
   deck_limit: number;
   slot: string;
   real_slot: string;
-  traits: string;
-  real_traits: string;
+  traits?: string;
+  real_traits?: string;
   flavor?: string;
   illustrator: string;
   is_unique: boolean;
@@ -89,6 +89,7 @@ export interface AhdbCard {
   octgn_id: string;
   url: string;
   imagesrc?: string;
+  backimagesrc?: string;
   duplicated_by?: string[];
 }
 
@@ -148,34 +149,6 @@ export interface AhdbDeck {
   problem: string | null;
 }
 
-// export interface PopupDatabase {
-//   items: PopupDatabaseItem[];
-//   stringMapping: PopupDatabaseStringMapping;
-// }
-
-// export interface PopupDatabaseStringMapping {
-//   classToName: { [k: number]: string };
-//   packCodeToName: { [k: string]: string };
-//   subPackCodeToName: { [k: string]: string };
-// }
-
-export interface PopupDatabaseItem {
-  id: string;
-  n: string;
-  sn: string;
-  pc: string;
-  pn: string;
-  spn: string;
-  ps: number;
-  pss: string;
-  c1: string;
-  c2?: string;
-  c3?: string;
-  xp?: number;
-  xpat: number;
-  xps: string;
-  xpts: string;
-  ex: boolean;
-  ext: boolean;
-	ir: boolean
+export function extractTraits(s: string): string[] {
+  return s.split(". ").map((x) => x.replaceAll(".", ""));
 }

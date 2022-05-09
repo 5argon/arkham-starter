@@ -34,8 +34,8 @@ export interface AhdbCard {
 	deck_limit: number
 	slot: string
 	real_slot: string
-	traits: string
-	real_traits: string
+	traits?: string
+	real_traits?: string
 	restrictions?: null | {
 		investigator: { [k: string]: string }
 	}
@@ -47,5 +47,6 @@ export interface AhdbCard {
 	octgn_id: string
 	url: string
 	imagesrc?: string
+	backimagesrc?: string
 	duplicated_by?: string[]
 }
