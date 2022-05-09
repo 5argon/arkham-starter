@@ -10,7 +10,12 @@
 <Story name="Try">
 	<table style="width: 100%;">
 		<tr>
-			<UpgradeDivider text={'Sample'} xpCarryover={12} unlocked={false} />
+			<UpgradeDivider
+				text={'Sample'}
+				xpCarryover={12}
+				calculatedXpCarryover={24}
+				unlocked={false}
+			/>
 		</tr>
 	</table>
 </Story>

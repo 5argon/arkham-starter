@@ -1,4 +1,4 @@
-import type { LazyPopupDatabase, PopupDatabase } from '$lib/core/popup-database'
+import type { PopupDatabase } from '$lib/core/popup-database'
 import type { GlobalSettings, Row } from '../interface'
 
 export interface CalculatedXp {
@@ -6,13 +6,7 @@ export interface CalculatedXp {
 	cumulatives: number[]
 }
 
-export async function calculateXps(
-	popupDatabase: LazyPopupDatabase,
-	rows: Row[],
-	gs: GlobalSettings,
-): Promise<CalculatedXp> {
-	console.log('Calc!')
-	const db = await popupDatabase
+export function calculateXps(db: PopupDatabase, rows: Row[], gs: GlobalSettings): CalculatedXp {
 	let cumulative = 0
 	const costs: number[] = []
 	const cumulatives: number[] = []
@@ -37,8 +31,6 @@ export async function calculateXps(
 			}
 		}
 	}
-	console.log(costs)
-	console.log(cumulatives)
 	return {
 		costs: costs,
 		cumulatives: cumulatives,
@@ -49,17 +41,31 @@ export async function calculateXps(
  * Returns 0 XP if card not found or not a card.
  */
 function findXpDifference(
-	left: string,
-	right: string,
+	cardLeft: string | null,
+	cardRight: string | null,
 	db: PopupDatabase,
 	gs: GlobalSettings,
 ): number {
-	const cardLeft = extractCard(left)
-	const cardRight = extractCard(right)
-	console.log(cardLeft)
-	const leftXp = cardLeft !== null ? findXp(cardLeft, db, gs) : 0
-	const rightXp = cardRight !== null ? findXp(cardRight, db, gs) : 0
-	return Math.max(1, rightXp - leftXp)
+	if (cardLeft === null && cardRight === null) {
+		return 0
+	}
+	let leftXp = 0
+	let rightXp = 0
+	if (cardLeft !== null) {
+		const leftC = extractCard(cardLeft)
+		leftXp = leftC !== null ? findXp(leftC, db, gs) : 0
+	}
+	if (cardRight !== null) {
+		const rightC = extractCard(cardRight)
+		rightXp = rightC !== null ? findXp(rightC, db, gs) : 0
+	}
+	if (cardRight !== null && cardLeft === null) {
+		return rightXp
+	} else if (cardRight === null && cardLeft !== null) {
+		return 0
+	} else {
+		return Math.max(1, rightXp - leftXp)
+	}
 }
 
 function findXp(card: string, db: PopupDatabase, gs: GlobalSettings): number {

@@ -6,8 +6,10 @@
 	export let text: string | null = null
 </script>
 
-<FaIcon spin path={allIcons.loading} />
-{#if text !== null}{text}{/if}
+<span>
+	<FaIcon spin path={allIcons.loading} />
+	{#if text !== null}{text}{/if}
+</span>
 
 <style>
 </style>

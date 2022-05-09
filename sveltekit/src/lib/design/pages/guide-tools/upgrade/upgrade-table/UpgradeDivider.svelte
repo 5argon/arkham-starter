@@ -4,6 +4,7 @@
 	import { allIcons } from '$lib/design/icons/all-icons'
 
 	import EditableNumberCell from './EditableNumberCell.svelte'
+	export let singleMode: boolean = false
 	export let text: string
 	export let xpCarryover: number
 	export let calculatedXpCarryover: number
@@ -14,28 +15,30 @@
 	export let onXpCarryoverChanged: (n: number) => void = () => {
 		// do nothing
 	}
-	export let onDelete: () => void = () => {
-		// do nothing
-	}
+	// export let onDelete: () => void = () => {
+	// 	// do nothing
+	// }
 
 	$: showXp = unlocked ? xpCarryover : calculatedXpCarryover
 </script>
 
 <div class="flex-box">
 	<div class="flex-item flex-text">
-		<TextBox rightAlign currentText={text} onChange={onTextChanged} />
+		<TextBox rightAlign={!singleMode} currentText={text} onChange={onTextChanged} />
 	</div>
-	<div class="flex-item">
-		<CardBlockButton label="Move Row Down" iconPath={allIcons.delete} onClick={onDelete} />
-	</div>
-	<div class="flex-item">
-		<EditableNumberCell
-			currentNumber={showXp}
-			suffixText={'XP'}
-			editingLevel={unlocked ? EditingLevel.Editable : EditingLevel.GreyedOut}
-			onEndEdit={onXpCarryoverChanged}
-		/>
-	</div>
+	<!-- <div class="flex-item">
+		<CardBlockButton label="Delete" iconPath={allIcons.delete} onClick={onDelete} />
+	</div> -->
+	{#if singleMode === false}
+		<div class="flex-item">
+			<EditableNumberCell
+				currentNumber={showXp}
+				suffixText={'XP'}
+				editingLevel={unlocked ? EditingLevel.Editable : EditingLevel.GreyedOut}
+				onEndEdit={onXpCarryoverChanged}
+			/>
+		</div>
+	{/if}
 </div>
 
 <style>

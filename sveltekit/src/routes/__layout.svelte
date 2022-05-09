@@ -20,7 +20,7 @@
 		flex-direction: column;
 		padding: 1rem;
 		width: 100%;
-		max-width: 1024px;
+		max-width: 1400px;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}

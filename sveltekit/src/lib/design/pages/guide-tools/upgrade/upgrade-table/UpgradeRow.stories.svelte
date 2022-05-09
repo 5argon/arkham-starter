@@ -161,4 +161,48 @@
 			}}
 		/>
 	</Story>
+
+	<Story name="Single Left Right">
+		<UpgradeRow
+			singleMode
+			rowActionEvents={er}
+			rowEditEvents={ee}
+			calculatedCumulativeXp={3}
+			calculatedXp={6}
+			popupDatabase={pdb}
+			row={{
+				carryoverXp: 10,
+				divider: false,
+				dividerText: 'Hello',
+				dividerXpCumulativeUnlock: false,
+				left: '08116',
+				right: '08112',
+				mark: '*',
+				xp: 8,
+				xpUnlock: false,
+			}}
+		/>
+	</Story>
+
+	<Story name="Single Divider">
+		<UpgradeRow
+			singleMode
+			rowActionEvents={er}
+			rowEditEvents={ee}
+			calculatedCumulativeXp={3}
+			calculatedXp={6}
+			popupDatabase={pdb}
+			row={{
+				carryoverXp: 10,
+				divider: true,
+				dividerText: 'Hello',
+				dividerXpCumulativeUnlock: false,
+				left: '08116',
+				right: '08112',
+				mark: '*',
+				xp: 8,
+				xpUnlock: false,
+			}}
+		/>
+	</Story>
 {/await}

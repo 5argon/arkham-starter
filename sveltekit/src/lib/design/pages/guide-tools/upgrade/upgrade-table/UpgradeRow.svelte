@@ -16,6 +16,7 @@
 	import RowActionFront from './RowActionFront.svelte'
 	import UpgradeDivider from './UpgradeDivider.svelte'
 
+	export let singleMode: boolean = false
 	export let popupDatabase: PopupDatabase
 	export let row: Row
 	export let calculatedXp: number
@@ -33,18 +34,15 @@
 <div class={'flex-row' + ' ' + (row.divider ? 'divider-row' : '')}>
 	<div class="flex-item">
 		<RowActionFront
-			divider={row.divider}
-			onInsertTop={rowActionEvents.onAddAbove}
-			onInsertBottom={rowActionEvents.onAddBelow}
+			onDelete={rowActionEvents.onDelete}
 			onMoveRowDown={rowActionEvents.onMoveDown}
 			onMoveRowUp={rowActionEvents.onMoveUp}
-			onDelete={rowActionEvents.onDelete}
-			onToggle={rowEditEvents.onDividerChanged}
 		/>
 	</div>
 	{#if row.divider}
 		<div class="flex-item upgrade-divider">
 			<UpgradeDivider
+				{singleMode}
 				text={row.dividerText}
 				xpCarryover={row.carryoverXp}
 				calculatedXpCarryover={calculatedCumulativeXp}
@@ -64,6 +62,7 @@
 		<div class="flex-item card-block">
 			{#if leftCard !== null}
 				<CardBlockUpDown
+					{singleMode}
 					text={leftCard.n}
 					class1={leftCard.c1}
 					class2={leftCard.c2}
@@ -76,51 +75,58 @@
 				<div class="grey-empty" />
 			{/if}
 		</div>
-		<div class="flex-item arrow">→</div>
-		<div class="flex-item card-block">
-			{#if rightCard !== null}
-				<CardBlockUpDown
-					text={rightCard.n}
-					class1={rightCard.c1}
-					class2={rightCard.c2}
-					class3={rightCard.c3}
-					exceptional={rightCard.ex}
-					xp={rightCard.xp}
-					xpTaboo={rightCard.xpat}
+		{#if !singleMode}
+			<div class="flex-item arrow">→</div>
+			<div class="flex-item card-block">
+				{#if rightCard !== null}
+					<CardBlockUpDown
+						{singleMode}
+						text={rightCard.n}
+						class1={rightCard.c1}
+						class2={rightCard.c2}
+						class3={rightCard.c3}
+						exceptional={rightCard.ex}
+						xp={rightCard.xp}
+						xpTaboo={rightCard.xpat}
+					/>
+				{:else}
+					<div class="grey-empty" />
+				{/if}
+			</div>
+		{/if}
+		{#if !singleMode}
+			<div class="flex-item">
+				<EditableNumberCell
+					currentNumber={row.xpUnlock ? row.xp : calculatedXp}
+					editingLevel={row.xpUnlock ? EditingLevel.Editable : EditingLevel.GreyedOut}
+					onEndEdit={rowEditEvents.onXpChanged}
+					suffixText="XP"
+				/>
+			</div>
+			<div class="flex-item">
+				<EditableNumberCell
+					currentNumber={calculatedCumulativeXp}
+					editingLevel={EditingLevel.GreyedOut}
+					suffixText="XP"
+				/>
+			</div>
+		{/if}
+	{/if}
+	{#if !singleMode}
+		<div class="flex-item">
+			{#if row.divider}
+				<RowActionBack
+					xpLock={row.dividerXpCumulativeUnlock}
+					onXpLockChanged={(e) => rowEditEvents.onXpCumulativeLockChanged(e)}
 				/>
 			{:else}
-				<div class="grey-empty" />
+				<RowActionBack
+					xpLock={row.xpUnlock}
+					onXpLockChanged={(e) => rowEditEvents.onXpLockChanged(e)}
+				/>
 			{/if}
 		</div>
-		<div class="flex-item">
-			<EditableNumberCell
-				currentNumber={row.xpUnlock ? row.xp : calculatedXp}
-				editingLevel={row.xpUnlock ? EditingLevel.Editable : EditingLevel.GreyedOut}
-				onEndEdit={rowEditEvents.onXpChanged}
-				suffixText="XP"
-			/>
-		</div>
-		<div class="flex-item">
-			<EditableNumberCell
-				currentNumber={calculatedCumulativeXp}
-				editingLevel={EditingLevel.GreyedOut}
-				suffixText="XP"
-			/>
-		</div>
 	{/if}
-	<div class="flex-item">
-		{#if row.divider}
-			<RowActionBack
-				xpLock={row.dividerXpCumulativeUnlock}
-				onXpLockChanged={(e) => rowEditEvents.onXpCumulativeLockChanged(e)}
-			/>
-		{:else}
-			<RowActionBack
-				xpLock={row.xpUnlock}
-				onXpLockChanged={(e) => rowEditEvents.onXpLockChanged(e)}
-			/>
-		{/if}
-	</div>
 </div>
 
 <style>

@@ -23,7 +23,13 @@
 </span> -->
 
 <label>
-	<input type="checkbox" class={iconImagePath !== null ? 'hidden-for-icon' : ''} style={beforeCss} {checked} />
+	<input
+		type="checkbox"
+		class={iconImagePath !== null ? 'hidden-for-icon' : ''}
+		style={beforeCss}
+		{checked}
+		on:change={handler}
+	/>
 	{#if iconImagePath !== null}
 		<FaIcon path={iconImagePath} />
 	{:else if label !== null}

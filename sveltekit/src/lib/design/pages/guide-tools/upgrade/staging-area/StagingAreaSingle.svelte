@@ -5,6 +5,7 @@
 	import UnknownCardBlock from '$lib/design/components/card/UnknownCardBlock.svelte'
 	import { defaultGlobalSettings, type GlobalSettings } from '$lib/guide-tools/upgrade/interface'
 	import CardBlockLeftRight from './CardBlockLeftRight.svelte'
+	import { fly } from 'svelte/transition'
 
 	export let collapse: boolean = false
 	export let globalSettings: GlobalSettings = defaultGlobalSettings
@@ -73,31 +74,35 @@
 	{#each cards as c, i (c?.id ?? 0)}
 		{#if c !== null}
 			{#if collapse}
-				<CardBlockLeftRight
-					showImageStrip={false}
-					collapse={true}
-					class1={c.c1}
-					class2={c.c2 ?? null}
-					class3={c.c3 ?? null}
-					xp={c.xp}
-					onClickLeft={() => onAddToLeftSide(c.id)}
-					onClickRight={() => onAddToRightSide(c.id)}
-				/>
+				<div in:fly={{ y: -20, duration: 300 }}>
+					<CardBlockLeftRight
+						showImageStrip={true}
+						collapse={true}
+						class1={c.c1}
+						class2={c.c2 ?? null}
+						class3={c.c3 ?? null}
+						xp={c.xp}
+						onClickLeft={() => onAddToLeftSide(c.id)}
+						onClickRight={() => onAddToRightSide(c.id)}
+					/>
+				</div>
 			{:else}
-				<CardBlockLeftRight
-					showImageStrip={true}
-					text={c.n}
-					class1={c.c1}
-					class2={c.c2 ?? null}
-					class3={c.c3 ?? null}
-					exceptional={globalSettings.taboo ? c.ext : c.ex}
-					restriction={c.ir}
-					xp={c.xp}
-					xpTaboo={globalSettings.taboo ? c.xpat : 0}
-					onClickDelete={() => onDelete(c.id)}
-					onClickLeft={() => onAddToLeftSide(c.id)}
-					onClickRight={() => onAddToRightSide(c.id)}
-				/>
+				<div in:fly={{ x: -20, duration: 300 }}>
+					<CardBlockLeftRight
+						showImageStrip={true}
+						text={c.n}
+						class1={c.c1}
+						class2={c.c2 ?? null}
+						class3={c.c3 ?? null}
+						exceptional={globalSettings.taboo ? c.ext : c.ex}
+						restriction={c.ir}
+						xp={c.xp}
+						xpTaboo={globalSettings.taboo ? c.xpat : 0}
+						onClickDelete={() => onDelete(c.id)}
+						onClickLeft={() => onAddToLeftSide(c.id)}
+						onClickRight={() => onAddToRightSide(c.id)}
+					/>
+				</div>
 			{/if}
 		{:else}
 			<UnknownCardBlock cardId={stagingCards[i]} />

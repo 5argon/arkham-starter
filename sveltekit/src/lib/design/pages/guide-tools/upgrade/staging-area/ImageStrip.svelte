@@ -9,8 +9,8 @@
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
 	export let class3: CardClass | null = null
-	export let imageUrl: string | null = null
-	export let imageBase64: string | null = null
+	// export let imageUrl: string | null = null
+	// export let imageBase64: string | null = null
 
 	let showClasses: boolean
 	$: showClasses =

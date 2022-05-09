@@ -1,5 +1,5 @@
 export interface ToolbarEvents {
-	onAddTop: () => void
-	onAddBottom: () => void
+	onAddCardRow: () => void
+	onAddDividerRow: () => void
 	onClear: () => void
 }

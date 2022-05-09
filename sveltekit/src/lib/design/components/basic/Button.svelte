@@ -11,7 +11,7 @@
 <!-- <input type="button" class="button-span" value={label} on:click={onClick} /> -->
 <button
 	type="button"
-	disabled={disabled}
+	{disabled}
 	class={(center ? 'center' : '') +
 		' ' +
 		'content-flex' +
@@ -51,7 +51,7 @@
 
 	.button-block {
 		display: flex;
-		width: 100%;
+		width: calc(100% - 4px);
 		margin: 2px 2px;
 		padding: 2px 4px;
 	}

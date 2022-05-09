@@ -4,10 +4,11 @@
 	import type { CardClass } from '$lib/design/interface/card-class'
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
 
+	export let singleMode: boolean = false
 	export let text: string
-	export let onClickDelete: () => void = () => {
-		// do nothing
-	}
+	// export let onClickDelete: () => void = () => {
+	// 	// do nothing
+	// }
 	export let onClickUp: () => void = () => {
 		// do nothing
 	}
@@ -25,6 +26,7 @@
 </script>
 
 <CardBlock
+	showImageStrip={singleMode}
 	{text}
 	{class1}
 	{class2}
@@ -35,27 +37,29 @@
 	{packIcon}
 	{packNumber}
 	leftButtons={[]}
-	rightButtons={[
-		{
-			label: 'Move Up',
-			iconPath: allIcons.arrowUp,
-			onClick: () => {
-				onClickUp()
-			},
-		},
-		{
-			label: 'Move Down',
-			iconPath: allIcons.arrowDown,
-			onClick: () => {
-				onClickDown()
-			},
-		},
-		{
-			label: 'Delete',
-			iconPath: allIcons.delete,
-			onClick: () => {
-				onClickDelete()
-			},
-		},
-	]}
+	rightButtons={singleMode
+		? []
+		: [
+				{
+					label: 'Move Up',
+					iconPath: allIcons.arrowUp,
+					onClick: () => {
+						onClickUp()
+					},
+				},
+				{
+					label: 'Move Down',
+					iconPath: allIcons.arrowDown,
+					onClick: () => {
+						onClickDown()
+					},
+				},
+				// {
+				// 	label: 'Delete',
+				// 	iconPath: allIcons.delete,
+				// 	onClick: () => {
+				// 		onClickDelete()
+				// 	},
+				// },
+		  ]}
 />

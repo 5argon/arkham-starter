@@ -43,6 +43,23 @@ export interface GlobalSettings {
 	taboo: boolean
 }
 
+export interface TableSettings {
+	/**
+	 * Hides the arrow, right column, and both XP calculation columns.
+	 * Button to add to left right turns into a single button.
+	 * Automatically turn on card image due to increased space.
+	 */
+	singleColumnMode: boolean
+
+	cardInfos: CardInfo[]
+}
+
+export enum CardInfo {
+	PlayCost,
+	CommitIcons,
+	Traits,
+}
+
 export const defaultGlobalSettings: GlobalSettings = {
 	taboo: true,
 }

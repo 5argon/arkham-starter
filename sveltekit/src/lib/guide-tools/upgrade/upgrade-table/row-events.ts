@@ -1,6 +1,10 @@
+export interface TableEvents {
+	onAddRow: () => void
+	onAddDivider: () => void
+	onClearAll: () => void
+}
+
 export interface TableRowActionEvents {
-	onAddAbove: (i: number) => void
-	onAddBelow: (i: number) => void
 	onDelete: (i: number) => void
 	onMoveUp: (i: number) => void
 	onMoveDown: (i: number) => void
@@ -24,8 +28,6 @@ export interface TableRowEditEvents {
 }
 
 export interface RowActionEvents {
-	onAddAbove: () => void
-	onAddBelow: () => void
 	onDelete: () => void
 	onMoveUp: () => void
 	onMoveDown: () => void
