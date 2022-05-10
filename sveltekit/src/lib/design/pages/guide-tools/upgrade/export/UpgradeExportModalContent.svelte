@@ -14,6 +14,8 @@
 	$: markdown = upgradeExport(upgradeExportOptions, exportOptions, exportRows)
 </script>
 
+<ListDivider label="Export Options" level={ListDividerLevel.One} />
+WIP! You can't adjust anything for now.
 <ListDivider label="Markdown" level={ListDividerLevel.One} />
 <textarea rows={10}>{markdown}</textarea>
 

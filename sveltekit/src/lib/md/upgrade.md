@@ -8,6 +8,22 @@ This is for decks that uses the main section for level 0 starting cards and Side
 
 The formatting will closely emulate what is shown on the left section of your deck in ArkhamDB. (With class icons, coloring, XP pips, and hoverable.) So if you are writing a detailed deck guide for beginners, they can make visual connection to the decklist better as opposed to being generic blue hyperlinks.
 
+* [Staging Area](#staging-area)
+* [Two-column Table](#two-column-table)
+  + [Left side](#left-side)
+  + [Right side](#right-side)
+  + [Arrow](#arrow)
+  + [Mark](#mark)
+  + [XP Unlock](#xp-unlock)
+  + [Divider Row](#divider-row)
+  + [Cumulative XP Unlock](#cumulative-xp-unlock)
+* [Exporting](#exporting)
+  + [Shape](#shape)
+  + [Included columns](#included-columns)
+  + [Card presentation](#card-presentation)
+  + [Export border](#export-border)
+  + [Import code](#import-code)
+
 ## Staging Area
 
 Section on the left side of the screen. These are cards you are planning to add to the two-column table to try out the upgrades. You may add more cards than actually used in the planner.
@@ -70,6 +86,8 @@ Similar to "XP Unlock" feature, but only available on the divider row. Using unl
 An example is that you would like to express branching path of plans, and therefore 2 divider should start from the same number of cumulative XP from the previous section. Or you can also position divider on top, and enter negative number to express that you have some spare XP from the start. (e.g. In the Thick of It, Parallel Roland.)
 
 ## Exporting
+
+Many things are draft of the complete feature, right now you cannot actually adjust the exporting this much just yet...
 
 Adjust several exporting options here and you will see the export result updated below. Copy the text and paste in your ArkhamDB deck guide. Currently there is no emulated ArkhamDB preview of export result, please see it in ArkhamDB directly after pasting.
 

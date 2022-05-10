@@ -15,6 +15,7 @@ export const allIcons = {
 	noticeSuccess: ic('circle-check-solid'),
 	noticeError: ic('circle-exclamation-solid'),
 	loading: ic('spinner-third-duotone'),
+	manual: ic('book-solid'),
 }
 
 function ic(s: string): string {

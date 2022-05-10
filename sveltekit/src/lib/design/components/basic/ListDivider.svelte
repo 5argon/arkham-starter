@@ -14,17 +14,22 @@
 	export let level: ListDividerLevel = ListDividerLevel.One
 </script>
 
-<div class={level === ListDividerLevel.One ? 'label-level-one' : 'label-level-two'}>
-	{#if level === ListDividerLevel.One}
-		<FaIcon path={allIcons.rightDouble} />
-	{:else}
-		<FaIcon path={allIcons.rightSingle} />
-	{/if}
-	{label}
+<div class="outer">
+	<div class={level === ListDividerLevel.One ? 'label-level-one' : 'label-level-two'}>
+		{#if level === ListDividerLevel.One}
+			<FaIcon path={allIcons.rightDouble} />
+		{:else}
+			<FaIcon path={allIcons.rightSingle} />
+		{/if}
+		{label}
+	</div>
+	<hr class={level === ListDividerLevel.One ? 'level-one' : 'level-two'} />
 </div>
-<hr class={level === ListDividerLevel.One ? 'level-one' : 'level-two'} />
 
 <style>
+	.outer{
+		margin: 8px 0px;
+	}
 	.label-level-one {
 		font-weight: bold;
 		color: #333;

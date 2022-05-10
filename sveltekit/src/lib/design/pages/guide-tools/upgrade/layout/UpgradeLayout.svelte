@@ -25,6 +25,7 @@
 		type GlobalSettings,
 	} from '$lib/guide-tools/script/common/settings'
 	import type { Row } from '$lib/guide-tools/upgrade/interface'
+	import help from '$lib/md/upgrade.md?raw'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -123,7 +124,7 @@
 			rows[i].xpUnlock = n
 		},
 		onDropSwap: (fi, fr, c, ti, tr) => {
-			console.log(fi,fr,c,ti,tr)
+			console.log(fi, fr, c, ti, tr)
 			if (fi === -1) {
 				// Add
 				if (tr) {
@@ -163,7 +164,7 @@
 	let collapse: boolean = true
 </script>
 
-<PageTitle title="Upgrade Planner" />
+<PageTitle title="Upgrade Planner" helpMd={help} />
 {#await popupDatabase}
 	<SpinnerSpan text="Loading..." />
 {:then pdb}
