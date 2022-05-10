@@ -122,8 +122,40 @@
 			}
 			rows[i].xpUnlock = n
 		},
-		onDropSwap: (a, b, c, d, e) => {
-			console.log(a, b, c, d, e)
+		onDropSwap: (fi, fr, c, ti, tr) => {
+			console.log(fi,fr,c,ti,tr)
+			if (fi === -1) {
+				// Add
+				if (tr) {
+					rows[ti].right = c
+				} else {
+					rows[ti].left = c
+				}
+			} else {
+				// Swap
+				if (fr) {
+					if (tr) {
+						const take = rows[fi].right
+						rows[fi].right = rows[ti].right
+						rows[ti].right = take
+					} else {
+						const take = rows[fi].right
+						rows[fi].right = rows[ti].left
+						rows[ti].left = take
+					}
+				} else {
+					if (tr) {
+						const take = rows[fi].left
+						rows[fi].left = rows[ti].right
+						rows[ti].right = take
+					} else {
+						const take = rows[fi].left
+						rows[fi].left = rows[ti].left
+						rows[ti].left = take
+					}
+				}
+			}
+			rows = rows
 		},
 	}
 

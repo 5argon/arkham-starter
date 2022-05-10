@@ -122,13 +122,13 @@
 						{index}
 						right={true}
 						onDropSwap={(fi, fr, fc) => {
-							rowEditEvents.onDropSwap(fi, fr, fc, false)
+							rowEditEvents.onDropSwap(fi, fr, fc, true)
 						}}
 					/>
 				{:else}
 					<GreyEmpty
 						onDropSwap={(fi, fr, fc) => {
-							rowEditEvents.onDropSwap(fi, fr, fc, false)
+							rowEditEvents.onDropSwap(fi, fr, fc, true)
 						}}
 					/>
 				{/if}
