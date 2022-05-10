@@ -75,12 +75,9 @@ export function upgradeExport(
 					const subMeat = upgradeExportSubdivided(upgradeExportOptions, exportOptions, agg)
 					meats.push(subMeat)
 					agg.length = 0
-					// Then push this divider for the next round.
-					agg.push(r)
 				}
-			} else {
-				agg.push(r)
 			}
+			agg.push(r)
 		}
 		// Clear up all the remaining rows
 		if (agg.length > 0) {
@@ -92,7 +89,7 @@ export function upgradeExport(
 	} else {
 		meat = upgradeExportSubdivided(upgradeExportOptions, exportOptions, exportRows)
 	}
-	const all: string[] = [meat, upgradeCode, openClose]
+	const all: string[] = [meat, upgradeCode, comment]
 	return all.join('\n')
 }
 
@@ -111,12 +108,12 @@ export function upgradeExportSubdivided(
 			}
 		})
 	const all: string[] = [
-		openClose,
+		openComment,
 		tableHeader(upgradeExportOptions),
 		mdColumns,
 		...rows,
 		emptyRow,
-		openClose,
+		closeComment,
 	]
 	return all.join('\n')
 }
@@ -141,7 +138,9 @@ function upgradeExportRow(
 
 const nbsp = '　'
 
-const openClose = '[//]: # (==========================================)'
+const openComment = '[//]: # (==================== TABLE START ====================)'
+const closeComment = '[//]: # (===================== TABLE END =====================)'
+const comment = '[//]: # (=====================================================)'
 const mdColumns = '|:-:|:--|:-:|:--|--:|--:|'
 const emptyRow = '|　|  |  |  |  |  |'
 

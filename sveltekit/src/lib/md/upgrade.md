@@ -10,21 +10,21 @@ The export formatting will closely emulate what is shown on the left section of 
 
 Below are some boring write ups about details of each section you can probably figure out by just using it... I program better when I write documentations first even before anything is completed.
 
-* [Staging Area](#staging-area)
-* [Two-column Table](#two-column-table)
-  + [Left side](#left-side)
-  + [Right side](#right-side)
-  + [Arrow](#arrow)
-  + [Mark](#mark)
-  + [XP Unlock](#xp-unlock)
-  + [Divider Row](#divider-row)
-  + [Cumulative XP Unlock](#cumulative-xp-unlock)
-* [Exporting](#exporting)
-  + [Shape](#shape)
-  + [Included columns](#included-columns)
-  + [Card presentation](#card-presentation)
-  + [Export border](#export-border)
-  + [Import code](#import-code)
+- [Staging Area](#staging-area)
+- [Two-column Table](#two-column-table)
+  - [Left side](#left-side)
+  - [Right side](#right-side)
+  - [Arrow](#arrow)
+  - [Mark](#mark)
+  - [XP Unlock](#xp-unlock)
+  - [Divider Row](#divider-row)
+  - [Cumulative XP Unlock](#cumulative-xp-unlock)
+- [Exporting](#exporting)
+  - [Shape](#shape)
+  - [Included columns](#included-columns)
+  - [Card presentation](#card-presentation)
+  - [Export border](#export-border)
+  - [Import code](#import-code)
 
 ## Staging Area
 
@@ -111,22 +111,23 @@ However, the more you add blings to the export, the more it looks messy in the M
 
 ### Export border
 
-At start and end of the exported Markdown, you might notice this :
+You might notice these :
 
 ```md
-[//]: # '=========================================='
+[//]: # (==================== TABLE START ====================)
+
+...
+[//]: # (===================== TABLE END =====================)
 ```
 
-This is yet another Markdown comment that viewer cannot see. Since the exported Markdown table looks like a mess, this dividing line helps you see clearer where is the table while scrolling through your deck documentation.
+This is a Markdown comment that viewer cannot see. Since the exported Markdown table looks like a mess, this dividing line helps you see clearer where is the table while scrolling through your deck documentation, so you can detect an actual content that you had hand-typed from the mess.
 
 ### Import code
 
 Using the same Markdown comment, at the end of your exported Markdown you will see something like this :
 
 ```
-[//]: # (==========================================)
 [//]: # (https://arkham-starters.com/guide-tools/upgrade?i=O%2C%2C%2C1%2C0%2C14%2C38%2C%7C%2C....)
-[//]: # (==========================================)
 ```
 
 Since table is hell to continue editing in Markdown format, this URL is intended so if you visit it, you would arrive back at this page with the table restored and can continue making changes to make a new export. You can share this so others can use to see the upgrade plan in this site as well. Note that the staging area is not restored.
