@@ -4,4 +4,4 @@
 	export let cardId: string
 </script>
 
-<CardBlock text={'(Unknown card ID ' + cardId + ')'} />
+<CardBlock {cardId} text={'(Unknown card ID ' + cardId + ')'} />

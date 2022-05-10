@@ -1,5 +1,6 @@
 import type { PopupDatabase } from '$lib/core/popup-database'
 import type { GlobalSettings } from '$lib/guide-tools/script/common/settings'
+import type { Row } from '../interface'
 
 export interface CalculatedXp {
 	costs: number[]
@@ -51,18 +52,26 @@ function findXpDifference(
 	}
 	let leftXp = 0
 	let rightXp = 0
+	let cn1: string | null = null
+	let cn2: string | null = null
 	if (cardLeft !== null) {
 		leftXp = findXp(cardLeft, db, gs)
+		cn1 = findCardName(cardLeft, db, gs)
 	}
 	if (cardRight !== null) {
 		rightXp = findXp(cardRight, db, gs)
+		cn2 = findCardName(cardRight, db, gs)
 	}
 	if (cardRight !== null && cardLeft === null) {
 		return Math.max(1, rightXp)
 	} else if (cardRight === null && cardLeft !== null) {
 		return 0
 	} else {
-		return Math.max(1, rightXp - leftXp)
+		if (cn1 !== null && cn2 !== null && cn1 === cn2) {
+			return Math.max(1, rightXp - leftXp)
+		} else {
+			return Math.max(1, rightXp)
+		}
 	}
 }
 
@@ -76,6 +85,11 @@ function findXp(card: string, db: PopupDatabase, gs: GlobalSettings): number {
 	} else {
 		return 0
 	}
+}
+
+function findCardName(card: string, db: PopupDatabase, gs: GlobalSettings): string | null {
+	const c = db.getById(card)
+	return c?.original.n ?? null
 }
 
 /**

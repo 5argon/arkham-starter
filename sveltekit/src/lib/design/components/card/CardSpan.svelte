@@ -56,7 +56,6 @@
 
 	let colorClass: string
 	$: {
-		console.log(class1 + ' ' + class2 + ' ' + class3)
 		if (color) {
 			colorClass = classToFontColorCss(class1, class2, class3)
 		} else {
@@ -107,8 +106,9 @@
 		<span class="card-name-container">
 			<span class={colorClass + ' ' + 'card-name'}>{text}</span>
 		</span>
-		{#if weakness}<span title="Weakness" class={'pips ' + textIconFontClass}
-				>{textIconToFontCharacter(TextIcon.Weakness)}</span
+		{#if weakness || cardId === randomBasicWeakness}<span
+				title="Weakness"
+				class={'pips ' + textIconFontClass}>{textIconToFontCharacter(TextIcon.Weakness)}</span
 			>{/if}{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}
 		{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}
 		{#if xpTaboo !== null && xpTaboo > 0}
@@ -137,6 +137,7 @@
 	}
 
 	.amount {
+		width: 12px;
 		user-select: none;
 		font-family: 'ArkhamNumber';
 		margin-right: 2px;

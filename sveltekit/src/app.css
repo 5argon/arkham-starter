@@ -50,6 +50,9 @@ input {
 	src: url('/font/Bolton.ttf') format('truetype');
 }
 
+.font-neutral {
+	color: #5d5d5d;
+}
 .font-guardian {
 	color: #2b80c5;
 }
@@ -70,7 +73,7 @@ input {
 }
 
 .border-color-neutral {
-	border-color: #6f6f6f;
+	border-color: #a3a3a3;
 }
 .border-color-guardian {
 	border-color: #0553c0;

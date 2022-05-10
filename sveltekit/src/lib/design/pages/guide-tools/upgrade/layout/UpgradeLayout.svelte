@@ -51,6 +51,7 @@
 		onClear: () => {
 			rows = []
 		},
+		onExportMarkdown: () => {},
 	}
 	const rowActionEvents: TableRowActionEvents = {
 		onDelete: (i) => {

@@ -26,46 +26,52 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
+	export let onChangeHovering: (h: boolean) => void = () => {
+		// do nothing
+	}
 </script>
 
-<CardBlock
-	showImageStrip={singleMode}
-	{cardId}
-	{text}
-	{class1}
-	{class2}
-	{class3}
-	{xp}
-	{xpTaboo}
-	{exceptional}
-	{packIcon}
-	{packNumber}
-	{restriction}
-	{weakness}
-	leftButtons={[]}
-	rightButtons={singleMode
-		? []
-		: [
-				{
-					label: 'Delete',
-					iconPath: allIcons.delete,
-					onClick: () => {
-						onClickDelete()
+<div>
+	<CardBlock
+		showImageStrip={singleMode}
+		{cardId}
+		{text}
+		{class1}
+		{class2}
+		{class3}
+		{xp}
+		{xpTaboo}
+		{exceptional}
+		{packIcon}
+		{packNumber}
+		{restriction}
+		{weakness}
+		{onChangeHovering}
+		leftButtons={[]}
+		rightButtons={singleMode
+			? []
+			: [
+					{
+						label: 'Delete',
+						iconPath: allIcons.delete,
+						onClick: () => {
+							onClickDelete()
+						},
 					},
-				},
-				{
-					label: 'Move Up',
-					iconPath: allIcons.arrowUp,
-					onClick: () => {
-						onClickUp()
+					{
+						label: 'Move Up',
+						iconPath: allIcons.arrowUp,
+						onClick: () => {
+							onClickUp()
+						},
 					},
-				},
-				{
-					label: 'Move Down',
-					iconPath: allIcons.arrowDown,
-					onClick: () => {
-						onClickDown()
+					{
+						label: 'Move Down',
+						iconPath: allIcons.arrowDown,
+						onClick: () => {
+							onClickDown()
+						},
 					},
-				},
-		  ]}
-/>
+			  ]}
+	/>
+</div>

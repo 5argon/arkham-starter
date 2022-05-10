@@ -15,7 +15,7 @@ export function classToFontColorCss(
 	}
 	switch (c1) {
 		case CardClass.Neutral:
-			return ''
+			return 'font-neutral'
 		case CardClass.Guardian:
 			return 'font-guardian'
 		case CardClass.Seeker:

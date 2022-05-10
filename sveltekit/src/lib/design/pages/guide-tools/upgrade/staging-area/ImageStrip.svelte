@@ -56,7 +56,7 @@
 		margin-right: 4px;
 		border-width: 1px;
 		border-style: solid;
-		border-left-width: 3px;
+		border-left-width: 4px;
 		border-left-style: solid;
 		/* Make absolute position of multi-class icon works. */
 		position: relative;

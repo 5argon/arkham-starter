@@ -27,13 +27,69 @@
 	export let imageBase64: string | null = null
 	export let leftButtons: CardBlockButtonProp[] = []
 	export let rightButtons: CardBlockButtonProp[] = []
+	let hovering: boolean = false
+	export let onChangeHovering: (h: boolean) => void = () => {
+		// do nothing
+	}
+	export let onDropSwap: (swapTo: string) => void = () => {
+		// do nothing
+	}
+
+	function dragLeaveHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		hovering = false
+		onChangeHovering(false)
+	}
+
+	function dragEnterHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		hovering = true
+		onChangeHovering(true)
+	}
+
+	function dragStartHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		if (e.dataTransfer !== null) {
+			e.dataTransfer.setData('text/plain', cardId)
+		}
+	}
+
+	function dragoverHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		// Apparently this allows dragging over the characters... lol
+		hovering = true
+		if (e.dataTransfer !== null) {
+			e.dataTransfer.dropEffect = 'move'
+		}
+	}
+
+	function dropHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		hovering = false
+		if (e.dataTransfer !== null) {
+			onDropSwap(e.dataTransfer.getData('text/plain'))
+		}
+	}
+
+	function dragendHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		if (e.dataTransfer !== null) {
+			if (e.dataTransfer.dropEffect !== 'none') {
+				// Do nothing, since swap at drop target will remove this one.
+			}
+		}
+	}
 </script>
 
 <div class="card-block-div">
 	{#each leftButtons as b}
 		<CardBlockButton label={b.label} iconPath={b.iconPath} onClick={b.onClick} />
 	{/each}
-	<span class="block">
+	<div
+		on:dragleave={dragLeaveHandler}
+		on:dragenter={dragEnterHandler}
+		on:dragstart={dragStartHandler}
+		on:dragover|preventDefault={dragoverHandler}
+		on:drop|preventDefault={dropHandler}
+		on:dragend|preventDefault={dragendHandler}
+		draggable={true}
+		class:hovering
+		class="block"
+	>
 		<CardSpan
 			{amount}
 			{cardId}
@@ -53,7 +109,7 @@
 			{imageBase64}
 			color={true}
 		/>
-	</span>
+	</div>
 	{#each rightButtons as b}
 		<CardBlockButton label={b.label} iconPath={b.iconPath} onClick={b.onClick} />
 	{/each}
@@ -72,5 +128,9 @@
 		margin: 2px 2px;
 		box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.035);
 		display: flex;
+	}
+
+	.hovering {
+		background-color: rgba(255, 234, 0, 0.385);
 	}
 </style>

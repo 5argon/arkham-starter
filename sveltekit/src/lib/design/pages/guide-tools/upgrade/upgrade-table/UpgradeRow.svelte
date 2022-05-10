@@ -11,11 +11,16 @@
 	import CardBlockUpDown from './CardBlockUpDown.svelte'
 	import EditableNumberCell from './EditableNumberCell.svelte'
 	import EditableSmallCell from './EditableSmallCell.svelte'
+	import GreyEmpty from './GreyEmpty.svelte'
 	import HeaderRow from './HeaderRow.svelte'
 	import RowActionBack from './RowActionBack.svelte'
 	import RowActionFront from './RowActionFront.svelte'
 	import UpgradeDivider from './UpgradeDivider.svelte'
 
+	export let index: number
+	export let onDrop: (fromIndex: number, fromRight: boolean, toRight: boolean) => void = () => {
+		// do nothing
+	}
 	export let singleMode: boolean = false
 	export let popupDatabase: PopupDatabase
 	export let row: Row
@@ -32,6 +37,8 @@
 	$: {
 		rightCard = row.right !== null ? popupDatabase.getById(row.right) : null
 	}
+	$: boldArrow =
+		leftCard !== null && rightCard !== null && leftCard.original.n === rightCard.original.n
 </script>
 
 {#if row.divider}
@@ -84,13 +91,11 @@
 					onClickDelete={rowActionEvents.onDeleteLeft}
 				/>
 			{:else}
-				<div class="grey-empty-outer">
-					<div class="grey-empty" />
-				</div>
+				<GreyEmpty />
 			{/if}
 		</div>
 		{#if !singleMode}
-			<div class="flex-item arrow">→</div>
+			<div class="flex-item arrow" class:bold-arrow={boldArrow}>→</div>
 			<div class="flex-item card-block">
 				{#if rightCard !== null}
 					<CardBlockUpDown
@@ -110,9 +115,7 @@
 						onClickDelete={rowActionEvents.onDeleteRight}
 					/>
 				{:else}
-					<div class="grey-empty-outer">
-						<div class="grey-empty" />
-					</div>
+					<GreyEmpty />
 				{/if}
 			</div>
 		{/if}
@@ -173,18 +176,11 @@
 	.arrow {
 		flex: 1;
 		text-align: center;
+		user-select: none;
 	}
 
-	.grey-empty-outer {
-		height: 26.5px;
-		display: flex;
-		align-items: center;
-	}
-
-	.grey-empty {
-		flex: 1;
-		height: 12px;
-		background-color: rgba(0, 0, 0, 0.01);
-		border: 1px dashed rgba(0, 0, 0, 0.1);
+	.bold-arrow {
+		text-shadow: 1px 0px 0px #ffffff, 2px 0px 0px #ff0000;
+		font-weight: bold;
 	}
 </style>

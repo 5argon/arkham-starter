@@ -1,4 +1,6 @@
-After Fantasy Flight Games made the [Revised Core Set](https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/) and is repackaging previously released expansions to be more accessible, the game is getting a lot more influx of new players. This is an exciting time to create more helping contents for this game so the community could grow easier.
+After Fantasy Flight Games made the [Revised Core Set](https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/) and is repackaging previously released expansions to be more accessible, the game is getting a lot more influx of new players. I was among those players feeling welcomed by the Revised Core Set to get into the game.
+
+This is an exciting time to create more helping contents for this game so the community could grow easier.
 
 [arkham-starters.com](/) aims to compliment [ArkhamDB](https://arkhamdb.com/)'s wealth of knowledge, but is specialized for newcomers into the series. A dedicated URL "arkham-starters" reduce complications of going to a specific page inside ArkhamDB or entering a specific query.
 

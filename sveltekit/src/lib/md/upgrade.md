@@ -1,0 +1,94 @@
+# Upgrade Planner
+
+A two-column table that can "diff" the cards and update XP calculation (cost and total cumulative) as you change things around on the table. The plan is implied that you upgrade in order from top to bottom.
+
+Its primary objective is to export your finished plan to table-formatted Markdown which is difficult to normally type. Then you can paste it in ArkhamDB's deck guide to remember your upgrade plans on how the deck would survive in early scenarios and get to the final state.
+
+This is for decks that uses the main section for level 0 starting cards and Side Deck section for all the upgrade cards. Sometimes you forgot which cards in the starting list are waiting to be removed long after creating it. Therefore just by importing that deck, you have every cards needed for both "from" and "to" columns for this planner since ArkhamDB exports both the main and side deck together.
+
+## Staging Area
+
+Section on the left side of the screen. These are cards you are planning to add to the two-column table to try out the upgrades. You may add more cards than actually used in the planner.
+
+It is planned so you can add any individual card as you like, but it need a good card browser which looks like a lot of work. For now, you can only add cards by pasing deck URL from ArkhamDB.
+
+Other than grabbing the deck ID number from the URL, it also detects a kind of deck from the URL : 
+
+- If it has `/decklist/view` : It requests a deck from published deck API of ArkhamDB.
+- If it has `/deck/view` or `/deck/edit` : It requests a deck from personal deck API of ArkhamDB, which would fail if you hadn't check the "make public" option in your user settings. Also if you are currently editing the deck and have changes in the card list, save it first before importing.
+
+Use the left/right button to add the card to main two-column table. It will create a new row automatically if it cannot find empty space to add.
+
+It is possible to drag and drop cards here to an empty slot in the two-column table. A card will appear there but will not disappear from the staging list.
+
+## Two-column Table
+
+Any card can move individually by drag-and-dropping. If you drop on an another card, both cards will swap place. Press the trash can button to delete a single card.
+
+An entire row can be moved as a whole using up/down button on the left. A row cannot be dragged. An entire row can be deleted by pressing the trash can button on the left.
+
+### Left side
+
+This side represent a card to be removed.
+
+So if your plan for the step is purchasing a Permanent card, it should be on the right side, not the left. (Otherwise automatic XP calculation would be wrong.)
+
+### Right side
+
+This side represent a card to add.
+
+### Arrow
+
+It is has a little red tip, that means it detects that a row is an upgrade instead of a purchase and may get XP discount. It detects by comparing card name of both sides if they are the same or not.
+
+### Mark
+
+There is a little box on the left side of the left card for each row. You can type anything here (like an asterisk or other ASCII characters) and it will appear in the final export as its own row.
+
+This is so if you want to say something about this row, it can be paired with later under the table. Markdown support of column span is not good, so it is best not try to add an explanation paragraph sandwiched inside the table. 
+
+### XP Unlock
+
+Check the unlock icon at the end of each row to unlock the automatic XP calculation. The XP box is now editable, and is currently using the previously automatically calculated XP. Locking and unlocking again will reset the box to automatically calculated number.
+
+The application has no knowledge of a card like Adaptable, Down the Rabbit Hole, etc. and this is where you can force it to use any XP as you like.
+
+Cumulative XP will also be updated to use your custom edit XP automatically.
+
+### Divider Row
+
+Press "Add Divider Row" to add a special row. This row can subdivides the table into multiple sections with total cumulative XP connected. Use the up/down button on the left to position the divider row.
+
+Type on the long box to explain the divider. It is exported in Markdown to the same column as the right card.
+
+### Cumulative XP Unlock
+
+Similar to "XP Unlock" feature, but only available on the divider row. Using unlock check box on the divider row will "interrupt" the flow of cumulative XP to stop here, and start with a new value that you type in.
+
+An example is that you would like to express branching path of plans, and therefore 2 divider should start from the same number of cumulative XP from the previous section. Or you can also position divider on top, and enter negative number to express that you have some spare XP from the start. (e.g. In the Thick of It, Parallel Roland.)
+
+## Exporting
+
+Adjust several exporting options here and you will see the export result updated below. Copy the text and paste in your ArkhamDB deck guide. Currently there is no emulated ArkhamDB preview of export result, please see it in ArkhamDB directly after pasting.
+
+### Shape
+
+Toggle between simple list or table. Columns will not line up in a simple list, but is more flexible to continue editing in Markdown.
+
+### Included columns
+
+You can remove the XP and cumulative XP column in the export here. Arrow column can be customized to use an another glyph that is not an arrow. It can also be bolded when it is an upgrade instead of a purchase.
+
+### Card presentation
+
+Customize how each card looks like in the export for both sides.
+
+The card can be a simple ArkhamDB hoverable link (e.g. `[Text](/card/12345)`) or full-on styled with class icons, text color, and even XP pips, so it looks like the decklist cards on the left side in ArkhamDB such that reader can connect the dots easier between your guide and the deck.
+
+However, the more you add blings to the export, the more it looks messy in the Markdown and impossible to continue editing in Markdown. To deal with this problem, it also export a strange string of code ("upgrade code") that represents an entire table.
+
+### Upgrade code
+
+In the exported Markdown, there is a gibberish "Markdown comment" syntax at the bottom. This syntax prevents the text inside from being rendered, so no one but you see this. Therefore we basically can attach any hidden data along with the exported table.
+
+This code is intended so this application can load back the table for further editing, since table is hell to continue editing in Markdown format. But right now, it has no such loading feature yet. Also if I made changes to the upgrade code format it is possible that an old upgrade code is no longer compatible.

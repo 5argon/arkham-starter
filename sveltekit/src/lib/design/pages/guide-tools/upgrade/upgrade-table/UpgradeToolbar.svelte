@@ -4,7 +4,12 @@
 	export let toolbarEvents: ToolbarEvents
 </script>
 
-<Button label="Add Card Row" onClick={toolbarEvents.onAddCardRow} />
-<Button label="Add Divider Row" onClick={toolbarEvents.onAddDividerRow} />
-<Button label="Reset" onClick={toolbarEvents.onClear} />
-<Button label="Export Markdown" onClick={toolbarEvents.onClear} />
+<div>
+	You can drag and drop to reposition the cards.
+</div>
+<div>
+	<Button label="Add Card Row" onClick={toolbarEvents.onAddCardRow} />
+	<Button label="Add Divider Row" onClick={toolbarEvents.onAddDividerRow} />
+	<Button label="Reset" onClick={toolbarEvents.onClear} />
+	<Button label="Export Markdown" onClick={toolbarEvents.onExportMarkdown} />
+</div>
