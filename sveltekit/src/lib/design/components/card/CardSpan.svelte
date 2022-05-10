@@ -51,8 +51,6 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
-	export let imageUrl: string | null = null
-	export let imageBase64: string | null = null
 
 	let colorClass: string
 	$: {
@@ -88,8 +86,7 @@
 			name={text}
 			{showImageStrip}
 			{xp}
-			{imageUrl}
-			{imageBase64}
+			{cardId}
 			{class1}
 			{class2}
 			{class3}

@@ -6,6 +6,7 @@
 
 <Story name="Test">
 	<CardBlockLeftRight
+		cardId={'12345'}
 		text={'Sample Card'}
 		class1={CardClass.Rogue}
 		class2={null}

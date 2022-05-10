@@ -36,6 +36,16 @@ export interface CardInfo {
 	traitOptions: TraitOptions
 	commitOptions: CommitOptions
 }
+
+export interface CardOptions {
+	classIcons: boolean
+	color: boolean
+	bold: boolean
+	link: boolean
+	tabooIcon: boolean
+	exceptionalIcon: boolean
+}
+
 export interface TraitOptions {
 	/**
 	 * If not `null`, this trait is sorted in front.
@@ -49,7 +59,7 @@ export interface CommitOptions {
 	 * Highlight this icon followed by wild icons.
 	 * All other icons are faded and ordered later.
 	 */
-	highlight: CommitIcon
+	highlight: CommitIcon | null
 }
 
 export const defaultGlobalSettings: GlobalSettings = {

@@ -10,7 +10,7 @@
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
 	export let class3: CardClass | null = null
-	export let imageUrl: string | null = null
+	export let cardId: string | null = null
 	// export let imageBase64: string | null = null
 
 	let showClasses: boolean
@@ -32,7 +32,7 @@
 
 {#if showImageStrip}
 	<span class={'image-strip' + ' ' + colorClass}>
-		<img class="image-in-strip" src={'/image/card/strip/' + imageUrl + '.png'} alt={name} />
+		<img draggable={false} class="image-in-strip" src={'/image/card/strip/' + cardId + '.png'} alt={name} />
 		{#if xp !== null}
 			<div class="pips">{pips}</div>
 		{/if}

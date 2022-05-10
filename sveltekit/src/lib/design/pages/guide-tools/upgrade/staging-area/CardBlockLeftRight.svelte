@@ -28,8 +28,6 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
-	export let imageUrl: string | null = null
-	export let imageBase64: string | null = null
 </script>
 
 <CardBlock
@@ -47,8 +45,6 @@
 	{packNumber}
 	{restriction}
 	{weakness}
-	{imageUrl}
-	{imageBase64}
 	dragDataPrefix={'-1,staging,'}
 	leftButtons={collapse
 		? []

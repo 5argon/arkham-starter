@@ -2,9 +2,11 @@
 
 A two-column table that can "diff" the cards and update XP calculation (cost and total cumulative) as you change things around on the table. The plan is implied that you upgrade in order from top to bottom.
 
-Its primary objective is to export your finished plan to table-formatted Markdown which is difficult to normally type. Then you can paste it in ArkhamDB's deck guide to remember your upgrade plans on how the deck would survive in early scenarios and get to the final state.
+Its primary objective is to export your finished plan to table-formatted Markdown which is a disaster to normally type. Paste it in ArkhamDB's deck guide to remember your upgrade plans for future reference in-between scenarios what you were thinking while creating the deck, and perhaps make some deviations from the plan depending on your campaign state.
 
 This is for decks that uses the main section for level 0 starting cards and Side Deck section for all the upgrade cards. Sometimes you forgot which cards in the starting list are waiting to be removed long after creating it. Therefore just by importing that deck, you have every cards needed for both "from" and "to" columns for this planner since ArkhamDB exports both the main and side deck together.
+
+The formatting will closely emulate what is shown on the left section of your deck in ArkhamDB. (With class icons, coloring, XP pips, and hoverable.) So if you are writing a detailed deck guide for beginners, they can make visual connection to the decklist better as opposed to being generic blue hyperlinks.
 
 ## Staging Area
 
@@ -12,7 +14,7 @@ Section on the left side of the screen. These are cards you are planning to add 
 
 It is planned so you can add any individual card as you like, but it need a good card browser which looks like a lot of work. For now, you can only add cards by pasing deck URL from ArkhamDB.
 
-Other than grabbing the deck ID number from the URL, it also detects a kind of deck from the URL : 
+Other than grabbing the deck ID number from the URL, it also detects a kind of deck from the URL :
 
 - If it has `/decklist/view` : It requests a deck from published deck API of ArkhamDB.
 - If it has `/deck/view` or `/deck/edit` : It requests a deck from personal deck API of ArkhamDB, which would fail if you hadn't check the "make public" option in your user settings. Also if you are currently editing the deck and have changes in the card list, save it first before importing.
@@ -31,7 +33,7 @@ An entire row can be moved as a whole using up/down button on the left. A row ca
 
 This side represent a card to be removed.
 
-So if your plan for the step is purchasing a Permanent card, it should be on the right side, not the left. (Otherwise automatic XP calculation would be wrong.)
+So if your plan for the step is purchasing a Permanent card, it should be on the right side, not the left. (Otherwise automatic calculation would be wrong.)
 
 ### Right side
 
@@ -45,7 +47,7 @@ It is has a little red tip, that means it detects that a row is an upgrade inste
 
 There is a little box on the left side of the left card for each row. You can type anything here (like an asterisk or other ASCII characters) and it will appear in the final export as its own row.
 
-This is so if you want to say something about this row, it can be paired with later under the table. Markdown support of column span is not good, so it is best not try to add an explanation paragraph sandwiched inside the table. 
+This is so if you want to say something about this row, it can be paired with later under the table. Markdown support of column span is not good, so it is best not try to add an explanation paragraph sandwiched inside the table.
 
 ### XP Unlock
 
@@ -77,7 +79,7 @@ Toggle between simple list or table. Columns will not line up in a simple list, 
 
 ### Included columns
 
-You can remove the XP and cumulative XP column in the export here. Arrow column can be customized to use an another glyph that is not an arrow. It can also be bolded when it is an upgrade instead of a purchase.
+You can remove the XP and cumulative XP column in the export here. Arrow column can be customized to use an another glyph that is not an arrow. It can also be colored red when it is an upgrade instead of a purchase.
 
 ### Card presentation
 
@@ -87,8 +89,26 @@ The card can be a simple ArkhamDB hoverable link (e.g. `[Text](/card/12345)`) or
 
 However, the more you add blings to the export, the more it looks messy in the Markdown and impossible to continue editing in Markdown. To deal with this problem, it also export a strange string of code ("upgrade code") that represents an entire table.
 
-### Upgrade code
+### Export border
 
-In the exported Markdown, there is a gibberish "Markdown comment" syntax at the bottom. This syntax prevents the text inside from being rendered, so no one but you see this. Therefore we basically can attach any hidden data along with the exported table.
+At start and end of the exported Markdown, you might notice this :
 
-This code is intended so this application can load back the table for further editing, since table is hell to continue editing in Markdown format. But right now, it has no such loading feature yet. Also if I made changes to the upgrade code format it is possible that an old upgrade code is no longer compatible.
+```md
+[//]: # '=========================================='
+```
+
+This is yet another Markdown comment that viewer cannot see. Since the exported Markdown table looks like a mess, this dividing line helps you see clearer where is the table while scrolling through your deck documentation.
+
+### Import code
+
+Using the same Markdown comment, at the end of your exported Markdown you will see something like this :
+
+```
+[//]: # (==========================================)
+[//]: # (https://arkham-starters.com/guide-tools/upgrade?import=O%2C%2C%2C1%2C0%2C14%2C38%2C%7C%2C....)
+[//]: # (==========================================)
+```
+
+Since table is hell to continue editing in Markdown format, this URL is intended so if you visit it, you would arrive back at this page with the table restored and can continue making changes to make a new export. You can share this so others can use to see the upgrade plan in this site as well. Note that the staging area is not restored.
+
+But right now, it has no such loading feature yet. Also if I made changes to the upgrade code format it is possible that an old upgrade code is no longer compatible.

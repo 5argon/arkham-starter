@@ -5,7 +5,7 @@
 </script>
 
 <div>
-	You can drag and drop to reposition the cards.
+	You can drag and drop to reposition a card individually.
 </div>
 <div>
 	<Button label="Add Card Row" onClick={toolbarEvents.onAddCardRow} />

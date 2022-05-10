@@ -1,23 +1,26 @@
-import type { CardInfo, GlobalSettings, PipStyle } from '../common/settings'
+import type { CardInfo, CardOptions, GlobalSettings } from '../common/settings'
 
 export interface UpgradeExportOptions {
-	costHeader: string
-	totalHeader: string
 	simpleList: boolean
-	markColumn: boolean
-	arrowCharacter: string
-	xpColumn: boolean
-	cumulativeXpColumn: boolean
+	splitDivider: boolean
+	xpSuffix:string
+	arrow: {
+		character: string
+		boldUpgrade: boolean
+	}
+	headers: {
+		costHeader: string
+		totalHeader: string
+	}
+	columns: {
+		markColumn: boolean
+		xpColumn: boolean
+		cumulativeXpColumn: boolean
+	}
 }
 
 export interface ExportOptions {
 	globalOptions: GlobalSettings
-	card: CardInfo
-	pipStyle: PipStyle
-	classIcons: boolean
-	color: boolean
-	bold: boolean
-	link: boolean
-	tabooIcon: boolean
-	exceptionalIcon: boolean
+	cardInfo: CardInfo
+	cardOptions: CardOptions
 }

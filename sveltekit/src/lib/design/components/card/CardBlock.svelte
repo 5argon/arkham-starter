@@ -23,8 +23,6 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
-	export let imageUrl: string | null = null
-	export let imageBase64: string | null = null
 	export let dragDataPrefix: string = ''
 	export let leftButtons: CardBlockButtonProp[] = []
 	export let rightButtons: CardBlockButtonProp[] = []
@@ -115,8 +113,6 @@
 			{packNumber}
 			{weakness}
 			{restriction}
-			{imageUrl}
-			{imageBase64}
 			color={true}
 		/>
 	</div>
@@ -138,6 +134,7 @@
 		margin: 2px 2px;
 		box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.035);
 		display: flex;
+		cursor: grab;
 	}
 
 	.hovering {

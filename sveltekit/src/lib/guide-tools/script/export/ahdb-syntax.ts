@@ -84,6 +84,10 @@ export function wrapColor(
 	}
 }
 
+export function wrapPips(s: string): string {
+	return '<span class="card-xp">' + s + '</span>'
+}
+
 export function wrapLeftBorder(
 	text: string,
 	c1: CardClass,

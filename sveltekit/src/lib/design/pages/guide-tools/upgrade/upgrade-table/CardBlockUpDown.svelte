@@ -31,11 +31,15 @@
 	export let weakness: boolean = false
 	export let index: number
 	export let right: boolean
+
+	let width: number
 </script>
+
+<svelte:window bind:outerWidth={width} />
 
 <div>
 	<CardBlock
-		showImageStrip={singleMode}
+		showImageStrip={singleMode || width > 1300}
 		{cardId}
 		{text}
 		{class1}
@@ -61,20 +65,20 @@
 							onClickDelete()
 						},
 					},
-					{
-						label: 'Move Up',
-						iconPath: allIcons.arrowUp,
-						onClick: () => {
-							onClickUp()
-						},
-					},
-					{
-						label: 'Move Down',
-						iconPath: allIcons.arrowDown,
-						onClick: () => {
-							onClickDown()
-						},
-					},
+					// {
+					// 	label: 'Move Up',
+					// 	iconPath: allIcons.arrowUp,
+					// 	onClick: () => {
+					// 		onClickUp()
+					// 	},
+					// },
+					// {
+					// 	label: 'Move Down',
+					// 	iconPath: allIcons.arrowDown,
+					// 	onClick: () => {
+					// 		onClickDown()
+					// 	},
+					// },
 			  ]}
 	/>
 </div>

@@ -94,7 +94,6 @@
 						xp={c.original.xp}
 						onClickLeft={() => onAddToLeftSide(c.original.id)}
 						onClickRight={() => onAddToRightSide(c.original.id)}
-						imageUrl={c.original.id}
 					/>
 				</div>
 			{:else}
@@ -117,7 +116,6 @@
 						onClickDelete={() => onDelete(c.original.id)}
 						onClickLeft={() => onAddToLeftSide(c.original.id)}
 						onClickRight={() => onAddToRightSide(c.original.id)}
-						imageUrl={c.original.id}
 					/>
 				</div>
 			{/if}

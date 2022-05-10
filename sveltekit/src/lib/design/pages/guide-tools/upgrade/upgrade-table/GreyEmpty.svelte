@@ -59,7 +59,7 @@
 
 <style>
 	.grey-empty-outer {
-		height: 26.5px;
+		height: 28px;
 		display: flex;
 		align-items: center;
 	}

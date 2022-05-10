@@ -36,7 +36,7 @@
 
 {#if cardClass !== CardClass.Neutral}
 	<div class="outer-square">
-		<img class="class-icon" src={imagePath} alt={iconAlt} />
+		<img draggable={false} class="class-icon" src={imagePath} alt={iconAlt} />
 	</div>
 {/if}
 
