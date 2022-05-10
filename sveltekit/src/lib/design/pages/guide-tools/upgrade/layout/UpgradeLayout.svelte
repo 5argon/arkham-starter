@@ -122,6 +122,9 @@
 			}
 			rows[i].xpUnlock = n
 		},
+		onDropSwap: (a, b, c, d, e) => {
+			console.log(a, b, c, d, e)
+		},
 	}
 
 	let popupDatabase = fetchPopupDatabase()

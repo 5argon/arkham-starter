@@ -25,44 +25,54 @@
 	export let weakness: boolean = false
 	export let imageUrl: string | null = null
 	export let imageBase64: string | null = null
+	export let dragDataPrefix: string = ''
 	export let leftButtons: CardBlockButtonProp[] = []
 	export let rightButtons: CardBlockButtonProp[] = []
 	let hovering: boolean = false
 	export let onChangeHovering: (h: boolean) => void = () => {
 		// do nothing
 	}
-	export let onDropSwap: (swapTo: string) => void = () => {
+	export let onDropSwap: (fromIndex: number, fromRight: boolean, swapTo: string) => void = () => {
 		// do nothing
 	}
 
 	function dragLeaveHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
-		hovering = false
-		onChangeHovering(false)
+		if (e.dataTransfer !== null) {
+			hovering = false
+			onChangeHovering(false)
+		}
 	}
 
 	function dragEnterHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
-		hovering = true
-		onChangeHovering(true)
+		if (e.dataTransfer !== null) {
+			hovering = true
+			onChangeHovering(true)
+		}
 	}
 
 	function dragStartHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
 		if (e.dataTransfer !== null) {
-			e.dataTransfer.setData('text/plain', cardId)
+			e.dataTransfer.setData('text/plain', dragDataPrefix + cardId)
 		}
 	}
 
 	function dragoverHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
-		// Apparently this allows dragging over the characters... lol
-		hovering = true
 		if (e.dataTransfer !== null) {
-			e.dataTransfer.dropEffect = 'move'
+			if (e.dataTransfer.types.length === 1 && e.dataTransfer.types[0] === 'text/plain') {
+				// Apparently this allows dragging over the characters... lol
+				hovering = true
+				e.dataTransfer.dropEffect = 'move'
+			} else {
+				e.dataTransfer.dropEffect = 'none'
+			}
 		}
 	}
 
 	function dropHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
-		hovering = false
 		if (e.dataTransfer !== null) {
-			onDropSwap(e.dataTransfer.getData('text/plain'))
+			hovering = false
+			const receive = e.dataTransfer.getData('text/plain').split(',')
+			onDropSwap(parseInt(receive[0], 10), receive[1] === 'right', receive[2])
 		}
 	}
 

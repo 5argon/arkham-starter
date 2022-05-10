@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let onDropSwap: (swapTo: string) => void = () => {
+	export let onDropSwap: (fromIndex: number, fromRight: boolean, swapTo: string) => void = () => {
 		// do nothing
 	}
 	let hovering: boolean
@@ -12,21 +12,26 @@
 		hovering = true
 	}
 
-	function dragStartHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
-		if (e.dataTransfer !== null) {
-		}
-	}
+	function dragStartHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {}
 
 	function dragoverHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
-		hovering = true
 		if (e.dataTransfer !== null) {
-			e.dataTransfer.dropEffect = 'move'
+			if (e.dataTransfer.types.length === 1 && e.dataTransfer.types[0] === 'text/plain') {
+				hovering = true
+				e.dataTransfer.dropEffect = 'move'
+			} else {
+				e.dataTransfer.dropEffect = 'none'
+			}
 		}
 	}
 
 	function dropHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
 		hovering = false
 		if (e.dataTransfer !== null) {
+			const receive = e.dataTransfer.getData('text/plain').split(',')
+			if (receive.length === 3) {
+				onDropSwap(parseInt(receive[0], 10), receive[1] === 'right', receive[2])
+			}
 		}
 	}
 
@@ -61,7 +66,7 @@
 
 	.grey-empty {
 		flex: 1;
-		height: 12px;
+		height: 14px;
 		background-color: rgba(0, 0, 0, 0.01);
 		border: 1px dashed rgba(0, 0, 0, 0.1);
 	}

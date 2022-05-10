@@ -18,9 +18,6 @@
 	import UpgradeDivider from './UpgradeDivider.svelte'
 
 	export let index: number
-	export let onDrop: (fromIndex: number, fromRight: boolean, toRight: boolean) => void = () => {
-		// do nothing
-	}
 	export let singleMode: boolean = false
 	export let popupDatabase: PopupDatabase
 	export let row: Row
@@ -89,9 +86,18 @@
 					onClickDown={rowActionEvents.onMoveDownLeft}
 					onClickUp={rowActionEvents.onMoveUpLeft}
 					onClickDelete={rowActionEvents.onDeleteLeft}
+					onDropSwap={(fi, fr, fc) => {
+						rowEditEvents.onDropSwap(fi, fr, fc, false)
+					}}
+					{index}
+					right={false}
 				/>
 			{:else}
-				<GreyEmpty />
+				<GreyEmpty
+					onDropSwap={(fi, fr, fc) => {
+						rowEditEvents.onDropSwap(fi, fr, fc, false)
+					}}
+				/>
 			{/if}
 		</div>
 		{#if !singleMode}
@@ -113,9 +119,18 @@
 						onClickDown={rowActionEvents.onMoveDownRight}
 						onClickUp={rowActionEvents.onMoveUpRight}
 						onClickDelete={rowActionEvents.onDeleteRight}
+						{index}
+						right={true}
+						onDropSwap={(fi, fr, fc) => {
+							rowEditEvents.onDropSwap(fi, fr, fc, false)
+						}}
 					/>
 				{:else}
-					<GreyEmpty />
+					<GreyEmpty
+						onDropSwap={(fi, fr, fc) => {
+							rowEditEvents.onDropSwap(fi, fr, fc, false)
+						}}
+					/>
 				{/if}
 			</div>
 		{/if}

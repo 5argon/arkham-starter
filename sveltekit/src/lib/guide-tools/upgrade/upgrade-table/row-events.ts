@@ -27,6 +27,13 @@ export interface TableRowEditEvents {
 	onDividerChanged: (i: number, n: boolean) => void
 	onDividerTextChanged: (i: number, n: string) => void
 	onLoseFocus: (i: number) => void
+	onDropSwap: (
+		fromIndex: number,
+		fromRight: boolean,
+		swapTo: string,
+		toIndex: number,
+		toRight: boolean,
+	) => void
 }
 
 export interface RowActionEvents {
@@ -52,6 +59,7 @@ export interface RowEditEvents {
 	onDividerChanged: (n: boolean) => void
 	onDividerTextChanged: (n: string) => void
 	onLoseFocus: () => void
+	onDropSwap: (fromIndex: number, fromRight: boolean, swapTo: string, toRight: boolean) => void
 }
 
 export function createEmptyRowActionEvents(): RowActionEvents {

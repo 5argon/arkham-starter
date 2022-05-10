@@ -16,6 +16,9 @@
 	export let onClickDown: () => void = () => {
 		// do nothing
 	}
+	export let onDropSwap: (fromIndex: number, fromRight: boolean, swapTo: string) => void = () => {
+		// do nothing
+	}
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
 	export let class3: CardClass | null = null
@@ -26,9 +29,8 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
-	export let onChangeHovering: (h: boolean) => void = () => {
-		// do nothing
-	}
+	export let index: number
+	export let right: boolean
 </script>
 
 <div>
@@ -46,7 +48,8 @@
 		{packNumber}
 		{restriction}
 		{weakness}
-		{onChangeHovering}
+		{onDropSwap}
+		dragDataPrefix={index + ',' + (right ? 'right' : 'left') + ','}
 		leftButtons={[]}
 		rightButtons={singleMode
 			? []

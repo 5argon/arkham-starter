@@ -26,6 +26,7 @@
 	<UpgradeToolbar {toolbarEvents} />
 	{#each rows as r, i (i)}
 		<UpgradeRow
+			index={i}
 			popupDatabase={db}
 			{singleMode}
 			row={r}
@@ -91,6 +92,9 @@
 				},
 				onXpCumulativeLockChanged: (n, c) => {
 					rowEditEvents.onXpCumulativeLockChanged(i, n, c)
+				},
+				onDropSwap: (a, b, c, d) => {
+					rowEditEvents.onDropSwap(a, b, c, i, d)
 				},
 			}}
 		/>

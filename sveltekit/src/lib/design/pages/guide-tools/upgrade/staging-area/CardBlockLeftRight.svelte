@@ -49,6 +49,7 @@
 	{weakness}
 	{imageUrl}
 	{imageBase64}
+	dragDataPrefix={'-1,staging,'}
 	leftButtons={collapse
 		? []
 		: [
