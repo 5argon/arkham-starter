@@ -14,6 +14,13 @@ export function extractDeckFromUrl(url: string): ExtractResult {
 		}
 	}
 	{
+		const urlRegex = new RegExp(/decklist\/edit\/([^\/]*)/gm)
+		const matchResult = urlRegex.exec(url)
+		if (matchResult !== null) {
+			return { deck: matchResult[1], published: true }
+		}
+	}
+	{
 		const urlRegex = new RegExp(/deck\/view\/([^\/]*)/gm)
 		const matchResult = urlRegex.exec(url)
 		if (matchResult !== null) {

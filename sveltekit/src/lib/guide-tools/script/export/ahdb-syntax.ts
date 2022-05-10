@@ -56,35 +56,42 @@ export function wrapCard(text: string, card: string): string {
 	return `[${text}](/card/${card})`
 }
 
+export function wrapSmall(text: string): string {
+	return `<span class="small">${text}</span>`
+}
+
 export function wrapColor(
 	text: string,
 	c1: CardClass,
 	c2: CardClass | null,
 	c3: CardClass | null,
+	small?: boolean,
 ): string {
+	const smallString = small ? ' small' : ''
 	if (c2 === null && c3 === null) {
 		switch (c1) {
 			case CardClass.Guardian:
-				return `<span class="fg-guardian">${text}</span>`
+				return `<span class="fg-guardian${smallString}">${text}</span>`
 			case CardClass.Seeker:
-				return `<span class="fg-seeker">${text}</span>`
+				return `<span class="fg-seeker${smallString}">${text}</span>`
 			case CardClass.Rogue:
-				return `<span class="fg-rogue">${text}</span>`
+				return `<span class="fg-rogue${smallString}">${text}</span>`
 			case CardClass.Mystic:
-				return `<span class="fg-mystic">${text}</span>`
+				return `<span class="fg-mystic${smallString}">${text}</span>`
 			case CardClass.Survivor:
-				return `<span class="fg-survivor">${text}</span>`
+				return `<span class="fg-survivor${smallString}">${text}</span>`
 			case CardClass.Neutral:
-				return `<span class="fg-neutral">${text}</span>`
+				return `<span class="fg-neutral${smallString}">${text}</span>`
 			default:
-				return `<span class="fg-neutral">${text}</span>`
+				return `<span class="fg-neutral${smallString}">${text}</span>`
 		}
 	} else {
-		return `<span class="fg-dual">${text}</span>`
+		return `<span class="fg-dual${smallString}">${text}</span>`
 	}
 }
 
 export function wrapPips(s: string): string {
+	// Cause trouble inside table...
 	return '<span class="card-xp">' + s + '</span>'
 }
 

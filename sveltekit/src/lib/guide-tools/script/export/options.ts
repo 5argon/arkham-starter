@@ -3,7 +3,8 @@ import type { CardInfo, CardOptions, GlobalSettings } from '../common/settings'
 export interface UpgradeExportOptions {
 	simpleList: boolean
 	splitDivider: boolean
-	xpSuffix:string
+	xpSuffix: string
+	ignoreSmall: boolean
 	arrow: {
 		character: string
 		boldUpgrade: boolean

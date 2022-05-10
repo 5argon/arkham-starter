@@ -17,12 +17,12 @@ export function calculateXps(db: PopupDatabase, rows: Row[], gs: GlobalSettings)
 			if (r.dividerXpCumulativeUnlock) {
 				cumulative = r.carryoverXp
 			}
-			costs.push(0)
+			costs.push(r.xp)
 			cumulatives.push(cumulative)
 		} else {
 			if (r.xpUnlock) {
 				cumulative += r.xp
-				costs.push(0)
+				costs.push(r.xp)
 				cumulatives.push(cumulative)
 			} else {
 				const xp = findXpDifference(r.left, r.right, db, gs)

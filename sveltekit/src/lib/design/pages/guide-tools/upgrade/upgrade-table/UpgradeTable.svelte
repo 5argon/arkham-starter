@@ -23,7 +23,7 @@
 </script>
 
 <div class="wrapper">
-	<UpgradeToolbar {toolbarEvents} />
+	<UpgradeToolbar pdb={db} {toolbarEvents} />
 	{#each rows as r, i (i)}
 		<UpgradeRow
 			index={i}

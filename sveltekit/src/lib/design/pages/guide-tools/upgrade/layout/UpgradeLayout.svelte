@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fetchPopupDatabase } from '$lib/core/popup-database'
+	import { fetchPopupDatabase, PopupDatabase } from '$lib/core/popup-database'
 
 	import BigRightSider from '$lib/design/components/layout/BigRightSider.svelte'
 
@@ -22,10 +22,19 @@
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import {
 		defaultGlobalSettings,
+		PipStyle,
 		type GlobalSettings,
 	} from '$lib/guide-tools/script/common/settings'
 	import type { Row } from '$lib/guide-tools/upgrade/interface'
 	import help from '$lib/md/upgrade.md?raw'
+	import Modal from '$lib/design/components/layout/Modal.svelte'
+	import UpgradeExportModalContent from '../export/UpgradeExportModalContent.svelte'
+	import type { ExportCard, UpgradeExportRow } from '$lib/guide-tools/script/export/export-tools'
+	import {
+		calculateXps,
+		type CalculatedXp,
+	} from '$lib/guide-tools/upgrade/upgrade-table/xp-calculate'
+	import type { ExportOptions, UpgradeExportOptions } from '$lib/guide-tools/script/export/options'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -40,7 +49,56 @@
 	let stagingAmounts2: (number | null)[] = []
 	let stagingAmounts3: (number | null)[] = []
 
+	function rowToExportRow(
+		r: Row,
+		i: number,
+		pdb: PopupDatabase,
+		c: CalculatedXp,
+	): UpgradeExportRow {
+		function mpdb(c: string | null, pdb: PopupDatabase): ExportCard | null {
+			if (c === null) {
+				return null
+			}
+			const ca = pdb.getById(c)
+			if (ca === null) {
+				return null
+			}
+			return {
+				cardName: ca.original.n,
+				class1: ca.class1,
+				class2: ca.class2 ?? null,
+				class3: ca.class3 ?? null,
+				cost: ca.original.cs ?? null,
+				exceptional: ca.original.ex,
+				exceptionalTaboo: ca.original.ext,
+				id: ca.original.id,
+				skillAgility: ca.original.sag ?? null,
+				skillCombat: ca.original.scm ?? null,
+				skillIntellect: ca.original.sit ?? null,
+				skillWild: ca.original.swl ?? null,
+				skillWillpower: ca.original.swi ?? null,
+				traits: ca.traits,
+				xp: ca.original.xp ?? null,
+				xpTaboo: ca.original.xpat,
+			}
+		}
+		return {
+			cardLeft: mpdb(r.left, pdb),
+			cardRight: mpdb(r.right, pdb),
+			divider: r.divider,
+			dividerText: r.dividerText,
+			mark: r.mark,
+			xp: c.costs[i],
+			xpCumulative: c.cumulatives[i],
+			xpCumulativeUnlocked: r.dividerXpCumulativeUnlock,
+			xpUnlocked: r.xpUnlock,
+		}
+	}
+
 	let rows: Row[] = []
+	let exportRows: UpgradeExportRow[] = []
+
+	let showingExportModal: boolean = false
 
 	const toolbarEvents: ToolbarEvents = {
 		onAddCardRow: () => {
@@ -52,7 +110,11 @@
 		onClear: () => {
 			rows = []
 		},
-		onExportMarkdown: () => {},
+		onExportMarkdown: (pdb: PopupDatabase) => {
+			const calc = calculateXps(pdb, rows, globalSettings)
+			exportRows = rows.map((x, i) => rowToExportRow(x, i, pdb, calc))
+			showingExportModal = true
+		},
 	}
 	const rowActionEvents: TableRowActionEvents = {
 		onDelete: (i) => {
@@ -124,7 +186,6 @@
 			rows[i].xpUnlock = n
 		},
 		onDropSwap: (fi, fr, c, ti, tr) => {
-			console.log(fi, fr, c, ti, tr)
 			if (fi === -1) {
 				// Add
 				if (tr) {
@@ -162,9 +223,69 @@
 
 	let popupDatabase = fetchPopupDatabase()
 	let collapse: boolean = true
+
+	let upgradeExportOptions: UpgradeExportOptions = {
+		arrow: {
+			character: '→',
+			boldUpgrade: true,
+		},
+		columns: {
+			cumulativeXpColumn: true,
+			markColumn: true,
+			xpColumn: true,
+		},
+		headers: {
+			costHeader: 'Cost',
+			totalHeader: 'Total',
+		},
+		ignoreSmall: false,
+		simpleList: false,
+		splitDivider: false,
+		xpSuffix: 'XP',
+	}
+	let exportOptions: ExportOptions = {
+		cardInfo: {
+			cardInfoTypes: [],
+			commitOptions: { highlight: null },
+			traitOptions: { highlight: null },
+		},
+		cardOptions: {
+			bold: false,
+			classIcons: true,
+			color: true,
+			exceptionalIcon: true,
+			link: true,
+			tabooIcon: true,
+		},
+		globalOptions: {
+			pipStyle: PipStyle.Pips,
+			taboo: true,
+		},
+	}
+	let onChangeUpgradeExportOptions: (n: UpgradeExportOptions) => void = (n) => {
+		upgradeExportOptions = n
+	}
+	let onChangeExportOptions: (n: ExportOptions) => void = (n) => {
+		exportOptions = n
+	}
 </script>
 
 <PageTitle title="Upgrade Planner" helpMd={help} />
+<Modal
+	onClose={() => {
+		showingExportModal = false
+	}}
+	show={showingExportModal}
+	title="Export"
+>
+	<UpgradeExportModalContent
+		{exportRows}
+		{exportOptions}
+		{onChangeExportOptions}
+		{onChangeUpgradeExportOptions}
+		{upgradeExportOptions}
+	/>
+</Modal>
 {#await popupDatabase}
 	<SpinnerSpan text="Loading..." />
 {:then pdb}

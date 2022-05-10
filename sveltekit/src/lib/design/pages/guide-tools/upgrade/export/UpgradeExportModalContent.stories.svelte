@@ -124,6 +124,7 @@
 			costHeader: 'Cost',
 			totalHeader: 'Total',
 		},
+		ignoreSmall: false,
 		simpleList: false,
 		splitDivider: true,
 		xpSuffix: 'XP',

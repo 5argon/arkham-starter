@@ -24,7 +24,7 @@
 
 <div class="flex-box">
 	<div class="flex-item flex-text">
-		<TextBox rightAlign={!singleMode} currentText={text} onChange={onTextChanged} />
+		<TextBox currentText={text} onChange={onTextChanged} />
 	</div>
 	<!-- <div class="flex-item">
 		<CardBlockButton label="Delete" iconPath={allIcons.delete} onClick={onDelete} />

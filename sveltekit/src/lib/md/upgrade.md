@@ -6,7 +6,9 @@ Its primary objective is to export your finished plan to table-formatted Markdow
 
 This is for decks that uses the main section for level 0 starting cards and Side Deck section for all the upgrade cards. Sometimes you forgot which cards in the starting list are waiting to be removed long after creating it. Therefore just by importing that deck, you have every cards needed for both "from" and "to" columns for this planner since ArkhamDB exports both the main and side deck together.
 
-The formatting will closely emulate what is shown on the left section of your deck in ArkhamDB. (With class icons, coloring, XP pips, and hoverable.) So if you are writing a detailed deck guide for beginners, they can make visual connection to the decklist better as opposed to being generic blue hyperlinks.
+The export formatting will closely emulate what is shown on the left section of your deck in ArkhamDB. (With class icons, coloring, XP pips, hoverable, and is using the same stylesheet as the rest of ArkhamDB.) So if you are writing a detailed deck guide for beginners, they can make visual connection to the decklist better as opposed to being generic blue hyperlinks.
+
+Below are some boring write ups about details of each section you can probably figure out by just using it... I program better when I write documentations first even before anything is completed.
 
 * [Staging Area](#staging-area)
 * [Two-column Table](#two-column-table)
@@ -123,7 +125,7 @@ Using the same Markdown comment, at the end of your exported Markdown you will s
 
 ```
 [//]: # (==========================================)
-[//]: # (https://arkham-starters.com/guide-tools/upgrade?import=O%2C%2C%2C1%2C0%2C14%2C38%2C%7C%2C....)
+[//]: # (https://arkham-starters.com/guide-tools/upgrade?i=O%2C%2C%2C1%2C0%2C14%2C38%2C%7C%2C....)
 [//]: # (==========================================)
 ```
 
