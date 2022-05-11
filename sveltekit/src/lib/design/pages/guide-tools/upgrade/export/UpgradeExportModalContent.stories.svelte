@@ -2,9 +2,11 @@
 	import { CardClass } from '$lib/core/card-class'
 
 	import Story from '$lib/design/story/story.svelte'
-	import { PipStyle } from '$lib/guide-tools/script/common/settings'
 	import type { UpgradeExportRow } from '$lib/guide-tools/script/export/export-tools'
-	import type { ExportOptions, UpgradeExportOptions } from '$lib/guide-tools/script/export/options'
+	import { CardInfo_CommitOptions_CommitIcon } from '$lib/proto/generated/card_info'
+	import type { ExportOptions } from '$lib/proto/generated/export_options'
+	import { GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
+	import type { UpgradeExportOptions } from '$lib/proto/generated/upgrade_export'
 	import UpgradeExportModalContent from './UpgradeExportModalContent.svelte'
 
 	let exportRows: UpgradeExportRow[] = [
@@ -113,10 +115,10 @@
 	let upgradeExportOptions: UpgradeExportOptions = {
 		arrow: {
 			character: '→',
-			boldUpgrade: true,
+			highlightUpgrade: true,
 		},
 		columns: {
-			cumulativeXpColumn: true,
+			cumulativeColumn: true,
 			markColumn: true,
 			xpColumn: true,
 		},
@@ -132,8 +134,8 @@
 	let exportOptions: ExportOptions = {
 		cardInfo: {
 			cardInfoTypes: [],
-			commitOptions: { highlight: null },
-			traitOptions: { highlight: null },
+			commitOptions: { highlight: CardInfo_CommitOptions_CommitIcon.Unknown },
+			traitOptions: { highlight: '' },
 		},
 		cardOptions: {
 			bold: false,
@@ -143,8 +145,8 @@
 			link: true,
 			tabooIcon: true,
 		},
-		globalOptions: {
-			pipStyle: PipStyle.Pips,
+		globalSettings: {
+			pipStyle: GlobalSettings_PipStyle.Pips,
 			taboo: true,
 		},
 	}
@@ -158,10 +160,12 @@
 
 <Story name="Test">
 	<UpgradeExportModalContent
+		singleMode={false}
 		{exportOptions}
 		{exportRows}
 		{onChangeExportOptions}
 		{onChangeUpgradeExportOptions}
 		{upgradeExportOptions}
+		importDeckUrl="something.com"
 	/>
 </Story>

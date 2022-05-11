@@ -37,7 +37,7 @@ export async function publicDeckPublished(deckNumber: string): Promise<AhdbDeck 
 	try {
 		const ret = await fetchWithRetries(publicDecklist)
 		const s = (await ret.json()) as AhdbDeck
-		console.log(s)
+		//console.log(s)
 		return s
 	} catch {
 		return null
@@ -49,7 +49,7 @@ export async function publicDeckPersonal(deckNumber: string): Promise<AhdbDeck |
 	try {
 		const ret2 = await fetchWithRetries(publicDeck)
 		const s2 = (await ret2.json()) as AhdbDeck
-		console.log(s2)
+		//console.log(s2)
 		return s2
 	} catch {
 		return null

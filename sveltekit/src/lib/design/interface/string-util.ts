@@ -1,3 +1,33 @@
+import { wrapPips, wrapSmall } from '$lib/guide-tools/script/export/ahdb-syntax'
+import { GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
+
+export function makePipsStyle(
+	p: number,
+	ps: GlobalSettings_PipStyle,
+	shouldSmall: boolean,
+	ignoreSmall: boolean,
+): string {
+	let pips: string
+	switch (ps) {
+		case GlobalSettings_PipStyle.PipsReal:
+			pips = wrapPips(makePips(p))
+			break
+		case GlobalSettings_PipStyle.Pips:
+			pips = makePips(p)
+			break
+		case GlobalSettings_PipStyle.Number:
+			pips = makePips(p)
+			break
+		default:
+			pips = ''
+			break
+	}
+	if (shouldSmall && !ignoreSmall) {
+		pips = wrapSmall(pips)
+	}
+	return pips
+}
+
 export function makePips(p: number): string {
 	const pipCharacter = '•'
 	const newPips: string[] = []

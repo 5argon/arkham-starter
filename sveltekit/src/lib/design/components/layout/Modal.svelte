@@ -28,8 +28,8 @@
 		margin-top: 5%;
 		margin-left: 10%;
 		margin-right: 10%;
-		padding: 32px;
-		height: 50%;
+		padding: 0% 10%;
+		height: 75%;
 		background-color: white;
 		box-shadow: 1px 2px 5px 3px rgba(0, 0, 0, 0.3);
 		overflow: scroll;

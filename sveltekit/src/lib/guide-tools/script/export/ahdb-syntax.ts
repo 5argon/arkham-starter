@@ -56,7 +56,10 @@ export function wrapCard(text: string, card: string): string {
 	return `[${text}](/card/${card})`
 }
 
-export function wrapSmall(text: string): string {
+export function wrapSmall(text: string, ignore?: boolean): string {
+	if (ignore === true) {
+		return text
+	}
 	return `<span class="small">${text}</span>`
 }
 

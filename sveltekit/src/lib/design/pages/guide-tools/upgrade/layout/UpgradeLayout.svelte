@@ -22,11 +22,9 @@
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import {
 		defaultGlobalSettings,
-		PipStyle,
 		type GlobalSettings,
 	} from '$lib/guide-tools/script/common/settings'
 	import type { Row } from '$lib/guide-tools/upgrade/interface'
-	import help from '$lib/md/upgrade.md?raw'
 	import Modal from '$lib/design/components/layout/Modal.svelte'
 	import UpgradeExportModalContent from '../export/UpgradeExportModalContent.svelte'
 	import type { ExportCard, UpgradeExportRow } from '$lib/guide-tools/script/export/export-tools'
@@ -34,13 +32,18 @@
 		calculateXps,
 		type CalculatedXp,
 	} from '$lib/guide-tools/upgrade/upgrade-table/xp-calculate'
-	import type { ExportOptions, UpgradeExportOptions } from '$lib/guide-tools/script/export/options'
+	import type { UpgradeExportOptions } from '$lib/proto/generated/upgrade_export'
+	import { GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
+	import type { ExportOptions } from '$lib/proto/generated/export_options'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
 	 */
 	export let singleMode: boolean = false
+	export let pageTitle: string
+	export let helpMd: string
 
+	let importText: string = ''
 	let globalSettings: GlobalSettings = defaultGlobalSettings
 	let stagingCards1: string[] = []
 	let stagingCards2: string[] = []
@@ -227,10 +230,10 @@
 	let upgradeExportOptions: UpgradeExportOptions = {
 		arrow: {
 			character: '→',
-			boldUpgrade: true,
+			highlightUpgrade: true,
 		},
 		columns: {
-			cumulativeXpColumn: true,
+			cumulativeColumn: true,
 			markColumn: true,
 			xpColumn: true,
 		},
@@ -239,26 +242,26 @@
 			totalHeader: 'Total',
 		},
 		ignoreSmall: false,
-		simpleList: false,
+		simpleList: singleMode,
 		splitDivider: false,
 		xpSuffix: 'XP',
 	}
 	let exportOptions: ExportOptions = {
 		cardInfo: {
 			cardInfoTypes: [],
-			commitOptions: { highlight: null },
-			traitOptions: { highlight: null },
+			commitOptions: { highlight: undefined },
+			traitOptions: { highlight: undefined },
 		},
 		cardOptions: {
-			bold: false,
+			bold: singleMode ? true : false,
 			classIcons: true,
 			color: true,
 			exceptionalIcon: true,
 			link: true,
 			tabooIcon: true,
 		},
-		globalOptions: {
-			pipStyle: PipStyle.Pips,
+		globalSettings: {
+			pipStyle: singleMode ? GlobalSettings_PipStyle.PipsReal : GlobalSettings_PipStyle.Pips,
 			taboo: true,
 		},
 	}
@@ -270,7 +273,7 @@
 	}
 </script>
 
-<PageTitle title="Upgrade Planner" helpMd={help} />
+<PageTitle subTitle="Guide Tools" title={pageTitle} {helpMd} />
 <Modal
 	onClose={() => {
 		showingExportModal = false
@@ -279,11 +282,13 @@
 	title="Export"
 >
 	<UpgradeExportModalContent
+		{singleMode}
 		{exportRows}
 		{exportOptions}
 		{onChangeExportOptions}
 		{onChangeUpgradeExportOptions}
 		{upgradeExportOptions}
+		importDeckUrl={importText}
 	/>
 </Modal>
 {#await popupDatabase}
@@ -293,6 +298,10 @@
 		<div slot="left">
 			<div class="vertical-scroll">
 				<StagingArea
+					{importText}
+					onChangeImportText={(t) => {
+						importText = t
+					}}
 					popupDatabase={pdb}
 					onCollapseChanged={(c) => {
 						collapse = c

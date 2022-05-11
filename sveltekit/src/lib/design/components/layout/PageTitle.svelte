@@ -3,15 +3,17 @@
 
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import SvelteMarkdown from 'svelte-markdown'
+	import MarkdownImage from '../basic/MarkdownImage.svelte'
 	import Modal from './Modal.svelte'
 
 	export let title: string
+	export let subTitle: string = ''
 	export let helpMd: string | null = null
 	let openModal: boolean = false
 </script>
 
 <div>
-	<h1 class="inline-block"><a href="/">arkham-starters.com</a> | {title}</h1>
+	<h1 class="inline-block"><a href="/">arkham-starters.com</a> | {subTitle} | {title}</h1>
 	{#if helpMd !== null}
 		<Modal
 			onClose={() => {
@@ -19,7 +21,7 @@
 			}}
 			show={openModal}
 		>
-			<SvelteMarkdown source={helpMd} />
+			<SvelteMarkdown renderers={{ image: MarkdownImage }} source={helpMd} />
 		</Modal>
 		<span on:click={() => (openModal = true)}><FaIcon big path={allIcons.manual} /></span>
 	{/if}

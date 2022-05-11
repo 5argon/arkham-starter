@@ -1,6 +1,7 @@
+
 <script lang="ts">
 	import UpgradeLayout from '$lib/design/pages/guide-tools/upgrade/layout/UpgradeLayout.svelte'
-	import help from '$lib/md/upgrade.md?raw'
+	import help from '$lib/md/list.md?raw'
 </script>
 
-<UpgradeLayout pageTitle="Upgrade Planner" helpMd={help} singleMode={false} />
+<UpgradeLayout pageTitle="Card List" helpMd={help} singleMode={true} />

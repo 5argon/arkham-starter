@@ -46,7 +46,10 @@
 	let gettingCards: boolean = false
 	let noticeLevel: NoticeLevel = NoticeLevel.Normal
 	let noticeText: string | null = null
-	let importText: string = ''
+	export let importText: string = ''
+	export let onChangeImportText: (t: string) => void = () => {
+		// do nothing
+	}
 </script>
 
 <div class="expand-collapse-button">
@@ -68,13 +71,10 @@
 	currentText={importText}
 	editingLevel={EditingLevel.Editable}
 	label={'Import Deck'}
-	onChange={(t) => {
-		importText = t
-	}}
-	onEndEdit={(t) => {
-		importText = t
-	}}
+	onChange={onChangeImportText}
+	onEndEdit={onChangeImportText}
 	onSubmit={async (n) => {
+		onChangeImportText(n)
 		if (n.trim() === '') {
 			return
 		}

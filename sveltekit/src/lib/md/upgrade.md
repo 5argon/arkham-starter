@@ -1,10 +1,14 @@
 # Upgrade Planner
 
+![Preview](../../../static/image/documentation/guide-tools/upgrade/preview.png)
+
 A two-column table that can "diff" the cards and update XP calculation (cost and total cumulative) as you change things around on the table. The plan is implied that you upgrade in order from top to bottom.
 
 Its primary objective is to export your finished plan to table-formatted Markdown which is a disaster to normally type. Paste it in ArkhamDB's deck guide to remember your upgrade plans for future reference in-between scenarios what you were thinking while creating the deck, and perhaps make some deviations from the plan depending on your campaign state.
 
 This is for decks that uses the main section for level 0 starting cards and Side Deck section for all the upgrade cards. Sometimes you forgot which cards in the starting list are waiting to be removed long after creating it. Therefore just by importing that deck, you have every cards needed for both "from" and "to" columns for this planner since ArkhamDB exports both the main and side deck together.
+
+![Export format](../../../static/image/documentation/guide-tools/upgrade/export-format.png)
 
 The export formatting will closely emulate what is shown on the left section of your deck in ArkhamDB. (With class icons, coloring, XP pips, hoverable, and is using the same stylesheet as the rest of ArkhamDB.) So if you are writing a detailed deck guide for beginners, they can make visual connection to the decklist better as opposed to being generic blue hyperlinks.
 
@@ -79,7 +83,7 @@ Cumulative XP will also be updated to use your custom edit XP automatically.
 
 Press "Add Divider Row" to add a special row. This row can subdivides the table into multiple sections with total cumulative XP connected. Use the up/down button on the left to position the divider row.
 
-Type on the long box to explain the divider. It is exported in Markdown to the same column as the right card.
+Type on the long box to explain the divider. It is exported in Markdown to the same column as the left card.
 
 ### Cumulative XP Unlock
 
@@ -107,7 +111,7 @@ Customize how each card looks like in the export for both sides.
 
 The card can be a simple ArkhamDB hoverable link (e.g. `[Text](/card/12345)`) or full-on styled with class icons, text color, and even XP pips, so it looks like the decklist cards on the left side in ArkhamDB such that reader can connect the dots easier between your guide and the deck.
 
-However, the more you add blings to the export, the more it looks messy in the Markdown and impossible to continue editing in Markdown. To deal with this problem, it also export a strange string of code ("upgrade code") that represents an entire table.
+However, the more you add blings to the export, the more it looks messy in the Markdown and impossible to continue editing in Markdown. To deal with this problem, it also exports a special URL which takes you back here with all the data restored.
 
 ### Export border
 
@@ -122,14 +126,19 @@ You might notice these :
 
 This is a Markdown comment that viewer cannot see. Since the exported Markdown table looks like a mess, this dividing line helps you see clearer where is the table while scrolling through your deck documentation, so you can detect an actual content that you had hand-typed from the mess.
 
-### Import code
+### URL
 
-Using the same Markdown comment, at the end of your exported Markdown you will see something like this :
+At the end of your exported Markdown you will see a URL nested inside Markdown comment, like this :
 
 ```
-[//]: # (https://arkham-starters.com/guide-tools/upgrade?i=O%2C%2C%2C1%2C0%2C14%2C38%2C%7C%2C....)
+[//]: # (https://arkham-starters.com/guide-tools/upgrade?i=EiIaAlhQKgcKA%2BKGkhABMg0KBENvc3SBVRvdG...)
 ```
 
-Since table is hell to continue editing in Markdown format, this URL is intended so if you visit it, you would arrive back at this page with the table restored and can continue making changes to make a new export. You can share this so others can use to see the upgrade plan in this site as well. Note that the staging area is not restored.
+Since the table is hell to continue editing in Markdown format, this URL is intended so if you visit it, you would arrive back at this page with the table restored and can continue making changes to make a new export. You can share this so others can use to see the upgrade plan in this site as well.
 
 But right now, it has no such loading feature yet. Also if I made changes to the upgrade code format it is possible that an old upgrade code is no longer compatible.
+
+Note that only the deck URL in the Staging Area is remembered, not the cards imported. This page will re-run the import once you arrive back in this page. Therefore, if you made changes to the deck at the URL's destination, the card list in the Staging Area may be different from before.
+
+
+You can share this URL somewhere to direct people to view your upgrade plan here instead of rendered in ArkhamDB's Markdown section.

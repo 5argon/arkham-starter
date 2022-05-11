@@ -1,8 +1,15 @@
 import { CardClass } from '$lib/core/card-class'
-import { makePips } from '$lib/design/interface/string-util'
-import { PipStyle } from '../common/settings'
+import { makePips, makePipsStyle } from '$lib/design/interface/string-util'
+import type { ExportOptions } from '$lib/proto/generated/export_options'
+import { GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
+import {
+	UpgradeExportProto,
+	UpgradeExportRow as UpgradeExportRowProto,
+	type UpgradeExportOptions,
+} from '$lib/proto/generated/upgrade_export'
 import { ahdbIcons, prefixClassIcons, wrapCard, wrapColor, wrapSmall } from './ahdb-syntax'
-import type { ExportOptions, UpgradeExportOptions } from './options'
+import { binaryToUrlString } from './options'
+import { makeSimpleList } from './simple-list'
 
 export interface ExportCard {
 	cardName: string
@@ -22,6 +29,7 @@ export interface ExportCard {
 	skillWild: number | null
 	traits: string[]
 }
+
 export interface UpgradeExportRow {
 	mark: string
 	cardLeft: ExportCard | null
@@ -35,9 +43,38 @@ export interface UpgradeExportRow {
 }
 
 export interface UpgradeExport {
+	/**
+	 * This is not in the protobuf, since we need to only remember card IDs left and right.
+	 */
+	upgradeRows: UpgradeExportRow[]
+
 	upgradeExportOptions: UpgradeExportOptions
 	exportOptions: ExportOptions
-	exportRows: UpgradeExportRow[]
+	importDeckUrl: string
+}
+
+export function upgradeExportToProtoString(eo: UpgradeExport): string {
+	const pp: UpgradeExportProto = {
+		importDeckUrl: eo.importDeckUrl,
+		exportOptions: eo.exportOptions,
+		upgradeExportOptions: eo.upgradeExportOptions,
+		upgradeRows: eo.upgradeRows.map<UpgradeExportRowProto>((x) => {
+			return {
+				cardLeft: x.cardLeft?.id ?? '',
+				cardRight: x.cardRight?.id ?? '',
+				cumulativeXp: x.xpCumulative,
+				cumulativeXpUnlocked: x.xpCumulativeUnlocked,
+				divider: x.divider,
+				dividerText: x.dividerText,
+				mark: x.mark,
+				xp: x.xp,
+				xpUnlocked: x.xpUnlocked,
+			}
+		}),
+	}
+	const p = UpgradeExportProto.create(pp)
+	const uint = UpgradeExportProto.toBinary(p)
+	return binaryToUrlString(uint)
 }
 
 function trimEndingEmpty(exportRows: UpgradeExportRow[]): UpgradeExportRow[] {
@@ -56,15 +93,26 @@ function trimEndingEmpty(exportRows: UpgradeExportRow[]): UpgradeExportRow[] {
 	return [...exportRows]
 }
 
-export function upgradeExport(
-	upgradeExportOptions: UpgradeExportOptions,
-	exportOptions: ExportOptions,
-	exportRows: UpgradeExportRow[],
-): string {
+export function upgradeExport(uex: UpgradeExport): string {
+	if (uex.upgradeExportOptions === undefined) {
+		return ''
+	}
+	if (uex.exportOptions === undefined) {
+		return ''
+	}
+	if (uex.upgradeRows === undefined) {
+		return ''
+	}
+	const upgradeExportOptions: UpgradeExportOptions = uex.upgradeExportOptions
+	const exportOptions: ExportOptions = uex.exportOptions
+	let exportRows: UpgradeExportRow[] = uex.upgradeRows
+
 	exportRows = trimEndingEmpty(exportRows)
-	const upgradeCode = makeUpgradeCode(exportRows)
+	const upgradeCode = makeUpgradeCode(uex)
 	let meat: string
-	if (upgradeExportOptions.splitDivider) {
+	if (upgradeExportOptions.simpleList) {
+		meat = makeSimpleList(upgradeExportOptions, exportOptions, exportRows)
+	} else if (upgradeExportOptions.splitDivider) {
 		const meats: string[] = []
 		const agg: UpgradeExportRow[] = []
 		for (let i = 0; i < exportRows.length; i++) {
@@ -89,7 +137,10 @@ export function upgradeExport(
 	} else {
 		meat = upgradeExportSubdivided(upgradeExportOptions, exportOptions, exportRows)
 	}
-	const all: string[] = [meat, upgradeCode, comment]
+	const all: string[] = [meat, upgradeCode]
+	if (!uex.upgradeExportOptions.simpleList) {
+		all.push(comment)
+	}
 	return all.join('\n')
 }
 
@@ -124,8 +175,9 @@ function upgradeExportRow(
 	eo: ExportOptions,
 ): string {
 	const mark = mdMarkColumn(row.mark)
-	const leftCard = row.cardLeft !== null ? mdCardAndInfo(row.cardLeft, eo) : null
-	const rightCard = row.cardRight !== null ? mdCardAndInfo(row.cardRight, eo) : null
+	const leftCard = row.cardLeft !== null ? mdCardAndInfo(row.cardLeft, eo, ueo.ignoreSmall) : null
+	const rightCard =
+		row.cardRight !== null ? mdCardAndInfo(row.cardRight, eo, ueo.ignoreSmall) : null
 	const arrow =
 		row.cardLeft !== null && row.cardRight !== null
 			? arrowColumn(row.cardLeft.cardName === row.cardRight.cardName, ueo)
@@ -150,8 +202,8 @@ function mdMarkColumn(mark: string): string {
 
 function arrowColumn(isUpgrade: boolean, opt: UpgradeExportOptions): string {
 	const arrow = isUpgrade
-		? wrapColor(opt.arrow.character, CardClass.Survivor, null, null)
-		: opt.arrow.character
+		? wrapColor(opt.arrow?.character ?? '', CardClass.Survivor, null, null)
+		: opt.arrow?.character ?? ''
 	return nbsp + arrow + nbsp
 }
 
@@ -171,59 +223,86 @@ function dividerRow(
 }
 
 function tableHeader(opt: UpgradeExportOptions): string {
-	return `|  |  |  |  | ${nbsp + opt.headers.costHeader} | ${nbsp + opt.headers.totalHeader} |`
+	return `|  |  |  |  | ${nbsp + opt.headers?.costHeader ?? ''} | ${
+		nbsp + opt.headers?.totalHeader ?? ''
+	} |`
 }
 
 /**
  * Only a part of one row about the card.
  */
-function mdCardAndInfo(card: ExportCard, opt: ExportOptions): string {
+function mdCardAndInfo(card: ExportCard, opt: ExportOptions, ignoreSmall: boolean): string {
 	// WIP
-	const justCard = mdJustcard(card, opt)
+	const justCard = mdJustcard(card, opt, ignoreSmall)
 	return justCard
 }
 
-function mdJustcard(card: ExportCard, opt: ExportOptions): string {
+function mdJustcard(card: ExportCard, opt: ExportOptions, ignoreSmall: boolean): string {
 	let cardName = card.cardName
-	cardName = opt.cardOptions.bold ? `**${cardName}**` : cardName
-	cardName = opt.cardOptions.color
-		? wrapColor(cardName, card.class1, card.class2, card.class3, true)
-		: cardName
-	cardName = opt.cardOptions.link ? wrapCard(cardName, card.id) : cardName
+	cardName = opt.cardOptions?.bold ?? false ? `**${cardName}**` : cardName
 	cardName =
-		opt.globalOptions.pipStyle === PipStyle.Pips
-			? `${cardName} ${wrapSmall(makePips(card.xp ?? 0))}`
+		opt.cardOptions?.color ?? true
+			? wrapColor(cardName, card.class1, card.class2, card.class3, !ignoreSmall)
+			: cardName
+	cardName = opt.cardOptions?.link ?? true ? wrapCard(cardName, card.id) : cardName
+	const normalPips = wrapSmall(
+		makePipsStyle(
+			card.xp ?? 0,
+			opt.globalSettings?.pipStyle ?? GlobalSettings_PipStyle.PipsReal,
+			true,
+			ignoreSmall,
+		),
+	)
+	const tabooPips = wrapSmall(
+		makePipsStyle(
+			card.xpTaboo,
+			opt.globalSettings?.pipStyle ?? GlobalSettings_PipStyle.PipsReal,
+			true,
+			ignoreSmall,
+		),
+	)
+
+	cardName =
+		(opt.globalSettings?.pipStyle ?? GlobalSettings_PipStyle.PipsReal) !==
+		GlobalSettings_PipStyle.None
+			? `${cardName} ${normalPips}`
 			: cardName
 	cardName =
-		opt.globalOptions.taboo && card.xpTaboo > 0
-			? `${cardName} ${wrapSmall(makePips(card.xpTaboo))}${ahdbIcons.tablet}`
+		(opt.globalSettings?.taboo ?? true) && card.xpTaboo > 0
+			? `${cardName} ${tabooPips}${ahdbIcons.tablet}`
 			: cardName
 	cardName =
-		opt.cardOptions.exceptionalIcon &&
-		((!opt.globalOptions.taboo && card.exceptional) ||
-			(opt.globalOptions.taboo && card.exceptionalTaboo))
+		(opt.cardOptions?.exceptionalIcon ?? true) &&
+		((!(opt.globalSettings?.taboo ?? true) && card.exceptional) ||
+			((opt.globalSettings?.taboo ?? true) && card.exceptionalTaboo))
 			? `${cardName}${ahdbIcons.elderSign}`
 			: cardName
-	cardName = opt.cardOptions.classIcons
-		? prefixClassIcons(cardName, card.class1, card.class2, card.class3)
-		: cardName
+	cardName =
+		opt.cardOptions?.classIcons ?? true
+			? prefixClassIcons(cardName, card.class1, card.class2, card.class3)
+			: cardName
 	return cardName
 }
 
-function makeUpgradeCode(exportRows: UpgradeExportRow[]): string {
-	const rows = exportRows.map<string>((x) => {
-		const n = !x.divider
-		return [
-			n ? x.mark : '',
-			n ? '' : x.cardLeft?.id ?? '',
-			n ? '' : x.cardRight?.id ?? '',
-			n ? (x.xpUnlocked ? 1 : 0).toString() : 0,
-			n ? 0 : (x.xpCumulativeUnlocked ? 1 : 0).toString(),
-			x.xp.toString(),
-			x.xpCumulative.toString(),
-			n ? '' : x.dividerText,
-		].join(',')
-	})
-	const joined = rows.join('|')
-	return `[//]: # (https://arkham-starters.com/guide-tools/upgrade?i=${encodeURIComponent(joined)})`
+function makeUpgradeCode(uex: UpgradeExport): string {
+	if (uex.upgradeExportOptions.simpleList) {
+		return ''
+	}
+	const proto = upgradeExportToProtoString(uex)
+
+	// const rows = exportRows.map<string>((x) => {
+	// 	const n = !x.divider
+	// 	return [
+	// 		n ? x.mark : '',
+	// 		n ? '' : x.cardLeft?.id ?? '',
+	// 		n ? '' : x.cardRight?.id ?? '',
+	// 		n ? (x.xpUnlocked ? 1 : 0).toString() : 0,
+	// 		n ? 0 : (x.xpCumulativeUnlocked ? 1 : 0).toString(),
+	// 		x.xp.toString(),
+	// 		x.xpCumulative.toString(),
+	// 		n ? '' : x.dividerText,
+	// 	].join(',')
+	// })
+	// const joined = rows.join('|')
+	return `[//]: # (https://arkham-starters.com/guide-tools/upgrade?i=${proto})`
 }
