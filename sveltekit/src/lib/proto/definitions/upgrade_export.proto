@@ -44,6 +44,8 @@ message UpgradeExportOptions {
 			C = 3;
 			D = 4;
 			E = 5;
+			F = 6;
+			G = 7;
 		}
 		BlockStyle block_style = 1;
 	}
@@ -55,4 +57,5 @@ message UpgradeExportOptions {
 	Headers headers = 6;
 	Columns columns = 7;
 	SimpleListOptions simple_list_options = 8;
+	bool upgradeUrl = 9;
 }

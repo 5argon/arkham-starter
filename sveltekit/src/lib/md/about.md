@@ -9,3 +9,4 @@ This is an exciting time to create more helping contents for this game so the co
 Right now, it has only "guide tool" that aids writing the note section when you build the deck in ArkhamDB. You can try using them for now : 
 
 - [Upgrade Planner](/guide-tools/upgrade)
+- [Card List](/guide-tools/list)

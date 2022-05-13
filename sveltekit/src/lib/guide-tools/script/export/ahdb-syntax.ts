@@ -47,6 +47,9 @@ export function prefixClassIcons(
 	c2: CardClass | null,
 	c3: CardClass | null,
 ): string {
+	if (c1 === CardClass.Neutral && c2 === null && c3 === null) {
+		return text
+	}
 	return `${getClassIcon(c1)}${c2 !== null ? getClassIcon(c2) : ''}${
 		c3 !== null ? getClassIcon(c3) : ''
 	} ${text}`
@@ -94,8 +97,22 @@ export function wrapColor(
 }
 
 export function wrapPips(s: string): string {
+	if (s.length === 0) {
+		return ''
+	}
 	// Cause trouble inside table...
 	return '<span class="card-xp">' + s + '</span>'
+}
+
+export function wrapLeftBorderWithSlot(
+	text: string,
+	slotText: string,
+	c1: CardClass,
+	c2: CardClass | null,
+	c3: CardClass | null,
+): string {
+	const noSlot = wrapLeftBorder(text, c1, c2, c3)
+	return noSlot.replace('</div>', '<p>\n\n' + slotText + '\n</p></div>')
 }
 
 export function wrapLeftBorder(
@@ -107,19 +124,19 @@ export function wrapLeftBorder(
 	if (c2 === null && c3 === null) {
 		switch (c1) {
 			case CardClass.Guardian:
-				return `<div class="card-text border-guardian"><p>${text}</p></span>`
+				return `<div class="card-text border-guardian"><p>${text}</p></div>`
 			case CardClass.Seeker:
-				return `<div class="card-text border-seeker"><p>${text}</p></span>`
+				return `<div class="card-text border-seeker"><p>${text}</p></div>`
 			case CardClass.Rogue:
-				return `<div class="card-text border-rogue"><p>${text}</p></span>`
+				return `<div class="card-text border-rogue"><p>${text}</p></div>`
 			case CardClass.Mystic:
-				return `<div class="card-text border-mystic"><p>${text}</p></span>`
+				return `<div class="card-text border-mystic"><p>${text}</p></div>`
 			case CardClass.Survivor:
-				return `<div class="card-text border-survivor"><p>${text}</p></span>`
+				return `<div class="card-text border-survivor"><p>${text}</p></div>`
 			case CardClass.Neutral:
-				return `<div class="card-text border-neutral"><p>${text}</p></span>`
+				return `<div class="card-text border-neutral"><p>${text}</p></div>`
 		}
 	} else {
-		return `<div class="card-text border-dual"><p>${text}</p></span>`
+		return `<div class="card-text border-dual"><p>${text}</p></div>`
 	}
 }

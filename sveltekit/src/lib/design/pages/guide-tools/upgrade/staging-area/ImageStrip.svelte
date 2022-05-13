@@ -32,7 +32,7 @@
 
 {#if showImageStrip}
 	<span class={'image-strip' + ' ' + colorClass}>
-		<img draggable={false} class="image-in-strip" src={'/image/card/strip/' + cardId + '.png'} alt={name} />
+		<img draggable={false} class="image-in-strip" src={'/image/card/strip/' + cardId + '.png'} alt={""} />
 		{#if xp !== null}
 			<div class="pips">{pips}</div>
 		{/if}

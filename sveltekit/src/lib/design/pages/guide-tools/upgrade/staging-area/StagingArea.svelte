@@ -4,6 +4,8 @@
 	import TextBox, { EditingLevel, NoticeLevel } from '$lib/design/components/basic/TextBox.svelte'
 	import StagingAreaSingle from './StagingAreaSingle.svelte'
 	import { extractDeckFromUrl, getDeckCardIds } from '$lib/ahdb/public-api/high-level'
+	import { onMount } from 'svelte'
+	import type { GlobalSettings } from '$lib/proto/generated/global_settings'
 
 	export let onImportDeck: (
 		cards1: string[],
@@ -16,8 +18,10 @@
 		// do nothing
 	}
 
+	export let singleMode: boolean = false
 	export let collapse: boolean = false
 	export let popupDatabase: PopupDatabase
+	export let globalSettings: GlobalSettings
 	export let stagingCards1: string[] = []
 	export let stagingCards2: string[] = []
 	export let stagingCards3: string[] = []
@@ -50,30 +54,8 @@
 	export let onChangeImportText: (t: string) => void = () => {
 		// do nothing
 	}
-</script>
 
-<div class="expand-collapse-button">
-	<Button
-		big
-		center
-		label={collapse ? 'Expand' : 'Collapse'}
-		block={true}
-		onClick={() => onCollapseChanged(!collapse)}
-	/>
-</div>
-<TextBox
-	enableNotice
-	placeholderText={"Paste ArkhamDB's Deck URL here. (If unpublished, it must be public.)"}
-	submitButtonText={'Import'}
-	{noticeLevel}
-	{noticeText}
-	spinnerText={gettingCards ? 'Importing a deck...' : null}
-	currentText={importText}
-	editingLevel={EditingLevel.Editable}
-	label={'Import Deck'}
-	onChange={onChangeImportText}
-	onEndEdit={onChangeImportText}
-	onSubmit={async (n) => {
+	async function submit(n: string) {
 		onChangeImportText(n)
 		if (n.trim() === '') {
 			return
@@ -99,10 +81,40 @@
 		noticeLevel = NoticeLevel.Success
 		noticeText = 'Import successful : ' + cards.deck
 		exportedOnce = true
-	}}
+	}
+
+	onMount(async () => {
+		submit(importText)
+	})
+</script>
+
+<div class="expand-collapse-button">
+	<Button
+		big
+		center
+		label={collapse ? 'Expand' : 'Collapse'}
+		block={true}
+		onClick={() => onCollapseChanged(!collapse)}
+	/>
+</div>
+<TextBox
+	enableNotice
+	placeholderText={"Paste ArkhamDB's Deck URL here. (If unpublished, it must be public.)"}
+	submitButtonText={'Import'}
+	{noticeLevel}
+	{noticeText}
+	spinnerText={gettingCards ? 'Importing a deck...' : null}
+	currentText={importText}
+	editingLevel={EditingLevel.Editable}
+	label={'Import Deck'}
+	onChange={onChangeImportText}
+	onEndEdit={onChangeImportText}
+	onSubmit={submit}
 />
 <StagingAreaSingle
+	{singleMode}
 	{collapse}
+	{globalSettings}
 	label={exportedOnce ? 'Deck' : 'Staging Area 1'}
 	{popupDatabase}
 	stagingCards={stagingCards1}
@@ -112,7 +124,9 @@
 	{onAddToRightSide}
 />
 <StagingAreaSingle
+	{singleMode}
 	{collapse}
+	{globalSettings}
 	label={exportedOnce ? 'Side Deck' : 'Staging Area 2'}
 	{popupDatabase}
 	stagingCards={stagingCards2}
@@ -122,7 +136,9 @@
 	{onAddToRightSide}
 />
 <StagingAreaSingle
+	{singleMode}
 	{collapse}
+	{globalSettings}
 	label={exportedOnce ? 'Ignore Deck Limit' : 'Staging Area 3'}
 	{popupDatabase}
 	stagingCards={stagingCards3}

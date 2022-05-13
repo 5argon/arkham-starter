@@ -2,6 +2,7 @@
 	import { fetchPopupDatabase } from '$lib/core/popup-database'
 
 	import Story from '$lib/design/story/story.svelte'
+	import { GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
 	import StagingAreaSingle from './StagingAreaSingle.svelte'
 
 	const pdbp = fetchPopupDatabase()
@@ -11,6 +12,7 @@
 	<Story name="Test">
 		<StagingAreaSingle
 			label={'Staging Test'}
+			globalSettings={{ pipStyle: GlobalSettings_PipStyle.PipsReal, taboo: true }}
 			popupDatabase={pdb}
 			stagingCards={[
 				'01000',

@@ -1,14 +1,14 @@
 import { CardClass } from '$lib/core/card-class'
-import { makePips, makePipsStyle } from '$lib/design/interface/string-util'
+import type { Row } from '$lib/guide-tools/upgrade/interface'
 import type { ExportOptions } from '$lib/proto/generated/export_options'
-import { GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
 import {
 	UpgradeExportProto,
 	UpgradeExportRow as UpgradeExportRowProto,
 	type UpgradeExportOptions,
 } from '$lib/proto/generated/upgrade_export'
-import { ahdbIcons, prefixClassIcons, wrapCard, wrapColor, wrapSmall } from './ahdb-syntax'
-import { binaryToUrlString } from './options'
+import { wrapColor, wrapSmall } from './ahdb-syntax'
+import { mdCardAndInfo } from './md-card'
+import { base64ToBinary, binaryToUrlString } from './options'
 import { makeSimpleList } from './simple-list'
 
 export interface ExportCard {
@@ -51,6 +51,58 @@ export interface UpgradeExport {
 	upgradeExportOptions: UpgradeExportOptions
 	exportOptions: ExportOptions
 	importDeckUrl: string
+}
+
+export interface RestoreResult {
+	rows: Row[]
+	upgradeExportOptions: UpgradeExportOptions
+	exportOptions: ExportOptions
+	importDeckUrl: string
+}
+
+export function protoStringRestore(s: string): RestoreResult {
+	let pt: UpgradeExportProto
+	try {
+		pt = UpgradeExportProto.fromBinary(base64ToBinary(s))
+	} catch (e) {
+		console.log(e)
+		return {
+			exportOptions: {},
+			importDeckUrl: '',
+			rows: [],
+			upgradeExportOptions: {
+				upgradeUrl: true,
+				ignoreSmall: false,
+				simpleList: false,
+				splitDivider: false,
+				xpSuffix: 'XP',
+			},
+		}
+	}
+	return {
+		exportOptions: pt.exportOptions ?? {},
+		importDeckUrl: pt.importDeckUrl,
+		upgradeExportOptions: pt.upgradeExportOptions ?? {
+			upgradeUrl: true,
+			ignoreSmall: false,
+			simpleList: false,
+			splitDivider: false,
+			xpSuffix: 'XP',
+		},
+		rows: pt.upgradeRows.map((x) => {
+			return {
+				carryoverXp: x.cumulativeXp,
+				divider: x.divider,
+				dividerText: x.dividerText,
+				dividerXpCumulativeUnlock: x.cumulativeXpUnlocked,
+				left: x.cardLeft,
+				mark: x.mark,
+				right: x.cardRight,
+				xp: x.xp,
+				xpUnlock: x.xpUnlocked,
+			}
+		}),
+	}
 }
 
 export function upgradeExportToProtoString(eo: UpgradeExport): string {
@@ -184,7 +236,7 @@ function upgradeExportRow(
 			: arrowColumn(false, ueo)
 	const xp = xpColumn(row.xp, ueo.xpSuffix)
 	const xpCumulative = xpColumn(row.xpCumulative, ueo.xpSuffix)
-	const all: string[] = ['', mark, leftCard ?? '', arrow, rightCard ?? '', xp, xpCumulative, '']
+	const all: string[] = ['', mark, leftCard ?? '  ', arrow, rightCard ?? '  ', xp, xpCumulative, '']
 	return all.join('|')
 }
 
@@ -218,7 +270,8 @@ function dividerRow(
 	topmost: boolean,
 ): string {
 	return (
-		(topmost ? '' : emptyRow + '\n') + `|  | **${text}** |  |  |  | ${xpCumulative} ${xpSuffix} |`
+		(topmost ? '' : emptyRow + '\n') +
+		`|  | ${text !== '' ? '**' + text + '**' : ''} |  |  |  | ${xpCumulative} ${xpSuffix} |`
 	)
 }
 
@@ -226,62 +279,6 @@ function tableHeader(opt: UpgradeExportOptions): string {
 	return `|  |  |  |  | ${nbsp + opt.headers?.costHeader ?? ''} | ${
 		nbsp + opt.headers?.totalHeader ?? ''
 	} |`
-}
-
-/**
- * Only a part of one row about the card.
- */
-function mdCardAndInfo(card: ExportCard, opt: ExportOptions, ignoreSmall: boolean): string {
-	// WIP
-	const justCard = mdJustcard(card, opt, ignoreSmall)
-	return justCard
-}
-
-function mdJustcard(card: ExportCard, opt: ExportOptions, ignoreSmall: boolean): string {
-	let cardName = card.cardName
-	cardName = opt.cardOptions?.bold ?? false ? `**${cardName}**` : cardName
-	cardName =
-		opt.cardOptions?.color ?? true
-			? wrapColor(cardName, card.class1, card.class2, card.class3, !ignoreSmall)
-			: cardName
-	cardName = opt.cardOptions?.link ?? true ? wrapCard(cardName, card.id) : cardName
-	const normalPips = wrapSmall(
-		makePipsStyle(
-			card.xp ?? 0,
-			opt.globalSettings?.pipStyle ?? GlobalSettings_PipStyle.PipsReal,
-			true,
-			ignoreSmall,
-		),
-	)
-	const tabooPips = wrapSmall(
-		makePipsStyle(
-			card.xpTaboo,
-			opt.globalSettings?.pipStyle ?? GlobalSettings_PipStyle.PipsReal,
-			true,
-			ignoreSmall,
-		),
-	)
-
-	cardName =
-		(opt.globalSettings?.pipStyle ?? GlobalSettings_PipStyle.PipsReal) !==
-		GlobalSettings_PipStyle.None
-			? `${cardName} ${normalPips}`
-			: cardName
-	cardName =
-		(opt.globalSettings?.taboo ?? true) && card.xpTaboo > 0
-			? `${cardName} ${tabooPips}${ahdbIcons.tablet}`
-			: cardName
-	cardName =
-		(opt.cardOptions?.exceptionalIcon ?? true) &&
-		((!(opt.globalSettings?.taboo ?? true) && card.exceptional) ||
-			((opt.globalSettings?.taboo ?? true) && card.exceptionalTaboo))
-			? `${cardName}${ahdbIcons.elderSign}`
-			: cardName
-	cardName =
-		opt.cardOptions?.classIcons ?? true
-			? prefixClassIcons(cardName, card.class1, card.class2, card.class3)
-			: cardName
-	return cardName
 }
 
 function makeUpgradeCode(uex: UpgradeExport): string {

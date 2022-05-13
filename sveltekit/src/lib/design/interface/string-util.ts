@@ -22,7 +22,7 @@ export function makePipsStyle(
 			pips = ''
 			break
 	}
-	if (shouldSmall && !ignoreSmall) {
+	if (pips.length > 0 && shouldSmall && !ignoreSmall) {
 		pips = wrapSmall(pips)
 	}
 	return pips

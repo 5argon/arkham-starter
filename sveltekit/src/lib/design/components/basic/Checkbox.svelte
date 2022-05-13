@@ -36,3 +36,9 @@
 		<span class="label-span">{label}</span>
 	{/if}
 </label>
+
+<style>
+	.label-span {
+		user-select: none;
+	}
+</style>

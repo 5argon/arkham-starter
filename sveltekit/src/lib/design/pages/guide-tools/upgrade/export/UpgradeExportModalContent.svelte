@@ -2,6 +2,7 @@
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
+	import RadioGroup from '$lib/design/components/basic/RadioGroup.svelte'
 
 	import { upgradeExport, type UpgradeExportRow } from '$lib/guide-tools/script/export/export-tools'
 	import type { ExportOptions } from '$lib/proto/generated/export_options'
@@ -24,9 +25,37 @@
 </script>
 
 <ListDivider label="Export Options" level={ListDividerLevel.One} />
-<div>WIP! Not many things to adjust for now.</div>
 {#if singleMode}
-	<span />
+	<Checkbox
+		checked={exportOptions.cardOptions?.bold ?? false}
+		label="Bold"
+		onCheckChanged={(c) => {
+			const n = { ...exportOptions }
+			if (exportOptions.cardOptions !== undefined) {
+				exportOptions.cardOptions.bold = c
+			}
+			return n
+		}}
+	/>
+	<RadioGroup
+		onValueChanged={(v) => {
+			const nu = { ...upgradeExportOptions }
+			if (nu.simpleListOptions !== undefined) {
+				nu.simpleListOptions.blockStyle = parseInt(v)
+			}
+			onChangeUpgradeExportOptions(nu)
+		}}
+		current={upgradeExportOptions.simpleListOptions?.blockStyle.toString() ?? ''}
+		label="Style"
+		radioId="style"
+		choices={[
+			{ label: 'List', value: '1' },
+			{ label: 'List with horizontal lines', value: '2' },
+			{ label: 'Bullet points', value: '3' },
+			{ label: 'Table (with left-aligned empty column)', value: '4' },
+			{ label: 'Table (with center-aligned empty column)', value: '5' },
+		]}
+	/>
 {:else}
 	<Checkbox
 		checked={upgradeExportOptions.splitDivider}

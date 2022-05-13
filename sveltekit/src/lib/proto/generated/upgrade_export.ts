@@ -114,6 +114,10 @@ export interface UpgradeExportOptions {
      * @generated from protobuf field: UpgradeExportOptions.SimpleListOptions simple_list_options = 8;
      */
     simpleListOptions?: UpgradeExportOptions_SimpleListOptions;
+    /**
+     * @generated from protobuf field: bool upgradeUrl = 9;
+     */
+    upgradeUrl: boolean;
 }
 /**
  * @generated from protobuf message UpgradeExportOptions.Arrow
@@ -194,7 +198,15 @@ export enum UpgradeExportOptions_SimpleListOptions_BlockStyle {
     /**
      * @generated from protobuf enum value: E = 5;
      */
-    E = 5
+    E = 5,
+    /**
+     * @generated from protobuf enum value: F = 6;
+     */
+    F = 6,
+    /**
+     * @generated from protobuf enum value: G = 7;
+     */
+    G = 7
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class UpgradeExportProto$Type extends MessageType<UpgradeExportProto> {
@@ -378,11 +390,12 @@ class UpgradeExportOptions$Type extends MessageType<UpgradeExportOptions> {
             { no: 5, name: "arrow", kind: "message", T: () => UpgradeExportOptions_Arrow },
             { no: 6, name: "headers", kind: "message", T: () => UpgradeExportOptions_Headers },
             { no: 7, name: "columns", kind: "message", T: () => UpgradeExportOptions_Columns },
-            { no: 8, name: "simple_list_options", kind: "message", T: () => UpgradeExportOptions_SimpleListOptions }
+            { no: 8, name: "simple_list_options", kind: "message", T: () => UpgradeExportOptions_SimpleListOptions },
+            { no: 9, name: "upgradeUrl", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
         ]);
     }
     create(value?: PartialMessage<UpgradeExportOptions>): UpgradeExportOptions {
-        const message = { simpleList: false, splitDivider: false, xpSuffix: "", ignoreSmall: false };
+        const message = { simpleList: false, splitDivider: false, xpSuffix: "", ignoreSmall: false, upgradeUrl: false };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<UpgradeExportOptions>(this, message, value);
@@ -416,6 +429,9 @@ class UpgradeExportOptions$Type extends MessageType<UpgradeExportOptions> {
                     break;
                 case /* UpgradeExportOptions.SimpleListOptions simple_list_options */ 8:
                     message.simpleListOptions = UpgradeExportOptions_SimpleListOptions.internalBinaryRead(reader, reader.uint32(), options, message.simpleListOptions);
+                    break;
+                case /* bool upgradeUrl */ 9:
+                    message.upgradeUrl = reader.bool();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -453,6 +469,9 @@ class UpgradeExportOptions$Type extends MessageType<UpgradeExportOptions> {
         /* UpgradeExportOptions.SimpleListOptions simple_list_options = 8; */
         if (message.simpleListOptions)
             UpgradeExportOptions_SimpleListOptions.internalBinaryWrite(message.simpleListOptions, writer.tag(8, WireType.LengthDelimited).fork(), options).join();
+        /* bool upgradeUrl = 9; */
+        if (message.upgradeUrl !== false)
+            writer.tag(9, WireType.Varint).bool(message.upgradeUrl);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

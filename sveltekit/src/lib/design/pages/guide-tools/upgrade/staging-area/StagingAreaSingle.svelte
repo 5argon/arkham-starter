@@ -5,13 +5,11 @@
 	import UnknownCardBlock from '$lib/design/components/card/UnknownCardBlock.svelte'
 	import CardBlockLeftRight from './CardBlockLeftRight.svelte'
 	import { fly } from 'svelte/transition'
-	import {
-		defaultGlobalSettings,
-		type GlobalSettings,
-	} from '$lib/guide-tools/script/common/settings'
+	import type { GlobalSettings } from '$lib/proto/generated/global_settings'
 
+	export let singleMode: boolean = false
 	export let collapse: boolean = false
-	export let globalSettings: GlobalSettings = defaultGlobalSettings
+	export let globalSettings: GlobalSettings
 	export let label: string
 	export let popupDatabase: PopupDatabase
 	export let stagingCards: string[] = []
@@ -80,6 +78,7 @@
 			{#if collapse}
 				<div in:fly={{ y: -20, duration: 300 }}>
 					<CardBlockLeftRight
+						{singleMode}
 						cardId={c.original.id}
 						amount={stagingAmounts[i]}
 						showImageStrip={true}
@@ -99,6 +98,7 @@
 			{:else}
 				<div in:fly={{ x: -20, duration: 300 }}>
 					<CardBlockLeftRight
+						{singleMode}
 						cardId={c.original.id}
 						amount={stagingAmounts[i]}
 						showImageStrip={true}

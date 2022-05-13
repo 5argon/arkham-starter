@@ -20,21 +20,25 @@
 	} from '$lib/guide-tools/upgrade/upgrade-table/row-operations'
 	import SpinnerSpan from '$lib/design/components/basic/SpinnerSpan.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import {
-		defaultGlobalSettings,
-		type GlobalSettings,
-	} from '$lib/guide-tools/script/common/settings'
 	import type { Row } from '$lib/guide-tools/upgrade/interface'
 	import Modal from '$lib/design/components/layout/Modal.svelte'
 	import UpgradeExportModalContent from '../export/UpgradeExportModalContent.svelte'
-	import type { ExportCard, UpgradeExportRow } from '$lib/guide-tools/script/export/export-tools'
+	import {
+		protoStringRestore,
+		type ExportCard,
+		type UpgradeExportRow,
+	} from '$lib/guide-tools/script/export/export-tools'
 	import {
 		calculateXps,
 		type CalculatedXp,
 	} from '$lib/guide-tools/upgrade/upgrade-table/xp-calculate'
-	import type { UpgradeExportOptions } from '$lib/proto/generated/upgrade_export'
-	import { GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
+	import {
+		UpgradeExportOptions_SimpleListOptions_BlockStyle,
+		type UpgradeExportOptions,
+	} from '$lib/proto/generated/upgrade_export'
+	import { GlobalSettings, GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
 	import type { ExportOptions } from '$lib/proto/generated/export_options'
+	import { CardInfo_CommitOptions_CommitIcon } from '$lib/proto/generated/card_info'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -42,9 +46,10 @@
 	export let singleMode: boolean = false
 	export let pageTitle: string
 	export let helpMd: string
+	export let importProto: string | null = null
 
 	let importText: string = ''
-	let globalSettings: GlobalSettings = defaultGlobalSettings
+	let globalSettings: GlobalSettings = { pipStyle: GlobalSettings_PipStyle.PipsReal, taboo: true }
 	let stagingCards1: string[] = []
 	let stagingCards2: string[] = []
 	let stagingCards3: string[] = []
@@ -245,12 +250,15 @@
 		simpleList: singleMode,
 		splitDivider: false,
 		xpSuffix: 'XP',
+		simpleListOptions: {
+			blockStyle: UpgradeExportOptions_SimpleListOptions_BlockStyle.A,
+		},
 	}
 	let exportOptions: ExportOptions = {
 		cardInfo: {
 			cardInfoTypes: [],
-			commitOptions: { highlight: undefined },
-			traitOptions: { highlight: undefined },
+			commitOptions: { highlight: CardInfo_CommitOptions_CommitIcon.Unknown },
+			traitOptions: { highlight: '' },
 		},
 		cardOptions: {
 			bold: singleMode ? true : false,
@@ -270,6 +278,19 @@
 	}
 	let onChangeExportOptions: (n: ExportOptions) => void = (n) => {
 		exportOptions = n
+	}
+
+	$: {
+		if (importProto !== null) {
+			const restoreResult = protoStringRestore(importProto)
+			importText = restoreResult.importDeckUrl
+			rows = restoreResult.rows
+			if (restoreResult.exportOptions.globalSettings !== undefined) {
+				globalSettings = restoreResult.exportOptions.globalSettings
+			}
+			exportOptions = restoreResult.exportOptions
+			upgradeExportOptions = restoreResult.upgradeExportOptions
+		}
 	}
 </script>
 
@@ -298,6 +319,8 @@
 		<div slot="left">
 			<div class="vertical-scroll">
 				<StagingArea
+					{singleMode}
+					{globalSettings}
 					{importText}
 					onChangeImportText={(t) => {
 						importText = t
