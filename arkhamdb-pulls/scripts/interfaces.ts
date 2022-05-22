@@ -41,12 +41,13 @@ export interface TabooItem {
 }
 
 export interface AhdbCard {
+  bonded_to?: null | string;
   pack_code: string;
   pack_name: string;
   type_code: string;
   type_name: string;
-  subtype_code?:string;
-  subtype_name?:string;
+  subtype_code?: string;
+  subtype_name?: string;
   faction_code: string;
   faction_name: string;
   faction2_code?: string;
@@ -71,7 +72,7 @@ export interface AhdbCard {
   skill_agility?: number;
   skill_willpower?: number;
   skill_wild?: number;
-  xp?: number;
+  xp?: number | null;
   health?: number;
   sanity?: number;
   health_per_investigator: boolean;

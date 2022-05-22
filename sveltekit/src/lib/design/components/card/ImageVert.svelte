@@ -5,7 +5,7 @@
 	import { makePips } from '$lib/design/interface/string-util'
 
 	export let name: string | null = null
-	export let showImageStrip: boolean
+	export let show: boolean
 	export let xp: number | null = null
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
@@ -30,9 +30,14 @@
 	}
 </script>
 
-{#if showImageStrip}
-	<span class={'image-strip' + ' ' + colorClass}>
-		<img draggable={false} class="image-in-strip" src={'/image/card/strip/' + cardId + '.png'} alt={""} />
+{#if show}
+	<span class={'image-strip' + ' ' + colorClass} title={name}>
+		<img
+			draggable={false}
+			class="image-in-strip"
+			src={'/image/card/square-small/' + cardId + '.png'}
+			alt={''}
+		/>
 		{#if xp !== null}
 			<div class="pips">{pips}</div>
 		{/if}
@@ -43,28 +48,25 @@
 					/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
 			</div>
 		{/if}
-		<div class="image-strip-inner" />
 	</span>
 {/if}
 
 <style>
 	.image-strip {
-		flex-shrink: 0;
-		width: 48px;
-		height: 16px;
-		background-color: rgba(0, 0, 0, 0.05);
-		margin-right: 4px;
-		border-width: 1px;
+		display: inline-block;
+		width: 24px;
+		height: 24px;
+		border-width: 1.5px;
 		border-style: solid;
-		border-left-width: 4px;
-		border-left-style: solid;
-		/* Make absolute position of multi-class icon works. */
 		position: relative;
 	}
 
-	.image-strip-inner {
-		width: 100%;
-		height: 100%;
+	.image-in-strip {
+		user-select: none;
+		width: 22px;
+		height: 22px;
+		border: solid 1px white;
+		position: relative;
 	}
 
 	.multi-icons {
@@ -74,21 +76,13 @@
 		right: 0;
 		display: flex;
 		width: 14px;
-		transform: translateY(-11px);
-	}
-
-	.image-in-strip {
-		position: absolute;
-		user-select: none;
-		width: 47px;
-		height: 15px;
-		border:solid 0.5px white;
+		transform: translateY(-10px) translateX(1px);
 	}
 
 	.pips {
 		position: absolute;
-		top:1px;
-		left:1px;
+		top: 2px;
+		left: 2px;
 		color: white;
 		text-shadow: 0.3px 0.3px 1px black;
 		position: absolute;

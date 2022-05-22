@@ -33,8 +33,8 @@
 	import { makePips } from '$lib/design/interface/string-util'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
-	import ImageStrip from '$lib/design/pages/guide-tools/upgrade/staging-area/ImageStrip.svelte'
 	import { randomBasicWeakness } from '$lib/ahdb/card'
+import ImageStrip from './ImageStrip.svelte';
 
 	export let cardId: string
 	export let showImageStrip: boolean = false

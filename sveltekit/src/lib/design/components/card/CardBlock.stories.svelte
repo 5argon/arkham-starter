@@ -10,6 +10,7 @@
 
 <Story name="Block stacking">
 	<CardBlock
+		cardId={'12345'}
 		text={'Sample Card'}
 		class1={CardClass.Mystic}
 		class2={CardClass.Survivor}
@@ -21,6 +22,7 @@
 		packNumber={94}
 	/>
 	<CardBlock
+		cardId={'12345'}
 		text={'Sample Card'}
 		class1={CardClass.Mystic}
 		class2={CardClass.Survivor}
@@ -32,6 +34,7 @@
 		packNumber={94}
 	/>
 	<CardBlock
+		cardId={'12345'}
 		text={'Sample Card'}
 		class1={CardClass.Mystic}
 		class2={CardClass.Survivor}
@@ -46,6 +49,7 @@
 
 <Story name="With buttons">
 	<CardBlock
+		cardId={'12345'}
 		text={'Sample Card'}
 		class1={CardClass.Guardian}
 		class2={CardClass.Rogue}
