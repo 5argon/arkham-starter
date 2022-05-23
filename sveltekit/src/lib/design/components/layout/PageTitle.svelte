@@ -13,7 +13,7 @@
 </script>
 
 <div>
-	<h1 class="inline-block"><a href="/">arkham-starters.com</a> | {subTitle} | {title}</h1>
+	<h1 class="inline-block"><a href="/">arkham-starter.com</a> | {subTitle} | {title}</h1>
 	{#if helpMd !== null}
 		<Modal
 			onClose={() => {

@@ -129,7 +129,7 @@ This is a Markdown comment that viewer cannot see. Since the exported Markdown t
 At the end of your exported Markdown you will see a URL nested inside Markdown comment, like this :
 
 ```
-[//]: # (https://arkham-starters.com/guide-tools/upgrade?i=EiIaAlhQKgcKA%2BKGkhABMg0KBENvc3SBVRvdG...)
+[//]: # (https://arkham-starter.com/guide-tools/upgrade?i=EiIaAlhQKgcKA%2BKGkhABMg0KBENvc3SBVRvdG...)
 ```
 
 Since the table is hell to continue editing in Markdown format, this URL is intended so if you visit it, you would arrive back at this page with the table restored and can continue making changes to make a new export. You can share this so others can use to see the upgrade plan in this site as well.

@@ -301,5 +301,5 @@ function makeUpgradeCode(uex: UpgradeExport): string {
 	// 	].join(',')
 	// })
 	// const joined = rows.join('|')
-	return `[//]: # (https://arkham-starters.com/guide-tools/upgrade?i=${proto})`
+	return `[//]: # (https://arkham-starter.com/guide-tools/upgrade?i=${proto})`
 }

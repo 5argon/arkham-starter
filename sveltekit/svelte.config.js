@@ -14,6 +14,10 @@ const config = {
 		methodOverride: {
 			allowed: ['PATCH', 'DELETE'],
 		},
+
+		prerender: {
+			default: true,
+		},
 	},
 }
 

@@ -3,6 +3,10 @@
 	import mdText from '$lib/md/about.md?raw'
 </script>
 
-<h1>arkham-starters.com</h1>
+<h1>arkham-starter.com</h1>
+
+<svelte:head>
+	<title>arkham-starter.com</title>
+</svelte:head>
 
 <SvelteMarkdown source={mdText} />

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Footer from '$lib/design/components/layout/Footer.svelte';
-	import Header from '$lib/design/components/layout/Header.svelte';
-	import '../app.css';
+	import Footer from '$lib/design/components/layout/Footer.svelte'
+	import Header from '$lib/design/components/layout/Header.svelte'
+	import '../app.css'
 </script>
 
 <Header />
@@ -10,7 +10,7 @@
 	<slot />
 </main>
 
-<Footer/>
+<Footer />
 
 <style>
 	main {
@@ -23,5 +23,4 @@
 		margin: 0 auto;
 		box-sizing: border-box;
 	}
-
 </style>
