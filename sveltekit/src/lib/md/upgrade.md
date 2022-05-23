@@ -71,7 +71,7 @@ If it has a little red tip, that means it detects that a row is an upgrade inste
 
 ### Mark
 
-There is a little box on the left side of the left card for each row. You can type anything here (like an asterisk or other ASCII characters) and it will appear in the final export as its own row.
+There is a little box on the left side of the left card for each row. You can type anything here (like an asterisk or other ASCII characters) and it will appear in the final export as its own column.
 
 ![Marking a row](../../../static/image/documentation/guide-tools/upgrade/marking.png)
 
@@ -104,10 +104,6 @@ Type on the long box to explain the divider. It is exported in Markdown to the s
 ![Cumulative XP unlocking](../../../static/image/documentation/guide-tools/upgrade/cxp-unlock.png)
 
 Similar to "XP Unlock" feature, but only available on the divider row. Using unlock check box on the divider row will "interrupt" the flow of cumulative XP to stop here, and start with a new value that you type in.
-
-An example usage is to make a connecting table that was interrupted by some text. Place the divider on top, unlock, and enter the final XP of the previous table. This table will start at that XP.
-
-![Cumulative XP unlocking](../../../static/image/documentation/guide-tools/upgrade/cumulative-unlock.png)
 
 ## Exporting
 

@@ -6,7 +6,7 @@ This is an exciting time to create more helping contents for this game so the co
 
 **Currently, the site is WIP.** Big part of the site is planned to be the reimagined "beginner's decklist" section, which curates decks from ArkhamDB that require low pack count to build and have a guide to play it. These decks will receive beginner-friendly presentation both in the listing page and the inside, such as being more graphical and has more overview insight of the deck. (e.g. The decision made regarding to that investigator's deckbuilding options, which helps beginners so they don't have to decipher the decklist themself.)
 
-Right now, it has only "guide tool" that aids writing the note section when you build the deck in ArkhamDB. You can try using them for now : 
+Right now, it has only "guide tools" that aids writing the note section when you build the deck in ArkhamDB. You can try using them for now : 
 
 - [Upgrade Planner](/guide-tools/upgrade)
 - [Card List](/guide-tools/list)

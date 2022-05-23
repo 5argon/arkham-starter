@@ -6,6 +6,7 @@
 
 <Story name="Test">
 	<CardBlockUpDown
+		cardId={'12345'}
 		text={'Sample Card'}
 		class1={CardClass.Rogue}
 		class2={null}
@@ -13,5 +14,7 @@
 		exceptional={false}
 		xp={5}
 		xpTaboo={2}
+		index={0}
+		right={false}
 	/>
 </Story>
