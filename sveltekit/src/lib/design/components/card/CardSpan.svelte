@@ -34,7 +34,7 @@
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import { randomBasicWeakness } from '$lib/ahdb/card'
-import ImageStrip from './ImageStrip.svelte';
+	import ImageStrip from './ImageStrip.svelte'
 
 	export let cardId: string
 	export let showImageStrip: boolean = false
@@ -82,15 +82,7 @@ import ImageStrip from './ImageStrip.svelte';
 
 <span class="outer-span">
 	{#if cardId !== randomBasicWeakness}
-		<ImageStrip
-			name={text}
-			{showImageStrip}
-			{xp}
-			{cardId}
-			{class1}
-			{class2}
-			{class3}
-		/>
+		<ImageStrip name={text} {showImageStrip} {xp} {cardId} {class1} {class2} {class3} />
 	{/if}
 
 	{#if text !== null}
@@ -164,7 +156,8 @@ import ImageStrip from './ImageStrip.svelte';
 		align-items: center;
 		font-family: 'SerifText';
 		font-size: xx-small;
-		color: rgb(0.3, 0.3, 0.3);
+		color: rgba(1, 1, 1, 0.4);
+		margin-top: 4px;
 		margin-left: 4px;
 	}
 
@@ -176,5 +169,7 @@ import ImageStrip from './ImageStrip.svelte';
 	.pack-icon {
 		height: 10px;
 		margin-right: 2px;
+		margin-bottom: 3px;
+		filter: opacity(0.4);
 	}
 </style>

@@ -85,6 +85,48 @@ export const specialCc: CountingCriteria[] = [
   },
 ];
 
+export function forwardPack(packCode: string): string {
+  if (
+    ["dwl", "tmm", "tece", "bota", "uau", "wda", "litas"].findIndex(
+      (x) => x === packCode
+    ) !== -1
+  ) {
+    return "dwl";
+  } else if (
+    ["ptc", "eotp", "tuo", "apot", "tpm", "bsr", "dca"].findIndex(
+      (x) => x === packCode
+    ) !== -1
+  ) {
+    return "ptc";
+  } else if (
+    ["tfa", "tof", "tbb", "hote", "tcoa", "tdoy", "sha"].findIndex(
+      (x) => x === packCode
+    ) !== -1
+  ) {
+    return "tfa";
+  } else if (
+    ["tcu", "tsn", "wos", "fgg", "uad", "icc", "bbt"].findIndex(
+      (x) => x === packCode
+    ) !== -1
+  ) {
+    return "tcu";
+  } else if (
+    ["tde", "sfk", "tsh", "dsm", "pnr", "wgd", "woc"].findIndex(
+      (x) => x === packCode
+    ) !== -1
+  ) {
+    return "tde";
+  } else if (
+    ["tic", "itd", "def", "hhg", "lif", "lod", "itm"].findIndex(
+      (x) => x === packCode
+    ) !== -1
+  ) {
+    return "tic";
+  } else {
+    return packCode;
+  }
+}
+
 export const bunches: (string[] | undefined)[] = [
   undefined,
   ["core"],

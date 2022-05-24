@@ -8,6 +8,7 @@ import {
   pullsUtils,
   pullsUtilsPlayerDatabase,
   pullsUtilsPopupDatabase,
+  pullsUtilsTaboo,
 } from "./scripts/constants.ts";
 import { downloadImages } from "./scripts/process-user-deck/download-images.ts";
 
@@ -96,7 +97,7 @@ playerCards.forEach((x) => {
       x.code in tabooExceptionalMap
         ? tabooExceptionalMap[x.code]
         : x.exceptional,
-    xp: x.xp,
+    xp: x.xp ?? undefined,
     xpat: x.code in tabooXpMap ? tabooXpMap[x.code] : 0,
     tra: traits,
     sag: x.skill_agility,
@@ -137,9 +138,17 @@ const w2 = Deno.writeTextFile(
   path.join(pullsDirectory, pullsUtils, pullsUtilsPlayerDatabase),
   JSON.stringify(playerCards)
 );
-await Promise.all([w1, w2]);
+const w3 = Deno.writeTextFile(
+  path.join(pullsDirectory, pullsUtils, pullsUtilsTaboo),
+  JSON.stringify(taboos)
+);
+await Promise.all([w1, w2, w3]);
 console.log("Finished writing popup database and player database.");
 
-console.log("Downloading all player card images... (TAKES TIME!)");
-await downloadImages(playerCards);
-console.log("Downloaded all player card images.");
+if (Deno.args.findIndex((x) => x === "-i") === -1) {
+  console.log("Downloading all player card images... (TAKES TIME!)");
+  await downloadImages(playerCards);
+  console.log("Downloaded all player card images.");
+} else {
+  console.log("Skipped image downloads.");
+}

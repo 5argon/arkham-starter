@@ -1,11 +1,6 @@
 {
 	"folders": [
 		{
-			"name": "arkham-starters",
-			"path": ".."
-		},
-		{
-			"name": "arkhamdb-pulls",
 			"path": "../arkhamdb-pulls"
 		}
 	],

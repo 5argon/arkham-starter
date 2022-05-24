@@ -4,7 +4,6 @@ import {
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
 import type { CardPackIcon } from '$lib/design/interface/card-pack'
-import pdb from '../data/popupdb.json'
 import type { CardClass } from './card-class'
 export type LazyPopupDatabase = Promise<PopupDatabase>
 
@@ -183,9 +182,7 @@ export interface PopupDatabaseItemRaw {
 }
 
 export async function fetchPopupDatabase(): LazyPopupDatabase {
-	// Real app use fetch, dev use direct import?
-	// const res = await fetch('/db/popupdb.json')
-	// const pdb = (await res.json()) as PopupDatabase
-	const p = pdb as PopupDatabaseRaw
+	const res = await fetch('/db/popupdb.json')
+	const p = (await res.json()) as PopupDatabaseRaw
 	return new PopupDatabase(p)
 }

@@ -233,6 +233,7 @@
 	let collapse: boolean = true
 
 	let upgradeExportOptions: UpgradeExportOptions = {
+		upgradeUrl: true,
 		arrow: {
 			character: '→',
 			highlightUpgrade: true,
