@@ -34,9 +34,16 @@ export function extractDeckFromUrl(url: string): ExtractResult {
 			return { deck: matchResult[1], published: false }
 		}
 	}
+	{
+		const pRegex = new RegExp(/p:(\d+)$/gm)
+		const matchResult = pRegex.exec(url)
+		if (matchResult !== null) {
+			return { deck: matchResult[1], published: true }
+		}
+	}
 
 	// If no match, assume the input is already deck code, hopefully.
-	return { deck: url, published: true }
+	return { deck: url, published: false }
 }
 
 export interface GetDeckCardIdReturns {

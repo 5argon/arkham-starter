@@ -99,7 +99,7 @@
 </div>
 <TextBox
 	enableNotice
-	placeholderText={"Paste ArkhamDB's Deck URL here. (If unpublished, it must be public.)"}
+	placeholderText={"Deck ID (prefix p: if published) or Deck URL."}
 	submitButtonText={'Import'}
 	{noticeLevel}
 	{noticeText}

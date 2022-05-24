@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { coreToRcore } from '$lib/ahdb/conversion'
+
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { ExtraColumn, Grouping } from '$lib/deck-table/grouping'
@@ -6,11 +8,17 @@
 	import CardTable from './CardTable.svelte'
 
 	export let entries: DecklistEntry[]
+	$: entriesForwarded = entries.map<DecklistEntry>((x) => {
+		return {
+			...x,
+			cardId: coreToRcore(x.cardId),
+		}
+	})
 	export let groupings: Grouping[]
 	export let taboo: boolean
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
-	$: gc = groupCards(entries, groupings, fullDatabase)
+	$: gc = groupCards(entriesForwarded, groupings, fullDatabase)
 </script>
 
 <CardTable {fullDatabase} {taboo} groupedCards={gc} {columns} />

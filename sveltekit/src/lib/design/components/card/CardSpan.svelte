@@ -33,7 +33,7 @@
 	import { makePips } from '$lib/design/interface/string-util'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
-	import { randomBasicWeakness } from '$lib/ahdb/card'
+	import { isRandomBasicWeakness } from '$lib/ahdb/card'
 	import ImageStrip from './ImageStrip.svelte'
 
 	export let cardId: string
@@ -81,7 +81,7 @@
 </script>
 
 <span class="outer-span">
-	{#if cardId !== randomBasicWeakness}
+	{#if !isRandomBasicWeakness(cardId)}
 		<ImageStrip name={text} {showImageStrip} {xp} {cardId} {class1} {class2} {class3} />
 	{/if}
 
@@ -95,7 +95,7 @@
 		<span class="card-name-container">
 			<span class={colorClass + ' ' + 'card-name'}>{text}</span>
 		</span>
-		{#if weakness || cardId === randomBasicWeakness}<span
+		{#if weakness || isRandomBasicWeakness(cardId)}<span
 				title="Weakness"
 				class={'pips ' + textIconFontClass}>{textIconToFontCharacter(TextIcon.Weakness)}</span
 			>{/if}{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}

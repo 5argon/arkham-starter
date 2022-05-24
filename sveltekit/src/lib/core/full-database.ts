@@ -1,4 +1,3 @@
-import type { AhdbCard } from '$lib/ahdb/card'
 import {
 	classConversion,
 	iconToNewNameConversion,
@@ -7,7 +6,13 @@ import {
 import type { AhdbTaboo } from '$lib/ahdb/taboo'
 import tb from '../data/taboo.json'
 import type { CardClass } from '$lib/design/interface/card-class'
-import type { CardPackIcon } from '$lib/design/interface/card-pack'
+import { CardPackIcon } from '$lib/design/interface/card-pack'
+import {
+	isRandomBasicWeakness,
+	randomBasicWeakness,
+	randomBasicWeaknessRcore,
+	type AhdbCard,
+} from '$lib/ahdb/card'
 export type LazyFullDatabase = Promise<FullDatabase>
 
 export interface FullDatabaseItem {
@@ -53,6 +58,20 @@ export class FullDatabase {
 		mapped.forEach((x) => {
 			this.cardsMap[x.original.code] = x
 		})
+
+		if (randomBasicWeakness in this.cardsMap) {
+			const rbw = this.cardsMap[randomBasicWeakness]
+			this.cardsMap[randomBasicWeaknessRcore] = {
+				...rbw,
+				packIcon: CardPackIcon.RevisedCoreSet,
+				original: {
+					...rbw.original,
+					code: randomBasicWeaknessRcore,
+					pack_name: 'Revised Core Set',
+					pack_code: 'rcore',
+				},
+			}
+		}
 	}
 	public getCard(id: string): FullDatabaseItem {
 		if (id in this.cardsMap) {
