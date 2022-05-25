@@ -38,14 +38,18 @@ Section on the left side of the screen. These are cards you are planning to add 
 
 It is planned so you can add any individual card as you like, but it need a good card browser which looks like a lot of work. For now, you can only add cards by pasting deck URL from ArkhamDB.
 
-Other than grabbing the deck ID number from the URL, it also detects a kind of deck from the URL :
+Use the left/right button to add the card to main two-column table. It will create a new row automatically if it cannot find empty space to add.
+
+It is possible to drag and drop cards here to an empty slot in the two-column table. A card will appear there but will not disappear from the staging list.
+
+### Importing a deck
+
+You can paste ArkhamDB's deck URL into the box. Other than grabbing the deck ID number from the URL, it also detects a kind of deck from the URL :
 
 - If it has `/decklist/view` or `/decklist/edit` : It requests a deck from published deck API of ArkhamDB.
 - If it has `/deck/view` or `/deck/edit` : It requests a deck from personal deck API of ArkhamDB, which **would fail if** that user hadn't check the "make public" option in your user settings. Also if you are currently editing the deck and have changes in the card list, save it first before importing.
 
-Use the left/right button to add the card to main two-column table. It will create a new row automatically if it cannot find empty space to add.
-
-It is possible to drag and drop cards here to an empty slot in the two-column table. A card will appear there but will not disappear from the staging list.
+You can also type just the deck's ID number, but it always assume it is a personal-but-public deck. To type just deck's ID and you want it to meant published deck, prefix `p:` in front of ID.
 
 ## Two-column Table
 
@@ -116,7 +120,7 @@ There is only 1 option to adjust right now, which to make divider provides a dis
 You might notice these :
 
 ```md
-[//]: # (==================== TABLE START ====================)
+[//]: # '==================== TABLE START ===================='
 
 ...
 [//]: # (===================== TABLE END =====================)

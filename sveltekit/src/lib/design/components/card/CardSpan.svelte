@@ -1,22 +1,3 @@
-<script context="module" lang="ts">
-	export interface CardSpanProp {
-		text: string | null
-		amount: number | null
-		color: boolean
-		class1: CardClass | null
-		class2: CardClass | null
-		class3: CardClass | null
-		xp: number | null
-		xpTaboo: number | null
-		exceptional: boolean
-		packIcon: CardPackIcon | null
-		packNumber: number | null
-		restriction: boolean
-		imageUrl: string | null
-		imageBase64: string | null
-	}
-</script>
-
 <script lang="ts">
 	import { CardClass, classToFontColorCss } from '$lib/design/interface/card-class'
 	import {
@@ -39,6 +20,7 @@
 	export let cardId: string
 	export let showImageStrip: boolean = false
 	export let text: string | null = null
+	export let subText: string | null = null
 	export let amount: number | null = null
 	export let color: boolean = false
 	export let class1: CardClass | null = null
@@ -93,7 +75,9 @@
 				/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
 		</span>
 		<span class="card-name-container">
-			<span class={colorClass + ' ' + 'card-name'}>{text}</span>
+			<span class={colorClass + ' ' + 'card-name'}>{text}</span>{#if subText !== null}<span
+					class={colorClass + ' ' + 'card-subname'}>{subText}</span
+				>{/if}
 		</span>
 		{#if weakness || isRandomBasicWeakness(cardId)}<span
 				title="Weakness"
@@ -138,6 +122,14 @@
 		font-weight: normal;
 		font-size: small;
 		margin: 0px 4px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.card-subname {
+		margin-right:4px;
+		font-size: xx-small;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;

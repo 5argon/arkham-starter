@@ -6,6 +6,15 @@ The biggest difference is on the export modal. The point of this tool is that yo
 
 This tool make the card name part correctly colored, linked, and have XP pips. It will also exports a text such as `TYPEHERE`, because usually you want to say something about each card and it can be difficult to find where to type in the sea of HTML tags.
 
+## Importing a deck
+
+You can paste ArkhamDB's deck URL into the box. Other than grabbing the deck ID number from the URL, it also detects a kind of deck from the URL :
+
+- If it has `/decklist/view` or `/decklist/edit` : It requests a deck from published deck API of ArkhamDB.
+- If it has `/deck/view` or `/deck/edit` : It requests a deck from personal deck API of ArkhamDB, which **would fail if** that user hadn't check the "make public" option in your user settings. Also if you are currently editing the deck and have changes in the card list, save it first before importing.
+
+You can also type just the deck's ID number, but it always assume it is a personal-but-public deck. To type just deck's ID and you want it to meant published deck, prefix `p:` in front of ID.
+
 ## Options
 
 Regardless of styles, you can control some other options that would applies to all styles, such as making the card's name bold.

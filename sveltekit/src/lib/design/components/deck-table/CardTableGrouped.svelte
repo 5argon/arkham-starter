@@ -3,7 +3,7 @@
 
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
-	import type { ExtraColumn, Grouping } from '$lib/deck-table/grouping'
+	import type { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import { groupCards } from '$lib/deck-table/grouping/group-cards'
 	import CardTable from './CardTable.svelte'
 
@@ -15,10 +15,11 @@
 		}
 	})
 	export let groupings: Grouping[]
+	export let sortings: Sorting[]
 	export let taboo: boolean
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
-	$: gc = groupCards(entriesForwarded, groupings, fullDatabase)
+	$: gc = groupCards(entriesForwarded, groupings, sortings, fullDatabase)
 </script>
 
-<CardTable {fullDatabase} {taboo} groupedCards={gc} {columns} />
+<CardTable {fullDatabase} {taboo} groupedCards={gc} {columns} totalLevels={groupings.length} />

@@ -1,15 +1,15 @@
 export enum Grouping {
-	Set,
-	Class,
-	Type,
-	Slot,
+	Set = 1,
+	Class = 2,
+	Type = 3,
 }
 
 export enum Sorting {
-	Name,
-	Number,
-	Type,
-	Class,
+	Number = 1,
+	Class = 2,
+	Set = 3,
+	Type = 4,
+	Name = 5,
 }
 
 export enum ExtraColumn {

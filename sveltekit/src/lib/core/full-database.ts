@@ -22,6 +22,7 @@ export interface FullDatabaseItem {
 	class3?: CardClass
 	packNameTransformed: string | null
 	original: AhdbCard
+	prioritySubname?: string
 	tabooXp?: number
 	tabooText?: string
 	tabooDeckLimit?: number
@@ -32,8 +33,10 @@ export interface FullDatabaseItem {
  */
 export class FullDatabase {
 	private cardsMap: { [k: string]: FullDatabaseItem }
+	private sameName: { [k: string]: FullDatabaseItem[] }
 	constructor(cards: AhdbCard[], taboo: AhdbTaboo | null) {
 		this.cardsMap = {}
+		this.sameName = {}
 		const mapped = cards.map<FullDatabaseItem>((x) => {
 			const icon = packCodeToIconConversion(x.pack_code)
 			const fdi: FullDatabaseItem = {
@@ -57,6 +60,17 @@ export class FullDatabase {
 		})
 		mapped.forEach((x) => {
 			this.cardsMap[x.original.code] = x
+			if (!(x.original.name in this.sameName)) {
+				this.sameName[x.original.name] = []
+			} else {
+				if (
+					this.sameName[x.original.name].findIndex(
+						(y) => y.original.subname === x.original.subname,
+					) === -1
+				) {
+					this.sameName[x.original.name].push(x)
+				}
+			}
 		})
 
 		if (randomBasicWeakness in this.cardsMap) {
@@ -78,6 +92,13 @@ export class FullDatabase {
 			return this.cardsMap[id]
 		}
 		throw new Error(`Card not found : ${id}`)
+	}
+
+	public getSameName(name: string): FullDatabaseItem[] {
+		if (name in this.sameName) {
+			return this.sameName[name]
+		}
+		throw new Error(`Card not found : ${name}`)
 	}
 }
 
@@ -104,4 +125,8 @@ export async function fetchFullDatabase(): LazyFullDatabase {
 	const p = (await res.json()) as AhdbCard[]
 	const tb = await fetchLatestTaboo()
 	return new FullDatabase(p, tb)
+}
+
+export function shouldShowSubname(fdbi: FullDatabaseItem, fdb: FullDatabase): boolean {
+	return fdb.getSameName(fdbi.original.name).length > 1
 }

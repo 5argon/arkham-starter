@@ -1,6 +1,6 @@
 <script>
 	import { fetchFullDatabase } from '$lib/core/full-database'
-	import { Grouping } from '$lib/deck-table/grouping'
+	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 
 	import Story from '$lib/design/story/story.svelte'
 	import CardTableGrouped from './CardTableGrouped.svelte'
@@ -12,6 +12,8 @@
 		<CardTableGrouped
 			taboo={true}
 			fullDatabase={fdb}
+			groupings={[Grouping.Type]}
+			sortings={[Sorting.Set, Sorting.Number]}
 			entries={[
 				{ cardId: '01000', amount: 1 },
 				{ cardId: '01032', amount: 2 },
@@ -40,8 +42,8 @@
 				{ cardId: '08103', amount: 2 },
 				{ cardId: '08109', amount: 1 },
 				{ cardId: '08118', amount: 1 },
+				{ cardId: '02263', amount: 1 },
 			]}
-			groupings={[Grouping.Set]}
 		/>
 	</Story>
 {/await}

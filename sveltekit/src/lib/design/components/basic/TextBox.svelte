@@ -99,7 +99,7 @@
 			class={'text-box-input' + ' ' + rightAlignClass}
 			type="text"
 			placeholder={placeholderText}
-			on:change={inputChangeHandler}
+			on:change={inputEndEditHandler}
 			on:input={inputChangeHandler}
 			on:keyup={inputKeyboardHandler}
 			value={currentText}
@@ -128,7 +128,7 @@
 
 <style>
 	.notice-text {
-		min-height: 25px;
+		min-height: 16px;
 	}
 
 	.label {

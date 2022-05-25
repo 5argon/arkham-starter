@@ -6,12 +6,12 @@
 
 	export let groupedCards: GroupedCards[]
 	export let taboo: boolean
+	export let totalLevels: number
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
-	console.log(groupedCards)
 </script>
 
-<table>
+<table class="card-table">
 	{#if columns.length > 0}
 		<thead>
 			<tr>
@@ -27,7 +27,15 @@
 	{/if}
 	<tbody>
 		{#each groupedCards as gc}
-			<RenderGroupedCards groupedCards={gc} level={0} {fullDatabase} {columns} {taboo} />
+			<RenderGroupedCards
+				groupedCards={gc}
+				level={0}
+				previousGroupedCards={[]}
+				{totalLevels}
+				{fullDatabase}
+				{columns}
+				{taboo}
+			/>
 		{/each}
 	</tbody>
 </table>

@@ -16,6 +16,7 @@ export const allIcons = {
 	noticeError: ic('circle-exclamation-solid'),
 	loading: ic('spinner-third-duotone'),
 	manual: ic('book-solid'),
+	plus: ic('plus-solid'),
 }
 
 function ic(s: string): string {

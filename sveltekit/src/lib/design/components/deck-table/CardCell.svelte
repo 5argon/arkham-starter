@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { FullDatabase } from '$lib/core/full-database'
+	import { type FullDatabase, shouldShowSubname } from '$lib/core/full-database'
 	import CardSpan from '../card/CardSpan.svelte'
 
 	export let taboo: boolean
@@ -13,8 +13,8 @@
 	{cardId}
 	{amount}
 	class1={card.class1}
-	class2={card.class2}
-	class3={card.class3}
+	class2={card.class2 ?? null}
+	class3={card.class3 ?? null}
 	exceptional={taboo && card.tabooExceptional ? card.tabooExceptional : card.original.exceptional}
 	color={true}
 	packIcon={card.packIcon}
@@ -22,6 +22,7 @@
 	restriction={card.original.restrictions !== undefined}
 	showImageStrip={true}
 	text={card.original.name}
+	subText={shouldShowSubname(card, fullDatabase) ? card.original.subname : null}
 	weakness={card.original.subtype_code === 'weakness'}
 	xp={card.original.xp}
 	xpTaboo={taboo ? card.tabooXp : undefined}

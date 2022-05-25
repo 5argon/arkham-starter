@@ -8,14 +8,24 @@
 	import ColumnCell from './ColumnCell.svelte'
 	export let taboo: boolean
 	export let level: number
+	export let totalLevels: number
 	export let groupedCards: GroupedCards
+	export let previousGroupedCards: GroupedCards[]
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
 	$: spanning = columns.length + 1
 </script>
 
 {#if groupedCards.groupName !== null}
-	<CardGroup groupName={groupedCards.groupName} {level} {spanning} />
+	<CardGroup
+		groupName={groupedCards.groupName}
+		previousGroupNames={previousGroupedCards.map((x) => {
+			return x.groupName
+		})}
+		{level}
+		{spanning}
+		{totalLevels}
+	/>
 {/if}
 {#each groupedCards.entries as en, index}
 	{#if isEntry(en)}
@@ -30,7 +40,15 @@
 			{/each}
 		</tr>
 	{:else}
-		<svelte:self level={level + 1} groupedCards={en} {fullDatabase} {columns} {taboo} />
+		<svelte:self
+			level={level + 1}
+			groupedCards={en}
+			previousGroupedCards={[...previousGroupedCards, groupedCards]}
+			{totalLevels}
+			{fullDatabase}
+			{columns}
+			{taboo}
+		/>
 	{/if}
 {/each}
 
