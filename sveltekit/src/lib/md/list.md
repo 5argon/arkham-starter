@@ -1,6 +1,6 @@
 # Card List
 
-This tool is almost like the [Upgrade Planner](/guide-tools/upgrade), but it is a single column instead of two, therefore it has all functions related to differentiating the XP removed. 
+This tool is almost like the [Upgrade Planner](/tool/upgrade), but it is a single column instead of two, therefore it has all functions related to differentiating the XP removed. 
 
 The biggest difference is on the export modal. The point of this tool is that you want to print something "for each" card while writing a guide. For example, pointing out some cards in the deck that synergize well with something.
 
@@ -30,13 +30,13 @@ This simply give you a card's name, then double new lines later, it is where you
 
 ### List with horizontal lines
 
-![List with horizontal lines](../../../static/image/documentation/guide-tools/list/list-2.png)
+![List with horizontal lines](../../../static/image/documentation/tool/list/list-2.png)
 
 Like "List", but `<hr>` has been placed in-between each cards. There is no line on the top of the first card and next to the last card. I think the list looked better that way.
 
 ### Bullet points
 
-![Bullet point](../../../static/image/documentation/guide-tools/list/bullet-1.png)
+![Bullet point](../../../static/image/documentation/tool/list/bullet-1.png)
 
 Append `- ` in front of each card to make them bullet points.
 
@@ -44,11 +44,11 @@ When XP pips are used in this style, they are not enlarged to emulate the pips o
 
 There is a secret feature on this style, which if your list contains even one divider row, the divider will take the 1st level of the bullet point and everything else will move to the 2nd level.
 
-![Divider with bullet point](../../../static/image/documentation/guide-tools/list/bullet-2.png)
+![Divider with bullet point](../../../static/image/documentation/tool/list/bullet-2.png)
 
 ### Table (with left-aligned empty column)
 
-![Table](../../../static/image/documentation/guide-tools/list/table-1.png)
+![Table](../../../static/image/documentation/tool/list/table-1.png)
 
 Export a Markdown table with 1 column for the card, and 1 column with a placeholder text so you can see easier where to type. Divider rows are possible to use to make some empty rows like the image above, while still keeping the table lined up as a whole.
 
@@ -66,7 +66,7 @@ You can change the alignment by changing the weird row between table header and 
 
 ### Table (with center-aligned empty column)
 
-![Table](../../../static/image/documentation/guide-tools/list/table-2.png)
+![Table](../../../static/image/documentation/tool/list/table-2.png)
 
 It is a bit different that the column it made for you has center align. This center aligned column is great for adding single digit numbers, and you can copy paste a bit to add more.
 

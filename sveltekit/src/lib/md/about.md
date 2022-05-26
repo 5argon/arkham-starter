@@ -12,5 +12,5 @@ On technical side, this site has a heavy restriction that it must be a static si
 
 Right now, it has only "guide tools" that aids writing the note section when you build the deck in ArkhamDB. These are actually test bed for UI components I planned to use in the finished site. You can try using them for now : 
 
-- [Upgrade Planner](/guide-tools/upgrade)
-- [Card List](/guide-tools/list)
+- [Upgrade Planner](/tool/upgrade)
+- [Card List](/tool/list)

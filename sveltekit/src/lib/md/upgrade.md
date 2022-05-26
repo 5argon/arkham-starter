@@ -1,6 +1,6 @@
 # Upgrade Planner
 
-![Preview](../../../static/image/documentation/guide-tools/upgrade/preview.png)
+![Preview](../../../static/image/documentation/tool/upgrade/preview.png)
 
 A two-column table that can "diff" the cards and update XP calculation (cost and total cumulative) as you change things around on the table. The plan is implied that you upgrade in order from top to bottom.
 
@@ -10,7 +10,7 @@ By importing that deck, you have every cards needed for both "from" and "to" col
 
 Its primary objective is to test upgrade viability of your deck, then **export** your finished plan to table-formatted Markdown which is a disaster to normally type. Paste this exported Markdown to ArkhamDB's deck guide to remember your upgrade plans for future reference in-between scenarios what you were thinking while creating the deck, and perhaps easier to make some deviations from the plan depending on your campaign state because you see the original outline clearer.
 
-![Export format](../../../static/image/documentation/guide-tools/upgrade/export-format.png)
+![Export format](../../../static/image/documentation/tool/upgrade/export-format.png)
 
 The export formatting try to emulate what is shown on the left section of your deck in ArkhamDB. (With class icons, coloring, XP pips, hoverable, and is even using the same stylesheet as the rest of ArkhamDB.) So if you are writing a detailed deck guide for beginners, they can make visual connection to the decklist better as opposed to being generic blue hyperlinks.
 
@@ -69,7 +69,7 @@ This side represent a card to add.
 
 ### Arrow
 
-![Upgrade arrow](../../../static/image/documentation/guide-tools/upgrade/upgrade-arrow.png)
+![Upgrade arrow](../../../static/image/documentation/tool/upgrade/upgrade-arrow.png)
 
 If it has a little red tip, that means it detects that a row is an upgrade instead of a purchase and may get XP discount. It detects by comparing card name of both sides if they are the same or not.
 
@@ -77,7 +77,7 @@ If it has a little red tip, that means it detects that a row is an upgrade inste
 
 There is a little box on the left side of the left card for each row. You can type anything here (like an asterisk or other ASCII characters) and it will appear in the final export as its own column.
 
-![Marking a row](../../../static/image/documentation/guide-tools/upgrade/marking.png)
+![Marking a row](../../../static/image/documentation/tool/upgrade/marking.png)
 
 This is so if you want to say something about this row, it can be paired with later under the table. Markdown support of column span is not good, so it is best not try to add an explanation paragraph sandwiched inside the table.
 
@@ -87,13 +87,13 @@ Check the unlock icon at the end of each row to unlock the automatic XP calculat
 
 The application has no knowledge of a card like [Adaptable](https://arkhamdb.com/card/02110), [Down the Rabbit Hole](https://arkhamdb.com/card/08059), etc. and this is where you can force it to use any XP as you like.
 
-![XP Unlocking](../../../static/image/documentation/guide-tools/upgrade/xp-unlock.png)
+![XP Unlocking](../../../static/image/documentation/tool/upgrade/xp-unlock.png)
 
 Cumulative XP will also be updated to use your custom edit XP automatically.
 
 Exceptional cards are already accounted for in the automatic calculations, you don't have to manually type in the doubled amount of XP. (If there is no bug in my calculation coding, hopefully.)
 
-![Exceptional XP](../../../static/image/documentation/guide-tools/upgrade/exceptional-xp.png)
+![Exceptional XP](../../../static/image/documentation/tool/upgrade/exceptional-xp.png)
 
 ### Divider Row
 
@@ -105,7 +105,7 @@ Type on the long box to explain the divider. It is exported in Markdown to the s
 
 ### Cumulative XP Unlock
 
-![Cumulative XP unlocking](../../../static/image/documentation/guide-tools/upgrade/cxp-unlock.png)
+![Cumulative XP unlocking](../../../static/image/documentation/tool/upgrade/cxp-unlock.png)
 
 Similar to "XP Unlock" feature, but only available on the divider row. Using unlock check box on the divider row will "interrupt" the flow of cumulative XP to stop here, and start with a new value that you type in.
 
@@ -133,7 +133,7 @@ This is a Markdown comment that viewer cannot see. Since the exported Markdown t
 At the end of your exported Markdown you will see a URL nested inside Markdown comment, like this :
 
 ```
-[//]: # (https://arkham-starter.com/guide-tools/upgrade?i=EiIaAlhQKgcKA%2BKGkhABMg0KBENvc3SBVRvdG...)
+[//]: # (https://arkham-starter.com/tool/upgrade?i=EiIaAlhQKgcKA%2BKGkhABMg0KBENvc3SBVRvdG...)
 ```
 
 Since the table is hell to continue editing in Markdown format, this URL is intended so if you visit it, you would arrive back at this page with the table restored and can continue making changes to make a new export. You can share this so others can use to see the upgrade plan in this site as well.
