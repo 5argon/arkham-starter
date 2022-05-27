@@ -55,8 +55,8 @@
 <style>
 	.image-strip {
 		flex-shrink: 0;
-		width: 48px;
-		height: 16px;
+		width: 49px;
+		height: 17px;
 		background-color: rgba(0, 0, 0, 0.05);
 		margin-right: 4px;
 		border-width: 1px;
@@ -87,7 +87,7 @@
 		user-select: none;
 		width: 47px;
 		height: 15px;
-		border: solid 0.5px white;
+		border: solid 1px white;
 	}
 
 	.pips {
