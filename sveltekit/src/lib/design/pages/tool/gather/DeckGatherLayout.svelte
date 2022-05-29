@@ -41,6 +41,7 @@
 			const c1 = coreToRcore(g.cards1[i])
 			const a1 = g.amounts1[i]
 			ents.push({
+				id: 'p1' + c1,
 				amount: a1,
 				cardId: c1,
 				label: { text: 'P' + (player + 1), color: colorHex },
@@ -50,6 +51,7 @@
 			const c2 = coreToRcore(g.cards2[i])
 			const a2 = g.amounts2[i]
 			ents.push({
+				id: 'p2' + c2,
 				amount: a2,
 				cardId: c2,
 				label: { text: 'P' + (player + 1) + ' Side', color: colorHex },
@@ -59,6 +61,7 @@
 			const c3 = coreToRcore(g.cards3[i])
 			const a3 = g.amounts3[i]
 			ents.push({
+				id: 'p3' + c3,
 				amount: a3,
 				cardId: c3,
 				label: { text: 'P' + (player + 1) + ' Ignore', color: colorHex },
@@ -104,6 +107,7 @@
 			const card = fdb.getCard(x.cardId)
 			const nd: DecklistEntry = {
 				...x,
+				id: 'over' + x.id,
 				label: x.label
 					? {
 							color: x.label.color,
@@ -143,6 +147,17 @@
 
 	let sharingUrl: string = ''
 	let entries: DecklistEntry[] = []
+	let toggleMap: { [cardId: string]: boolean }
+	$: {
+		// Entries are always replaced as a whole,
+		// so this reactive assignment always correctly reset toggle to all false.
+		toggleMap = {}
+		entries.forEach((x) => {
+			if (!(x.id in toggleMap)) {
+				toggleMap[x.id] = false
+			}
+		})
+	}
 	let overlappingEntries: DecklistEntry[] = []
 	let p1: Player = newDeck(startingP1)
 	let p2: Player = newDeck(startingP2)
@@ -333,6 +348,7 @@
 			<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 			<div class="card-table">
 				<CardTableGrouped
+					{toggleMap}
 					entries={overlappingEntries}
 					{groupings}
 					{sortings}
@@ -349,6 +365,7 @@
 		<!-- For some reason just add to div make the table not stretch... -->
 		<div class="card-table">
 			<CardTableGrouped
+				{toggleMap}
 				{entries}
 				{groupings}
 				{sortings}

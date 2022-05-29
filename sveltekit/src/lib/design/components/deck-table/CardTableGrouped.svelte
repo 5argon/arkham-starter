@@ -16,10 +16,18 @@
 	})
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
+	export let toggleMap: { [cardId: string]: boolean }
 	export let taboo: boolean
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
 	$: gc = groupCards(entriesForwarded, groupings, sortings, fullDatabase)
 </script>
 
-<CardTable {fullDatabase} {taboo} groupedCards={gc} {columns} totalLevels={groupings.length} />
+<CardTable
+	{toggleMap}
+	{fullDatabase}
+	{taboo}
+	groupedCards={gc}
+	{columns}
+	totalLevels={groupings.length}
+/>

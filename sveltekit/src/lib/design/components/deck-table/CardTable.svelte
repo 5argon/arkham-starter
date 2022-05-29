@@ -5,6 +5,7 @@
 	import RenderGroupedCards from './RenderGroupedCards.svelte'
 
 	export let groupedCards: GroupedCards[]
+	export let toggleMap: { [cardId: string]: boolean }
 	export let taboo: boolean
 	export let totalLevels: number
 	export let fullDatabase: FullDatabase
@@ -29,6 +30,7 @@
 		{#each groupedCards as gc}
 			<RenderGroupedCards
 				groupedCards={gc}
+				{toggleMap}
 				level={0}
 				previousGroupedCards={[]}
 				{totalLevels}

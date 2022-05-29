@@ -1,4 +1,8 @@
 export interface DecklistEntry {
+	/**
+	 * Must uniquely identify the deck and cards from that deck.
+	 */
+	id: string
 	cardId: string
 	amount: number
 	label?: DecklistLabel
@@ -16,10 +20,4 @@ export function isEntry(d: DecklistEntry | GroupedCards): d is DecklistEntry {
 export interface GroupedCards {
 	groupName: string | null
 	entries: (DecklistEntry | GroupedCards)[]
-}
-
-export interface DecklistCards {
-	deck: DecklistEntry[]
-	sideDeck: DecklistEntry[]
-	ignoreDeckLimit: DecklistEntry[]
 }

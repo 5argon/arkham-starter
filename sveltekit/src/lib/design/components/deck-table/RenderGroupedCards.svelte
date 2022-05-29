@@ -13,6 +13,7 @@
 	export let previousGroupedCards: GroupedCards[]
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
+	export let toggleMap: { [id: string]: boolean }
 	$: spanning = columns.length + 1
 </script>
 
@@ -31,7 +32,18 @@
 	{#if isEntry(en)}
 		<tr>
 			<td class={index % 2 === 0 ? 'even' : 'odd'}>
-				<CardCell cardId={en.cardId} {fullDatabase} amount={en.amount} {taboo} />
+				<CardCell
+					onToggleChanged={(t) => {
+						if (en.id in toggleMap) {
+							toggleMap[en.id] = t
+						}
+					}}
+					toggled={en.id in toggleMap ? toggleMap[en.id] : false}
+					cardId={en.cardId}
+					{fullDatabase}
+					amount={en.amount}
+					{taboo}
+				/>
 			</td>
 			{#each columns as c}
 				<td>
