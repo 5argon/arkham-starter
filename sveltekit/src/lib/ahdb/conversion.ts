@@ -2,8 +2,49 @@ import { CardClass } from '$lib/core/card-class'
 import { CardPack } from '$lib/core/card-pack'
 import { randomBasicWeakness, randomBasicWeaknessRcore } from './card'
 
+/**
+ * Hard coded name of each pack.
+ */
+export function iconToNameConversion(c: CardPack): string {
+	switch (c) {
+		case CardPack.CoreSet:
+			return 'Core Set'
+		case CardPack.RevisedCoreSet:
+			return 'Revised Core Set'
+		case CardPack.NathanielCho:
+			return 'Nathaniel Cho'
+		case CardPack.HarveyWalters:
+			return 'Harvey Walters'
+		case CardPack.WinifredHabbamock:
+			return 'Winifred Habbamock'
+		case CardPack.JacquelineFine:
+			return 'Jacqueline Fine'
+		case CardPack.StellaClark:
+			return 'Stella Clark'
+
+		case CardPack.ReturnToTheNightOfTheZealot:
+			return 'Return To the Night of the Zealot'
+		case CardPack.ReturnToTheDunwichLegacy:
+			return 'Return To the Dunwich Legacy'
+		case CardPack.ReturnToThePathToCarcosa:
+			return 'Return To the Path to Carcosa'
+		case CardPack.ReturnToTheCircleUndone:
+			return 'Return To the Circle Undone'
+		case CardPack.ReturnToTheForgottenAge:
+			return 'Return To the Forgotten Age'
+		case CardPack.ReturnToTheDreamEaters:
+			return 'Return To the Dream-Eaters'
+		case CardPack.ReturnToTheInnsmouthConspiracy:
+			return 'Return To the Innsmouth Conspiracy'
+		default:
+			return iconToNewNameConversion(c) ?? ''
+	}
+}
+
 export function iconToNewNameConversion(c: CardPack): string | null {
 	switch (c) {
+		case CardPack.Unknown:
+			return '(Unknown Set)'
 		case CardPack.CoreSet:
 			break
 		case CardPack.RevisedCoreSet:
@@ -36,8 +77,6 @@ export function iconToNewNameConversion(c: CardPack): string | null {
 			return 'The Dream-Eaters Investigator Expansion'
 		case CardPack.TheInnsmouthConspiracy:
 			return 'The Innsmouth Conspiracy Investigator Expansion'
-		case CardPack.EdgeOfTheEarth:
-			return 'Edge of the Earth Investigator Expansion'
 
 		case CardPack.ReturnToTheNightOfTheZealot:
 			break
@@ -49,12 +88,18 @@ export function iconToNewNameConversion(c: CardPack): string | null {
 			break
 		case CardPack.ReturnToTheForgottenAge:
 			break
+		case CardPack.ReturnToTheDreamEaters:
+			break
+		case CardPack.ReturnToTheInnsmouthConspiracy:
+			break
 	}
 	return null
 }
 
 export function packCodeToIconConversion(p: string): CardPack {
 	switch (p) {
+		case 'unk':
+			return CardPack.Unknown
 		case 'core':
 			return CardPack.CoreSet
 		case 'rcore':
@@ -137,6 +182,8 @@ export function packCodeToIconConversion(p: string): CardPack {
 			return CardPack.TheInnsmouthConspiracy
 		case 'eoep':
 			return CardPack.EdgeOfTheEarth
+		case 'sck':
+			return CardPack.TheScarletKeys
 
 		case 'rtnotz':
 			return CardPack.ReturnToTheNightOfTheZealot
@@ -148,6 +195,10 @@ export function packCodeToIconConversion(p: string): CardPack {
 			return CardPack.ReturnToTheForgottenAge
 		case 'rttcu':
 			return CardPack.ReturnToTheCircleUndone
+		case 'rttde':
+			return CardPack.ReturnToTheDreamEaters
+		case 'rttic':
+			return CardPack.ReturnToTheInnsmouthConspiracy
 		default:
 			return CardPack.CoreSet
 	}

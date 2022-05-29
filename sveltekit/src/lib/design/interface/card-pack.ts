@@ -14,70 +14,70 @@ export function getPackStaticUrl(pack: CardPackIcon, color: CardPackIconColor): 
 	let fileName: string
 	switch (pack) {
 		case CardPackIcon.CoreSet:
-			fileName = '_Core Set'
+			fileName = 'core'
 			break
 		case CardPackIcon.RevisedCoreSet:
-			fileName = '_Core Set'
+			fileName = 'core'
 			break
 		case CardPackIcon.ParallelInvestigator:
-			fileName = '_Parallel'
+			fileName = 'parallel'
 			break
 		case CardPackIcon.Novella:
-			fileName = '_Novella'
+			fileName = 'promotional'
 			break
 
 		case CardPackIcon.NathanielCho:
-			fileName = 'Nathaniel Cho'
+			fileName = 'nat'
 			break
 		case CardPackIcon.HarveyWalters:
-			fileName = 'Harvey Walters'
+			fileName = 'har'
 			break
 		case CardPackIcon.WinifredHabbamock:
-			fileName = 'Winifred Habbamock'
+			fileName = 'win'
 			break
 		case CardPackIcon.JacquelineFine:
-			fileName = 'Jacqueline Fine'
+			fileName = 'jac'
 			break
 		case CardPackIcon.StellaClark:
-			fileName = 'Stella Clark'
+			fileName = 'ste'
 			break
 
 		case CardPackIcon.TheDunwichLegacy:
-			fileName = '_The Dunwich Legacy'
+			fileName = 'dwl'
 			break
 		case CardPackIcon.ThePathToCarcosa:
-			fileName = '_The Path to Carcosa'
+			fileName = 'ptc'
 			break
 		case CardPackIcon.TheForgottenAge:
-			fileName = '_The Forgotten Age'
+			fileName = 'tfa'
 			break
 		case CardPackIcon.TheCircleUndone:
-			fileName = '_The Circle Undone'
+			fileName = 'tcu'
 			break
 		case CardPackIcon.TheDreamEaters:
-			fileName = '_The Dream-Eaters'
+			fileName = 'tde'
 			break
 		case CardPackIcon.TheInnsmouthConspiracy:
-			fileName = '_The Innsmouth Conspiracy'
+			fileName = 'tic'
 			break
 		case CardPackIcon.EdgeOfTheEarth:
-			fileName = '_Edge of the Earth'
+			fileName = 'eoe'
 			break
 
 		case CardPackIcon.ReturnToTheNightOfTheZealot:
-			fileName = '_Return to the Night of the Zealot'
+			fileName = 'rtnotz'
 			break
 		case CardPackIcon.ReturnToTheDunwichLegacy:
-			fileName = '_Return to the Dunwich Legacy'
+			fileName = 'rtdwl'
 			break
 		case CardPackIcon.ReturnToThePathToCarcosa:
-			fileName = '_Return to the Path to Carcosa'
+			fileName = 'rtptc'
 			break
 		case CardPackIcon.ReturnToTheForgottenAge:
-			fileName = '_Return to the Forgotten Age'
+			fileName = 'rttfa'
 			break
 		case CardPackIcon.ReturnToTheCircleUndone:
-			fileName = '_Return to the Circle Undone'
+			fileName = 'rttcu'
 			break
 		default:
 			return ''

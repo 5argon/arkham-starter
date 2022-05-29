@@ -2,6 +2,8 @@
 
 ![Preview](../../../static/image/documentation/tool/upgrade/preview.png)
 
+**Note:** This tool is **not** intended to be mobile-friendly.
+
 A two-column table that can "diff" the cards and update XP calculation (cost and total cumulative) as you change things around on the table. The plan is implied that you upgrade in order from top to bottom.
 
 It is designed for decks that uses the main section for level 0 starting cards and Side Deck section for all the upgrade cards. Sometimes you forgot which cards in the starting list are waiting to be removed long after creating it, or you are not sure if all the upgrades you listed in the Side Deck is too XP hungry or not.

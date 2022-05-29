@@ -75,6 +75,7 @@
 	}
 	.long-span {
 		display: inline-flex;
+		flex-wrap: wrap;
 		align-items: center;
 	}
 </style>

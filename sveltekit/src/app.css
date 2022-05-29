@@ -110,7 +110,7 @@ input {
 	background-color: #ff9f9f;
 }
 .player-2-bg {
-	background-color: #aefffe;
+	background-color: #aee7ff;
 }
 .player-3-bg {
 	background-color: #d0f892;
@@ -120,4 +120,23 @@ input {
 }
 .player-0-bg {
 	background-color: #e2e2e2;
+}
+
+.background-color-neutral {
+	background-color: #d5d5d5;
+}
+.background-color-guardian {
+	background-color: #aee7ff;
+}
+.background-color-seeker {
+	background-color: #f8df79;
+}
+.background-color-rogue {
+	background-color: #d0f892;
+}
+.background-color-mystic {
+	background-color: #dabaff;
+}
+.background-color-survivor {
+	background-color: #ff9f9f;
 }

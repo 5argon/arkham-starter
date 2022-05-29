@@ -129,6 +129,7 @@
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 
 	import Button from '$lib/design/components/basic/Button.svelte'
+	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import TextBox from '$lib/design/components/basic/TextBox.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
@@ -260,6 +261,16 @@
 	<TextBox label="Sharing URL" currentText={sharingUrl} />
 </div>
 
+<div class="options">
+	<Checkbox
+		label="Fixed Label Color"
+		checked={false}
+		onCheckChanged={() => {
+			// do something
+		}}
+	/>
+</div>
+
 <PlayerDeckInput
 	player={0}
 	deckUrl={p1.deckUrl}
@@ -350,6 +361,9 @@
 {/await}
 
 <style>
+	.options {
+		margin-bottom: 12px;
+	}
 	.card-table {
 		margin: 0 auto;
 	}

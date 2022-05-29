@@ -86,6 +86,11 @@ export interface PopupDatabaseItemRaw {
 	sn: string
 
 	/**
+	 * Explicit subname
+	 */
+	esn: boolean
+
+	/**
 	 * Pack code
 	 */
 	pc: number

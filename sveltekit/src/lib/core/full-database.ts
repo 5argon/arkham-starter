@@ -5,14 +5,9 @@ import {
 } from '$lib/ahdb/conversion'
 import type { AhdbTaboo } from '$lib/ahdb/taboo'
 import tb from '../data/taboo.json'
-import type { CardClass } from '$lib/design/interface/card-class'
+import { CardClass } from '$lib/design/interface/card-class'
 import { CardPackIcon } from '$lib/design/interface/card-pack'
-import {
-	isRandomBasicWeakness,
-	randomBasicWeakness,
-	randomBasicWeaknessRcore,
-	type AhdbCard,
-} from '$lib/ahdb/card'
+import { randomBasicWeakness, randomBasicWeaknessRcore, type AhdbCard } from '$lib/ahdb/card'
 export type LazyFullDatabase = Promise<FullDatabase>
 
 export interface FullDatabaseItem {
@@ -87,18 +82,58 @@ export class FullDatabase {
 			}
 		}
 	}
+
+	/**
+	 * Has buult-in unknown card forwarding.
+	 */
 	public getCard(id: string): FullDatabaseItem {
 		if (id in this.cardsMap) {
 			return this.cardsMap[id]
 		}
-		throw new Error(`Card not found : ${id}`)
+		return this.createUnknownCard(id)
+	}
+
+	private createUnknownCard(id: string): FullDatabaseItem {
+		return {
+			class1: CardClass.Neutral,
+			packIcon: CardPackIcon.Unknown,
+			packNameTransformed: null,
+			original: {
+				code: id,
+				deck_limit: 0,
+				double_sided: false,
+				exceptional: false,
+				faction_code: 'neutral',
+				faction_name: 'Neutral',
+				health_per_investigator: false,
+				illustrator: '',
+				is_unique: false,
+				myriad: false,
+				name: `Unknown (ID: ${id})`,
+				octgn_id: '',
+				pack_code: 'unk',
+				pack_name: '(Unknown Set)',
+				permanent: false,
+				position: 0,
+				quantity: Number.MAX_SAFE_INTEGER,
+				real_name: 'Unknown',
+				real_slot: '',
+				real_text: '',
+				slot: '',
+				subname: '',
+				text: '',
+				type_code: 'unknown',
+				type_name: 'Unknown',
+				url: '',
+			},
+		}
 	}
 
 	public getSameName(name: string): FullDatabaseItem[] {
 		if (name in this.sameName) {
 			return this.sameName[name]
 		}
-		throw new Error(`Card not found : ${name}`)
+		return []
 	}
 }
 

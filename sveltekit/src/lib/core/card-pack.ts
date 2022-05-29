@@ -1,4 +1,6 @@
 export enum CardPack {
+	Unknown,
+
 	CoreSet,
 	RevisedCoreSet,
 	ParallelInvestigator,
@@ -17,10 +19,13 @@ export enum CardPack {
 	TheDreamEaters,
 	TheInnsmouthConspiracy,
 	EdgeOfTheEarth,
+	TheScarletKeys,
 
 	ReturnToTheNightOfTheZealot,
 	ReturnToTheDunwichLegacy,
 	ReturnToThePathToCarcosa,
 	ReturnToTheCircleUndone,
 	ReturnToTheForgottenAge,
+	ReturnToTheDreamEaters,
+	ReturnToTheInnsmouthConspiracy,
 }

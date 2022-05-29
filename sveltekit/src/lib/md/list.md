@@ -1,5 +1,7 @@
 # Card List
 
+**Note:** This tool is **not** intended to be mobile-friendly.
+
 This tool is almost like the [Upgrade Planner](/tool/upgrade), but it is a single column instead of two, therefore it has all functions related to differentiating the XP removed. 
 
 The biggest difference is on the export modal. The point of this tool is that you want to print something "for each" card while writing a guide. For example, pointing out some cards in the deck that synergize well with something.

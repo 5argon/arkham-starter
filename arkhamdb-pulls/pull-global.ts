@@ -77,6 +77,20 @@ const playerCards = allCards.filter((x) => {
   return x.faction_code !== "mythos";
 });
 
+// Cards that need its subname shown to remove ambiguity are collected here.
+// It searches an entire game if there is a card with same name but different subname or not.
+const shouldShowExplicitSubname: { [k: string]: boolean } = {};
+const sameNameDifferentSubname: {
+  [name: string]: { code: string; subname: string }[];
+} = {};
+playerCards.forEach((x) => {
+  const name = x.name;
+  if (!(name in sameNameDifferentSubname)) {
+    sameNameDifferentSubname[name] = [];
+  }
+  sameNameDifferentSubname[name].push({ code: x.code, subname: x.subname });
+});
+
 playerCards.forEach((x) => {
   let traits: number[] = [];
   if (x.traits !== undefined) {
@@ -89,6 +103,7 @@ playerCards.forEach((x) => {
     id: x.code,
     n: x.name,
     sn: x.subname,
+    esn: false,
     ps: x.position,
     pc: packCodeMap.toNum[x.pack_code],
     pn: packNameMap.toNum[x.pack_name],

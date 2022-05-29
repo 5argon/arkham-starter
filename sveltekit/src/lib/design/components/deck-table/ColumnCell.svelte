@@ -20,5 +20,6 @@
 		font-size: x-small;
 		padding: 1px 4px;
 		border-radius: 2px;
+		white-space: nowrap;
 	}
 </style>

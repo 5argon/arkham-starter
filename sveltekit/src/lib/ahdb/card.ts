@@ -4,6 +4,10 @@ export function isRandomBasicWeakness(cardId: string): boolean {
 	return cardId === randomBasicWeakness || cardId === randomBasicWeaknessRcore
 }
 
+export function isUnknownCardNumber(num: number): boolean {
+	return num === 1000 || num === 0
+}
+
 export interface AhdbCard {
 	pack_code: string
 	pack_name: string
