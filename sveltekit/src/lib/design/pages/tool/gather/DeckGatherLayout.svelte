@@ -184,6 +184,9 @@
 		const p3x = extractDeckFromUrl(p3.deckUrl)
 		const p4x = extractDeckFromUrl(p4.deckUrl)
 		async function getDeck(p: Player, x: ExtractResult): Promise<GetDeckCardIdReturns | null> {
+			if (x.deck === '') {
+				return null
+			}
 			const cards = await getDeckCardIds(x.deck, x.published)
 			return cards
 		}
@@ -277,6 +280,12 @@
 </div>
 
 <div class="options">
+	<Button
+		label="Reset Toggles"
+		onClick={() => {
+			toggleMap = {}
+		}}
+	/>
 	<Checkbox
 		label="Fixed Label Color"
 		checked={false}
@@ -379,8 +388,12 @@
 
 <style>
 	.options {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
 		margin-bottom: 12px;
 	}
+
 	.card-table {
 		margin: 0 auto;
 	}

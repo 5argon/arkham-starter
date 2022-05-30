@@ -29,6 +29,12 @@ You can paste ArkhamDB's deck URL into the box. Other than grabbing the deck ID 
 
 You can also type just the deck's ID number, but it always assume it is a personal-but-public deck. To type just deck's ID and you want it to meant published deck, prefix `p:` in front of ID.
 
+### Checking for forgotten cards
+
+After importing, a deck's name will appear under the text box. Along with it a card count for main and side deck. (e.g. `[DECK: 33]`)
+
+The after gathered everything, you can count the finished stack against these numbers to check if you have gathered everything correctly or not. Especially that your deck is being assembled with help from everyone in the table, it is more prone to mistakes such as getting 2 copies of a card that you included only 1 copy in the deck.
+
 ## Sharing URL
 
 After pressing "Gather All Cards" once, you will also get a URL where the visitor will arrive at this page with decks already in the box and automatically click "Gather All Cards" after arriving.
