@@ -48,6 +48,7 @@ export function extractDeckFromUrl(url: string): ExtractResult {
 
 export interface GetDeckCardIdReturns {
 	deck: string
+	investigatorCode: string
 	cards1: string[]
 	cards2: string[]
 	cards3: string[]
@@ -79,6 +80,7 @@ export async function getDeckCardIds(
 	}
 	return {
 		deck: d.name,
+		investigatorCode: d.investigator_code,
 		cards1: cardListToArray(d.slots),
 		cards2: cardListToArray(d.sideSlots),
 		cards3: cardListToArray(d.ignoreDeckLimitSlots),

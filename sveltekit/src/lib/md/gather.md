@@ -55,6 +55,8 @@ The tool assumes you owns 1 box of every release. (There is no Core Set, only 1x
 
 This tool currently has no idea about duplicate cards in multiple set, and warn you as soon as it exceeds the quantity inside that set. e.g. Multiple players has "Charisma" that was selected from Dunwich set in ArkhamDB, that it totals to 3 copies, it then warns you even though there is more Charisma in the Revised Core Set to use. For now, please look out for this situation on your own.
 
+It is useful also for playing with "starter deck" that ArkhamDB author have made. These authors may put effort to ensure that 2 decks can play together with minimal clash in the same "series". It is complicated when you starts using 3 or 4 of these decks together, or using it with some of decks in an another series (i.e. Starter deck of investigator from a different cycle.) and the author may not able to exhaustively check for you which is possible to play with which. You can use this tool to check the combination on your own.
+
 ## Toggling a row
 
 When gathering card, sometimes you may got confused which one you had already picked out if they are found in your collection out of order.

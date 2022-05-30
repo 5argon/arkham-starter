@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import { isRandomBasicWeakness } from '$lib/ahdb/card'
+	import { isRandomBasicWeakness, type AhdbCard } from '$lib/ahdb/card'
 
 	import { coreToRcore } from '$lib/ahdb/conversion'
 
@@ -10,6 +10,7 @@
 		mainCount: number
 		sideCount: number
 		ignoreCount: number
+		investigator: FullDatabaseItem | null
 	}
 	function newDeck(startingUrl: string): Player {
 		return {
@@ -19,23 +20,35 @@
 			mainCount: 0,
 			sideCount: 0,
 			ignoreCount: 0,
+			investigator: null,
 		}
 	}
-	function fillIn(g: GetDeckCardIdReturns, player: number, ents: DecklistEntry[]) {
-		let colorHex: string = '#e2e2e2'
-		switch (player) {
-			case 0:
-				colorHex = '#ff9f9f'
-				break
-			case 1:
-				colorHex = '#aefffe'
-				break
-			case 2:
-				colorHex = '#d0f892'
-				break
-			case 3:
-				colorHex = '#f8df79'
-				break
+	function fillIn(
+		g: GetDeckCardIdReturns,
+		player: number,
+		fixedColor: boolean,
+		faction: CardClass,
+		ents: DecklistEntry[],
+	) {
+		let colorHex: string
+		if (fixedColor) {
+			colorHex = 'player-0-bg'
+			switch (player) {
+				case 0:
+					colorHex = 'player-1-bg'
+					break
+				case 1:
+					colorHex = 'player-2-bg'
+					break
+				case 2:
+					colorHex = 'player-3-bg'
+					break
+				case 3:
+					colorHex = 'player-4-bg'
+					break
+			}
+		} else {
+			colorHex = cardClassToBackgroundClass(faction)
 		}
 		for (let i = 0; i < g.cards1.length; i++) {
 			const c1 = coreToRcore(g.cards1[i])
@@ -128,7 +141,8 @@
 		type ExtractResult,
 		type GetDeckCardIdReturns,
 	} from '$lib/ahdb/public-api/high-level'
-	import { fetchFullDatabase, FullDatabase } from '$lib/core/full-database'
+	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
+	import { fetchFullDatabase, FullDatabase, type FullDatabaseItem } from '$lib/core/full-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 
@@ -144,6 +158,7 @@
 	export let startingP2: string = ''
 	export let startingP3: string = ''
 	export let startingP4: string = ''
+	export let fixedLabelColor: boolean = false
 
 	let sharingUrl: string = ''
 	let entries: DecklistEntry[] = []
@@ -163,6 +178,10 @@
 	let p2: Player = newDeck(startingP2)
 	let p3: Player = newDeck(startingP3)
 	let p4: Player = newDeck(startingP4)
+	let p1r: GetDeckCardIdReturns | null = null
+	let p2r: GetDeckCardIdReturns | null = null
+	let p3r: GetDeckCardIdReturns | null = null
+	let p4r: GetDeckCardIdReturns | null = null
 	let pulling: boolean = false
 	$: overlapping = overlappingEntries.length > 0
 	let fdbp = fetchFullDatabase()
@@ -179,6 +198,10 @@
 		const fdb = await fdbp
 		pulling = true
 		overlapping = false
+		p1r = null
+		p2r = null
+		p3r = null
+		p4r = null
 		const p1x = extractDeckFromUrl(p1.deckUrl)
 		const p2x = extractDeckFromUrl(p2.deckUrl)
 		const p3x = extractDeckFromUrl(p3.deckUrl)
@@ -194,10 +217,10 @@
 		const p2p = getDeck(p2, p2x)
 		const p3p = getDeck(p3, p3x)
 		const p4p = getDeck(p4, p4x)
-		const p1r = await p1p
-		const p2r = await p2p
-		const p3r = await p3p
-		const p4r = await p4p
+		p1r = await p1p
+		p2r = await p2p
+		p3r = await p3p
+		p4r = await p4p
 		function sum(a: number[]): number {
 			return a.reduce((p, c) => {
 				return p + c
@@ -210,6 +233,7 @@
 			mainCount: p1r ? sum(p1r.amounts1) : 0,
 			sideCount: p1r ? sum(p1r.amounts2) : 0,
 			ignoreCount: p1r ? sum(p1r.amounts3) : 0,
+			investigator: p1r ? fdb.getCard(p1r.investigatorCode) : null,
 		}
 		p2 = {
 			...p2,
@@ -218,6 +242,7 @@
 			mainCount: p2r ? sum(p2r.amounts1) : 0,
 			sideCount: p2r ? sum(p2r.amounts2) : 0,
 			ignoreCount: p2r ? sum(p2r.amounts3) : 0,
+			investigator: p2r ? fdb.getCard(p2r.investigatorCode) : null,
 		}
 		p3 = {
 			...p3,
@@ -226,6 +251,7 @@
 			mainCount: p3r ? sum(p3r.amounts1) : 0,
 			sideCount: p3r ? sum(p3r.amounts2) : 0,
 			ignoreCount: p3r ? sum(p3r.amounts3) : 0,
+			investigator: p3r ? fdb.getCard(p3r.investigatorCode) : null,
 		}
 		p4 = {
 			...p4,
@@ -234,35 +260,54 @@
 			mainCount: p4r ? sum(p4r.amounts1) : 0,
 			sideCount: p4r ? sum(p4r.amounts2) : 0,
 			ignoreCount: p4r ? sum(p4r.amounts3) : 0,
+			investigator: p4r ? fdb.getCard(p4r.investigatorCode) : null,
 		}
-		entries = []
-		overlappingEntries = []
 		sharingUrl = 'https://arkham-starter.com/tool/gather'
+		reactFill(p1r, p2r, p3r, p4r)
 		const su: string[] = []
 		if (p1r) {
-			fillIn(p1r, 0, entries)
 			su.push('p1=' + (p1x.published ? 'p-' : '') + p1x.deck)
 		}
 		if (p2r) {
-			fillIn(p2r, 1, entries)
 			su.push('p2=' + (p2x.published ? 'p-' : '') + p2x.deck)
 		}
 		if (p3r) {
-			fillIn(p3r, 2, entries)
 			su.push('p3=' + (p3x.published ? 'p-' : '') + p3x.deck)
 		}
 		if (p4r) {
-			fillIn(p4r, 3, entries)
 			su.push('p4=' + (p4x.published ? 'p-' : '') + p4x.deck)
 		}
 		if (su.length > 0) {
 			sharingUrl += '?' + su.join('&')
 		}
 
+		pulling = false
+	}
+
+	async function reactFill(
+		p1rr: GetDeckCardIdReturns | null,
+		p2rr: GetDeckCardIdReturns | null,
+		p3rr: GetDeckCardIdReturns | null,
+		p4rr: GetDeckCardIdReturns | null,
+	) {
+		const fdb = await fdbp
+		entries = []
+		overlappingEntries = []
+		if (p1rr) {
+			fillIn(p1rr, 0, fixedLabelColor, p1.investigator?.class1 ?? CardClass.Neutral, entries)
+		}
+		if (p2rr) {
+			fillIn(p2rr, 1, fixedLabelColor, p2.investigator?.class1 ?? CardClass.Neutral, entries)
+		}
+		if (p3rr) {
+			fillIn(p3rr, 2, fixedLabelColor, p3.investigator?.class1 ?? CardClass.Neutral, entries)
+		}
+		if (p4rr) {
+			fillIn(p4rr, 3, fixedLabelColor, p4.investigator?.class1 ?? CardClass.Neutral, entries)
+		}
 		checkDupe(entries, overlappingEntries, fdb)
 		entries = [...entries]
 		overlappingEntries = [...overlappingEntries]
-		pulling = false
 	}
 
 	let groupings: Grouping[] = [Grouping.Set]
@@ -288,15 +333,18 @@
 	/>
 	<Checkbox
 		label="Fixed Label Color"
-		checked={false}
+		checked={fixedLabelColor}
 		onCheckChanged={() => {
-			// do something
+			fixedLabelColor = !fixedLabelColor
+			reactFill(p1r, p2r, p3r, p4r)
 		}}
 	/>
 </div>
 
 <PlayerDeckInput
 	player={0}
+	cardClass={p1.investigator?.class1 ?? CardClass.Neutral}
+	{fixedLabelColor}
 	deckUrl={p1.deckUrl}
 	pullError={p1.error}
 	mainCount={p1.mainCount}
@@ -310,6 +358,8 @@
 />
 <PlayerDeckInput
 	player={1}
+	cardClass={p2.investigator?.class1 ?? CardClass.Neutral}
+	{fixedLabelColor}
 	deckUrl={p2.deckUrl}
 	pullError={p2.error}
 	mainCount={p2.mainCount}
@@ -323,6 +373,8 @@
 />
 <PlayerDeckInput
 	player={2}
+	cardClass={p3.investigator?.class1 ?? CardClass.Neutral}
+	{fixedLabelColor}
 	deckUrl={p3.deckUrl}
 	pullError={p3.error}
 	mainCount={p3.mainCount}
@@ -336,6 +388,8 @@
 />
 <PlayerDeckInput
 	player={3}
+	cardClass={p4.investigator?.class1 ?? CardClass.Neutral}
+	{fixedLabelColor}
 	deckUrl={p4.deckUrl}
 	pullError={p4.error}
 	mainCount={p4.mainCount}

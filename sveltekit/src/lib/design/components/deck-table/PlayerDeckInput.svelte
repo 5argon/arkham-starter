@@ -1,6 +1,10 @@
 <script lang="ts">
+	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
+
 	import TextBox, { EditingLevel, NoticeLevel } from '../basic/TextBox.svelte'
 
+	export let fixedLabelColor: boolean
+	export let cardClass: CardClass 
 	export let player: number
 	export let deckUrl: string
 	export let onDeckUrlChanged: (s: string) => void = () => {
@@ -47,10 +51,12 @@
 			}
 		}
 	}
+	$: playerClass = 'player-' + (player + 1) + '-bg'
+	$: classClass = cardClassToBackgroundClass(cardClass)
 </script>
 
 <div class="outer-flex">
-	<div class={'inner-flex player ' + 'player-' + (player + 1) + '-bg'}>
+	<div class={'inner-flex player ' + (fixedLabelColor ? playerClass : classClass)}>
 		P{player + 1}
 	</div>
 	<div class="inner-flex deck">

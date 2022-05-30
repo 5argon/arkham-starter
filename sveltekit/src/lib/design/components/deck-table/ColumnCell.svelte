@@ -12,7 +12,11 @@
 </script>
 
 {#if column === ExtraColumn.Label && label !== undefined}
-	<span class="label" style={'background-color:' + label.color}>{label.text}</span>
+	<span
+		class={'label' + (label.color.indexOf('#') === -1 ? ' ' + label.color : '')}
+		style={label.color.indexOf('#') === 0 ? 'background-color:' + label.color : null}
+		>{label.text}</span
+	>
 {/if}
 
 <style>
