@@ -41,7 +41,7 @@
 			const c1 = coreToRcore(g.cards1[i])
 			const a1 = g.amounts1[i]
 			ents.push({
-				id: 'p1' + c1,
+				id: 'd' + player + c1,
 				amount: a1,
 				cardId: c1,
 				label: { text: 'P' + (player + 1), color: colorHex },
@@ -51,7 +51,7 @@
 			const c2 = coreToRcore(g.cards2[i])
 			const a2 = g.amounts2[i]
 			ents.push({
-				id: 'p2' + c2,
+				id: 's' + player + c2,
 				amount: a2,
 				cardId: c2,
 				label: { text: 'P' + (player + 1) + ' Side', color: colorHex },
@@ -61,7 +61,7 @@
 			const c3 = coreToRcore(g.cards3[i])
 			const a3 = g.amounts3[i]
 			ents.push({
-				id: 'p3' + c3,
+				id: 'i' + player + c3,
 				amount: a3,
 				cardId: c3,
 				label: { text: 'P' + (player + 1) + ' Ignore', color: colorHex },
@@ -107,7 +107,7 @@
 			const card = fdb.getCard(x.cardId)
 			const nd: DecklistEntry = {
 				...x,
-				id: 'over' + x.id,
+				id: 'over' + x.label + x.id,
 				label: x.label
 					? {
 							color: x.label.color,

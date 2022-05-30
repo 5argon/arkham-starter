@@ -75,9 +75,9 @@
 				/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
 		</span>
 		<span class="card-name-container">
-			<span class={colorClass + ' ' + 'card-name'}>{text}</span>{#if subText !== null}<span
-					class={colorClass + ' ' + 'card-subname'}>{subText}</span
-				>{/if}
+			<span class:card-name-long={text.length >= 25} class={colorClass + ' ' + 'card-name'}
+				>{text}</span
+			>{#if subText !== null}<span class={colorClass + ' ' + 'card-subname'}>{subText}</span>{/if}
 			{#if weakness || isRandomBasicWeakness(cardId)}<span
 					title="Weakness"
 					class={'pips ' + textIconFontClass}>{textIconToFontCharacter(TextIcon.Weakness)}</span
@@ -118,7 +118,7 @@
 
 	.amount-x {
 		user-select: none;
-		width: 6px;
+		width: 5px;
 		margin-right: 2px;
 		margin-top: 2px;
 		font-family: 'ArkhamNumber';
@@ -128,9 +128,12 @@
 	.card-name {
 		font-weight: normal;
 		font-size: small;
-		margin: 0px 4px;
 		overflow: hidden;
 		text-overflow: ellipsis;
+	}
+
+	.card-name-long {
+		font-size: 0.8em;
 	}
 
 	.card-name-container {
@@ -140,13 +143,17 @@
 	}
 
 	.card-subname {
-		margin-right: 4px;
+		max-width: 42px;
+		max-height: 18px;
+		line-height: 1em;
+		margin-left: 4px;
 		font-size: xx-small;
 		text-overflow: ellipsis;
 	}
 
 	.pips {
 		user-select: none;
+		margin-left: 2px;
 	}
 
 	.taboo-pips {
@@ -165,6 +172,7 @@
 
 	.all-class-icons {
 		height: 16px;
+		margin-right: 4px;
 		flex-shrink: 0;
 	}
 

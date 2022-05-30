@@ -8,7 +8,7 @@ Supposed that you have a party of 3 players, then designate 6 stacks for the mai
 
 This is faster than each player building only their own deck and having to go through the same section in the collection over and over, possibly passing through cards that are to be taken out to an another player's deck. 
 
-It is useful if you are the collection's owner where everyone's deck will be built from. You can then gather them for everyone, or have an entire table helps working on gathering everyone's deck in parallel, now that the "tasks" are clearly grouped without conflict.
+It is useful if you are the collection's owner where everyone's deck will be built from. You can then gather them for everyone if they are new to the game. Alternatively have an entire table helps working on gathering everyone's deck in parallel if they all know your collection, now that the "tasks" are clearly grouped without conflict.
 
 You should use the "grouping" feature as a mean to divide the task, for example you use a binder for one class then you should start by "Class" grouping. If you use a box for one cycle of cards, then you should start by "Set" grouping. If the available groupings or sortings can't cover how you organized your collection, please let me know and I can probably make it happen.
 
@@ -33,7 +33,7 @@ You can also type just the deck's ID number, but it always assume it is a person
 
 After importing, a deck's name will appear under the text box. Along with it a card count for main and side deck. (e.g. `[DECK: 33]`)
 
-The after gathered everything, you can count the finished stack against these numbers to check if you have gathered everything correctly or not. Especially that your deck is being assembled with help from everyone in the table, it is more prone to mistakes such as getting 2 copies of a card that you included only 1 copy in the deck.
+After gathered everything, you can count the finished stack against these numbers to check if you have gathered everything correctly or not. Especially that your deck is being assembled with help from everyone in the table, it is more prone to mistakes such as getting 2 copies of a card that you included only 1 copy in the deck.
 
 ## Sharing URL
 
@@ -55,8 +55,8 @@ The tool assumes you owns 1 box of every release. (There is no Core Set, only 1x
 
 This tool currently has no idea about duplicate cards in multiple set, and warn you as soon as it exceeds the quantity inside that set. e.g. Multiple players has "Charisma" that was selected from Dunwich set in ArkhamDB, that it totals to 3 copies, it then warns you even though there is more Charisma in the Revised Core Set to use. For now, please look out for this situation on your own.
 
-## Ticking
+## Toggling a row
 
 When gathering card, sometimes you may got confused which one you had already picked out if they are found in your collection out of order.
 
-To help with this, you can touch the row toggle it to fade like a to-do list, remembering that you had already gathered that card.
+To help with this, you can click/touch the row to toggle it like a to-do list. It will fade out, remembering that you had already gathered that card.
