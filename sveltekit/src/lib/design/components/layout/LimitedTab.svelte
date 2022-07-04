@@ -8,14 +8,21 @@
 
 <script lang="ts">
 	let active = 0
+	export let hide1 = false
+	export let hide2 = false
+	export let hide3 = false
+	export let hide4 = false
+	export let hide5 = false
+	export let hide6 = false
 	function handler(index: number) {
 		active = index
 	}
 </script>
 
 <ul>
-	{#if $$slots.tab1}
+	{#if $$slots.tab1 && $$slots.content1 && !hide1}
 		<li
+			class="limited-tab-hack"
 			class:inactive={active !== 0}
 			on:click={() => {
 				handler(0)
@@ -24,8 +31,9 @@
 			<slot name="tab1" />
 		</li>
 	{/if}
-	{#if $$slots.tab2}
+	{#if $$slots.tab2 && $$slots.content2 && !hide2}
 		<li
+			class="limited-tab-hack"
 			class:inactive={active !== 1}
 			on:click={() => {
 				handler(1)
@@ -34,8 +42,9 @@
 			<slot name="tab2" />
 		</li>
 	{/if}
-	{#if $$slots.tab3}
+	{#if $$slots.tab3 && $$slots.content3 && !hide3}
 		<li
+			class="limited-tab-hack"
 			class:inactive={active !== 2}
 			on:click={() => {
 				handler(2)
@@ -44,8 +53,9 @@
 			<slot name="tab3" />
 		</li>
 	{/if}
-	{#if $$slots.tab4}
+	{#if $$slots.tab4 && $$slots.content4 && !hide4}
 		<li
+			class="limited-tab-hack"
 			class:inactive={active !== 3}
 			on:click={() => {
 				handler(3)
@@ -54,8 +64,9 @@
 			<slot name="tab4" />
 		</li>
 	{/if}
-	{#if $$slots.tab5}
+	{#if $$slots.tab5 && $$slots.content5 && !hide5}
 		<li
+			class="limited-tab-hack"
 			class:inactive={active !== 4}
 			on:click={() => {
 				handler(4)
@@ -64,8 +75,9 @@
 			<slot name="tab5" />
 		</li>
 	{/if}
-	{#if $$slots.tab6}
+	{#if $$slots.tab6 && $$slots.content6 && !hide6}
 		<li
+			class="limited-tab-hack"
 			class:inactive={active !== 5}
 			on:click={() => {
 				handler(5)
@@ -82,7 +94,7 @@
 	{#if active === 2 && $$slots.content3}<slot name="content3" />{/if}
 	{#if active === 3 && $$slots.content4}<slot name="content4" />{/if}
 	{#if active === 4 && $$slots.content5}<slot name="content5" />{/if}
-	{#if active === 5 && $$slots.content5}<slot name="content6" />{/if}
+	{#if active === 5 && $$slots.content6}<slot name="content6" />{/if}
 </div>
 
 <style>
@@ -104,8 +116,12 @@
 		padding: 4px 8px;
 	}
 
+	li div:empty {
+		display: none;
+	}
+
 	.inactive {
-		background-color: rgba(0,0,0,0.1);
+		background-color: rgba(0, 0, 0, 0.1);
 		border-bottom: 1px solid black;
 	}
 

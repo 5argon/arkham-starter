@@ -140,3 +140,7 @@ input {
 .background-color-survivor {
 	background-color: #ff9f9f;
 }
+
+.limited-tab-hack div:empty {
+	display: none;
+}

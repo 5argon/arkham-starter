@@ -153,6 +153,9 @@
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
+	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
+	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
+	import LimitedTabTab from '$lib/design/components/layout/LimitedTabTab.svelte'
 
 	export let startingP1: string = ''
 	export let startingP2: string = ''
@@ -184,6 +187,14 @@
 	let p4r: GetDeckCardIdReturns | null = null
 	let pulling: boolean = false
 	$: overlapping = overlappingEntries.length > 0
+	var overlappingCount: number
+	$: {
+		const uniqueCards = new Set<string>()
+		for (let i = 0; i < overlappingEntries.length; i++) {
+			uniqueCards.add(overlappingEntries[i].cardId)
+		}
+		overlappingCount = Array.from(uniqueCards).length
+	}
 	let fdbp = fetchFullDatabase()
 
 	gather()
@@ -406,36 +417,49 @@
 
 {#await fdbp then fdb}
 	{#if !pulling && (entries.length !== 0 || overlappingEntries.length !== 0)}
-		{#if overlapping}
-			<ListDivider label="Deck Overlaps" />
-			<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
-			<div class="card-table">
-				<CardTableGrouped
-					{toggleMap}
-					entries={overlappingEntries}
-					{groupings}
-					{sortings}
-					taboo={true}
-					fullDatabase={fdb}
-					columns={[ExtraColumn.Label]}
-				/>
-			</div>
-		{/if}
+		<div class="limited-tab">
+			<LimitedTab hide2={!overlapping}>
+				<div slot="tab1">Gathered Cards</div>
+				<div slot="content1">
+					<ListDivider label="Gathered Cards" />
+					<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
-		<ListDivider label="Gathered Cards" />
-		<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
-
-		<!-- For some reason just add to div make the table not stretch... -->
-		<div class="card-table">
-			<CardTableGrouped
-				{toggleMap}
-				{entries}
-				{groupings}
-				{sortings}
-				taboo={true}
-				fullDatabase={fdb}
-				columns={[ExtraColumn.Label]}
-			/>
+					<!-- For some reason just add to div make the table not stretch... -->
+					<div class="card-table">
+						<CardTableGrouped
+							{toggleMap}
+							{entries}
+							{groupings}
+							{sortings}
+							taboo={true}
+							fullDatabase={fdb}
+							columns={[ExtraColumn.Label]}
+						/>
+					</div>
+				</div>
+				<div slot="tab2">
+					<span class="deck-overlaps-tab-text">Deck Overlaps</span><NotificationNumber
+						count={overlappingCount}
+					/>
+				</div>
+				<div slot="content2">
+					{#if overlapping}
+						<ListDivider label={'Deck Overlaps'} />
+						<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
+						<div class="card-table">
+							<CardTableGrouped
+								{toggleMap}
+								entries={overlappingEntries}
+								{groupings}
+								{sortings}
+								taboo={true}
+								fullDatabase={fdb}
+								columns={[ExtraColumn.Label]}
+							/>
+						</div>
+					{/if}
+				</div>
+			</LimitedTab>
 		</div>
 	{/if}
 {/await}
@@ -451,7 +475,17 @@
 	.card-table {
 		margin: 0 auto;
 	}
+
 	.sharing-url {
 		margin-bottom: 12px;
+	}
+
+	.deck-overlaps-tab-text {
+		color: red;
+		font-weight: bold;
+	}
+
+	.limited-tab {
+		margin: 8px 0px;
 	}
 </style>
