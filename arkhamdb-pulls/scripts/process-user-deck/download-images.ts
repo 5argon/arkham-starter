@@ -44,7 +44,7 @@ async function downloadImageAndProcessSingleCard(
   stripPath: string,
   squareSmallPath: string
 ): Promise<void> {
-  await downloadImageSingleCard(card, fullPath);
+  await downloadImageSingleCard(card, card.code, fullPath);
   await processSingleCard(
     card,
     fullPath,
@@ -54,8 +54,9 @@ async function downloadImageAndProcessSingleCard(
   );
 }
 
-async function downloadImageSingleCard(
+export async function downloadImageSingleCard(
   card: AhdbCard,
+  fileName: string,
   destination: string
 ): Promise<void> {
   if (card.imagesrc === undefined) {
@@ -67,7 +68,7 @@ async function downloadImageSingleCard(
   const imageResult = await fetchWithRetries(imagePath);
   const abuf = await imageResult.arrayBuffer();
   await Deno.writeFile(
-    path.join(destination, card.code + ".png"),
+    path.join(destination, fileName + ".png"),
     new Uint8Array(abuf)
   );
 }

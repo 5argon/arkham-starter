@@ -62,3 +62,13 @@ It is useful also for playing with "starter deck" that ArkhamDB author have made
 When gathering card, sometimes you may got confused which one you had already picked out if they are found in your collection out of order.
 
 To help with this, you can click/touch the row to toggle it like a to-do list. It will fade out, remembering that you had already gathered that card.
+
+## Count Summary Tab
+
+This tab gives you card counts of each grouping layers, with no cards inside them.
+
+The use of this tab is when disassembling all player's deck after the end of your campaign. If you combined all the cards according to your desired grouping and matched the count, you have made sure you didn't lost any cards before putting them back into your player card collection.
+
+This inverted the workload of having to count the cards inside your player card collection. Now you just count the subset of what you took away from the collection.
+
+When upgrading cards by transferring from Side Deck to the main deck, the replaced card should be put into the Side Deck instead of going back to your collection, so the count adds up to the same number in this page when you finished playing.

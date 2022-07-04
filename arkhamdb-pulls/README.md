@@ -4,10 +4,6 @@ So that arkham-starters.com is not troubling ArkhamDB's server as much as possib
 
 `pull.ts` is a Deno script that would gather required data from ArkhamDB to generate the static site. This should be the only time we need an internet connection when generating the site.
 
-Input in `input` folder is a `json` files named after user's ID in ArkhamDB, inside containing JSON object of a single field `decks`.
-
-This `decks` is an array of `number` of public deck IDs of that user that would like to be featured in arkhambeginners.com.
-
 ## Initiating the pull
 
 ```
@@ -15,3 +11,10 @@ deno run --allow-read --allow-write --allow-net pull.ts
 ```
 
 `pulls` folder will be cleaned up and repopulated with new data once it is done.
+
+## What's in the `pulls` folder?
+
+- `images` : Inside are subfolders of different pre-cropped shapes of each card's image. The web has access to all these images and use URL structure to choose the right version for display.
+- `json` : Contains `.json` obtained from ArkhamDB and pre-processed. They are copied to the SvelteKit app before building.
+  - `playerdb.json` : Contains data of all player cards. Mythos cards are excluded completely. This site is not a complete card database unlike ArkhamDB.
+  - `popupdb.json` : This is a minified version of `playerdb.json`. "Popup" means just enough card data to display a small popup such as that when you write a deck guide and type `#` character. Many fields are stripped out, many fields need further client-side transformation. We aim for smaller size for this one so user with bad internet connection could use the page if the page don't require full database.
