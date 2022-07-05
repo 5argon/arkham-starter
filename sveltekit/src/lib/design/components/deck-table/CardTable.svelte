@@ -10,9 +10,11 @@
 	export let totalLevels: number
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
+	export let centered: boolean = false
+	export let clickToggle: boolean = false
 </script>
 
-<table class="card-table">
+<table class:centered>
 	{#if columns.length > 0}
 		<thead>
 			<tr>
@@ -37,7 +39,14 @@
 				{fullDatabase}
 				{columns}
 				{taboo}
+				{clickToggle}
 			/>
 		{/each}
 	</tbody>
 </table>
+
+<style>
+	.centered {
+		margin: 0 auto;
+	}
+</style>

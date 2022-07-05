@@ -7,15 +7,15 @@
 	export let amount: number
 	export let fullDatabase: FullDatabase
 	export let toggled: boolean
-	export let onToggleChanged: (t: boolean) => void
+	export let onToggleChanged: undefined | ((t: boolean) => void) = undefined
 
 	function handler(e: MouseEvent & { currentTarget: HTMLElement }) {
-		onToggleChanged(!toggled)
+		onToggleChanged?.(!toggled)
 	}
 	$: card = fullDatabase.getCard(cardId)
 </script>
 
-<div class="toggle-div" class:toggle-div-on={toggled} on:click={handler}>
+<div class:toggle-div={onToggleChanged} class:toggle-div-on={toggled} on:click={handler}>
 	<CardSpan
 		{cardId}
 		{amount}

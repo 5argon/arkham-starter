@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
-	import { isRandomBasicWeakness, type AhdbCard } from '$lib/ahdb/card'
+	import { isRandomBasicWeakness } from '$lib/ahdb/card'
+	import { browser } from '$app/env';
 
 	import { coreToRcore } from '$lib/ahdb/conversion'
 
@@ -151,6 +152,7 @@
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import TextBox from '$lib/design/components/basic/TextBox.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
+	import CountSummary from '$lib/design/components/deck-table/CountSummary.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
 	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
@@ -336,6 +338,14 @@
 </div>
 
 <div class="options">
+	{#if browser && navigator.canShare}
+		<Button
+			label="Share URL"
+			onClick={() => {
+				navigator.share({ url: sharingUrl })
+			}}
+		/>
+	{/if}
 	<Button
 		label="Reset Toggles"
 		onClick={() => {
@@ -424,18 +434,17 @@
 					<ListDivider label="Gathered Cards" />
 					<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
-					<!-- For some reason just add to div make the table not stretch... -->
-					<div class="card-table">
-						<CardTableGrouped
-							{toggleMap}
-							{entries}
-							{groupings}
-							{sortings}
-							taboo={true}
-							fullDatabase={fdb}
-							columns={[ExtraColumn.Label]}
-						/>
-					</div>
+					<CardTableGrouped
+						{toggleMap}
+						{entries}
+						{groupings}
+						{sortings}
+						clickToggle
+						taboo={true}
+						fullDatabase={fdb}
+						columns={[ExtraColumn.Label]}
+						centered
+					/>
 				</div>
 				<div slot="tab2">
 					<span class="deck-overlaps-tab-text">Deck Overlaps</span><NotificationNumber
@@ -446,18 +455,23 @@
 					{#if overlapping}
 						<ListDivider label={'Deck Overlaps'} />
 						<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
-						<div class="card-table">
-							<CardTableGrouped
-								{toggleMap}
-								entries={overlappingEntries}
-								{groupings}
-								{sortings}
-								taboo={true}
-								fullDatabase={fdb}
-								columns={[ExtraColumn.Label]}
-							/>
-						</div>
+						<CardTableGrouped
+							{toggleMap}
+							entries={overlappingEntries}
+							{groupings}
+							{sortings}
+							taboo={true}
+							fullDatabase={fdb}
+							columns={[ExtraColumn.Label]}
+							centered
+						/>
 					{/if}
+				</div>
+				<div slot="tab3">Count Summary</div>
+				<div slot="content3">
+					<ListDivider label={'Count Summary'} />
+					<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
+					<CountSummary {entries} {groupings} {sortings} fullDatabase={fdb} centered />
 				</div>
 			</LimitedTab>
 		</div>
@@ -470,10 +484,6 @@
 		align-items: center;
 		flex-wrap: wrap;
 		margin-bottom: 12px;
-	}
-
-	.card-table {
-		margin: 0 auto;
 	}
 
 	.sharing-url {

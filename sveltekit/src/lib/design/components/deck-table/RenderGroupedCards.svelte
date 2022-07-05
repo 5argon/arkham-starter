@@ -14,6 +14,7 @@
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
 	export let toggleMap: { [id: string]: boolean }
+	export let clickToggle: boolean = false
 	$: spanning = columns.length + 1
 </script>
 
@@ -33,11 +34,13 @@
 		<tr>
 			<td class={index % 2 === 0 ? 'even' : 'odd'}>
 				<CardCell
-					onToggleChanged={(t) => {
-						if (en.id in toggleMap) {
-							toggleMap[en.id] = t
-						}
-					}}
+					onToggleChanged={clickToggle
+						? (t) => {
+								if (en.id in toggleMap) {
+									toggleMap[en.id] = t
+								}
+						  }
+						: undefined}
 					toggled={en.id in toggleMap ? toggleMap[en.id] : false}
 					cardId={en.cardId}
 					{fullDatabase}

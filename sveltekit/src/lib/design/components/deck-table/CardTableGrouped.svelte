@@ -20,6 +20,8 @@
 	export let taboo: boolean
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
+	export let centered: boolean = false
+	export let clickToggle: boolean = false
 	$: gc = groupCards(entriesForwarded, groupings, sortings, fullDatabase)
 </script>
 
@@ -29,5 +31,7 @@
 	{taboo}
 	groupedCards={gc}
 	{columns}
+	{centered}
+	{clickToggle}
 	totalLevels={groupings.length}
 />
