@@ -60,6 +60,7 @@
 			groupedCards={en}
 			previousGroupedCards={[...previousGroupedCards, groupedCards]}
 			{toggleMap}
+			{clickToggle}
 			{totalLevels}
 			{fullDatabase}
 			{columns}

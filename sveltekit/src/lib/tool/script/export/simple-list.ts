@@ -86,7 +86,7 @@ export function makeSimpleListJoiner(
 		UpgradeExportOptions_SimpleListOptions_BlockStyle.A
 	) {
 		case UpgradeExportOptions_SimpleListOptions_BlockStyle.B: {
-			const tem1 = '\n<hr>\n\n'
+			const tem1 = '\n---\n\n'
 			return tem1
 		}
 		default:

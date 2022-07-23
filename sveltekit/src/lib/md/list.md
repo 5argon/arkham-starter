@@ -34,7 +34,7 @@ This simply give you a card's name, then double new lines later, it is where you
 
 ![List with horizontal lines](../../../static/image/documentation/tool/list/list-2.png)
 
-Like "List", but `<hr>` has been placed in-between each cards. There is no line on the top of the first card and next to the last card. I think the list looked better that way.
+Like "List", but `---` has been placed in-between each cards. (That would be converted to a nice line by the Markdown engine.) There is no line on the top of the first card and next to the last card. I think the list looked better that way.
 
 ### Bullet points
 

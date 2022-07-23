@@ -4,7 +4,7 @@ export const transformDirectory = "transform";
 
 export const pullsCards = "cards";
 export const pullsDecks = "decks";
-export const pullsImages = "images";
+export const pullsImages = "card";
 export const pullsJson = "json";
 
 export const pullsImagesFull = "full";
