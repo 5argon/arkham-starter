@@ -2,6 +2,8 @@ export enum Grouping {
 	Set = 1,
 	Class = 2,
 	Type = 3,
+	Level = 4,
+	Level015 = 5,
 }
 
 export enum Sorting {
@@ -10,6 +12,7 @@ export enum Sorting {
 	Set = 3,
 	Type = 4,
 	Name = 5,
+	Level = 6,
 }
 
 export enum ExtraColumn {

@@ -46,6 +46,10 @@ function vs(a: WithCard, b: WithCard, s: Sorting): number {
 		case Sorting.Set: {
 			return a.card.packIcon - b.card.packIcon
 		}
+		case Sorting.Level : {
+			const undefinedXp = -99
+			return (a.card.original.xp ?? undefinedXp) - (b.card.original.xp ?? undefinedXp)
+		}
 		default: {
 			return 0
 		}

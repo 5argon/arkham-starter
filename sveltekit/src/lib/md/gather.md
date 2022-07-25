@@ -2,9 +2,13 @@
 
 This is a tool to help you bring out the cards from your collection for **all players** that had built their own deck in ArkhamDB **in one go**. It does this simply by dumping all the decks together (both starting card list and side deck) into **a single big list**. You can then able to sort everything according to the shape of your collection, and going through everyone's card in a more efficient manner.
 
-You can still tell which entry is for which player by looking at the label appended to each entry, and whether it belongs to that player's side deck or the main deck.
+You can still tell which entry is for which player by looking at the label appended to each entry, and whether it belongs to that player's side deck or the main deck. (Cards for side decks has `-S` suffix.)
 
-Supposed that you have a party of 3 players, then designate 6 stacks for the main and side deck of each person. Then everyone can help building each other's deck very fast by putting the cards in the right stack as the label told.
+![List with labels](../../../static/image/documentation/tool/gather/list.png)
+
+Supposed that you have a party of 2 players, then designate 4 stacks for the main and side deck of each person. Then everyone can help building each other's deck very fast by putting the cards in the right stack as the label told.
+
+![Building decks in parallel.](../../../static/image/documentation/tool/gather/decks.png)
 
 This is faster than each player building only their own deck and having to go through the same section in the collection over and over, possibly passing through cards that are to be taken out to an another player's deck.
 
@@ -41,7 +45,9 @@ After pressing "Gather All Cards" once, you will also get a URL where the visito
 
 This is so you can give the URL to other players in the table, then everyone can help out bringing cards from the collection at the same time.
 
-### Mobile friendliness
+### Mobile usage
+
+![Mobile usage](../../../static/image/documentation/tool/gather/mobile.png)
 
 This tool is specifically made so a player could work on gathering cards by looking at their mobile phone screen, to go together with this sharing URL feature.
 
@@ -63,11 +69,15 @@ In the future, the Sharing URL should be able to restore grouping and sorting se
 
 ## Toggling a row
 
+![Toggling](../../../static/image/documentation/tool/gather/toggle.png)
+
 When gathering card, sometimes you may got confused which one you had already picked out if they are found in your collection out of order.
 
 To help with this, you can click/touch the row to toggle it like a to-do list. It will fade out, remembering that you had already gathered that card.
 
 ## Deck Overlaps Tab
+
+![Overlaps](../../../static/image/documentation/tool/gather/overlaps.png)
 
 This tab **only appears if** multiple players used the same cards too much it exceeds quantity provided in the collection. It lists everyone that contributes to breaking the limit, and also amount used vs. total quantity of that card suffixed to the label at the end.
 
@@ -79,11 +89,13 @@ It is useful also for playing with "starter deck" that ArkhamDB author have made
 
 ## Count Summary Tab
 
+![Count](../../../static/image/documentation/tool/gather/count.png)
+
 This tab gives you card counts of each grouping layers. It gives 2 kinds of count : Of each physical copy of a card, and count 1 for each unique card.
 
 The use of this tab is when disassembling all player's deck after the end of your campaign. If you combined all the cards according to your desired grouping and matched the count, you have made sure you didn't lost any cards before putting them back into your player card collection.
 
-This inverted the workload could be having to count the used cards combined with the remaining cards in your player card collection. Instead, now you just count a smaller subset of what you took away from the collection.
+This inverted the workload, which could be you having to count the used cards combined with the remaining cards in your player card collection. Instead, now you just count a smaller subset of what you took away from the collection.
 
 It parallels to how you count your encounter set before putting back into the collection. You only count that set, you don't count the cards of other scenarios that wasn't used since you made sure they aren't lost the last time you played.
 

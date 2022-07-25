@@ -34,6 +34,7 @@
 			<option value={Sorting.Set}>Set</option>
 			<option value={Sorting.Type}>Type</option>
 			<option value={Sorting.Name}>Name</option>
+			<option value={Sorting.Level}>Level</option>
 		</select>
 	</span>
 	{#if i < sortings.length - 1}

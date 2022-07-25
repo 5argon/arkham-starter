@@ -137,6 +137,70 @@ function groupCardsOneGroup(
 			groups = sorted
 			break
 		}
+		case Grouping.Level: {
+			const st: { [k: number]: { entries: DecklistEntry[]; level: number } } = {}
+			const undefinedXp = -99
+			cs.forEach((x) => {
+				const sn: number = x.card.original.xp ?? undefinedXp
+				if (!(sn in st)) {
+					st[sn] = { entries: [], level: sn }
+				}
+				st[sn].entries.push(x.dle)
+				st[sn].level = sn
+			})
+			const sorted = Object.entries(st)
+				.sort(([k], [k2]) => {
+					return parseInt(k) - parseInt(k2)
+				})
+				.map<GroupedCards>(([, v]) => {
+					return {
+						entries: v.entries,
+						groupName: v.level === undefinedXp ? "Level -" : "Level " + v.level,
+					}
+				})
+			groups = sorted
+			break
+		}
+		case Grouping.Level015: {
+			const st: { [k: number]: { entries: DecklistEntry[]; level: number } } = {}
+			const undefinedXp = -99
+			const level15 = 15
+			cs.forEach((x) => {
+				const actualLevel: number = x.card.original.xp ?? undefinedXp
+				let groupingLevel: number = x.card.original.xp ?? undefinedXp
+				switch (x.card.original.xp ){
+					case undefined:{
+						groupingLevel = undefinedXp
+						break
+					}
+					case 0 : {
+						groupingLevel = 0
+						break
+					}
+					default : {
+						groupingLevel = level15
+						break
+					}
+				}
+				if (!(groupingLevel in st)) {
+					st[groupingLevel] = { entries: [], level: groupingLevel }
+				}
+				st[groupingLevel].entries.push(x.dle)
+				st[groupingLevel].level = actualLevel
+			})
+			const sorted = Object.entries(st)
+				.sort(([ ,v], [,v2]) => {
+					return v.level - v2.level
+				})
+				.map<GroupedCards>(([, v]) => {
+					return {
+						entries: v.entries,
+						groupName: v.level === undefinedXp ? "Level -" : (v.level === 0 ? "Level 0" : "Level 1~5")
+					}
+				})
+			groups = sorted
+			break
+		}
 		default: {
 			groups = [{ groupName: null, entries: entries }]
 		}
