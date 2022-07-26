@@ -32,6 +32,7 @@
 			<option value={Grouping.Set}>Set</option>
 			<option value={Grouping.Class}>Class</option>
 			<option value={Grouping.Type}>Type</option>
+			<option value={Grouping.Slot}>Slot</option>
 			<option value={Grouping.Level}>Level</option>
 			<option value={Grouping.Level015}>Level (0, 1~5)</option>
 		</select>

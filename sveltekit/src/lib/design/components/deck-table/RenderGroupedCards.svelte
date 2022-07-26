@@ -9,6 +9,7 @@
 	export let taboo: boolean
 	export let level: number
 	export let totalLevels: number
+	export let theOnlyGroup: boolean
 	export let groupedCards: GroupedCards
 	export let previousGroupedCards: GroupedCards[]
 	export let fullDatabase: FullDatabase
@@ -18,7 +19,7 @@
 	$: spanning = columns.length + 1
 </script>
 
-{#if groupedCards.groupName !== null}
+{#if groupedCards.groupName !== null && !theOnlyGroup}
 	<CardGroup
 		groupName={groupedCards.groupName}
 		previousGroupNames={previousGroupedCards.map((x) => {
@@ -65,6 +66,7 @@
 			{fullDatabase}
 			{columns}
 			{taboo}
+			theOnlyGroup={groupedCards.entries.length === 1}
 		/>
 	{/if}
 {/each}

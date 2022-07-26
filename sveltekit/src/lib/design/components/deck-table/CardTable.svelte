@@ -40,6 +40,7 @@
 				{columns}
 				{taboo}
 				{clickToggle}
+				theOnlyGroup={groupedCards.length === 1}
 			/>
 		{/each}
 	</tbody>

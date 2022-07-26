@@ -44,8 +44,8 @@ export interface AhdbCard {
 	sanity?: number
 	health_per_investigator: boolean
 	deck_limit: number
-	slot: string
-	real_slot: string
+	slot?: string
+	real_slot?: string
 	traits?: string
 	real_traits?: string
 	restrictions?: null | {

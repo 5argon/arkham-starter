@@ -92,3 +92,51 @@ export function typeScore(typeCode: string, subtypeCode: string | undefined): nu
 			return 4 << 3
 	}
 }
+
+export function topLevelTypeScore(typeCode: string): number {
+	switch (typeCode) {
+		case 'Asset':
+			return 1 << 3
+		case 'Event':
+			return 2 << 3
+		case 'Skill':
+			return 3 << 3
+		case 'Permanent':
+			return 4 << 3
+		case 'Weakness':
+			return 5 << 3
+		default:
+			return 6 << 3
+	}
+}
+
+export const multipleSlotsString = "Multiple Slots"
+export const noSlotString= "No Slot"
+export const nonAssetString = "Non-Asset"
+
+export function slotScore(slot: string): number {
+	switch (slot) {
+		case 'Hand':
+			return 1 << 4
+		case 'Hand x2':
+			return 2 << 4
+		case 'Arcane':
+			return 3 << 4
+		case 'Arcane x2':
+			return 4 << 4
+		case 'Accessory':
+			return 5 << 4
+		case 'Body':
+			return 6 << 4
+		case 'Ally':
+			return 7 << 4
+		case multipleSlotsString:
+			return 8 << 4
+		case noSlotString:
+			return 9 << 4
+		case nonAssetString:
+			return 10 << 4
+		default:
+			return 11 << 4
+	}
+}

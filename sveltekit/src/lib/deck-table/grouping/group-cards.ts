@@ -2,7 +2,7 @@ import { classConversion } from '$lib/ahdb/conversion'
 import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
 import { isEntry, type DecklistEntry, type GroupedCards } from '../decklist-entry'
 import { Grouping, Sorting } from '../grouping'
-import { classesScore, sortCards, typeScore } from './sort-cards'
+import { classesScore, multipleSlotsString, nonAssetString, noSlotString, slotScore, sortCards, topLevelTypeScore, typeScore } from './sort-cards'
 
 export function groupCards(
 	entries: DecklistEntry[],
@@ -23,6 +23,39 @@ export function groupCards(
 export interface WithCard {
 	card: FullDatabaseItem
 	dle: DecklistEntry
+}
+
+function typeCodeTransform(typeCode: string, subtypeCode: string | undefined, permanent: boolean): string {
+	if (permanent) {
+		return "Permanent"
+	}
+	switch (subtypeCode) {
+		case "weakness": {
+			return "Weakness"
+		}
+		case "basicweakness": {
+			return "Weakness"
+		}
+	}
+
+	switch (typeCode) {
+		case "asset": {
+			return "Asset"
+		}
+		case "event": {
+			return "Event"
+		}
+		case "skill": {
+			return "Skill"
+		}
+		case "enemy": {
+			return "Enemy"
+		}
+		case "treachery": {
+			return "Treachery"
+		}
+	}
+	return "Others"
 }
 
 function groupCardsOneGroup(
@@ -85,21 +118,55 @@ function groupCardsOneGroup(
 		case Grouping.Type: {
 			const st: { [k: string]: { entries: DecklistEntry[]; typeName: string } } = {}
 			cs.forEach((x) => {
-				const sn: string = x.card.original.type_code
+				const sn: string = typeCodeTransform(x.card.original.type_code, x.card.original.subtype_code, x.card.original.permanent)
 				if (!(sn in st)) {
 					st[sn] = { entries: [], typeName: '' }
 				}
 				st[sn].entries.push(x.dle)
-				st[sn].typeName = x.card.original.type_name
+				st[sn].typeName = sn
 			})
 			const sorted = Object.entries(st)
 				.sort(([k], [k2]) => {
-					return typeScore(k, undefined) - typeScore(k2, undefined)
+					return topLevelTypeScore(k) - topLevelTypeScore(k2)
 				})
 				.map<GroupedCards>(([, v]) => {
 					return {
 						entries: v.entries,
 						groupName: v.typeName,
+					}
+				})
+			groups = sorted
+			break
+		}
+		case Grouping.Slot: {
+			const st: { [k: string]: { entries: DecklistEntry[]; slotName: string } } = {}
+			cs.forEach((x) => {
+				const slot = x.card.original.real_slot
+				let sn = noSlotString
+				if (x.card.original.type_code !== "asset") {
+					sn = nonAssetString
+				}
+				else if (slot !== "" && slot !== undefined) {
+					if (slot.includes(".")) {
+						sn = multipleSlotsString
+					} else {
+						sn = slot
+					}
+				}
+				if (!(sn in st)) {
+					st[sn] = { entries: [], slotName: '' }
+				}
+				st[sn].entries.push(x.dle)
+				st[sn].slotName = sn
+			})
+			const sorted = Object.entries(st)
+				.sort(([k], [k2]) => {
+					return slotScore(k) - slotScore(k2)
+				})
+				.map<GroupedCards>(([, v]) => {
+					return {
+						entries: v.entries,
+						groupName: v.slotName,
 					}
 				})
 			groups = sorted
@@ -168,16 +235,16 @@ function groupCardsOneGroup(
 			cs.forEach((x) => {
 				const actualLevel: number = x.card.original.xp ?? undefinedXp
 				let groupingLevel: number = x.card.original.xp ?? undefinedXp
-				switch (x.card.original.xp ){
-					case undefined:{
+				switch (x.card.original.xp) {
+					case undefined: {
 						groupingLevel = undefinedXp
 						break
 					}
-					case 0 : {
+					case 0: {
 						groupingLevel = 0
 						break
 					}
-					default : {
+					default: {
 						groupingLevel = level15
 						break
 					}
@@ -189,7 +256,7 @@ function groupCardsOneGroup(
 				st[groupingLevel].level = actualLevel
 			})
 			const sorted = Object.entries(st)
-				.sort(([ ,v], [,v2]) => {
+				.sort(([, v], [, v2]) => {
 					return v.level - v2.level
 				})
 				.map<GroupedCards>(([, v]) => {

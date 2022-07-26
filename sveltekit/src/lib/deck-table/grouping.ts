@@ -4,6 +4,7 @@ export enum Grouping {
 	Type = 3,
 	Level = 4,
 	Level015 = 5,
+	Slot = 6,
 }
 
 export enum Sorting {
