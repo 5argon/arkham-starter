@@ -82,13 +82,30 @@ const playerCards = allCards.filter((x) => {
 const sameNameDifferentSubname: {
   [name: string]: { code: string; subname: string }[];
 } = {};
+
 playerCards.forEach((x) => {
+  if (x.subname === undefined) {
+    return;
+  }
   const name = x.name;
   if (!(name in sameNameDifferentSubname)) {
     sameNameDifferentSubname[name] = [];
   }
   sameNameDifferentSubname[name].push({ code: x.code, subname: x.subname });
 });
+
+const needExplicitSubnameCodes = new Set<string>()
+Object.entries(sameNameDifferentSubname).forEach(([k, v]) => {
+  const subnameCheck = new Set<string>()
+  v.forEach(x => {
+    subnameCheck.add(x.subname)
+  })
+  if (subnameCheck.size > 1) {
+    v.forEach(x => {
+      needExplicitSubnameCodes.add(x.code)
+    })
+  }
+})
 
 playerCards.forEach((x) => {
   let traits: number[] = [];
@@ -102,7 +119,7 @@ playerCards.forEach((x) => {
     id: x.code,
     n: x.name,
     sn: x.subname,
-    esn: false,
+    esn: needExplicitSubnameCodes.has(x.code),
     ps: x.position,
     pc: packCodeMap.toNum[x.pack_code],
     pn: packNameMap.toNum[x.pack_name],

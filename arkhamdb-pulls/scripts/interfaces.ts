@@ -62,7 +62,7 @@ export interface AhdbCard {
   code: string;
   name: string;
   real_name: string;
-  subname: string;
+  subname?: string;
   cost?: number;
   text: string;
   real_text: string;

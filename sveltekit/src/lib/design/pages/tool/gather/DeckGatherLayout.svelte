@@ -157,7 +157,6 @@
 	import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
 	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
-	import LimitedTabTab from '$lib/design/components/layout/LimitedTabTab.svelte'
 
 	export let startingP1: string = ''
 	export let startingP2: string = ''

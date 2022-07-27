@@ -19,6 +19,14 @@ input {
 	font-family: 'Ahlcg';
 }
 
+a, a:visited {
+	color: inherit;
+}
+
+a:hover, a:active {
+	color: rgb(121, 121, 121);
+}
+
 @font-face {
 	font-family: 'Ahlcg';
 	src: url('/font/Ahlcg.ttf') format('truetype');
@@ -80,7 +88,7 @@ input {
 	border-color: #a3a3a3;
 }
 .border-color-guardian {
-	border-color: #0553c0;
+	border-color: #1a4c93;
 }
 .border-color-seeker {
 	border-color: #b35b0d;
@@ -92,7 +100,7 @@ input {
 	border-color: #611db0;
 }
 .border-color-survivor {
-	border-color: #870a11;
+	border-color: #cb1c25;
 }
 .border-color-multiclass {
 	border-color: #818107;
@@ -123,7 +131,7 @@ input {
 }
 
 .background-color-neutral {
-	background-color: #d5d5d5;
+	background-color:#f0f0f0;
 }
 .background-color-guardian {
 	background-color: #aee7ff;

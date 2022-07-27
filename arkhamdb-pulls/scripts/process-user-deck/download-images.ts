@@ -64,7 +64,7 @@ export async function downloadImageSingleCard(
     return;
   }
   const imagePath = path.join(baseUrl, card.imagesrc);
-  console.log("Downloading card image : " + imagePath);
+  // console.log("Downloading card image : " + imagePath);
   const imageResult = await fetchWithRetries(imagePath);
   const abuf = await imageResult.arrayBuffer();
   await Deno.writeFile(

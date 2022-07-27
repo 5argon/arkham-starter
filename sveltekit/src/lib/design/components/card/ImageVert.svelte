@@ -56,7 +56,7 @@
 		display: inline-block;
 		width: 24px;
 		height: 24px;
-		border-width: 1.5px;
+		border-width: 1px 1px 1px 3px;
 		border-style: solid;
 		position: relative;
 	}

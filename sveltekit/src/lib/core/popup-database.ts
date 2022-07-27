@@ -83,7 +83,7 @@ export interface PopupDatabaseItemRaw {
 	/**
 	 * Subname
 	 */
-	sn: string
+	sn?: string
 
 	/**
 	 * Explicit subname

@@ -1,45 +1,48 @@
 # Starter deck criterias
 
-Decks in `arkham-starter.com` has several restrictions on them, otherwise ArkhamDB is the best place to publish your deck.
+All decks on arkham-starter.com is a **subset of** decks in arkhamdb.com. Each entry also links to the original deck at arkhamdb.com instead of outright copying it. So this site works like an aggregator, viewers are still forwarded to the original page that the author could receive comments and likes.
 
-The main point is that as a "starter deck", they should not require too many purchases under the new distribution model and provide some general idea to play the deck. Some experienced player just see the deck list and understand how to play, but not beginners.
+However, there are several restrictions that qualifies a deck for this site, otherwise this site would be identical to arkhamdb.com! The name "starter" is intended that these decks are all a "starter deck", meaning that they are :
 
-## No more than 2 Investigator Expansions
+- **Economical :** It must limits amount of purchases, regarding the repackaged format. It make use of what's available to the fullest as opposed to picking the best pieces from across an entire collections. Right now, a unit of purchase is Revised Core Set, Investigator Expansion box, and the Starter Deck. We don't think about old Mythos Packs in this site.
+- **Guided :** Often, decks in arkhamdb.com are very brief in explaining how to play the deck as the author assumes player looking at the decklist and know what combos are available, and know what to do for any combination that they draw. Especially if there are fan favorite cards among them that defines the play style.
 
-This is the most strict criteria of this site. **In addition to** the Revised Core Set, you can use 2 more Investigator Expansions. That means if the investigator used didn't came from Revised Core Set, it already took 1 of the 2 Investigator Expansion slot you have.
+  That does not work for beginners that do not even know effects of each card. Decks here must put more effort in writing a guide such that even a complete beginner (that know basic rules) can play the deck. More obscure rules that is related to the function of the deck must be explained in the deck guide.
+- **Ready to start a campaign with :** In arkhamdb.com, there are many decks that lists the final state. Beginners cannot reverse engineer these decks on their own how would the 0 XP version looks like. We enforce a rule that the starting deck must require 0 XP, or exactly the bonus XP that the investigator or some cards like In The Thick Of It could provide. Then, the Side Deck section is used to hold the upgrade cards. Which card to remove when upgrading the deck is expressed separately with the attached upgrade guide.
 
-With this restriction, this site has its niche to be a reliable place for players just starting out to find something to play without being forwarded to pay more and more.
+## Pack Restriction
 
-## Optionally 1 Investigator Starter Deck
+Any deck can use Revised Core Set. Additionally, it could use **up to 2 Investigator Expansion boxes**. (This includes the investigator of that deck.) Optionally, it could opt in to use **1 Starter Deck**. Parallel Investigators can be used freely as they are free to print.
 
-Things works differently for Investigator Starter Deck, since they are not as expensive as a box of Investigator Expansion. It maybe reasonable for newcomers to have a few boxes of these along with their Investigator Expansion purchase.
+Return To product are not eligible for use, as they are not economical.
 
-You can choose to use 1 Investigator Starter Deck in addition to 2 Investigator Expansions, **however** note that search tool of this site is heavily optimized for filtering by Investigator Expansions. By choosing to use an Investigator Starter Deck, your deck will have reduced audience if the player filter using just Investigator Expansions but not also ticking the Investigator Starter Deck.
+The browsing page, filtering, searching, and structure of this site are optimized for this restriction. For example, starting from any deck, you can search for an another deck to play together that does not require any additional purchases and has no overlapping cards.
 
-## Side Deck for upgrades
+### The Badge
 
-Your deck must express upgrade cards using the Side Deck section, and the deck is what it looks like at Scenario 1. You can attach the "final form" deck, but at least the main entry must be structured like so.
+To highlight this system even more, each deck will receive a badge that categorize the deck how many packs the deck uses :
 
-Side Deck can include all the different suggestions for upgrades, or even for swapping in the Scenario 1 deck. It is not required that all cards in the Side Deck must be used in the plan.
+- `1` : Using only Revised Core Set.
+- `1S` : Revised Core Set + 1 Starter Deck.
+- `2` : Revised Core Set + 1 Investigator Expansion.
+- `2S` : Revised Core Set + 1 Investigator Expansion + 1 Starter Deck.
+- `3` : Revised Core Set + 2 Investigator Expansions.
+- `3S` : Revised Core Set + 2 Investigator Expansions + 1 Starter Deck.
 
-## Deck guide
+These badges have their use when the player is just starting out. For example, viewers that just bought a Revised Core Set may filter with `1` to find what to play, then maybe take a peek at `2` option to browse what decks are available to play if they buy which Investigator Expansion box next, without any Starter Deck in the equation.
 
-You should write a guide to play the deck in your ArkhamDB page. This site will **not** import your guide but will display a button to forward user to ArkhamDB to read your guide. This maybe just 1 or 2 paragraphs, not required to be a long article.
+These badges also encourage deck creator to not "waste" a pack's inclusion, for example, using only a few good cards from a Starter Deck, since that would cause the badge to gain `S` suffix. From deck creator's standpoint this optimizes the deck, but for beginner's standpoint it meant he must additionally buy a Starter Deck in order to complete this deck's missing piece.
 
-## No Story Cards
+## Deck Guide
 
-In ArkhamDB, you can build the deck using any cards, including story cards. They will show up as unknown in this site because the database doesn't even have them. Deck using campaign cards will not show up in this site.
+I hope you write a good guide at the original page at arkham.db, but there is no human to check these. This site places a simple restriction that the text must be over 1000 characters.
 
-## Attachments
+Additionally, you can write a new **excerpt** that only appears on this site. It should get the viewer excited to go to your original page at arkhamdb.com.
 
-Other than a link to your deck in ArkhamDB, this site allows adding in several new data, independent of ArkhamDB :
+### Upgrade Guide
 
-- Deck name : You may used to add "(Deck Guide)" or something in the name or the packs used to improve visibility. Since this site show them in the UI by default, you can type in a new name for your deck to be different from original.
-- Upgrade guide : By using the Upgrade Planner tool, you get an "import code" that can be attached to your deck. They will be rendered nicely along with the deck.
-- Excerpt : You can type a short paragraph that would be displayed near the button to go to ArkhamDB page. It only accepts plain text. Type something that makes the viewer wants to learn more about your deck.
+By using the Upgrade Planner tool on this site, you can get a Markdown text that can be embedded in arkhamdb.com's description section.
 
-## Revised Core Set Forwarding
+Entries in this site can also display an export code from Upgrade Planner to show separately as well, so viewer can take a peek at the recommended upgrade path before going to the original page at arkhamdb.com.
 
-You can use either Core Set or Revised Core Set cards in ArkhamDB, as they are treated as different entries. However when they show up in this site, everything are forwarded to Revised Core Set to reduce confusion for beginners.
-
-This also means this site assume all players has Revised Core Set bonus cards such as Lockpicks (1).
+Deck can additionally provide alternate upgrade guides. You can use this to show the standalone version that hits close to 19 XP, 29 XP breakpoint, etc.
