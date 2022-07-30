@@ -1,26 +1,29 @@
 <script lang="ts">
 	export let front: boolean = false
 	export let back: boolean = false
+	export let compact: boolean = false
 
 	const parallel = 'Parallel'
+	const parallelShort = 'Par.'
 	const regular = 'Regular'
+	const regularShort = 'Reg.'
 	const frontText = 'Front'
 	const backText = 'Back'
 
-	$: firstText = front ? parallel : regular
-	$: secondText = back ? parallel : regular
+	$: firstText = compact ? (front ? parallelShort : regularShort) : front ? parallel : regular
+	$: secondText = compact ? (back ? parallelShort : regularShort) : back ? parallel : regular
 </script>
 
 {#if front || back}
 	<span class="frame">
 		<span class="front" class:parallel={front}>
 			{firstText}
-			{frontText}
+			{#if !compact}{frontText}{/if}
 		</span>
 		<span class:middle={front && back} />
 		<span class="back" class:parallel={back}>
 			{secondText}
-			{backText}
+			{#if !compact}{backText}{/if}
 		</span>
 	</span>
 {/if}
@@ -34,9 +37,9 @@
 		display: flex;
 	}
 
-    .middle{
-        width: 1px;
-    }
+	.middle {
+		width: 1px;
+	}
 
 	.front {
 		border: 1px solid rgb(59, 59, 59);

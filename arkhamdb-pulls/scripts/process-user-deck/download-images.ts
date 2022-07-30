@@ -100,7 +100,13 @@ async function processSingleCard(
   } catch {
     return;
   }
-  const image = await Image.decode(read);
+  let image
+  try {
+    image = await Image.decode(read);
+  } catch {
+    console.log("Error downloading image " + card.code)
+    return
+  }
   const w = image.width;
   const h = image.height;
   let squareTarget: CropTarget;

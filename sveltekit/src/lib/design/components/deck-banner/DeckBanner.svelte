@@ -12,12 +12,12 @@
 </script>
 
 <script lang="ts">
-	import ImageVert from '../card/ImageVert.svelte'
 	import ParallelInfo from './ParallelInfo.svelte'
 	import type {
 		ChosenCards,
 		ChosenClasses,
 		ChosenNumber,
+		ChosenTraits,
 		DeckDistribution,
 		XpDistributionData,
 	} from '$lib/design/interface/deck-banner'
@@ -38,11 +38,13 @@
 	export let deckBadge: DeckBadge
 	export let packs: CardPackIcon[]
 	export let popupDb: PopupDatabase
+	export let compact: boolean = false
 
 	export let previewCards: string[]
 
 	export let chosenCards: ChosenCards[] = []
 	export let chosenClasses: ChosenClasses | null = null
+	export let chosenTraits: ChosenTraits | null = null
 	export let chosenNumber: ChosenNumber | null = null
 	export let deckDistributions: DeckDistribution | null = null
 	export let xpDistributions: XpDistributionData[] | null = null
@@ -63,7 +65,7 @@
 		const card = popupDb.getById(investigatorCode)
 		if (card !== null) {
 			investigatorName = card.original.n
-			investigatorSubtitle = card.original.sn ?? ""
+			investigatorSubtitle = card.original.sn ?? ''
 			investigatorClass = card.class1
 		}
 	}
@@ -138,25 +140,41 @@
 		<span class="deck-badge">{badgeText}</span>
 	</div>
 	<div class={'content'}>
-		<div class="first-block">
-			<img
-				class={'investigator-img ' + borderColorClass}
-				src={'/image/card/square/' + investigatorCode + '.png'}
-				alt={''}
-				draggable="false"
-			/>
+		<div class="first-block" class:first-block-compact={compact}>
+			{#if compact}
+				<div class="compact-investigator">
+					<img
+						class={'investigator-img-compact ' + borderColorClass}
+						src={'/image/card/strip/' + investigatorCode + '.png'}
+						alt={''}
+						draggable="false"
+					/>
+					<div class="parallel-compact">
+						<ParallelInfo compact front={parallelFront} back={parallelBack} />
+					</div>
+				</div>
+			{:else}
+				<img
+					class={'investigator-img ' + borderColorClass}
+					src={'/image/card/square/' + investigatorCode + '.png'}
+					alt={''}
+					draggable="false"
+				/>
+			{/if}
 			<div class="main-info">
 				<div class="main-info-top">
-					<div class="investigator-name">
-						<ClassIcon cardClass={investigatorClass} />
-						<span class="investigator-title">
-							{investigatorName}
-						</span>
-						<span class="investigator-subtitle">{investigatorSubtitle}</span>
-					</div>
-					<div class="parallel-info">
-						<ParallelInfo front={parallelFront} back={parallelBack} />
-					</div>
+					{#if !compact}
+						<div class="investigator-name">
+							<ClassIcon cardClass={investigatorClass} />
+							<span class="investigator-title">
+								{investigatorName}
+							</span>
+							<span class="investigator-subtitle">{investigatorSubtitle}</span>
+						</div>
+						<div class="parallel-info">
+							<ParallelInfo front={parallelFront} back={parallelBack} />
+						</div>
+					{/if}
 					<div class="author">
 						<span>Author: <a href={authorUrl} target="_blank">{authorName}</a></span>
 						{#if seriesName !== null}
@@ -166,44 +184,59 @@
 						{/if}
 					</div>
 				</div>
-				<CardSquareList {popupDb} {previewCards} />
+				{#if !compact}
+					<CardSquareList {popupDb} {previewCards} />
+				{/if}
 			</div>
 		</div>
-		<div class={'second-block ' + borderColorClass}>
-			{#if deckDistributions !== null}
-				<DeckInsightItem title={deckDistributions.title} cardClass={investigatorClass}>
-					{#if deckDistributions.distributions.length === 3}
-						<TwoClassBar
-							class1={typeof deckDistributions.distributions[0].item !== 'string'
-								? deckDistributions.distributions[0].item
-								: CardClass.Neutral}
-							class2={typeof deckDistributions.distributions[2].item !== 'string'
-								? deckDistributions.distributions[2].item
-								: CardClass.Neutral}
-							class1Amount={deckDistributions.distributions[0].amount}
-							neutralAmount={deckDistributions.distributions[1].amount}
-							class2Amount={deckDistributions.distributions[2].amount}
-						/>
-					{/if}
-				</DeckInsightItem>
-			{/if}
-			{#if xpDistributions !== null}
-				{#each xpDistributions as x}
-					<DeckInsightItem title={x.title} cardClass={investigatorClass}>
-						<XpDistribution
-							topic={x.item}
-							level1={x.level1}
-							level2={x.level2}
-							level3={x.level3}
-							level4={x.level4}
-							level5={x.level5}
-						/>
+		<div class={'second-block ' + borderColorClass} class:second-block-compact={compact}>
+			{#if compact}
+				<CardSquareList {popupDb} {previewCards} />
+			{:else}
+				{#if chosenTraits !== null}
+					<DeckInsightItem title={chosenTraits.title} cardClass={investigatorClass}>
+						{#each chosenTraits.traits as t}
+							<span class={'trait-label ' + backgroundColorClass}>
+								{t}
+							</span>
+						{/each}
 					</DeckInsightItem>
+				{/if}
+				{#if deckDistributions !== null}
+					<DeckInsightItem title={deckDistributions.title} cardClass={investigatorClass}>
+						{#if deckDistributions.distributions.length === 3}
+							<TwoClassBar
+								class1={typeof deckDistributions.distributions[0].item !== 'string'
+									? deckDistributions.distributions[0].item
+									: CardClass.Neutral}
+								class2={typeof deckDistributions.distributions[2].item !== 'string'
+									? deckDistributions.distributions[2].item
+									: CardClass.Neutral}
+								class1Amount={deckDistributions.distributions[0].amount}
+								neutralAmount={deckDistributions.distributions[1].amount}
+								class2Amount={deckDistributions.distributions[2].amount}
+							/>
+						{/if}
+					</DeckInsightItem>
+				{/if}
+				{#if xpDistributions !== null}
+					{#each xpDistributions as x}
+						<DeckInsightItem title={x.title} cardClass={investigatorClass}>
+							<XpDistribution
+								topic={x.item}
+								level1={x.level1}
+								level2={x.level2}
+								level3={x.level3}
+								level4={x.level4}
+								level5={x.level5}
+							/>
+						</DeckInsightItem>
+					{/each}
+				{/if}
+				{#each chosenCards as cc}
+					<ChosenCardRender {popupDb} cardClass={investigatorClass} chosenCards={cc} />
 				{/each}
 			{/if}
-			{#each chosenCards as cc}
-				<ChosenCardRender {popupDb} cardClass={investigatorClass} chosenCards={cc} />
-			{/each}
 		</div>
 	</div>
 </div>
@@ -231,7 +264,18 @@
 		flex-basis: 350px;
 		flex-grow: 1;
 		display: flex;
+		align-items: center;
 		margin: 4px 0px;
+	}
+
+	.parallel-compact {
+		margin-top: 2px;
+	}
+
+	.compact-investigator {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.investigator-title {
@@ -270,11 +314,32 @@
 		flex-basis: 310px;
 		flex-grow: 2;
 		margin: 4px 0px;
+		padding-left: 4px;
+	}
+
+	.first-block-compact {
+		flex-basis: 250px;
+		flex-grow: initial;
+	}
+
+	.second-block-compact {
+		display: flex;
+		align-items: center;
+		border: none;
+		flex: content;
 	}
 
 	.investigator-img {
 		width: 100px;
 		height: 100px;
+		border-width: 1px;
+		border-style: solid;
+		user-select: none;
+	}
+
+	.investigator-img-compact {
+		width: 72px;
+		height: 24px;
 		border-width: 1px;
 		border-style: solid;
 		user-select: none;
@@ -292,7 +357,7 @@
 		margin: 0px 4px;
 		user-select: none;
 		font-size: x-small;
-        text-align: center;
+		text-align: center;
 	}
 
 	.deck-name {
@@ -312,6 +377,13 @@
 		border-radius: 2px;
 		margin: 0px 4px;
 		padding: 0px 4px;
+	}
+
+	.trait-label {
+		font-size: small;
+		border-radius: 2px;
+		padding: 0px 4px;
+		margin-right: 2px;
 	}
 
 	.pack-icon {

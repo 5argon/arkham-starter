@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { packCodeToIconConversion } from '$lib/ahdb/conversion'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import ImageVert from '../card/ImageVert.svelte'
 
