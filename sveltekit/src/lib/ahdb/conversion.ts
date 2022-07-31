@@ -22,6 +22,11 @@ export function iconToNameConversion(c: CardPack): string {
 		case CardPack.StellaClark:
 			return 'Stella Clark'
 
+		case CardPack.EdgeOfTheEarth:
+			return 'Edge of the Earth Investigator Expansion'
+		case CardPack.TheScarletKeys:
+			return 'The Scarlet Keys Investigator Expansion'
+
 		case CardPack.ReturnToTheNightOfTheZealot:
 			return 'Return To the Night of the Zealot'
 		case CardPack.ReturnToTheDunwichLegacy:

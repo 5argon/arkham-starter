@@ -6,12 +6,6 @@ export enum CardPack {
 	ParallelInvestigator,
 	Novella,
 
-	NathanielCho,
-	HarveyWalters,
-	WinifredHabbamock,
-	JacquelineFine,
-	StellaClark,
-
 	TheDunwichLegacy,
 	ThePathToCarcosa,
 	TheForgottenAge,
@@ -28,4 +22,10 @@ export enum CardPack {
 	ReturnToTheForgottenAge,
 	ReturnToTheDreamEaters,
 	ReturnToTheInnsmouthConspiracy,
+
+	NathanielCho,
+	HarveyWalters,
+	WinifredHabbamock,
+	JacquelineFine,
+	StellaClark,
 }

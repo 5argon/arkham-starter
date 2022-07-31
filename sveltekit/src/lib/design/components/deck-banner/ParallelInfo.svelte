@@ -16,7 +16,7 @@
 				break
 			}
 			case '01003': {
-				parallelLink = 'https://www.fantasyflightgames.com/en/news/2020/5/5/beyond-our-dimension/'
+				parallelLink = 'https://www.fantasyflightgames.com/en/news/2020/8/13/all-or-nothing/'
 				break
 			}
 			case '01004': {
@@ -76,6 +76,7 @@
 
 	.frame {
 		display: flex;
+		user-select: none;
 	}
 
 	.middle {

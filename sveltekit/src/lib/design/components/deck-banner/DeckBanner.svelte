@@ -27,7 +27,8 @@
 	import CardSquareList from './CardSquareList.svelte'
 	import { coreToRcore } from '$lib/ahdb/conversion'
 	import { sortIcons } from './deck-banner-sort-icons'
-	import { createPackRequirementText } from './pack-requirement-text'
+	import PackIconWithHover from '../card/PackIconWithHover.svelte'
+	import DeckBadge from './DeckBadge.svelte'
 
 	export let authorName: string
 	export let authorUrl: string
@@ -49,6 +50,7 @@
 	export let chosenNumber: ChosenNumber | null = null
 	export let deckDistributions: DeckDistribution | null = null
 	export let xpDistributions: XpDistributionData[] | null = null
+	export let link: string | null = null
 
 	// $: {
 	// 	if (xpDistributions !== null) {
@@ -94,7 +96,6 @@
 		backgroundColorClass = cardClassToBackgroundClass(investigatorClass)
 	}
 
-	let badgeText: string = createPackRequirementText(packs)
 	let previewCardsReal: PopupDatabaseItem[] = []
 	$: {
 		previewCardsReal = []
@@ -109,15 +110,22 @@
 
 <div class={'frame ' + borderColorClass}>
 	<div class={'head ' + backgroundColorClass}>
-		<span class="deck-name">{deckName}</span>
+		<a
+			href={link}
+			class:deck-name-with-link={link !== null}
+			class:deck-name-without-link={link === null}
+			class="deck-name"
+		>
+			<span> {deckName}</span>
+		</a>
 		<div class="packs">
-			{#if packs.length <= 3}
-				{#each packStaticUrls as p}
-					<img class="pack-icon" src={p} alt="Pack icon" draggable="false" />
+			{#if packsSorted.length <= 3}
+				{#each packsSorted as p}
+					<PackIconWithHover pack={p} />
 				{/each}
 			{/if}
 		</div>
-		<span class="deck-badge" class:non-starter={packs.length > 3}>{badgeText}</span>
+		<DeckBadge packs={packsSorted} />
 	</div>
 	<div class={'content'}>
 		<div class="first-block" class:first-block-compact={compact}>
@@ -332,18 +340,6 @@
 		align-items: center;
 	}
 
-	.deck-badge {
-		width: 80px;
-		margin: 0px 4px;
-		user-select: none;
-		font-size: x-small;
-		text-align: center;
-	}
-
-	.non-starter {
-		font-weight: bold;
-	}
-
 	.deck-name {
 		font-size: large;
 		font-weight: bold;
@@ -352,6 +348,18 @@
 		margin-left: 8px;
 		border-radius: 4px;
 		flex: auto;
+	}
+
+	.deck-name-with-link {
+		text-decoration: none;
+	}
+
+	.deck-name-without-link:hover {
+		color: inherit;
+	}
+
+	.deck-name-with-link:hover {
+		text-decoration: underline;
 	}
 
 	.packs {
@@ -369,12 +377,5 @@
 		border-radius: 2px;
 		padding: 0px 4px;
 		margin-right: 2px;
-	}
-
-	.pack-icon {
-		max-width: 15px;
-		max-height: 15px;
-		margin: 0px 1px;
-		user-select: none;
 	}
 </style>

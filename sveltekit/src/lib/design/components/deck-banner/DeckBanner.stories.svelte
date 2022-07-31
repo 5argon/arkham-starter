@@ -19,6 +19,7 @@
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
 			packs={[]}
+			link={'https://arkhamdb.com/user/profile/61394/5argon'}
 			deckName={'Compact Rendering'}
 			investigatorCode="01001"
 			compact
@@ -139,11 +140,7 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			packs={[
-				CardPack.TheDunwichLegacy,
-				CardPack.ThePathToCarcosa,
-				CardPack.StellaClark,
-			]}
+			packs={[CardPack.TheDunwichLegacy, CardPack.ThePathToCarcosa, CardPack.StellaClark]}
 			deckName={'Using Starter'}
 			investigatorCode="01001"
 			compact

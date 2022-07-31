@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { CardClass } from '$lib/core/card-class'
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
+	import HoverFrame from '../inline/HoverFrame.svelte'
 	import CardSpan from './CardSpan.svelte'
 
 	export let cardId: string
@@ -18,7 +19,7 @@
 	export let weakness: boolean = false
 </script>
 
-<span class="frame">
+<HoverFrame>
 	<CardSpan
 		{cardId}
 		{text}
@@ -37,14 +38,4 @@
 		{packIcon}
 		{packNumber}
 	/>
-</span>
-
-<style>
-	.frame {
-		border: 1px solid black;
-		padding: 2px 8px;
-		user-select: none;
-		box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.13);
-		background-color: rgba(255, 255, 255, 0.95);
-	}
-</style>
+</HoverFrame>

@@ -80,7 +80,7 @@
 	.card-hover {
 		position: absolute;
 		z-index: 1;
-		margin-top: -20px;
+		margin-top: -25px;
 	}
 
 	.image-strip {
