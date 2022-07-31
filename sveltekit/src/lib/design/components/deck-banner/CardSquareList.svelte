@@ -31,6 +31,8 @@
 				class3={pc.class3}
 				name={pc.original.esn === false ? pc.original.n : pc.original.n + ' : ' + pc.original.sn}
 				xp={pc.original.xp}
+				packIcon={pc.packIcon}
+				packNumber={pc.original.ps}
 			/>
 		</span>
 	{/each}
@@ -48,7 +50,7 @@
 
 	.more {
 		font-size: small;
-        padding:0px 4px;
+		padding: 0px 4px;
 	}
 
 	.preview-card-each {

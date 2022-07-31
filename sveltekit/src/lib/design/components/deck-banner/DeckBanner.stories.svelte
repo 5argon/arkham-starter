@@ -18,8 +18,7 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.Core}
-			packs={[CardPack.RevisedCoreSet]}
+			packs={[]}
 			deckName={'Compact Rendering'}
 			investigatorCode="01001"
 			compact
@@ -58,9 +57,94 @@
 			seriesName="R.Core Starter Decks Mk II"
 			seriesUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.Core}
-			packs={[CardPack.RevisedCoreSet]}
+			packs={[]}
 			deckName={'Vertically Expanded Compact Rendering'}
+			investigatorCode="01001"
+			compact
+			parallelBack
+			deckDistributions={{
+				title: 'Starting Deck',
+				distributions: [
+					{ item: CardClass.Guardian, amount: 18 },
+					{ item: CardClass.Neutral, amount: 5 },
+					{ item: CardClass.Seeker, amount: 7 },
+				],
+			}}
+			xpDistributions={[
+				{
+					title: 'XP Cards',
+					item: CardClass.Guardian,
+					level1: 10,
+					level2: 6,
+					level3: 0,
+					level4: 2,
+					level5: 0,
+				},
+				{
+					title: '',
+					item: CardClass.Seeker,
+					level1: 0,
+					level2: 2,
+				},
+			]}
+			previewCards={['01016', '01017', '01018']}
+		/>
+	</Story>
+	<Story name={'Non-Starter Deck'}>
+		<DeckBanner
+			authorName="5argon"
+			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
+			popupDb={pdb}
+			packs={[
+				CardPack.TheDunwichLegacy,
+				CardPack.ThePathToCarcosa,
+				CardPack.HarveyWalters,
+				CardPack.TheInnsmouthConspiracy,
+				CardPack.ReturnToTheForgottenAge,
+			]}
+			deckName={'Non-Starter Deck'}
+			investigatorCode="01001"
+			compact
+			parallelBack
+			deckDistributions={{
+				title: 'Starting Deck',
+				distributions: [
+					{ item: CardClass.Guardian, amount: 18 },
+					{ item: CardClass.Neutral, amount: 5 },
+					{ item: CardClass.Seeker, amount: 7 },
+				],
+			}}
+			xpDistributions={[
+				{
+					title: 'XP Cards',
+					item: CardClass.Guardian,
+					level1: 10,
+					level2: 6,
+					level3: 0,
+					level4: 2,
+					level5: 0,
+				},
+				{
+					title: '',
+					item: CardClass.Seeker,
+					level1: 0,
+					level2: 2,
+				},
+			]}
+			previewCards={['01016', '01017', '01018']}
+		/>
+	</Story>
+	<Story name={'Using Starter'}>
+		<DeckBanner
+			authorName="5argon"
+			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
+			popupDb={pdb}
+			packs={[
+				CardPack.TheDunwichLegacy,
+				CardPack.ThePathToCarcosa,
+				CardPack.StellaClark,
+			]}
+			deckName={'Using Starter'}
 			investigatorCode="01001"
 			compact
 			parallelBack
@@ -97,8 +181,7 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.Core}
-			packs={[CardPack.RevisedCoreSet]}
+			packs={[]}
 			deckName={'Normal Roland'}
 			investigatorCode="01001"
 			deckDistributions={{
@@ -135,8 +218,7 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.Core}
-			packs={[CardPack.RevisedCoreSet]}
+			packs={[]}
 			deckName={'Parallel Front Roland'}
 			investigatorCode="01001"
 			parallelFront
@@ -175,7 +257,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.ThePathToCarcosa]}
 			deckName={'Parallel Back Roland'}
 			investigatorCode="01001"
@@ -193,7 +274,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.ThePathToCarcosa]}
 			deckName={'Parallel Roland'}
 			investigatorCode="01001"
@@ -213,7 +293,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.TwoEx}
 			packs={[CardPack.TheDunwichLegacy, CardPack.EdgeOfTheEarth]}
 			deckName={'Normal Daisy'}
 			investigatorCode="01002"
@@ -252,7 +331,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.TwoEx}
 			packs={[CardPack.TheDunwichLegacy, CardPack.EdgeOfTheEarth]}
 			deckName={'Parallel Front Daisy'}
 			parallelFront
@@ -292,7 +370,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.EdgeOfTheEarth]}
 			deckName={'Parallel Back Daisy'}
 			investigatorCode="01002"
@@ -310,7 +387,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.EdgeOfTheEarth]}
 			deckName={'Parallel Daisy'}
 			investigatorCode="01002"
@@ -329,7 +405,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.ThePathToCarcosa]}
 			deckName={'Normal Skids'}
 			investigatorCode="01003"
@@ -367,7 +442,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.ThePathToCarcosa]}
 			deckName={'Parallel Front Skids'}
 			parallelFront
@@ -406,7 +480,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.EdgeOfTheEarth]}
 			deckName={'Parallel Back Skids'}
 			parallelBack
@@ -425,7 +498,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.EdgeOfTheEarth]}
 			deckName={'Parallel Skids'}
 			parallelFront
@@ -445,7 +517,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.EdgeOfTheEarth]}
 			deckName={'Normal Agnes'}
 			investigatorCode="01004"
@@ -483,7 +554,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.EdgeOfTheEarth]}
 			deckName={'Parallel Front Agnes'}
 			parallelFront
@@ -525,7 +595,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.ThePathToCarcosa]}
 			deckName={'Parallel Back Agnes'}
 			parallelBack
@@ -543,7 +612,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.ThePathToCarcosa]}
 			deckName={'Parallel Agnes'}
 			parallelFront
@@ -563,7 +631,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.EdgeOfTheEarth]}
 			deckName={'Normal Wendy'}
 			investigatorCode="01005"
@@ -607,7 +674,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.EdgeOfTheEarth]}
 			deckName={'Parallel Front Wendy'}
 			parallelFront
@@ -652,7 +718,6 @@
 			authorName="ElseWhere"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.TwoEx}
 			packs={[CardPack.TheInnsmouthConspiracy, CardPack.TheForgottenAge]}
 			deckName={'Parallel Back Wendy'}
 			parallelBack
@@ -677,7 +742,6 @@
 			authorName="ElseWhere"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.TwoEx}
 			packs={[CardPack.TheInnsmouthConspiracy, CardPack.TheForgottenAge]}
 			deckName={'Parallel Wendy'}
 			parallelFront
@@ -703,7 +767,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.TwoEx}
 			packs={[CardPack.TheDunwichLegacy, CardPack.EdgeOfTheEarth]}
 			deckName={'Turkey Flambé'}
 			investigatorCode="02001"
@@ -733,7 +796,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.TheDunwichLegacy]}
 			deckName={'Simple Dark Horse Rex Deck'}
 			investigatorCode="02002"
@@ -763,7 +825,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.TheDunwichLegacy]}
 			deckName={'News of Isabelle'}
 			investigatorCode="02003"
@@ -793,7 +854,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.TheDunwichLegacy]}
 			deckName={'The Axe Arts'}
 			investigatorCode="02004"
@@ -823,7 +883,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.TheDunwichLegacy]}
 			deckName={'Persistent Pete'}
 			investigatorCode="02005"
@@ -853,7 +912,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.TwoEx}
 			packs={[CardPack.ThePathToCarcosa, CardPack.EdgeOfTheEarth]}
 			deckName={'Actually quite smart Daniela'}
 			investigatorCode="08001"
@@ -883,7 +941,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.TwoEx}
 			packs={[CardPack.TheDunwichLegacy, CardPack.EdgeOfTheEarth]}
 			deckName={'He is single'}
 			investigatorCode="08004"
@@ -913,7 +970,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.OneEx}
 			packs={[CardPack.EdgeOfTheEarth]}
 			deckName={'The Underworld Bullwhip'}
 			investigatorCode="08007"
@@ -943,7 +999,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.TwoEx}
 			packs={[CardPack.TheDunwichLegacy, CardPack.EdgeOfTheEarth]}
 			deckName={'Mortal Kombat'}
 			investigatorCode="08010"
@@ -977,7 +1032,6 @@
 			authorName="5argon"
 			authorUrl="https://arkhamdb.com/user/profile/61394/5argon"
 			popupDb={pdb}
-			deckBadge={DeckBadge.TwoEx}
 			packs={[CardPack.ThePathToCarcosa, CardPack.EdgeOfTheEarth]}
 			deckName={'Poor and horrified Bob'}
 			investigatorCode="08016"

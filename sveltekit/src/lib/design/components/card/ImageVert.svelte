@@ -1,8 +1,10 @@
 <script lang="ts">
 	import type { CardClass } from '$lib/core/card-class'
 	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
-	import { classToBorderColorCss, classToFontColorCss } from '$lib/design/interface/card-class'
+	import { classToBorderColorCss } from '$lib/design/interface/card-class'
+	import type { CardPackIcon } from '$lib/design/interface/card-pack'
 	import { makePips } from '$lib/design/interface/string-util'
+	import CardHover from './CardHover.svelte'
 
 	export let name: string | null = null
 	export let show: boolean
@@ -10,8 +12,11 @@
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
 	export let class3: CardClass | null = null
-	export let cardId: string | null = null
-	// export let imageBase64: string | null = null
+	export let cardId: string
+	// Used in the popup.
+	export let packIcon: CardPackIcon | null = null
+	// Used in the popup.
+	export let packNumber: number | null = null
 
 	let showClasses: boolean
 	$: showClasses =
@@ -28,10 +33,30 @@
 			pips = makePips(xp)
 		}
 	}
+
+	$: nameWithPips = name + ' ' + pips
+
+	let hovering: boolean = false
+	function mouseEnterHandler(e: MouseEvent & { currentTarget: EventTarget }) {
+		hovering = true
+	}
+	function mouseLeaveHandler(e: MouseEvent & { currentTarget: EventTarget }) {
+		hovering = false
+	}
 </script>
 
 {#if show}
-	<span class={'image-strip' + ' ' + colorClass} title={name}>
+	{#if hovering}
+		<div class="card-hover">
+			<CardHover {cardId} {class1} {class2} {class3} text={name} {xp} {packIcon} {packNumber} />
+		</div>
+	{/if}
+	<span
+		class={'image-strip' + ' ' + colorClass}
+		data-text={nameWithPips}
+		on:mouseenter={mouseEnterHandler}
+		on:mouseleave={mouseLeaveHandler}
+	>
 		<img
 			draggable={false}
 			class="image-in-strip"
@@ -52,6 +77,12 @@
 {/if}
 
 <style>
+	.card-hover {
+		position: absolute;
+		z-index: 1;
+		margin-top: -20px;
+	}
+
 	.image-strip {
 		display: inline-block;
 		width: 24px;

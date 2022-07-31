@@ -1,6 +1,5 @@
 <script lang="ts" context="module">
 	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
-	import { DeckBadge } from '$lib/core/deck-badge'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import { classToBorderColorCss } from '$lib/design/interface/card-class'
 	import {
@@ -26,6 +25,9 @@
 	import TwoClassBar from './TwoClassBar.svelte'
 	import ChosenCardRender from './ChosenCardRender.svelte'
 	import CardSquareList from './CardSquareList.svelte'
+	import { coreToRcore } from '$lib/ahdb/conversion'
+	import { sortIcons } from './deck-banner-sort-icons'
+	import { createPackRequirementText } from './pack-requirement-text'
 
 	export let authorName: string
 	export let authorUrl: string
@@ -35,7 +37,6 @@
 	export let parallelFront: boolean = false
 	export let parallelBack: boolean = false
 	export let deckName: string
-	export let deckBadge: DeckBadge
 	export let packs: CardPackIcon[]
 	export let popupDb: PopupDatabase
 	export let compact: boolean = false
@@ -61,20 +62,25 @@
 	let investigatorName: string
 	let investigatorSubtitle: string
 	let investigatorClass: CardClass
+	let investigatorPack: CardPackIcon
+	$: investigatorCodeRCore =
+		!parallelFront && !parallelBack ? coreToRcore(investigatorCode) : investigatorCode
 	$: {
-		const card = popupDb.getById(investigatorCode)
+		const card = popupDb.getById(investigatorCodeRCore)
 		if (card !== null) {
 			investigatorName = card.original.n
 			investigatorSubtitle = card.original.sn ?? ''
 			investigatorClass = card.class1
+			investigatorPack = card.packIcon
 		}
 	}
 
+	$: packsSorted = sortIcons(packs, investigatorPack)
 	let packStaticUrls: string[]
 	$: {
 		packStaticUrls = []
 		for (let i = 0; i < packs.length; i += 1) {
-			packStaticUrls.push(getPackStaticUrl(packs[i], CardPackIconColor.Black))
+			packStaticUrls.push(getPackStaticUrl(packsSorted[i], CardPackIconColor.Black))
 		}
 	}
 
@@ -88,35 +94,7 @@
 		backgroundColorClass = cardClassToBackgroundClass(investigatorClass)
 	}
 
-	let badgeText: string
-	$: {
-		switch (deckBadge) {
-			case DeckBadge.Core: {
-				badgeText = 'Revised Core Set'
-				break
-			}
-			case DeckBadge.CoreS: {
-				badgeText = 'Core + Starter'
-				break
-			}
-			case DeckBadge.OneEx: {
-				badgeText = '1 Expansion'
-				break
-			}
-			case DeckBadge.OneExS: {
-				badgeText = '1 Expansion + Starter'
-				break
-			}
-			case DeckBadge.TwoEx: {
-				badgeText = '2 Expansions'
-				break
-			}
-			case DeckBadge.TwoExS: {
-				badgeText = '2 Expansions + Starter'
-				break
-			}
-		}
-	}
+	let badgeText: string = createPackRequirementText(packs)
 	let previewCardsReal: PopupDatabaseItem[] = []
 	$: {
 		previewCardsReal = []
@@ -131,13 +109,15 @@
 
 <div class={'frame ' + borderColorClass}>
 	<div class={'head ' + backgroundColorClass}>
-		<div class="packs">
-			{#each packStaticUrls as p}
-				<img class="pack-icon" src={p} alt="Pack icon" draggable="false" />
-			{/each}
-		</div>
 		<span class="deck-name">{deckName}</span>
-		<span class="deck-badge">{badgeText}</span>
+		<div class="packs">
+			{#if packs.length <= 3}
+				{#each packStaticUrls as p}
+					<img class="pack-icon" src={p} alt="Pack icon" draggable="false" />
+				{/each}
+			{/if}
+		</div>
+		<span class="deck-badge" class:non-starter={packs.length > 3}>{badgeText}</span>
 	</div>
 	<div class={'content'}>
 		<div class="first-block" class:first-block-compact={compact}>
@@ -145,18 +125,18 @@
 				<div class="compact-investigator">
 					<img
 						class={'investigator-img-compact ' + borderColorClass}
-						src={'/image/card/strip/' + investigatorCode + '.png'}
+						src={'/image/card/strip/' + investigatorCodeRCore + '.png'}
 						alt={''}
 						draggable="false"
 					/>
 					<div class="parallel-compact">
-						<ParallelInfo compact front={parallelFront} back={parallelBack} />
+						<ParallelInfo compact front={parallelFront} back={parallelBack} {investigatorCode} />
 					</div>
 				</div>
 			{:else}
 				<img
 					class={'investigator-img ' + borderColorClass}
-					src={'/image/card/square/' + investigatorCode + '.png'}
+					src={'/image/card/square/' + investigatorCodeRCore + '.png'}
 					alt={''}
 					draggable="false"
 				/>
@@ -172,7 +152,7 @@
 							<span class="investigator-subtitle">{investigatorSubtitle}</span>
 						</div>
 						<div class="parallel-info">
-							<ParallelInfo front={parallelFront} back={parallelBack} />
+							<ParallelInfo front={parallelFront} back={parallelBack} {investigatorCode} />
 						</div>
 					{/if}
 					<div class="author">
@@ -360,11 +340,16 @@
 		text-align: center;
 	}
 
+	.non-starter {
+		font-weight: bold;
+	}
+
 	.deck-name {
 		font-size: large;
 		font-weight: bold;
 		background-color: white;
 		padding: 0px 8px;
+		margin-left: 8px;
 		border-radius: 4px;
 		flex: auto;
 	}
@@ -373,7 +358,7 @@
 		display: flex;
 		align-items: center;
 		justify-items: center;
-		width: 48px;
+		width: 30px;
 		border-radius: 2px;
 		margin: 0px 4px;
 		padding: 0px 4px;
@@ -387,7 +372,8 @@
 	}
 
 	.pack-icon {
-		height: 15px;
+		max-width: 15px;
+		max-height: 15px;
 		margin: 0px 1px;
 		user-select: none;
 	}

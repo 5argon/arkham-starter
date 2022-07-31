@@ -1,7 +1,34 @@
 <script lang="ts">
+	export let investigatorCode: string
 	export let front: boolean = false
 	export let back: boolean = false
 	export let compact: boolean = false
+
+	let parallelLink: string | null = null
+	$: {
+		switch (investigatorCode) {
+			case '01001': {
+				parallelLink = 'https://www.fantasyflightgames.com/en/news/2021/6/18/by-the-book/'
+				break
+			}
+			case '01002': {
+				parallelLink = 'https://www.fantasyflightgames.com/en/news/2020/5/5/beyond-our-dimension/'
+				break
+			}
+			case '01003': {
+				parallelLink = 'https://www.fantasyflightgames.com/en/news/2020/5/5/beyond-our-dimension/'
+				break
+			}
+			case '01004': {
+				parallelLink = 'https://www.fantasyflightgames.com/en/news/2020/12/3/bad-blood/'
+				break
+			}
+			case '01005': {
+				parallelLink = 'https://www.fantasyflightgames.com/en/news/2021/12/30/red-tide-rising-1/'
+				break
+			}
+		}
+	}
 
 	const parallel = 'Parallel'
 	const parallelShort = 'Par.'
@@ -17,13 +44,27 @@
 {#if front || back}
 	<span class="frame">
 		<span class="front" class:parallel={front}>
-			{firstText}
-			{#if !compact}{frontText}{/if}
+			{#if parallelLink !== null && front}
+				<a href={parallelLink} target="_blank">
+					{firstText}
+					{#if !compact}{frontText}{/if}
+				</a>
+			{:else}
+				{firstText}
+				{#if !compact}{frontText}{/if}
+			{/if}
 		</span>
 		<span class:middle={front && back} />
 		<span class="back" class:parallel={back}>
-			{secondText}
-			{#if !compact}{backText}{/if}
+			{#if parallelLink !== null && back}
+				<a href={parallelLink} target="_blank">
+					{secondText}
+					{#if !compact}{backText}{/if}
+				</a>
+			{:else}
+				{secondText}
+				{#if !compact}{backText}{/if}
+			{/if}
 		</span>
 	</span>
 {/if}
@@ -45,6 +86,15 @@
 		border: 1px solid rgb(59, 59, 59);
 		border-radius: 4px 0px 0px 4px;
 		padding: 0px 4px;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: inherit;
+		text-decoration: underline;
 	}
 
 	.back {
