@@ -20,6 +20,8 @@ message UpgradeExportRow {
 	int32 cumulative_xp = 7;
 	string divider_text = 8;
 	bool divider = 9;
+	bool right_custom = 10;
+	string right_custom_text = 11;
 }
 
 message UpgradeExportOptions {
@@ -58,4 +60,6 @@ message UpgradeExportOptions {
 	Columns columns = 7;
 	SimpleListOptions simple_list_options = 8;
 	bool upgradeUrl = 9;
+	bool show_link = 10;
+	string show_link_text = 11;
 }

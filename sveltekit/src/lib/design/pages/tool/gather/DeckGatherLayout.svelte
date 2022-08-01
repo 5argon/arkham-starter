@@ -337,7 +337,7 @@
 </div>
 
 <div class="options">
-	{#if browser && navigator.canShare}
+	{#if browser && navigator.canShare()}
 		<Button
 			label="Share URL"
 			onClick={() => {

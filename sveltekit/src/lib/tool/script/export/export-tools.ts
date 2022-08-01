@@ -77,6 +77,8 @@ export function protoStringRestore(s: string): RestoreResult {
 				simpleList: false,
 				splitDivider: false,
 				xpSuffix: 'XP',
+				showLink: true,
+				showLinkText: "(View at arkham-starter.com)"
 			},
 		}
 	}
@@ -89,6 +91,8 @@ export function protoStringRestore(s: string): RestoreResult {
 			simpleList: false,
 			splitDivider: false,
 			xpSuffix: 'XP',
+			showLink: true,
+			showLinkText: "(View at arkham-starter.com)"
 		},
 		rows: pt.upgradeRows.map((x) => {
 			return {
@@ -122,6 +126,8 @@ export function upgradeExportToProtoString(eo: UpgradeExport): string {
 				mark: x.mark,
 				xp: x.xp,
 				xpUnlocked: x.xpUnlocked,
+				rightCustom: false,
+				rightCustomText: "",
 			}
 		}),
 	}
@@ -173,7 +179,7 @@ export function upgradeExport(uex: UpgradeExport): string {
 			if (r.divider) {
 				// When found a divider, perform generation of all the previous entries.
 				if (agg.length > 0) {
-					const subMeat = upgradeExportSubdivided(upgradeExportOptions, exportOptions, agg)
+					const subMeat = upgradeExportSubdivided(uex, upgradeExportOptions, exportOptions, agg)
 					meats.push(subMeat)
 					agg.length = 0
 				}
@@ -182,22 +188,26 @@ export function upgradeExport(uex: UpgradeExport): string {
 		}
 		// Clear up all the remaining rows
 		if (agg.length > 0) {
-			const subMeat = upgradeExportSubdivided(upgradeExportOptions, exportOptions, agg)
+			const subMeat = upgradeExportSubdivided(uex, upgradeExportOptions, exportOptions, agg)
 			meats.push(subMeat)
 			agg.length = 0
 		}
 		meat = meats.join('\n')
 	} else {
-		meat = upgradeExportSubdivided(upgradeExportOptions, exportOptions, exportRows)
+		meat = upgradeExportSubdivided(uex, upgradeExportOptions, exportOptions, exportRows)
 	}
-	const all: string[] = [meat, upgradeCode]
-	if (!uex.upgradeExportOptions.simpleList) {
-		all.push(comment)
+	const all: string[] = [meat]
+	if (!uex.upgradeExportOptions.showLink) {
+		all.push(upgradeCode)
+		if (!uex.upgradeExportOptions.simpleList) {
+			all.push(comment)
+		}
 	}
 	return all.join('\n')
 }
 
 export function upgradeExportSubdivided(
+	uex: UpgradeExport,
 	upgradeExportOptions: UpgradeExportOptions,
 	exportOptions: ExportOptions,
 	exportRows: UpgradeExportRow[],
@@ -211,12 +221,13 @@ export function upgradeExportSubdivided(
 				return upgradeExportRow(x, upgradeExportOptions, exportOptions)
 			}
 		})
+	const link = `<span class="small">[${upgradeExportOptions.showLinkText}](${makeUpgradePlannerUrl(upgradeExportToProtoString(uex))})</span>`
 	const all: string[] = [
 		openComment,
 		tableHeader(upgradeExportOptions),
 		mdColumns,
 		...rows,
-		emptyRow,
+		upgradeExportOptions.showLink ? link : emptyRow,
 		closeComment,
 	]
 	return all.join('\n')
@@ -277,9 +288,8 @@ function dividerRow(
 }
 
 function tableHeader(opt: UpgradeExportOptions): string {
-	return `|  |  |  |  | ${nbsp + opt.headers?.costHeader ?? ''} | ${
-		nbsp + opt.headers?.totalHeader ?? ''
-	} |`
+	return `|  |  |  |  | ${nbsp + opt.headers?.costHeader ?? ''} | ${nbsp + opt.headers?.totalHeader ?? ''
+		} |`
 }
 
 function makeUpgradeCode(uex: UpgradeExport): string {
@@ -307,5 +317,9 @@ function makeUpgradeCode(uex: UpgradeExport): string {
 	// 	].join(',')
 	// })
 	// const joined = rows.join('|')
-	return `[//]: # (https://arkham-starter.com/tool/upgrade?i=${proto})`
+	return `[//]: # (${makeUpgradePlannerUrl(proto)})`
+}
+
+export function makeUpgradePlannerUrl(proto: string): string {
+	return `https://arkham-starter.com/tool/upgrade?i=${proto}`
 }

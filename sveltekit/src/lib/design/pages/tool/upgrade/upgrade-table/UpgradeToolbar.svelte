@@ -12,5 +12,5 @@
 	<Button label="Add Card Row" onClick={toolbarEvents.onAddCardRow} />
 	<Button label="Add Divider Row" onClick={toolbarEvents.onAddDividerRow} />
 	<Button label="Reset" onClick={toolbarEvents.onClear} />
-	<Button label="Export Markdown" onClick={() => toolbarEvents.onExportMarkdown(pdb)} />
+	<Button label="Export" onClick={() => toolbarEvents.onExportMarkdown(pdb)} />
 </div>

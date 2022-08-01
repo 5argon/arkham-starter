@@ -4,9 +4,18 @@
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
 	import RadioGroup from '$lib/design/components/basic/RadioGroup.svelte'
 
-	import { upgradeExport, type UpgradeExportRow } from '$lib/tool/script/export/export-tools'
+	import {
+		makeUpgradePlannerUrl,
+		upgradeExport,
+		upgradeExportToProtoString,
+		type UpgradeExport,
+		type UpgradeExportRow,
+	} from '$lib/tool/script/export/export-tools'
 	import type { ExportOptions } from '$lib/proto/generated/export_options'
 	import type { UpgradeExportOptions } from '$lib/proto/generated/upgrade_export'
+	import TextBox from '$lib/design/components/basic/TextBox.svelte'
+	import { browser } from '$app/env'
+	import Button from '$lib/design/components/basic/Button.svelte'
 
 	export let singleMode: boolean
 	export let exportRows: UpgradeExportRow[]
@@ -16,15 +25,26 @@
 	export let onChangeUpgradeExportOptions: (n: UpgradeExportOptions) => void
 	export let onChangeExportOptions: (n: ExportOptions) => void
 
-	$: markdown = upgradeExport({
+	let ue: UpgradeExport
+	$: ue = {
 		upgradeExportOptions: upgradeExportOptions,
 		exportOptions: exportOptions,
 		upgradeRows: exportRows,
 		importDeckUrl: importDeckUrl,
-	})
+	}
+
+	$: markdown = upgradeExport(ue)
+	$: dataCode = upgradeExportToProtoString(ue)
+	$: link = makeUpgradePlannerUrl(dataCode)
+
+	function copyToClipboard(s: string) {
+		if (browser) {
+			navigator.clipboard.writeText(s)
+		}
+	}
 </script>
 
-<ListDivider label="Export Options" level={ListDividerLevel.One} />
+<ListDivider label="Markdown for arkhamdb.com" level={ListDividerLevel.One} />
 {#if singleMode}
 	<Checkbox
 		checked={exportOptions.cardOptions?.bold ?? false}
@@ -57,18 +77,51 @@
 		]}
 	/>
 {:else}
+	<div>
+		<Checkbox
+			checked={upgradeExportOptions.splitDivider}
+			label="Split Divider"
+			onCheckChanged={(e) => {
+				const n = { ...upgradeExportOptions }
+				n.splitDivider = e
+				onChangeUpgradeExportOptions(n)
+			}}
+		/>
+	</div>
 	<Checkbox
-		checked={upgradeExportOptions.splitDivider}
-		label="Split Divider"
+		checked={upgradeExportOptions.showLink}
+		label="Show Link"
 		onCheckChanged={(e) => {
 			const n = { ...upgradeExportOptions }
-			n.splitDivider = e
+			n.showLink = e
 			onChangeUpgradeExportOptions(n)
 		}}
 	/>
+	{#if upgradeExportOptions.showLink}
+		<TextBox
+			label={'Link Text'}
+			currentText={upgradeExportOptions.showLinkText}
+			onEndEdit={(e) => {
+				const n = { ...upgradeExportOptions }
+				n.showLinkText = e
+				onChangeUpgradeExportOptions(n)
+			}}
+		/>
+	{/if}
 {/if}
-<ListDivider label="Markdown" level={ListDividerLevel.One} />
-<textarea rows={10}>{markdown}</textarea>
+
+<div>
+	<Button label="Copy To Clipboard" onClick={() => copyToClipboard(markdown)} />
+	<textarea rows={10}>{markdown}</textarea>
+</div>
+
+<ListDivider label="Data Code" level={ListDividerLevel.One} />
+<Button label="Copy To Clipboard" onClick={() => copyToClipboard(dataCode)} />
+<textarea rows={5}>{dataCode}</textarea>
+
+<ListDivider label="Link" level={ListDividerLevel.One} />
+<Button label="Copy To Clipboard" onClick={() => copyToClipboard(link)} />
+<textarea rows={5}>{link}</textarea>
 
 <style>
 	textarea {

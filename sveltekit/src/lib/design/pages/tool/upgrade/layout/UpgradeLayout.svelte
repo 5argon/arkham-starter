@@ -28,10 +28,7 @@
 		type ExportCard,
 		type UpgradeExportRow,
 	} from '$lib/tool/script/export/export-tools'
-	import {
-		calculateXps,
-		type CalculatedXp,
-	} from '$lib/tool/upgrade/upgrade-table/xp-calculate'
+	import { calculateXps, type CalculatedXp } from '$lib/tool/upgrade/upgrade-table/xp-calculate'
 	import {
 		UpgradeExportOptions_SimpleListOptions_BlockStyle,
 		type UpgradeExportOptions,
@@ -254,6 +251,8 @@
 		simpleListOptions: {
 			blockStyle: UpgradeExportOptions_SimpleListOptions_BlockStyle.A,
 		},
+		showLink: true,
+		showLinkText: '(View at arkham-starter.com)',
 	}
 	let exportOptions: ExportOptions = {
 		cardInfo: {

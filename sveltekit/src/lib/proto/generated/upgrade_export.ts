@@ -77,6 +77,14 @@ export interface UpgradeExportRow {
      * @generated from protobuf field: bool divider = 9;
      */
     divider: boolean;
+    /**
+     * @generated from protobuf field: bool right_custom = 10;
+     */
+    rightCustom: boolean;
+    /**
+     * @generated from protobuf field: string right_custom_text = 11;
+     */
+    rightCustomText: string;
 }
 /**
  * @generated from protobuf message UpgradeExportOptions
@@ -118,6 +126,14 @@ export interface UpgradeExportOptions {
      * @generated from protobuf field: bool upgradeUrl = 9;
      */
     upgradeUrl: boolean;
+    /**
+     * @generated from protobuf field: bool show_link = 10;
+     */
+    showLink: boolean;
+    /**
+     * @generated from protobuf field: string show_link_text = 11;
+     */
+    showLinkText: string;
 }
 /**
  * @generated from protobuf message UpgradeExportOptions.Arrow
@@ -288,11 +304,13 @@ class UpgradeExportRow$Type extends MessageType<UpgradeExportRow> {
             { no: 6, name: "xp", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 7, name: "cumulative_xp", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 8, name: "divider_text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 9, name: "divider", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 9, name: "divider", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 10, name: "right_custom", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 11, name: "right_custom_text", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<UpgradeExportRow>): UpgradeExportRow {
-        const message = { mark: "", cardLeft: "", cardRight: "", xpUnlocked: false, cumulativeXpUnlocked: false, xp: 0, cumulativeXp: 0, dividerText: "", divider: false };
+        const message = { mark: "", cardLeft: "", cardRight: "", xpUnlocked: false, cumulativeXpUnlocked: false, xp: 0, cumulativeXp: 0, dividerText: "", divider: false, rightCustom: false, rightCustomText: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<UpgradeExportRow>(this, message, value);
@@ -329,6 +347,12 @@ class UpgradeExportRow$Type extends MessageType<UpgradeExportRow> {
                     break;
                 case /* bool divider */ 9:
                     message.divider = reader.bool();
+                    break;
+                case /* bool right_custom */ 10:
+                    message.rightCustom = reader.bool();
+                    break;
+                case /* string right_custom_text */ 11:
+                    message.rightCustomText = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -369,6 +393,12 @@ class UpgradeExportRow$Type extends MessageType<UpgradeExportRow> {
         /* bool divider = 9; */
         if (message.divider !== false)
             writer.tag(9, WireType.Varint).bool(message.divider);
+        /* bool right_custom = 10; */
+        if (message.rightCustom !== false)
+            writer.tag(10, WireType.Varint).bool(message.rightCustom);
+        /* string right_custom_text = 11; */
+        if (message.rightCustomText !== "")
+            writer.tag(11, WireType.LengthDelimited).string(message.rightCustomText);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -391,11 +421,13 @@ class UpgradeExportOptions$Type extends MessageType<UpgradeExportOptions> {
             { no: 6, name: "headers", kind: "message", T: () => UpgradeExportOptions_Headers },
             { no: 7, name: "columns", kind: "message", T: () => UpgradeExportOptions_Columns },
             { no: 8, name: "simple_list_options", kind: "message", T: () => UpgradeExportOptions_SimpleListOptions },
-            { no: 9, name: "upgradeUrl", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 9, name: "upgradeUrl", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 10, name: "show_link", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 11, name: "show_link_text", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<UpgradeExportOptions>): UpgradeExportOptions {
-        const message = { simpleList: false, splitDivider: false, xpSuffix: "", ignoreSmall: false, upgradeUrl: false };
+        const message = { simpleList: false, splitDivider: false, xpSuffix: "", ignoreSmall: false, upgradeUrl: false, showLink: false, showLinkText: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<UpgradeExportOptions>(this, message, value);
@@ -432,6 +464,12 @@ class UpgradeExportOptions$Type extends MessageType<UpgradeExportOptions> {
                     break;
                 case /* bool upgradeUrl */ 9:
                     message.upgradeUrl = reader.bool();
+                    break;
+                case /* bool show_link */ 10:
+                    message.showLink = reader.bool();
+                    break;
+                case /* string show_link_text */ 11:
+                    message.showLinkText = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -472,6 +510,12 @@ class UpgradeExportOptions$Type extends MessageType<UpgradeExportOptions> {
         /* bool upgradeUrl = 9; */
         if (message.upgradeUrl !== false)
             writer.tag(9, WireType.Varint).bool(message.upgradeUrl);
+        /* bool show_link = 10; */
+        if (message.showLink !== false)
+            writer.tag(10, WireType.Varint).bool(message.showLink);
+        /* string show_link_text = 11; */
+        if (message.showLinkText !== "")
+            writer.tag(11, WireType.LengthDelimited).string(message.showLinkText);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
