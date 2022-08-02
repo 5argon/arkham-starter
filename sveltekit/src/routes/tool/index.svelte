@@ -7,4 +7,5 @@
 <h1>For playing</h1>
 <ul>
 	<li><a href="/tool/gather">Deck Gather</a></li>
+	<li><a href="/tool/encounter">Encounter Set Quick Reference</a></li>
 </ul>

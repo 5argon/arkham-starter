@@ -115,13 +115,15 @@
 	<textarea rows={10}>{markdown}</textarea>
 </div>
 
-<ListDivider label="Data Code" level={ListDividerLevel.One} />
-<Button label="Copy To Clipboard" onClick={() => copyToClipboard(dataCode)} />
-<textarea rows={5}>{dataCode}</textarea>
+{#if !singleMode}
+	<ListDivider label="Data Code" level={ListDividerLevel.One} />
+	<Button label="Copy To Clipboard" onClick={() => copyToClipboard(dataCode)} />
+	<textarea rows={5}>{dataCode}</textarea>
 
-<ListDivider label="Link" level={ListDividerLevel.One} />
-<Button label="Copy To Clipboard" onClick={() => copyToClipboard(link)} />
-<textarea rows={5}>{link}</textarea>
+	<ListDivider label="Link" level={ListDividerLevel.One} />
+	<Button label="Copy To Clipboard" onClick={() => copyToClipboard(link)} />
+	<textarea rows={5}>{link}</textarea>
+{/if}
 
 <style>
 	textarea {
