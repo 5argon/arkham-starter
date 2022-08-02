@@ -51,6 +51,15 @@ message UpgradeExportOptions {
 		}
 		BlockStyle block_style = 1;
 	}
+
+	enum UpgradeExportStyle{
+		Unknown = 0;
+		MarkdownArkhamDb = 1;
+		MarkdownArkhamCards = 2;
+		Markdown = 4;
+		Forum = 3;
+	}
+
 	bool simple_list = 1;
 	bool split_divider = 2;
 	string xp_suffix = 3;
@@ -62,4 +71,5 @@ message UpgradeExportOptions {
 	bool upgradeUrl = 9;
 	bool show_link = 10;
 	string show_link_text = 11;
+	UpgradeExportStyle upgrade_export_style = 12;
 }

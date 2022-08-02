@@ -31,6 +31,7 @@
 	import { calculateXps, type CalculatedXp } from '$lib/tool/upgrade/upgrade-table/xp-calculate'
 	import {
 		UpgradeExportOptions_SimpleListOptions_BlockStyle,
+		UpgradeExportOptions_UpgradeExportStyle,
 		type UpgradeExportOptions,
 	} from '$lib/proto/generated/upgrade_export'
 	import { GlobalSettings, GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
@@ -253,6 +254,7 @@
 		},
 		showLink: true,
 		showLinkText: '(View at arkham-starter.com)',
+		upgradeExportStyle: UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb,
 	}
 	let exportOptions: ExportOptions = {
 		cardInfo: {

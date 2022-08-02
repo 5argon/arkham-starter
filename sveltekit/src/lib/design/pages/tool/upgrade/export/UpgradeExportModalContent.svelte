@@ -12,7 +12,10 @@
 		type UpgradeExportRow,
 	} from '$lib/tool/script/export/export-tools'
 	import type { ExportOptions } from '$lib/proto/generated/export_options'
-	import type { UpgradeExportOptions } from '$lib/proto/generated/upgrade_export'
+	import {
+		UpgradeExportOptions_UpgradeExportStyle,
+		type UpgradeExportOptions,
+	} from '$lib/proto/generated/upgrade_export'
 	import TextBox from '$lib/design/components/basic/TextBox.svelte'
 	import { browser } from '$app/env'
 	import Button from '$lib/design/components/basic/Button.svelte'
@@ -33,7 +36,7 @@
 		importDeckUrl: importDeckUrl,
 	}
 
-	$: markdown = upgradeExport(ue)
+	$: exportText = upgradeExport(ue)
 	$: dataCode = upgradeExportToProtoString(ue)
 	$: link = makeUpgradePlannerUrl(dataCode)
 
@@ -42,9 +45,15 @@
 			navigator.clipboard.writeText(s)
 		}
 	}
+
+	function onUpgradeExportStyleChangedHandler(e: Event & { currentTarget: HTMLSelectElement }) {
+		const n = { ...upgradeExportOptions }
+		n.upgradeExportStyle = parseInt(e.currentTarget.value)
+		onChangeUpgradeExportOptions(n)
+	}
 </script>
 
-<ListDivider label="Markdown for arkhamdb.com" level={ListDividerLevel.One} />
+<ListDivider label="Text" level={ListDividerLevel.One} />
 {#if singleMode}
 	<Checkbox
 		checked={exportOptions.cardOptions?.bold ?? false}
@@ -77,6 +86,25 @@
 		]}
 	/>
 {:else}
+	<div>
+		Style
+		<select
+			value={upgradeExportOptions.upgradeExportStyle ===
+			UpgradeExportOptions_UpgradeExportStyle.Unknown
+				? UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb
+				: upgradeExportOptions.upgradeExportStyle}
+			on:change={(e) => onUpgradeExportStyleChangedHandler(e)}
+		>
+			<option value={UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb}
+				>Markdown (arkhamdb.com)</option
+			>
+			<option value={UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamCards}
+				>Markdown (ArkhamCards)</option
+			>
+			<option value={UpgradeExportOptions_UpgradeExportStyle.Markdown}>Markdown</option>
+			<option value={UpgradeExportOptions_UpgradeExportStyle.Forum}>Forum</option>
+		</select>
+	</div>
 	<div>
 		<Checkbox
 			checked={upgradeExportOptions.splitDivider}
@@ -111,8 +139,8 @@
 {/if}
 
 <div>
-	<Button label="Copy To Clipboard" onClick={() => copyToClipboard(markdown)} />
-	<textarea rows={10}>{markdown}</textarea>
+	<Button label="Copy To Clipboard" onClick={() => copyToClipboard(exportText)} />
+	<textarea rows={10}>{exportText}</textarea>
 </div>
 
 {#if !singleMode}

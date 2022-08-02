@@ -72,12 +72,12 @@ export class FullDatabase {
 			const rbw = this.cardsMap[randomBasicWeakness]
 			this.cardsMap[randomBasicWeaknessRcore] = {
 				...rbw,
-				packIcon: CardPackIcon.RevisedCoreSet,
+				packIcon: CardPackIcon.RandomBasicWeakness,
 				original: {
 					...rbw.original,
 					code: randomBasicWeaknessRcore,
-					pack_name: 'Revised Core Set',
-					pack_code: 'rcore',
+					pack_name: 'Random Basic Weakness',
+					pack_code: 'rbw',
 				},
 			}
 		}

@@ -2,6 +2,7 @@ import { CardClass } from '$lib/core/card-class'
 import type { Row } from '$lib/tool/upgrade/interface'
 import type { ExportOptions } from '$lib/proto/generated/export_options'
 import {
+	UpgradeExportOptions_UpgradeExportStyle,
 	UpgradeExportProto,
 	UpgradeExportRow as UpgradeExportRowProto,
 	type UpgradeExportOptions,
@@ -78,7 +79,8 @@ export function protoStringRestore(s: string): RestoreResult {
 				splitDivider: false,
 				xpSuffix: 'XP',
 				showLink: true,
-				showLinkText: "(View at arkham-starter.com)"
+				showLinkText: "(View at arkham-starter.com)",
+				upgradeExportStyle: UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb,
 			},
 		}
 	}
@@ -92,7 +94,8 @@ export function protoStringRestore(s: string): RestoreResult {
 			splitDivider: false,
 			xpSuffix: 'XP',
 			showLink: true,
-			showLinkText: "(View at arkham-starter.com)"
+			showLinkText: "(View at arkham-starter.com)",
+			upgradeExportStyle: UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb,
 		},
 		rows: pt.upgradeRows.map((x) => {
 			return {

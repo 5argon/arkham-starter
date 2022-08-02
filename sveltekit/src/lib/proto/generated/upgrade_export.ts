@@ -134,6 +134,10 @@ export interface UpgradeExportOptions {
      * @generated from protobuf field: string show_link_text = 11;
      */
     showLinkText: string;
+    /**
+     * @generated from protobuf field: UpgradeExportOptions.UpgradeExportStyle upgrade_export_style = 12;
+     */
+    upgradeExportStyle: UpgradeExportOptions_UpgradeExportStyle;
 }
 /**
  * @generated from protobuf message UpgradeExportOptions.Arrow
@@ -223,6 +227,31 @@ export enum UpgradeExportOptions_SimpleListOptions_BlockStyle {
      * @generated from protobuf enum value: G = 7;
      */
     G = 7
+}
+/**
+ * @generated from protobuf enum UpgradeExportOptions.UpgradeExportStyle
+ */
+export enum UpgradeExportOptions_UpgradeExportStyle {
+    /**
+     * @generated from protobuf enum value: Unknown = 0;
+     */
+    Unknown = 0,
+    /**
+     * @generated from protobuf enum value: MarkdownArkhamDb = 1;
+     */
+    MarkdownArkhamDb = 1,
+    /**
+     * @generated from protobuf enum value: MarkdownArkhamCards = 2;
+     */
+    MarkdownArkhamCards = 2,
+    /**
+     * @generated from protobuf enum value: Markdown = 4;
+     */
+    Markdown = 4,
+    /**
+     * @generated from protobuf enum value: Forum = 3;
+     */
+    Forum = 3
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class UpgradeExportProto$Type extends MessageType<UpgradeExportProto> {
@@ -423,11 +452,12 @@ class UpgradeExportOptions$Type extends MessageType<UpgradeExportOptions> {
             { no: 8, name: "simple_list_options", kind: "message", T: () => UpgradeExportOptions_SimpleListOptions },
             { no: 9, name: "upgradeUrl", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 10, name: "show_link", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 11, name: "show_link_text", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 11, name: "show_link_text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 12, name: "upgrade_export_style", kind: "enum", T: () => ["UpgradeExportOptions.UpgradeExportStyle", UpgradeExportOptions_UpgradeExportStyle] }
         ]);
     }
     create(value?: PartialMessage<UpgradeExportOptions>): UpgradeExportOptions {
-        const message = { simpleList: false, splitDivider: false, xpSuffix: "", ignoreSmall: false, upgradeUrl: false, showLink: false, showLinkText: "" };
+        const message = { simpleList: false, splitDivider: false, xpSuffix: "", ignoreSmall: false, upgradeUrl: false, showLink: false, showLinkText: "", upgradeExportStyle: 0 };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<UpgradeExportOptions>(this, message, value);
@@ -470,6 +500,9 @@ class UpgradeExportOptions$Type extends MessageType<UpgradeExportOptions> {
                     break;
                 case /* string show_link_text */ 11:
                     message.showLinkText = reader.string();
+                    break;
+                case /* UpgradeExportOptions.UpgradeExportStyle upgrade_export_style */ 12:
+                    message.upgradeExportStyle = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -516,6 +549,9 @@ class UpgradeExportOptions$Type extends MessageType<UpgradeExportOptions> {
         /* string show_link_text = 11; */
         if (message.showLinkText !== "")
             writer.tag(11, WireType.LengthDelimited).string(message.showLinkText);
+        /* UpgradeExportOptions.UpgradeExportStyle upgrade_export_style = 12; */
+        if (message.upgradeExportStyle !== 0)
+            writer.tag(12, WireType.Varint).int32(message.upgradeExportStyle);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

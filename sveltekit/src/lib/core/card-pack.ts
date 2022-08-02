@@ -1,5 +1,6 @@
 export enum CardPack {
 	Unknown,
+	RandomBasicWeakness,
 
 	CoreSet,
 	RevisedCoreSet,

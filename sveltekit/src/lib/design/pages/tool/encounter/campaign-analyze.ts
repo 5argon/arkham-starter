@@ -1,4 +1,4 @@
-import { EncounterSetFlag, type Campaign, type EncounterSet, type Scenario } from "$lib/core/campaign"
+import { EncounterSetFlag, type Campaign, type EncounterSet, type Scenario, type ScenarioTransition } from "$lib/core/campaign"
 
 export function findCoreEncounters(c: Campaign): EncounterSet[] {
     return findUniqueEncounters(c).filter(x => {
@@ -64,6 +64,8 @@ export interface TransitionInfo {
     keep: EncounterSet[]
     add: EncounterSet[]
     remove: EncounterSet[]
+    removeToForesight: EncounterSet[]
+    addToForesight: EncounterSet[]
 }
 
 function mergeEncounters(s: Scenario | null): EncounterSet[] {
@@ -79,16 +81,39 @@ function mergeEncounters(s: Scenario | null): EncounterSet[] {
     return es
 }
 
-export function makeTransitionInfo(from: Scenario | null, to: Scenario): TransitionInfo {
+export function makeTransitionInfo(from: Scenario | null, to: Scenario, foresight: Scenario | null): TransitionInfo {
     const fromEncounters = mergeEncounters(from)
     const toEncounters = mergeEncounters(to)
-    const keep = fromEncounters.filter(value => toEncounters.includes(value));
+    const keep = fromEncounters.filter(x => toEncounters.includes(x));
     const add = toEncounters.filter(x => !keep.includes(x));
-    const remove = fromEncounters.filter(x => !keep.includes(x));
-    return {
+    let remove = fromEncounters.filter(x => !keep.includes(x));
+    let addToForesight: EncounterSet[] = []
+    let removeToForesight: EncounterSet[] = []
+    if (foresight !== null) {
+        const nextNextEncounters = mergeEncounters(foresight)
+        const nextNextDiffKeep = nextNextEncounters.filter(x => !keep.includes(x));
+        const nextNextDiffAdd = nextNextDiffKeep.filter(x => !add.includes(x));
+        removeToForesight = nextNextDiffAdd.filter(x => remove.includes(x));
+        remove = remove.filter(x => !removeToForesight.includes(x));
+        addToForesight = nextNextDiffAdd.filter(x => !removeToForesight.includes(x));
+    }
+    const res: TransitionInfo = {
         add: add,
         remove: remove,
-        keep: keep
-    }
+        keep: keep,
+        addToForesight: addToForesight,
+        removeToForesight: removeToForesight
 
+    }
+    console.log("NEW", res)
+    return res
+
+}
+
+export function findForesightChoices(c: Campaign, t: ScenarioTransition): Scenario[] {
+    const nextNextTransitions = c.scenarioTransitions.filter(x => x.from === t.to)
+    const allForesights = nextNextTransitions.map(x => x.to)
+    const dedupe = new Set<Scenario>()
+    allForesights.forEach(x => dedupe.add(x))
+    return Array.from(dedupe)
 }

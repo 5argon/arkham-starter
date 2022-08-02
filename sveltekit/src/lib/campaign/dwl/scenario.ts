@@ -1,4 +1,4 @@
-import type { Scenario } from '$lib/core/campaign'
+import { CoreGameComponent, type Scenario } from '$lib/core/campaign'
 import {
 	agentsOfYogSothoth,
 	ancientEvils,
@@ -46,17 +46,25 @@ export const extracurricularActivityScenario: Scenario = {
 export const theHouseAlwaysWinsScenario: Scenario = {
 	name: 'The House Always Wins',
 	encounterSets: [theHouseAlwaysWins, rats, badLuck, naomisCrew],
+	coreGameComponents: [CoreGameComponent.TokenElderThing],
 	encounterSetsSecondary: [strikingFear, hideousAbominations],
 }
 
 export const theMiskatonicMuseumScenario: Scenario = {
 	name: 'The Miskatonic Museum',
+	coreGameComponents: [CoreGameComponent.TokenTablet],
 	encounterSets: [theMiskatonicMuseum, chillingCold, lockedDoors, badLuck, sorcery, theBeyond],
 }
 
 export const theEssexCountyExpressScenario: Scenario = {
 	name: 'The Essex County Express',
 	encounterSets: [theEssexCountyExpress, ancientEvils, darkCult, strikingFear, theBeyond],
+	coreGameComponentsPerDifficulty: {
+		easy: [CoreGameComponent.TokenM2],
+		standard: [CoreGameComponent.TokenM3],
+		hard: [CoreGameComponent.TokenM4],
+		expert: [CoreGameComponent.TokenM5],
+	}
 }
 
 export const bloodOnTheAltarScenario: Scenario = {
