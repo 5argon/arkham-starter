@@ -30,7 +30,7 @@ import {
 } from './encounter'
 
 export const extracurricularActivityScenario: Scenario = {
-	name: 'Extracurricular Activity',
+	name: 'Extracurricular Activity (I)',
 	encounterSets: [
 		extracurricularActivity,
 		agentsOfYogSothoth,
@@ -44,7 +44,28 @@ export const extracurricularActivityScenario: Scenario = {
 }
 
 export const theHouseAlwaysWinsScenario: Scenario = {
-	name: 'The House Always Wins',
+	name: 'The House Always Wins (I)',
+	encounterSets: [theHouseAlwaysWins, rats, badLuck, naomisCrew],
+	coreGameComponents: [CoreGameComponent.TokenElderThing],
+	encounterSetsSecondary: [strikingFear, hideousAbominations],
+}
+
+export const extracurricularActivity2Scenario: Scenario = {
+	name: 'Extracurricular Activity (II)',
+	encounterSets: [
+		extracurricularActivity,
+		agentsOfYogSothoth,
+		ancientEvils,
+		lockedDoors,
+		bishopsThralls,
+		sorcery,
+		theBeyond,
+		whippoorwills,
+	],
+}
+
+export const theHouseAlwaysWins2Scenario: Scenario = {
+	name: 'The House Always Wins (II)',
 	encounterSets: [theHouseAlwaysWins, rats, badLuck, naomisCrew],
 	coreGameComponents: [CoreGameComponent.TokenElderThing],
 	encounterSetsSecondary: [strikingFear, hideousAbominations],
