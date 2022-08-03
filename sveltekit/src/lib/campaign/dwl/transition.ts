@@ -15,10 +15,10 @@ import {
 export const transitions: ScenarioTransition[] = [
     { from: null, to: extracurricularActivityScenario },
     { from: extracurricularActivityScenario, to: theHouseAlwaysWins2Scenario },
-    { from: theHouseAlwaysWins2Scenario, to: theMiskatonicMuseumScenario },
-
     { from: null, to: theHouseAlwaysWinsScenario },
     { from: theHouseAlwaysWinsScenario, to: extracurricularActivity2Scenario },
+
+    { from: theHouseAlwaysWins2Scenario, to: theMiskatonicMuseumScenario },
     { from: extracurricularActivity2Scenario, to: theMiskatonicMuseumScenario },
 
     { from: theMiskatonicMuseumScenario, to: theEssexCountyExpressScenario },

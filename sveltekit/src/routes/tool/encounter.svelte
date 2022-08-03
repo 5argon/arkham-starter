@@ -8,4 +8,5 @@
 <ul>
 	<li><a href="./encounter/notz">Night of the Zealot</a></li>
 	<li><a href="./encounter/dwl">The Dunwich Legacy</a></li>
+	<li><a href="./encounter/eote">Edge of the Earth</a></li>
 </ul>

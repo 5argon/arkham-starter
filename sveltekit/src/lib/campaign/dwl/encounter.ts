@@ -1,4 +1,4 @@
-import type { EncounterSet } from "$lib/core/campaign";
+import { EncounterSetFlag, type EncounterSet } from "$lib/core/campaign";
 
 const folder = "The Dunwich Legacy/"
 const scenarioFolder = "Scenarios/"
@@ -60,6 +60,7 @@ export const whippoorwills: EncounterSet = {
 export const extracurricularActivity: EncounterSet = {
     name: "Extracurricular Activity",
     icon: folder + scenarioFolder + "TDL 1A - Extracurricular Activity",
+    flag: EncounterSetFlag.Scenario,
     count: 21,
     startingEncounterDeckCount: 0,
 }
@@ -67,6 +68,7 @@ export const extracurricularActivity: EncounterSet = {
 export const theHouseAlwaysWins: EncounterSet = {
     name: "The House Always Wins",
     icon: folder + scenarioFolder + "TDL 1B - The House Always Wins",
+    flag: EncounterSetFlag.Scenario,
     count: 23,
     startingEncounterDeckCount: 4,
 }
@@ -75,6 +77,7 @@ export const theHouseAlwaysWins: EncounterSet = {
 export const theMiskatonicMuseum: EncounterSet = {
     name: "The Miskatonic Museum",
     icon: folder + scenarioFolder + "TDL 2 - The Miskatonic Museum",
+    flag: EncounterSetFlag.Scenario,
     count: 34,
     startingEncounterDeckCount: 10,
 }
@@ -82,6 +85,7 @@ export const theMiskatonicMuseum: EncounterSet = {
 export const theEssexCountyExpress: EncounterSet = {
     name: "The Essex County Express",
     icon: folder + scenarioFolder + "TDL 3 - The Essex County Express",
+    flag: EncounterSetFlag.Scenario,
     count: 36,
     startingEncounterDeckCount: 13,
 }
@@ -89,6 +93,7 @@ export const theEssexCountyExpress: EncounterSet = {
 export const bloodOnTheAltar: EncounterSet = {
     name: "Blood on the Altar",
     icon: folder + scenarioFolder + "TDL 4 - Blood on the Altar",
+    flag: EncounterSetFlag.Scenario,
     count: 38,
     startingEncounterDeckCount: 13,
 }
@@ -96,6 +101,7 @@ export const bloodOnTheAltar: EncounterSet = {
 export const undimensionedAndUnseen: EncounterSet = {
     name: "Undimensioned and Unseen",
     icon: folder + scenarioFolder + "TDL 5 - Undimensioned and Unseen",
+    flag: EncounterSetFlag.Scenario,
     count: 38,
     startingEncounterDeckCount: 11,
 }
@@ -103,6 +109,7 @@ export const undimensionedAndUnseen: EncounterSet = {
 export const whereDoomAwaits: EncounterSet = {
     name: "Where Doom Awaits",
     icon: folder + scenarioFolder + "TDL 6 - Where Doom Awaits",
+    flag: EncounterSetFlag.Scenario,
     count: 32,
     startingEncounterDeckCount: 12,
 }
@@ -110,6 +117,7 @@ export const whereDoomAwaits: EncounterSet = {
 export const lostInTimeAndSpace: EncounterSet = {
     name: "Lost in Time and Space",
     icon: folder + scenarioFolder + "TDL 7 - Lost in Time and Space",
+    flag: EncounterSetFlag.Scenario,
     count: 36,
     startingEncounterDeckCount: 23,
 }

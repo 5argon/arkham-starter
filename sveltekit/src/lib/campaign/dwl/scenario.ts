@@ -1,4 +1,4 @@
-import { CoreGameComponent, type Scenario } from '$lib/core/campaign'
+import { GameComponent, type Scenario } from '$lib/core/campaign'
 import {
 	agentsOfYogSothoth,
 	ancientEvils,
@@ -30,6 +30,7 @@ import {
 } from './encounter'
 
 export const extracurricularActivityScenario: Scenario = {
+	index: 1,
 	name: 'Extracurricular Activity (I)',
 	encounterSets: [
 		extracurricularActivity,
@@ -44,13 +45,15 @@ export const extracurricularActivityScenario: Scenario = {
 }
 
 export const theHouseAlwaysWinsScenario: Scenario = {
+	index: 2,
 	name: 'The House Always Wins (I)',
 	encounterSets: [theHouseAlwaysWins, rats, badLuck, naomisCrew],
-	coreGameComponents: [CoreGameComponent.TokenElderThing],
+	gameComponents: [GameComponent.TokenElderThing],
 	encounterSetsSecondary: [strikingFear, hideousAbominations],
 }
 
 export const extracurricularActivity2Scenario: Scenario = {
+	index: 3,
 	name: 'Extracurricular Activity (II)',
 	encounterSets: [
 		extracurricularActivity,
@@ -65,41 +68,47 @@ export const extracurricularActivity2Scenario: Scenario = {
 }
 
 export const theHouseAlwaysWins2Scenario: Scenario = {
+	index: 4,
 	name: 'The House Always Wins (II)',
 	encounterSets: [theHouseAlwaysWins, rats, badLuck, naomisCrew],
-	coreGameComponents: [CoreGameComponent.TokenElderThing],
+	gameComponents: [GameComponent.TokenElderThing],
 	encounterSetsSecondary: [strikingFear, hideousAbominations],
 }
 
 export const theMiskatonicMuseumScenario: Scenario = {
+	index: 5,
 	name: 'The Miskatonic Museum',
-	coreGameComponents: [CoreGameComponent.TokenTablet],
+	gameComponents: [GameComponent.TokenTablet],
 	encounterSets: [theMiskatonicMuseum, chillingCold, lockedDoors, badLuck, sorcery, theBeyond],
 }
 
 export const theEssexCountyExpressScenario: Scenario = {
+	index: 6,
 	name: 'The Essex County Express',
 	encounterSets: [theEssexCountyExpress, ancientEvils, darkCult, strikingFear, theBeyond],
-	coreGameComponentsPerDifficulty: {
-		easy: [CoreGameComponent.TokenM2],
-		standard: [CoreGameComponent.TokenM3],
-		hard: [CoreGameComponent.TokenM4],
-		expert: [CoreGameComponent.TokenM5],
+	gameComponentsPerDifficulty: {
+		easy: [GameComponent.TokenM2],
+		standard: [GameComponent.TokenM3],
+		hard: [GameComponent.TokenM4],
+		expert: [GameComponent.TokenM5],
 	}
 }
 
 export const bloodOnTheAltarScenario: Scenario = {
+	index: 7,
 	name: 'Blood on the Altar',
 	encounterSets: [bloodOnTheAltar, ancientEvils, nightgaunts, dunwich, whippoorwills],
 	encounterSetsSecondary: [naomisCrew],
 }
 
 export const undimensionedAndUnseenScenario: Scenario = {
+	index: 8,
 	name: 'Undimensioned and Unseen',
 	encounterSets: [undimensionedAndUnseen, strikingFear, beastThralls, dunwich, whippoorwills],
 }
 
 export const whereDoomAwaitsScenario: Scenario = {
+	index: 9,
 	name: 'Where Doom Awaits',
 	encounterSets: [
 		whereDoomAwaits,
@@ -114,6 +123,7 @@ export const whereDoomAwaitsScenario: Scenario = {
 }
 
 export const lostInTimeAndSpaceScenario: Scenario = {
+	index: 10,
 	name: 'Lost in Time and Space',
 	encounterSets: [lostInTimeAndSpace, agentsOfYogSothoth, hideousAbominations, sorcery, theBeyond],
 }

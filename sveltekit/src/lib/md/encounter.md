@@ -38,7 +38,7 @@ The "Set aside" section indicates that you should not shuffle these sets togethe
 
 One layer higher from a scenario are transitions. Campaign is composed of finite sequence of transitions from one scenario to other, which links up into a tree visualized by the official campaign log.
 
-This tab let you select from all these possible transitions instead of individual scenario. Each transition is a **pair** of scenario except the first one where you start the game.
+This tab let you select from all these possible transitions instead of individual scenario. They are filtered to those that starts from the selected scenario, which is linked with the Scenario Tab. Each transition is a **pair** of scenario except the first one where you start the game.
 
 ## Pre-gather for the next session
 
@@ -54,7 +54,7 @@ Assembling needed encounter sets ahead of time can improve excitement on the nex
 
 ## Foresight
 
-An extremely nerdy and niche feature, I am not sure if anyone other than me wants to do this. It attempts to pre-gather a encounter set **next to the next session** while tearing down the current one.
+An extremely nerdy and niche feature, I am not sure if anyone other than me wants to do this. It attempts to pre-gather encounter sets **next to the next session** while tearing down the current one, as much as possible.
 
 If there is only one choice what the next-next scenario would be, you just have to check "Foresight". Otherwise, the UI will show all the possible ones based on available transitions for you to select which one to Foresight.
 

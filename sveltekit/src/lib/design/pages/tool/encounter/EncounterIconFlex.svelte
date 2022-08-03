@@ -1,15 +1,31 @@
 <script type="ts">
-	import { EncounterSetFlag, type EncounterSet } from '$lib/core/campaign'
+	import {
+		EncounterSetFlag,
+		isEncounterSetWithModification,
+		type EncounterSet,
+		type EncounterSetItem,
+	} from '$lib/core/campaign'
 	import EncounterIcon from './EncounterIcon.svelte'
 
-	export let encounterSets: EncounterSet[]
+	export let encounterSets: EncounterSetItem[]
 	export let showName: boolean = false
 	export let firstIsScenarioSet: boolean = false
 	export let hideStartingEncoutnerSetNumber: boolean = false
+	let encounterSetsExtracted: EncounterSet[] = []
+	$: {
+		encounterSetsExtracted = []
+		encounterSets.forEach((x) => {
+			if (isEncounterSetWithModification(x)) {
+				encounterSetsExtracted.push(x.encounterSet)
+			} else {
+				encounterSetsExtracted.push(x)
+			}
+		})
+	}
 </script>
 
 <div>
-	{#each encounterSets as ce, i}
+	{#each encounterSetsExtracted as ce, i}
 		<EncounterIcon
 			iconPath={ce.icon}
 			iconName={ce.name}

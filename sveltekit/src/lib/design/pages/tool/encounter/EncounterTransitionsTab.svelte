@@ -2,12 +2,23 @@
 	import type { Campaign, Scenario, ScenarioTransition } from '$lib/core/campaign'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-	import PackIconHover from '$lib/design/components/card/PackIconHover.svelte'
-	import { once } from 'svelte/internal'
-	import { findForesightChoices, makeTransitionInfo } from './campaign-analyze'
+	import {
+		filterPossibleTransitions,
+		findForesightChoices,
+		findUniqueScenarios,
+		makeTransitionInfo,
+		type TransitionInfo,
+	} from './campaign-analyze'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	export let campaign: Campaign
-	export let dropdownIndex: number = 0
+	export let dropdownIndexScenario: number = 0
+	export let dropdownIndexTransition: number = 0
+	export let onDropdownIndexScenarioChanged: (n: number) => void = (n) => {
+		dropdownIndexScenario = n
+	}
+	export let onDropdownIndexTransitionChanged: (n: number) => void = (n) => {
+		dropdownIndexTransition = n
+	}
 	export let showName: boolean = false
 	export let foresightChecked: boolean = false
 	export let selectedForesightIndex: number = 0
@@ -17,19 +28,32 @@
 	export let onChangeForesight: (c: boolean) => void = (c) => {
 		foresightChecked = c
 	}
-	export let onDropdownIndexChanged: (n: number) => void = (n) => {
-		dropdownIndex = n
+	let scenarios: Scenario[]
+	$: {
+		scenarios = findUniqueScenarios(campaign)
 	}
-	$: selectedScenarioIndex = dropdownIndex
 
-	const scenarioTransitions: ScenarioTransition[] = campaign.scenarioTransitions
-	$: selectedScenarioTransition = scenarioTransitions[selectedScenarioIndex]
+	let possibleTransitions: ScenarioTransition[]
+	let selectedScenarioTransition: ScenarioTransition | null
+
+	$: {
+		const selectedScenario: Scenario = scenarios[dropdownIndexScenario]
+		possibleTransitions = filterPossibleTransitions(campaign.scenarioTransitions, selectedScenario)
+		if (dropdownIndexTransition >= possibleTransitions.length) {
+			selectedScenarioTransition = null
+		} else {
+			selectedScenarioTransition = possibleTransitions[dropdownIndexTransition]
+		}
+	}
 
 	let cannotForesight: boolean = false
 	let foresightChoices: Scenario[] = []
 	let oneChoice: boolean = false
 	$: {
-		foresightChoices = findForesightChoices(campaign, selectedScenarioTransition)
+		foresightChoices =
+			selectedScenarioTransition === null
+				? []
+				: findForesightChoices(campaign, selectedScenarioTransition)
 		if (foresightChoices.length === 0) {
 			cannotForesight = true
 			oneChoice = false
@@ -59,73 +83,112 @@
 		}
 	}
 
-	function onChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
-		onDropdownIndexChanged(parseInt(e.currentTarget.value))
+	function onScenarioChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
+		onDropdownIndexScenarioChanged(parseInt(e.currentTarget.value))
+	}
+
+	function onTransitionChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
+		onDropdownIndexTransitionChanged(parseInt(e.currentTarget.value))
 	}
 
 	function makeTransitionString(from: Scenario | null, to: Scenario | null): string {
 		const arrow = from !== null && to !== null
 		return (from?.name ?? '') + (arrow ? ' → ' : '') + (to?.name ?? '')
 	}
-	$: ti = makeTransitionInfo(
-		selectedScenarioTransition.from,
-		selectedScenarioTransition.to,
-		foresighting,
-	)
+	let ti: TransitionInfo | null
+	$: {
+		if (selectedScenarioTransition !== null) {
+			ti = makeTransitionInfo(
+				selectedScenarioTransition.from,
+				selectedScenarioTransition.to,
+				foresighting,
+			)
+		} else {
+			ti = null
+		}
+	}
 </script>
 
-<div>
-	<span>Transition</span>
-	<select name="transitions" value={selectedScenarioIndex} on:change={(e) => onChangeHandler(e)}>
-		{#each scenarioTransitions as s, i}
-			<option value={i}>{makeTransitionString(s.from, s.to)}</option>
+<div class="dropdown">
+	<span>Scenario</span>
+	<select
+		name="scenario"
+		value={dropdownIndexScenario}
+		on:change={(e) => onScenarioChangeHandler(e)}
+	>
+		{#each scenarios as s, i}
+			<option value={i}>{s.name}</option>
 		{/each}
 	</select>
-
-	{#if !cannotForesight}
-		<Checkbox
-			label={'Foresight'}
-			checked={foresightChecked}
-			onCheckChanged={(c) => {
-				onChangeForesight(c)
-			}}
-		/>
-		{#if onlyForesightChoice !== null}
-			<span>
-				( → {onlyForesightChoice.name})
-			</span>
-		{/if}
-	{/if}
 </div>
 
-<ListDivider label={'Keep'} />
-<EncounterIconFlex encounterSets={ti.keep} {showName} hideStartingEncoutnerSetNumber />
-<ListDivider label={'Add'} />
-<EncounterIconFlex
-	encounterSets={ti.add}
-	{showName}
-	firstIsScenarioSet
-	hideStartingEncoutnerSetNumber
-/>
-<ListDivider label={'Remove'} />
-<EncounterIconFlex
-	encounterSets={ti.remove}
-	{showName}
-	firstIsScenarioSet
-	hideStartingEncoutnerSetNumber
-/>
-{#if foresighting !== null}
-	<ListDivider label={'Remove to Foresight'} />
+{#if ti !== null}
+	<div class="dropdown">
+		<span>Transition</span>
+		<select
+			name="transitions"
+			value={dropdownIndexTransition}
+			on:change={(e) => onTransitionChangeHandler(e)}
+		>
+			{#each possibleTransitions as s, i}
+				<option value={i}>{makeTransitionString(s.from, s.to)}</option>
+			{/each}
+		</select>
+
+		{#if !cannotForesight}
+			<Checkbox
+				label={'Foresight'}
+				checked={foresightChecked}
+				onCheckChanged={(c) => {
+					onChangeForesight(c)
+				}}
+			/>
+			{#if onlyForesightChoice !== null}
+				<span>
+					( → {onlyForesightChoice.name})
+				</span>
+			{/if}
+		{/if}
+	</div>
+
+	<ListDivider label={'Keep'} />
+	<EncounterIconFlex encounterSets={ti.keep} {showName} hideStartingEncoutnerSetNumber />
+	<ListDivider label={'Add'} />
 	<EncounterIconFlex
-		encounterSets={ti.removeToForesight}
-		{showName}
-		hideStartingEncoutnerSetNumber
-	/>
-	<ListDivider label={'Add to Foresight'} />
-	<EncounterIconFlex
-		encounterSets={ti.addToForesight}
+		encounterSets={ti.add}
 		{showName}
 		firstIsScenarioSet
 		hideStartingEncoutnerSetNumber
 	/>
+	<ListDivider label={'Remove'} />
+	<EncounterIconFlex
+		encounterSets={ti.remove}
+		{showName}
+		firstIsScenarioSet
+		hideStartingEncoutnerSetNumber
+	/>
+	{#if foresighting !== null}
+		<ListDivider label={'Remove to Foresight'} />
+		<EncounterIconFlex
+			encounterSets={ti.removeToForesight}
+			{showName}
+			hideStartingEncoutnerSetNumber
+		/>
+		<ListDivider label={'Add to Foresight'} />
+		<EncounterIconFlex
+			encounterSets={ti.addToForesight}
+			{showName}
+			firstIsScenarioSet
+			hideStartingEncoutnerSetNumber
+		/>
+	{/if}
 {/if}
+{#if ti === null}
+	No transitions available from scenario.
+{/if}
+
+<style>
+	.dropdown {
+		margin: 4px 0px;
+	}
+</style>

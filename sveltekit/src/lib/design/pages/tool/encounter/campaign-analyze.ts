@@ -1,4 +1,4 @@
-import { EncounterSetFlag, type Campaign, type EncounterSet, type Scenario, type ScenarioTransition } from "$lib/core/campaign"
+import { EncounterSetFlag, isEncounterSetWithModification, type Campaign, type EncounterSet, type Scenario, type ScenarioTransition } from "$lib/core/campaign"
 
 export function findCoreEncounters(c: Campaign): EncounterSet[] {
     return findUniqueEncounters(c).filter(x => {
@@ -28,27 +28,14 @@ export function findUniqueEncounters(c: Campaign): EncounterSet[] {
     const t = c.scenarioTransitions.flatMap<EncounterSet>(x => {
         const result: EncounterSet[] = []
         if (x.from !== null) {
-            proc(x.from).forEach(y => {
+            mergeEncounters(x.from).forEach(y => {
                 result.push(y)
             })
         }
         if (x.to !== null) {
-            proc(x.to).forEach(y => {
+            mergeEncounters(x.to).forEach(y => {
                 result.push(y)
             })
-        }
-        function proc(s: Scenario): EncounterSet[] {
-            const e = [...s.encounterSets]
-            if (s.encounterSetsSecondary !== undefined) {
-                s.encounterSetsSecondary.forEach(y => {
-                    if (Array.isArray(y)) {
-                        e.push(...y)
-                    } else {
-                        e.push(y)
-                    }
-                })
-            }
-            return e
         }
         return result
     })
@@ -72,13 +59,28 @@ function mergeEncounters(s: Scenario | null): EncounterSet[] {
     if (s === null) {
         return []
     }
-    const es: EncounterSet[] = [...s.encounterSets]
+    const es: EncounterSet[] = []
+    s.encounterSets.forEach(x => {
+        if (isEncounterSetWithModification(x)) {
+            es.push(x.encounterSet)
+        } else {
+            es.push(x)
+        }
+    })
     if (s.encounterSetsSecondary !== undefined) {
         s.encounterSetsSecondary.forEach(x => {
-            es.push(x)
+            if (isEncounterSetWithModification(x)) {
+                es.push(x.encounterSet)
+            } else {
+                es.push(x)
+            }
         })
     }
     return es
+}
+
+export function filterPossibleTransitions(allTransitions: ScenarioTransition[], currentScenario: Scenario): ScenarioTransition[] {
+    return allTransitions.filter(x => x.from === currentScenario)
 }
 
 export function makeTransitionInfo(from: Scenario | null, to: Scenario, foresight: Scenario | null): TransitionInfo {
@@ -105,9 +107,7 @@ export function makeTransitionInfo(from: Scenario | null, to: Scenario, foresigh
         removeToForesight: removeToForesight
 
     }
-    console.log("NEW", res)
     return res
-
 }
 
 export function findForesightChoices(c: Campaign, t: ScenarioTransition): Scenario[] {

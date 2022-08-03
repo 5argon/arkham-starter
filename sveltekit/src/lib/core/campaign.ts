@@ -8,26 +8,41 @@ export interface EncounterSet {
 
 export enum EncounterSetFlag {
     Core,
-    ReturnTo
+    ReturnTo,
+    Scenario
 }
 
 export interface Campaign {
     name: string,
     scenarioTransitions: ScenarioTransition[]
     commonEncounterSets?: EncounterSet[]
-    startingChaosBag?: PerDifficultySettings<CoreGameComponent[]>
+    startingChaosBag?: PerDifficultySettings<GameComponent[]>
 }
 
 export interface Scenario {
+    index: number
     name: string
 
     /**
      * First element assumed to be scenario's unique encounter set.
      */
-    encounterSets: EncounterSet[]
-    encounterSetsSecondary?: EncounterSet[]
-    coreGameComponents?: CoreGameComponent[]
-    coreGameComponentsPerDifficulty?: PerDifficultySettings<CoreGameComponent[]>
+    encounterSets: EncounterSetItem[]
+    encounterSetsSecondary?: EncounterSetItem[]
+    gameComponents?: GameComponent[]
+    gameComponentsPerDifficulty?: PerDifficultySettings<GameComponent[]>
+}
+
+export type EncounterSetItem = EncounterSet | EncounterSetWithModification
+
+export interface EncounterSetWithModification {
+    encounterSet: EncounterSet,
+    subtractCount?: number
+    overwriteCount?: number
+}
+
+export function isEncounterSetWithModification(e: EncounterSetItem)
+    : e is EncounterSetWithModification {
+    return "encounterSet" in e
 }
 
 export interface PerDifficultySettings<T> {
@@ -37,7 +52,7 @@ export interface PerDifficultySettings<T> {
     expert?: T
 }
 
-export enum CoreGameComponent {
+export enum GameComponent {
     TokenP1,
     Token0,
     TokenM1,
@@ -55,6 +70,11 @@ export enum CoreGameComponent {
     TokenAutofail,
     TokenElderSign,
     TokenFrost,
+    Seal1,
+    Seal2,
+    Seal3,
+    Seal4,
+    Seal5,
 }
 
 export interface ScenarioTransition {

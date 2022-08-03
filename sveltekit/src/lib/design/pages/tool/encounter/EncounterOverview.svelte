@@ -78,8 +78,14 @@
 		<div slot="content3">
 			<EncounterTransitionsTab
 				{campaign}
-				dropdownIndex={transitionTabIndex}
-				onDropdownIndexChanged={(n) => {
+				dropdownIndexScenario={scenarioTabIndex}
+				dropdownIndexTransition={transitionTabIndex}
+				onDropdownIndexScenarioChanged={(n) => {
+					scenarioTabIndex = n
+					// Is it right that this logic is not inside the component?
+					transitionTabIndex = 0
+				}}
+				onDropdownIndexTransitionChanged={(n) => {
 					transitionTabIndex = n
 				}}
 				{showName}

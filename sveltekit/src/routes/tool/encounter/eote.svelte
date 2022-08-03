@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { theDunwichLegacyCampaign } from '$lib/campaign/dwl/campaign'
+	import { edgeOfTheEarthCampaign } from '$lib/campaign/eote/campaign'
 
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import EncounterOverview from '$lib/design/pages/tool/encounter/EncounterOverview.svelte'
@@ -8,8 +8,8 @@
 
 <PageTitle
 	subTitle="Tool"
-	title={'Encounter Set Quick Reference (The Dunwich Legacy)'}
+	title={'Encounter Set Quick Reference (Edge of the Earth)'}
 	helpMd={help}
 />
 
-<EncounterOverview campaign={theDunwichLegacyCampaign} />
+<EncounterOverview campaign={edgeOfTheEarthCampaign} />
