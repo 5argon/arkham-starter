@@ -11,6 +11,7 @@
 	} from './campaign-analyze'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	export let campaign: Campaign
+	export let advanced: boolean
 	export let dropdownIndexScenario: number = 0
 	export let dropdownIndexTransition: number = 0
 	export let onDropdownIndexScenarioChanged: (n: number) => void = (n) => {
@@ -21,10 +22,7 @@
 	}
 	export let showName: boolean = false
 	export let foresightChecked: boolean = false
-	export let selectedForesightIndex: number = 0
-	export let onChangeForesightIndex: (n: number) => void = (n) => {
-		selectedForesightIndex = n
-	}
+	let selectedForesightIndex: number = 0
 	export let onChangeForesight: (c: boolean) => void = (c) => {
 		foresightChecked = c
 	}
@@ -64,7 +62,7 @@
 			} else {
 				onlyForesightChoice = null
 			}
-			onChangeForesightIndex(0)
+			selectedForesightIndex = 0
 		}
 	}
 
@@ -107,6 +105,14 @@
 			ti = null
 		}
 	}
+
+	let foresightLabel: string
+	$: {
+		foresightLabel = 'Foresight'
+		if (onlyForesightChoice !== null) {
+			foresightLabel = foresightLabel + ' ( → ' + onlyForesightChoice.name + ')'
+		}
+	}
 </script>
 
 <div class="dropdown">
@@ -135,56 +141,49 @@
 			{/each}
 		</select>
 
-		{#if !cannotForesight}
-			<Checkbox
-				label={'Foresight'}
-				checked={foresightChecked}
-				onCheckChanged={(c) => {
-					onChangeForesight(c)
-				}}
-			/>
-			{#if onlyForesightChoice !== null}
-				<span>
-					( → {onlyForesightChoice.name})
-				</span>
+		{#if advanced}
+			{#if !cannotForesight}
+				<Checkbox
+					label={foresightLabel}
+					checked={foresightChecked}
+					onCheckChanged={(c) => {
+						onChangeForesight(c)
+					}}
+				/>
+			{/if}
+			{#if !onlyForesightChoice}
+				<select
+					name="transitions"
+					value={selectedForesightIndex}
+					on:change={(e) => {
+						selectedForesightIndex = parseInt(e.currentTarget.value)
+					}}
+				>
+					{#each foresightChoices as s, i}
+						<option value={i}>{'→ ' + s.name}</option>
+					{/each}
+				</select>
 			{/if}
 		{/if}
 	</div>
 
 	<ListDivider label={'Keep'} />
-	<EncounterIconFlex encounterSets={ti.keep} {showName} hideStartingEncoutnerSetNumber />
+	<EncounterIconFlex encounterSets={ti.keep} {showName} hideNumbers />
 	<ListDivider label={'Add'} />
-	<EncounterIconFlex
-		encounterSets={ti.add}
-		{showName}
-		firstIsScenarioSet
-		hideStartingEncoutnerSetNumber
-	/>
+	<EncounterIconFlex encounterSets={ti.add} {showName} hideNumbers />
 	<ListDivider label={'Remove'} />
-	<EncounterIconFlex
-		encounterSets={ti.remove}
-		{showName}
-		firstIsScenarioSet
-		hideStartingEncoutnerSetNumber
-	/>
-	{#if foresighting !== null}
-		<ListDivider label={'Remove to Foresight'} />
-		<EncounterIconFlex
-			encounterSets={ti.removeToForesight}
-			{showName}
-			hideStartingEncoutnerSetNumber
-		/>
-		<ListDivider label={'Add to Foresight'} />
-		<EncounterIconFlex
-			encounterSets={ti.addToForesight}
-			{showName}
-			firstIsScenarioSet
-			hideStartingEncoutnerSetNumber
-		/>
+	<EncounterIconFlex encounterSets={ti.remove} {showName} hideNumbers />
+	{#if advanced}
+		{#if foresighting !== null}
+			<ListDivider label={'Remove to Foresight'} />
+			<EncounterIconFlex encounterSets={ti.removeToForesight} {showName} hideNumbers />
+			<ListDivider label={'Add to Foresight'} />
+			<EncounterIconFlex encounterSets={ti.addToForesight} {showName} hideNumbers />
+		{/if}
 	{/if}
 {/if}
 {#if ti === null}
-	No transitions available from scenario.
+	No transition available from this scenario.
 {/if}
 
 <style>

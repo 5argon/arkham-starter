@@ -3,9 +3,9 @@
 
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import EncounterOverview from '$lib/design/pages/tool/encounter/EncounterOverview.svelte'
-	import help from '$lib/md/encounter.md?raw'
+	import help from '$lib/md/campaign-reference.md?raw'
 </script>
 
-<PageTitle subTitle="Tool" title={'Encounter Set Quick Reference (Night of the Zealot)'} helpMd={help} />
+<PageTitle subTitle="Tool" title={'Campaign Reference: Night of the Zealot'} helpMd={help} />
 
 <EncounterOverview campaign={nightOfTheZealotCampaign} />

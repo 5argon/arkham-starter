@@ -15,4 +15,4 @@ Right now, it has several utilities that help you play the game. These are actua
 - [Upgrade Planner](/tool/upgrade)
 - [Card List](/tool/list)
 - [Deck Gather](/tool/gather)
-- [Encounter Set Quick Reference](/tool/encounter)
+- [Campaign Reference](/tool/campaign)

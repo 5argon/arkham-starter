@@ -6,7 +6,7 @@
 		type Scenario,
 	} from '$lib/core/campaign'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-	import { findUniqueScenarios } from './campaign-analyze'
+	import { findUniqueScenarios, mergeEncounters } from './campaign-analyze'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	export let campaign: Campaign
 	export let showName: boolean = false
@@ -24,13 +24,15 @@
 
 	$: count = selectedScenario.encounterSets.reduce<number>((p, c) => {
 		if (!isEncounterSetWithModification(c)) {
-			return p + (c.startingEncounterDeckCount ? c.startingEncounterDeckCount : c.count)
+			return (
+				p + (c.startingEncounterDeckCount !== undefined ? c.startingEncounterDeckCount : c.count)
+			)
 		} else {
 			const starting = c.encounterSet.startingEncounterDeckCount
 			const subtract = c.subtractCount
 			const overwriteCount = c.overwriteCount
-			if (overwriteCount) {
-				return overwriteCount
+			if (overwriteCount !== undefined) {
+				return p + overwriteCount
 			}
 			return p + ((starting ? starting : c.encounterSet.count) - (subtract ?? 0))
 		}
@@ -50,11 +52,14 @@
 	</select>
 </div>
 
-<ListDivider label={'Starting Encounter Deck (' + count + ' Cards)'} />
-<EncounterIconFlex encounterSets={selectedScenario.encounterSets} {showName} firstIsScenarioSet />
+<ListDivider label={'Encounter Sets'} />
+<EncounterIconFlex encounterSets={mergeEncounters(selectedScenario)} {showName} hideNumbers />
+
+<ListDivider label={'Starting Encounter Deck ( ' + count + ' cards )'} />
+<EncounterIconFlex encounterSets={selectedScenario.encounterSets} {showName} />
 
 {#if selectedScenario.encounterSetsSecondary !== undefined}
-	<ListDivider label={'Set aside'} />
+	<ListDivider label={'Set Aside'} />
 	<EncounterIconFlex encounterSets={selectedScenario.encounterSetsSecondary} {showName} />
 {/if}
 

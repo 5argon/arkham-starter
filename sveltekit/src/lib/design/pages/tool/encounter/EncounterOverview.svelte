@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Campaign } from '$lib/core/campaign'
 	import { Difficulty } from '$lib/core/difficulty'
-	import Button from '$lib/design/components/basic/Button.svelte'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
@@ -14,6 +13,7 @@
 	let scenarioTabIndex: number = 0
 	let transitionTabIndex: number = 0
 	let showName: boolean = false
+	let advanced: boolean = false
 	let difficulty: Difficulty = Difficulty.Standard
 	$: coreEncounters = findCoreEncounters(campaign)
 
@@ -22,7 +22,7 @@
 	}
 </script>
 
-<a href="/tool/encounter">Back to Campaign List</a>
+<a href="/tool/campaign">Back to Campaign List</a>
 
 <ListDivider label="Settings" />
 
@@ -43,25 +43,28 @@
 			showName = c
 		}}
 	/>
+	<Checkbox
+		label={'Advanced Features'}
+		checked={advanced}
+		onCheckChanged={(c) => {
+			advanced = c
+		}}
+	/>
 </div>
 
 <ListDivider label="Core Encounter Sets" />
-<EncounterIconFlex encounterSets={coreEncounters} {showName} hideStartingEncoutnerSetNumber />
+<EncounterIconFlex encounterSets={coreEncounters} {showName} hideNumbers />
 
 {#if campaign.commonEncounterSets !== undefined}
 	<ListDivider label="Common Encounter Sets" />
-	<EncounterIconFlex
-		encounterSets={campaign.commonEncounterSets}
-		{showName}
-		hideStartingEncoutnerSetNumber
-	/>
+	<EncounterIconFlex encounterSets={campaign.commonEncounterSets} {showName} hideNumbers />
 {/if}
 
 <div class="tabs">
 	<LimitedTab>
 		<div slot="tab1">Matrix</div>
 		<div slot="content1">
-			<EncounterMatrixTab {campaign} />
+			<EncounterMatrixTab {campaign} {showName} />
 		</div>
 		<div slot="tab2">Scenarios</div>
 		<div slot="content2">
@@ -78,6 +81,7 @@
 		<div slot="content3">
 			<EncounterTransitionsTab
 				{campaign}
+				{advanced}
 				dropdownIndexScenario={scenarioTabIndex}
 				dropdownIndexTransition={transitionTabIndex}
 				onDropdownIndexScenarioChanged={(n) => {

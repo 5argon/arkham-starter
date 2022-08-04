@@ -24,27 +24,29 @@
 	$: popupText = iconName
 </script>
 
-{#if hovering && !showName}
-	<span class="popup">
-		<HoverFrame>{popupText}</HoverFrame>
-	</span>
-{/if}
-<div class="outer-flex">
-	<div class="ensure-square" on:mouseenter={mouseEnterHandler} on:mouseleave={mouseLeaveHandler}>
-		<img
-			class="encounter-icon"
-			class:encounter-icon-black={!coreSet && !returnToSet}
-			class:encounter-icon-core={coreSet}
-			class:encounter-icon-scenario-set={scenarioSet}
-			class:encounter-icon-return-to={returnToSet}
-			src={makeIconPath(iconPath)}
-			alt={iconName}
-		/>
+<span class="wrap">
+	{#if hovering && !showName}
+		<span class="popup">
+			<HoverFrame>{popupText}</HoverFrame>
+		</span>
+	{/if}
+	<div class="outer-flex">
+		<div class="ensure-square" on:mouseenter={mouseEnterHandler} on:mouseleave={mouseLeaveHandler}>
+			<img
+				class="encounter-icon"
+				class:encounter-icon-black={!coreSet && !returnToSet}
+				class:encounter-icon-core={coreSet}
+				class:encounter-icon-scenario-set={scenarioSet}
+				class:encounter-icon-return-to={returnToSet}
+				src={makeIconPath(iconPath)}
+				alt={iconName}
+			/>
+		</div>
+		{#if showName}<span class="show-name" class:name-with-number={number !== null}>{iconName}</span
+			>{/if}
+		{#if number !== null}<span class="number">({number})</span>{/if}
 	</div>
-	{#if showName}<span class="show-name" class:name-with-number={number !== null}>{iconName}</span
-		>{/if}
-	{#if number !== null}<span class="number">({number})</span>{/if}
-</div>
+</span>
 
 <style>
 	.outer-flex {
@@ -77,7 +79,7 @@
 	.encounter-icon {
 		max-width: 100%;
 		max-height: 100%;
-		margin: 0 auto;
+		margin: auto auto;
 	}
 
 	.encounter-icon-black {
@@ -99,5 +101,7 @@
 	.popup {
 		position: absolute;
 		margin-top: -25px;
+		z-index: 1;
+		white-space: nowrap;
 	}
 </style>

@@ -6,7 +6,6 @@ import {
 	creaturesInTheIce,
 	deadlyWeather,
 	elderThings,
-	expeditionTeam,
 	fatalMirage,
 	hazardsOfAntarctica,
 	iceAndDeath,
@@ -25,25 +24,18 @@ import {
 	toTheForbiddenPeaks,
 } from './encounter'
 
-export const edgeOfTheEarthPrologueScenario: Scenario = {
-	index: 1,
-	name: 'Prologue',
-	encounterSets: [expeditionTeam],
-	gameComponents: [GameComponent.TokenTablet, GameComponent.TokenCultist],
-}
-
 export const iceAndDeathPart1Scenario: Scenario = {
 	index: 2,
 	name: 'Ice and Death, Part I',
 	encounterSets: [
 		theCrash,
 		ancientEvils,
-		iceAndDeath,
+		{ encounterSet: iceAndDeath, subtractCount: 3 },
 		deadlyWeather,
 		hazardsOfAntarctica,
 		silenceAndMystery,
 	],
-	encounterSetsSecondary: [creaturesInTheIce],
+	encounterSetsSecondary: [creaturesInTheIce, { encounterSet: iceAndDeath, overwriteCount: 3 }],
 	gameComponents: [GameComponent.TokenFrost],
 }
 
@@ -73,6 +65,10 @@ export const iceAndDeathPart3Scenario: Scenario = {
 		deadlyWeather,
 		hazardsOfAntarctica,
 		silenceAndMystery,
+	],
+	encounterSetsSecondary: [
+		{ encounterSet: iceAndDeath, overwriteCount: 3 },
+		{ encounterSet: creaturesInTheIce, overwriteCount: 5 }
 	],
 	gameComponents: [GameComponent.TokenFrost],
 }

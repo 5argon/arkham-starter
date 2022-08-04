@@ -21,7 +21,9 @@ export function findUniqueScenarios(c: Campaign): Scenario[] {
     t.forEach(x => {
         unique.add(x)
     })
-    return Array.from(unique)
+    return Array.from(unique).sort((a, b) => {
+        return a.index - b.index
+    })
 }
 
 export function findUniqueEncounters(c: Campaign): EncounterSet[] {
@@ -55,28 +57,28 @@ export interface TransitionInfo {
     addToForesight: EncounterSet[]
 }
 
-function mergeEncounters(s: Scenario | null): EncounterSet[] {
+export function mergeEncounters(s: Scenario | null): EncounterSet[] {
     if (s === null) {
         return []
     }
-    const es: EncounterSet[] = []
+    const es = new Set<EncounterSet>()
     s.encounterSets.forEach(x => {
         if (isEncounterSetWithModification(x)) {
-            es.push(x.encounterSet)
+            es.add(x.encounterSet)
         } else {
-            es.push(x)
+            es.add(x)
         }
     })
     if (s.encounterSetsSecondary !== undefined) {
         s.encounterSetsSecondary.forEach(x => {
             if (isEncounterSetWithModification(x)) {
-                es.push(x.encounterSet)
+                es.add(x.encounterSet)
             } else {
-                es.push(x)
+                es.add(x)
             }
         })
     }
-    return es
+    return Array.from(es)
 }
 
 export function filterPossibleTransitions(allTransitions: ScenarioTransition[], currentScenario: Scenario): ScenarioTransition[] {

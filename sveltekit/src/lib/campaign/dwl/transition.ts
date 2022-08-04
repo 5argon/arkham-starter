@@ -1,11 +1,9 @@
 import type { ScenarioTransition } from '$lib/core/campaign'
 import {
     bloodOnTheAltarScenario,
-    extracurricularActivity2Scenario,
     extracurricularActivityScenario,
     lostInTimeAndSpaceScenario,
     theEssexCountyExpressScenario,
-    theHouseAlwaysWins2Scenario,
     theHouseAlwaysWinsScenario,
     theMiskatonicMuseumScenario,
     undimensionedAndUnseenScenario,
@@ -14,12 +12,13 @@ import {
 
 export const transitions: ScenarioTransition[] = [
     { from: null, to: extracurricularActivityScenario },
-    { from: extracurricularActivityScenario, to: theHouseAlwaysWins2Scenario },
     { from: null, to: theHouseAlwaysWinsScenario },
-    { from: theHouseAlwaysWinsScenario, to: extracurricularActivity2Scenario },
 
-    { from: theHouseAlwaysWins2Scenario, to: theMiskatonicMuseumScenario },
-    { from: extracurricularActivity2Scenario, to: theMiskatonicMuseumScenario },
+    { from: extracurricularActivityScenario, to: theMiskatonicMuseumScenario },
+    { from: extracurricularActivityScenario, to: theHouseAlwaysWinsScenario },
+
+    { from: theHouseAlwaysWinsScenario, to: extracurricularActivityScenario },
+    { from: theHouseAlwaysWinsScenario, to: theMiskatonicMuseumScenario },
 
     { from: theMiskatonicMuseumScenario, to: theEssexCountyExpressScenario },
     { from: theEssexCountyExpressScenario, to: bloodOnTheAltarScenario },

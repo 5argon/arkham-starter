@@ -1,9 +1,21 @@
 import type { ScenarioTransition } from '$lib/core/campaign'
-import { cityOfTheElderThings1Scenario, cityOfTheElderThings2Scenario, cityOfTheElderThings3Scenario, edgeOfTheEarthPrologueScenario, fatalMirage1Scenario, fatalMirage2Scenario, fatalMirage3Scenario, iceAndDeathPart1Scenario, iceAndDeathPart2Scenario, iceAndDeathPart3Scenario, theHeartOfMadness1Scenario, theHeartOfMadness2Scenario, toTheForbiddenPeaksScenario } from './scenario'
+import {
+    cityOfTheElderThings1Scenario,
+    cityOfTheElderThings2Scenario,
+    cityOfTheElderThings3Scenario,
+    fatalMirage1Scenario,
+    fatalMirage2Scenario,
+    fatalMirage3Scenario,
+    iceAndDeathPart1Scenario,
+    iceAndDeathPart2Scenario,
+    iceAndDeathPart3Scenario,
+    theHeartOfMadness1Scenario,
+    theHeartOfMadness2Scenario,
+    toTheForbiddenPeaksScenario,
+} from './scenario'
 
 export const transitions: ScenarioTransition[] = [
-    { from: null, to: edgeOfTheEarthPrologueScenario },
-    { from: edgeOfTheEarthPrologueScenario, to: iceAndDeathPart1Scenario },
+    { from: null, to: iceAndDeathPart1Scenario },
 
     { from: iceAndDeathPart1Scenario, to: iceAndDeathPart2Scenario },
     { from: iceAndDeathPart1Scenario, to: iceAndDeathPart3Scenario },
@@ -43,4 +55,3 @@ export const transitions: ScenarioTransition[] = [
 
     { from: theHeartOfMadness1Scenario, to: theHeartOfMadness2Scenario },
 ]
-

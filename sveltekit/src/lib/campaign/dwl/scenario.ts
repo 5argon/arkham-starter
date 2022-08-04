@@ -31,7 +31,7 @@ import {
 
 export const extracurricularActivityScenario: Scenario = {
 	index: 1,
-	name: 'Extracurricular Activity (I)',
+	name: 'Extracurricular Activity',
 	encounterSets: [
 		extracurricularActivity,
 		agentsOfYogSothoth,
@@ -46,30 +46,7 @@ export const extracurricularActivityScenario: Scenario = {
 
 export const theHouseAlwaysWinsScenario: Scenario = {
 	index: 2,
-	name: 'The House Always Wins (I)',
-	encounterSets: [theHouseAlwaysWins, rats, badLuck, naomisCrew],
-	gameComponents: [GameComponent.TokenElderThing],
-	encounterSetsSecondary: [strikingFear, hideousAbominations],
-}
-
-export const extracurricularActivity2Scenario: Scenario = {
-	index: 3,
-	name: 'Extracurricular Activity (II)',
-	encounterSets: [
-		extracurricularActivity,
-		agentsOfYogSothoth,
-		ancientEvils,
-		lockedDoors,
-		bishopsThralls,
-		sorcery,
-		theBeyond,
-		whippoorwills,
-	],
-}
-
-export const theHouseAlwaysWins2Scenario: Scenario = {
-	index: 4,
-	name: 'The House Always Wins (II)',
+	name: 'The House Always Wins',
 	encounterSets: [theHouseAlwaysWins, rats, badLuck, naomisCrew],
 	gameComponents: [GameComponent.TokenElderThing],
 	encounterSetsSecondary: [strikingFear, hideousAbominations],
