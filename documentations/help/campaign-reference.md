@@ -4,7 +4,7 @@ The [Campaign Reference](https://arkham-starter.com/tool/campaign) is currently 
 
 ## Where are they?
 
-Go to `sveltekit/src/lib/campaign` to see folders named after abbreviation of the campaign's name. Inside you will find exactly 4 sides, forming hierarchy of data from bottom to top in this order : 
+Go to `sveltekit/src/lib/campaign` to see folders named after abbreviation of the campaign's name. Inside you will find exactly 4 files, forming hierarchy of data from bottom to top in this order : 
 
 ## Encounter
 
@@ -32,4 +32,6 @@ Look at transitions of the existing campaigns to get general idea how to edit th
 
 ## Campaign
 
-Finally, `campaign.ts` take all the transition along with some campaign-wide data, and you have a full campaign!
+Finally, `campaign.ts` take all the transition along with some campaign-wide data, and you have a full campaign! Each Campaign Reference page use just this file, it can drills all the way down and obtain every information about the campaign.
+
+Notably, it has `commonEncounterSets` field. If the campaign always ask the player to mess with some encounter sets you can move them from each scenario's `shuffles`/`setAsides` to this array instead. It will be excluded from the matrix and setup instruction to make room for other sets that actually differs between scenarios.
