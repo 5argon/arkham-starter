@@ -99,7 +99,6 @@ export const theGathering: EncounterSet = {
     name: "The Gathering",
     icon: folder + scenarioFolder + "NotZ 1 - The Gathering",
     count: 16,
-    startingEncounterDeckCount: 2,
 }
 
 export const theMidnightMasks: EncounterSet = {
@@ -107,7 +106,6 @@ export const theMidnightMasks: EncounterSet = {
     name: "The Midnight Masks",
     icon: folder + scenarioFolder + "NotZ 2 - The Midnight Masks",
     count: 20,
-    startingEncounterDeckCount: 5,
 }
 
 export const theDevourerBelow: EncounterSet = {
@@ -115,5 +113,4 @@ export const theDevourerBelow: EncounterSet = {
     name: "The Devourer Below",
     icon: folder + scenarioFolder + "NotZ 3 - The Devourer Below",
     count: 18,
-    startingEncounterDeckCount: 2,
 }

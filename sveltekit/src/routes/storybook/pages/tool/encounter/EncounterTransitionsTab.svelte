@@ -1,5 +1,5 @@
 <script>
-	import Stories from '../../../../../lib/design/pages/tool/encounter/EncounterTransitionsTab.stories.svelte';
+	import Stories from '../../../../../lib/design/pages/tool/campaign/EncounterTransitionsTab.stories.svelte';
 </script>
 
 <Stories />

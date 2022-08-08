@@ -23,3 +23,9 @@ Draft documentations to be put inside the site for real later. Everything in `/d
 - [Deck criterias](./documentations/deck-criterias.md)
 - [Adding decks](./documentations/adding-decks.md)
 - [Site features](./documentations/site-features.md)
+
+## Need Help! (For non-programmers)
+
+There are some sections you can help using GitHub's built-in text editor. (Though you need GitHub ID to submit the edit.)
+
+- [Campaign Reference](./documentations/help/campaign-reference.md)

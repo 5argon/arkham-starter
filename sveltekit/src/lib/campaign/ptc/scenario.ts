@@ -33,7 +33,7 @@ import {
 export const curtainCallScenario: Scenario = {
 	index: 1,
 	name: 'Curtain Call',
-	encounterSets: [
+	shuffles: [
 		curtainCall,
 		rats,
 		strikingFear,
@@ -47,14 +47,20 @@ export const curtainCallScenario: Scenario = {
 export const theLastKingScenario: Scenario = {
 	index: 2,
 	name: 'The Last King',
-	encounterSets: [theLastKing, ancientEvils, decayAndFilth, hastursGift, theStranger],
+	shuffles: [
+		{ encounterSet: theLastKing, overwriteCount: 0 },
+		ancientEvils,
+		decayAndFilth,
+		hastursGift,
+		theStranger,
+	],
 }
 
 export const echoesOfThePastScenario: Scenario = {
 	index: 3,
 	name: 'Echoes of the Past',
-	encounterSets: [
-		echoesOfThePast,
+	shuffles: [
+		{ encounterSet: echoesOfThePast, overwriteCount: 0 },
 		darkCult,
 		lockedDoors,
 		{ encounterSet: theMidnightMasks, overwriteCount: 5 },
@@ -66,8 +72,8 @@ export const echoesOfThePastScenario: Scenario = {
 export const theUnspeakableOathScenario: Scenario = {
 	index: 4,
 	name: 'The Unspeakable Oath',
-	encounterSets: [
-		theUnspeakableOath,
+	shuffles: [
+		{ encounterSet: theUnspeakableOath, overwriteCount: 0 },
 		agentsOfHastur,
 		decayAndFilth,
 		delusions,
@@ -79,8 +85,8 @@ export const theUnspeakableOathScenario: Scenario = {
 export const aPhantomOfTruthScenario: Scenario = {
 	index: 5,
 	name: 'A Phantom of Truth',
-	encounterSets: [
-		aPhantomOfTruth,
+	shuffles: [
+		{ encounterSet: aPhantomOfTruth, overwriteCount: 0 },
 		agentsOfHastur,
 		{ encounterSet: theMidnightMasks, overwriteCount: 5 },
 		byakhee,
@@ -92,14 +98,19 @@ export const aPhantomOfTruthScenario: Scenario = {
 export const thePallidMaskScenario: Scenario = {
 	index: 6,
 	name: 'The Pallid Mask',
-	encounterSets: [thePallidMask, chillingCold, ghouls, hauntings],
+	shuffles: [
+		{ encounterSet: thePallidMask, overwriteCount: 0 },
+		chillingCold,
+		ghouls,
+		hauntings,
+	],
 }
 
 export const blackStarsRiseScenario: Scenario = {
 	index: 7,
 	name: 'Black Stars Rise',
-	encounterSets: [
-		blackStarsRise,
+	shuffles: [
+		{ encounterSet: blackStarsRise, overwriteCount: 0 },
 		ancientEvils,
 		darkCult,
 		byakhee,
@@ -112,8 +123,8 @@ export const blackStarsRiseScenario: Scenario = {
 export const dimCarcosaScenario: Scenario = {
 	index: 8,
 	name: 'Dim Carcosa',
-	encounterSets: [
-		dimCarcosa,
+	shuffles: [
+		{ encounterSet: dimCarcosa, overwriteCount: 0 },
 		agentsOfHastur,
 		strikingFear,
 		cultOfTheYellowSign,

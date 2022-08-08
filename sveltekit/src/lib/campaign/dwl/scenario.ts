@@ -32,8 +32,8 @@ import {
 export const extracurricularActivityScenario: Scenario = {
 	index: 1,
 	name: 'Extracurricular Activity',
-	encounterSets: [
-		extracurricularActivity,
+	shuffles: [
+		{ encounterSet: extracurricularActivity, overwriteCount: 0 },
 		agentsOfYogSothoth,
 		ancientEvils,
 		lockedDoors,
@@ -47,48 +47,78 @@ export const extracurricularActivityScenario: Scenario = {
 export const theHouseAlwaysWinsScenario: Scenario = {
 	index: 2,
 	name: 'The House Always Wins',
-	encounterSets: [theHouseAlwaysWins, rats, badLuck, naomisCrew],
+	shuffles: [
+		{ encounterSet: theHouseAlwaysWins, overwriteCount: 4 },
+		rats,
+		badLuck,
+		naomisCrew,
+	],
 	gameComponents: [GameComponent.TokenElderThing],
-	encounterSetsSecondary: [strikingFear, hideousAbominations],
+	setAsides: [strikingFear, hideousAbominations],
 }
 
 export const theMiskatonicMuseumScenario: Scenario = {
 	index: 5,
 	name: 'The Miskatonic Museum',
 	gameComponents: [GameComponent.TokenTablet],
-	encounterSets: [theMiskatonicMuseum, chillingCold, lockedDoors, badLuck, sorcery, theBeyond],
+	shuffles: [
+		{ encounterSet: theMiskatonicMuseum, overwriteCount: 10 },
+		chillingCold,
+		lockedDoors,
+		badLuck,
+		sorcery,
+		theBeyond,
+	],
 }
 
 export const theEssexCountyExpressScenario: Scenario = {
 	index: 6,
 	name: 'The Essex County Express',
-	encounterSets: [theEssexCountyExpress, ancientEvils, darkCult, strikingFear, theBeyond],
+	shuffles: [
+		{ encounterSet: theEssexCountyExpress, overwriteCount: 13 },
+		ancientEvils,
+		darkCult,
+		strikingFear,
+		theBeyond,
+	],
 	gameComponentsPerDifficulty: {
 		easy: [GameComponent.TokenM2],
 		standard: [GameComponent.TokenM3],
 		hard: [GameComponent.TokenM4],
 		expert: [GameComponent.TokenM5],
-	}
+	},
 }
 
 export const bloodOnTheAltarScenario: Scenario = {
 	index: 7,
 	name: 'Blood on the Altar',
-	encounterSets: [bloodOnTheAltar, ancientEvils, nightgaunts, dunwich, whippoorwills],
-	encounterSetsSecondary: [naomisCrew],
+	shuffles: [
+		{ encounterSet: bloodOnTheAltar, overwriteCount: 13 },
+		ancientEvils,
+		nightgaunts,
+		dunwich,
+		whippoorwills,
+	],
+	setAsides: [naomisCrew],
 }
 
 export const undimensionedAndUnseenScenario: Scenario = {
 	index: 8,
 	name: 'Undimensioned and Unseen',
-	encounterSets: [undimensionedAndUnseen, strikingFear, beastThralls, dunwich, whippoorwills],
+	shuffles: [
+		{ encounterSet: undimensionedAndUnseen, overwriteCount: 11 },
+		strikingFear,
+		beastThralls,
+		dunwich,
+		whippoorwills,
+	],
 }
 
 export const whereDoomAwaitsScenario: Scenario = {
 	index: 9,
 	name: 'Where Doom Awaits',
-	encounterSets: [
-		whereDoomAwaits,
+	shuffles: [
+		{ encounterSet: whereDoomAwaits, overwriteCount: 12 },
 		ancientEvils,
 		chillingCold,
 		strikingFear,
@@ -96,11 +126,17 @@ export const whereDoomAwaitsScenario: Scenario = {
 		bishopsThralls,
 		sorcery,
 	],
-	encounterSetsSecondary: [hideousAbominations],
+	setAsides: [hideousAbominations],
 }
 
 export const lostInTimeAndSpaceScenario: Scenario = {
 	index: 10,
 	name: 'Lost in Time and Space',
-	encounterSets: [lostInTimeAndSpace, agentsOfYogSothoth, hideousAbominations, sorcery, theBeyond],
+	shuffles: [
+		{ encounterSet: lostInTimeAndSpace, overwriteCount: 23 },
+		agentsOfYogSothoth,
+		hideousAbominations,
+		sorcery,
+		theBeyond,
+	],
 }

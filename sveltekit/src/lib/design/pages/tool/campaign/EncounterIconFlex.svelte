@@ -46,9 +46,8 @@
 			if (isEncounterSetWithModification(x)) {
 				encounterSetsExtracted.push(x.encounterSet)
 				const es = x.encounterSet
-				const num =
-					es.startingEncounterDeckCount !== undefined ? es.startingEncounterDeckCount : es.count
-				const numMod = x.overwriteCount !== undefined ? x.overwriteCount : num - (x.subtractCount ?? 0)
+				const num = es.count
+				const numMod = x.overwriteCount !== undefined ? x.overwriteCount : num
 				// Do not show number if it is exactly the set's count.
 				if (numMod != es.count) {
 					showingNumbers.push(numMod)
@@ -57,8 +56,7 @@
 				}
 			} else {
 				encounterSetsExtracted.push(x)
-				const num =
-					x.startingEncounterDeckCount !== undefined ? x.startingEncounterDeckCount : x.count
+				const num = x.count
 				// Do not show number if it is exactly the set's count.
 				if (num != x.count) {
 					showingNumbers.push(num)

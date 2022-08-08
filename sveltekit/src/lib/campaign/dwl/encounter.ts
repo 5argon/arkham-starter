@@ -62,7 +62,6 @@ export const extracurricularActivity: EncounterSet = {
     icon: folder + scenarioFolder + "TDL 1A - Extracurricular Activity",
     flag: EncounterSetFlag.Scenario,
     count: 21,
-    startingEncounterDeckCount: 0,
 }
 
 export const theHouseAlwaysWins: EncounterSet = {
@@ -70,7 +69,6 @@ export const theHouseAlwaysWins: EncounterSet = {
     icon: folder + scenarioFolder + "TDL 1B - The House Always Wins",
     flag: EncounterSetFlag.Scenario,
     count: 23,
-    startingEncounterDeckCount: 4,
 }
 
 
@@ -79,7 +77,6 @@ export const theMiskatonicMuseum: EncounterSet = {
     icon: folder + scenarioFolder + "TDL 2 - The Miskatonic Museum",
     flag: EncounterSetFlag.Scenario,
     count: 34,
-    startingEncounterDeckCount: 10,
 }
 
 export const theEssexCountyExpress: EncounterSet = {
@@ -87,7 +84,6 @@ export const theEssexCountyExpress: EncounterSet = {
     icon: folder + scenarioFolder + "TDL 3 - The Essex County Express",
     flag: EncounterSetFlag.Scenario,
     count: 36,
-    startingEncounterDeckCount: 13,
 }
 
 export const bloodOnTheAltar: EncounterSet = {
@@ -95,7 +91,6 @@ export const bloodOnTheAltar: EncounterSet = {
     icon: folder + scenarioFolder + "TDL 4 - Blood on the Altar",
     flag: EncounterSetFlag.Scenario,
     count: 38,
-    startingEncounterDeckCount: 13,
 }
 
 export const undimensionedAndUnseen: EncounterSet = {
@@ -103,7 +98,6 @@ export const undimensionedAndUnseen: EncounterSet = {
     icon: folder + scenarioFolder + "TDL 5 - Undimensioned and Unseen",
     flag: EncounterSetFlag.Scenario,
     count: 38,
-    startingEncounterDeckCount: 11,
 }
 
 export const whereDoomAwaits: EncounterSet = {
@@ -111,7 +105,6 @@ export const whereDoomAwaits: EncounterSet = {
     icon: folder + scenarioFolder + "TDL 6 - Where Doom Awaits",
     flag: EncounterSetFlag.Scenario,
     count: 32,
-    startingEncounterDeckCount: 12,
 }
 
 export const lostInTimeAndSpace: EncounterSet = {
@@ -119,7 +112,6 @@ export const lostInTimeAndSpace: EncounterSet = {
     icon: folder + scenarioFolder + "TDL 7 - Lost in Time and Space",
     flag: EncounterSetFlag.Scenario,
     count: 36,
-    startingEncounterDeckCount: 23,
 }
 
 export const armitagesFate: EncounterSet = {

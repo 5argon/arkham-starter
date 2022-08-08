@@ -62,15 +62,15 @@ export function mergeEncounters(s: Scenario | null): EncounterSet[] {
         return []
     }
     const es = new Set<EncounterSet>()
-    s.encounterSets.forEach(x => {
+    s.shuffles.forEach(x => {
         if (isEncounterSetWithModification(x)) {
             es.add(x.encounterSet)
         } else {
             es.add(x)
         }
     })
-    if (s.encounterSetsSecondary !== undefined) {
-        s.encounterSetsSecondary.forEach(x => {
+    if (s.setAsides !== undefined) {
+        s.setAsides.forEach(x => {
             if (isEncounterSetWithModification(x)) {
                 es.add(x.encounterSet)
             } else {

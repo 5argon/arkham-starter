@@ -23,19 +23,15 @@
 	}
 	$: selectedScenario = scenarios[selectedScenarioIndex]
 
-	$: count = selectedScenario.encounterSets.reduce<number>((p, c) => {
+	$: count = selectedScenario.shuffles.reduce<number>((p, c) => {
 		if (!isEncounterSetWithModification(c)) {
-			return (
-				p + (c.startingEncounterDeckCount !== undefined ? c.startingEncounterDeckCount : c.count)
-			)
+			return p + c.count
 		} else {
-			const starting = c.encounterSet.startingEncounterDeckCount
-			const subtract = c.subtractCount
 			const overwriteCount = c.overwriteCount
 			if (overwriteCount !== undefined) {
 				return p + overwriteCount
 			}
-			return p + ((starting ? starting : c.encounterSet.count) - (subtract ?? 0))
+			return p + c.encounterSet.count
 		}
 	}, 0)
 
@@ -58,11 +54,11 @@
 
 {#if !incomplete}
 	<ListDivider label={'Starting Encounter Deck ( ' + count + ' cards )'} />
-	<EncounterIconFlex encounterSets={selectedScenario.encounterSets} {showName} />
+	<EncounterIconFlex encounterSets={selectedScenario.shuffles} {showName} />
 
-	{#if selectedScenario.encounterSetsSecondary !== undefined}
+	{#if selectedScenario.setAsides !== undefined}
 		<ListDivider label={'Set Aside'} />
-		<EncounterIconFlex encounterSets={selectedScenario.encounterSetsSecondary} {showName} />
+		<EncounterIconFlex encounterSets={selectedScenario.setAsides} {showName} />
 	{/if}
 {/if}
 

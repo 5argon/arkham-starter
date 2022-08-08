@@ -27,25 +27,25 @@ import {
 export const iceAndDeathPart1Scenario: Scenario = {
 	index: 2,
 	name: 'Ice and Death, Part I',
-	encounterSets: [
-		theCrash,
+	shuffles: [
+		{ encounterSet: theCrash, overwriteCount: 0 },
 		ancientEvils,
-		{ encounterSet: iceAndDeath, subtractCount: 3 },
+		{ encounterSet: iceAndDeath, overwriteCount: 4 },
 		deadlyWeather,
 		hazardsOfAntarctica,
 		silenceAndMystery,
 	],
-	encounterSetsSecondary: [creaturesInTheIce, { encounterSet: iceAndDeath, overwriteCount: 3 }],
+	setAsides: [creaturesInTheIce, { encounterSet: iceAndDeath, overwriteCount: 3 }],
 	gameComponents: [GameComponent.TokenFrost],
 }
 
 export const iceAndDeathPart2Scenario: Scenario = {
 	index: 3,
 	name: 'Ice and Death, Part II',
-	encounterSets: [
-		lostInTheNight,
+	shuffles: [
+		{ encounterSet: lostInTheNight, overwriteCount: 0 },
 		ancientEvils,
-		iceAndDeath,
+		{ encounterSet: iceAndDeath, overwriteCount: 7 },
 		leftBehind,
 		deadlyWeather,
 		hazardsOfAntarctica,
@@ -57,27 +57,27 @@ export const iceAndDeathPart2Scenario: Scenario = {
 export const iceAndDeathPart3Scenario: Scenario = {
 	index: 4,
 	name: 'Ice and Death, Part III',
-	encounterSets: [
-		seepingNightmares,
+	shuffles: [
+		{ encounterSet: seepingNightmares, overwriteCount: 2 },
 		ancientEvils,
-		{ encounterSet: iceAndDeath, subtractCount: 3 },
-		{ encounterSet: creaturesInTheIce, subtractCount: 5 },
+		{ encounterSet: iceAndDeath, overwriteCount: 7 },
+		{ encounterSet: creaturesInTheIce, overwriteCount: 2 },
 		deadlyWeather,
 		hazardsOfAntarctica,
 		silenceAndMystery,
 	],
-	encounterSetsSecondary: [
+	setAsides: [
 		{ encounterSet: iceAndDeath, overwriteCount: 3 },
-		{ encounterSet: creaturesInTheIce, overwriteCount: 5 }
+		{ encounterSet: creaturesInTheIce, overwriteCount: 5 },
 	],
 	gameComponents: [GameComponent.TokenFrost],
 }
 
-export const fatalMirage1Scenario: Scenario = {
+export const fatalMirageScenario: Scenario = {
 	index: 5,
-	name: 'Fatal Mirage (I)',
-	encounterSets: [
-		fatalMirage,
+	name: 'Fatal Mirage',
+	shuffles: [
+		{ encounterSet: fatalMirage, overwriteCount: 9 },
 		chillingCold,
 		agentsOfTheUnknown,
 		leftBehind,
@@ -91,8 +91,8 @@ export const fatalMirage1Scenario: Scenario = {
 export const toTheForbiddenPeaksScenario: Scenario = {
 	index: 6,
 	name: 'To the Forbidden Peaks',
-	encounterSets: [
-		toTheForbiddenPeaks,
+	shuffles: [
+		{ encounterSet: toTheForbiddenPeaks, overwriteCount: 14 },
 		deadlyWeather,
 		elderThings,
 		hazardsOfAntarctica,
@@ -101,26 +101,11 @@ export const toTheForbiddenPeaksScenario: Scenario = {
 	gameComponents: [GameComponent.TokenElderThing],
 }
 
-export const fatalMirage2Scenario: Scenario = {
-	index: 7,
-	name: 'Fatal Mirage (II)',
-	encounterSets: [
-		fatalMirage,
-		chillingCold,
-		agentsOfTheUnknown,
-		leftBehind,
-		miasma,
-		namelessHorrors,
-		silenceAndMystery,
-	],
-	gameComponents: [GameComponent.TokenFrost],
-}
-
 export const cityOfTheElderThings1Scenario: Scenario = {
-	index: 8,
+	index: 7,
 	name: 'City of the Elder Things (v.I)',
-	encounterSets: [
-		{ encounterSet: cityOfTheElderThings, subtractCount: 3 },
+	shuffles: [
+		{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
 		lockedDoors,
 		elderThings,
 		miasma,
@@ -148,10 +133,10 @@ export const cityOfTheElderThings1Scenario: Scenario = {
 }
 
 export const cityOfTheElderThings2Scenario: Scenario = {
-	index: 9,
+	index: 8,
 	name: 'City of the Elder Things (v.II)',
-	encounterSets: [
-		{ encounterSet: cityOfTheElderThings, subtractCount: 3 },
+	shuffles: [
+		{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
 		chillingCold,
 		creaturesInTheIce,
 		elderThings,
@@ -179,10 +164,10 @@ export const cityOfTheElderThings2Scenario: Scenario = {
 }
 
 export const cityOfTheElderThings3Scenario: Scenario = {
-	index: 10,
+	index: 9,
 	name: 'City of the Elder Things (v.III)',
-	encounterSets: [
-		{ encounterSet: cityOfTheElderThings, subtractCount: 3 },
+	shuffles: [
+		{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
 		chillingCold,
 		lockedDoors,
 		creaturesInTheIce,
@@ -208,28 +193,12 @@ export const cityOfTheElderThings3Scenario: Scenario = {
 	],
 }
 
-export const fatalMirage3Scenario: Scenario = {
-	index: 11,
-	name: 'Fatal Mirage (III)',
-	encounterSets: [
-		fatalMirage,
-		chillingCold,
-		agentsOfTheUnknown,
-		leftBehind,
-		miasma,
-		namelessHorrors,
-		silenceAndMystery,
-	],
-	gameComponents: [GameComponent.TokenFrost],
-}
-
-
 export const theHeartOfMadness1Scenario: Scenario = {
-	index: 12,
+	index: 10,
 	name: 'The Heart of Madness, Part I',
-	encounterSets: [
-		theHeartOfMadness,
-		theGreatSeal,
+	shuffles: [
+		{ encounterSet: theHeartOfMadness, overwriteCount: 6 },
+		{ encounterSet: theGreatSeal, overwriteCount: 4 },
 		ancientEvils,
 		lockedDoors,
 		miasma,
@@ -247,14 +216,14 @@ export const theHeartOfMadness1Scenario: Scenario = {
 }
 
 export const theHeartOfMadness2Scenario: Scenario = {
-	index: 13,
+	index: 11,
 	name: 'The Heart of Madness, Part II',
-	encounterSets: [
-		theHeartOfMadness,
-		stirringInTheDeep,
+	shuffles: [
+		{ encounterSet: theHeartOfMadness, overwriteCount: 6 },
+		{ encounterSet: stirringInTheDeep, overwriteCount: 2 },
 		agentsOfTheUnknown,
 		chillingCold,
-		{ encounterSet: strikingFear, subtractCount: 3 },
+		{ encounterSet: strikingFear, overwriteCount: 4 },
 		ancientEvils,
 		miasma,
 		namelessHorrors,

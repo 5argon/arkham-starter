@@ -1,11 +1,11 @@
-import { EncounterSetFlag, type EncounterSet, type Scenario } from "$lib/core/campaign";
+import { EncounterSetFlag, type EncounterSet, } from "$lib/core/campaign";
 
 const folder = "The Path to Carcosa/"
 const scenario = "Scenarios/"
 
 export const curtainCall: EncounterSet = {
     name: "Curtain Call",
-    startingEncounterDeckCount: 0,
+    count: 0,
     icon: folder + scenario + "TPtC 1 - Curtain Call",
     flag: EncounterSetFlag.Scenario
 }
@@ -13,7 +13,6 @@ export const curtainCall: EncounterSet = {
 export const theLastKing: EncounterSet = {
     name: "The Last King",
     count: 0,
-    startingEncounterDeckCount: 0,
     icon: folder + scenario + "TPtC 2 - The Last King",
     flag: EncounterSetFlag.Scenario
 }
@@ -21,7 +20,6 @@ export const theLastKing: EncounterSet = {
 export const echoesOfThePast: EncounterSet = {
     name: "Echoes of the Past",
     count: 0,
-    startingEncounterDeckCount: 0,
     icon: folder + scenario + "TPtC 3 - Echoes of the Past",
     flag: EncounterSetFlag.Scenario
 }
@@ -29,7 +27,6 @@ export const echoesOfThePast: EncounterSet = {
 export const theUnspeakableOath: EncounterSet = {
     name: "The Unspeakable Oath",
     count: 0,
-    startingEncounterDeckCount: 0,
     icon: folder + scenario + "TPtC 4 - The Unspeakable Oath",
     flag: EncounterSetFlag.Scenario
 }
@@ -37,7 +34,6 @@ export const theUnspeakableOath: EncounterSet = {
 export const aPhantomOfTruth: EncounterSet = {
     name: "A Phantom of Truth",
     count: 0,
-    startingEncounterDeckCount: 0,
     icon: folder + scenario + "TPtC 5 - A Phantom of Truth",
     flag: EncounterSetFlag.Scenario
 }
@@ -45,7 +41,6 @@ export const aPhantomOfTruth: EncounterSet = {
 export const thePallidMask: EncounterSet = {
     name: "The Pallid Mask",
     count: 0,
-    startingEncounterDeckCount: 0,
     icon: folder + scenario + "TPtC 6 - The Pallid Mask",
     flag: EncounterSetFlag.Scenario
 }
@@ -53,7 +48,6 @@ export const thePallidMask: EncounterSet = {
 export const blackStarsRise: EncounterSet = {
     name: "Black Stars Rise",
     count: 0,
-    startingEncounterDeckCount: 0,
     icon: folder + scenario + "TPtC 7 - Black Stars Rise",
     flag: EncounterSetFlag.Scenario
 }
@@ -61,7 +55,6 @@ export const blackStarsRise: EncounterSet = {
 export const theVortexAbove: EncounterSet = {
     name: "The Vortex Above",
     count: 0,
-    startingEncounterDeckCount: 0,
     icon: folder + scenario + "TPtC 7A - The Vortex Above",
     flag: EncounterSetFlag.Scenario
 }
@@ -69,7 +62,6 @@ export const theVortexAbove: EncounterSet = {
 export const theFloodBelow: EncounterSet = {
     name: "The Flood Below",
     count: 0,
-    startingEncounterDeckCount: 0,
     icon: folder + scenario + "TPtC 7B - The Flood Below",
     flag: EncounterSetFlag.Scenario
 }
@@ -77,7 +69,6 @@ export const theFloodBelow: EncounterSet = {
 export const dimCarcosa: EncounterSet = {
     name: "Dim Carcosa",
     count: 0,
-    startingEncounterDeckCount: 0,
     icon: folder + scenario + "TPtC 8 - Dim Carcosa",
     flag: EncounterSetFlag.Scenario
 }
