@@ -17,6 +17,7 @@ export interface Campaign {
     scenarioTransitions: ScenarioTransition[]
     commonEncounterSets?: EncounterSet[]
     startingChaosBag?: PerDifficultySettings<GameComponent[]>
+    basicWeaknessTraits? :string[]
 }
 
 export interface Scenario {

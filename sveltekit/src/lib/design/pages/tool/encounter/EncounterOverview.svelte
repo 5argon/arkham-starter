@@ -4,17 +4,19 @@
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
-	import { findCoreEncounters } from './campaign-analyze'
+	import { findCoreEncounters, findUniqueScenarios } from './campaign-analyze'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	import EncounterMatrixTab from './EncounterMatrixTab.svelte'
 	import EncounterScenariosTab from './EncounterScenariosTab.svelte'
 	import EncounterTransitionsTab from './EncounterTransitionsTab.svelte'
 	export let campaign: Campaign
+	export let incomplete: boolean = false
 	let scenarioTabIndex: number = 0
 	let transitionTabIndex: number = 0
 	let showName: boolean = false
 	let advanced: boolean = false
 	let difficulty: Difficulty = Difficulty.Standard
+	let activeTab: number = 0
 	$: coreEncounters = findCoreEncounters(campaign)
 
 	function onDifficultyChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
@@ -24,17 +26,29 @@
 
 <a href="/tool/campaign">Back to Campaign List</a>
 
+{#if incomplete}
+	<p>
+		<strong>** INCOMPLETE **</strong> I only buy repackaged campaigns and have not played this campaign
+		yet. The following information are probably missing or wrong :
+	</p>
+	<ul>
+		<li>Card count of each encounter set.</li>
+		<li>The right transitions between scenarios.</li>
+		<li>
+			Subset card count of the scenario-specific encounter set that goes into the shuffled encounter
+			deck.
+		</li>
+		<li>Everything related to scenario setup, like set aside encounter sets.</li>
+	</ul>
+	<p>
+		If you have the campaign would like to help out completing the missing information, head to the
+		<a href="https://github.com/5argon/arkham-starter" target="_blank">Github page</a> to find out how.
+		Thank you!
+	</p>
+{/if}
+
 <ListDivider label="Settings" />
 
-<div>
-	<span>Difficulty</span>
-	<select name="difficulties" value={difficulty} on:change={(e) => onDifficultyChangeHandler(e)}>
-		<option value={Difficulty.Easy}>Easy</option>
-		<option value={Difficulty.Standard}>Standard</option>
-		<option value={Difficulty.Hard}>Hard</option>
-		<option value={Difficulty.Expert}>Expert</option>
-	</select>
-</div>
 <div>
 	<Checkbox
 		label={'Show Name'}
@@ -51,6 +65,17 @@
 		}}
 	/>
 </div>
+{#if advanced}
+	<div>
+		<span>Difficulty</span>
+		<select name="difficulties" value={difficulty} on:change={(e) => onDifficultyChangeHandler(e)}>
+			<option value={Difficulty.Easy}>Easy</option>
+			<option value={Difficulty.Standard}>Standard</option>
+			<option value={Difficulty.Hard}>Hard</option>
+			<option value={Difficulty.Expert}>Expert</option>
+		</select>
+	</div>
+{/if}
 
 <ListDivider label="Core Encounter Sets" />
 <EncounterIconFlex encounterSets={coreEncounters} {showName} hideNumbers />
@@ -61,10 +86,18 @@
 {/if}
 
 <div class="tabs">
-	<LimitedTab>
+	<LimitedTab bind:active={activeTab}>
 		<div slot="tab1">Matrix</div>
 		<div slot="content1">
-			<EncounterMatrixTab {campaign} {showName} />
+			<EncounterMatrixTab
+				{campaign}
+				{showName}
+				onGoToScenario={(s) => {
+					activeTab = 1
+					const index = findUniqueScenarios(campaign).findIndex((x) => x === s)
+					scenarioTabIndex = index
+				}}
+			/>
 		</div>
 		<div slot="tab2">Scenarios</div>
 		<div slot="content2">
@@ -75,6 +108,7 @@
 				onDropdownIndexChanged={(n) => {
 					scenarioTabIndex = n
 				}}
+				{incomplete}
 			/>
 		</div>
 		<div slot="tab3">Transitions</div>

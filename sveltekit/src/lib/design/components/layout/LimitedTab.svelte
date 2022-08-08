@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts">
-	let active = 0
+	export let active :number = 0
 	export let hide1 = false
 	export let hide2 = false
 	export let hide3 = false

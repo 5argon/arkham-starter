@@ -6,6 +6,7 @@ export const theDunwichLegacyCampaign: Campaign = {
 	name: 'The Dunwich Legacy',
 	scenarioTransitions: transitions,
 	commonEncounterSets: [armitagesFate],
+	basicWeaknessTraits: ["Madness", "Injury", "Pact"],
 	startingChaosBag: {
 		easy: [
 			GameComponent.TokenP1,

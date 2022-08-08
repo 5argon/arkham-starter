@@ -37,7 +37,12 @@
 		<tbody>
 			{#each rows as r}
 				<tr>
-					<td class="sticky scenario-name">{r.scenario.name}</td>
+					<td
+						class="sticky scenario-name"
+						on:click={() => {
+							onGoToScenario(r.scenario)
+						}}>{r.scenario.name}</td
+					>
 					<td>
 						{#each r.specificSets as s}
 							<EncounterIcon iconName={s.name} iconPath={s.icon} scenarioSet />
@@ -86,6 +91,11 @@
 		height: 20px;
 		white-space: nowrap;
 		padding: 0px 8px;
+		cursor: pointer;
+	}
+
+	.scenario-name:hover {
+		text-decoration: underline;
 	}
 
 	tbody tr td {

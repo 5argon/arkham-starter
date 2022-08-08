@@ -61,6 +61,7 @@ export const theHeartOfMadness: EncounterSet = {
     name: "The Heart of Madness",
     count: 18,
     startingEncounterDeckCount: 6,
+    flag: EncounterSetFlag.Scenario,
     icon: folder + "The Heart of Madness"
 }
 
@@ -155,7 +156,7 @@ export const expeditionTeam: EncounterSet = {
 export const tekelili: EncounterSet = {
     name: "Tekeli-Li",
     count: 16,
-    icon: folder + "Tekeli-Li"
+    icon: folder + "Tekeli-li"
 }
 
 export const memorialsOfTheLost: EncounterSet = {

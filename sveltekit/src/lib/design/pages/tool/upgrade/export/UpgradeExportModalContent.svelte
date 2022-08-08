@@ -87,7 +87,7 @@
 	/>
 {:else}
 	<div>
-		Style
+		Style (Not usable yet, sorry!)
 		<select
 			value={upgradeExportOptions.upgradeExportStyle ===
 			UpgradeExportOptions_UpgradeExportStyle.Unknown

@@ -4,12 +4,13 @@ If you search "Arkham Horror Encounter Set Usage" or similar, you will find spre
 
 These has many purposes, including :
 
-- Want to know what are needed for an entire campaign run.
-- Want to gather the cards ahead of reading the story, due to storage "logistics".
+- Want to gather the cards, pre-shuffle the encounter deck ahead of time, without mistakenly shuffle in the sets that are meant to be set aside.
+- Want to know what are needed for an entire campaign run, to pack up for trips, etc.
+- Want to optimize "storage logistics".
 - Want to setup the for the next time right at the end of today's session.
 - Want to see the overall encounter set usage statistics.
 
-However, players come and go. Many sheets has editing disabled, and the player that stopped playing the game won't have time to maintain it anymore. The forked version is made because someone want to continue, or just that the visualization is not to their liking.
+However, players come and go. Many sheets has editing disabled, and the player that stopped playing the game won't have time to maintain it anymore. Forked versions are made because someone want to continue, or just that the visualization is not to their liking.
 
 So I made a yet another version. These are my reasons :
 
@@ -44,9 +45,11 @@ Minimum means sometimes the scenario would immediately ask you to add the set as
 
 If any icon is showing parentheses of number behind it, that means not all cards in the set are included in the encounter deck.
 
-This always occur on a scenario-specific set, as that set count of cards would also include act, agenda, locations, etc. as well.
+This almost always occur on a scenario-specific set, as that set count of cards would also include act, agenda, locations, etc. as well, that you should not shuffle into the encounter deck.
 
 Depending on setup instruction, it may occur on other sets too. To keep spoiler minimal, please read the setup instruction why not all of them are in the deck. If you are replaying, probably these parentheses could remind you of the setup instructions without touching the campaign guide.
+
+This is the most useful for replays, as when you see just the number, you can recall what those cards are.
 
 # Transitions Tab
 

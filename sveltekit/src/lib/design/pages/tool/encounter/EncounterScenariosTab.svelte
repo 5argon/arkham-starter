@@ -9,6 +9,7 @@
 	import { findUniqueScenarios, mergeEncounters } from './campaign-analyze'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	export let campaign: Campaign
+	export let incomplete: boolean = false
 	export let showName: boolean = false
 	export let dropdownIndex: number = 0
 	export let onDropdownIndexChanged: (n: number) => void = (n) => {
@@ -55,12 +56,14 @@
 <ListDivider label={'Encounter Sets'} />
 <EncounterIconFlex encounterSets={mergeEncounters(selectedScenario)} {showName} hideNumbers />
 
-<ListDivider label={'Starting Encounter Deck ( ' + count + ' cards )'} />
-<EncounterIconFlex encounterSets={selectedScenario.encounterSets} {showName} />
+{#if !incomplete}
+	<ListDivider label={'Starting Encounter Deck ( ' + count + ' cards )'} />
+	<EncounterIconFlex encounterSets={selectedScenario.encounterSets} {showName} />
 
-{#if selectedScenario.encounterSetsSecondary !== undefined}
-	<ListDivider label={'Set Aside'} />
-	<EncounterIconFlex encounterSets={selectedScenario.encounterSetsSecondary} {showName} />
+	{#if selectedScenario.encounterSetsSecondary !== undefined}
+		<ListDivider label={'Set Aside'} />
+		<EncounterIconFlex encounterSets={selectedScenario.encounterSetsSecondary} {showName} />
+	{/if}
 {/if}
 
 <style>
