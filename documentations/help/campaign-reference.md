@@ -4,7 +4,9 @@ The [Campaign Reference](https://arkham-starter.com/tool/campaign) is currently 
 
 ## Where are they?
 
-Go to `sveltekit/src/lib/campaign` to see folders named after abbreviation of the campaign's name. Inside you will find exactly 4 files, forming hierarchy of data from bottom to top in this order : 
+Go to [`sveltekit/src/lib/campaign`](https://github.com/5argon/arkham-starter/tree/main/sveltekit/src/lib/campaign) to see folders named after abbreviation of the campaign's name.
+
+Inside you will find exactly 4 files. Each file can be edited and submit for changes by pressing the pencil button to open GitHub's built-in editor. They form a hierarchy of data from bottom to top in this order : 
 
 ## Encounter
 

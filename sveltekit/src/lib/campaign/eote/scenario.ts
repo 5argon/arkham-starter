@@ -1,5 +1,5 @@
 import { GameComponent, type Scenario } from '$lib/core/campaign'
-import { ancientEvils, chillingCold, lockedDoors, strikingFear } from '../core/encounter'
+import { ancientEvils, chillingCold, lockedDoors, strikingFear } from '../notz/encounter'
 import {
 	agentsOfTheUnknown,
 	cityOfTheElderThings,
@@ -28,9 +28,9 @@ export const iceAndDeathPart1Scenario: Scenario = {
 	index: 2,
 	name: 'Ice and Death, Part I',
 	shuffles: [
+		{ encounterSet: iceAndDeath, overwriteCount: 4 },
 		{ encounterSet: theCrash, overwriteCount: 0 },
 		ancientEvils,
-		{ encounterSet: iceAndDeath, overwriteCount: 4 },
 		deadlyWeather,
 		hazardsOfAntarctica,
 		silenceAndMystery,
@@ -43,9 +43,9 @@ export const iceAndDeathPart2Scenario: Scenario = {
 	index: 3,
 	name: 'Ice and Death, Part II',
 	shuffles: [
+		{ encounterSet: iceAndDeath, overwriteCount: 7 },
 		{ encounterSet: lostInTheNight, overwriteCount: 0 },
 		ancientEvils,
-		{ encounterSet: iceAndDeath, overwriteCount: 7 },
 		leftBehind,
 		deadlyWeather,
 		hazardsOfAntarctica,
@@ -58,9 +58,9 @@ export const iceAndDeathPart3Scenario: Scenario = {
 	index: 4,
 	name: 'Ice and Death, Part III',
 	shuffles: [
+		{ encounterSet: iceAndDeath, overwriteCount: 7 },
 		{ encounterSet: seepingNightmares, overwriteCount: 2 },
 		ancientEvils,
-		{ encounterSet: iceAndDeath, overwriteCount: 7 },
 		{ encounterSet: creaturesInTheIce, overwriteCount: 2 },
 		deadlyWeather,
 		hazardsOfAntarctica,

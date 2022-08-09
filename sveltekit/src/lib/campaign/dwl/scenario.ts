@@ -8,7 +8,7 @@ import {
 	nightgaunts,
 	rats,
 	strikingFear,
-} from '../core/encounter'
+} from '../notz/encounter'
 import {
 	badLuck,
 	beastThralls,

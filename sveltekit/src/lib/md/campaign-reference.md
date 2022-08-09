@@ -1,8 +1,8 @@
 # Campaign Reference
 
-If you search "Arkham Horror Encounter Set Usage" or similar, you will find spread sheets or tables that many community members have made, and passed over, over the years. This shows a quick overview of encounter set used in varying granularity. Some show an entire game, some has one campaign per sheet.
+If you search "Arkham Horror Encounter Set Usage" or similar, you will find spread sheets or tables that many community members have made, and passed over, over the years. (Such as [this](https://docs.google.com/spreadsheets/d/1nNLXLzIEQ4nxQqgOlGV8rsp26qAC437c88pmC5izCaQ/edit#gid=1034825012), or [this one](https://docs.google.com/spreadsheets/d/1peu40dxwrnw1c-XMaPTleEa1Vus1skcAG3XXBB-bEDc/edit#gid=1507178912).) They show a quick overview of encounter set used in varying granularity. Some show an entire game, some has one campaign per sheet.
 
-These has many purposes, including :
+These have many purposes, including :
 
 - Want to gather the cards, pre-shuffle the encounter deck ahead of time, without mistakenly shuffle in the sets that are meant to be set aside.
 - Want to know what are needed for an entire campaign run, to pack up for trips, etc.
@@ -16,7 +16,7 @@ So I made a yet another version. These are my reasons :
 
 - I don't want to keep a Google Sheet URL, I want it accessible from URL I can remember (that is, my own site).
 - Google Sheets are often massive and not mobile friendly. I want to be able to reference quickly from tiny mobile phone screen without much scrolling around. (Especially, not too much horizontal scrolling.)
-- I have my own preference of how I want to see the data. Mainly, I want to be able to hide all the texts once I got used to the campaign and make it minimal, but also can toggle them back when I want to.
+- I have my own preference of how I want to see the data. Mainly, I want to be able to hide all the texts once I got used to the campaign and make it minimal, but also can toggle them back when I want to. 
 - I want the loading performance to be better than Google Sheets.
 
 By programming a web application, I can make the data shift around in presentation as opposed to be completely static in Google Sheets. Also I have more confidence of maintaining it now that everything are automatically generated from a central source of "campaign database" in the code, not that I hand-place every icons in the cell like in Google Sheets.
@@ -25,13 +25,23 @@ By programming a web application, I can make the data shift around in presentati
 
 This section tells you some campaign-wide information. For example, all the Core Set encounter sets used throughout the campaign. It maybe useful in some organization scheme, maybe you want to move all the relevant core encounters to near the campaign encounter sets while the campaign is on-going.
 
+## Encounter Set Sorting
+
+Check "Advanced Features" to see this settings. Throughout the interface, encounter sets are first grouped by scenario-exclusive (blue), return to (green), core set (red), and campaign sets (black). This grouping cannot be changed, but you can change the sorting inside each group :
+
+- **Default** : In the Matrix tab, they are sorted by how early they are introduced in the campaign. Therefore the sets that are used in the first few scenarios of the campaign are sorted to the left. In the Scenarios and Transitions tab, they are sorted in arbitrary order programmed for each scenario.
+- **Frequency** : Sets that are re-used more times throughout the campaign are grouped to the left. Sets that are only used a few times are grouped to the right. If you also order your dividers according to this, it may optimize the distance traveled between dividers when you are setting up the game.
+- **Alphabetical** : Sort the sets everywhere from the name (A to Z).
+
 # Matrix Tab
 
 This emulates the classic Google Sheet layout invented by the community. An overview matrix like this has sparseness that let you see the whole picture. However, when reading only a scenario you are interested in, maybe using Scenarios Tab is more to-the-point.
 
+You can also click on the scenario's name on the first column to jump to a Scenario Tab, with that scenario selected for you.
+
 # Scenarios Tab
 
-The smallest unit of a campaign are scenarios. By selecting one, you will see a minimal presentation of scenario setup what are needed to play.
+By selecting a scenario, you will see a minimal presentation of scenario setup what are needed to play.
 
 The "Set aside" section indicates that you should not shuffle these sets together just yet. Scenario setup tells you what to do, or maybe they come into play in the middle of scenario.
 
@@ -39,7 +49,7 @@ The "Set aside" section indicates that you should not shuffle these sets togethe
 
 It is intended so you can setup without looking at the campaign guide. The minimum count is there to let you check if you missed anything. (Occassionally there is a card sticking on the dividers...)
 
-Minimum means sometimes the scenario would immediately ask you to add the set aside cards to the starting encounter deck on setup, depending on some conditions. This app has no way to know if you met those conditions or not.
+Minimum means sometimes the scenario would immediately ask you to add the set aside cards to the starting encounter deck on setup, depending on some conditions, therefore no longer matching this count. This app has no way to know if you met those conditions or not.
 
 ## Subset
 
@@ -47,9 +57,9 @@ If any icon is showing parentheses of number behind it, that means not all cards
 
 This almost always occur on a scenario-specific set, as that set count of cards would also include act, agenda, locations, etc. as well, that you should not shuffle into the encounter deck.
 
-Depending on setup instruction, it may occur on other sets too. To keep spoiler minimal, please read the setup instruction why not all of them are in the deck. If you are replaying, probably these parentheses could remind you of the setup instructions without touching the campaign guide.
+Depending on setup instruction, it may occur on other sets too. To keep spoiler minimal, please read the setup instruction why not all of them are in the deck.
 
-This is the most useful for replays, as when you see just the number, you can recall what those cards are.
+This is the most useful for replays, as when you see just the number, you can recall the setup instructions what those cards are.
 
 # Transitions Tab
 
@@ -71,7 +81,9 @@ Assembling needed encounter sets ahead of time can improve excitement on the nex
 
 ## Foresight
 
-An extremely niche feature, I am not sure if anyone other than me wants to do this. It attempts to pre-gather encounter sets **next to the next session** while tearing down the current one, **as much as possible**. (It would also have to wait for some encounter sets that are used in the next session.)
+An extremely niche feature, I am not sure if anyone other than me wants to do this. **Requires checking "Advanced Features" in the settings to see the control.**
+
+It attempts to pre-gather encounter sets **next to the next session** while tearing down the current one, **as much as possible**. (It would also have to wait for some encounter sets that are used in the next session.)
 
 If there is only one choice what the next-next scenario would be, you just have to check "Foresight". Otherwise, the UI will show all the possible ones based on available transitions for you to select which one to Foresight.
 

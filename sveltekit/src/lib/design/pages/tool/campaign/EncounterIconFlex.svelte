@@ -6,6 +6,7 @@
 		type EncounterSetItem,
 	} from '$lib/core/campaign'
 	import EncounterIcon from './EncounterIcon.svelte'
+import EncounterIconWithLabel from './EncounterIconWithLabel.svelte';
 
 	export let encounterSets: EncounterSetItem[]
 	$: sortedEncounterSets = encounterSets.sort((a, b) => {
@@ -71,7 +72,7 @@
 <div>
 	{#each encounterSetsExtracted as ce, i}
 		{#if hideNumbers || (!hideNumbers && showingNumbers[i] !== 0)}
-			<EncounterIcon
+			<EncounterIconWithLabel
 				iconPath={ce.icon}
 				iconName={ce.name}
 				coreSet={ce.flag === EncounterSetFlag.Core}

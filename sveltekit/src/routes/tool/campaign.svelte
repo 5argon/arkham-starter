@@ -39,3 +39,6 @@
 	<li><a href="./campaign/tfa">*The Forgotten Age</a></li>
 	<li><a href="./campaign/eote">Edge of the Earth</a></li>
 </ul>
+<ul>
+	<li><a href="./campaign/rtnotz">Return to Night of the Zealot</a></li>
+</ul>

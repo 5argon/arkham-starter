@@ -5,6 +5,7 @@ const folder = 'Edge of the Earth/'
 export const iceAndDeath: EncounterSet = {
 	name: 'Ice and Death',
 	count: 21,
+	flag: EncounterSetFlag.Scenario,
 	icon: folder + 'Ice and Death',
 }
 

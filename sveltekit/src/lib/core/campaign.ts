@@ -5,6 +5,12 @@ export interface EncounterSet {
 	flag?: EncounterSetFlag
 }
 
+export enum EncounterSetSorting {
+	Default,
+	Frequency,
+	Alphabetical,
+}
+
 export enum EncounterSetFlag {
 	Core,
 	ReturnTo,

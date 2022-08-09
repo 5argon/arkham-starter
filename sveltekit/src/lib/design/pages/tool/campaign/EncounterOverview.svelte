@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Campaign } from '$lib/core/campaign'
+	import { EncounterSetSorting, type Campaign } from '$lib/core/campaign'
 	import { Difficulty } from '$lib/core/difficulty'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
@@ -17,10 +17,15 @@
 	let advanced: boolean = false
 	let difficulty: Difficulty = Difficulty.Standard
 	let activeTab: number = 0
+	let sorting: EncounterSetSorting = EncounterSetSorting.Default
 	$: coreEncounters = findCoreEncounters(campaign)
 
 	function onDifficultyChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
 		difficulty = parseInt(e.currentTarget.value)
+	}
+
+	function onSortingChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
+		sorting = parseInt(e.currentTarget.value)
 	}
 </script>
 
@@ -33,15 +38,13 @@
 	</p>
 	<ul>
 		<li>Card count of each encounter set.</li>
+		<li>Subset count that actually goes into the random encounter deck.</li>
 		<li>The right transitions between scenarios.</li>
-		<li>
-			Subset card count of the scenario-specific encounter set that goes into the shuffled encounter
-			deck.
-		</li>
 		<li>Everything related to scenario setup, like set aside encounter sets.</li>
 	</ul>
 	<p>
-		If you have the campaign would like to help out completing the missing information, head to the
+		If you have the campaign and would like to help out completing the missing information, head to
+		the
 		<a href="https://github.com/5argon/arkham-starter" target="_blank">Github page</a> to find out how.
 		Thank you!
 	</p>
@@ -49,7 +52,7 @@
 
 <ListDivider label="Settings" />
 
-<div>
+<div class="settings-item">
 	<Checkbox
 		label={'Show Name'}
 		checked={showName}
@@ -57,6 +60,8 @@
 			showName = c
 		}}
 	/>
+</div>
+<div class="settings-item">
 	<Checkbox
 		label={'Advanced Features'}
 		checked={advanced}
@@ -66,13 +71,21 @@
 	/>
 </div>
 {#if advanced}
-	<div>
+	<div class="settings-item">
 		<span>Difficulty</span>
 		<select name="difficulties" value={difficulty} on:change={(e) => onDifficultyChangeHandler(e)}>
 			<option value={Difficulty.Easy}>Easy</option>
 			<option value={Difficulty.Standard}>Standard</option>
 			<option value={Difficulty.Hard}>Hard</option>
 			<option value={Difficulty.Expert}>Expert</option>
+		</select>
+	</div>
+	<div class="settings-item">
+		<span>Encounter Set Sorting</span>
+		<select name="sortings" value={sorting} on:change={(e) => onSortingChangeHandler(e)}>
+			<option value={EncounterSetSorting.Default}>Default</option>
+			<option value={EncounterSetSorting.Frequency}>Frequency</option>
+			<option value={EncounterSetSorting.Alphabetical}>Alphabetical</option>
 		</select>
 	</div>
 {/if}
@@ -135,5 +148,9 @@
 <style>
 	.tabs {
 		margin-top: 12px;
+	}
+
+	.settings-item {
+		margin: 2px 0px;
 	}
 </style>

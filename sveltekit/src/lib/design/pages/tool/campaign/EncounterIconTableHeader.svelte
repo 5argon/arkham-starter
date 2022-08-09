@@ -10,13 +10,16 @@
 	{#if showName}
 		<div class="name">{encounterSet.name}</div>
 	{/if}
-	<EncounterIcon
-		iconPath={encounterSet.icon}
-		iconName={encounterSet.name}
-		coreSet={encounterSet.flag === EncounterSetFlag.Core}
-		scenarioSet={encounterSet.flag === EncounterSetFlag.Scenario}
-		returnToSet={encounterSet.flag === EncounterSetFlag.ReturnTo}
-	/>
+	<div class="fade">
+		<EncounterIcon
+			iconPath={encounterSet.icon}
+			iconName={encounterSet.name}
+			coreSet={encounterSet.flag === EncounterSetFlag.Core}
+			scenarioSet={encounterSet.flag === EncounterSetFlag.Scenario}
+			returnToSet={encounterSet.flag === EncounterSetFlag.ReturnTo}
+			enableHover
+		/>
+	</div>
 </div>
 
 <style>

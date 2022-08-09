@@ -9,7 +9,7 @@ import {
 	rats,
 	strikingFear,
 	theMidnightMasks,
-} from '../core/encounter'
+} from '../notz/encounter'
 import {
 	aPhantomOfTruth,
 	blackStarsRise,

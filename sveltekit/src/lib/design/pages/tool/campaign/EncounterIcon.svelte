@@ -6,8 +6,7 @@
 	export let coreSet: boolean = false
 	export let scenarioSet: boolean = false
 	export let returnToSet: boolean = false
-	export let showName: boolean = false
-	export let number: number | null = null
+	export let enableHover: boolean = false
 
 	let hovering = false
 	function mouseEnterHandler(e: MouseEvent & { currentTarget: EventTarget }) {
@@ -24,56 +23,38 @@
 	$: popupText = iconName
 </script>
 
-<span class="wrap">
-	{#if hovering && !showName}
+<span class="wrap" on:mouseenter={mouseEnterHandler} on:mouseleave={mouseLeaveHandler}>
+	{#if hovering && enableHover}
 		<span class="popup">
 			<HoverFrame>{popupText}</HoverFrame>
 		</span>
 	{/if}
 	<div class="outer-flex">
-		<div class="ensure-square" on:mouseenter={mouseEnterHandler} on:mouseleave={mouseLeaveHandler}>
-			<img
-				class="encounter-icon"
-				class:encounter-icon-black={!coreSet && !returnToSet}
-				class:encounter-icon-core={coreSet}
-				class:encounter-icon-scenario-set={scenarioSet}
-				class:encounter-icon-return-to={returnToSet}
-				src={makeIconPath(iconPath)}
-				alt={iconName}
-			/>
-		</div>
-		{#if showName}<span class="show-name" class:name-with-number={number !== null}>{iconName}</span
-			>{/if}
-		{#if number !== null}<span class="number">({number})</span>{/if}
+		<img
+			class="encounter-icon"
+			class:encounter-icon-black={!coreSet && !returnToSet}
+			class:encounter-icon-core={coreSet}
+			class:encounter-icon-scenario-set={scenarioSet}
+			class:encounter-icon-return-to={returnToSet}
+			src={makeIconPath(iconPath)}
+			alt={iconName}
+		/>
 	</div>
 </span>
 
 <style>
+	.wrap {
+		display: inline-block;
+		width: 24px;
+		height: 24px;
+	}
+
 	.outer-flex {
 		display: inline-flex;
 		align-items: center;
 		justify-items: center;
-	}
-
-	.show-name {
-		margin-right: 8px;
-	}
-
-	.name-with-number {
-		margin-right: 4px;
-	}
-
-	.number {
-		margin-right: 8px;
-	}
-
-	.ensure-square {
 		width: 24px;
 		height: 24px;
-		display: inline-flex;
-		align-items: center;
-		justify-items: center;
-		margin: 0px 4px;
 	}
 
 	.encounter-icon {

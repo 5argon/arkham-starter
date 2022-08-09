@@ -21,7 +21,7 @@
 	<table class:table-name-padding={showName}>
 		<thead>
 			<tr>
-				<th class="sticky">Scenario</th>
+				<th class="sticky" />
 				<th />
 				{#each encountersReused as e}
 					<th><EncounterIconTableHeader encounterSet={e} {showName} /></th>
@@ -43,21 +43,26 @@
 							onGoToScenario(r.scenario)
 						}}>{r.scenario.name}</td
 					>
-					<td>
+					<td class="specific-sets" class:no-specific-sets={r.specificSets.length == 0}>
 						{#each r.specificSets as s}
-							<EncounterIcon iconName={s.name} iconPath={s.icon} scenarioSet />
+							<div class="block-wrap">
+								<EncounterIcon iconName={s.name} iconPath={s.icon} scenarioSet enableHover />
+							</div>
 						{/each}
 					</td>
 					{#each r.orderedEncounterSets as o}
 						{#if o !== null}
-							<td
-								><EncounterIcon
-									iconName={o.name}
-									iconPath={o.icon}
-									coreSet={o.flag === EncounterSetFlag.Core}
-									returnToSet={o.flag === EncounterSetFlag.ReturnTo}
-								/></td
-							>
+							<td>
+								<div class="block-wrap">
+									<EncounterIcon
+										iconName={o.name}
+										iconPath={o.icon}
+										coreSet={o.flag === EncounterSetFlag.Core}
+										returnToSet={o.flag === EncounterSetFlag.ReturnTo}
+										enableHover
+									/>
+								</div>
+							</td>
 						{:else}
 							<td />
 						{/if}
@@ -76,14 +81,14 @@
 	}
 
 	.sticky {
-		z-index: 9999;
+		z-index: 1;
 		position: sticky;
 		left: 0;
 		background-color: rgba(255, 255, 255, 0.95);
 	}
 
 	.table-name-padding {
-		padding-top: 90px;
+		padding-top: 110px;
 	}
 
 	.scenario-name {
@@ -99,7 +104,26 @@
 	}
 
 	tbody tr td {
+		width: 28px;
+		height: 28px;
 		vertical-align: middle;
+	}
+
+	.specific-sets {
+		width: unset;
+	}
+
+	.no-specific-sets {
+		width: unset;
+		height: unset;
+	}
+
+	.block-wrap {
+		display: flex;
+		width: 28px;
+		height: 28px;
+		justify-content: center;
+		align-items: center;
 	}
 
 	tbody tr:nth-child(odd) {
