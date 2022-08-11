@@ -1,16 +1,23 @@
 <script lang="ts">
-	import type { Campaign, Scenario, ScenarioTransition } from '$lib/core/campaign'
+	import type {
+		Campaign,
+		EncounterSetSorting,
+		Scenario,
+		ScenarioTransition,
+	} from '$lib/core/campaign'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import {
 		filterPossibleTransitions,
 		findForesightChoices,
+		findFrequencies,
 		findUniqueScenarios,
 		makeTransitionInfo,
 		type TransitionInfo,
 	} from './campaign-analyze'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	export let campaign: Campaign
+	export let sorting: EncounterSetSorting
 	export let advanced: boolean
 	export let dropdownIndexScenario: number = 0
 	export let dropdownIndexTransition: number = 0
@@ -26,10 +33,9 @@
 	export let onChangeForesight: (c: boolean) => void = (c) => {
 		foresightChecked = c
 	}
-	let scenarios: Scenario[]
-	$: {
-		scenarios = findUniqueScenarios(campaign)
-	}
+
+	$: frequencies = findFrequencies(scenarios)
+	$: scenarios = findUniqueScenarios(campaign)
 
 	let possibleTransitions: ScenarioTransition[]
 	let selectedScenarioTransition: ScenarioTransition | null
@@ -168,17 +174,29 @@
 	</div>
 
 	<ListDivider label={'Keep'} />
-	<EncounterIconFlex encounterSets={ti.keep} {showName} hideNumbers />
+	<EncounterIconFlex encounterSets={ti.keep} {showName} hideNumbers {sorting} {frequencies} />
 	<ListDivider label={'Add'} />
-	<EncounterIconFlex encounterSets={ti.add} {showName} hideNumbers />
+	<EncounterIconFlex encounterSets={ti.add} {showName} hideNumbers {sorting} {frequencies} />
 	<ListDivider label={'Remove'} />
-	<EncounterIconFlex encounterSets={ti.remove} {showName} hideNumbers />
+	<EncounterIconFlex encounterSets={ti.remove} {showName} hideNumbers {sorting} {frequencies} />
 	{#if advanced}
 		{#if foresighting !== null}
 			<ListDivider label={'Remove to Foresight'} />
-			<EncounterIconFlex encounterSets={ti.removeToForesight} {showName} hideNumbers />
+			<EncounterIconFlex
+				encounterSets={ti.removeToForesight}
+				{showName}
+				hideNumbers
+				{sorting}
+				{frequencies}
+			/>
 			<ListDivider label={'Add to Foresight'} />
-			<EncounterIconFlex encounterSets={ti.addToForesight} {showName} hideNumbers />
+			<EncounterIconFlex
+				encounterSets={ti.addToForesight}
+				{showName}
+				hideNumbers
+				{sorting}
+				{frequencies}
+			/>
 		{/if}
 	{/if}
 {/if}

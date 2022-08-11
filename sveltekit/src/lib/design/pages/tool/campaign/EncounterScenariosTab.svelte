@@ -1,14 +1,14 @@
 <script lang="ts">
 	import {
+		EncounterSetSorting,
 		isEncounterSetWithModification,
 		type Campaign,
-		type EncounterSet,
-		type Scenario,
 	} from '$lib/core/campaign'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-	import { findUniqueScenarios, mergeEncounters } from './campaign-analyze'
+	import { findFrequencies, findUniqueScenarios, mergeEncounters } from './campaign-analyze'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	export let campaign: Campaign
+	export let sorting: EncounterSetSorting
 	export let incomplete: boolean = false
 	export let showName: boolean = false
 	export let dropdownIndex: number = 0
@@ -17,11 +17,10 @@
 	}
 	$: selectedScenarioIndex = dropdownIndex
 
-	let scenarios: Scenario[]
-	$: {
-		scenarios = findUniqueScenarios(campaign)
-	}
+	$: scenarios = findUniqueScenarios(campaign)
+	$: frequencies = findFrequencies(scenarios)
 	$: selectedScenario = scenarios[selectedScenarioIndex]
+	$: selectedScenarioEncounters = mergeEncounters(selectedScenario)
 
 	$: count = selectedScenario.shuffles.reduce<number>((p, c) => {
 		if (!isEncounterSetWithModification(c)) {
@@ -50,15 +49,26 @@
 </div>
 
 <ListDivider label={'Encounter Sets'} />
-<EncounterIconFlex encounterSets={mergeEncounters(selectedScenario)} {showName} hideNumbers />
+<EncounterIconFlex
+	encounterSets={selectedScenarioEncounters}
+	{showName}
+	hideNumbers
+	{sorting}
+	{frequencies}
+/>
 
 {#if !incomplete}
 	<ListDivider label={'Starting Encounter Deck ( ' + count + ' cards )'} />
-	<EncounterIconFlex encounterSets={selectedScenario.shuffles} {showName} />
+	<EncounterIconFlex encounterSets={selectedScenario.shuffles} {showName} {sorting} {frequencies} />
 
 	{#if selectedScenario.setAsides !== undefined}
 		<ListDivider label={'Set Aside'} />
-		<EncounterIconFlex encounterSets={selectedScenario.setAsides} {showName} />
+		<EncounterIconFlex
+			encounterSets={selectedScenario.setAsides}
+			{showName}
+			{sorting}
+			{frequencies}
+		/>
 	{/if}
 {/if}
 

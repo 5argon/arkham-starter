@@ -1,16 +1,29 @@
 <script lang="ts">
-	import { EncounterSetFlag, type Campaign, type Scenario } from '$lib/core/campaign'
-	import { findUniqueEncounters, findUniqueScenarios } from './campaign-analyze'
+	import {
+		EncounterSetFlag,
+		EncounterSetSorting,
+		type Campaign,
+		type Scenario,
+	} from '$lib/core/campaign'
+	import {
+		findFrequencies,
+		findUniqueEncounters,
+		findUniqueScenarios,
+		sortEncounters,
+	} from './campaign-analyze'
 	import EncounterIcon from './EncounterIcon.svelte'
 	import EncounterIconTableHeader from './EncounterIconTableHeader.svelte'
 	import { createMatrixRows } from './matrix-row'
 	export let campaign: Campaign
+	export let sorting: EncounterSetSorting = EncounterSetSorting.Alphabetical
 	export let showName: boolean = false
 	export let onGoToScenario: (s: Scenario) => void = () => {
 		// do nothing
 	}
 	$: scenarios = findUniqueScenarios(campaign)
-	$: encounters = findUniqueEncounters(campaign)
+	$: uniqueEncounters = findUniqueEncounters(campaign)
+	$: frequencies = findFrequencies(scenarios)
+	$: encounters = sortEncounters(uniqueEncounters, sorting, frequencies)
 	$: encountersReused = encounters.filter((x) => x.flag === undefined)
 	$: encountersCore = encounters.filter((x) => x.flag === EncounterSetFlag.Core)
 	$: encountersReturnTo = encounters.filter((x) => x.flag === EncounterSetFlag.ReturnTo)

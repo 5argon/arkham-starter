@@ -1,40 +1,52 @@
 <script type="ts">
 	import {
 		EncounterSetFlag,
+		EncounterSetSorting,
+		getEncounterInsideItem,
 		isEncounterSetWithModification,
 		type EncounterSet,
 		type EncounterSetItem,
 	} from '$lib/core/campaign'
-	import EncounterIcon from './EncounterIcon.svelte'
-import EncounterIconWithLabel from './EncounterIconWithLabel.svelte';
+	import { sortEncountersScore, type EncounterSetFrequencies } from './campaign-analyze'
+	import EncounterIconWithLabel from './EncounterIconWithLabel.svelte'
 
 	export let encounterSets: EncounterSetItem[]
+	export let sorting: EncounterSetSorting
+	export let frequencies: EncounterSetFrequencies
+
 	$: sortedEncounterSets = encounterSets.sort((a, b) => {
 		function sortScore(e: EncounterSetItem): number {
-			let flag: EncounterSetFlag | undefined
-			if (isEncounterSetWithModification(e)) {
-				flag = e.encounterSet.flag
-			} else {
-				flag = e.flag
-			}
+			let flag: EncounterSetFlag | undefined = getEncounterInsideItem(e).flag
 			let score: number
 			switch (flag) {
 				case EncounterSetFlag.Core: {
 					score = 0
 					break
 				}
-				case EncounterSetFlag.Scenario: {
-					score = 2
+				case EncounterSetFlag.ReturnTo: {
+					score = 1
 					break
 				}
 				default: {
-					score = 1
+					score = 2
+					break
+				}
+				case EncounterSetFlag.Scenario: {
+					score = 3
 					break
 				}
 			}
 			return score
 		}
-		return sortScore(b) - sortScore(a)
+		const sortScoreA = sortScore(a)
+		const sortScoreB = sortScore(b)
+		if (sortScoreA !== sortScoreB) {
+			return sortScore(b) - sortScore(a)
+		}
+
+		let encounterA: EncounterSet = getEncounterInsideItem(a)
+		let encounterB: EncounterSet = getEncounterInsideItem(b)
+		return sortEncountersScore(encounterA, encounterB, sorting, frequencies)
 	})
 	export let showName: boolean = false
 	export let hideNumbers: boolean = false
@@ -76,6 +88,7 @@ import EncounterIconWithLabel from './EncounterIconWithLabel.svelte';
 				iconPath={ce.icon}
 				iconName={ce.name}
 				coreSet={ce.flag === EncounterSetFlag.Core}
+				returnToSet={ce.flag === EncounterSetFlag.ReturnTo}
 				{showName}
 				scenarioSet={ce.flag === EncounterSetFlag.Scenario}
 				number={!hideNumbers ? showingNumbers[i] : null}

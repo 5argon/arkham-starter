@@ -107,6 +107,7 @@ export const returnToTheDevourerBelowScenario: Scenario = {
 		ghoulsOfUmordhoth,
 		theDevourersCult,
 		strikingFear,
+		returnToCultOfUmordhoth,
 	],
 	setAsides: [
 		agentsOfCthulhu,

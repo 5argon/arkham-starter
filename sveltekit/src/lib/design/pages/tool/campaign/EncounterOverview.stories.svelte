@@ -5,5 +5,5 @@
 </script>
 
 <Story name="Test">
-	<EncounterOverview campaign={allCampaigns[1]} />
+	<EncounterOverview campaign={allCampaigns[1]}  />
 </Story>

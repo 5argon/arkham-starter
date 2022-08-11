@@ -6,9 +6,8 @@ export interface EncounterSet {
 }
 
 export enum EncounterSetSorting {
-	Default,
-	Frequency,
 	Alphabetical,
+	Frequency,
 }
 
 export enum EncounterSetFlag {
@@ -46,6 +45,14 @@ export function isEncounterSetWithModification(
 	e: EncounterSetItem,
 ): e is EncounterSetWithModification {
 	return 'encounterSet' in e
+}
+
+export function getEncounterInsideItem(e: EncounterSetItem) {
+	if (isEncounterSetWithModification(e)) {
+		return e.encounterSet
+	} else {
+		return e
+	}
 }
 
 export interface PerDifficultySettings<T> {

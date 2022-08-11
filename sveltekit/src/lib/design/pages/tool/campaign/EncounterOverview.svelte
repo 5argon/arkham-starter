@@ -4,7 +4,12 @@
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
-	import { findCoreEncounters, findUniqueScenarios } from './campaign-analyze'
+	import {
+		findCoreEncounters,
+		findFrequencies,
+		findUniqueScenarios,
+		sortEncounters,
+	} from './campaign-analyze'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	import EncounterMatrixTab from './EncounterMatrixTab.svelte'
 	import EncounterScenariosTab from './EncounterScenariosTab.svelte'
@@ -17,8 +22,10 @@
 	let advanced: boolean = false
 	let difficulty: Difficulty = Difficulty.Standard
 	let activeTab: number = 0
-	let sorting: EncounterSetSorting = EncounterSetSorting.Default
-	$: coreEncounters = findCoreEncounters(campaign)
+	let sorting: EncounterSetSorting = EncounterSetSorting.Alphabetical
+	$: scenarios = findUniqueScenarios(campaign)
+	$: encounterFrequencies = findFrequencies(scenarios)
+	$: coreEncounters = sortEncounters(findCoreEncounters(campaign), sorting, encounterFrequencies)
 
 	function onDifficultyChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
 		difficulty = parseInt(e.currentTarget.value)
@@ -83,19 +90,30 @@
 	<div class="settings-item">
 		<span>Encounter Set Sorting</span>
 		<select name="sortings" value={sorting} on:change={(e) => onSortingChangeHandler(e)}>
-			<option value={EncounterSetSorting.Default}>Default</option>
-			<option value={EncounterSetSorting.Frequency}>Frequency</option>
 			<option value={EncounterSetSorting.Alphabetical}>Alphabetical</option>
+			<option value={EncounterSetSorting.Frequency}>Frequency</option>
 		</select>
 	</div>
 {/if}
 
 <ListDivider label="Core Encounter Sets" />
-<EncounterIconFlex encounterSets={coreEncounters} {showName} hideNumbers />
+<EncounterIconFlex
+	encounterSets={coreEncounters}
+	{showName}
+	hideNumbers
+	{sorting}
+	frequencies={encounterFrequencies}
+/>
 
 {#if campaign.commonEncounterSets !== undefined}
 	<ListDivider label="Common Encounter Sets" />
-	<EncounterIconFlex encounterSets={campaign.commonEncounterSets} {showName} hideNumbers />
+	<EncounterIconFlex
+		encounterSets={campaign.commonEncounterSets}
+		{showName}
+		hideNumbers
+		{sorting}
+		frequencies={encounterFrequencies}
+	/>
 {/if}
 
 <div class="tabs">
@@ -105,6 +123,7 @@
 			<EncounterMatrixTab
 				{campaign}
 				{showName}
+				{sorting}
 				onGoToScenario={(s) => {
 					activeTab = 1
 					const index = findUniqueScenarios(campaign).findIndex((x) => x === s)
@@ -117,6 +136,7 @@
 			<EncounterScenariosTab
 				{campaign}
 				{showName}
+				{sorting}
 				dropdownIndex={scenarioTabIndex}
 				onDropdownIndexChanged={(n) => {
 					scenarioTabIndex = n
@@ -129,6 +149,7 @@
 			<EncounterTransitionsTab
 				{campaign}
 				{advanced}
+				{sorting}
 				dropdownIndexScenario={scenarioTabIndex}
 				dropdownIndexTransition={transitionTabIndex}
 				onDropdownIndexScenarioChanged={(n) => {
