@@ -120,40 +120,40 @@ export const returnToTheGathering: EncounterSet = {
 	flag: EncounterSetFlag.Scenario,
 	name: 'Return to The Gathering',
 	icon: folder + returnToFolder + scenarioFolder + 'NotZ R-1 - The Gathering',
-	count: 0,
+	count: 16,
 }
 
 export const returnToTheMidnightMasks: EncounterSet = {
 	flag: EncounterSetFlag.Scenario,
 	name: 'Return to The Midnight Masks',
 	icon: folder + returnToFolder + scenarioFolder + 'NotZ R-2 - The Midnight Masks',
-	count: 0,
+	count: 8,
 }
 
 export const returnToTheDevourerBelow: EncounterSet = {
 	flag: EncounterSetFlag.Scenario,
 	name: 'Return to The Devourer Below',
 	icon: folder + returnToFolder + scenarioFolder + 'NotZ R-3 - The Devourer Below',
-	count: 0,
+	count: 7,
 }
 
 export const returnToCultOfUmordhoth: EncounterSet = {
 	flag: EncounterSetFlag.ReturnTo,
 	name: 'Return to Cult of Umôrdhoth',
 	icon: folder + returnToFolder + 'Return Cult of Umordhoth',
-	count: 0,
+	count: 3,
 }
 
 export const ghoulsOfUmordhoth: EncounterSet = {
 	flag: EncounterSetFlag.ReturnTo,
 	name: 'Ghouls of Umôrdhoth',
 	icon: folder + returnToFolder + 'Ghouls of Umordhoth',
-	count: 0,
+	count: 7,
 }
 
 export const theDevourersCult: EncounterSet = {
 	flag: EncounterSetFlag.ReturnTo,
 	name: "The Devourer's Cult",
 	icon: folder + returnToFolder + "The Devourer's Cult",
-	count: 0,
+	count: 6,
 }

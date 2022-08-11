@@ -40,5 +40,6 @@
 	<li><a href="./campaign/eote">Edge of the Earth</a></li>
 </ul>
 <ul>
-	<li><a href="./campaign/rtnotz">Return to Night of the Zealot</a></li>
+	<li><a href="./campaign/rtnotz">*Return to Night of the Zealot</a></li>
+	<li><a href="./campaign/rtdwl">*Return to The Dunwich Legacy</a></li>
 </ul>

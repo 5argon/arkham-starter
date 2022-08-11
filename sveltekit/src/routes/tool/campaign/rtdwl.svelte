@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { returnToNightOfTheZealotCampaign } from '$lib/campaign/notz/campaign'
+	import { returnToTheDunwichLegacyCampaign } from '$lib/campaign/dwl/campaign'
 
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import EncounterOverview from '$lib/design/pages/tool/campaign/EncounterOverview.svelte'
@@ -8,8 +8,8 @@
 
 <PageTitle
 	subTitle="Tool"
-	title={'Campaign Reference: Return to Night of the Zealot'}
+	title={'Campaign Reference: Return to The Dunwich Legacy'}
 	helpMd={help}
 />
 
-<EncounterOverview campaign={returnToNightOfTheZealotCampaign} incomplete />
+<EncounterOverview campaign={returnToTheDunwichLegacyCampaign} incomplete />

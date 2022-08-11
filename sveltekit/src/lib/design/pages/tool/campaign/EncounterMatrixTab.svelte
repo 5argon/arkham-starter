@@ -119,7 +119,7 @@
 	}
 
 	.block-wrap {
-		display: flex;
+		display: inline-flex;
 		width: 28px;
 		height: 28px;
 		justify-content: center;

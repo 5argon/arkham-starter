@@ -12,13 +12,26 @@ import {
 import {
 	badLuck,
 	beastThralls,
+	beyondTheThreshold,
 	bishopsThralls,
 	bloodOnTheAltar,
+	creepingCold,
 	dunwich,
+	erraticFear,
 	extracurricularActivity,
 	hideousAbominations,
 	lostInTimeAndSpace,
 	naomisCrew,
+	resurgentEvils,
+	returnToBloodOnTheAltar,
+	returnToExtracurricularActivity,
+	returnToLostInTimeAndSpace,
+	returnToTheEssexCountyExpress,
+	returnToTheHouseAlwaysWins,
+	returnToTheMiskatonicMuseum,
+	returnToUndimensionedAndUnseen,
+	returnToWhereDoomAwaits,
+	secretDoors,
 	sorcery,
 	theBeyond,
 	theEssexCountyExpress,
@@ -27,6 +40,7 @@ import {
 	undimensionedAndUnseen,
 	whereDoomAwaits,
 	whippoorwills,
+	yogSothothsEmissaries,
 } from './encounter'
 
 export const extracurricularActivityScenario: Scenario = {
@@ -47,12 +61,7 @@ export const extracurricularActivityScenario: Scenario = {
 export const theHouseAlwaysWinsScenario: Scenario = {
 	index: 2,
 	name: 'The House Always Wins',
-	shuffles: [
-		{ encounterSet: theHouseAlwaysWins, overwriteCount: 4 },
-		rats,
-		badLuck,
-		naomisCrew,
-	],
+	shuffles: [{ encounterSet: theHouseAlwaysWins, overwriteCount: 4 }, rats, badLuck, naomisCrew],
 	gameComponents: [GameComponent.TokenElderThing],
 	setAsides: [strikingFear, hideousAbominations],
 }
@@ -138,5 +147,118 @@ export const lostInTimeAndSpaceScenario: Scenario = {
 		hideousAbominations,
 		sorcery,
 		theBeyond,
+	],
+}
+
+export const returnToExtracurricularActivityScenario: Scenario = {
+	index: 1,
+	name: 'Extracurricular Activity',
+	shuffles: [
+		{ encounterSet: returnToExtracurricularActivity, overwriteCount: 0 },
+		{ encounterSet: extracurricularActivity, overwriteCount: 0 },
+		bishopsThralls,
+		sorcery,
+		whippoorwills,
+		beyondTheThreshold,
+		resurgentEvils,
+		secretDoors,
+		yogSothothsEmissaries,
+	],
+}
+
+export const returnToTheHouseAlwaysWinsScenario: Scenario = {
+	index: 2,
+	name: 'The House Always Wins',
+	shuffles: [
+		{ encounterSet: returnToTheHouseAlwaysWins, overwriteCount: 0 },
+		{ encounterSet: theHouseAlwaysWins, overwriteCount: 0 },
+		rats,
+		badLuck,
+		naomisCrew,
+	],
+	setAsides: [hideousAbominations, erraticFear],
+}
+
+export const returnToTheMiskatonicMuseumScenario: Scenario = {
+	index: 5,
+	name: 'The Miskatonic Museum',
+	gameComponents: [GameComponent.TokenTablet],
+	shuffles: [
+		{ encounterSet: returnToTheMiskatonicMuseum, overwriteCount: 0 },
+		{ encounterSet: theMiskatonicMuseum, overwriteCount: 0 },
+		badLuck,
+		sorcery,
+		beyondTheThreshold,
+		creepingCold,
+		secretDoors,
+	],
+}
+
+export const returnToTheEssexCountyExpressScenario: Scenario = {
+	index: 6,
+	name: 'The Essex County Express',
+	shuffles: [
+		{ encounterSet: returnToTheEssexCountyExpress, overwriteCount: 0 },
+		{ encounterSet: theEssexCountyExpress, overwriteCount: 0 },
+		darkCult,
+		beyondTheThreshold,
+		erraticFear,
+		resurgentEvils,
+	],
+}
+
+export const returnToBloodOnTheAltarScenario: Scenario = {
+	index: 7,
+	name: 'Blood on the Altar',
+	shuffles: [
+		{ encounterSet: returnToBloodOnTheAltar, overwriteCount: 0 },
+		{ encounterSet: bloodOnTheAltar, overwriteCount: 0 },
+		nightgaunts,
+		dunwich,
+		whippoorwills,
+		resurgentEvils,
+	],
+	setAsides: [naomisCrew],
+}
+
+export const returnToUndimensionedAndUnseenScenario: Scenario = {
+	index: 8,
+	name: 'Undimensioned and Unseen',
+	shuffles: [
+		{ encounterSet: returnToUndimensionedAndUnseen, overwriteCount: 0 },
+		{ encounterSet: undimensionedAndUnseen, overwriteCount: 0 },
+		beastThralls,
+		dunwich,
+		whippoorwills,
+		erraticFear,
+	],
+}
+
+export const returnToWhereDoomAwaitsScenario: Scenario = {
+	index: 9,
+	name: 'Where Doom Awaits',
+	shuffles: [
+		{ encounterSet: returnToWhereDoomAwaits, overwriteCount: 0 },
+		{ encounterSet: whereDoomAwaits, overwriteCount: 0 },
+		beastThralls,
+		bishopsThralls,
+		sorcery,
+		creepingCold,
+		erraticFear,
+		resurgentEvils,
+	],
+	setAsides: [hideousAbominations],
+}
+
+export const returnToLostInTimeAndSpaceScenario: Scenario = {
+	index: 10,
+	name: 'Lost in Time and Space',
+	shuffles: [
+		{ encounterSet: returnToLostInTimeAndSpace, overwriteCount: 0 },
+		{ encounterSet: lostInTimeAndSpace, overwriteCount: 0 },
+		hideousAbominations,
+		sorcery,
+		beyondTheThreshold,
+		yogSothothsEmissaries,
 	],
 }
