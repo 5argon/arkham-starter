@@ -32,6 +32,21 @@ import {
 	threadsOfFate,
 	turnBackTime,
 	yigsVenom,
+	returnToTheUntamedWilds,
+	returnToTheDoomOfEztli,
+	returnToThreadsOfFate,
+	returnToTheBoundaryBeyond,
+	returnToPillarsOfJudgement,
+	returnToKnyan,
+	returnToTheCityOfArchives,
+	returnToTheDepthsOfYoth,
+	returnToShatteredAeons,
+	returnToTurnBackTime,
+	doomedExpedition,
+	cultOfPnakotus,
+	returnToRainforest,
+	venomousHate,
+	temporalHunters,
 } from './encounter'
 
 export const theUntamedWildsScenario: Scenario = {
@@ -169,5 +184,154 @@ export const turnBackTimeScenario: Scenario = {
 		poison,
 		temporalFlux,
 		yigsVenom,
+	],
+}
+
+export const returnToTheUntamedWildsScenario: Scenario = {
+	index: 1,
+	name: 'The Untamed Wilds',
+	shuffles: [
+		{ encounterSet: theUntamedWilds, overwriteCount: 0 },
+		{ encounterSet: returnToTheUntamedWilds, overwriteCount: 0 },
+		ancientEvils,
+		agentsOfYig,
+		guardiansOfTime,
+		poison,
+		rainforest,
+		serpents,
+		doomedExpedition,
+		returnToRainforest,
+	],
+}
+
+export const returnToTheDoomOfEztliScenario: Scenario = {
+	index: 2,
+	name: 'The Doom of Eztli',
+	shuffles: [
+		{ encounterSet: theDoomOfEztli, overwriteCount: 0 },
+		{ encounterSet: returnToTheDoomOfEztli, overwriteCount: 0 },
+		chillingCold,
+		agentsOfYig,
+		deadlyTraps,
+		forgottenRuins,
+		poison,
+		serpents,
+		temporalHunters,
+		venomousHate,
+	],
+}
+
+export const returnToThreadsOfFateScenario: Scenario = {
+	index: 3,
+	name: 'Threads of Fate',
+	shuffles: [
+		{ encounterSet: threadsOfFate, overwriteCount: 0 },
+		{ encounterSet: returnToThreadsOfFate, overwriteCount: 0 },
+		lockedDoors,
+		nightgaunts,
+		{ encounterSet: theMidnightMasks, overwriteCount: 5 },
+		pnakoticBrotherhood,
+		cultOfPnakotus,
+	],
+}
+
+export const returnToTheBoundaryBeyondScenario: Scenario = {
+	index: 4,
+	name: 'The Boundary Beyond',
+	shuffles: [
+		{ encounterSet: theBoundaryBeyond, overwriteCount: 0 },
+		{ encounterSet: returnToTheBoundaryBeyond, overwriteCount: 0 },
+		guardiansOfTime,
+		pnakoticBrotherhood,
+		poison,
+		cultOfPnakotus,
+		temporalHunters,
+		venomousHate,
+	],
+}
+
+export const returnToHeartOfTheEldersPart1Scenario: Scenario = {
+	index: 5,
+	name: 'Heart of the Elders, Part I',
+	shuffles: [
+		{ encounterSet: pillarsOfJudgement, overwriteCount: 0 },
+		{ encounterSet: returnToPillarsOfJudgement, overwriteCount: 0 },
+		poison,
+		rainforest,
+		doomedExpedition,
+		returnToRainforest,
+	],
+}
+
+export const returnToHeartOfTheEldersPart2Scenario: Scenario = {
+	index: 6,
+	name: 'Heart of the Elders, Part II',
+	shuffles: [
+		{ encounterSet: knyan, overwriteCount: 0 },
+		{ encounterSet: returnToKnyan, overwriteCount: 0 },
+		agentsOfYig,
+		deadlyTraps,
+		forgottenRuins,
+		poison,
+		venomousHate,
+	],
+}
+
+export const returnToTheCityOfArchivesScenario: Scenario = {
+	index: 7,
+	name: 'The City of Archives',
+	shuffles: [
+		{ encounterSet: theCityOfArchives, overwriteCount: 0 },
+		{ encounterSet: returnToTheCityOfArchives, overwriteCount: 0 },
+		agentsOfYogSothoth,
+		chillingCold,
+		lockedDoors,
+		strikingFear,
+	],
+}
+
+export const returnToTheDepthsOfYothScenario: Scenario = {
+	index: 8,
+	name: 'The Depths of Yoth',
+	shuffles: [
+		{ encounterSet: theDepthsOfYoth, overwriteCount: 0 },
+		{ encounterSet: returnToTheDepthsOfYoth, overwriteCount: 0 },
+		agentsOfYig,
+		forgottenRuins,
+		poison,
+		doomedExpedition,
+		venomousHate,
+	],
+}
+
+export const returnToShatteredAeonsScenario: Scenario = {
+	index: 9,
+	name: 'Shattered Aeons',
+	shuffles: [
+		{ encounterSet: shatteredAeons, overwriteCount: 0 },
+		{ encounterSet: returnToShatteredAeons, overwriteCount: 0 },
+		ancientEvils,
+		agentsOfYig,
+		pnakoticBrotherhood,
+		cultOfPnakotus,
+		temporalHunters,
+	],
+}
+
+export const returnToTurnBackTimeScenario: Scenario = {
+	index: 10,
+	name: 'Turn Back Time',
+	shuffles: [
+		{ encounterSet: turnBackTime, overwriteCount: 0 },
+		{ encounterSet: returnToTurnBackTime, overwriteCount: 0 },
+		{ encounterSet: theDoomOfEztli, overwriteCount: 0 },
+		chillingCold,
+		agentsOfYig,
+		deadlyTraps,
+		forgottenRuins,
+		poison,
+		serpents,
+		temporalHunters,
+		venomousHate,
 	],
 }

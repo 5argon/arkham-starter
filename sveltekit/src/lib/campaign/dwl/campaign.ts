@@ -83,7 +83,7 @@ export const theDunwichLegacyCampaign: Campaign = {
 }
 
 export const returnToTheDunwichLegacyCampaign: Campaign = {
-	name: 'Return to The Dunwich Legacy',
+	name: 'Return to the Dunwich Legacy',
 	scenarioTransitions: returnToTransitions,
 	commonEncounterSets: [armitagesFate],
 	basicWeaknessTraits: ['Madness', 'Injury', 'Pact'],

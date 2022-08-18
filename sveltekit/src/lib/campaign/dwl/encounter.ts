@@ -170,21 +170,21 @@ export const returnToExtracurricularActivity: EncounterSet = {
 }
 
 export const returnToTheHouseAlwaysWins: EncounterSet = {
-	name: 'Return to The House Always Wins',
+	name: 'Return to the House Always Wins',
 	icon: folder + returnToFolder + scenarioFolder + 'TDL R-1B - The House Always Wins',
 	flag: EncounterSetFlag.Scenario,
 	count: 7,
 }
 
 export const returnToTheMiskatonicMuseum: EncounterSet = {
-	name: 'Return to The Miskatonic Museum',
+	name: 'Return to the Miskatonic Museum',
 	icon: folder + returnToFolder + scenarioFolder + 'TDL R-2 - The Miskatonic Museum',
 	flag: EncounterSetFlag.Scenario,
 	count: 7,
 }
 
 export const returnToTheEssexCountyExpress: EncounterSet = {
-	name: 'Return to The Essex County Express',
+	name: 'Return to the Essex County Express',
 	icon: folder + returnToFolder + scenarioFolder + 'TDL R-3 - The Essex County Express',
 	flag: EncounterSetFlag.Scenario,
 	count: 7,

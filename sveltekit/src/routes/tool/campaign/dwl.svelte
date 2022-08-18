@@ -8,7 +8,7 @@
 
 <PageTitle
 	subTitle="Tool"
-	title={'Campaign Reference: The Dunwich Legacy'}
+	title={'Campaign Reference: ' + theDunwichLegacyCampaign.name}
 	helpMd={help}
 />
 

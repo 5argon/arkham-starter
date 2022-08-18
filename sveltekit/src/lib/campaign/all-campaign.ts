@@ -3,7 +3,7 @@ import { nightOfTheZealotCampaign, returnToNightOfTheZealotCampaign } from './no
 import { returnToTheDunwichLegacyCampaign, theDunwichLegacyCampaign } from './dwl/campaign'
 import { edgeOfTheEarthCampaign } from './eote/campaign'
 import { returnToThePathToCarcosaCampaign, thePathToCarcosaCampaign } from './ptc/campaign'
-import { theForgottenAgeCampaign } from './tfa/campaign'
+import { returnToTheForgottenAgeCampaign, theForgottenAgeCampaign } from './tfa/campaign'
 
 /**
  * Order of this array reflects in the UI.
@@ -18,4 +18,5 @@ export const allCampaigns: Campaign[] = [
 	returnToNightOfTheZealotCampaign,
 	returnToTheDunwichLegacyCampaign,
 	returnToThePathToCarcosaCampaign,
+	returnToTheForgottenAgeCampaign,
 ]

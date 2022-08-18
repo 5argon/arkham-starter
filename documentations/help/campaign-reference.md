@@ -12,7 +12,7 @@ Inside you will find exactly 4 files. Each file can be edited and submit for cha
 
 `encounter.ts` is each individual encounter set, including the scenario-specific one. Each one has an icon and card count, shown at the bottom right corner of the card.
 
-The incomplete campaign may have `count` field as `0`. You can help changing it to the right number shown at the bottom right of the card of that set.
+The incomplete campaign may have a correct `count` field already, I entered it according to card's final entry in arkhamdb.com (it has good spoiler system). However if any is wrong you can edit it.
 
 ## Scenario
 

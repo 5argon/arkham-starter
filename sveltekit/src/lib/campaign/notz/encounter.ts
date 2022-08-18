@@ -125,14 +125,14 @@ export const returnToTheGathering: EncounterSet = {
 
 export const returnToTheMidnightMasks: EncounterSet = {
 	flag: EncounterSetFlag.Scenario,
-	name: 'Return to The Midnight Masks',
+	name: 'Return to the Midnight Masks',
 	icon: folder + returnToFolder + scenarioFolder + 'NotZ R-2 - The Midnight Masks',
 	count: 8,
 }
 
 export const returnToTheDevourerBelow: EncounterSet = {
 	flag: EncounterSetFlag.Scenario,
-	name: 'Return to The Devourer Below',
+	name: 'Return to the Devourer Below',
 	icon: folder + returnToFolder + scenarioFolder + 'NotZ R-3 - The Devourer Below',
 	count: 7,
 }

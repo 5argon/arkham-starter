@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { returnToTheDunwichLegacyCampaign } from '$lib/campaign/dwl/campaign'
+	import { returnToTheForgottenAgeCampaign } from '$lib/campaign/tfa/campaign'
 
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import EncounterOverview from '$lib/design/pages/tool/campaign/EncounterOverview.svelte'
@@ -8,8 +8,8 @@
 
 <PageTitle
 	subTitle="Tool"
-	title={'Campaign Reference: ' + returnToTheDunwichLegacyCampaign.name}
+	title={'Campaign Reference: ' + returnToTheForgottenAgeCampaign.name}
 	helpMd={help}
 />
 
-<EncounterOverview campaign={returnToTheDunwichLegacyCampaign} incomplete />
+<EncounterOverview campaign={returnToTheForgottenAgeCampaign} incomplete />

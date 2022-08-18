@@ -22,7 +22,7 @@ export const thePathToCarcosaCampaign: Campaign = {
 }
 
 export const returnToThePathToCarcosaCampaign: Campaign = {
-	name: 'Return to The Path to Carcosa',
+	name: 'Return to the Path to Carcosa',
 	scenarioTransitions: transitionsReturnTo,
 	commonEncounterSets: [],
 	startingChaosBag: {

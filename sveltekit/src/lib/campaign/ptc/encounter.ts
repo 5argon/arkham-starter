@@ -122,7 +122,7 @@ export const returnToCurtainCall: EncounterSet = {
 }
 
 export const returnToTheLastKing: EncounterSet = {
-	name: 'Return to The Last King',
+	name: 'Return to the Last King',
 	count: 9,
 	icon: folder + returnTo + scenario + 'TPtC R-2 - The Last King',
 	flag: EncounterSetFlag.Scenario,
@@ -136,21 +136,21 @@ export const returnToEchoesOfThePast: EncounterSet = {
 }
 
 export const returnToTheUnspeakableOath: EncounterSet = {
-	name: 'Return to The Unspeakable Oath',
+	name: 'Return to the Unspeakable Oath',
 	count: 6,
 	icon: folder + returnTo + scenario + 'TPtC R-4 - The Unspeakable Oath',
 	flag: EncounterSetFlag.Scenario,
 }
 
 export const returnToAPhantomOfTruth: EncounterSet = {
-	name: 'Return to A Phantom of Truth',
+	name: 'Return to a Phantom of Truth',
 	count: 9,
 	icon: folder + returnTo + scenario + 'TPtC R-5 - A Phantom of Truth',
 	flag: EncounterSetFlag.Scenario,
 }
 
 export const returnToThePallidMask: EncounterSet = {
-	name: 'Return to The Pallid Mask',
+	name: 'Return to the Pallid Mask',
 	count: 6,
 	icon: folder + returnTo + scenario + 'TPtC R-6 - The Pallid Mask',
 	flag: EncounterSetFlag.Scenario,

@@ -8,7 +8,7 @@
 
 <PageTitle
 	subTitle="Tool"
-	title={'Campaign Reference: Return to Night of the Zealot'}
+	title={'Campaign Reference: ' + returnToNightOfTheZealotCampaign.name}
 	helpMd={help}
 />
 

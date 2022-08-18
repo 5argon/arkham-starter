@@ -8,7 +8,7 @@
 
 <PageTitle
 	subTitle="Tool"
-	title={'Campaign Reference: Return to The Path to Carcosa'}
+	title={'Campaign Reference: ' + returnToThePathToCarcosaCampaign.name}
 	helpMd={help}
 />
 
