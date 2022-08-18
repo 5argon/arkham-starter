@@ -1,9 +1,29 @@
 import type { Campaign } from '$lib/core/campaign'
-import { transitions } from './transition'
+import { transitions, transitionsReturnTo } from './transition'
 
 export const thePathToCarcosaCampaign: Campaign = {
 	name: 'The Path to Carcosa',
 	scenarioTransitions: transitions,
+	commonEncounterSets: [],
+	startingChaosBag: {
+		easy: [
+
+		],
+		standard: [
+
+		],
+		hard: [
+
+		],
+		expert: [
+
+		],
+	},
+}
+
+export const returnToThePathToCarcosaCampaign: Campaign = {
+	name: 'Return to The Path to Carcosa',
+	scenarioTransitions: transitionsReturnTo,
 	commonEncounterSets: [],
 	startingChaosBag: {
 		easy: [

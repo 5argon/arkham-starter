@@ -4,13 +4,6 @@
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
 	import RadioGroup from '$lib/design/components/basic/RadioGroup.svelte'
 
-	import {
-		makeUpgradePlannerUrl,
-		upgradeExport,
-		upgradeExportToProtoString,
-		type UpgradeExport,
-		type UpgradeExportRow,
-	} from '$lib/tool/script/export/export-tools'
 	import type { ExportOptions } from '$lib/proto/generated/export_options'
 	import {
 		UpgradeExportOptions_UpgradeExportStyle,
@@ -19,6 +12,13 @@
 	import TextBox from '$lib/design/components/basic/TextBox.svelte'
 	import { browser } from '$app/env'
 	import Button from '$lib/design/components/basic/Button.svelte'
+	import {
+		makeUpgradePlannerUrl,
+		upgradeExportCenter,
+		upgradeExportToProtoString,
+		type UpgradeExport,
+		type UpgradeExportRow,
+	} from '$lib/tool/script/export/export-tools-center'
 
 	export let singleMode: boolean
 	export let exportRows: UpgradeExportRow[]
@@ -36,7 +36,7 @@
 		importDeckUrl: importDeckUrl,
 	}
 
-	$: exportText = upgradeExport(ue)
+	$: exportText = upgradeExportCenter(ue)
 	$: dataCode = upgradeExportToProtoString(ue)
 	$: link = makeUpgradePlannerUrl(dataCode)
 
@@ -54,7 +54,24 @@
 </script>
 
 <ListDivider label="Text" level={ListDividerLevel.One} />
-{#if singleMode}
+<div>
+	Export Format
+	<select
+		value={upgradeExportOptions.upgradeExportStyle ===
+		UpgradeExportOptions_UpgradeExportStyle.Unknown
+			? UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb
+			: upgradeExportOptions.upgradeExportStyle}
+		on:change={(e) => onUpgradeExportStyleChangedHandler(e)}
+	>
+		<option value={UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb}
+			>Markdown (arkhamdb.com)</option
+		>
+		<option value={UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamCards}
+			>Markdown (ArkhamCards)</option
+		>
+	</select>
+</div>
+{#if singleMode && upgradeExportOptions.upgradeExportStyle === UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb}
 	<Checkbox
 		checked={exportOptions.cardOptions?.bold ?? false}
 		label="Bold"
@@ -85,26 +102,7 @@
 			{ label: 'Table (with center-aligned empty column)', value: '5' },
 		]}
 	/>
-{:else}
-	<div>
-		Style (Not usable yet, sorry!)
-		<select
-			value={upgradeExportOptions.upgradeExportStyle ===
-			UpgradeExportOptions_UpgradeExportStyle.Unknown
-				? UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb
-				: upgradeExportOptions.upgradeExportStyle}
-			on:change={(e) => onUpgradeExportStyleChangedHandler(e)}
-		>
-			<option value={UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb}
-				>Markdown (arkhamdb.com)</option
-			>
-			<option value={UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamCards}
-				>Markdown (ArkhamCards)</option
-			>
-			<option value={UpgradeExportOptions_UpgradeExportStyle.Markdown}>Markdown</option>
-			<option value={UpgradeExportOptions_UpgradeExportStyle.Forum}>Forum</option>
-		</select>
-	</div>
+{:else if upgradeExportOptions.upgradeExportStyle === UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb}
 	<div>
 		<Checkbox
 			checked={upgradeExportOptions.splitDivider}

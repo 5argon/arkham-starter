@@ -4,7 +4,7 @@ import {
 	UpgradeExportOptions_SimpleListOptions_BlockStyle,
 	type UpgradeExportOptions,
 } from '$lib/proto/generated/upgrade_export'
-import type { UpgradeExportRow } from './export-tools'
+import type { UpgradeExportRow } from './export-tools-arkhamdb'
 import { mdCardAndInfo } from './md-card'
 
 export function makeSimpleList(

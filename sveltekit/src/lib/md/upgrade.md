@@ -111,35 +111,34 @@ Type on the long box to explain the divider. It is exported in Markdown to the s
 
 Similar to "XP Unlock" feature, but only available on the divider row. Using unlock check box on the divider row will "interrupt" the flow of cumulative XP to stop here, and start with a new value that you type in.
 
-## Exporting
+## Export
 
-You will see a chunk of nightmare that you now don't have to type. Highlight them with Ctrl/Cmd+A, copy, then paste into your deck's description in ArkhamDB.
+This tool exports 3 things :
 
-There is only 1 option to adjust right now, which to make divider provides a disconnected table. The columns will stop lining up between tables, but you can now type something in-between.
+### Text
 
-### Export border
+Choose the export format to match your destination.
 
-You might notice these :
+#### Format : ArkhamDB
 
-```md
-[//]: # '==================== TABLE START ===================='
+ArkhamDB format is designed to paste in Description section of your deck, and it make use of ArkhamDB's CSS styling. If you paste this string somewhere else (even if Markdown is supported, such as Reddit or Discord) you would just see a big mess.
 
-...
-[//]: # (===================== TABLE END =====================)
-```
+Markdown table is supported here. Combined with CSS coloring, we can get very pretty result. The settings allow you to include a link for viewers to come view the upgrade plan in this site as well. Which maybe more mobile friendly, and the viewer can also continue adjusting your plan further. You can also use this link yourself to make edits to your previous upgrade plan.
 
-This is a Markdown comment that viewer cannot see. Since the exported Markdown table looks like a mess, this dividing line helps you see clearer where is the table while scrolling through your deck documentation, so you can detect an actual content that you had hand-typed from the mess.
+#### Format : ArkhamCards
 
-### Upgrade URL
+ArkhamCards has a deck viewer, where if you touch the top right corner and select "Notes", it can show the deck's Description section in ArkhamDB. It support card hot-linking in the same syntax as ArkhamDB as well.
 
-At the end of your exported Markdown you will see a URL nested inside Markdown comment, like this :
+However, Markdown supported in ArkhamCards is not as extensive as ArkhamDB, and CSS coloring is not supported as well, naturally. This export option removes the Markdown table formatting and adjust stuff to be simpler.
 
-```
-[//]: # (https://arkham-starter.com/tool/upgrade?i=EiIaAlhQKgcKA%2BKGkhABMg0KBENvc3SBVRvdG...)
-```
+### Data Code
 
-Since the table is hell to continue editing in Markdown format, this URL is intended so if you visit it, you would arrive back at this page with the table restored and can continue making changes to make a new export. You can share this so others can use to see the upgrade plan in this site as well.
+All the work you done in this page are compressed into this messy string. Data Code will have some use in the full arkham-starter.com so you can tie upgrades with any deck. For now, this has no use.
 
-Only the deck URL in the Staging Area is remembered, not the list of cards imported. This page will re-run the import once you arrive back in this page. Therefore, if you made changes to the deck at the URL's destination, the card list in the Staging Area may be different from before.
+### Link
 
-You can share this URL somewhere to direct people to view your upgrade plan here instead of rendered in ArkhamDB's Markdown section, for example sharing in a forum post to illustrate your point when talking about upgrading.
+Use this link to come back to this page with all the work preserved. You can use this to share upgrade plans to others where pasting the export text is not possible, but browser usage is possible.
+
+You will notice that the link contains the Data Code above.
+
+

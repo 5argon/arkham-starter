@@ -42,4 +42,5 @@
 <ul>
 	<li><a href="./campaign/rtnotz">*Return to Night of the Zealot</a></li>
 	<li><a href="./campaign/rtdwl">*Return to The Dunwich Legacy</a></li>
+	<li><a href="./campaign/rtptc">*Return to The Path to Carcosa</a></li>
 </ul>

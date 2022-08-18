@@ -2,12 +2,17 @@
 	import { CardClass } from '$lib/core/card-class'
 
 	import Story from '$lib/design/story/story.svelte'
-	import type { UpgradeExportRow } from '$lib/tool/script/export/export-tools'
+	import type { UpgradeExportRow } from '$lib/tool/script/export/export-tools-center'
 	import { CardInfo_CommitOptions_CommitIcon } from '$lib/proto/generated/card_info'
 	import type { ExportOptions } from '$lib/proto/generated/export_options'
 	import { GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
-	import type { UpgradeExportOptions } from '$lib/proto/generated/upgrade_export'
 	import UpgradeExportModalContent from './UpgradeExportModalContent.svelte'
+	import {
+		UpgradeExportOptions_SimpleListOptions,
+		UpgradeExportOptions_SimpleListOptions_BlockStyle,
+		UpgradeExportOptions_UpgradeExportStyle,
+		type UpgradeExportOptions,
+	} from '$lib/proto/generated/upgrade_export'
 
 	let exportRows: UpgradeExportRow[] = [
 		{
@@ -130,6 +135,11 @@
 		simpleList: false,
 		splitDivider: true,
 		xpSuffix: 'XP',
+		showLink: false,
+		showLinkText: 'link',
+		upgradeExportStyle: UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb,
+		upgradeUrl: true,
+		simpleListOptions: { blockStyle: UpgradeExportOptions_SimpleListOptions_BlockStyle.A },
 	}
 	let exportOptions: ExportOptions = {
 		cardInfo: {

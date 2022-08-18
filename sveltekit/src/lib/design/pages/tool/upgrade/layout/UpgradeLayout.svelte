@@ -23,11 +23,6 @@
 	import type { Row } from '$lib/tool/upgrade/interface'
 	import Modal from '$lib/design/components/layout/Modal.svelte'
 	import UpgradeExportModalContent from '../export/UpgradeExportModalContent.svelte'
-	import {
-		protoStringRestore,
-		type ExportCard,
-		type UpgradeExportRow,
-	} from '$lib/tool/script/export/export-tools'
 	import { calculateXps, type CalculatedXp } from '$lib/tool/upgrade/upgrade-table/xp-calculate'
 	import {
 		UpgradeExportOptions_SimpleListOptions_BlockStyle,
@@ -37,6 +32,8 @@
 	import { GlobalSettings, GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
 	import type { ExportOptions } from '$lib/proto/generated/export_options'
 	import { CardInfo_CommitOptions_CommitIcon } from '$lib/proto/generated/card_info'
+	import type { ExportCard, UpgradeExportRow } from '$lib/tool/script/export/export-tools-center'
+	import { protoStringRestore } from '$lib/tool/script/export/proto-string-restore'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.

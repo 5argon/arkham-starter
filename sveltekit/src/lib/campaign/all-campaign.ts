@@ -2,7 +2,7 @@ import type { Campaign } from '$lib/core/campaign'
 import { nightOfTheZealotCampaign, returnToNightOfTheZealotCampaign } from './notz/campaign'
 import { returnToTheDunwichLegacyCampaign, theDunwichLegacyCampaign } from './dwl/campaign'
 import { edgeOfTheEarthCampaign } from './eote/campaign'
-import { thePathToCarcosaCampaign } from './ptc/campaign'
+import { returnToThePathToCarcosaCampaign, thePathToCarcosaCampaign } from './ptc/campaign'
 import { theForgottenAgeCampaign } from './tfa/campaign'
 
 /**
@@ -17,4 +17,5 @@ export const allCampaigns: Campaign[] = [
 
 	returnToNightOfTheZealotCampaign,
 	returnToTheDunwichLegacyCampaign,
+	returnToThePathToCarcosaCampaign,
 ]

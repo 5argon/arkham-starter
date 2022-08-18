@@ -20,6 +20,8 @@ export const ahdbIcons = {
 
 	elderSign: '<span class="icon-elder_sign"></span>',
 	autoFail: '<span class="icon-auto_fail"></span>',
+
+	action: '<span class="icon-action"></span>',
 }
 
 function getClassIcon(c: CardClass): string {
