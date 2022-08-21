@@ -4,6 +4,7 @@ import { transitions } from './transition'
 
 export const edgeOfTheEarthCampaign: Campaign = {
 	name: 'Edge of the Earth',
+	setupReferenceGraphic: 'Edge of the Earth',
 	scenarioTransitions: transitions,
 	commonEncounterSets: [tekelili, expeditionTeam, memorialsOfTheLost],
 	startingChaosBag: {

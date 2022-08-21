@@ -47,6 +47,7 @@ import {
 	returnToRainforest,
 	venomousHate,
 	temporalHunters,
+	returnToHeartOfTheElders,
 } from './encounter'
 
 export const theUntamedWildsScenario: Scenario = {
@@ -254,7 +255,9 @@ export const returnToHeartOfTheEldersPart1Scenario: Scenario = {
 	index: 5,
 	name: 'Heart of the Elders, Part I',
 	shuffles: [
+		{ encounterSet: heartOfTheElders, overwriteCount: 0 },
 		{ encounterSet: pillarsOfJudgement, overwriteCount: 0 },
+		{ encounterSet: returnToHeartOfTheElders, overwriteCount: 0 },
 		{ encounterSet: returnToPillarsOfJudgement, overwriteCount: 0 },
 		poison,
 		rainforest,
@@ -267,7 +270,9 @@ export const returnToHeartOfTheEldersPart2Scenario: Scenario = {
 	index: 6,
 	name: 'Heart of the Elders, Part II',
 	shuffles: [
+		{ encounterSet: heartOfTheElders, overwriteCount: 0 },
 		{ encounterSet: knyan, overwriteCount: 0 },
+		{ encounterSet: returnToHeartOfTheElders, overwriteCount: 0 },
 		{ encounterSet: returnToKnyan, overwriteCount: 0 },
 		agentsOfYig,
 		deadlyTraps,

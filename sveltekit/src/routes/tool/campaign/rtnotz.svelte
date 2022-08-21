@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { returnToNightOfTheZealotCampaign } from '$lib/campaign/notz/campaign'
+	import { returnToTheNightOfTheZealotCampaign } from '$lib/campaign/notz/campaign'
 
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import EncounterOverview from '$lib/design/pages/tool/campaign/EncounterOverview.svelte'
@@ -8,8 +8,8 @@
 
 <PageTitle
 	subTitle="Tool"
-	title={'Campaign Reference: ' + returnToNightOfTheZealotCampaign.name}
+	title={'Campaign Reference: ' + returnToTheNightOfTheZealotCampaign.name}
 	helpMd={help}
 />
 
-<EncounterOverview campaign={returnToNightOfTheZealotCampaign} incomplete />
+<EncounterOverview campaign={returnToTheNightOfTheZealotCampaign} incomplete />

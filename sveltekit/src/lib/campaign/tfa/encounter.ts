@@ -175,6 +175,13 @@ export const returnToTheBoundaryBeyond: EncounterSet = {
 	flag: EncounterSetFlag.Scenario,
 }
 
+export const returnToHeartOfTheElders: EncounterSet = {
+	name: 'Return to Heart of the Elders',
+	count: 0,
+	icon: folder + returnTo + scenario + 'TFA R-5 - Heart of the Elders',
+	flag: EncounterSetFlag.Scenario,
+}
+
 export const returnToPillarsOfJudgement: EncounterSet = {
 	name: 'Return to Pillars of Judgment',
 	count: 4,

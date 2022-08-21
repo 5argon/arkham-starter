@@ -37,6 +37,11 @@
 </script>
 
 <a href="/tool/campaign">Back to Campaign List</a>
+{#if campaign.setupReferenceGraphic !== undefined}
+	<a href={'/image/custom/setup-reference/' + campaign.setupReferenceGraphic + '.png'}
+		>Print Setup Reference Card</a
+	>
+{/if}
 
 {#if incomplete}
 	<p>

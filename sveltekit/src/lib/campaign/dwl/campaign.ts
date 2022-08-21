@@ -4,6 +4,7 @@ import { returnToTransitions, transitions } from './transition'
 
 export const theDunwichLegacyCampaign: Campaign = {
 	name: 'The Dunwich Legacy',
+	setupReferenceGraphic: 'The Dunwich Legacy',
 	scenarioTransitions: transitions,
 	commonEncounterSets: [armitagesFate],
 	basicWeaknessTraits: ['Madness', 'Injury', 'Pact'],
@@ -84,6 +85,7 @@ export const theDunwichLegacyCampaign: Campaign = {
 
 export const returnToTheDunwichLegacyCampaign: Campaign = {
 	name: 'Return to the Dunwich Legacy',
+	setupReferenceGraphic: 'Return to the Dunwich Legacy',
 	scenarioTransitions: returnToTransitions,
 	commonEncounterSets: [armitagesFate],
 	basicWeaknessTraits: ['Madness', 'Injury', 'Pact'],

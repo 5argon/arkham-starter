@@ -22,6 +22,7 @@ export interface Campaign {
 	commonEncounterSets?: EncounterSet[]
 	startingChaosBag?: PerDifficultySettings<GameComponent[]>
 	basicWeaknessTraits?: string[]
+	setupReferenceGraphic?: string
 }
 
 export interface Scenario {

@@ -17,7 +17,8 @@ So I made a yet another version...
 ## What's different?
 
 - These are programmatically generated from "data", rather than me hand-placing graphics like Google Sheet authors. For the programmer, it is easier to maintain and correct mistakes, or making the same improvement/fix across all campaign pages.
-- Some presentation can be changed using interactive controls, such as showing or hiding encounter set name for an entire page. 
+- Some presentation can be changed using interactive controls, such as showing or hiding encounter set name for an entire page.
+- Some HTML techs can be used, such as hovering over the icon to see the full name, or color-coding the icon.
 - Google Sheets are often massive and not mobile friendly. I want to be able to reference quickly from tiny mobile phone screen without much scrolling around. (Especially not too much horizontal scrolling.)
 - I don't want to keep a Google Sheet URL, I want it accessible from URL I can remember. (It is my own site after all!)
 - I want the loading performance to be better than Google Sheets, without the editing tools and unnecessary buttons.
@@ -25,6 +26,12 @@ So I made a yet another version...
 ## Top Section
 
 This section tells you some campaign-wide information. For example, all the Core Set encounter sets used throughout the campaign. It maybe useful in some organization scheme, maybe you want to move all the relevant core encounters to near the campaign encounter sets while the campaign is on-going.
+
+### Printing the Setup Reference Card
+
+If you want to go analog, this link takes you to an Arkham-esque card graphic containing the content in Matrix Tab. Keep this card near all the campaign encounter sets so you are able to pick all the required sets as soon as you opened the box.
+
+Each one is sized at 94 x 69 mm at 300 DPI. That is +5 mm each size from a regular card game size of 89 x 64 mm to give you some bleed space to cut after printing. It is really small once printed though! But players replaying should be able to recognize the icons at least.
 
 ### Encounter Set Sorting
 
@@ -46,6 +53,8 @@ You can also click on the scenario's name on the first column to jump to a Scena
 By selecting a scenario, you will see a minimal presentation of scenario setup what are needed to play.
 
 The "Set aside" section indicates that you should not shuffle these sets together just yet. Scenario setup tells you what to do, or maybe they come into play in the middle of scenario.
+
+This tab is also handy for small phones, because they cannot handle the matrix view well. When viewing an individual scenario, line wrapping causes the icons to overflow down your vertical screen properly.
 
 ### Minimum Count
 

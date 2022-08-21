@@ -1,22 +1,28 @@
 import type { Campaign } from '$lib/core/campaign'
-import { transitions } from './transition'
+import { transitions, transitionsReturnTo } from './transition'
 
-export const theForgottenAgeCampaign: Campaign = {
-	name: 'The Forgotten Age',
+export const theCircleUndoneCampaign: Campaign = {
+	name: 'The Circle Undone',
+	setupReferenceGraphic: 'The Circle Undone',
 	scenarioTransitions: transitions,
 	commonEncounterSets: [],
 	startingChaosBag: {
-		easy: [
+		easy: [],
+		standard: [],
+		hard: [],
+		expert: [],
+	},
+}
 
-		],
-		standard: [
-
-		],
-		hard: [
-
-		],
-		expert: [
-
-		],
+export const returnToTheCircleUndoneCampaign: Campaign = {
+	name: 'Return to the Circle Undone',
+	setupReferenceGraphic: 'Return to the Circle Undone',
+	scenarioTransitions: transitionsReturnTo,
+	commonEncounterSets: [],
+	startingChaosBag: {
+		easy: [],
+		standard: [],
+		hard: [],
+		expert: [],
 	},
 }

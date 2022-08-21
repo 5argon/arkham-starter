@@ -1,173 +1,340 @@
 import type { Scenario } from '$lib/core/campaign'
 import {
-	agentsOfYogSothoth,
+	agentsOfShubNiggurath,
 	ancientEvils,
 	chillingCold,
 	darkCult,
 	lockedDoors,
 	nightgaunts,
+	rats,
 	strikingFear,
+	theDevourerBelow,
 	theMidnightMasks,
 } from '../notz/encounter'
 import {
-	agentsOfYig,
-	deadlyTraps,
-	expedition,
-	forgottenRuins,
-	guardiansOfTime,
-	heartOfTheElders,
-	pillarsOfJudgement,
-	knyan,
-	pnakoticBrotherhood,
-	poison,
-	rainforest,
-	serpents,
-	shatteredAeons,
-	temporalFlux,
-	theBoundaryBeyond,
-	theCityOfArchives,
-	theDepthsOfYoth,
-	theDoomOfEztli,
-	theUntamedWilds,
-	threadsOfFate,
-	turnBackTime,
-	yigsVenom,
+	agentsOfAzathoth,
+	anettesCoven,
+	atDeathsDoorstep,
+	beforeTheBlackThrone,
+	bloodthirstySpirits,
+	chillingMists,
+	cityOfSins,
+	cityOfTheDamned,
+	disappearanceAtTheTwilightEstate,
+	forTheGreaterGood,
+	hexcraft,
+	impendingEvils,
+	inexorableFate,
+	inTheClutchesOfChaos,
+	musicOfTheDamned,
+	realmOfDeath,
+	returnToAtDeathsDoorstep,
+	returnToBeforeTheBlackThrone,
+	returnToDisappearanceAtTheTwilightEstate,
+	returnToForTheGreaterGood,
+	returnToInTheClutchesOfChaos,
+	returnToTheSecretName,
+	returnToTheWagesOfSin,
+	returnToTheWitchingHour,
+	returnToUnionAndDisillusion,
+	secretsOfTheUniverse,
+	silverTwilightLodge,
+	spectralPredators,
+	theSecretName,
+	theWagesOfSin,
+	theWatcher,
+	theWitchingHour,
+	trappedSpirits,
+	unionAndDisillusion,
+	unspeakableFate,
+	unstableRealm,
+	witchcraft,
 } from './encounter'
 
-export const theUntamedWildsScenario: Scenario = {
+export const disappearanceAtTheTwilightEstateScenario: Scenario = {
 	index: 1,
-	name: 'The Untamed Wilds',
+	name: 'Disappearance at the Twilight Estate',
 	shuffles: [
-		{ encounterSet: theUntamedWilds, overwriteCount: 0 },
-		ancientEvils,
-		agentsOfYig,
-		expedition,
-		guardiansOfTime,
-		poison,
-		rainforest,
-		serpents,
+		{ encounterSet: disappearanceAtTheTwilightEstate, overwriteCount: 0 },
+		{ encounterSet: atDeathsDoorstep, overwriteCount: 7 },
+		chillingCold,
+		inexorableFate,
+		realmOfDeath,
+		spectralPredators,
+		theWatcher,
+		trappedSpirits,
 	],
 }
 
-export const theDoomOfEztliScenario: Scenario = {
+export const theWitchingHourScenario: Scenario = {
 	index: 2,
-	name: 'The Doom of Eztli',
+	name: 'The Witching Hour',
 	shuffles: [
-		{ encounterSet: theDoomOfEztli, overwriteCount: 0 },
-		chillingCold,
-		agentsOfYig,
-		deadlyTraps,
-		forgottenRuins,
-		poison,
-		temporalFlux,
-		yigsVenom,
-	],
-}
-
-export const threadsOfFateScenario: Scenario = {
-	index: 3,
-	name: 'Threads of Fate',
-	shuffles: [
-		{ encounterSet: threadsOfFate, overwriteCount: 0 },
-		darkCult,
-		lockedDoors,
-		nightgaunts,
-		{ encounterSet: theMidnightMasks, overwriteCount: 5 },
-		pnakoticBrotherhood,
-	],
-}
-
-export const theBoundaryBeyondScenario: Scenario = {
-	index: 4,
-	name: 'The Boundary Beyond',
-	shuffles: [
-		{ encounterSet: theBoundaryBeyond, overwriteCount: 0 },
-		darkCult,
-		guardiansOfTime,
-		pnakoticBrotherhood,
-		poison,
-		temporalFlux,
-		yigsVenom,
-	],
-}
-
-export const heartOfTheEldersPart1Scenario: Scenario = {
-	index: 5,
-	name: 'Heart of the Elders, Part I',
-	shuffles: [
-		{ encounterSet: heartOfTheElders, overwriteCount: 0 },
-		{ encounterSet: pillarsOfJudgement, overwriteCount: 0 },
-		expedition,
-		poison,
-		rainforest,
-		serpents,
-	],
-}
-
-export const heartOfTheEldersPart2Scenario: Scenario = {
-	index: 6,
-	name: 'Heart of the Elders, Part II',
-	shuffles: [
-		{ encounterSet: heartOfTheElders, overwriteCount: 0 },
-		{ encounterSet: knyan, overwriteCount: 0 },
-		agentsOfYig,
-		deadlyTraps,
-		forgottenRuins,
-		poison,
-		yigsVenom,
-	],
-}
-
-export const theCityOfArchivesScenario: Scenario = {
-	index: 7,
-	name: 'The City of Archives',
-	shuffles: [
-		{ encounterSet: theCityOfArchives, overwriteCount: 0 },
-		agentsOfYogSothoth,
-		chillingCold,
-		lockedDoors,
+		{ encounterSet: theWitchingHour, overwriteCount: 0 },
+		ancientEvils,
 		strikingFear,
+		{ encounterSet: theDevourerBelow, overwriteCount: 6 },
+		anettesCoven,
+		cityOfSins,
+		witchcraft,
+	],
+	setAsides: [agentsOfShubNiggurath, agentsOfAzathoth],
+}
+
+export const atDeathsDoorstepScenario: Scenario = {
+	index: 3,
+	name: "At Death's Doorstep",
+	shuffles: [
+		{ encounterSet: atDeathsDoorstep, overwriteCount: 0 },
+		chillingCold,
+		inexorableFate,
+		silverTwilightLodge,
+		spectralPredators,
+		trappedSpirits,
+	],
+	setAsides: [realmOfDeath, theWatcher],
+}
+
+export const theSecretNameScenario: Scenario = {
+	index: 4,
+	name: 'The Secret Name',
+	shuffles: [
+		{ encounterSet: theSecretName, overwriteCount: 0 },
+		rats,
+		cityOfSins,
+		inexorableFate,
+		realmOfDeath,
+		witchcraft,
 	],
 }
 
-export const theDepthsOfYothScenario: Scenario = {
-	index: 8,
-	name: 'The Depths of Yoth',
+export const theWagesOfSinScenario: Scenario = {
+	index: 5,
+	name: 'The Wages of Sin',
 	shuffles: [
-		{ encounterSet: theDepthsOfYoth, overwriteCount: 0 },
-		agentsOfYig,
-		expedition,
-		forgottenRuins,
-		poison,
-		yigsVenom,
+		{ encounterSet: theWagesOfSin, overwriteCount: 0 },
+		anettesCoven,
+		cityOfSins,
+		inexorableFate,
+		realmOfDeath,
+		trappedSpirits,
+		witchcraft,
 	],
+	setAsides: [theWatcher],
 }
 
-export const shatteredAeonsScenario: Scenario = {
-	index: 9,
-	name: 'Shattered Aeons',
+export const forTheGreaterGoodScenario: Scenario = {
+	index: 6,
+	name: 'For the Greater Good',
 	shuffles: [
-		{ encounterSet: shatteredAeons, overwriteCount: 0 },
+		{ encounterSet: forTheGreaterGood, overwriteCount: 0 },
 		ancientEvils,
 		darkCult,
-		agentsOfYig,
-		pnakoticBrotherhood,
-		temporalFlux,
+		lockedDoors,
+		cityOfSins,
+		silverTwilightLodge,
 	],
 }
 
-export const turnBackTimeScenario: Scenario = {
-	index: 10,
-	name: 'Turn Back Time',
+export const unionAndDisillusionScenario: Scenario = {
+	index: 7,
+	name: 'Union and Disillusion',
 	shuffles: [
-		{ encounterSet: turnBackTime, overwriteCount: 0 },
-		{ encounterSet: theDoomOfEztli, overwriteCount: 0 },
+		{ encounterSet: unionAndDisillusion, overwriteCount: 0 },
+		ancientEvils,
 		chillingCold,
-		agentsOfYig,
-		deadlyTraps,
-		forgottenRuins,
-		poison,
-		temporalFlux,
-		yigsVenom,
+		inexorableFate,
+		realmOfDeath,
+		spectralPredators,
+	],
+	setAsides: [anettesCoven, silverTwilightLodge, theWatcher],
+}
+
+export const inTheClutchesOfChaos1Scenario: Scenario = {
+	index: 8,
+	name: 'In the Clutches of Chaos (v.I)',
+	shuffles: [
+		{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
+		{ encounterSet: musicOfTheDamned, overwriteCount: 0 },
+		nightgaunts,
+		agentsOfAzathoth,
+		anettesCoven,
+		cityOfSins,
+		witchcraft,
+	],
+}
+
+export const inTheClutchesOfChaos2Scenario: Scenario = {
+	index: 9,
+	name: 'In the Clutches of Chaos (v.II)',
+	shuffles: [
+		{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
+		{ encounterSet: secretsOfTheUniverse, overwriteCount: 0 },
+		nightgaunts,
+		agentsOfAzathoth,
+		strikingFear,
+		{ encounterSet: theMidnightMasks, overwriteCount: 5 },
+		silverTwilightLodge,
+	],
+}
+
+export const beforeTheBlackThroneScenario: Scenario = {
+	index: 10,
+	name: 'Before the Black Throne',
+	shuffles: [
+		{ encounterSet: beforeTheBlackThrone, overwriteCount: 0 },
+		ancientEvils,
+		darkCult,
+		agentsOfAzathoth,
+		inexorableFate,
+	],
+}
+
+export const returnToDisappearanceAtTheTwilightEstateScenario: Scenario = {
+	index: 1,
+	name: 'Disappearance at the Twilight Estate',
+	shuffles: [
+		{ encounterSet: disappearanceAtTheTwilightEstate, overwriteCount: 0 },
+		{ encounterSet: returnToDisappearanceAtTheTwilightEstate, overwriteCount: 0 },
+		{ encounterSet: atDeathsDoorstep, overwriteCount: 7 },
+		spectralPredators,
+		theWatcher,
+		bloodthirstySpirits,
+		chillingMists,
+		unspeakableFate,
+		unstableRealm,
+	],
+}
+
+export const returnToTheWitchingHourScenario: Scenario = {
+	index: 2,
+	name: 'The Witching Hour',
+	shuffles: [
+		{ encounterSet: theWitchingHour, overwriteCount: 0 },
+		{ encounterSet: returnToTheWitchingHour, overwriteCount: 0 },
+		{ encounterSet: theDevourerBelow, overwriteCount: 6 },
+		strikingFear,
+		anettesCoven,
+		cityOfTheDamned,
+		hexcraft,
+		impendingEvils,
+	],
+	setAsides: [agentsOfShubNiggurath, agentsOfAzathoth],
+}
+
+export const returnToAtDeathsDoorstepScenario: Scenario = {
+	index: 3,
+	name: "At Death's Doorstep",
+	shuffles: [
+		{ encounterSet: atDeathsDoorstep, overwriteCount: 0 },
+		{ encounterSet: returnToAtDeathsDoorstep, overwriteCount: 0 },
+		silverTwilightLodge,
+		spectralPredators,
+		bloodthirstySpirits,
+		chillingMists,
+		unspeakableFate,
+	],
+	setAsides: [unstableRealm, theWatcher],
+}
+
+export const returnToTheSecretNameScenario: Scenario = {
+	index: 4,
+	name: 'The Secret Name',
+	shuffles: [
+		{ encounterSet: theSecretName, overwriteCount: 0 },
+		{ encounterSet: returnToTheSecretName, overwriteCount: 0 },
+		rats,
+		cityOfTheDamned,
+		hexcraft,
+		unspeakableFate,
+		unstableRealm,
+	],
+}
+
+export const returnToTheWagesOfSinScenario: Scenario = {
+	index: 5,
+	name: 'The Wages of Sin',
+	shuffles: [
+		{ encounterSet: theWagesOfSin, overwriteCount: 0 },
+		{ encounterSet: returnToTheWagesOfSin, overwriteCount: 0 },
+		anettesCoven,
+		bloodthirstySpirits,
+		cityOfTheDamned,
+		hexcraft,
+		unspeakableFate,
+		unstableRealm,
+	],
+	setAsides: [theWatcher],
+}
+
+export const returnToForTheGreaterGoodScenario: Scenario = {
+	index: 6,
+	name: 'For the Greater Good',
+	shuffles: [
+		{ encounterSet: forTheGreaterGood, overwriteCount: 0 },
+		{ encounterSet: returnToForTheGreaterGood, overwriteCount: 0 },
+		darkCult,
+		lockedDoors,
+		silverTwilightLodge,
+		cityOfTheDamned,
+		impendingEvils,
+	],
+}
+
+export const returnToUnionAndDisillusionScenario: Scenario = {
+	index: 7,
+	name: 'Union and Disillusion',
+	shuffles: [
+		{ encounterSet: unionAndDisillusion, overwriteCount: 0 },
+		{ encounterSet: returnToUnionAndDisillusion, overwriteCount: 0 },
+		spectralPredators,
+		chillingMists,
+		impendingEvils,
+		unspeakableFate,
+		unstableRealm,
+	],
+	setAsides: [anettesCoven, silverTwilightLodge, theWatcher],
+}
+
+export const returnToInTheClutchesOfChaos1Scenario: Scenario = {
+	index: 8,
+	name: 'In the Clutches of Chaos (v.I)',
+	shuffles: [
+		{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
+		{ encounterSet: returnToInTheClutchesOfChaos, overwriteCount: 0 },
+		{ encounterSet: musicOfTheDamned, overwriteCount: 0 },
+		nightgaunts,
+		agentsOfAzathoth,
+		anettesCoven,
+		cityOfTheDamned,
+		hexcraft,
+	],
+}
+
+export const returnToInTheClutchesOfChaos2Scenario: Scenario = {
+	index: 9,
+	name: 'In the Clutches of Chaos (v.II)',
+	shuffles: [
+		{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
+		{ encounterSet: returnToInTheClutchesOfChaos, overwriteCount: 0 },
+		{ encounterSet: secretsOfTheUniverse, overwriteCount: 0 },
+		{ encounterSet: theMidnightMasks, overwriteCount: 5 },
+		nightgaunts,
+		strikingFear,
+		agentsOfAzathoth,
+		silverTwilightLodge,
+	],
+}
+
+export const returnToBeforeTheBlackThroneScenario: Scenario = {
+	index: 10,
+	name: 'Before the Black Throne',
+	shuffles: [
+		{ encounterSet: beforeTheBlackThrone, overwriteCount: 0 },
+		{ encounterSet: returnToBeforeTheBlackThrone, overwriteCount: 0 },
+		darkCult,
+		agentsOfAzathoth,
+		impendingEvils,
+		unspeakableFate,
 	],
 }

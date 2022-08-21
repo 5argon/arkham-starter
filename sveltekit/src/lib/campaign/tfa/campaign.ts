@@ -3,6 +3,7 @@ import { transitions, transitionsReturnTo } from './transition'
 
 export const theForgottenAgeCampaign: Campaign = {
 	name: 'The Forgotten Age',
+	setupReferenceGraphic: 'The Forgotten Age',
 	scenarioTransitions: transitions,
 	commonEncounterSets: [],
 	startingChaosBag: {
@@ -15,6 +16,7 @@ export const theForgottenAgeCampaign: Campaign = {
 
 export const returnToTheForgottenAgeCampaign: Campaign = {
 	name: 'Return to the Forgotten Age',
+	setupReferenceGraphic: 'Return to the Forgotten Age',
 	scenarioTransitions: transitionsReturnTo,
 	commonEncounterSets: [],
 	startingChaosBag: {
