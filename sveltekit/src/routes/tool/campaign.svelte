@@ -38,6 +38,8 @@
 	<li><a href="./campaign/ptc">*The Path to Carcosa</a></li>
 	<li><a href="./campaign/tfa">*The Forgotten Age</a></li>
 	<li><a href="./campaign/tcu">*The Circle Undone</a></li>
+	<li><a href="./campaign/tde">*The Dream-Eaters</a></li>
+	<li><a href="./campaign/tic">*The Innsmouth Conspiracy</a></li>
 	<li><a href="./campaign/eote">Edge of the Earth</a></li>
 </ul>
 <ul>

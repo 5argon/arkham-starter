@@ -1,5 +1,4 @@
 import type { Scenario } from '$lib/core/campaign'
-import { insert_hydration_dev } from 'svelte/internal'
 import {
 	agentsOfHastur,
 	ancientEvils,
@@ -47,6 +46,7 @@ import {
 export const curtainCallScenario: Scenario = {
 	index: 1,
 	name: 'Curtain Call',
+	shortName: 'I',
 	shuffles: [
 		{ encounterSet: curtainCall, overwriteCount: 0 },
 		rats,
@@ -61,6 +61,7 @@ export const curtainCallScenario: Scenario = {
 export const theLastKingScenario: Scenario = {
 	index: 2,
 	name: 'The Last King',
+	shortName: 'II',
 	shuffles: [
 		{ encounterSet: theLastKing, overwriteCount: 0 },
 		ancientEvils,
@@ -73,6 +74,7 @@ export const theLastKingScenario: Scenario = {
 export const echoesOfThePastScenario: Scenario = {
 	index: 3,
 	name: 'Echoes of the Past',
+	shortName: 'III',
 	shuffles: [
 		{ encounterSet: echoesOfThePast, overwriteCount: 0 },
 		darkCult,
@@ -86,6 +88,7 @@ export const echoesOfThePastScenario: Scenario = {
 export const theUnspeakableOathScenario: Scenario = {
 	index: 4,
 	name: 'The Unspeakable Oath',
+	shortName: 'IV',
 	shuffles: [
 		{ encounterSet: theUnspeakableOath, overwriteCount: 0 },
 		agentsOfHastur,
@@ -99,6 +102,7 @@ export const theUnspeakableOathScenario: Scenario = {
 export const aPhantomOfTruthScenario: Scenario = {
 	index: 5,
 	name: 'A Phantom of Truth',
+	shortName: 'V',
 	shuffles: [
 		{ encounterSet: aPhantomOfTruth, overwriteCount: 0 },
 		agentsOfHastur,
@@ -112,12 +116,14 @@ export const aPhantomOfTruthScenario: Scenario = {
 export const thePallidMaskScenario: Scenario = {
 	index: 6,
 	name: 'The Pallid Mask',
+	shortName: 'VI',
 	shuffles: [{ encounterSet: thePallidMask, overwriteCount: 0 }, chillingCold, ghouls, hauntings],
 }
 
 export const blackStarsRiseScenario: Scenario = {
 	index: 7,
 	name: 'Black Stars Rise',
+	shortName: 'VII',
 	shuffles: [
 		{ encounterSet: blackStarsRise, overwriteCount: 0 },
 		ancientEvils,
@@ -132,6 +138,7 @@ export const blackStarsRiseScenario: Scenario = {
 export const dimCarcosaScenario: Scenario = {
 	index: 8,
 	name: 'Dim Carcosa',
+	shortName: 'VIII',
 	shuffles: [
 		{ encounterSet: dimCarcosa, overwriteCount: 0 },
 		agentsOfHastur,
@@ -145,6 +152,7 @@ export const dimCarcosaScenario: Scenario = {
 export const returnToCurtainCallScenario: Scenario = {
 	index: 1,
 	name: 'Curtain Call',
+	shortName: 'I',
 	shuffles: [
 		{ encounterSet: curtainCall, overwriteCount: 0 },
 		{ encounterSet: returnToCurtainCall, overwriteCount: 0 },
@@ -160,6 +168,7 @@ export const returnToCurtainCallScenario: Scenario = {
 export const returnToTheLastKingScenario: Scenario = {
 	index: 2,
 	name: 'The Last King',
+	shortName: 'II',
 	shuffles: [
 		{ encounterSet: theLastKing, overwriteCount: 0 },
 		{ encounterSet: returnToTheLastKing, overwriteCount: 0 },
@@ -173,6 +182,7 @@ export const returnToTheLastKingScenario: Scenario = {
 export const returnToEchoesOfThePastScenario: Scenario = {
 	index: 3,
 	name: 'Echoes of the Past',
+	shortName: 'III',
 	shuffles: [
 		{ encounterSet: echoesOfThePast, overwriteCount: 0 },
 		{ encounterSet: returnToEchoesOfThePast, overwriteCount: 0 },
@@ -187,6 +197,7 @@ export const returnToEchoesOfThePastScenario: Scenario = {
 export const returnToTheUnspeakableOathScenario: Scenario = {
 	index: 4,
 	name: 'The Unspeakable Oath',
+	shortName: 'IV',
 	shuffles: [
 		{ encounterSet: theUnspeakableOath, overwriteCount: 0 },
 		{ encounterSet: returnToTheUnspeakableOath, overwriteCount: 0 },
@@ -201,6 +212,7 @@ export const returnToTheUnspeakableOathScenario: Scenario = {
 export const returnToAPhantomOfTruthScenario: Scenario = {
 	index: 5,
 	name: 'A Phantom of Truth',
+	shortName: 'V',
 	shuffles: [
 		{ encounterSet: aPhantomOfTruth, overwriteCount: 0 },
 		{ encounterSet: returnToAPhantomOfTruth, overwriteCount: 0 },
@@ -215,6 +227,7 @@ export const returnToAPhantomOfTruthScenario: Scenario = {
 export const returnToThePallidMaskScenario: Scenario = {
 	index: 6,
 	name: 'The Pallid Mask',
+	shortName: 'VI',
 	shuffles: [
 		{ encounterSet: thePallidMask, overwriteCount: 0 },
 		{ encounterSet: returnToThePallidMask, overwriteCount: 0 },
@@ -227,6 +240,7 @@ export const returnToThePallidMaskScenario: Scenario = {
 export const returnToBlackStarsRiseScenario: Scenario = {
 	index: 7,
 	name: 'Black Stars Rise',
+	shortName: 'VII',
 	shuffles: [
 		{ encounterSet: blackStarsRise, overwriteCount: 0 },
 		{ encounterSet: returnToBlackStarsRise, overwriteCount: 0 },
@@ -242,6 +256,7 @@ export const returnToBlackStarsRiseScenario: Scenario = {
 export const returnToDimCarcosaScenario: Scenario = {
 	index: 8,
 	name: 'Dim Carcosa',
+	shortName: 'VIII',
 	shuffles: [
 		{ encounterSet: dimCarcosa, overwriteCount: 0 },
 		{ encounterSet: returnToDimCarcosa, overwriteCount: 0 },

@@ -19,6 +19,7 @@
 	let scenarioTabIndex: number = 0
 	let transitionTabIndex: number = 0
 	let showName: boolean = false
+	let shortScenarioName: boolean = false
 	let advanced: boolean = false
 	let difficulty: Difficulty = Difficulty.Standard
 	let activeTab: number = 0
@@ -38,7 +39,9 @@
 
 <a href="/tool/campaign">Back to Campaign List</a>
 {#if campaign.setupReferenceGraphic !== undefined}
-	<a href={'/image/custom/setup-reference/' + campaign.setupReferenceGraphic + '.png'}
+	<a
+		target="_blank"
+		href={'/image/custom/setup-reference/' + campaign.setupReferenceGraphic + '.png'}
 		>Print Setup Reference Card</a
 	>
 {/if}
@@ -46,7 +49,7 @@
 {#if incomplete}
 	<p>
 		<strong>** INCOMPLETE **</strong> I only buy repackaged campaigns and have not played this campaign
-		yet. The following information are probably missing or wrong :
+		yet. The following information could be missing or wrong :
 	</p>
 	<ul>
 		<li>Card count of each encounter set.</li>
@@ -99,6 +102,13 @@
 			<option value={EncounterSetSorting.Frequency}>Frequency</option>
 		</select>
 	</div>
+	<Checkbox
+		label={'Short Scenario Name'}
+		checked={shortScenarioName}
+		onCheckChanged={(c) => {
+			shortScenarioName = c
+		}}
+	/>
 {/if}
 
 <ListDivider label="Core Encounter Sets" />
@@ -126,6 +136,7 @@
 		<div slot="tab1">Matrix</div>
 		<div slot="content1">
 			<EncounterMatrixTab
+				{shortScenarioName}
 				{campaign}
 				{showName}
 				{sorting}

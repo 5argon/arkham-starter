@@ -27,6 +27,7 @@ import {
 export const iceAndDeathPart1Scenario: Scenario = {
 	index: 2,
 	name: 'Ice and Death, Part I',
+	shortName: 'I (Pt. I)',
 	shuffles: [
 		{ encounterSet: iceAndDeath, overwriteCount: 4 },
 		{ encounterSet: theCrash, overwriteCount: 0 },
@@ -42,6 +43,7 @@ export const iceAndDeathPart1Scenario: Scenario = {
 export const iceAndDeathPart2Scenario: Scenario = {
 	index: 3,
 	name: 'Ice and Death, Part II',
+	shortName: 'I (Pt. II)',
 	shuffles: [
 		{ encounterSet: iceAndDeath, overwriteCount: 7 },
 		{ encounterSet: lostInTheNight, overwriteCount: 0 },
@@ -57,6 +59,7 @@ export const iceAndDeathPart2Scenario: Scenario = {
 export const iceAndDeathPart3Scenario: Scenario = {
 	index: 4,
 	name: 'Ice and Death, Part III',
+	shortName: 'I (Pt. III)',
 	shuffles: [
 		{ encounterSet: iceAndDeath, overwriteCount: 7 },
 		{ encounterSet: seepingNightmares, overwriteCount: 2 },
@@ -76,6 +79,7 @@ export const iceAndDeathPart3Scenario: Scenario = {
 export const fatalMirageScenario: Scenario = {
 	index: 5,
 	name: 'Fatal Mirage',
+	shortName: '???',
 	shuffles: [
 		{ encounterSet: fatalMirage, overwriteCount: 9 },
 		chillingCold,
@@ -91,6 +95,7 @@ export const fatalMirageScenario: Scenario = {
 export const toTheForbiddenPeaksScenario: Scenario = {
 	index: 6,
 	name: 'To the Forbidden Peaks',
+	shortName: 'II',
 	shuffles: [
 		{ encounterSet: toTheForbiddenPeaks, overwriteCount: 14 },
 		deadlyWeather,
@@ -104,6 +109,7 @@ export const toTheForbiddenPeaksScenario: Scenario = {
 export const cityOfTheElderThings1Scenario: Scenario = {
 	index: 7,
 	name: 'City of the Elder Things (v.I)',
+	shortName: 'III (v.I)',
 	shuffles: [
 		{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
 		lockedDoors,
@@ -135,6 +141,7 @@ export const cityOfTheElderThings1Scenario: Scenario = {
 export const cityOfTheElderThings2Scenario: Scenario = {
 	index: 8,
 	name: 'City of the Elder Things (v.II)',
+	shortName: 'III (v.II)',
 	shuffles: [
 		{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
 		chillingCold,
@@ -166,6 +173,7 @@ export const cityOfTheElderThings2Scenario: Scenario = {
 export const cityOfTheElderThings3Scenario: Scenario = {
 	index: 9,
 	name: 'City of the Elder Things (v.III)',
+	shortName: 'III (v.III)',
 	shuffles: [
 		{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
 		chillingCold,
@@ -196,6 +204,7 @@ export const cityOfTheElderThings3Scenario: Scenario = {
 export const theHeartOfMadness1Scenario: Scenario = {
 	index: 10,
 	name: 'The Heart of Madness, Part I',
+	shortName: 'IV (Pt. I)',
 	shuffles: [
 		{ encounterSet: theHeartOfMadness, overwriteCount: 6 },
 		{ encounterSet: theGreatSeal, overwriteCount: 4 },
@@ -218,6 +227,7 @@ export const theHeartOfMadness1Scenario: Scenario = {
 export const theHeartOfMadness2Scenario: Scenario = {
 	index: 11,
 	name: 'The Heart of Madness, Part II',
+	shortName: 'IV (Pt. II)',
 	shuffles: [
 		{ encounterSet: theHeartOfMadness, overwriteCount: 6 },
 		{ encounterSet: stirringInTheDeep, overwriteCount: 2 },

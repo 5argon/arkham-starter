@@ -136,6 +136,10 @@ export function sortEncountersScore(
 	}
 }
 
+export function makeLongScenarioName(s: Scenario): string {
+	return s.shortName !== undefined ? `(${s.shortName}) ${s.name}` : s.name
+}
+
 export function filterPossibleTransitions(
 	allTransitions: ScenarioTransition[],
 	currentScenario: Scenario,

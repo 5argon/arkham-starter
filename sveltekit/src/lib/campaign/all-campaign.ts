@@ -4,6 +4,9 @@ import { returnToTheDunwichLegacyCampaign, theDunwichLegacyCampaign } from './dw
 import { edgeOfTheEarthCampaign } from './eote/campaign'
 import { returnToThePathToCarcosaCampaign, thePathToCarcosaCampaign } from './ptc/campaign'
 import { returnToTheForgottenAgeCampaign, theForgottenAgeCampaign } from './tfa/campaign'
+import { returnToTheCircleUndoneCampaign, theCircleUndoneCampaign } from './tcu/campaign'
+import { theDreamEatersCampaign } from './tde/campaign'
+import { theInnsmouthConspiracyCampaign } from './tic/campaign'
 
 /**
  * Order of this array reflects in the UI.
@@ -13,10 +16,14 @@ export const allCampaigns: Campaign[] = [
 	theDunwichLegacyCampaign,
 	thePathToCarcosaCampaign,
 	theForgottenAgeCampaign,
+	theCircleUndoneCampaign,
+	theDreamEatersCampaign,
+	theInnsmouthConspiracyCampaign,
 	edgeOfTheEarthCampaign,
 
 	returnToTheNightOfTheZealotCampaign,
 	returnToTheDunwichLegacyCampaign,
 	returnToThePathToCarcosaCampaign,
 	returnToTheForgottenAgeCampaign,
+	returnToTheCircleUndoneCampaign,
 ]

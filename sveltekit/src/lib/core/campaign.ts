@@ -28,6 +28,7 @@ export interface Campaign {
 export interface Scenario {
 	index: number
 	name: string
+	shortName?: string
 
 	shuffles: EncounterSetItem[]
 	setAsides?: EncounterSetItem[]

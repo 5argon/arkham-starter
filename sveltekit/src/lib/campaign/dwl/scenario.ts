@@ -46,6 +46,7 @@ import {
 export const extracurricularActivityScenario: Scenario = {
 	index: 1,
 	name: 'Extracurricular Activity',
+	shortName: 'I-A',
 	shuffles: [
 		{ encounterSet: extracurricularActivity, overwriteCount: 0 },
 		agentsOfYogSothoth,
@@ -61,6 +62,7 @@ export const extracurricularActivityScenario: Scenario = {
 export const theHouseAlwaysWinsScenario: Scenario = {
 	index: 2,
 	name: 'The House Always Wins',
+	shortName: 'I-B',
 	shuffles: [{ encounterSet: theHouseAlwaysWins, overwriteCount: 4 }, rats, badLuck, naomisCrew],
 	gameComponents: [GameComponent.TokenElderThing],
 	setAsides: [strikingFear, hideousAbominations],
@@ -69,6 +71,7 @@ export const theHouseAlwaysWinsScenario: Scenario = {
 export const theMiskatonicMuseumScenario: Scenario = {
 	index: 5,
 	name: 'The Miskatonic Museum',
+	shortName: 'II',
 	gameComponents: [GameComponent.TokenTablet],
 	shuffles: [
 		{ encounterSet: theMiskatonicMuseum, overwriteCount: 10 },
@@ -83,6 +86,7 @@ export const theMiskatonicMuseumScenario: Scenario = {
 export const theEssexCountyExpressScenario: Scenario = {
 	index: 6,
 	name: 'The Essex County Express',
+	shortName: 'III',
 	shuffles: [
 		{ encounterSet: theEssexCountyExpress, overwriteCount: 13 },
 		ancientEvils,
@@ -101,6 +105,7 @@ export const theEssexCountyExpressScenario: Scenario = {
 export const bloodOnTheAltarScenario: Scenario = {
 	index: 7,
 	name: 'Blood on the Altar',
+	shortName: 'IV',
 	shuffles: [
 		{ encounterSet: bloodOnTheAltar, overwriteCount: 13 },
 		ancientEvils,
@@ -114,6 +119,7 @@ export const bloodOnTheAltarScenario: Scenario = {
 export const undimensionedAndUnseenScenario: Scenario = {
 	index: 8,
 	name: 'Undimensioned and Unseen',
+	shortName: 'V',
 	shuffles: [
 		{ encounterSet: undimensionedAndUnseen, overwriteCount: 11 },
 		strikingFear,
@@ -126,6 +132,7 @@ export const undimensionedAndUnseenScenario: Scenario = {
 export const whereDoomAwaitsScenario: Scenario = {
 	index: 9,
 	name: 'Where Doom Awaits',
+	shortName: 'VI',
 	shuffles: [
 		{ encounterSet: whereDoomAwaits, overwriteCount: 12 },
 		ancientEvils,
@@ -141,6 +148,7 @@ export const whereDoomAwaitsScenario: Scenario = {
 export const lostInTimeAndSpaceScenario: Scenario = {
 	index: 10,
 	name: 'Lost in Time and Space',
+	shortName: 'VII',
 	shuffles: [
 		{ encounterSet: lostInTimeAndSpace, overwriteCount: 23 },
 		agentsOfYogSothoth,
@@ -153,6 +161,7 @@ export const lostInTimeAndSpaceScenario: Scenario = {
 export const returnToExtracurricularActivityScenario: Scenario = {
 	index: 1,
 	name: 'Extracurricular Activity',
+	shortName: 'I-A',
 	shuffles: [
 		{ encounterSet: returnToExtracurricularActivity, overwriteCount: 0 },
 		{ encounterSet: extracurricularActivity, overwriteCount: 0 },
@@ -169,6 +178,7 @@ export const returnToExtracurricularActivityScenario: Scenario = {
 export const returnToTheHouseAlwaysWinsScenario: Scenario = {
 	index: 2,
 	name: 'The House Always Wins',
+	shortName: 'I-B',
 	shuffles: [
 		{ encounterSet: returnToTheHouseAlwaysWins, overwriteCount: 0 },
 		{ encounterSet: theHouseAlwaysWins, overwriteCount: 0 },
@@ -182,6 +192,7 @@ export const returnToTheHouseAlwaysWinsScenario: Scenario = {
 export const returnToTheMiskatonicMuseumScenario: Scenario = {
 	index: 5,
 	name: 'The Miskatonic Museum',
+	shortName: 'II',
 	gameComponents: [GameComponent.TokenTablet],
 	shuffles: [
 		{ encounterSet: returnToTheMiskatonicMuseum, overwriteCount: 0 },
@@ -197,6 +208,7 @@ export const returnToTheMiskatonicMuseumScenario: Scenario = {
 export const returnToTheEssexCountyExpressScenario: Scenario = {
 	index: 6,
 	name: 'The Essex County Express',
+	shortName: 'III',
 	shuffles: [
 		{ encounterSet: returnToTheEssexCountyExpress, overwriteCount: 0 },
 		{ encounterSet: theEssexCountyExpress, overwriteCount: 0 },
@@ -210,6 +222,7 @@ export const returnToTheEssexCountyExpressScenario: Scenario = {
 export const returnToBloodOnTheAltarScenario: Scenario = {
 	index: 7,
 	name: 'Blood on the Altar',
+	shortName: 'IV',
 	shuffles: [
 		{ encounterSet: returnToBloodOnTheAltar, overwriteCount: 0 },
 		{ encounterSet: bloodOnTheAltar, overwriteCount: 0 },
@@ -224,6 +237,7 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 export const returnToUndimensionedAndUnseenScenario: Scenario = {
 	index: 8,
 	name: 'Undimensioned and Unseen',
+	shortName: 'V',
 	shuffles: [
 		{ encounterSet: returnToUndimensionedAndUnseen, overwriteCount: 0 },
 		{ encounterSet: undimensionedAndUnseen, overwriteCount: 0 },
@@ -237,6 +251,7 @@ export const returnToUndimensionedAndUnseenScenario: Scenario = {
 export const returnToWhereDoomAwaitsScenario: Scenario = {
 	index: 9,
 	name: 'Where Doom Awaits',
+	shortName: 'VI',
 	shuffles: [
 		{ encounterSet: returnToWhereDoomAwaits, overwriteCount: 0 },
 		{ encounterSet: whereDoomAwaits, overwriteCount: 0 },
@@ -253,6 +268,7 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 export const returnToLostInTimeAndSpaceScenario: Scenario = {
 	index: 10,
 	name: 'Lost in Time and Space',
+	shortName: 'VII',
 	shuffles: [
 		{ encounterSet: returnToLostInTimeAndSpace, overwriteCount: 0 },
 		{ encounterSet: lostInTimeAndSpace, overwriteCount: 0 },

@@ -54,6 +54,7 @@ import {
 export const disappearanceAtTheTwilightEstateScenario: Scenario = {
 	index: 1,
 	name: 'Disappearance at the Twilight Estate',
+	shortName: 'P',
 	shuffles: [
 		{ encounterSet: disappearanceAtTheTwilightEstate, overwriteCount: 0 },
 		{ encounterSet: atDeathsDoorstep, overwriteCount: 7 },
@@ -69,6 +70,7 @@ export const disappearanceAtTheTwilightEstateScenario: Scenario = {
 export const theWitchingHourScenario: Scenario = {
 	index: 2,
 	name: 'The Witching Hour',
+	shortName: 'I',
 	shuffles: [
 		{ encounterSet: theWitchingHour, overwriteCount: 0 },
 		ancientEvils,
@@ -84,6 +86,7 @@ export const theWitchingHourScenario: Scenario = {
 export const atDeathsDoorstepScenario: Scenario = {
 	index: 3,
 	name: "At Death's Doorstep",
+	shortName: 'II',
 	shuffles: [
 		{ encounterSet: atDeathsDoorstep, overwriteCount: 0 },
 		chillingCold,
@@ -98,6 +101,7 @@ export const atDeathsDoorstepScenario: Scenario = {
 export const theSecretNameScenario: Scenario = {
 	index: 4,
 	name: 'The Secret Name',
+	shortName: 'III',
 	shuffles: [
 		{ encounterSet: theSecretName, overwriteCount: 0 },
 		rats,
@@ -111,6 +115,7 @@ export const theSecretNameScenario: Scenario = {
 export const theWagesOfSinScenario: Scenario = {
 	index: 5,
 	name: 'The Wages of Sin',
+	shortName: 'IV',
 	shuffles: [
 		{ encounterSet: theWagesOfSin, overwriteCount: 0 },
 		anettesCoven,
@@ -126,6 +131,7 @@ export const theWagesOfSinScenario: Scenario = {
 export const forTheGreaterGoodScenario: Scenario = {
 	index: 6,
 	name: 'For the Greater Good',
+	shortName: 'V',
 	shuffles: [
 		{ encounterSet: forTheGreaterGood, overwriteCount: 0 },
 		ancientEvils,
@@ -139,6 +145,7 @@ export const forTheGreaterGoodScenario: Scenario = {
 export const unionAndDisillusionScenario: Scenario = {
 	index: 7,
 	name: 'Union and Disillusion',
+	shortName: 'VI',
 	shuffles: [
 		{ encounterSet: unionAndDisillusion, overwriteCount: 0 },
 		ancientEvils,
@@ -153,6 +160,7 @@ export const unionAndDisillusionScenario: Scenario = {
 export const inTheClutchesOfChaos1Scenario: Scenario = {
 	index: 8,
 	name: 'In the Clutches of Chaos (v.I)',
+	shortName: 'VII (v.I)',
 	shuffles: [
 		{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
 		{ encounterSet: musicOfTheDamned, overwriteCount: 0 },
@@ -167,6 +175,7 @@ export const inTheClutchesOfChaos1Scenario: Scenario = {
 export const inTheClutchesOfChaos2Scenario: Scenario = {
 	index: 9,
 	name: 'In the Clutches of Chaos (v.II)',
+	shortName: 'VII (v.II)',
 	shuffles: [
 		{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
 		{ encounterSet: secretsOfTheUniverse, overwriteCount: 0 },
@@ -181,6 +190,7 @@ export const inTheClutchesOfChaos2Scenario: Scenario = {
 export const beforeTheBlackThroneScenario: Scenario = {
 	index: 10,
 	name: 'Before the Black Throne',
+	shortName: 'VIII',
 	shuffles: [
 		{ encounterSet: beforeTheBlackThrone, overwriteCount: 0 },
 		ancientEvils,
@@ -193,6 +203,7 @@ export const beforeTheBlackThroneScenario: Scenario = {
 export const returnToDisappearanceAtTheTwilightEstateScenario: Scenario = {
 	index: 1,
 	name: 'Disappearance at the Twilight Estate',
+	shortName: 'P',
 	shuffles: [
 		{ encounterSet: disappearanceAtTheTwilightEstate, overwriteCount: 0 },
 		{ encounterSet: returnToDisappearanceAtTheTwilightEstate, overwriteCount: 0 },
@@ -209,6 +220,7 @@ export const returnToDisappearanceAtTheTwilightEstateScenario: Scenario = {
 export const returnToTheWitchingHourScenario: Scenario = {
 	index: 2,
 	name: 'The Witching Hour',
+	shortName: 'I',
 	shuffles: [
 		{ encounterSet: theWitchingHour, overwriteCount: 0 },
 		{ encounterSet: returnToTheWitchingHour, overwriteCount: 0 },
@@ -225,6 +237,7 @@ export const returnToTheWitchingHourScenario: Scenario = {
 export const returnToAtDeathsDoorstepScenario: Scenario = {
 	index: 3,
 	name: "At Death's Doorstep",
+	shortName: 'II',
 	shuffles: [
 		{ encounterSet: atDeathsDoorstep, overwriteCount: 0 },
 		{ encounterSet: returnToAtDeathsDoorstep, overwriteCount: 0 },
@@ -240,6 +253,7 @@ export const returnToAtDeathsDoorstepScenario: Scenario = {
 export const returnToTheSecretNameScenario: Scenario = {
 	index: 4,
 	name: 'The Secret Name',
+	shortName: 'III',
 	shuffles: [
 		{ encounterSet: theSecretName, overwriteCount: 0 },
 		{ encounterSet: returnToTheSecretName, overwriteCount: 0 },
@@ -254,6 +268,7 @@ export const returnToTheSecretNameScenario: Scenario = {
 export const returnToTheWagesOfSinScenario: Scenario = {
 	index: 5,
 	name: 'The Wages of Sin',
+	shortName: 'IV',
 	shuffles: [
 		{ encounterSet: theWagesOfSin, overwriteCount: 0 },
 		{ encounterSet: returnToTheWagesOfSin, overwriteCount: 0 },
@@ -270,6 +285,7 @@ export const returnToTheWagesOfSinScenario: Scenario = {
 export const returnToForTheGreaterGoodScenario: Scenario = {
 	index: 6,
 	name: 'For the Greater Good',
+	shortName: 'V',
 	shuffles: [
 		{ encounterSet: forTheGreaterGood, overwriteCount: 0 },
 		{ encounterSet: returnToForTheGreaterGood, overwriteCount: 0 },
@@ -284,6 +300,7 @@ export const returnToForTheGreaterGoodScenario: Scenario = {
 export const returnToUnionAndDisillusionScenario: Scenario = {
 	index: 7,
 	name: 'Union and Disillusion',
+	shortName: 'VI',
 	shuffles: [
 		{ encounterSet: unionAndDisillusion, overwriteCount: 0 },
 		{ encounterSet: returnToUnionAndDisillusion, overwriteCount: 0 },
@@ -299,6 +316,7 @@ export const returnToUnionAndDisillusionScenario: Scenario = {
 export const returnToInTheClutchesOfChaos1Scenario: Scenario = {
 	index: 8,
 	name: 'In the Clutches of Chaos (v.I)',
+	shortName: 'VII (v.I)',
 	shuffles: [
 		{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
 		{ encounterSet: returnToInTheClutchesOfChaos, overwriteCount: 0 },
@@ -314,6 +332,7 @@ export const returnToInTheClutchesOfChaos1Scenario: Scenario = {
 export const returnToInTheClutchesOfChaos2Scenario: Scenario = {
 	index: 9,
 	name: 'In the Clutches of Chaos (v.II)',
+	shortName: 'VII (v.II)',
 	shuffles: [
 		{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
 		{ encounterSet: returnToInTheClutchesOfChaos, overwriteCount: 0 },
@@ -329,6 +348,7 @@ export const returnToInTheClutchesOfChaos2Scenario: Scenario = {
 export const returnToBeforeTheBlackThroneScenario: Scenario = {
 	index: 10,
 	name: 'Before the Black Throne',
+	shortName: 'VIII',
 	shuffles: [
 		{ encounterSet: beforeTheBlackThrone, overwriteCount: 0 },
 		{ encounterSet: returnToBeforeTheBlackThrone, overwriteCount: 0 },

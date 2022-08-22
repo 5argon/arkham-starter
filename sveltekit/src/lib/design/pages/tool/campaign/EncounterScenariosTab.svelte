@@ -5,7 +5,12 @@
 		type Campaign,
 	} from '$lib/core/campaign'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-	import { findFrequencies, findUniqueScenarios, mergeEncounters } from './campaign-analyze'
+	import {
+		findFrequencies,
+		findUniqueScenarios,
+		makeLongScenarioName,
+		mergeEncounters,
+	} from './campaign-analyze'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	export let campaign: Campaign
 	export let sorting: EncounterSetSorting
@@ -43,7 +48,7 @@
 	<span>Scenario</span>
 	<select name="scenarios" value={selectedScenarioIndex} on:change={(e) => onChangeHandler(e)}>
 		{#each scenarios as s, i}
-			<option value={i}>{s.name}</option>
+			<option value={i}>{makeLongScenarioName(s)}</option>
 		{/each}
 	</select>
 </div>

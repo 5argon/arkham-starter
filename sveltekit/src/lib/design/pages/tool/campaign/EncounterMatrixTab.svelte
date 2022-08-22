@@ -17,6 +17,7 @@
 	export let campaign: Campaign
 	export let sorting: EncounterSetSorting = EncounterSetSorting.Alphabetical
 	export let showName: boolean = false
+	export let shortScenarioName: boolean = false
 	export let onGoToScenario: (s: Scenario) => void = () => {
 		// do nothing
 	}
@@ -48,13 +49,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each rows as r}
+			{#each rows as r, i}
 				<tr>
 					<td
 						class="sticky scenario-name"
 						on:click={() => {
 							onGoToScenario(r.scenario)
-						}}>{r.scenario.name}</td
+						}}
+					>
+						{shortScenarioName ? r.scenario.shortName ?? i + 1 : r.scenario.name}</td
 					>
 					<td class="specific-sets" class:no-specific-sets={r.specificSets.length == 0}>
 						{#each r.specificSets as s}

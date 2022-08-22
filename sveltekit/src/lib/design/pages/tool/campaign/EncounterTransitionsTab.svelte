@@ -12,6 +12,7 @@
 		findForesightChoices,
 		findFrequencies,
 		findUniqueScenarios,
+		makeLongScenarioName,
 		makeTransitionInfo,
 		type TransitionInfo,
 	} from './campaign-analyze'
@@ -97,7 +98,11 @@
 
 	function makeTransitionString(from: Scenario | null, to: Scenario | null): string {
 		const arrow = from !== null && to !== null
-		return (from?.name ?? '') + (arrow ? ' → ' : '') + (to?.name ?? '')
+		return (
+			(from !== null ? makeLongScenarioName(from) : '') +
+			(arrow ? ' → ' : '') +
+			(to !== null ? makeLongScenarioName(to) : '')
+		)
 	}
 	let ti: TransitionInfo | null
 	$: {
@@ -129,7 +134,7 @@
 		on:change={(e) => onScenarioChangeHandler(e)}
 	>
 		{#each scenarios as s, i}
-			<option value={i}>{s.name}</option>
+			<option value={i}>{makeLongScenarioName(s)}</option>
 		{/each}
 	</select>
 </div>

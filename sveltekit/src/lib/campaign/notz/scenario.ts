@@ -27,6 +27,7 @@ import {
 export const theGatheringScenario: Scenario = {
 	index: 1,
 	name: 'The Gathering',
+	shortName: 'I',
 	shuffles: [
 		{ encounterSet: theGathering, overwriteCount: 2 },
 		ancientEvils,
@@ -40,6 +41,7 @@ export const theGatheringScenario: Scenario = {
 export const theMidnightMasksScenario: Scenario = {
 	index: 2,
 	name: 'The Midnight Masks',
+	shortName: 'II',
 	shuffles: [
 		{ encounterSet: theMidnightMasks, overwriteCount: 5 },
 		chillingCold,
@@ -53,6 +55,7 @@ export const theMidnightMasksScenario: Scenario = {
 export const theDevourerBelowScenario: Scenario = {
 	index: 3,
 	name: 'The Devourer Below',
+	shortName: 'III',
 	shuffles: [
 		{ encounterSet: theDevourerBelow, overwriteCount: 2 },
 		ancientEvils,
@@ -72,6 +75,7 @@ export const theDevourerBelowScenario: Scenario = {
 export const returnToTheGatheringScenario: Scenario = {
 	index: 1,
 	name: 'The Gathering',
+	shortName: 'I',
 	shuffles: [
 		{ encounterSet: theGathering, overwriteCount: 0 },
 		{ encounterSet: returnToTheGathering, overwriteCount: 0 },
@@ -86,6 +90,7 @@ export const returnToTheGatheringScenario: Scenario = {
 export const returnToTheMidnightMasksScenario: Scenario = {
 	index: 2,
 	name: 'The Midnight Masks',
+	shortName: 'II',
 	shuffles: [
 		{ encounterSet: theMidnightMasks, overwriteCount: 0 },
 		{ encounterSet: returnToTheMidnightMasks, overwriteCount: 0 },
@@ -100,6 +105,7 @@ export const returnToTheMidnightMasksScenario: Scenario = {
 export const returnToTheDevourerBelowScenario: Scenario = {
 	index: 3,
 	name: 'The Devourer Below',
+	shortName: 'III',
 	shuffles: [
 		{ encounterSet: theDevourerBelow, overwriteCount: 0 },
 		{ encounterSet: returnToTheDevourerBelow, overwriteCount: 0 },

@@ -31,7 +31,9 @@ This section tells you some campaign-wide information. For example, all the Core
 
 If you want to go analog, this link takes you to an Arkham-esque card graphic containing the content in Matrix Tab. Keep this card near all the campaign encounter sets so you are able to pick all the required sets as soon as you opened the box.
 
-Each one is sized at 94 x 69 mm at 300 DPI. That is +5 mm each size from a regular card game size of 89 x 64 mm to give you some bleed space to cut after printing. It is really small once printed though! But players replaying should be able to recognize the icons at least.
+Each one has pixels that could fill 94 x 69 mm at 600 DPI. That is +5 mm each size from a regular card game size of 89 x 64 mm to give you some bleed space to cut after printing.
+
+Horizontal space is critical to enlarge the icons as much as possible, so scenario's name has been replaced with numbers.
 
 ### Encounter Set Sorting
 
@@ -41,6 +43,10 @@ Check "Advanced Features" to see this settings. Throughout the interface, encoun
 - **Frequency** : Sets that are re-used more times throughout the campaign are grouped to the left. Sets that are only used a few times are grouped to the right. If you also order your dividers according to this, it may optimize the distance traveled between dividers when you are setting up the game.
 
 This is an example of flexibility of having the presentation generated from data. In Google Sheet, it would be difficult to make a matrix that viewer can re-sort like this.
+
+### Short Scenario Name
+
+Check "Advanced Features" to see this settings. Affects Matrix Tab only. Replace the scenario name with numbers so it takes less horizontal space for smaller phones.
 
 ## Matrix Tab
 
