@@ -171,7 +171,7 @@
 					}}
 				>
 					{#each foresightChoices as s, i}
-						<option value={i}>{'→ ' + s.name}</option>
+						<option value={i}>{'→ ' + makeLongScenarioName(s)}</option>
 					{/each}
 				</select>
 			{/if}

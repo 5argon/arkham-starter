@@ -163,8 +163,8 @@ export const returnToExtracurricularActivityScenario: Scenario = {
 	name: 'Extracurricular Activity',
 	shortName: 'I-A',
 	shuffles: [
-		{ encounterSet: returnToExtracurricularActivity, overwriteCount: 0 },
 		{ encounterSet: extracurricularActivity, overwriteCount: 0 },
+		{ encounterSet: returnToExtracurricularActivity, overwriteCount: 0 },
 		bishopsThralls,
 		sorcery,
 		whippoorwills,
@@ -180,8 +180,8 @@ export const returnToTheHouseAlwaysWinsScenario: Scenario = {
 	name: 'The House Always Wins',
 	shortName: 'I-B',
 	shuffles: [
-		{ encounterSet: returnToTheHouseAlwaysWins, overwriteCount: 0 },
 		{ encounterSet: theHouseAlwaysWins, overwriteCount: 0 },
+		{ encounterSet: returnToTheHouseAlwaysWins, overwriteCount: 0 },
 		rats,
 		badLuck,
 		naomisCrew,
@@ -195,8 +195,8 @@ export const returnToTheMiskatonicMuseumScenario: Scenario = {
 	shortName: 'II',
 	gameComponents: [GameComponent.TokenTablet],
 	shuffles: [
-		{ encounterSet: returnToTheMiskatonicMuseum, overwriteCount: 0 },
 		{ encounterSet: theMiskatonicMuseum, overwriteCount: 0 },
+		{ encounterSet: returnToTheMiskatonicMuseum, overwriteCount: 0 },
 		badLuck,
 		sorcery,
 		beyondTheThreshold,
@@ -210,8 +210,8 @@ export const returnToTheEssexCountyExpressScenario: Scenario = {
 	name: 'The Essex County Express',
 	shortName: 'III',
 	shuffles: [
-		{ encounterSet: returnToTheEssexCountyExpress, overwriteCount: 0 },
 		{ encounterSet: theEssexCountyExpress, overwriteCount: 0 },
+		{ encounterSet: returnToTheEssexCountyExpress, overwriteCount: 0 },
 		darkCult,
 		beyondTheThreshold,
 		erraticFear,
@@ -224,8 +224,8 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 	name: 'Blood on the Altar',
 	shortName: 'IV',
 	shuffles: [
-		{ encounterSet: returnToBloodOnTheAltar, overwriteCount: 0 },
 		{ encounterSet: bloodOnTheAltar, overwriteCount: 0 },
+		{ encounterSet: returnToBloodOnTheAltar, overwriteCount: 0 },
 		nightgaunts,
 		dunwich,
 		whippoorwills,
@@ -239,8 +239,8 @@ export const returnToUndimensionedAndUnseenScenario: Scenario = {
 	name: 'Undimensioned and Unseen',
 	shortName: 'V',
 	shuffles: [
-		{ encounterSet: returnToUndimensionedAndUnseen, overwriteCount: 0 },
 		{ encounterSet: undimensionedAndUnseen, overwriteCount: 0 },
+		{ encounterSet: returnToUndimensionedAndUnseen, overwriteCount: 0 },
 		beastThralls,
 		dunwich,
 		whippoorwills,
@@ -253,8 +253,8 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 	name: 'Where Doom Awaits',
 	shortName: 'VI',
 	shuffles: [
-		{ encounterSet: returnToWhereDoomAwaits, overwriteCount: 0 },
 		{ encounterSet: whereDoomAwaits, overwriteCount: 0 },
+		{ encounterSet: returnToWhereDoomAwaits, overwriteCount: 0 },
 		beastThralls,
 		bishopsThralls,
 		sorcery,
@@ -270,8 +270,8 @@ export const returnToLostInTimeAndSpaceScenario: Scenario = {
 	name: 'Lost in Time and Space',
 	shortName: 'VII',
 	shuffles: [
-		{ encounterSet: returnToLostInTimeAndSpace, overwriteCount: 0 },
 		{ encounterSet: lostInTimeAndSpace, overwriteCount: 0 },
+		{ encounterSet: returnToLostInTimeAndSpace, overwriteCount: 0 },
 		hideousAbominations,
 		sorcery,
 		beyondTheThreshold,

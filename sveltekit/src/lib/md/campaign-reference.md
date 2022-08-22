@@ -18,10 +18,11 @@ So I made a yet another version...
 
 - These are programmatically generated from "data", rather than me hand-placing graphics like Google Sheet authors. For the programmer, it is easier to maintain and correct mistakes, or making the same improvement/fix across all campaign pages.
 - Some presentation can be changed using interactive controls, such as showing or hiding encounter set name for an entire page.
-- Some HTML techs can be used, such as hovering over the icon to see the full name, or color-coding the icon.
+- Some HTML techs can be used, such as hovering over the icon to see the full name, or color-coding the icon. (The icons are all black from the server, they are recolored live on the site.) The hover also works on mobile phone by tapping it.
 - Google Sheets are often massive and not mobile friendly. I want to be able to reference quickly from tiny mobile phone screen without much scrolling around. (Especially not too much horizontal scrolling.)
 - I don't want to keep a Google Sheet URL, I want it accessible from URL I can remember. (It is my own site after all!)
 - I want the loading performance to be better than Google Sheets, without the editing tools and unnecessary buttons.
+- This one's granularity is per campaign. Some prior works let you see usage statistics across all campaigns released so far, but I have no interest in that.
 
 ## Top Section
 
@@ -88,13 +89,15 @@ By selecting a scenario first, it shows all the possible transitions that has "f
 
 At the clean up at the end of each session, you would separate the encounter deck into individual encounter sets and counted that nothing were lost. Normally at this step you would put all of them back, but wait! Actually some sets are used again in the next scenario.
 
-So the idea to shave off some teardown/setup time is to keep the "intersects", put away the "differences", and add the new sets that wasn't used previously. The Transition Tab shows 3 group of encounter sets to help you do this :
+So the idea to shave off some teardown/setup time is to keep the "intersects", put away the "differences", and add the new sets that wasn't used previously. The Transition Tab shows 3 groups of encounter set to help you do this :
 
 - **Keep** : These sets you just played with are also used in the next scenario. You can keep them for the next session.
 - **Remove** : Return these to the right place in your collection, because they are not used in the next scenario.
 - **Add** : New encounter sets not used in the scenario you just finished, you need to add these to the "Keep" stack.
 
 Assembling needed encounter sets ahead of time can improve excitement on the next session when you are back with full power, so the game starts faster while you are eager to start playing.
+
+This is yet another advantage of this page being generated rather than made. Even I didn't know all these keep-remove-add relationship between scenarios before I made this site. I could say this feature exists just because I was curious.
 
 ### Foresight
 
