@@ -62,10 +62,12 @@ function mdJustcard(card: ExportCard, opt: ExportOptions): string {
 			? `${cardName} ${normalPips}`
 			: cardName
 	cardName = opt.cardOptions?.link ?? true ? wrapCard(cardName, card.id) : cardName
-	cardName =
-		(opt.globalSettings?.taboo ?? true) && card.xpTaboo > 0
-			? `${cardName} ${tabooPips}${ahdbIcons.tablet}`
-			: cardName
+	if (opt.globalSettings?.taboo) {
+		cardName =
+			(opt.globalSettings?.taboo ?? true) && card.xpTaboo > 0
+				? `${cardName} ${tabooPips}${ahdbIcons.tablet}`
+				: cardName
+	}
 	cardName =
 		(opt.cardOptions?.exceptionalIcon ?? true) &&
 		((!(opt.globalSettings?.taboo ?? true) && card.exceptional) ||

@@ -12,7 +12,6 @@ import { upgradeExportArkhamDb } from './export-tools-arkhamdb'
 import { binaryToUrlString } from './options'
 
 export function upgradeExportCenter(uex: UpgradeExport): string {
-	console.log('Recalled')
 	if (uex.upgradeExportOptions === undefined) {
 		return ''
 	}

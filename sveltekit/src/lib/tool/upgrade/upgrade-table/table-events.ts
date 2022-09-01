@@ -5,4 +5,5 @@ export interface ToolbarEvents {
 	onAddDividerRow: () => void
 	onClear: () => void
 	onExportMarkdown: (pdb: PopupDatabase) => void
+	onTabooToggle: (tabooOn: boolean) => void
 }

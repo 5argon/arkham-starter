@@ -1,5 +1,5 @@
 import type { PopupDatabase } from '$lib/core/popup-database'
-import type { GlobalSettings } from '$lib/tool/script/common/settings'
+import type { GlobalSettings } from '$lib/proto/generated/global_settings'
 import type { Row } from '../interface'
 
 export interface CalculatedXp {

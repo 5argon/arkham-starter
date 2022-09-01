@@ -91,6 +91,7 @@
 						restriction={c.original.ir}
 						weakness={c.original.wk}
 						xp={c.original.xp}
+						xpTaboo={globalSettings.taboo ? c.original.xpat : null}
 						onClickLeft={() => onAddToLeftSide(c.original.id)}
 						onClickRight={() => onAddToRightSide(c.original.id)}
 					/>
@@ -110,7 +111,7 @@
 						restriction={c.original.ir}
 						weakness={c.original.wk}
 						xp={c.original.xp}
-						xpTaboo={globalSettings.taboo ? c.original.xpat : 0}
+						xpTaboo={globalSettings.taboo ? c.original.xpat : null}
 						packNumber={c.original.ps}
 						packIcon={c.packIcon}
 						onClickDelete={() => onDelete(c.original.id)}

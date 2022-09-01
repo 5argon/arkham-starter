@@ -4,10 +4,7 @@
 
 	import type { Row } from '$lib/tool/upgrade/interface'
 
-	import type {
-		RowActionEvents,
-		RowEditEvents,
-	} from '$lib/tool/upgrade/upgrade-table/row-events'
+	import type { RowActionEvents, RowEditEvents } from '$lib/tool/upgrade/upgrade-table/row-events'
 	import CardBlockUpDown from './CardBlockUpDown.svelte'
 	import EditableNumberCell from './EditableNumberCell.svelte'
 	import EditableSmallCell from './EditableSmallCell.svelte'
@@ -20,6 +17,7 @@
 	export let index: number
 	export let singleMode: boolean = false
 	export let popupDatabase: PopupDatabase
+	export let useTaboo: boolean = true
 	export let row: Row
 	export let calculatedXp: number
 	export let calculatedCumulativeXp: number
@@ -78,11 +76,11 @@
 					class1={leftCard.class1}
 					class2={leftCard.class2 ?? null}
 					class3={leftCard.class3 ?? null}
-					exceptional={leftCard.original.ex}
+					exceptional={useTaboo ? leftCard.original.ext : leftCard.original.ex}
 					restriction={leftCard.original.ir}
 					weakness={leftCard.original.wk}
 					xp={leftCard.original.xp}
-					xpTaboo={leftCard.original.xpat}
+					xpTaboo={useTaboo ? leftCard.original.xpat : null}
 					onClickDown={rowActionEvents.onMoveDownLeft}
 					onClickUp={rowActionEvents.onMoveUpLeft}
 					onClickDelete={rowActionEvents.onDeleteLeft}
@@ -111,11 +109,11 @@
 						class1={rightCard.class1}
 						class2={rightCard.class2 ?? null}
 						class3={rightCard.class3 ?? null}
-						exceptional={rightCard.original.ex}
+						exceptional={useTaboo ? rightCard.original.ext : rightCard.original.ex}
 						restriction={rightCard.original.ir}
 						weakness={rightCard.original.wk}
 						xp={rightCard.original.xp}
-						xpTaboo={rightCard.original.xpat}
+						xpTaboo={useTaboo ? rightCard.original.xpat : null}
 						onClickDown={rowActionEvents.onMoveDownRight}
 						onClickUp={rowActionEvents.onMoveUpRight}
 						onClickDelete={rowActionEvents.onDeleteRight}

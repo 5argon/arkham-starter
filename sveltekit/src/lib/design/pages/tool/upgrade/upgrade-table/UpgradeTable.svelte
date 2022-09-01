@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PopupDatabase } from '$lib/core/popup-database'
-	import type { GlobalSettings } from '$lib/tool/script/common/settings'
+	import type { GlobalSettings } from '$lib/proto/generated/global_settings'
 
 	import type { Row } from '$lib/tool/upgrade/interface'
 	import type {
@@ -18,17 +18,17 @@
 	export let db: PopupDatabase
 	export let gs: GlobalSettings
 	export let singleMode: boolean = false
-
 	$: cx = calculateXps(db, rows, gs)
 </script>
 
 <div class="wrapper">
-	<UpgradeToolbar pdb={db} {toolbarEvents} />
+	<UpgradeToolbar pdb={db} {toolbarEvents} {gs} />
 	{#each rows as r, i (i)}
 		<UpgradeRow
 			index={i}
 			popupDatabase={db}
 			{singleMode}
+			useTaboo={gs.taboo}
 			row={r}
 			calculatedXp={cx.costs[i]}
 			calculatedCumulativeXp={cx.cumulatives[i]}

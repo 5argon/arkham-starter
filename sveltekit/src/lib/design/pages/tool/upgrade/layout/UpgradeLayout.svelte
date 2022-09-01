@@ -44,7 +44,11 @@
 	export let importProto: string | null = null
 
 	let importText: string = ''
-	let globalSettings: GlobalSettings = { pipStyle: GlobalSettings_PipStyle.PipsReal, taboo: true }
+	let globalSettings: GlobalSettings
+	$: globalSettings = {
+		pipStyle: singleMode ? GlobalSettings_PipStyle.PipsReal : GlobalSettings_PipStyle.Pips,
+		taboo: true,
+	}
 	let stagingCards1: string[] = []
 	let stagingCards2: string[] = []
 	let stagingCards3: string[] = []
@@ -117,6 +121,9 @@
 			const calc = calculateXps(pdb, rows, globalSettings)
 			exportRows = rows.map((x, i) => rowToExportRow(x, i, pdb, calc))
 			showingExportModal = true
+		},
+		onTabooToggle: (tabooOn: boolean) => {
+			globalSettings = { ...globalSettings, taboo: tabooOn }
 		},
 	}
 	const rowActionEvents: TableRowActionEvents = {
@@ -253,7 +260,8 @@
 		showLinkText: '(View at arkham-starter.com)',
 		upgradeExportStyle: UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb,
 	}
-	let exportOptions: ExportOptions = {
+	let exportOptions: ExportOptions
+	$: exportOptions = {
 		cardInfo: {
 			cardInfoTypes: [],
 			commitOptions: { highlight: CardInfo_CommitOptions_CommitIcon.Unknown },
@@ -267,10 +275,7 @@
 			link: true,
 			tabooIcon: true,
 		},
-		globalSettings: {
-			pipStyle: singleMode ? GlobalSettings_PipStyle.PipsReal : GlobalSettings_PipStyle.Pips,
-			taboo: true,
-		},
+		globalSettings: globalSettings,
 	}
 	let onChangeUpgradeExportOptions: (n: UpgradeExportOptions) => void = (n) => {
 		upgradeExportOptions = n

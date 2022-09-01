@@ -51,7 +51,7 @@
 	}
 	$: {
 		if (xpTaboo !== null) {
-			tabooPips = makePips(xpTaboo)
+			tabooPips = '(' + (xpTaboo > 0 ? '+' : '') + xpTaboo.toString() + ')'
 		}
 	}
 	let packStaticUrl: string
@@ -83,11 +83,8 @@
 					class={'pips ' + textIconFontClass}>{textIconToFontCharacter(TextIcon.Weakness)}</span
 				>{/if}{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}
 			{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}
-			{#if xpTaboo !== null && xpTaboo > 0}
+			{#if xpTaboo !== null && xpTaboo !== 0}
 				<span class="pips taboo-pips">{tabooPips}</span>
-				<span title="Taboo" class={'pips ' + textIconFontClass}
-					>{textIconToFontCharacter(TextIcon.TokenTablet)}</span
-				>
 			{/if}{#if exceptional}<span title="Exceptional" class={'pips ' + textIconFontClass}
 					>{textIconToFontCharacter(TextIcon.TokenElderSign)}</span
 				>{/if}
@@ -158,6 +155,7 @@
 
 	.taboo-pips {
 		margin-left: 4px;
+		font-size: xx-small;
 	}
 
 	.pack-span {
