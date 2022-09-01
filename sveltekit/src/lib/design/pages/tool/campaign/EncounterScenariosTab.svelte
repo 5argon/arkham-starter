@@ -39,6 +39,8 @@
 		}
 	}, 0)
 
+	$: hasSetAside = selectedScenario.setAsides !== undefined
+
 	function onChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
 		onDropdownIndexChanged(parseInt(e.currentTarget.value))
 	}
@@ -63,7 +65,9 @@
 />
 
 {#if !incomplete}
-	<ListDivider label={'Starting Encounter Deck ( ' + count + ' cards )'} />
+	<ListDivider
+		label={'Starting Encounter Deck ( ' + (hasSetAside ? 'Minimum ' : '') + count + ' cards )'}
+	/>
 	<EncounterIconFlex encounterSets={selectedScenario.shuffles} {showName} {sorting} {frequencies} />
 
 	{#if selectedScenario.setAsides !== undefined}

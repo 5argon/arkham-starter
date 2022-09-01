@@ -13,6 +13,7 @@
 	} from './campaign-analyze'
 	import EncounterIcon from './EncounterIcon.svelte'
 	import EncounterIconTableHeader from './EncounterIconTableHeader.svelte'
+	import { makeSetCountText } from './helper'
 	import { createMatrixRows } from './matrix-row'
 	export let campaign: Campaign
 	export let sorting: EncounterSetSorting = EncounterSetSorting.Alphabetical
@@ -62,7 +63,13 @@
 					<td class="specific-sets" class:no-specific-sets={r.specificSets.length == 0}>
 						{#each r.specificSets as s}
 							<div class="block-wrap">
-								<EncounterIcon iconName={s.name} iconPath={s.icon} scenarioSet enableHover />
+								<EncounterIcon
+									iconName={s.name}
+									subText={makeSetCountText(s)}
+									iconPath={s.icon}
+									scenarioSet
+									enableHover
+								/>
 							</div>
 						{/each}
 					</td>
@@ -73,6 +80,7 @@
 									<EncounterIcon
 										iconName={o.name}
 										iconPath={o.icon}
+										subText={makeSetCountText(o)}
 										coreSet={o.flag === EncounterSetFlag.Core}
 										returnToSet={o.flag === EncounterSetFlag.ReturnTo}
 										enableHover

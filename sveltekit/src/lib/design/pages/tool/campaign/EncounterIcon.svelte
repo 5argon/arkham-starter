@@ -3,6 +3,7 @@
 
 	export let iconPath: string
 	export let iconName: string
+	export let subText: string = ''
 	export let coreSet: boolean = false
 	export let scenarioSet: boolean = false
 	export let returnToSet: boolean = false
@@ -26,7 +27,13 @@
 <span class="wrap" on:mouseenter={mouseEnterHandler} on:mouseleave={mouseLeaveHandler}>
 	{#if hovering && enableHover}
 		<span class="popup">
-			<HoverFrame>{popupText}</HoverFrame>
+			<HoverFrame
+				><span
+					>{popupText}<span
+						>{#if subText !== ''}<span class="sub-text">{subText}</span>{/if}</span
+					></span
+				></HoverFrame
+			>
 		</span>
 	{/if}
 	<div class="outer-flex">
@@ -84,5 +91,11 @@
 		margin-top: -25px;
 		z-index: 1;
 		white-space: nowrap;
+	}
+
+	.sub-text {
+		color: grey;
+		font-size: x-small;
+		margin-left: 2px;
 	}
 </style>

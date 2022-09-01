@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { EncounterSetFlag, type EncounterSet } from '$lib/core/campaign'
 	import EncounterIcon from './EncounterIcon.svelte'
+	import { makeSetCountText } from './helper'
 
 	export let encounterSet: EncounterSet
 	export let showName: boolean
@@ -14,6 +15,7 @@
 		<EncounterIcon
 			iconPath={encounterSet.icon}
 			iconName={encounterSet.name}
+			subText={makeSetCountText(encounterSet)}
 			coreSet={encounterSet.flag === EncounterSetFlag.Core}
 			scenarioSet={encounterSet.flag === EncounterSetFlag.Scenario}
 			returnToSet={encounterSet.flag === EncounterSetFlag.ReturnTo}

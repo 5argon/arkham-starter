@@ -127,9 +127,19 @@ Markdown table is supported here. Combined with CSS coloring, we can get very pr
 
 #### Format : ArkhamCards
 
-ArkhamCards has a deck viewer, where if you touch the top right corner and select "Notes", it can show the deck's Description section in ArkhamDB. It support card hot-linking in the same syntax as ArkhamDB as well.
+ArkhamCards has a deck viewer, where if you touch the hamburger menu button on the top right corner and select "Notes", it can show the deck's Description section in ArkhamDB. It support card hot-linking in the same syntax as ArkhamDB as well.
 
-However, Markdown supported in ArkhamCards is not as extensive as ArkhamDB, and CSS coloring is not supported as well, naturally. This export option removes the Markdown table formatting and adjust stuff to be simpler.
+![ArkhamCards](../../../static/image/documentation/tool/upgrade/ahc-2.png)
+
+However, Markdown supported in ArkhamCards is not as extensive as ArkhamDB, and CSS coloring is not supported as well, naturally. This export option removes the Markdown table formatting and adjust stuff to be simpler. This is how it looks like in arkhamdb.com :
+
+![ArkhamCards](../../../static/image/documentation/tool/upgrade/ahc-1.png)
+
+Which may look less nicer since it does not have tabulated column formatting anymore, but in return, you can see it in ArkhamCards! While not colored, the class icons and pips added could help identifying the cards. Hyperlinks also works nicely as well, try tapping it.
+
+![ArkhamCards](../../../static/image/documentation/tool/upgrade/ahc-3.png)
+
+Remember that if you clone a deck to be included in ArkhamCards campaign, it loses all the Description text. You have to paste the Upgrade Planner snippets again in the deck in your ArkhamCards campaign.
 
 ### Data Code
 

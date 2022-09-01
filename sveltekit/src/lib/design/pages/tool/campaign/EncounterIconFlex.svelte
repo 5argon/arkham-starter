@@ -9,6 +9,7 @@
 	} from '$lib/core/campaign'
 	import { sortEncountersScore, type EncounterSetFrequencies } from './campaign-analyze'
 	import EncounterIconWithLabel from './EncounterIconWithLabel.svelte'
+	import { makeSetCountText } from './helper'
 
 	export let encounterSets: EncounterSetItem[]
 	export let sorting: EncounterSetSorting
@@ -87,6 +88,7 @@
 			<EncounterIconWithLabel
 				iconPath={ce.icon}
 				iconName={ce.name}
+				subText={makeSetCountText(ce)}
 				coreSet={ce.flag === EncounterSetFlag.Core}
 				returnToSet={ce.flag === EncounterSetFlag.ReturnTo}
 				{showName}
