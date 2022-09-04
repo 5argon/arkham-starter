@@ -29,12 +29,9 @@
 		style={beforeCss}
 		{checked}
 		on:change={handler}
-	/>
-	{#if iconImagePath !== null}
-		<FaIcon path={iconImagePath} />
-	{:else if label !== null}
-		<span class="label-span">{label}</span>
-	{/if}
+	/>{#if iconImagePath !== null}<FaIcon path={iconImagePath} />{:else if label !== null}<span
+			class="label-span">{label}</span
+		>{/if}
 </label>
 
 <style>

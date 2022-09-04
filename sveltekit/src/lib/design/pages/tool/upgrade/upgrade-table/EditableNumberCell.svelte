@@ -32,12 +32,10 @@
 	const rightAlignClass = 'right-align'
 </script>
 
-<span class="prefix-suffix">{prefixText}</span>
-{#if editingLevel === EditingLevel.JustText}
-	<span class="arkham-number">{currentNumber}</span>
-{:else}
-	<span>
-		<input
+<span class="prefix-suffix">{prefixText}</span>{#if editingLevel === EditingLevel.JustText}<span
+		class="arkham-number">{currentNumber}</span
+	>{:else}<span
+		><input
 			disabled={editingLevel === EditingLevel.GreyedOut}
 			class={'input-box-small' + ' ' + rightAlignClass + ' ' + 'arkham-number'}
 			type="text"
@@ -45,9 +43,7 @@
 			on:keyup={inputKeyboardHandler}
 			value={currentNumber}
 		/>
-	</span>
-{/if}
-<span class="prefix-suffix">{suffixText}</span>
+	</span>{/if}<span class="prefix-suffix">{suffixText}</span>
 
 <style>
 	.arkham-number {
@@ -57,7 +53,8 @@
 	.prefix-suffix {
 		font-size: x-small;
 		color: rgba(1, 1, 1, 0.2);
-		margin:0px 2px;
+		margin: 0px 2px;
+		user-select: none;
 	}
 
 	.input-box-small {

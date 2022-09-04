@@ -17,6 +17,7 @@ export const allIcons = {
 	loading: ic('spinner-third-duotone'),
 	manual: ic('book-solid'),
 	plus: ic('plus-solid'),
+	grip: ic('grip-dots-vertical-regular'),
 }
 
 function ic(s: string): string {

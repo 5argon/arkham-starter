@@ -1,20 +1,31 @@
 <script lang="ts">
+	export let disableHoverEffects: boolean = false
 	export let onDropSwap: (fromIndex: number, fromRight: boolean, swapTo: string) => void = () => {
 		// do nothing
 	}
 	let hovering: boolean
 
 	function dragLeaveHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		if (disableHoverEffects) {
+			return
+		}
 		hovering = false
 	}
 
 	function dragEnterHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		if (disableHoverEffects) {
+			return
+		}
 		hovering = true
 	}
 
 	function dragStartHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {}
 
 	function dragoverHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		if (disableHoverEffects) {
+			return
+		}
+		e.preventDefault()
 		if (e.dataTransfer !== null) {
 			if (e.dataTransfer.types.length === 1 && e.dataTransfer.types[0] === 'text/plain') {
 				hovering = true
@@ -26,6 +37,9 @@
 	}
 
 	function dropHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		if (disableHoverEffects) {
+			return
+		}
 		hovering = false
 		if (e.dataTransfer !== null) {
 			const receive = e.dataTransfer.getData('text/plain').split(',')
@@ -50,7 +64,7 @@
 		on:dragleave={dragLeaveHandler}
 		on:dragenter={dragEnterHandler}
 		on:dragstart={dragStartHandler}
-		on:dragover|preventDefault={dragoverHandler}
+		on:dragover={dragoverHandler}
 		on:drop|preventDefault={dropHandler}
 		on:dragend|preventDefault={dragendHandler}
 		class:hovering

@@ -126,5 +126,8 @@ export function createEmptyRowEditEvents(): RowEditEvents {
 		onLoseFocus: () => {
 			// do nothing
 		},
+		onDropSwap: (fromIndex, fromRight, swapTo, toRight) => {
+			// do nothing
+		},
 	}
 }

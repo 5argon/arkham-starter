@@ -17,6 +17,7 @@
 		rowMoveUp,
 		createRow,
 		addCardToList,
+		rowMoveFromTo,
 	} from '$lib/tool/upgrade/upgrade-table/row-operations'
 	import SpinnerSpan from '$lib/design/components/basic/SpinnerSpan.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
@@ -34,6 +35,7 @@
 	import { CardInfo_CommitOptions_CommitIcon } from '$lib/proto/generated/card_info'
 	import type { ExportCard, UpgradeExportRow } from '$lib/tool/script/export/export-tools-center'
 	import { protoStringRestore } from '$lib/tool/script/export/proto-string-restore'
+	import { extractDeckFromUrl } from '$lib/ahdb/public-api/high-level'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -375,6 +377,9 @@
 				{rowActionEvents}
 				{rowEditEvents}
 				{toolbarEvents}
+				onRowDragMove={(from, to) => {
+					rows = rowMoveFromTo(rows, from, to)
+				}}
 			/>
 		</div>
 	</BigRightSider>

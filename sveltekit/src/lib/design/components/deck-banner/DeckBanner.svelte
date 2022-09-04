@@ -231,7 +231,7 @@
 
 <style>
 	.frame {
-		border-width: 2px 2px 2px 10px;
+		border-width: 1px 1px 1px 4px;
 		border-style: solid;
 		box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1);
 		border-radius: 6px 0px 0px 6px;

@@ -26,6 +26,9 @@
 	export let dragDataPrefix: string = ''
 	export let leftButtons: CardBlockButtonProp[] = []
 	export let rightButtons: CardBlockButtonProp[] = []
+	// Cannot check the data inside on hover. Must explicitly disable the hover.
+	// https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData#caveats
+	export let disableHoverEffects = false
 	let hovering: boolean = false
 	export let onChangeHovering: (h: boolean) => void = () => {
 		// do nothing
@@ -35,6 +38,9 @@
 	}
 
 	function dragLeaveHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		if (disableHoverEffects) {
+			return
+		}
 		if (e.dataTransfer !== null) {
 			hovering = false
 			onChangeHovering(false)
@@ -42,6 +48,10 @@
 	}
 
 	function dragEnterHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		if (disableHoverEffects) {
+			return
+		}
+		// Need to also cover the entering moment, just dragover is not enough.
 		if (e.dataTransfer !== null) {
 			hovering = true
 			onChangeHovering(true)
@@ -55,6 +65,12 @@
 	}
 
 	function dragoverHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		if (disableHoverEffects) {
+			return
+		}
+		// Prevent default on the event or above here will make the green + appear
+		// on the cursor when dragging incompatible things over.
+		e.preventDefault()
 		if (e.dataTransfer !== null) {
 			if (e.dataTransfer.types.length === 1 && e.dataTransfer.types[0] === 'text/plain') {
 				// Apparently this allows dragging over the characters... lol
@@ -70,7 +86,10 @@
 		if (e.dataTransfer !== null) {
 			hovering = false
 			const receive = e.dataTransfer.getData('text/plain').split(',')
-			onDropSwap(parseInt(receive[0], 10), receive[1] === 'right', receive[2])
+			if (receive.length === 3) {
+				// Expecting format "3,left/right,01234" (index, left/right, card ID)
+				onDropSwap(parseInt(receive[0], 10), receive[1] === 'right', receive[2])
+			}
 		}
 	}
 
@@ -91,7 +110,7 @@
 		on:dragleave={dragLeaveHandler}
 		on:dragenter={dragEnterHandler}
 		on:dragstart={dragStartHandler}
-		on:dragover|preventDefault={dragoverHandler}
+		on:dragover={dragoverHandler}
 		on:drop|preventDefault={dropHandler}
 		on:dragend|preventDefault={dragendHandler}
 		draggable={true}
@@ -133,6 +152,7 @@
 		padding: 2px 10px;
 		margin: 2px 2px;
 		box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.035);
+		background-color: white;
 		display: flex;
 		cursor: grab;
 	}

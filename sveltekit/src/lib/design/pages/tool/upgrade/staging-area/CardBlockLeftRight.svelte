@@ -46,6 +46,7 @@
 	{packNumber}
 	{restriction}
 	{weakness}
+	disableHoverEffects
 	dragDataPrefix={'-1,staging,'}
 	leftButtons={collapse
 		? []

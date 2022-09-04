@@ -31,6 +31,7 @@
 	export let weakness: boolean = false
 	export let index: number
 	export let right: boolean
+	export let disableHoverEffects: boolean = false
 
 	let width: number
 </script>
@@ -53,6 +54,7 @@
 		{restriction}
 		{weakness}
 		{onDropSwap}
+		{disableHoverEffects}
 		dragDataPrefix={index + ',' + (right ? 'right' : 'left') + ','}
 		leftButtons={[]}
 		rightButtons={singleMode

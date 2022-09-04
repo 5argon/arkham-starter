@@ -4,7 +4,7 @@
 	export let big: boolean = false
 </script>
 
-<span><img class:big class={spin ? 'spinning' : ''} src={path} alt="" /></span>
+<span><img draggable="false" class:big class={spin ? 'spinning' : ''} src={path} alt="" /></span>
 
 <style>
 	span {

@@ -8,6 +8,10 @@ export function rowMoveUp(rows: Row[], index: number): Row[] {
 	return rowMove(rows, index, -1)
 }
 
+export function rowMoveFromTo(rows: Row[], fromIndex: number, toIndex: number): Row[] {
+	return rowMove(rows, fromIndex, toIndex - fromIndex)
+}
+
 function rowMove(rows: Row[], index: number, moveBy: number): Row[] {
 	index = Math.max(0, Math.min(rows.length - 1, index))
 	const removed = rows.splice(index, 1)

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import DragHandle from '$lib/design/components/basic/DragHandle.svelte'
+
 	// import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import CardBlockButton from '$lib/design/components/card/CardBlockButton.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
@@ -11,6 +13,7 @@
 	export let onDelete: () => void
 	export let onMoveRowUp: () => void
 	export let onMoveRowDown: () => void
+	export let hoveringOnGrip: (hovering: boolean) => void
 </script>
 
 <!-- <div class="inline-flex">
@@ -34,8 +37,9 @@
 	/>
 </div> -->
 <div class="inline-flex">
+	<DragHandle {hoveringOnGrip} />
 	<CardBlockButton label="Delete row" iconPath={allIcons.delete} onClick={onDelete} />
-	<RowActionUpDown onClickUp={onMoveRowUp} onClickDown={onMoveRowDown} />
+	<!-- <RowActionUpDown onClickUp={onMoveRowUp} onClickDown={onMoveRowDown} /> -->
 </div>
 
 <style>

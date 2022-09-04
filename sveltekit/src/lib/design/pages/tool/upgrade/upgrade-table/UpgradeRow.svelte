@@ -1,3 +1,7 @@
+<script lang="ts" context="module">
+	export const rowDragPrefix = 'row'
+</script>
+
 <script lang="ts">
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import { EditingLevel } from '$lib/design/components/basic/TextBox.svelte'
@@ -23,6 +27,8 @@
 	export let calculatedCumulativeXp: number
 	export let rowActionEvents: RowActionEvents
 	export let rowEditEvents: RowEditEvents
+	export let rowDragging: boolean = false
+	export let onRowDraggingChanged: (dragging: boolean) => void
 
 	let leftCard: PopupDatabaseItem | null
 	let rightCard: PopupDatabaseItem | null
@@ -34,17 +40,43 @@
 	}
 	$: boldArrow =
 		leftCard !== null && rightCard !== null && leftCard.original.n === rightCard.original.n
+
+	// This gives a ghost image of an entire row.
+	let rowDraggable = false
+
+	function dragStartHandler(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		// This drag start can override the individual card dragging EVEN THOUGH
+		// "draggable" is on/off dynamically. We must on/off this one as well.
+		if (e.dataTransfer !== null) {
+			e.dataTransfer.setData('text/plain', rowDragPrefix + ',' + index)
+		}
+		onRowDraggingChanged(true)
+	}
+
+	function dragEndHander(e: DragEvent & { currentTarget: HTMLDivElement }) {
+		onRowDraggingChanged(false)
+	}
 </script>
 
 {#if row.divider}
 	<HeaderRow />
 {/if}
-<div class={'flex-row' + ' ' + (row.divider ? 'divider-row' : '')}>
+<!-- Must not have preventDefault on the dragstart below, otherwise it disables dragging of the individual card
+nested inside this div. -->
+<div
+	draggable={rowDraggable ? 'true' : false}
+	on:dragstart={rowDraggable ? dragStartHandler : undefined}
+	on:dragend={rowDraggable ? dragEndHander : undefined}
+	class={'flex-row' + ' ' + (row.divider ? 'divider-row' : '')}
+>
 	<div class="flex-item">
 		<RowActionFront
 			onDelete={rowActionEvents.onDelete}
 			onMoveRowDown={rowActionEvents.onMoveDown}
 			onMoveRowUp={rowActionEvents.onMoveUp}
+			hoveringOnGrip={(hovering) => {
+				rowDraggable = hovering
+			}}
 		/>
 	</div>
 	{#if row.divider}
@@ -89,12 +121,14 @@
 					}}
 					{index}
 					right={false}
+					disableHoverEffects={rowDragging}
 				/>
 			{:else}
 				<GreyEmpty
 					onDropSwap={(fi, fr, fc) => {
 						rowEditEvents.onDropSwap(fi, fr, fc, false)
 					}}
+					disableHoverEffects={rowDragging}
 				/>
 			{/if}
 		</div>
@@ -122,12 +156,14 @@
 						onDropSwap={(fi, fr, fc) => {
 							rowEditEvents.onDropSwap(fi, fr, fc, true)
 						}}
+						disableHoverEffects={rowDragging}
 					/>
 				{:else}
 					<GreyEmpty
 						onDropSwap={(fi, fr, fc) => {
 							rowEditEvents.onDropSwap(fi, fr, fc, true)
 						}}
+						disableHoverEffects={rowDragging}
 					/>
 				{/if}
 			</div>
