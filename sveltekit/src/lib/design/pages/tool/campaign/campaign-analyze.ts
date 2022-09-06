@@ -102,6 +102,14 @@ export function mergeEncounters(s: Scenario | null): EncounterSet[] {
 	return Array.from(es)
 }
 
+export function mergeEncountersPure(encounters: EncounterSet[]): EncounterSet[] {
+	const es = new Set<EncounterSet>()
+	encounters.forEach((x) => {
+		es.add(x)
+	})
+	return Array.from(es)
+}
+
 export type EncounterSetFrequencies = { [setName: string]: number }
 
 export function sortEncounters(

@@ -234,7 +234,6 @@
 		border-width: 1px 1px 1px 4px;
 		border-style: solid;
 		box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1);
-		border-radius: 6px 0px 0px 6px;
 		max-width: 750px;
 	}
 
@@ -346,7 +345,7 @@
 		background-color: white;
 		padding: 0px 8px;
 		margin-left: 8px;
-		border-radius: 4px;
+		border-radius: 2px;
 		flex: auto;
 	}
 
