@@ -32,7 +32,7 @@
 		subText={shouldShowSubname(card, fullDatabase) ? card.original.subname : null}
 		weakness={card.original.subtype_code === 'weakness'}
 		xp={card.original.xp}
-		xpTaboo={taboo ? card.tabooXp : undefined}
+		xpTaboo={taboo ? (card.tabooXp ?? null): null}
 	/>
 </div>
 

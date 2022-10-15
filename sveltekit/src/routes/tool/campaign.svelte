@@ -43,7 +43,7 @@
 	<li><a href="./campaign/eote">Edge of the Earth</a></li>
 </ul>
 <ul>
-	<li><a href="./campaign/rtnotz">*Return to Night of the Zealot</a></li>
+	<li><a href="./campaign/rtnotz">*Return to the Night of the Zealot</a></li>
 	<li><a href="./campaign/rtdwl">*Return to the Dunwich Legacy</a></li>
 	<li><a href="./campaign/rtptc">*Return to the Path to Carcosa</a></li>
 	<li><a href="./campaign/rttfa">*Return to the Forgotten Age</a></li>

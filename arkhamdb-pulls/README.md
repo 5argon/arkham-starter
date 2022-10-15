@@ -13,7 +13,7 @@ deno run --allow-read --allow-write --allow-net pull.ts
 `pulls` folder will be cleaned up and repopulated with new data once it is done. Then you need to manually make use of the pulled resources. In my case :
 
 - `card` folder is copied to `static/image/` statically uploaded path (= not compiled, just upload) of the nearby SvelteKit project.
-- `json` folder's content are copied to a specific folder inside SvelteKit project that would really get compiled together. 
+- `json` folder's content are copied to `static/db`. These are intended to be publicly available for apps that wants a minified card database as well.
 
 ## What's in the `pulls` folder?
 

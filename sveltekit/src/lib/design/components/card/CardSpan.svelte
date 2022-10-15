@@ -68,7 +68,9 @@
 	{/if}
 
 	{#if text !== null}
-		{#if amount !== null}<span class="amount">{amount}</span><span class="amount-x">x</span>{/if}
+		{#if amount !== null}<span class="amount" class:amount-minus={amount < 0}>{amount}</span><span
+				class="amount-x">x</span
+			>{/if}
 		<span class="all-class-icons">
 			{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
 					cardClass={class2}
@@ -113,6 +115,11 @@
 		font-size: 0.9em;
 	}
 
+	/* Rarely deck has negative amount when upgrade bugged and removed a card that was not there. */
+	.amount-minus {
+		margin-right :5px;
+	}
+
 	.amount-x {
 		user-select: none;
 		width: 5px;
@@ -140,7 +147,7 @@
 	}
 
 	.card-subname {
-		max-width: 42px;
+		max-width: 52px;
 		max-height: 18px;
 		line-height: 1em;
 		margin-left: 4px;

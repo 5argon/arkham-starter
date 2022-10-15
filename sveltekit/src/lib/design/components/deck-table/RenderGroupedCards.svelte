@@ -37,7 +37,9 @@
 				<CardCell
 					onToggleChanged={clickToggle
 						? (t) => {
-								if (en.id in toggleMap) {
+								// It is surely entry at this point but Svelte
+								// is not powerful enough to carry the type narrowing to here.
+								if (isEntry(en) && en.id in toggleMap) {
 									toggleMap[en.id] = t
 								}
 						  }
@@ -56,6 +58,7 @@
 			{/each}
 		</tr>
 	{:else}
+		<!-- theOnlyGroup in effect for only the topmost level. This is surely deeper level grouping. -->
 		<svelte:self
 			level={level + 1}
 			groupedCards={en}
@@ -66,7 +69,7 @@
 			{fullDatabase}
 			{columns}
 			{taboo}
-			theOnlyGroup={groupedCards.entries.length === 1}
+			theOnlyGroup={false}
 		/>
 	{/if}
 {/each}
