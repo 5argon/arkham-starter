@@ -27,7 +27,7 @@ export interface PopupDatabaseItem {
   /**
    * Explicit subname
    */
-  esn:boolean;
+  esn: boolean;
 
   /**
    * Pack code
@@ -123,4 +123,21 @@ export interface PopupDatabaseItem {
    * Traits
    */
   tra: number[];
+
+  /**
+   * Customizable
+   */
+  cus?: CustomizableStruct[];
+}
+
+export interface CustomizableStruct {
+  /**
+   * XP checkboxes
+   */
+  xp: number;
+
+  /**
+   * Customizable name
+   */
+  n: string;
 }

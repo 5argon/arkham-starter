@@ -184,6 +184,21 @@ export interface PopupDatabaseItemRaw {
 	 * Traits
 	 */
 	tra: number[]
+
+	/**
+	 * Customizable
+	 */
+	cus?: {
+		/**
+		 * XP checkboxes
+		 */
+		xp: number
+
+		/**
+		 * Customizable name
+		 */
+		n: string
+	}[]
 }
 
 export async function fetchPopupDatabase(): LazyPopupDatabase {

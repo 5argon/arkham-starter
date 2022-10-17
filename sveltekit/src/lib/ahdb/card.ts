@@ -61,4 +61,13 @@ export interface AhdbCard {
 	imagesrc?: string
 	backimagesrc?: string
 	duplicated_by?: string[]
+	customization_text?: string
+	customization_change?: string
+	customization_options?: {
+		xp: number
+		text_change: 'replace' | 'insert' | 'append'
+		choice: 'remove_slot' | 'choose_trait' | 'choose_card'
+		position?: number
+		quantity?: number
+	}[]
 }

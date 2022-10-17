@@ -11,6 +11,7 @@ import {
   pullsUtilsTaboo,
 } from "./scripts/constants.ts";
 import { downloadImages } from "./scripts/process-user-deck/download-images.ts";
+import { extractCustomizable } from "./scripts/customizable.ts";
 
 console.log("Downloading all cards to create popup database...");
 const allCards = await publicAllCards("");
@@ -148,6 +149,7 @@ playerCards.forEach((x) => {
     ir: x.restrictions !== undefined && x.restrictions !== null,
     wk: x.subtype_code !== undefined && x.subtype_code === "weakness",
     cs: x.cost,
+    cus: extractCustomizable(x)
   });
 });
 
