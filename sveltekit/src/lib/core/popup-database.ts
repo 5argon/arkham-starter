@@ -73,122 +73,131 @@ export interface PopupDatabaseRaw {
 }
 
 export interface PopupDatabaseItemRaw {
+	/**
+	 * Card string ID like in ArkhamDB, such as "01006".
+	 */
 	id: string
 
 	/**
-	 * Name
+	 * Card name.
 	 */
 	n: string
 
 	/**
-	 * Subname
+	 * Card subname, such as "The Fed" of "Roland Banks".
 	 */
 	sn?: string
 
 	/**
-	 * Explicit subname
+	 * If `true`, it means there are other cards with the same name
+	 * and requires showing subname explicitly to not be confused.
+	 * Such as various instances of "Strange Solution".
 	 */
 	esn: boolean
 
 	/**
-	 * Pack code
+	 * Pack code.
+	 * Use number to map with the real string in outer maps.
 	 */
 	pc: number
 
 	/**
 	 * Pack name
+	 * Use number to map with the real string in outer maps.
 	 */
 	pn: number
 
 	/**
-	 * Position
+	 * Position. The number of cards on the bottom right corner.
 	 */
 	ps: number
 
 	/**
-	 * Class string 1
+	 * Class string from ArkhamDB, such as "survivor". (all lowercase)
 	 */
 	c1: number
 
 	/**
-	 * Class string 2
+	 * Class string from ArkhamDB, such as "survivor". (all lowercase)
 	 */
 	c2?: number
 
 	/**
-	 * Class string 3
+	 * Class string from ArkhamDB, such as "survivor". (all lowercase)
 	 */
 	c3?: number
 
 	/**
-	 * XP
+	 * XP pips
 	 */
 	xp?: number
 
 	/**
-	 * XP added from taboo
+	 * XP added (chained) from taboo. Can be negative in the case of unchain.
 	 */
 	xpat: number
 
 	/**
-	 * Exceptional
+	 * Exceptional status.
 	 */
 	ex: boolean
 
 	/**
-	 * Exceptional after taboo
+	 * Exceptional status after latest taboo applied.
 	 */
 	ext: boolean
 
 	/**
-	 * Investigator restriction
+	 * Investigator restriction.
+	 * Essentially `true` when it is an investigator signature card / weakness.
 	 */
 	ir: boolean
 
 	/**
-	 * Weakness
+	 * Weakness.
 	 */
 	wk: boolean
 
 	/**
-	 * Cost
+	 * Cost.
 	 */
 	cs?: number
 
 	/**
-	 * Intellect
+	 * Intellect icons.
 	 */
 	sit?: number
 
 	/**
-	 * Combat
+	 * Combat icons.
 	 */
 	scm?: number
 
 	/**
-	 * Wild
+	 * Wild icons.
 	 */
 	swl?: number
 
 	/**
-	 * Agility
+	 * Agility icons.
 	 */
 	sag?: number
 
 	/**
-	 * Willpower
+	 * Willpower icons.
 	 */
 	swi?: number
 
 	/**
-	 * Traits
+	 * Traits.
+	 * Use number to map with the real string in outer maps.
 	 */
 	tra: number[]
 
 	/**
-	 * Customizable
+	 * Customizable choices.
 	 */
-	cus?: {
+	cus: {
 		/**
 		 * XP checkboxes
 		 */
