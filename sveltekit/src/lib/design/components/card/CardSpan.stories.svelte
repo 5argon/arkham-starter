@@ -135,3 +135,43 @@
 <Story name="Unknown">
 	<UnknownCardSpan cardId={'12345'} />
 </Story>
+
+<Story name="Customizable Main Card">
+	<CardSpan
+		cardId="12345"
+		text={'Customizable Card Name'}
+		class1={CardClass.Survivor}
+		packIcon={CardPackIcon.EdgeOfTheEarth}
+		customizable={true}
+		color={true}
+		packNumber={123}
+	/>
+</Story>
+
+<Story name="Customizable Choice">
+	<CardSpan
+		cardId="12345"
+		text={'Pocket Multi-Tool'}
+		subText={"Spring-Loaded"}
+		checkBoxes={3}
+		class1={CardClass.Survivor}
+		packIcon={CardPackIcon.EdgeOfTheEarth}
+		customizable={true}
+		color={true}
+		packNumber={123}
+	/>
+</Story>
+
+<Story name="Customizable Choice 2">
+	<CardSpan
+		cardId="12345"
+		text={'Pocket Multi-Tool'}
+		subText={"Spring-Loaded"}
+		checkedBoxes={3}
+		class1={CardClass.Survivor}
+		packIcon={CardPackIcon.EdgeOfTheEarth}
+		customizable={true}
+		color={true}
+		packNumber={123}
+	/>
+</Story>

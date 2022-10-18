@@ -112,6 +112,9 @@
 					onDropSwap: (a, b, c, d) => {
 						rowEditEvents.onDropSwap(a, b, c, i, d)
 					},
+					onCustomizableCycle: (pdb) => {
+						rowEditEvents.onCustomizationCycle(i, pdb)
+					},
 				}}
 			/>
 			<RowDropTarget

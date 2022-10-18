@@ -84,16 +84,26 @@
 						showImageStrip={true}
 						collapse={true}
 						text={c.original.n}
+						subText={c.original.esn ? c.original.sn : null}
 						class1={c.class1}
 						class2={c.class2 ?? null}
 						class3={c.class3 ?? null}
 						exceptional={globalSettings.taboo ? c.original.ext : c.original.ex}
 						restriction={c.original.ir}
 						weakness={c.original.wk}
+						customizable={c.original.cus !== undefined}
 						xp={c.original.xp}
 						xpTaboo={globalSettings.taboo ? c.original.xpat : null}
-						onClickLeft={() => onAddToLeftSide(c.original.id)}
-						onClickRight={() => onAddToRightSide(c.original.id)}
+						onClickLeft={() => {
+							if (c !== null) {
+								onAddToLeftSide(c.original.id)
+							}
+						}}
+						onClickRight={() => {
+							if (c !== null) {
+								onAddToRightSide(c.original.id)
+							}
+						}}
 					/>
 				</div>
 			{:else}
@@ -104,19 +114,33 @@
 						amount={stagingAmounts[i]}
 						showImageStrip={true}
 						text={c.original.n}
+						subText={c.original.esn ? c.original.sn : null}
 						class1={c.class1}
 						class2={c.class2 ?? null}
 						class3={c.class3 ?? null}
 						exceptional={globalSettings.taboo ? c.original.ext : c.original.ex}
 						restriction={c.original.ir}
 						weakness={c.original.wk}
+						customizable={c.original.cus !== undefined}
 						xp={c.original.xp}
 						xpTaboo={globalSettings.taboo ? c.original.xpat : null}
 						packNumber={c.original.ps}
 						packIcon={c.packIcon}
-						onClickDelete={() => onDelete(c.original.id)}
-						onClickLeft={() => onAddToLeftSide(c.original.id)}
-						onClickRight={() => onAddToRightSide(c.original.id)}
+						onClickDelete={() => {
+							if (c !== null) {
+								onDelete(c.original.id)
+							}
+						}}
+						onClickLeft={() => {
+							if (c !== null) {
+								onAddToLeftSide(c.original.id)
+							}
+						}}
+						onClickRight={() => {
+							if (c !== null) {
+								onAddToRightSide(c.original.id)
+							}
+						}}
 					/>
 				</div>
 			{/if}

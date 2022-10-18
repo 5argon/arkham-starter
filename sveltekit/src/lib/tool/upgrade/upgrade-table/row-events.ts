@@ -1,3 +1,5 @@
+import type { PopupDatabase } from '$lib/core/popup-database'
+
 export interface TableEvents {
 	onAddRow: () => void
 	onAddDivider: () => void
@@ -34,6 +36,7 @@ export interface TableRowEditEvents {
 		toIndex: number,
 		toRight: boolean,
 	) => void
+	onCustomizationCycle: (i: number, pdb: PopupDatabase) => void
 }
 
 export interface RowActionEvents {
@@ -60,6 +63,7 @@ export interface RowEditEvents {
 	onDividerTextChanged: (n: string) => void
 	onLoseFocus: () => void
 	onDropSwap: (fromIndex: number, fromRight: boolean, swapTo: string, toRight: boolean) => void
+	onCustomizableCycle: (pdb: PopupDatabase) => void
 }
 
 export function createEmptyRowActionEvents(): RowActionEvents {
@@ -127,6 +131,9 @@ export function createEmptyRowEditEvents(): RowEditEvents {
 			// do nothing
 		},
 		onDropSwap: (fromIndex, fromRight, swapTo, toRight) => {
+			// do nothing
+		},
+		onCustomizableCycle: () => {
 			// do nothing
 		},
 	}

@@ -18,6 +18,9 @@ export const allIcons = {
 	manual: ic('book-solid'),
 	plus: ic('plus-solid'),
 	grip: ic('grip-dots-vertical-regular'),
+	customizable: ic('wrench-solid'),
+	checkBox: ic('square-regular'),
+	checkBoxChecked: ic('square-check-regular'),
 }
 
 function ic(s: string): string {

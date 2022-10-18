@@ -13,6 +13,7 @@
 	export let amount: number | null = null
 	export let showImageStrip: boolean = false
 	export let text: string | null = null
+	export let subText: string | null = null
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
 	export let class3: CardClass | null = null
@@ -23,6 +24,9 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
+	export let customizable: boolean = false
+	export let checkBoxes: number = 0
+	export let checkedBoxes: number = 0
 	export let dragDataPrefix: string = ''
 	export let leftButtons: CardBlockButtonProp[] = []
 	export let rightButtons: CardBlockButtonProp[] = []
@@ -122,6 +126,7 @@
 			{cardId}
 			{showImageStrip}
 			{text}
+			{subText}
 			{class1}
 			{class2}
 			{class3}
@@ -132,6 +137,9 @@
 			{packNumber}
 			{weakness}
 			{restriction}
+			{customizable}
+			{checkBoxes}
+			{checkedBoxes}
 			color={true}
 		/>
 	</div>

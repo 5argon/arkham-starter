@@ -86,6 +86,11 @@ export interface ExportCard {
 	skillWillpower: number | null
 	skillWild: number | null
 	traits: string[]
+	customizable: boolean
+	showingCustomizableChoice: boolean
+	customizableChoiceIndex: number
+	customizableChoiceName: string
+	customizableChoiceBoxes: number
 }
 
 export interface UpgradeExportRow {
@@ -127,7 +132,8 @@ export function upgradeExportToProtoString(eo: UpgradeExport): string {
 				mark: x.mark,
 				xp: x.xp,
 				xpUnlocked: x.xpUnlocked,
-				rightCustom: false,
+				rightCustom: x.cardRight?.showingCustomizableChoice ?? false,
+				rightCustomChoice: x.cardRight?.customizableChoiceIndex ?? 0,
 				rightCustomText: '',
 			}
 		}),

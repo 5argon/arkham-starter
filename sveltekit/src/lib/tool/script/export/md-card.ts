@@ -8,9 +8,22 @@ import type { ExportCard } from './export-tools-center'
  * Only a part of one row about the card.
  */
 export function mdCardAndInfo(card: ExportCard, opt: ExportOptions, ignoreSmall: boolean): string {
-	// WIP
-	const justCard = mdJustcard(card, opt, ignoreSmall)
-	return justCard
+	if (card.customizable) {
+		return mdJustcardCustomizable(card, opt, ignoreSmall)
+	}
+	return mdJustcard(card, opt, ignoreSmall)
+}
+
+function mdJustcardCustomizable(
+	card: ExportCard,
+	opt: ExportOptions,
+	ignoreSmall: boolean,
+): string {
+	const boxString = new Array(card.customizableChoiceBoxes).fill('☑').join('')
+	const boxesAndName = boxString + ' ' + card.customizableChoiceName
+	const wrappedColor = wrapColor(boxesAndName, card.class1, card.class2, card.class3, !ignoreSmall)
+	const wrappedLink = opt.cardOptions?.link ?? true ? wrapCard(wrappedColor, card.id) : wrappedColor
+	return wrappedLink
 }
 
 function mdJustcard(card: ExportCard, opt: ExportOptions, ignoreSmall: boolean): string {

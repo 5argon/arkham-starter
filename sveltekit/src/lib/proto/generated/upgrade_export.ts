@@ -85,6 +85,10 @@ export interface UpgradeExportRow {
      * @generated from protobuf field: string right_custom_text = 11;
      */
     rightCustomText: string;
+    /**
+     * @generated from protobuf field: int32 right_custom_choice = 12;
+     */
+    rightCustomChoice: number;
 }
 /**
  * @generated from protobuf message UpgradeExportOptions
@@ -335,11 +339,12 @@ class UpgradeExportRow$Type extends MessageType<UpgradeExportRow> {
             { no: 8, name: "divider_text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 9, name: "divider", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
             { no: 10, name: "right_custom", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 11, name: "right_custom_text", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 11, name: "right_custom_text", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 12, name: "right_custom_choice", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
         ]);
     }
     create(value?: PartialMessage<UpgradeExportRow>): UpgradeExportRow {
-        const message = { mark: "", cardLeft: "", cardRight: "", xpUnlocked: false, cumulativeXpUnlocked: false, xp: 0, cumulativeXp: 0, dividerText: "", divider: false, rightCustom: false, rightCustomText: "" };
+        const message = { mark: "", cardLeft: "", cardRight: "", xpUnlocked: false, cumulativeXpUnlocked: false, xp: 0, cumulativeXp: 0, dividerText: "", divider: false, rightCustom: false, rightCustomText: "", rightCustomChoice: 0 };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<UpgradeExportRow>(this, message, value);
@@ -382,6 +387,9 @@ class UpgradeExportRow$Type extends MessageType<UpgradeExportRow> {
                     break;
                 case /* string right_custom_text */ 11:
                     message.rightCustomText = reader.string();
+                    break;
+                case /* int32 right_custom_choice */ 12:
+                    message.rightCustomChoice = reader.int32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -428,6 +436,9 @@ class UpgradeExportRow$Type extends MessageType<UpgradeExportRow> {
         /* string right_custom_text = 11; */
         if (message.rightCustomText !== "")
             writer.tag(11, WireType.LengthDelimited).string(message.rightCustomText);
+        /* int32 right_custom_choice = 12; */
+        if (message.rightCustomChoice !== 0)
+            writer.tag(12, WireType.Varint).int32(message.rightCustomChoice);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

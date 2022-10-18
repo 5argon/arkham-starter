@@ -16,6 +16,7 @@
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import { isRandomBasicWeakness, isUnknownCardNumber } from '$lib/ahdb/card'
 	import ImageStrip from './ImageStrip.svelte'
+	import CustomizableCheckBoxes from './CustomizableCheckBoxes.svelte'
 
 	export let cardId: string
 	export let showImageStrip: boolean = false
@@ -33,6 +34,9 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
+	export let customizable: boolean = false
+	export let checkBoxes: number = 0
+	export let checkedBoxes: number = 0
 
 	let colorClass: string
 	$: {
@@ -71,19 +75,24 @@
 		{#if amount !== null}<span class="amount" class:amount-minus={amount < 0}>{amount}</span><span
 				class="amount-x">x</span
 			>{/if}
-		<span class="all-class-icons">
-			{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
-					cardClass={class2}
-				/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
-		</span>
+		{#if checkBoxes === 0 && checkedBoxes === 0}
+			<span class="all-class-icons">
+				{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
+						cardClass={class2}
+					/>{/if}{#if class3 !== null}<ClassIcon cardClass={class3} />{/if}
+			</span>
+		{/if}
 		<span class="card-name-container">
+			<CustomizableCheckBoxes {checkBoxes} {checkedBoxes} />
 			<span class:card-name-long={text.length >= 25} class={colorClass + ' ' + 'card-name'}
 				>{text}</span
 			>{#if subText !== null}<span class={colorClass + ' ' + 'card-subname'}>{subText}</span>{/if}
 			{#if weakness || isRandomBasicWeakness(cardId)}<span
 					title="Weakness"
 					class={'pips ' + textIconFontClass}>{textIconToFontCharacter(TextIcon.Weakness)}</span
-				>{/if}{#if restriction}<FaIcon path={allIcons.investigatorRestriction} />{/if}
+				>{/if}{#if restriction}<FaIcon
+					path={allIcons.investigatorRestriction}
+				/>{/if}{#if customizable}<FaIcon path={allIcons.customizable} />{/if}
 			{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}
 			{#if xpTaboo !== null && xpTaboo !== 0}
 				<span class="pips taboo-pips">{tabooPips}</span>
@@ -117,7 +126,7 @@
 
 	/* Rarely deck has negative amount when upgrade bugged and removed a card that was not there. */
 	.amount-minus {
-		margin-right :5px;
+		margin-right: 5px;
 	}
 
 	.amount-x {
@@ -177,7 +186,7 @@
 
 	.all-class-icons {
 		height: 16px;
-		margin-right: 4px;
+		margin-right: 2px;
 		flex-shrink: 0;
 	}
 

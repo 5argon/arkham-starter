@@ -39,7 +39,23 @@
 		rightCard = row.right !== null ? popupDatabase.getById(row.right) : null
 	}
 	$: boldArrow =
-		leftCard !== null && rightCard !== null && leftCard.original.n === rightCard.original.n
+		leftCard !== null &&
+		rightCard !== null &&
+		leftCard.original.n === rightCard.original.n &&
+		(leftCard.original.xp ?? 0) < (rightCard.original.xp ?? 0)
+
+	let customizationText: string = ''
+	let customizationBoxes: number = 0
+	$: {
+		if (row.custom && rightCard !== null) {
+			const cus = rightCard.original.cus
+			if (cus !== undefined && row.customizationChoice < cus.length) {
+				const selectedCus = cus[row.customizationChoice]
+				customizationText = selectedCus.n
+				customizationBoxes = selectedCus.xp
+			}
+		}
+	}
 
 	// This gives a ghost image of an entire row.
 	let rowDraggable = false
@@ -105,12 +121,14 @@ nested inside this div. -->
 					{singleMode}
 					cardId={leftCard.original.id}
 					text={leftCard.original.n}
+					subText={leftCard.original.esn ? leftCard.original.sn : null}
 					class1={leftCard.class1}
 					class2={leftCard.class2 ?? null}
 					class3={leftCard.class3 ?? null}
 					exceptional={useTaboo ? leftCard.original.ext : leftCard.original.ex}
 					restriction={leftCard.original.ir}
 					weakness={leftCard.original.wk}
+					customizable={leftCard.original.cus !== undefined}
 					xp={leftCard.original.xp}
 					xpTaboo={useTaboo ? leftCard.original.xpat : null}
 					onClickDown={rowActionEvents.onMoveDownLeft}
@@ -139,13 +157,16 @@ nested inside this div. -->
 					<CardBlockUpDown
 						{singleMode}
 						cardId={rightCard.original.id}
-						text={rightCard.original.n}
+						text={row.custom ? customizationText : rightCard.original.n}
+						subText={rightCard.original.esn ? rightCard.original.sn : null}
 						class1={rightCard.class1}
 						class2={rightCard.class2 ?? null}
 						class3={rightCard.class3 ?? null}
 						exceptional={useTaboo ? rightCard.original.ext : rightCard.original.ex}
 						restriction={rightCard.original.ir}
 						weakness={rightCard.original.wk}
+						customizable={rightCard.original.cus !== undefined}
+						checkedBoxes={row.custom ? customizationBoxes : 0}
 						xp={rightCard.original.xp}
 						xpTaboo={useTaboo ? rightCard.original.xpat : null}
 						onClickDown={rowActionEvents.onMoveDownRight}
@@ -155,6 +176,9 @@ nested inside this div. -->
 						right={true}
 						onDropSwap={(fi, fr, fc) => {
 							rowEditEvents.onDropSwap(fi, fr, fc, true)
+						}}
+						onCustomizableCycle={() => {
+							rowEditEvents.onCustomizableCycle(popupDatabase)
 						}}
 						disableHoverEffects={rowDragging}
 					/>

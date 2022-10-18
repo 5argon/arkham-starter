@@ -25,7 +25,8 @@ export function calculateXps(db: PopupDatabase, rows: Row[], gs: GlobalSettings)
 				costs.push(r.xp)
 				cumulatives.push(cumulative)
 			} else {
-				const xp = findXpDifference(r.left, r.right, db, gs)
+				const customizing: number | false = r.custom ? r.customizationChoice : false
+				const xp = findXpDifference(r.left, r.right, db, gs, customizing)
 				costs.push(xp)
 				cumulative += xp
 				cumulatives.push(cumulative)
@@ -46,6 +47,7 @@ function findXpDifference(
 	cardRight: string | null,
 	db: PopupDatabase,
 	gs: GlobalSettings,
+	customizing: number | false,
 ): number {
 	if (cardLeft === null && cardRight === null) {
 		return 0
@@ -55,11 +57,11 @@ function findXpDifference(
 	let cn1: string | null = null
 	let cn2: string | null = null
 	if (cardLeft !== null) {
-		leftXp = findXp(cardLeft, db, gs)
+		leftXp = findXp(cardLeft, db, gs, false)
 		cn1 = findCardName(cardLeft, db, gs)
 	}
 	if (cardRight !== null) {
-		rightXp = findXp(cardRight, db, gs)
+		rightXp = findXp(cardRight, db, gs, customizing)
 		cn2 = findCardName(cardRight, db, gs)
 	}
 	if (cardRight !== null && cardLeft === null) {
@@ -75,13 +77,24 @@ function findXpDifference(
 	}
 }
 
-function findXp(card: string, db: PopupDatabase, gs: GlobalSettings): number {
+function findXp(
+	card: string,
+	db: PopupDatabase,
+	gs: GlobalSettings,
+	customizing: number | false,
+): number {
 	const c = db.getById(card)
 	if (c !== null) {
-		return (
-			((c.original.xp ?? 0) + (gs.taboo ? c.original.xpat : 0)) *
-			(c.original.ex || (gs.taboo && c.original.ext) ? 2 : 1)
-		)
+		const cus = c.original.cus
+		if (customizing !== false && cus !== undefined && customizing < cus.length) {
+			const choice = cus[customizing]
+			return choice.xp
+		} else {
+			return (
+				((c.original.xp ?? 0) + (gs.taboo ? c.original.xpat : 0)) *
+				(c.original.ex || (gs.taboo && c.original.ext) ? 2 : 1)
+			)
+		}
 	} else {
 		return 0
 	}

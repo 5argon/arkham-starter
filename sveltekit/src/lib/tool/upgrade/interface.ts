@@ -1,5 +1,3 @@
-import type { CardInfoType } from '../script/common/settings'
-
 export interface Row {
 	mark: string
 	left: string | null
@@ -10,15 +8,6 @@ export interface Row {
 	carryoverXp: number
 	xpUnlock: boolean
 	dividerXpCumulativeUnlock: boolean
-}
-
-export interface TableSettings {
-	/**
-	 * Hides the arrow, right column, and both XP calculation columns.
-	 * Button to add to left right turns into a single button.
-	 * Automatically turn on card image due to increased space.
-	 */
-	singleColumnMode: boolean
-
-	cardInfos: CardInfoType[]
+	custom: boolean
+	customizationChoice: number
 }

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CardBlock from '$lib/design/components/card/CardBlock.svelte'
+	import type { CardBlockButtonProp } from '$lib/design/components/card/CardBlockButton.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import type { CardClass } from '$lib/design/interface/card-class'
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
@@ -7,6 +8,7 @@
 	export let singleMode: boolean = false
 	export let cardId: string
 	export let text: string
+	export let subText: string | null = null
 	export let onClickDelete: () => void = () => {
 		// do nothing
 	}
@@ -19,6 +21,9 @@
 	export let onDropSwap: (fromIndex: number, fromRight: boolean, swapTo: string) => void = () => {
 		// do nothing
 	}
+	export let onCustomizableCycle: () => void = () => {
+		// do nothing
+	}
 	export let class1: CardClass | null = null
 	export let class2: CardClass | null = null
 	export let class3: CardClass | null = null
@@ -29,11 +34,33 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
+	export let customizable: boolean = false
+	export let checkedBoxes: number = 0
 	export let index: number
 	export let right: boolean
 	export let disableHoverEffects: boolean = false
 
 	let width: number
+	let cardBlockButtons: CardBlockButtonProp[]
+	$: {
+		cardBlockButtons = []
+		cardBlockButtons.push({
+			label: 'Delete',
+			iconPath: allIcons.delete,
+			onClick: () => {
+				onClickDelete()
+			},
+		})
+		if (customizable && right) {
+			cardBlockButtons.push({
+				label: 'Select Customization',
+				iconPath: allIcons.customizable,
+				onClick: () => {
+					onCustomizableCycle()
+				},
+			})
+		}
+	}
 </script>
 
 <svelte:window bind:outerWidth={width} />
@@ -43,6 +70,7 @@
 		showImageStrip={singleMode || width > 1300}
 		{cardId}
 		{text}
+		{subText}
 		{class1}
 		{class2}
 		{class3}
@@ -55,32 +83,10 @@
 		{weakness}
 		{onDropSwap}
 		{disableHoverEffects}
+		customizable={checkedBoxes > 0 ? false : customizable}
+		{checkedBoxes}
 		dragDataPrefix={index + ',' + (right ? 'right' : 'left') + ','}
 		leftButtons={[]}
-		rightButtons={singleMode
-			? []
-			: [
-					{
-						label: 'Delete',
-						iconPath: allIcons.delete,
-						onClick: () => {
-							onClickDelete()
-						},
-					},
-					// {
-					// 	label: 'Move Up',
-					// 	iconPath: allIcons.arrowUp,
-					// 	onClick: () => {
-					// 		onClickUp()
-					// 	},
-					// },
-					// {
-					// 	label: 'Move Down',
-					// 	iconPath: allIcons.arrowDown,
-					// 	onClick: () => {
-					// 		onClickDown()
-					// 	},
-					// },
-			  ]}
+		rightButtons={singleMode ? [] : cardBlockButtons}
 	/>
 </div>

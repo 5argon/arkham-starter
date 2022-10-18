@@ -1,5 +1,9 @@
 import type { ExportOptions } from '$lib/proto/generated/export_options'
-import { UpgradeExportOptions_UpgradeExportStyle, UpgradeExportProto, type UpgradeExportOptions } from '$lib/proto/generated/upgrade_export'
+import {
+	UpgradeExportOptions_UpgradeExportStyle,
+	UpgradeExportProto,
+	type UpgradeExportOptions,
+} from '$lib/proto/generated/upgrade_export'
 import type { Row } from '$lib/tool/upgrade/interface'
 import { base64ToBinary } from './options'
 
@@ -56,6 +60,8 @@ export function protoStringRestore(s: string): RestoreResult {
 				right: x.cardRight,
 				xp: x.xp,
 				xpUnlock: x.xpUnlocked,
+				custom: x.rightCustom,
+				customizationChoice: x.rightCustomChoice,
 			}
 		}),
 	}

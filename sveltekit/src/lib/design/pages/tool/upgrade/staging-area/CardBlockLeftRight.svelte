@@ -9,6 +9,7 @@
 	export let amount: number | null = null
 	export let showImageStrip: boolean = false
 	export let text: string | null = null
+	export let subText: string | null = null
 	export let collapse: boolean = false
 	export let onClickDelete: () => void = () => {
 		// do nothing
@@ -29,6 +30,7 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
+	export let customizable: boolean = false
 </script>
 
 <CardBlock
@@ -36,6 +38,7 @@
 	{amount}
 	{showImageStrip}
 	{text}
+	{subText}
 	{class1}
 	{class2}
 	{class3}
@@ -46,6 +49,7 @@
 	{packNumber}
 	{restriction}
 	{weakness}
+	{customizable}
 	disableHoverEffects
 	dragDataPrefix={'-1,staging,'}
 	leftButtons={collapse

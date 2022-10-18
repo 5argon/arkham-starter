@@ -22,6 +22,7 @@ message UpgradeExportRow {
 	bool divider = 9;
 	bool right_custom = 10;
 	string right_custom_text = 11;
+	int32 right_custom_choice = 12;
 }
 
 message UpgradeExportOptions {

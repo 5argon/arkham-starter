@@ -197,7 +197,7 @@ export interface PopupDatabaseItemRaw {
 	/**
 	 * Customizable choices.
 	 */
-	cus: {
+	cus?: {
 		/**
 		 * XP checkboxes
 		 */

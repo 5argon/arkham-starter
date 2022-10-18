@@ -89,6 +89,26 @@ export function addCardToList(rows: Row[], card: string, right: boolean): Row[] 
 	return addRow(rows, card, right)
 }
 
+export function customizationCycle(row: Row, choiceLength: number): Row {
+	// If we change row's identity the row will bounce a bit by Svelte's animation... lol
+	// Let's mutate it for now.
+	if (!row.custom) {
+		row.custom = true
+		row.customizationChoice = 0
+		return row
+	} else {
+		const currentChoice = row.customizationChoice
+		if (currentChoice + 1 >= choiceLength) {
+			row.custom = false
+			row.customizationChoice = 0
+			return row
+		} else {
+			row.customizationChoice = currentChoice + 1
+			return row
+		}
+	}
+}
+
 export function createRow(divider: boolean): Row {
 	return {
 		carryoverXp: 0,
@@ -100,5 +120,7 @@ export function createRow(divider: boolean): Row {
 		right: null,
 		xp: 0,
 		xpUnlock: false,
+		custom: false,
+		customizationChoice: 0,
 	}
 }

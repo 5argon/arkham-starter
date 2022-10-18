@@ -39,7 +39,17 @@ function cardText(uer: ExportCard | null, opt: ExportOptions): string {
 	if (uer === null) {
 		return ''
 	}
+	if (uer.customizable) {
+		return mdJustcardCustomizable(uer, opt)
+	}
 	return mdJustcard(uer, opt)
+}
+
+function mdJustcardCustomizable(card: ExportCard, opt: ExportOptions): string {
+	const boxString = new Array(card.customizableChoiceBoxes).fill('☑').join('')
+	const boxesAndName = boxString + ' ' + card.customizableChoiceName
+	const wrappedLink = opt.cardOptions?.link ?? true ? wrapCard(boxesAndName, card.id) : boxesAndName
+	return wrappedLink
 }
 
 function mdJustcard(card: ExportCard, opt: ExportOptions): string {

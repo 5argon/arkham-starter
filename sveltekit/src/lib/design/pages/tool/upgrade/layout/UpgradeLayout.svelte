@@ -18,6 +18,7 @@
 		createRow,
 		addCardToList,
 		rowMoveFromTo,
+		customizationCycle,
 	} from '$lib/tool/upgrade/upgrade-table/row-operations'
 	import SpinnerSpan from '$lib/design/components/basic/SpinnerSpan.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
@@ -35,7 +36,6 @@
 	import { CardInfo_CommitOptions_CommitIcon } from '$lib/proto/generated/card_info'
 	import type { ExportCard, UpgradeExportRow } from '$lib/tool/script/export/export-tools-center'
 	import { protoStringRestore } from '$lib/tool/script/export/proto-string-restore'
-	import { extractDeckFromUrl } from '$lib/ahdb/public-api/high-level'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -89,6 +89,11 @@
 				traits: ca.traits,
 				xp: ca.original.xp ?? null,
 				xpTaboo: ca.original.xpat,
+				customizable: ca.original.cus !== undefined,
+				showingCustomizableChoice: r.custom,
+				customizableChoiceIndex: r.customizationChoice,
+				customizableChoiceBoxes: ca.original.cus?.[r.customizationChoice].xp ?? 0,
+				customizableChoiceName: ca.original.cus?.[r.customizationChoice].n ?? '',
 			}
 		}
 		return {
@@ -209,9 +214,23 @@
 				// Swap
 				if (fr) {
 					if (tr) {
-						const take = rows[fi].right
-						rows[fi].right = rows[ti].right
-						rows[ti].right = take
+						{
+							const take = rows[fi].right
+							rows[fi].right = rows[ti].right
+							rows[ti].right = take
+						}
+
+						// Right to right also swaps customizations
+						{
+							const take = rows[fi].custom
+							rows[fi].custom = rows[ti].custom
+							rows[ti].custom = take
+						}
+						{
+							const take = rows[fi].customizationChoice
+							rows[fi].customizationChoice = rows[ti].customizationChoice
+							rows[ti].customizationChoice = take
+						}
 					} else {
 						const take = rows[fi].right
 						rows[fi].right = rows[ti].left
@@ -222,6 +241,10 @@
 						const take = rows[fi].left
 						rows[fi].left = rows[ti].right
 						rows[ti].right = take
+
+						// Left to right resets customization options.
+						rows[ti].custom = false
+						rows[ti].customizationChoice = 0
 					} else {
 						const take = rows[fi].left
 						rows[fi].left = rows[ti].left
@@ -230,6 +253,19 @@
 				}
 			}
 			rows = rows
+		},
+		onCustomizationCycle: (i, pdb) => {
+			// Customization cycling is always on the right side.
+			const right = rows[i].right
+			if (right !== null) {
+				const rightCard = pdb.getById(right)
+				if (rightCard !== null) {
+					const customizationOptions = rightCard.original.cus
+					if (customizationOptions !== undefined) {
+						rows[i] = customizationCycle(rows[i], customizationOptions.length)
+					}
+				}
+			}
 		},
 	}
 
