@@ -32,7 +32,8 @@ function eachRow(uer: UpgradeExportRow, opt: ExportOptions, simpleList: boolean)
 }
 
 function divider(uer: UpgradeExportRow): string {
-	return '\n**' + uer.dividerText + '**\n'
+	const noText = uer.dividerText.trim() === ''
+	return !noText ? '\n**' + uer.dividerText + '**\n' : '\n'
 }
 
 function cardText(uer: ExportCard | null, opt: ExportOptions): string {
@@ -69,13 +70,14 @@ function mdJustcard(card: ExportCard, opt: ExportOptions): string {
 	cardName =
 		(opt.globalSettings?.pipStyle ?? GlobalSettings_PipStyle.PipsReal) !==
 		GlobalSettings_PipStyle.None
-			? `${cardName} ${normalPips}`
+			? `${cardName}${normalPips === '' ? '' : ` ${normalPips}`}`
 			: cardName
 	cardName = opt.cardOptions?.link ?? true ? wrapCard(cardName, card.id) : cardName
 	if (opt.globalSettings?.taboo) {
+		const tabooAppend = `${tabooPips}${ahdbIcons.tablet}`
 		cardName =
 			(opt.globalSettings?.taboo ?? true) && card.xpTaboo > 0
-				? `${cardName} ${tabooPips}${ahdbIcons.tablet}`
+				? `${cardName}${tabooAppend === '' ? '' : ` ${tabooAppend}`}`
 				: cardName
 	}
 	cardName =

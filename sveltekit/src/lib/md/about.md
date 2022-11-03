@@ -2,13 +2,7 @@ After Fantasy Flight Games made the [Revised Core Set](https://www.fantasyflight
 
 This is an exciting time to create more helping contents for this game so the community could grow easier.
 
-[arkham-starter.com](/) aims to compliment [ArkhamDB](https://arkhamdb.com/)'s wealth of knowledge, but is specialized for newcomers into the series. A dedicated URL "arkham-starter" reduce complications of going to a specific page inside ArkhamDB or entering a specific query. The name also suggests that one will find ready-to-use "starter decks" in here, but I will piggyback other beginner's resources into this site as well. (For "starting" players.)
-
-**Currently, the site is WIP.** Big part of the site is planned to be the reimagined "beginner's decklist" section, which forwards to decks from ArkhamDB with restriction that it uses low pack count to build and have a guide to play it. These decks will receive beginner-friendly presentation both in the listing page and the inside, such as being more graphical and has more overview insight of the deck. (e.g. The decision made regarding to that investigator's deckbuilding options, which helps beginners so they don't have to decipher the decklist themself.)
-
-Moreover, this site is tuned to the new distribution model to reduce beginner's confusion about the product. So much as pretending as if the Mythos Pack didn't exist. This means everything about Core Set is redirected to Revised Core Set, and there is only "The Dunwich Legacy Investigator Expansion" instead of an individual pack like "The Essex County Express" when talking about where a card belongs to.
-
-On technical side, this site has a heavy restriction that it must be a static site and does not require any "active" server to run. This is both for my personal learning/challenge and make the site faster to use for you as well. (It also make some rich features presented in ArkhamDB impossible to replicate, unfortunately.)
+# Tools for Arkham Horror : The Card Game
 
 Right now, it has several utilities that help you play the game. These are actually test bed for UI components I planned to use in the finished site.
 
@@ -16,3 +10,21 @@ Right now, it has several utilities that help you play the game. These are actua
 - [Card List](/tool/list)
 - [Deck Gather](/tool/gather)
 - [Campaign Reference](/tool/campaign)
+
+# What could this site do (when it is done)
+
+"Assemble your investigator party and start playing" is the purpose of this site, to be a great "starter" of Arkham Horror : The Card Game session. The biggest hurdle I am addressing is getting a party composition such that :
+
+- Having the right balance of investigator classes, and also playing the character that player likes.
+- Uses cards only in the collection that the party owns.
+- Has no or minimal amount of overlapping cards that needs proxying.
+- Find decks that contains a specific card, whether in the starting deck or planned in the upgrade.
+- Choose from preconstructed deck by other members but still respecting everything else.
+- Can find a way to fit into incomplete party incrementally. (e.g. First player may play anything, the next player should not choose the same class, the third player became even more restricted in remaining cards to use, etc.)
+- New players may need some explanation how to play the preconstructed deck.
+
+Contrary to [arkhamdb.com](https://arkhamdb.com)'s extensive data and queries, this site will have specific tooling to help getting the game started as fast as possible with respect to player's collection and the current "party". Each visitor gets a blank 4-slot party, and each step the members (decks) are added, the tool help finding the right deck for the remaining slots.
+
+I also introduce the concept of "Starter Deck", a special class of deck that will receive some cool treatment in this site. It is a deck using no more than 2 Investigator Expansions (plus 1 Investigator Starter Deck, optionally) and comes with a guide to play it. This will further encourage newcomers to pick and play them, as well as incentivize seasoned players to build an economical deck not using an entire collection.
+
+This site cannot build decks. It only use decks imported from arkhamdb.com, and must be done by the original author. arkhamdb.com does not expose a public API that lists all decks in the database, can just list 1 deck of other players that it knows the ID off. However it can list all of your own decks if you are logged in. I planned this site to be able to sign in to multiple arkhamdb.com users at once and increase the pool of possible decks it can use to assemble the party.

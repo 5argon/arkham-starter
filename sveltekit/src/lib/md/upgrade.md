@@ -57,7 +57,9 @@ You can also type just the deck's ID number, but it always assume it is a person
 
 Any card can move individually by drag-and-dropping. If you drop on an another card, both cards will swap place. Press the trash can button to delete a single card.
 
-An entire row can be moved as a whole using up/down button on the left. A row cannot be dragged. An entire row can be deleted by pressing the trash can button on the left.
+An entire row can be moved by dragging the handle on the leftmost of each row. When dragging, a destination line will show where would it be dropped to. If you dropped and the line does not disappear, that is a bug. Please grab the handle and drop again to make it disappear. (Or else card dragging may stop working temporarily.)
+
+An entire row can be deleted by pressing the trash can button on the left.
 
 ### Left side
 
@@ -73,7 +75,7 @@ This side represent a card to add.
 
 ![Upgrade arrow](../../../static/image/documentation/tool/upgrade/upgrade-arrow.png)
 
-If it has a little red tip, that means it detects that a row is an upgrade instead of a purchase and may get XP discount. It detects by comparing card name of both sides if they are the same or not.
+If it has a little red tip, that means it detects that a row is an upgrade instead of a purchase and may get XP discount. It detects by comparing card name of both sides if they are the same or not, and that the right side's XP is higher than the left.
 
 ### Mark
 
@@ -87,7 +89,7 @@ This is so if you want to say something about this row, it can be paired with la
 
 Check the unlock icon at the end of each row to unlock the automatic XP calculation. The XP box is now editable, and is currently using the previously automatically calculated XP. Locking and unlocking again will reset the box to automatically calculated number.
 
-The application has no knowledge of a card like [Adaptable](https://arkhamdb.com/card/02110), [Down the Rabbit Hole](https://arkhamdb.com/card/08059), etc. and this is where you can force it to use any XP as you like.
+The application has no knowledge of a card like [Adaptable](https://arkhamdb.com/card/02110), [Down the Rabbit Hole](https://arkhamdb.com/card/08059), etc. and this is where you can force it to use any XP as you like. You can use it together with the "Mark" feature so reader knows whats going on differently with these rows you edited the XP. (Like here I use "-1" to hint the reader that it is cheaper than usual.)
 
 ![XP Unlocking](../../../static/image/documentation/tool/upgrade/xp-unlock.png)
 
@@ -99,9 +101,7 @@ Exceptional cards are already accounted for in the automatic calculations, you d
 
 ### Divider Row
 
-Press "Add Divider Row" to add a special row. This row can subdivides the table into multiple sections with total cumulative XP connected. Use the up/down button on the left to position the divider row.
-
-I realized that if rows are draggable it would be much better, but it looks like a lot of more work. For now, please try pressing that up/down button repeatedly.
+Press "Add Divider Row" to add a special row. This row can subdivides the table into multiple sections with total cumulative XP connected. This row also have the drag handle.
 
 Type on the long box to explain the divider. It is exported in Markdown to the same column as the left card.
 
@@ -110,6 +110,10 @@ Type on the long box to explain the divider. It is exported in Markdown to the s
 ![Cumulative XP unlocking](../../../static/image/documentation/tool/upgrade/cxp-unlock.png)
 
 Similar to "XP Unlock" feature, but only available on the divider row. Using unlock check box on the divider row will "interrupt" the flow of cumulative XP to stop here, and start with a new value that you type in.
+
+## Use Latest Taboo
+
+Use this checkbox to use or not use the latest taboo. It affects XP calculation for chained / unchained cards, and also some cards gain Exceptional keyword in the taboo.
 
 ## Export
 

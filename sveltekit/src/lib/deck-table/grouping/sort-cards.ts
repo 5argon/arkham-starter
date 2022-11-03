@@ -101,7 +101,7 @@ export function topLevelTypeScore(typeCode: string): number {
 			return 2 << 3
 		case 'Skill':
 			return 3 << 3
-		case 'Permanent':
+		case 'Permanent Asset':
 			return 4 << 3
 		case 'Weakness':
 			return 5 << 3

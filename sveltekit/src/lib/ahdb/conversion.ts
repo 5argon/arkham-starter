@@ -187,7 +187,7 @@ export function packCodeToIconConversion(p: string): CardPack {
 			return CardPack.TheInnsmouthConspiracy
 		case 'eoep':
 			return CardPack.EdgeOfTheEarth
-		case 'tsk':
+		case 'tskp':
 			return CardPack.TheScarletKeys
 
 		case 'rtnotz':

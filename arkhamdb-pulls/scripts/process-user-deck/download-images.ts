@@ -59,18 +59,46 @@ export async function downloadImageSingleCard(
   fileName: string,
   destination: string
 ): Promise<void> {
+  // Skip downloading if we have image of it already.
+  const patched = await tryPatch(fileName, destination);
+  if (patched) {
+    return;
+  }
+
   if (card.imagesrc === undefined) {
     // console.log("Card " + card.code + " is missing an image.");
+    await tryPatch(fileName, destination);
     return;
   }
   const imagePath = path.join(baseUrl, card.imagesrc);
   // console.log("Downloading card image : " + imagePath);
-  const imageResult = await fetchWithRetries(imagePath);
+  let imageResult: Response;
+  try {
+    imageResult = await fetchWithRetries(imagePath);
+  } catch {
+    // console.log("Fetching failed for : " + imagePath);
+    await tryPatch(fileName, destination);
+    return;
+  }
   const abuf = await imageResult.arrayBuffer();
   await Deno.writeFile(
     path.join(destination, fileName + ".png"),
     new Uint8Array(abuf)
   );
+}
+
+async function tryPatch(code: string, destination: string): Promise<boolean> {
+  try {
+    await Deno.copyFile(
+      path.join("patch", code + ".png"),
+      path.join(destination, code + ".png")
+    );
+    console.log("Patched : " + code);
+    return true;
+  } catch {
+    // OK to fail
+    return false;
+  }
 }
 
 interface CropTarget {
@@ -90,22 +118,24 @@ async function processSingleCard(
   stripPath: string,
   squareSmallPath: string
 ): Promise<void> {
-  if (card.imagesrc === undefined) {
-    return;
-  }
   const p = path.join(fullPath, card.code + ".png");
   let read: Uint8Array;
   try {
     read = await Deno.readFile(p);
   } catch {
+    // If card does not have image, silently skipping.
+    // It is possible that it was patched.
+    if (card.imagesrc !== undefined) {
+      console.log("Error reading image " + card.code);
+    }
     return;
   }
-  let image
+  let image;
   try {
     image = await Image.decode(read);
   } catch {
-    console.log("Error downloading image " + card.code)
-    return
+    console.log("Error decoding image " + card.code);
+    return;
   }
   const w = image.width;
   const h = image.height;

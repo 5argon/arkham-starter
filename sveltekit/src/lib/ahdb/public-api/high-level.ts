@@ -78,6 +78,7 @@ export async function getDeckCardIds(
 	if (d === null) {
 		return null
 	}
+	console.log(d.description_md)
 	return {
 		deck: d.name,
 		investigatorCode: d.investigator_code,

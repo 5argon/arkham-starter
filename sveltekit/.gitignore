@@ -10,3 +10,4 @@ node_modules
 .output
 
 /static/image/card
+.yarn

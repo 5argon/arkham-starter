@@ -27,7 +27,7 @@ export interface WithCard {
 
 function typeCodeTransform(typeCode: string, subtypeCode: string | undefined, permanent: boolean): string {
 	if (permanent) {
-		return "Permanent"
+		return "Permanent Asset"
 	}
 	switch (subtypeCode) {
 		case "weakness": {

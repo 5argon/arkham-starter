@@ -5,7 +5,6 @@ import { PopupDatabase, PopupDatabaseItem } from "./scripts/popup-database.ts";
 import { path } from "./mod.ts";
 import {
   pullsDirectory,
-  pullsUtils,
   pullsUtilsPlayerDatabase,
   pullsUtilsPopupDatabase,
   pullsUtilsTaboo,

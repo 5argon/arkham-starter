@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	import { isRandomBasicWeakness } from '$lib/ahdb/card'
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	import { coreToRcore } from '$lib/ahdb/conversion'
 

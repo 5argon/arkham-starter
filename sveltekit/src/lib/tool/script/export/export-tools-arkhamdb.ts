@@ -133,9 +133,10 @@ function dividerRow(
 	xpSuffix: string,
 	topmost: boolean,
 ): string {
+	const noText = text.trim() === ''
 	return (
 		(topmost ? '' : emptyRow + '\n') +
-		`|  | ${text !== '' ? '**' + text + '**' : ''} |  |  |  | ${xpCumulative} ${xpSuffix} |`
+		`|  | ${!noText ? '**' + text + '**' : ''} |  |  |  | ${xpCumulative} ${xpSuffix} |`
 	)
 }
 

@@ -10,7 +10,7 @@
 		type UpgradeExportOptions,
 	} from '$lib/proto/generated/upgrade_export'
 	import TextBox from '$lib/design/components/basic/TextBox.svelte'
-	import { browser } from '$app/env'
+	import { browser } from '$app/environment'
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import {
 		makeUpgradePlannerUrl,
@@ -39,6 +39,23 @@
 	$: exportText = upgradeExportCenter(ue)
 	$: dataCode = upgradeExportToProtoString(ue)
 	$: link = makeUpgradePlannerUrl(dataCode)
+	let exportStyleDescription: string
+	$: {
+		const currentExportStyle = upgradeExportOptions.upgradeExportStyle
+		switch (currentExportStyle) {
+			case UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb:
+				exportStyleDescription =
+					"For pasting in arkhamdb.com's Description area. It uses some HTML in addition to Markdown to share the same style sheet coloring as the site, therefore these would only be effective when viewing directly on the site itself."
+				break
+			case UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamCards:
+				exportStyleDescription =
+					"For pasting in arkhamdb.com's Description area that is intended to be synched into ArkhamCards app (decks you cloned to add to your campaign), which simplifies the export a bit. If you just use arkhamdb.com format, deck description viewer in ArkhamCards cannot understand site's style sheet along with many HTML objects, and two column table is difficult to view on vertical phone screen when using the app."
+				break
+			default:
+				exportStyleDescription = ''
+				break
+		}
+	}
 
 	function copyToClipboard(s: string) {
 		if (browser) {
@@ -70,6 +87,9 @@
 			>Markdown (ArkhamCards)</option
 		>
 	</select>
+	<p>
+		{exportStyleDescription}
+	</p>
 </div>
 {#if singleMode && upgradeExportOptions.upgradeExportStyle === UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb}
 	<Checkbox
@@ -142,13 +162,23 @@
 </div>
 
 {#if !singleMode}
-	<ListDivider label="Data Code" level={ListDividerLevel.One} />
-	<Button label="Copy To Clipboard" onClick={() => copyToClipboard(dataCode)} />
-	<textarea rows={5}>{dataCode}</textarea>
-
 	<ListDivider label="Link" level={ListDividerLevel.One} />
+	<p>
+		Keep it to come back to this page later and continue editing, or to share your upgrade idea to
+		others where exported text does not work. Also there is already a link added in arkhamdb.com
+		export format. (If "Show Link" is not used, the link is hidden in the Markdown comment that only
+		you can see.)
+	</p>
 	<Button label="Copy To Clipboard" onClick={() => copyToClipboard(link)} />
 	<textarea rows={5}>{link}</textarea>
+
+	<ListDivider label="Data Code" level={ListDividerLevel.One} />
+	<p>
+		It represent an entire data that you worked on on this page. It is part of the link that made it
+		able to restore your session. Currently it has no use but it will in my finished site.
+	</p>
+	<Button label="Copy To Clipboard" onClick={() => copyToClipboard(dataCode)} />
+	<textarea rows={5}>{dataCode}</textarea>
 {/if}
 
 <style>

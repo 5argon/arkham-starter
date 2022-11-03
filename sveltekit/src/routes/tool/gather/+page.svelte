@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/env'
+	import { browser } from '$app/environment'
 
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import DeckGatherLayout from '$lib/design/pages/tool/gather/DeckGatherLayout.svelte'

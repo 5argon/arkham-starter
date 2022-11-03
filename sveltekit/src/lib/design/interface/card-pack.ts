@@ -61,10 +61,10 @@ export function getPackStaticUrl(pack: CardPackIcon, color: CardPackIconColor): 
 			fileName = 'tic'
 			break
 		case CardPackIcon.EdgeOfTheEarth:
-			fileName = 'eoe'
+			fileName = 'eoep'
 			break
 		case CardPackIcon.TheScarletKeys:
-			fileName = 'tsk'
+			fileName = 'tskp'
 			break
 
 		case CardPackIcon.ReturnToTheNightOfTheZealot:
