@@ -6,8 +6,6 @@
 </script>
 
 <script lang="ts">
-	import { isRandomBasicWeakness } from '$lib/ahdb/card'
-
 	import { allCampaigns } from '$lib/campaign/all-campaign'
 	import {
 		EncounterSetFlag,

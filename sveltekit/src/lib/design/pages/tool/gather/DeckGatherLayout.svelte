@@ -166,17 +166,7 @@
 
 	let sharingUrl: string = ''
 	let entries: DecklistEntry[] = []
-	let toggleMap: { [cardId: string]: boolean }
-	$: {
-		// Entries are always replaced as a whole,
-		// so this reactive assignment always correctly reset toggle to all false.
-		toggleMap = {}
-		entries.forEach((x) => {
-			if (!(x.id in toggleMap)) {
-				toggleMap[x.id] = false
-			}
-		})
-	}
+	let toggleMap: { [cardId: string]: boolean } = {}
 	let overlappingEntries: DecklistEntry[] = []
 	let p1: Player = newDeck(startingP1)
 	let p2: Player = newDeck(startingP2)
@@ -304,6 +294,7 @@
 	) {
 		const fdb = await fdbp
 		entries = []
+		toggleMap = {}
 		overlappingEntries = []
 		if (p1rr) {
 			fillIn(p1rr, 0, fixedLabelColor, p1.investigator?.class1 ?? CardClass.Neutral, entries)

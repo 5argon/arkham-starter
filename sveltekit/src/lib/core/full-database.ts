@@ -7,8 +7,8 @@ import type { AhdbTaboo } from '$lib/ahdb/taboo'
 import tb from '../data/taboo.json'
 import { CardClass } from '$lib/design/interface/card-class'
 import { CardPackIcon } from '$lib/design/interface/card-pack'
-import { randomBasicWeakness, randomBasicWeaknessRcore, type AhdbCard } from '$lib/ahdb/card'
 import type { CardPack } from './card-pack'
+import type { AhdbCard } from '$lib/ahdb/card'
 export type LazyFullDatabase = Promise<FullDatabase>
 
 export interface FullDatabaseItem {
@@ -77,23 +77,23 @@ export class FullDatabase {
 			}
 		})
 
-		if (randomBasicWeakness in this.cardsMap) {
-			const rbw = this.cardsMap[randomBasicWeakness]
-			this.cardsMap[randomBasicWeaknessRcore] = {
-				...rbw,
-				packIcon: CardPackIcon.RandomBasicWeakness,
-				original: {
-					...rbw.original,
-					code: randomBasicWeaknessRcore,
-					pack_name: 'Random Basic Weakness',
-					pack_code: 'rbw',
-				},
-			}
-		}
+		// if (randomBasicWeakness in this.cardsMap) {
+		// 	const rbw = this.cardsMap[randomBasicWeakness]
+		// 	this.cardsMap[randomBasicWeaknessRcore] = {
+		// 		...rbw,
+		// 		packIcon: CardPackIcon.RandomBasicWeakness,
+		// 		original: {
+		// 			...rbw.original,
+		// 			code: randomBasicWeaknessRcore,
+		// 			pack_name: 'Random Basic Weakness',
+		// 			pack_code: 'rbw',
+		// 		},
+		// 	}
+		// }
 	}
 
 	/**
-	 * Has buult-in unknown card forwarding.
+	 * Has built-in unknown card forwarding.
 	 */
 	public getCard(id: string): FullDatabaseItem {
 		if (id in this.cardsMap) {

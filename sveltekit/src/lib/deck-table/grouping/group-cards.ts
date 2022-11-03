@@ -1,8 +1,18 @@
+import { isRandomBasicWeakness } from '$lib/ahdb/card'
 import { classConversion } from '$lib/ahdb/conversion'
 import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
 import { isEntry, type DecklistEntry, type GroupedCards } from '../decklist-entry'
 import { Grouping, Sorting } from '../grouping'
-import { classesScore, multipleSlotsString, nonAssetString, noSlotString, slotScore, sortCards, topLevelTypeScore, typeScore } from './sort-cards'
+import {
+	classesScore,
+	multipleSlotsString,
+	nonAssetString,
+	noSlotString,
+	slotScore,
+	sortCards,
+	topLevelTypeScore,
+	typeScore,
+} from './sort-cards'
 
 export function groupCards(
 	entries: DecklistEntry[],
@@ -25,37 +35,41 @@ export interface WithCard {
 	dle: DecklistEntry
 }
 
-function typeCodeTransform(typeCode: string, subtypeCode: string | undefined, permanent: boolean): string {
+function typeCodeTransform(
+	typeCode: string,
+	subtypeCode: string | undefined,
+	permanent: boolean,
+): string {
 	if (permanent) {
-		return "Permanent Asset"
+		return 'Permanent Asset'
 	}
 	switch (subtypeCode) {
-		case "weakness": {
-			return "Weakness"
+		case 'weakness': {
+			return 'Weakness'
 		}
-		case "basicweakness": {
-			return "Weakness"
+		case 'basicweakness': {
+			return 'Weakness'
 		}
 	}
 
 	switch (typeCode) {
-		case "asset": {
-			return "Asset"
+		case 'asset': {
+			return 'Asset'
 		}
-		case "event": {
-			return "Event"
+		case 'event': {
+			return 'Event'
 		}
-		case "skill": {
-			return "Skill"
+		case 'skill': {
+			return 'Skill'
 		}
-		case "enemy": {
-			return "Enemy"
+		case 'enemy': {
+			return 'Enemy'
 		}
-		case "treachery": {
-			return "Treachery"
+		case 'treachery': {
+			return 'Treachery'
 		}
 	}
-	return "Others"
+	return 'Others'
 }
 
 function groupCardsOneGroup(
@@ -100,7 +114,11 @@ function groupCardsOneGroup(
 					st[sn] = { entries: [], packName: '' }
 				}
 				st[sn].entries.push(x.dle)
-				st[sn].packName = x.card.packNameTransformed ?? x.card.original.pack_name
+				if (isRandomBasicWeakness(x.card.original.code)) {
+					st[sn].packName = "Random Basic Weakness"
+				} else {
+					st[sn].packName = x.card.packNameTransformed ?? x.card.original.pack_name
+				}
 			})
 			const sorted = Object.entries(st)
 				.sort(([k], [k2]) => {
@@ -118,7 +136,11 @@ function groupCardsOneGroup(
 		case Grouping.Type: {
 			const st: { [k: string]: { entries: DecklistEntry[]; typeName: string } } = {}
 			cs.forEach((x) => {
-				const sn: string = typeCodeTransform(x.card.original.type_code, x.card.original.subtype_code, x.card.original.permanent)
+				const sn: string = typeCodeTransform(
+					x.card.original.type_code,
+					x.card.original.subtype_code,
+					x.card.original.permanent,
+				)
 				if (!(sn in st)) {
 					st[sn] = { entries: [], typeName: '' }
 				}
@@ -143,11 +165,10 @@ function groupCardsOneGroup(
 			cs.forEach((x) => {
 				const slot = x.card.original.real_slot
 				let sn = noSlotString
-				if (x.card.original.type_code !== "asset") {
+				if (x.card.original.type_code !== 'asset') {
 					sn = nonAssetString
-				}
-				else if (slot !== "" && slot !== undefined) {
-					if (slot.includes(".")) {
+				} else if (slot !== '' && slot !== undefined) {
+					if (slot.includes('.')) {
 						sn = multipleSlotsString
 					} else {
 						sn = slot
@@ -222,7 +243,7 @@ function groupCardsOneGroup(
 				.map<GroupedCards>(([, v]) => {
 					return {
 						entries: v.entries,
-						groupName: v.level === undefinedXp ? "Level -" : "Level " + v.level,
+						groupName: v.level === undefinedXp ? 'Level -' : 'Level ' + v.level,
 					}
 				})
 			groups = sorted
@@ -262,7 +283,8 @@ function groupCardsOneGroup(
 				.map<GroupedCards>(([, v]) => {
 					return {
 						entries: v.entries,
-						groupName: v.level === undefinedXp ? "Level -" : (v.level === 0 ? "Level 0" : "Level 1~5")
+						groupName:
+							v.level === undefinedXp ? 'Level -' : v.level === 0 ? 'Level 0' : 'Level 1~5',
 					}
 				})
 			groups = sorted

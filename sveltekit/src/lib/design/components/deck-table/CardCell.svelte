@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { isRandomBasicWeakness } from '$lib/ahdb/card'
+	import { CardClass } from '$lib/core/card-class'
 	import { type FullDatabase, shouldShowSubname } from '$lib/core/full-database'
 	import CardSpan from '../card/CardSpan.svelte'
 
@@ -13,29 +15,43 @@
 		onToggleChanged?.(!toggled)
 	}
 	$: card = fullDatabase.getCard(cardId)
+	$: rbw = isRandomBasicWeakness(cardId)
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class:toggle-div={onToggleChanged} class:toggle-div-on={toggled} on:click={handler}>
-	<CardSpan
-		{cardId}
-		{amount}
-		class1={card.class1}
-		class2={card.class2 ?? null}
-		class3={card.class3 ?? null}
-		exceptional={taboo && card.tabooExceptional ? card.tabooExceptional : card.original.exceptional}
-		color={true}
-		packIcon={card.packIcon}
-		packNumber={card.original.position}
-		restriction={card.original.restrictions !== undefined}
-		showImageStrip={true}
-		text={card.original.name}
-		subText={shouldShowSubname(card, fullDatabase) ? card.original.subname : null}
-		weakness={card.original.subtype_code === 'weakness' ||
-			card.original.subtype_code === 'basicweakness'}
-		investigator={card.original.type_code === 'investigator'}
-		xp={card.original.xp}
-		xpTaboo={taboo ? card.tabooXp ?? null : null}
-	/>
+	{#if rbw}
+		<CardSpan
+			{cardId}
+			{amount}
+			text={'Random Basic Weakness'}
+			weakness
+			investigator={card.original.type_code === 'investigator'}
+		/>
+	{:else}
+		<CardSpan
+			{cardId}
+			{amount}
+			class1={card.class1}
+			class2={card.class2 ?? null}
+			class3={card.class3 ?? null}
+			exceptional={taboo && card.tabooExceptional
+				? card.tabooExceptional
+				: card.original.exceptional}
+			color={true}
+			packIcon={card.packIcon}
+			packNumber={card.original.position}
+			restriction={card.original.restrictions !== undefined}
+			showImageStrip={true}
+			text={card.original.name}
+			subText={shouldShowSubname(card, fullDatabase) ? card.original.subname : null}
+			weakness={card.original.subtype_code === 'weakness' ||
+				card.original.subtype_code === 'basicweakness'}
+			investigator={card.original.type_code === 'investigator'}
+			xp={card.original.xp}
+			xpTaboo={taboo ? card.tabooXp ?? null : null}
+		/>
+	{/if}
 </div>
 
 <style>

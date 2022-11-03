@@ -1,6 +1,5 @@
 import { CardClass } from '$lib/core/card-class'
 import { CardPack } from '$lib/core/card-pack'
-import { randomBasicWeakness, randomBasicWeaknessRcore } from './card'
 
 /**
  * Hard coded name of each pack.
@@ -50,6 +49,8 @@ export function iconToNewNameConversion(c: CardPack): string | null {
 	switch (c) {
 		case CardPack.Unknown:
 			return '(Unknown Set)'
+		case CardPack.RandomBasicWeakness:
+			return 'Random Basic Weakness'
 		case CardPack.CoreSet:
 			break
 		case CardPack.RevisedCoreSet:
@@ -236,7 +237,6 @@ export function coreToRcore(cardId: string): string {
 }
 
 const coreToRcoreMap: { [k: string]: string } = {
-	[randomBasicWeakness]: randomBasicWeaknessRcore,
 	'01001': '01501',
 	'01002': '01502',
 	'01003': '01503',

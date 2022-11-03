@@ -1,7 +1,6 @@
 export const randomBasicWeakness = '01000'
-export const randomBasicWeaknessRcore = '02000'
 export function isRandomBasicWeakness(cardId: string): boolean {
-	return cardId === randomBasicWeakness || cardId === randomBasicWeaknessRcore
+	return cardId === randomBasicWeakness
 }
 
 export function isUnknownCardNumber(num: number): boolean {
@@ -70,4 +69,5 @@ export interface AhdbCard {
 		position?: number
 		quantity?: number
 	}[]
+	hidden?: boolean
 }
