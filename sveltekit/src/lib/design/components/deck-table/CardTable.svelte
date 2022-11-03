@@ -11,7 +11,8 @@
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
 	export let centered: boolean = false
-	export let clickToggle: boolean = false
+	export let hideAmount: boolean = false
+	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 </script>
 
 <table class:centered>
@@ -39,8 +40,9 @@
 				{fullDatabase}
 				{columns}
 				{taboo}
-				{clickToggle}
 				theOnlyGroup={groupedCards.length === 1}
+				{hideAmount}
+				{onClickToggle}
 			/>
 		{/each}
 	</tbody>

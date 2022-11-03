@@ -15,7 +15,8 @@
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
 	export let toggleMap: { [id: string]: boolean }
-	export let clickToggle: boolean = false
+	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
+	export let hideAmount: boolean = false
 	$: spanning = columns.length + 1
 </script>
 
@@ -35,19 +36,19 @@
 		<tr>
 			<td class={index % 2 === 0 ? 'even' : 'odd'}>
 				<CardCell
-					onToggleChanged={clickToggle
-						? (t) => {
+					onToggleChanged={onClickToggle === null
+						? undefined
+						: (t) => {
 								// It is surely entry at this point but Svelte
 								// is not powerful enough to carry the type narrowing to here.
-								if (isEntry(en) && en.id in toggleMap) {
-									toggleMap[en.id] = t
+								if (onClickToggle !== null && isEntry(en)) {
+									onClickToggle(en.id, t)
 								}
-						  }
-						: undefined}
+						  }}
 					toggled={en.id in toggleMap ? toggleMap[en.id] : false}
 					cardId={en.cardId}
 					{fullDatabase}
-					amount={en.amount}
+					amount={hideAmount ? null : en.amount}
 					{taboo}
 				/>
 			</td>
@@ -64,11 +65,12 @@
 			groupedCards={en}
 			previousGroupedCards={[...previousGroupedCards, groupedCards]}
 			{toggleMap}
-			{clickToggle}
 			{totalLevels}
 			{fullDatabase}
 			{columns}
 			{taboo}
+			{hideAmount}
+			{onClickToggle}
 			theOnlyGroup={false}
 		/>
 	{/if}

@@ -21,6 +21,7 @@ export const allIcons = {
 	customizable: ic('wrench-solid'),
 	checkBox: ic('square-regular'),
 	checkBoxChecked: ic('square-check-regular'),
+	investigator: ic('person-solid'),
 }
 
 function ic(s: string): string {

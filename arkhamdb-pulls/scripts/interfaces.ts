@@ -103,6 +103,7 @@ export interface AhdbCard {
     position?: number;
     quantity?: number;
   }[];
+  hidden?:boolean;
 }
 
 export interface AhdbPack {

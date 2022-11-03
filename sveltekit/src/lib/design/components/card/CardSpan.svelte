@@ -34,6 +34,7 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
+	export let investigator: boolean = false
 	export let customizable: boolean = false
 	export let checkBoxes: number = 0
 	export let checkedBoxes: number = 0
@@ -72,9 +73,11 @@
 	{/if}
 
 	{#if text !== null}
-		{#if amount !== null}<span class="amount" class:amount-minus={amount < 0}>{amount}</span><span
-				class="amount-x">x</span
-			>{/if}
+		{#if amount !== null}<span
+				class="amount"
+				class:amount-minus={amount < 0}
+				class:amount-two-digit={amount >= 10}>{amount}</span
+			><span class="amount-x">x</span>{/if}
 		{#if checkBoxes === 0 && checkedBoxes === 0}
 			<span class="all-class-icons">
 				{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
@@ -92,6 +95,8 @@
 					class={'pips ' + textIconFontClass}>{textIconToFontCharacter(TextIcon.Weakness)}</span
 				>{/if}{#if restriction}<FaIcon
 					path={allIcons.investigatorRestriction}
+				/>{/if}{#if investigator}<FaIcon
+					path={allIcons.investigator}
 				/>{/if}{#if customizable}<FaIcon path={allIcons.customizable} />{/if}
 			{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}
 			{#if xpTaboo !== null && xpTaboo !== 0}
@@ -127,6 +132,10 @@
 	/* Rarely deck has negative amount when upgrade bugged and removed a card that was not there. */
 	.amount-minus {
 		margin-right: 5px;
+	}
+
+	.amount-two-digit {
+		margin-right: 6px;
 	}
 
 	.amount-x {

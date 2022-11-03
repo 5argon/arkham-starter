@@ -10,6 +10,7 @@ Right now, it has several utilities that help you play the game. These are actua
 - [Card List](/tool/list)
 - [Deck Gather](/tool/gather)
 - [Campaign Reference](/tool/campaign)
+- [Explore Investigator Expansions](/explore)
 
 # What could this site do (when it is done)
 

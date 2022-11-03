@@ -75,7 +75,9 @@ const traitMap = makeMap(uniqueTrait);
 
 const popupDatabaseItems: PopupDatabaseItem[] = [];
 const playerCards = allCards.filter((x) => {
-  return x.faction_code !== "mythos";
+  return (
+    x.type_code !== "story" && x.faction_code !== "mythos" && x.hidden !== true
+  );
 });
 
 // Cards that need its subname shown to remove ambiguity are collected here.
@@ -95,18 +97,18 @@ playerCards.forEach((x) => {
   sameNameDifferentSubname[name].push({ code: x.code, subname: x.subname });
 });
 
-const needExplicitSubnameCodes = new Set<string>()
+const needExplicitSubnameCodes = new Set<string>();
 Object.entries(sameNameDifferentSubname).forEach(([k, v]) => {
-  const subnameCheck = new Set<string>()
-  v.forEach(x => {
-    subnameCheck.add(x.subname)
-  })
+  const subnameCheck = new Set<string>();
+  v.forEach((x) => {
+    subnameCheck.add(x.subname);
+  });
   if (subnameCheck.size > 1) {
-    v.forEach(x => {
-      needExplicitSubnameCodes.add(x.code)
-    })
+    v.forEach((x) => {
+      needExplicitSubnameCodes.add(x.code);
+    });
   }
-})
+});
 
 playerCards.forEach((x) => {
   let traits: number[] = [];
@@ -149,7 +151,7 @@ playerCards.forEach((x) => {
     ir: x.restrictions !== undefined && x.restrictions !== null,
     wk: x.subtype_code !== undefined && x.subtype_code === "weakness",
     cs: x.cost,
-    cus: extractCustomizable(x)
+    cus: extractCustomizable(x),
   });
 });
 

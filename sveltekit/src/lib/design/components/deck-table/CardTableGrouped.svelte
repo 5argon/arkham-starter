@@ -21,7 +21,8 @@
 	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
 	export let centered: boolean = false
-	export let clickToggle: boolean = false
+	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
+	export let hideAmount: boolean = false
 	$: gc = groupCards(entriesForwarded, groupings, sortings, fullDatabase)
 </script>
 
@@ -32,6 +33,7 @@
 	groupedCards={gc}
 	{columns}
 	{centered}
-	{clickToggle}
+	{onClickToggle}
 	totalLevels={groupings.length}
+	{hideAmount}
 />

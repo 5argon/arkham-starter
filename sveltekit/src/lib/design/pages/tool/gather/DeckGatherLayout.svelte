@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	import { isRandomBasicWeakness } from '$lib/ahdb/card'
-	import { browser } from '$app/environment';
+	import { browser } from '$app/environment'
 
 	import { coreToRcore } from '$lib/ahdb/conversion'
 
@@ -438,7 +438,10 @@
 						{entries}
 						{groupings}
 						{sortings}
-						clickToggle
+						onClickToggle={(c, t) => {
+							toggleMap[c] = t
+							toggleMap = { ...toggleMap }
+						}}
 						taboo={true}
 						fullDatabase={fdb}
 						columns={[ExtraColumn.Label]}

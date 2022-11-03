@@ -1,6 +1,5 @@
 <script lang="ts">
-	import ExploreLayout from '$lib/design/pages/explore/ExploreLayout.svelte'
-	import help from '$lib/md/explore.md?raw'
+	import ExploreFreeLayout from '$lib/design/pages/explore/ExploreFreeLayout.svelte'
 	import type { ExploreData } from './+page'
 	export let data: ExploreData
 	$: q = data.q
@@ -10,4 +9,4 @@
 	<title>arkham-starter.com | Explore</title>
 </svelte:head>
 
-<ExploreLayout pageTitle="Explore" helpMd={help} queryString={q} />
+<ExploreFreeLayout />

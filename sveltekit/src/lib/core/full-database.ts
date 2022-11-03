@@ -8,6 +8,7 @@ import tb from '../data/taboo.json'
 import { CardClass } from '$lib/design/interface/card-class'
 import { CardPackIcon } from '$lib/design/interface/card-pack'
 import { randomBasicWeakness, randomBasicWeaknessRcore, type AhdbCard } from '$lib/ahdb/card'
+import type { CardPack } from './card-pack'
 export type LazyFullDatabase = Promise<FullDatabase>
 
 export interface FullDatabaseItem {
@@ -29,9 +30,11 @@ export interface FullDatabaseItem {
 export class FullDatabase {
 	private cardsMap: { [k: string]: FullDatabaseItem }
 	private sameName: { [k: string]: FullDatabaseItem[] }
+	private byPack: { [k: string]: FullDatabaseItem[] }
 	constructor(cards: AhdbCard[], taboo: AhdbTaboo | null) {
 		this.cardsMap = {}
 		this.sameName = {}
+		this.byPack = {}
 		const mapped = cards.map<FullDatabaseItem>((x) => {
 			const icon = packCodeToIconConversion(x.pack_code)
 			const fdi: FullDatabaseItem = {
@@ -55,6 +58,12 @@ export class FullDatabase {
 		})
 		mapped.forEach((x) => {
 			this.cardsMap[x.original.code] = x
+
+			if (!(x.packIcon in this.byPack)) {
+				this.byPack[x.packIcon] = []
+			}
+			this.byPack[x.packIcon].push(x)
+
 			if (!(x.original.name in this.sameName)) {
 				this.sameName[x.original.name] = []
 			} else {
@@ -91,6 +100,15 @@ export class FullDatabase {
 			return this.cardsMap[id]
 		}
 		return this.createUnknownCard(id)
+	}
+
+	public queryPack(packs: CardPack[]): FullDatabaseItem[] {
+		return packs.flatMap<FullDatabaseItem>((x) => {
+			if (x in this.byPack) {
+				return this.byPack[x]
+			}
+			throw new Error('Pack not found ' + x)
+		})
 	}
 
 	private createUnknownCard(id: string): FullDatabaseItem {

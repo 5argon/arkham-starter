@@ -4,7 +4,7 @@
 
 	export let taboo: boolean
 	export let cardId: string
-	export let amount: number
+	export let amount: number | null
 	export let fullDatabase: FullDatabase
 	export let toggled: boolean
 	export let onToggleChanged: undefined | ((t: boolean) => void) = undefined
@@ -30,9 +30,11 @@
 		showImageStrip={true}
 		text={card.original.name}
 		subText={shouldShowSubname(card, fullDatabase) ? card.original.subname : null}
-		weakness={card.original.subtype_code === 'weakness'}
+		weakness={card.original.subtype_code === 'weakness' ||
+			card.original.subtype_code === 'basicweakness'}
+		investigator={card.original.type_code === 'investigator'}
 		xp={card.original.xp}
-		xpTaboo={taboo ? (card.tabooXp ?? null): null}
+		xpTaboo={taboo ? card.tabooXp ?? null : null}
 	/>
 </div>
 
