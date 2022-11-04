@@ -30,6 +30,7 @@
 		fixedColor: boolean,
 		faction: CardClass,
 		ents: DecklistEntry[],
+		fw: boolean,
 	) {
 		let colorHex: string
 		if (fixedColor) {
@@ -52,7 +53,7 @@
 			colorHex = cardClassToBackgroundClass(faction)
 		}
 		for (let i = 0; i < g.cards1.length; i++) {
-			const c1 = coreToRcore(g.cards1[i])
+			const c1 = fw ? coreToRcore(g.cards1[i]) : g.cards1[i]
 			const a1 = g.amounts1[i]
 			ents.push({
 				id: 'd' + player + c1,
@@ -62,7 +63,7 @@
 			})
 		}
 		for (let i = 0; i < g.cards2.length; i++) {
-			const c2 = coreToRcore(g.cards2[i])
+			const c2 = fw ? coreToRcore(g.cards2[i]) : g.cards2[i]
 			const a2 = g.amounts2[i]
 			ents.push({
 				id: 's' + player + c2,
@@ -72,7 +73,7 @@
 			})
 		}
 		for (let i = 0; i < g.cards3.length; i++) {
-			const c3 = coreToRcore(g.cards3[i])
+			const c3 = fw ? coreToRcore(g.cards3[i]) : g.cards3[i]
 			const a3 = g.amounts3[i]
 			ents.push({
 				id: 'i' + player + c3,
@@ -163,6 +164,7 @@
 	export let startingP3: string = ''
 	export let startingP4: string = ''
 	export let fixedLabelColor: boolean = false
+	export let forwardRcore: boolean = true
 
 	let sharingUrl: string = ''
 	let entries: DecklistEntry[] = []
@@ -297,16 +299,44 @@
 		toggleMap = {}
 		overlappingEntries = []
 		if (p1rr) {
-			fillIn(p1rr, 0, fixedLabelColor, p1.investigator?.class1 ?? CardClass.Neutral, entries)
+			fillIn(
+				p1rr,
+				0,
+				fixedLabelColor,
+				p1.investigator?.class1 ?? CardClass.Neutral,
+				entries,
+				forwardRcore,
+			)
 		}
 		if (p2rr) {
-			fillIn(p2rr, 1, fixedLabelColor, p2.investigator?.class1 ?? CardClass.Neutral, entries)
+			fillIn(
+				p2rr,
+				1,
+				fixedLabelColor,
+				p2.investigator?.class1 ?? CardClass.Neutral,
+				entries,
+				forwardRcore,
+			)
 		}
 		if (p3rr) {
-			fillIn(p3rr, 2, fixedLabelColor, p3.investigator?.class1 ?? CardClass.Neutral, entries)
+			fillIn(
+				p3rr,
+				2,
+				fixedLabelColor,
+				p3.investigator?.class1 ?? CardClass.Neutral,
+				entries,
+				forwardRcore,
+			)
 		}
 		if (p4rr) {
-			fillIn(p4rr, 3, fixedLabelColor, p4.investigator?.class1 ?? CardClass.Neutral, entries)
+			fillIn(
+				p4rr,
+				3,
+				fixedLabelColor,
+				p4.investigator?.class1 ?? CardClass.Neutral,
+				entries,
+				forwardRcore,
+			)
 		}
 		checkDupe(entries, overlappingEntries, fdb)
 		entries = [...entries]
@@ -347,6 +377,14 @@
 		checked={fixedLabelColor}
 		onCheckChanged={() => {
 			fixedLabelColor = !fixedLabelColor
+			reactFill(p1r, p2r, p3r, p4r)
+		}}
+	/>
+	<Checkbox
+		label="Forward to Revised Core Set"
+		checked={forwardRcore}
+		onCheckChanged={() => {
+			forwardRcore = !forwardRcore
 			reactFill(p1r, p2r, p3r, p4r)
 		}}
 	/>

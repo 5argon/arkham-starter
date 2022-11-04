@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { coreToRcore } from '$lib/ahdb/conversion'
-
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
@@ -11,7 +9,7 @@
 	$: entriesForwarded = entries.map<DecklistEntry>((x) => {
 		return {
 			...x,
-			cardId: coreToRcore(x.cardId),
+			cardId: x.cardId,
 		}
 	})
 	export let groupings: Grouping[]

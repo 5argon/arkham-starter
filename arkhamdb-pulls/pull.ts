@@ -12,6 +12,7 @@ import {
 } from "./scripts/constants.ts";
 import { downloadImages } from "./scripts/process-user-deck/download-images.ts";
 import { extractCustomizable } from "./scripts/customizable.ts";
+import { manualEdit } from "./scripts/manual-edit.ts";
 
 console.log("Downloading all cards to create popup database...");
 const allCards = await publicAllCards("");
@@ -74,11 +75,12 @@ const classNameMap = makeMap(uniqueClassName);
 const traitMap = makeMap(uniqueTrait);
 
 const popupDatabaseItems: PopupDatabaseItem[] = [];
-const playerCards = allCards.filter((x) => {
+const playerCards= allCards.filter((x) => {
   return (
     x.type_code !== "story" && x.faction_code !== "mythos" && x.hidden !== true
   );
 });
+manualEdit(playerCards)
 
 // Cards that need its subname shown to remove ambiguity are collected here.
 // It searches an entire game if there is a card with same name but different subname or not.

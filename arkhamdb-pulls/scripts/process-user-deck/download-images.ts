@@ -226,6 +226,20 @@ async function processSingleCard(
         h: 192.7 / 842,
       };
       break;
+    case "location":
+      squareTarget = {
+        x: 131 / 606,
+        y: 95.5 / 842,
+        w: 336 / 606,
+        h: 336 / 842,
+      };
+      stripTarget = {
+        x: 83 / 606,
+        y: 137.3 / 842,
+        w: 446 / 606,
+        h: 148.7 / 842,
+      };
+      break;
     default:
       return;
   }

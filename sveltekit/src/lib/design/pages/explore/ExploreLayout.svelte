@@ -118,7 +118,7 @@
 		}}
 	/>
 
-	<ListDivider label="Player Cards" />
+	<ListDivider label="The Rest of Player Cards" />
 
 	<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 

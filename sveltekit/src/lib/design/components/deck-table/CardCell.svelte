@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { isRandomBasicWeakness } from '$lib/ahdb/card'
-	import { CardClass } from '$lib/core/card-class'
 	import { type FullDatabase, shouldShowSubname } from '$lib/core/full-database'
 	import CardSpan from '../card/CardSpan.svelte'
 
