@@ -1,5 +1,6 @@
+<span>WIP : This explore page is supposed to show full card scans, but only small lists for now. Also the pack menu here is supposed to look better.</span>
 <span>
-	Proper menu is WIP! Use these for now : <a href="/explore/core">core</a>
+	<a href="/explore/core">core</a>
 	<a href="/explore/rcore">rcore</a>
 	<a href="/explore/dwl">dwl</a>
 	<a href="/explore/ptc">ptc</a>

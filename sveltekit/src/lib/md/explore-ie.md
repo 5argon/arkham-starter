@@ -15,9 +15,66 @@ The reason I made this :
 
 All other advantages of regular Explore page remains, such as showing full scans by default.
 
+## Collector's Number of repackaged Investigator Expansion boxes
+
+![Expansion](../../../static/image/documentation/explore/expansion.png)
+
+All cycles before Edge of the Earth are repackaged in new format. But to not make old time fans mad, they cannot change the collector's number of each card. (Number at the bottom right.)
+
+They **used to** sell "Deluxe Expansion" box (comes with 2 scenario) + 6 Mythos Pack per one cycle, making full 8 scenario campaign. Player cards can be found sprinkled in every of these boxes instead of jam packaed in one Investigator Expansion box like today.
+
+Let's see how the collector number connects in The Dunwich Legacy.
+
+Deluxe Expansion :
+
+```
+Investigtor Cards (1 -> 15)
+Player Cards (16 -> 36)
+Basic Weakness Cards (37 -> 39)
+Campaign Cards (Scenario 1 + 2) (40 -> 104)
+```
+
+Mythos Pack #1 ~ #6 :
+
+```
+Player Cards (105 -> 117)
+Campaign Cards (Scenario 3) (118 -> 146)
+
+Player Cards (147 -> 158)
+Campaign Cards (Scenario 4) (159 -> 183)
+
+...
+```
+
+If you subscribed in their LCG lifestyle purchasing model, you would get cards increasing in consecutive Collector's Number. Alternating between player cards and campaign cards.
+
+Today with big Investigator Expansion, essentially they just remove the campaign cards that supposed to connecting numbers together. The result is this disconnecting collector's number.
+
+```
+Investigtor Cards (1 -> 15)
+Player Cards (16 -> 36)
+Basic Weakness Cards (37 -> 39)
+Player Cards (105 -> 117)
+Player Cards (147 -> 158)
+...
+```
+
+In the Campaign Expansion box, of course you would get :
+
+```
+Campaign Cards (Scenario 1 + 2) (40 -> 104)
+Campaign Cards (Scenario 3) (118 -> 146)
+Campaign Cards (Scenario 4) (159 -> 183)
+...
+```
+
+By the way, ordering of physical cards came out of Investigator Expansion box are not ordered exactly like that. Player cards used to have 6 classes in order in **each** chunk of Player Cards. Now that they are jumbled together, they re-sort everything to be ordered by class again. You will see beautiful contiguous chunk of colors coming out of the box, but the collector's number looks very jumpy.
+
+The default sorting of **Group by Class, then sort by Number** this page uses corresponds to new Investigator Expansion model. If you change it to **Group by (nothing), then sort by Number** you would get a result similar to old distribution model, minus the campaign cards.
+
 ## Official QR Codes
 
-If you prefer, these are all the a QR codes on the back of product box that would reveal all the cards in it. Beware that old distribution format Mythos Pack would **spoil the campaign cards**.
+If you prefer, these are all the a QR codes on the back of product box that would reveal all the cards in it. Beware that old distribution format would **spoil the campaign cards** coming together with the player cards, as explained in the previous section.
 
 - [Core Set](http://ffgapp.com/qr/AHC01)
 - [The Dunwich Legacy](http://ffgapp.com/qr/AHC02)
