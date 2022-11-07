@@ -6,9 +6,11 @@
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
+	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import type { ExploreInput } from '$lib/explore/explore-input'
 	import helpMd from '$lib/md/explore-ie.md?raw'
+	import CardTableDoubleDisplay from './CardTableDoubleDisplay.svelte'
 	import ExploreMenu from './ExploreMenu.svelte'
 
 	export let pageTitle: string
@@ -20,6 +22,9 @@
 	let groupings: Grouping[] = exploreInput.groupings
 	let sortings: Sorting[] = exploreInput.sortings
 	let packs: CardPack[] = exploreInput.packs
+
+	let showList: boolean = true
+	let showScans: boolean = true
 
 	function onGroupingsChanged(g: Grouping[]) {
 		groupings = g
@@ -89,8 +94,38 @@
 {#await fdbp}
 	Loading...
 {:then fdb}
+	<div class="tab">
+		<LimitedTab
+			onChangeActive={(i) => {
+				switch (i) {
+					case 0: {
+						showList = true
+						showScans = true
+						break
+					}
+					case 1: {
+						showList = true
+						showScans = false
+						break
+					}
+					case 2: {
+						showList = false
+						showScans = true
+						break
+					}
+				}
+			}}
+		>
+			<div slot="tab1">List and Scans</div>
+			<div slot="content1" />
+			<div slot="tab2">List Only</div>
+			<div slot="content2" />
+			<div slot="tab3">Scans Only</div>
+			<div slot="content3" />
+		</LimitedTab>
+	</div>
 	<ListDivider label="Investigators" />
-	<CardTableGrouped
+	<CardTableDoubleDisplay
 		{toggleMap}
 		entries={getByPackFromFullDatabaseInvestigator(fdb, packs)}
 		groupings={[]}
@@ -101,11 +136,13 @@
 			toggleMap[c] = t
 			toggleMap = { ...toggleMap }
 		}}
+		{showList}
+		{showScans}
 	/>
 
 	<ListDivider label="Basic Weakness" />
 
-	<CardTableGrouped
+	<CardTableDoubleDisplay
 		{toggleMap}
 		entries={getByPackFromFullDatabaseWeakness(fdb, packs)}
 		groupings={[]}
@@ -116,13 +153,15 @@
 			toggleMap[c] = t
 			toggleMap = { ...toggleMap }
 		}}
+		{showList}
+		{showScans}
 	/>
 
 	<ListDivider label="The Rest of Player Cards" />
 
 	<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
-	<CardTableGrouped
+	<CardTableDoubleDisplay
 		{toggleMap}
 		entries={getByPackFromFullDatabase(fdb, packs)}
 		{groupings}
@@ -133,5 +172,13 @@
 			toggleMap[c] = t
 			toggleMap = { ...toggleMap }
 		}}
+		{showList}
+		{showScans}
 	/>
 {/await}
+
+<style>
+	.tab {
+		margin-top: 8px;
+	}
+</style>

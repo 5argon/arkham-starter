@@ -11,7 +11,7 @@ The reason I made this :
 - It can group in multiple layers, then sort in multiple layers. This may benefit players just purchased the box and wanted to sort differently from what the box gives you.
 - Use it to get some ideas to build decks or selecting an investigator focusing on one expansion box, by roughly looking at all the cards.
 - Use grouping and sorting to explore the bias of the expansion. (e.g. Whether it has a lot of level 0 cards or not.)
-- It is quite mobile friendly.
+- It is quite mobile friendly. 
 
 All other advantages of regular Explore page remains, such as showing full scans by default.
 

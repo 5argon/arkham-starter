@@ -75,12 +75,11 @@ const classNameMap = makeMap(uniqueClassName);
 const traitMap = makeMap(uniqueTrait);
 
 const popupDatabaseItems: PopupDatabaseItem[] = [];
-const playerCards= allCards.filter((x) => {
-  return (
-    x.type_code !== "story" && x.faction_code !== "mythos" && x.hidden !== true
-  );
+// Hidden card is kept, it is up to front end to not display them.
+const playerCards = allCards.filter((x) => {
+  return x.type_code !== "story" && x.faction_code !== "mythos";
 });
-manualEdit(playerCards)
+manualEdit(playerCards);
 
 // Cards that need its subname shown to remove ambiguity are collected here.
 // It searches an entire game if there is a card with same name but different subname or not.

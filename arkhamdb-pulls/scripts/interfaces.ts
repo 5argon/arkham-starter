@@ -103,7 +103,9 @@ export interface AhdbCard {
     position?: number;
     quantity?: number;
   }[];
-  hidden?:boolean;
+  hidden?: boolean;
+  linked_to_code?: string;
+  linked_to_name?: string;
 }
 
 export interface AhdbPack {

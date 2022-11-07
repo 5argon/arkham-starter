@@ -21,6 +21,7 @@
 	export let centered: boolean = false
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 	export let hideAmount: boolean = false
+	export let scansMode: boolean = false
 	$: gc = groupCards(entriesForwarded, groupings, sortings, fullDatabase)
 </script>
 
@@ -34,4 +35,5 @@
 	{onClickToggle}
 	totalLevels={groupings.length}
 	{hideAmount}
+	{scansMode}
 />

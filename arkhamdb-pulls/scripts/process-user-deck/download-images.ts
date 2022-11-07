@@ -44,7 +44,16 @@ async function downloadImageAndProcessSingleCard(
   stripPath: string,
   squareSmallPath: string
 ): Promise<void> {
-  await downloadImageSingleCard(card, card.code, fullPath);
+  function backCodeExtract(s: string): string {
+    const filename = s.match(/([\w\d_-]*)\.?[^\\\/]*$/i);
+    return filename?.[1] ?? "";
+  }
+  const regularFileName = card.code;
+  await downloadImageSingleCard(card.imagesrc, regularFileName, fullPath);
+  if (card.backimagesrc !== undefined) {
+    const backFileName = backCodeExtract(card.backimagesrc);
+    await downloadImageSingleCard(card.backimagesrc, backFileName, fullPath);
+  }
   await processSingleCard(
     card,
     fullPath,
@@ -55,7 +64,7 @@ async function downloadImageAndProcessSingleCard(
 }
 
 export async function downloadImageSingleCard(
-  card: AhdbCard,
+  imageSrc: string | undefined,
   fileName: string,
   destination: string
 ): Promise<void> {
@@ -65,12 +74,12 @@ export async function downloadImageSingleCard(
     return;
   }
 
-  if (card.imagesrc === undefined) {
+  if (imageSrc === undefined) {
     // console.log("Card " + card.code + " is missing an image.");
     await tryPatch(fileName, destination);
     return;
   }
-  const imagePath = path.join(baseUrl, card.imagesrc);
+  const imagePath = path.join(baseUrl, imageSrc);
   // console.log("Downloading card image : " + imagePath);
   let imageResult: Response;
   try {

@@ -12,6 +12,7 @@
 	export let columns: ExtraColumn[] = []
 	export let centered: boolean = false
 	export let hideAmount: boolean = false
+	export let scansMode :boolean = false
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 </script>
 
@@ -43,6 +44,7 @@
 				theOnlyGroup={groupedCards.length === 1}
 				{hideAmount}
 				{onClickToggle}
+				{scansMode}
 			/>
 		{/each}
 	</tbody>

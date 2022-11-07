@@ -1,4 +1,4 @@
-<span>WIP : This explore page is supposed to show full card scans, but only small lists for now. Also the pack menu here is supposed to look better.</span>
+<span>WIP : This pack selection menu here is supposed to look better.</span>
 <span>
 	<a href="/explore/core">core</a>
 	<a href="/explore/rcore">rcore</a>

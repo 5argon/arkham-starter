@@ -7,15 +7,19 @@
 </script>
 
 <script lang="ts">
-	export let active :number = 0
+	export let active: number = 0
 	export let hide1 = false
 	export let hide2 = false
 	export let hide3 = false
 	export let hide4 = false
 	export let hide5 = false
 	export let hide6 = false
+	export let onChangeActive: (i: number) => void = () => {
+		// do nothing
+	}
 	function handler(index: number) {
 		active = index
+		onChangeActive(index)
 	}
 </script>
 

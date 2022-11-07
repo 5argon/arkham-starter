@@ -103,12 +103,14 @@ export class FullDatabase {
 	}
 
 	public queryPack(packs: CardPack[]): FullDatabaseItem[] {
-		return packs.flatMap<FullDatabaseItem>((x) => {
-			if (x in this.byPack) {
-				return this.byPack[x]
-			}
-			throw new Error('Pack not found ' + x)
-		})
+		return packs
+			.flatMap<FullDatabaseItem>((x) => {
+				if (x in this.byPack) {
+					return this.byPack[x]
+				}
+				throw new Error('Pack not found ' + x)
+			})
+			.filter((x) => x.original.hidden !== true)
 	}
 
 	private createUnknownCard(id: string): FullDatabaseItem {
