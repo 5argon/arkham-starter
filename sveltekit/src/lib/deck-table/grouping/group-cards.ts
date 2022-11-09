@@ -1,5 +1,6 @@
 import { isRandomBasicWeakness } from '$lib/ahdb/card'
 import { classConversion } from '$lib/ahdb/conversion'
+import { CardPack } from '$lib/core/card-pack'
 import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
 import { isEntry, type DecklistEntry, type GroupedCards } from '../decklist-entry'
 import { Grouping, Sorting } from '../grouping'
@@ -109,13 +110,14 @@ function groupCardsOneGroup(
 		case Grouping.Set: {
 			const st: { [k: number]: { entries: DecklistEntry[]; packName: string } } = {}
 			cs.forEach((x) => {
-				const sn: number = x.card.packIcon
+				const rbw = isRandomBasicWeakness(x.card.original.code)
+				const sn: number = rbw ? CardPack.RandomBasicWeakness : x.card.packIcon
 				if (!(sn in st)) {
 					st[sn] = { entries: [], packName: '' }
 				}
 				st[sn].entries.push(x.dle)
-				if (isRandomBasicWeakness(x.card.original.code)) {
-					st[sn].packName = "Random Basic Weakness"
+				if (rbw) {
+					st[sn].packName = 'Random Basic Weakness'
 				} else {
 					st[sn].packName = x.card.packNameTransformed ?? x.card.original.pack_name
 				}

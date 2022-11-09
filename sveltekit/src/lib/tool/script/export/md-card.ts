@@ -8,7 +8,7 @@ import type { ExportCard } from './export-tools-center'
  * Only a part of one row about the card.
  */
 export function mdCardAndInfo(card: ExportCard, opt: ExportOptions, ignoreSmall: boolean): string {
-	if (card.customizable) {
+	if (card.customizable && card.showingCustomizableChoice) {
 		return mdJustcardCustomizable(card, opt, ignoreSmall)
 	}
 	return mdJustcard(card, opt, ignoreSmall)

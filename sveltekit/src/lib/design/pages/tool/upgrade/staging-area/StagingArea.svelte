@@ -6,6 +6,7 @@
 	import { extractDeckFromUrl, getDeckCardIds } from '$lib/ahdb/public-api/high-level'
 	import { onMount } from 'svelte'
 	import type { GlobalSettings } from '$lib/proto/generated/global_settings'
+	import { isRandomBasicWeakness, randomBasicWeakness } from '$lib/ahdb/card'
 
 	export let onImportDeck: (
 		cards1: string[],
@@ -71,11 +72,11 @@
 			return
 		}
 		onImportDeck(
-			cards.cards1,
+			cards.cards1.filter((x) => !isRandomBasicWeakness(x)),
 			cards.amounts1,
-			cards.cards2,
+			cards.cards2.filter((x) => !isRandomBasicWeakness(x)),
 			cards.amounts2,
-			cards.cards3,
+			cards.cards3.filter((x) => !isRandomBasicWeakness(x)),
 			cards.amounts3,
 		)
 		noticeLevel = NoticeLevel.Success
@@ -99,7 +100,7 @@
 </div>
 <TextBox
 	enableNotice
-	placeholderText={"Deck ID (prefix p: if published) or Deck URL."}
+	placeholderText={'Deck ID (prefix p: if published) or Deck URL.'}
 	submitButtonText={'Import'}
 	{noticeLevel}
 	{noticeText}

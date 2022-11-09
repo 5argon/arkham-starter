@@ -119,6 +119,10 @@ playerCards.forEach((x) => {
       return traitMap.toNum[x];
     });
   }
+  // Hidden stays in full database, but not in popup database.
+  if (x.hidden === true) {
+    return;
+  }
   popupDatabaseItems.push({
     id: x.code,
     n: x.name,

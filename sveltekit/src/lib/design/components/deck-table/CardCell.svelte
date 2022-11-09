@@ -19,38 +19,26 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class:toggle-div={onToggleChanged} class:toggle-div-on={toggled} on:click={handler}>
-	{#if rbw}
-		<CardSpan
-			{cardId}
-			{amount}
-			text={'Random Basic Weakness'}
-			weakness
-			investigator={card.original.type_code === 'investigator'}
-		/>
-	{:else}
-		<CardSpan
-			{cardId}
-			{amount}
-			class1={card.class1}
-			class2={card.class2 ?? null}
-			class3={card.class3 ?? null}
-			exceptional={taboo && card.tabooExceptional
-				? card.tabooExceptional
-				: card.original.exceptional}
-			color={true}
-			packIcon={card.packIcon}
-			packNumber={card.original.position}
-			restriction={card.original.restrictions !== undefined}
-			showImageStrip={true}
-			text={card.original.name}
-			subText={shouldShowSubname(card, fullDatabase) ? card.original.subname : null}
-			weakness={card.original.subtype_code === 'weakness' ||
-				card.original.subtype_code === 'basicweakness'}
-			investigator={card.original.type_code === 'investigator'}
-			xp={card.original.xp}
-			xpTaboo={taboo ? card.tabooXp ?? null : null}
-		/>
-	{/if}
+	<CardSpan
+		{cardId}
+		{amount}
+		class1={card.class1}
+		class2={card.class2 ?? null}
+		class3={card.class3 ?? null}
+		exceptional={taboo && card.tabooExceptional ? card.tabooExceptional : card.original.exceptional}
+		color={true}
+		packIcon={card.packIcon}
+		packNumber={card.original.position}
+		restriction={card.original.restrictions !== undefined}
+		showImageStrip={true}
+		text={card.original.name}
+		subText={shouldShowSubname(card, fullDatabase) ? card.original.subname : null}
+		weakness={card.original.subtype_code === 'weakness' ||
+			card.original.subtype_code === 'basicweakness'}
+		investigator={card.original.type_code === 'investigator'}
+		xp={card.original.xp}
+		xpTaboo={taboo ? card.tabooXp ?? null : null}
+	/>
 </div>
 
 <style>

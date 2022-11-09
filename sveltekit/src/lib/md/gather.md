@@ -20,7 +20,7 @@ You should use the "Group by ... then sort by ..." feature as a mean to divide t
 
 This tool is a part of complete "arkham-starter" website that will have simplified/transformed card entries to suit newcomers to the series, **defying what was actually used** in that deck from the ArkhamDB. This tool is subjected to the same transformations, as follows :
 
-- Any Core Set cards used in the deck is forwarded to Revised Core Set one, if it exists in ArkhamDB as a separated entry.
+- Any Core Set cards used in the deck is forwarded to Revised Core Set one (can be disabled by unchecking the options at the top), if it exists in ArkhamDB as a separated entry.
 - Any card from old distribution model will have the pack they came from as "\_\_\_ Investigator Expansion" instead of from a Mythos Pack that was used in ArkhamDB, even if they are not even got repackaged just yet by FFG right now. (e.g. "The Innsmouth Conspiracy Investigator Expansion" mysteriously exists right now in this app.) This helps quite a lot when grouping by Set.
 - The latest taboo is on even if the deck didn't specify to use it. It also can force the latest taboo to published deck that was using the previous taboo.
 
@@ -52,6 +52,14 @@ This is so you can give the URL to other players in the table, then everyone can
 This tool is specifically made so a player could work on gathering cards by looking at their mobile phone screen, to go together with this sharing URL feature.
 
 It should be fine to share this URL via messaging apps to each player's personal mobile phone. The card list is intentionally centered and with sufficient line breaking points for viewing on small vertical screen. (It looks quite reasonable on my ancient 4-inch 1st Gen iPhone SE!)
+
+## Forward to Revised Core Set
+
+This is on by default. In arkhamdb, Core Set cards and Revised Core Set cards are not the same entry. Decks using a mix of old and new can cause confusing result and confusing Deck Overlap count. Moreover, this app assumes only 1x Core Set owned. So decks using old Core Set cards 2x will immediately reports "Deck Overlap" with itself!
+
+This option forwards old core cards to revised one, and keep the card that are already from revised core set as it is. Allowing them to be counted together. Thanks to the amount of cards in Revised Core Set, it also functions like you having 2x Old Core Set (plus some other bonus cards).
+
+Most of the time, you should left this option checked. You can uncheck and see for fun what would happen.
 
 ## Grouping and sorting
 

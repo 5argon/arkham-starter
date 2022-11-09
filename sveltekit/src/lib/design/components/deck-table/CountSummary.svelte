@@ -8,17 +8,11 @@
 	import CountSummaryRender from './CountSummaryRender.svelte'
 
 	export let entries: DecklistEntry[]
-	$: entriesForwarded = entries.map<DecklistEntry>((x) => {
-		return {
-			...x,
-			cardId: coreToRcore(x.cardId),
-		}
-	})
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
 	export let fullDatabase: FullDatabase
 	export let centered :boolean = false
-	$: gc = groupCards(entriesForwarded, groupings, sortings, fullDatabase)
+	$: gc = groupCards(entries, groupings, sortings, fullDatabase)
 </script>
 
 <table class:centered>

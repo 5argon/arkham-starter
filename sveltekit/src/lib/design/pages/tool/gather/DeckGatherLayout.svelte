@@ -158,6 +158,7 @@
 	import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
 	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
+	import { once } from 'svelte/internal'
 
 	export let startingP1: string = ''
 	export let startingP2: string = ''
@@ -358,7 +359,7 @@
 </div>
 
 <div class="options">
-	{#if browser && navigator.canShare()}
+	{#if browser && navigator.canShare?.()}
 		<Button
 			label="Share URL"
 			onClick={() => {
@@ -485,6 +486,11 @@
 				<div slot="content2">
 					{#if overlapping}
 						<ListDivider label={'Deck Overlaps'} />
+						<p>Trobleshooting number "X/Y" on the label (X is higher than Y) means :</p>
+						<ul>
+							<li>X: Amount of this card contributed from all decks.</li>
+							<li>Y: Amount of this card you have in your collection.</li>
+						</ul>
 						<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 						<CardTableGrouped
 							{toggleMap}

@@ -39,6 +39,9 @@
 	export let checkBoxes: number = 0
 	export let checkedBoxes: number = 0
 
+	$: rbw = isRandomBasicWeakness(cardId)
+	$: effectiveText = rbw ? "Random Basic Weakness" : text
+
 	let colorClass: string
 	$: {
 		if (color) {
@@ -68,11 +71,11 @@
 </script>
 
 <span class="outer-span">
-	{#if !isRandomBasicWeakness(cardId)}
-		<ImageStrip name={text} {showImageStrip} {xp} {cardId} {class1} {class2} {class3} />
+	{#if !rbw}
+		<ImageStrip name={effectiveText} {showImageStrip} {xp} {cardId} {class1} {class2} {class3} />
 	{/if}
 
-	{#if text !== null}
+	{#if effectiveText !== null}
 		{#if amount !== null}<span
 				class="amount"
 				class:amount-minus={amount < 0}
@@ -87,10 +90,10 @@
 		{/if}
 		<span class="card-name-container">
 			<CustomizableCheckBoxes {checkBoxes} {checkedBoxes} />
-			<span class:card-name-long={text.length >= 25} class={colorClass + ' ' + 'card-name'}
-				>{text}</span
+			<span class:card-name-long={effectiveText.length >= 25} class={colorClass + ' ' + 'card-name'}
+				>{effectiveText}</span
 			>{#if subText !== null}<span class={colorClass + ' ' + 'card-subname'}>{subText}</span>{/if}
-			{#if weakness || isRandomBasicWeakness(cardId)}<span
+			{#if weakness || rbw}<span
 					title="Weakness"
 					class={'pips ' + textIconFontClass}>{textIconToFontCharacter(TextIcon.Weakness)}</span
 				>{/if}{#if restriction}<FaIcon
