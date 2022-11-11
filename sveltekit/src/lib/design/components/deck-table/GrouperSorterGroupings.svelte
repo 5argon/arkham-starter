@@ -35,6 +35,7 @@
 			<option value={Grouping.Slot}>Slot</option>
 			<option value={Grouping.Level}>Level</option>
 			<option value={Grouping.Level015}>Level (0, 1~5)</option>
+			<option value={Grouping.EffectiveIcons}>Effective Icons</option>
 		</select>
 	</span>
 	{#if i < groupings.length - 1}

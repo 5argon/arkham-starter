@@ -2,6 +2,7 @@
 	import { fetchPopupDatabase } from '$lib/core/popup-database'
 
 	import Story from '$lib/design/story/story.svelte'
+	import { xlink_attr } from 'svelte/internal'
 	import StagingArea from './StagingArea.svelte'
 
 	const pdbp = fetchPopupDatabase()
@@ -53,10 +54,10 @@
 			stagingCards1={cards1}
 			stagingCards2={cards2}
 			stagingCards3={cards3}
-			onImportDeck={(d1, a1, d2, a2, d3, a3) => {
-				cards1 = d1
-				cards2 = d2
-				cards3 = d3
+			onImportDeck={(d1, d2, d3) => {
+				cards1 = d1.map(x=>x.cardId)
+				cards2 = d2.map(x=>x.cardId)
+				cards3 = d3.map(x=>x.cardId)
 			}}
 		/>
 	</Story>

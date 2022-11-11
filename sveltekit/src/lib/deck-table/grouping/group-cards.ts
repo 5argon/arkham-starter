@@ -19,7 +19,7 @@ export function groupCards(
 	entries: DecklistEntry[],
 	groupings: Grouping[],
 	sortings: Sorting[],
-	fdb: FullDatabase,
+	fdb: FullDatabase ,
 ): GroupedCards[] {
 	const gc: GroupedCards = {
 		groupName: null,
@@ -287,6 +287,67 @@ function groupCardsOneGroup(
 						entries: v.entries,
 						groupName:
 							v.level === undefinedXp ? 'Level -' : v.level === 0 ? 'Level 0' : 'Level 1~5',
+					}
+				})
+			groups = sorted
+			break
+		}
+		case Grouping.EffectiveIcons: {
+			const st: { [k: number]: { entries: DecklistEntry[]; effectiveIcons: number } } = {}
+			cs.forEach((x) => {
+				const wild = x.card.original.skill_wild ?? 0
+				const effectiveCombat = (x.card.original.skill_combat ?? 0) + wild
+				const effectiveIntellect = (x.card.original.skill_intellect ?? 0) + wild
+				const effectiveWillpower = (x.card.original.skill_willpower ?? 0) + wild
+				const effectiveAgility = (x.card.original.skill_agility ?? 0) + wild
+				const maxContribution = [
+					effectiveCombat,
+					effectiveIntellect,
+					effectiveWillpower,
+					effectiveAgility,
+				].reduce((prev, cur) => {
+					if (cur > prev) {
+						return cur
+					}
+					return prev
+				}, 0)
+				if (!(maxContribution in st)) {
+					st[maxContribution] = { entries: [], effectiveIcons: maxContribution }
+				}
+				st[maxContribution].entries.push(x.dle)
+				st[maxContribution].effectiveIcons = maxContribution
+			})
+			const sorted = Object.entries(st)
+				.sort(([, v], [, v2]) => {
+					return v.effectiveIcons - v2.effectiveIcons
+				})
+				.map<GroupedCards>(([, v]) => {
+					let groupName: string
+					switch (v.effectiveIcons) {
+						case 0: {
+							groupName = 'No Icon'
+							break
+						}
+						case 1: {
+							groupName = 'Single Icon'
+							break
+						}
+						case 2: {
+							groupName = 'Double Icons'
+							break
+						}
+						case 3: {
+							groupName = 'Triple Icons'
+							break
+						}
+						default: {
+							groupName = 'Quadruple+ Icons'
+							break
+						}
+					}
+					return {
+						entries: v.entries,
+						groupName: groupName,
 					}
 				})
 			groups = sorted

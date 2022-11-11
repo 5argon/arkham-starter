@@ -42,23 +42,25 @@
 
 	let width: number
 	let cardBlockButtons: CardBlockButtonProp[]
+	const deleteButton: CardBlockButtonProp = {
+		label: 'Delete',
+		iconPath: allIcons.delete,
+		onClick: () => {
+			onClickDelete()
+		},
+	}
+	const customizableButton: CardBlockButtonProp = {
+		label: 'Select Customization',
+		iconPath: allIcons.customizable,
+		onClick: () => {
+			onCustomizableCycle()
+		},
+	}
 	$: {
-		cardBlockButtons = []
-		cardBlockButtons.push({
-			label: 'Delete',
-			iconPath: allIcons.delete,
-			onClick: () => {
-				onClickDelete()
-			},
-		})
 		if (customizable && right) {
-			cardBlockButtons.push({
-				label: 'Select Customization',
-				iconPath: allIcons.customizable,
-				onClick: () => {
-					onCustomizableCycle()
-				},
-			})
+			cardBlockButtons = [deleteButton, customizableButton]
+		} else {
+			cardBlockButtons = [deleteButton]
 		}
 	}
 </script>

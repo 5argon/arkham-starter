@@ -128,7 +128,7 @@ export interface PopupDatabaseItem {
   swi?: number;
 
   /**
-   * Traits. 
+   * Traits.
    * Use number to map with the real string in outer maps.
    */
   tra: number[];
@@ -137,6 +137,11 @@ export interface PopupDatabaseItem {
    * Customizable choices.
    */
   cus?: CustomizableStruct[];
+
+  /**
+   * Quantity
+   */
+  q: number;
 }
 
 export interface CustomizableStruct {

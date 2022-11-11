@@ -16,7 +16,7 @@
 	export let sortings: Sorting[]
 	export let toggleMap: { [cardId: string]: boolean }
 	export let taboo: boolean
-	export let fullDatabase: FullDatabase
+	export let fullDatabase: FullDatabase 
 	export let columns: ExtraColumn[] = []
 	export let centered: boolean = false
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null

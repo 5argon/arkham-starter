@@ -1,5 +1,5 @@
 import type { AhdbCard } from '../card'
-import type { AhdbDeck } from '../deck'
+import type { AhdbDeck, AhdbRealPublished } from '../deck'
 import type { AhdbPack } from '../pack'
 import type { AhdbTaboo, AhdbTabooProcessing, TabooItem } from '../taboo'
 import {
@@ -9,6 +9,7 @@ import {
 	publicApiDecklist,
 	publicApiPacks,
 	publicApiTaboos,
+	realUrlDecklist,
 } from './constants'
 import { fetchWithRetries } from './fetch'
 
@@ -39,6 +40,25 @@ export async function publicDeckPublished(deckNumber: string): Promise<AhdbDeck 
 		const s = (await ret.json()) as AhdbDeck
 		//console.log(s)
 		return s
+	} catch {
+		return null
+	}
+}
+
+export async function realDeckPublished(deckNumber: string): Promise<AhdbRealPublished | null> {
+	const publicDecklist = joinPath(...realUrlDecklist, deckNumber)
+	try {
+		const ret = await fetchWithRetries(publicDecklist)
+		const s = await ret.text()
+		const parser = new DOMParser()
+		const doc = parser.parseFromString(s, 'text/html')
+		const username = doc.querySelector('.username')
+		if (username !== null) {
+			console.log(username)
+			const ret: AhdbRealPublished = { username: username.textContent ?? '', userUrl: '' }
+			return ret
+		}
+		return null
 	} catch {
 		return null
 	}

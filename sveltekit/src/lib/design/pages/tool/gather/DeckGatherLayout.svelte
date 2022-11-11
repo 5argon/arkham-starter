@@ -53,8 +53,8 @@
 			colorHex = cardClassToBackgroundClass(faction)
 		}
 		for (let i = 0; i < g.cards1.length; i++) {
-			const c1 = fw ? coreToRcore(g.cards1[i]) : g.cards1[i]
-			const a1 = g.amounts1[i]
+			const c1 = fw ? coreToRcore(g.cards1[i].cardId) : g.cards1[i].cardId
+			const a1 = g.cards1[i].amount
 			ents.push({
 				id: 'd' + player + c1,
 				amount: a1,
@@ -63,8 +63,8 @@
 			})
 		}
 		for (let i = 0; i < g.cards2.length; i++) {
-			const c2 = fw ? coreToRcore(g.cards2[i]) : g.cards2[i]
-			const a2 = g.amounts2[i]
+			const c2 = fw ? coreToRcore(g.cards2[i].cardId) : g.cards2[i].cardId
+			const a2 = g.cards2[i].amount
 			ents.push({
 				id: 's' + player + c2,
 				amount: a2,
@@ -73,8 +73,8 @@
 			})
 		}
 		for (let i = 0; i < g.cards3.length; i++) {
-			const c3 = fw ? coreToRcore(g.cards3[i]) : g.cards3[i]
-			const a3 = g.amounts3[i]
+			const c3 = fw ? coreToRcore(g.cards3[i].cardId) : g.cards3[i].cardId
+			const a3 = g.cards3[i].amount
 			ents.push({
 				id: 'i' + player + c3,
 				amount: a3,
@@ -140,6 +140,7 @@
 	import {
 		extractDeckFromUrl,
 		getDeckCardIds,
+		type CardAndAmount,
 		type ExtractResult,
 		type GetDeckCardIdReturns,
 	} from '$lib/ahdb/public-api/high-level'
@@ -158,7 +159,7 @@
 	import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
 	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
-	import { once } from 'svelte/internal'
+	import { checkOverlaps } from '$lib/tool/overlap/overlap-helpers'
 
 	export let startingP1: string = ''
 	export let startingP2: string = ''
@@ -182,13 +183,7 @@
 	let pulling: boolean = false
 	$: overlapping = overlappingEntries.length > 0
 	var overlappingCount: number
-	$: {
-		const uniqueCards = new Set<string>()
-		for (let i = 0; i < overlappingEntries.length; i++) {
-			uniqueCards.add(overlappingEntries[i].cardId)
-		}
-		overlappingCount = Array.from(uniqueCards).length
-	}
+
 	let fdbp = fetchFullDatabase()
 
 	gather()
@@ -226,45 +221,45 @@
 		p2r = await p2p
 		p3r = await p3p
 		p4r = await p4p
-		function sum(a: number[]): number {
+		function sum(a: CardAndAmount[]): number {
 			return a.reduce((p, c) => {
-				return p + c
+				return p + c.amount
 			}, 0)
 		}
 		p1 = {
 			...p1,
 			deck: p1r ? p1r.deck : '',
 			error: !p1r && p1.deckUrl !== '' ? true : false,
-			mainCount: p1r ? sum(p1r.amounts1) : 0,
-			sideCount: p1r ? sum(p1r.amounts2) : 0,
-			ignoreCount: p1r ? sum(p1r.amounts3) : 0,
+			mainCount: p1r ? sum(p1r.cards1) : 0,
+			sideCount: p1r ? sum(p1r.cards2) : 0,
+			ignoreCount: p1r ? sum(p1r.cards3) : 0,
 			investigator: p1r ? fdb.getCard(p1r.investigatorCode) : null,
 		}
 		p2 = {
 			...p2,
 			deck: p2r ? p2r.deck : '',
 			error: !p2r && p2.deckUrl !== '' ? true : false,
-			mainCount: p2r ? sum(p2r.amounts1) : 0,
-			sideCount: p2r ? sum(p2r.amounts2) : 0,
-			ignoreCount: p2r ? sum(p2r.amounts3) : 0,
+			mainCount: p2r ? sum(p2r.cards1) : 0,
+			sideCount: p2r ? sum(p2r.cards2) : 0,
+			ignoreCount: p2r ? sum(p2r.cards3) : 0,
 			investigator: p2r ? fdb.getCard(p2r.investigatorCode) : null,
 		}
 		p3 = {
 			...p3,
 			deck: p3r ? p3r.deck : '',
 			error: !p3r && p3.deckUrl !== '' ? true : false,
-			mainCount: p3r ? sum(p3r.amounts1) : 0,
-			sideCount: p3r ? sum(p3r.amounts2) : 0,
-			ignoreCount: p3r ? sum(p3r.amounts3) : 0,
+			mainCount: p3r ? sum(p3r.cards1) : 0,
+			sideCount: p3r ? sum(p3r.cards2) : 0,
+			ignoreCount: p3r ? sum(p3r.cards3) : 0,
 			investigator: p3r ? fdb.getCard(p3r.investigatorCode) : null,
 		}
 		p4 = {
 			...p4,
 			deck: p4r ? p4r.deck : '',
 			error: !p4r && p4.deckUrl !== '' ? true : false,
-			mainCount: p4r ? sum(p4r.amounts1) : 0,
-			sideCount: p4r ? sum(p4r.amounts2) : 0,
-			ignoreCount: p4r ? sum(p4r.amounts3) : 0,
+			mainCount: p4r ? sum(p4r.cards1) : 0,
+			sideCount: p4r ? sum(p4r.cards2) : 0,
+			ignoreCount: p4r ? sum(p4r.cards3) : 0,
 			investigator: p4r ? fdb.getCard(p4r.investigatorCode) : null,
 		}
 		sharingUrl = 'https://arkham-starter.com/tool/gather'
@@ -339,7 +334,9 @@
 				forwardRcore,
 			)
 		}
-		checkDupe(entries, overlappingEntries, fdb)
+		const checkResult = checkOverlaps(entries, (c) => fdb.getCard(c).original.quantity)
+		overlappingEntries.push(...checkResult.overlapReports)
+		overlappingCount = checkResult.uniqueOverlapCount
 		entries = [...entries]
 		overlappingEntries = [...overlappingEntries]
 	}
@@ -481,6 +478,7 @@
 				<div slot="tab2">
 					<span class="deck-overlaps-tab-text">Deck Overlaps</span><NotificationNumber
 						count={overlappingCount}
+						attention
 					/>
 				</div>
 				<div slot="content2">

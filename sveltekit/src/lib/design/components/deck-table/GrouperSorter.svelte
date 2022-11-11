@@ -1,12 +1,15 @@
 <script lang="ts">
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import FramedTextSpan from '../inline/FramedTextSpan.svelte'
 	import GrouperSorterGroupings from './GrouperSorterGroupings.svelte'
 	import GrouperSorterSortings from './GrouperSorterSortings.svelte'
 
+	export let text: string = ''
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
 	export let onGroupingsChanged: (g: Grouping[]) => void
 	export let onSortingsChanged: (s: Sorting[]) => void
+
 	let dumbThing: number = Math.random()
 	let collectionCode = ''
 	function inputChangedHandler(e: Event & { currentTarget: HTMLInputElement }) {
@@ -41,6 +44,7 @@
 /> -->
 
 <div class="long-span">
+	<FramedTextSpan {text} />
 	<!-- <span>
 		<input
 			class="collection-code-box"
@@ -70,12 +74,10 @@
 </div>
 
 <style>
-	.collection-code-box {
-		width: 80px;
-	}
 	.long-span {
 		display: inline-flex;
 		flex-wrap: wrap;
 		align-items: center;
+		margin: 8px 0px;
 	}
 </style>

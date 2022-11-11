@@ -236,6 +236,18 @@ export function coreToRcore(cardId: string): string {
 	return cardId
 }
 
+export function rcoreToCore(cardId: string): string {
+	const flip = Object.fromEntries(
+		Object.entries(coreToRcoreMap).map(([k, v]) => {
+			return [v, k]
+		}),
+	)
+	if (cardId in flip) {
+		return flip[cardId]
+	}
+	return cardId
+}
+
 const coreToRcoreMap: { [k: string]: string } = {
 	'01001': '01501',
 	'01002': '01502',

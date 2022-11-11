@@ -157,6 +157,7 @@ playerCards.forEach((x) => {
     wk: x.subtype_code !== undefined && x.subtype_code === "weakness",
     cs: x.cost,
     cus: extractCustomizable(x),
+    q: x.quantity,
   });
 });
 

@@ -7,6 +7,7 @@
 	import PackIconHover from './PackIconHover.svelte'
 
 	export let pack: CardPackIcon
+	export let count: number | null = null
 	let hovering = false
 	function mouseEnterHandler(e: MouseEvent & { currentTarget: EventTarget }) {
 		hovering = true
@@ -41,12 +42,15 @@
 </script>
 
 <div on:mouseenter={mouseEnterHandler} on:mouseleave={mouseLeaveHandler}>
+	{#if count !== null}
+		<span class="count">{count}</span>
+	{/if}
 	{#if hovering}
 		<span class="pack-icon-popup">
 			<PackIconHover packIcon={pack} />
 		</span>
 	{/if}
-	<a href={packLink} target="_blank">
+	<a href={packLink} target="_blank" rel="noreferrer">
 		<img
 			class="pack-icon"
 			src={getPackStaticUrl(pack, CardPackIconColor.Black)}
@@ -71,5 +75,13 @@
 	.pack-icon-popup {
 		position: absolute;
 		margin-top: -25px;
+	}
+
+	.count {
+		user-select: none;
+		font-size: xx-small;
+		position: absolute;
+		margin-top: 14px;
+		color: grey;
 	}
 </style>

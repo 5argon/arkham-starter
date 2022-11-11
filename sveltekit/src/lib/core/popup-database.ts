@@ -208,6 +208,11 @@ export interface PopupDatabaseItemRaw {
 		 */
 		n: string
 	}[]
+
+	/**
+	 * Quantity
+	 */
+	q: number
 }
 
 export async function fetchPopupDatabase(): LazyPopupDatabase {

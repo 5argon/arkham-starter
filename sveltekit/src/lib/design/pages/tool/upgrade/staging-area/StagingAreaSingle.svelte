@@ -6,22 +6,22 @@
 	import CardBlockLeftRight from './CardBlockLeftRight.svelte'
 	import { fly } from 'svelte/transition'
 	import type { GlobalSettings } from '$lib/proto/generated/global_settings'
+	import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
 
 	export let singleMode: boolean = false
 	export let collapse: boolean = false
 	export let globalSettings: GlobalSettings
 	export let label: string
 	export let popupDatabase: PopupDatabase
-	export let stagingCards: string[] = []
-	export let stagingAmounts: (number | null)[] = []
+	export let stagingCards: CardAndAmount[] = []
 
 	let addCardTextboxText: string = ''
 
 	let cards: (PopupDatabaseItem | null)[]
 	$: {
-		cards = stagingCards.map((x) => popupDatabase.getById(x))
+		cards = stagingCards.map((x) => popupDatabase.getById(x.cardId))
 	}
-	export let onAddStagingCards: (cardId: string, amount: number | null) => void = () => {
+	export let onAddStagingCards: (cardId: CardAndAmount) => void = () => {
 		// do nothing
 	}
 	export let onDelete: (cardId: string) => void = () => {
@@ -45,7 +45,7 @@
 		if (card !== null) {
 			cardNoticeString = 'Found and added a card : ' + card.original.n
 			noticeLevel = NoticeLevel.Success
-			onAddStagingCards(card.original.id, null)
+			onAddStagingCards({ cardId: card.original.id, amount: 1 })
 			addCardTextboxText = ''
 		} else {
 			cardNoticeString = 'Card with ID ' + s + ' not found.'
@@ -80,7 +80,7 @@
 					<CardBlockLeftRight
 						{singleMode}
 						cardId={c.original.id}
-						amount={stagingAmounts[i]}
+						amount={stagingCards[i].amount}
 						showImageStrip={true}
 						collapse={true}
 						text={c.original.n}
@@ -111,7 +111,7 @@
 					<CardBlockLeftRight
 						{singleMode}
 						cardId={c.original.id}
-						amount={stagingAmounts[i]}
+						amount={stagingCards[i].amount}
 						showImageStrip={true}
 						text={c.original.n}
 						subText={c.original.esn ? c.original.sn : null}
@@ -145,7 +145,7 @@
 				</div>
 			{/if}
 		{:else}
-			<UnknownCardBlock cardId={stagingCards[i]} />
+			<UnknownCardBlock cardId={stagingCards[i].cardId} />
 		{/if}
 	{/each}
 </div>

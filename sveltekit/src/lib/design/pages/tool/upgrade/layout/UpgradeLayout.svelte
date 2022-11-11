@@ -36,7 +36,7 @@
 	import { CardInfo_CommitOptions_CommitIcon } from '$lib/proto/generated/card_info'
 	import type { ExportCard, UpgradeExportRow } from '$lib/tool/script/export/export-tools-center'
 	import { protoStringRestore } from '$lib/tool/script/export/proto-string-restore'
-	import { isRandomBasicWeakness } from '$lib/ahdb/card'
+	import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -46,18 +46,17 @@
 	export let helpMd: string
 	export let importProto: string | null = null
 
+	let popupDatabase = fetchPopupDatabase()
+
 	let importText: string = ''
 	let globalSettings: GlobalSettings
 	$: globalSettings = {
 		pipStyle: singleMode ? GlobalSettings_PipStyle.PipsReal : GlobalSettings_PipStyle.Pips,
 		taboo: true,
 	}
-	let stagingCards1: string[] = []
-	let stagingCards2: string[] = []
-	let stagingCards3: string[] = []
-	let stagingAmounts1: (number | null)[] = []
-	let stagingAmounts2: (number | null)[] = []
-	let stagingAmounts3: (number | null)[] = []
+	let stagingCards1: CardAndAmount[] = []
+	let stagingCards2: CardAndAmount[] = []
+	let stagingCards3: CardAndAmount[] = []
 
 	function rowToExportRow(
 		r: Row,
@@ -270,7 +269,6 @@
 		},
 	}
 
-	let popupDatabase = fetchPopupDatabase()
 	let collapse: boolean = true
 
 	let upgradeExportOptions: UpgradeExportOptions = {
@@ -388,20 +386,14 @@
 					onAddToRightSide={(c) => {
 						rows = addCardToList(rows, c, true)
 					}}
-					onImportDeck={(a, am, b, bm, c, cm) => {
-						stagingCards1 = a
-						stagingAmounts1 = am
-						stagingCards2 = b
-						stagingAmounts2 = bm
-						stagingCards3 = c
-						stagingAmounts3 = cm
+					onImportDeck={(a, b, c) => {
+						stagingCards1 = [...a]
+						stagingCards2 = [...b]
+						stagingCards3 = [...c]
 					}}
 					{stagingCards1}
 					{stagingCards2}
 					{stagingCards3}
-					{stagingAmounts1}
-					{stagingAmounts2}
-					{stagingAmounts3}
 				/>
 			</div>
 		</div>

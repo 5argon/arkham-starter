@@ -4,7 +4,7 @@ export interface AhdbDeck {
 	date_creation: string
 	date_update: string
 	description_md: string
-	user_id: number
+	user_id: number | null
 	investigator_code: string
 	investigator_name: string
 	slots: CardList
@@ -21,6 +21,11 @@ export interface AhdbDeck {
 	previous_deck: number | null
 	next_deck: number | null
 	problem: string | null
+}
+
+export interface AhdbRealPublished {
+	username: string
+	userUrl: string
 }
 
 export type CardList = { [k: string]: number } | null

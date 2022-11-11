@@ -143,7 +143,7 @@
 			color={true}
 		/>
 	</div>
-	{#each rightButtons as b}
+	{#each rightButtons as b (b)}
 		<CardBlockButton label={b.label} iconPath={b.iconPath} onClick={b.onClick} />
 	{/each}
 </div>
