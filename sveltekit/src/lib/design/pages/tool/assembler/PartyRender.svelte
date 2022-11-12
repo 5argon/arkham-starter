@@ -5,14 +5,38 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import Button from '$lib/design/components/basic/Button.svelte'
-	import PackInfoSpan from '$lib/design/components/inline/PackInfoSpan.svelte'
-	import { CardPackIcon } from '$lib/design/interface/card-pack'
+	import PackInfoSpan, {
+		type PackInfoSpanItem,
+	} from '$lib/design/components/inline/PackInfoSpan.svelte'
 	import { goto } from '$app/navigation'
+	import { addPackCount, countPacks, type PackCount } from '$lib/deck/deck-count'
 
 	export let party: Party
 	export let fullDatabase: FullDatabase
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
+	let packCount: PackCount
+
+	$: {
+		let collect: PackCount = {}
+		party.decks.forEach((x) => {
+			const a = countPacks(x.cards1, (c) => fullDatabase.getCard(c).packIcon)
+			const b = countPacks(x.cards2, (c) => fullDatabase.getCard(c).packIcon)
+			const c = countPacks(x.cards3, (c) => fullDatabase.getCard(c).packIcon)
+			collect = addPackCount(addPackCount(addPackCount(a, b), c), collect)
+		})
+		packCount = collect
+	}
+
+	let packInfoSpanItems: PackInfoSpanItem[]
+	$: {
+		packInfoSpanItems = Object.entries(packCount).map<PackInfoSpanItem>(([packString, count]) => {
+			return {
+				pack: parseInt(packString),
+				count: count,
+			}
+		})
+	}
 </script>
 
 <tr>
@@ -61,12 +85,7 @@
 		/>
 	</td>
 	<td class="outer-td">
-		<PackInfoSpan
-			items={[
-				{ pack: CardPackIcon.RevisedCoreSet, count: 2 },
-				{ pack: CardPackIcon.TheDunwichLegacy, count: 13 },
-			]}
-		/>
+		<PackInfoSpan items={packInfoSpanItems} />
 	</td>
 </tr>
 

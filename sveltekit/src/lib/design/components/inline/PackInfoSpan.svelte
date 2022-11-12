@@ -26,7 +26,9 @@
 
 <div class="packs">
 	{#each packsSorted as p}
-		<PackIconWithHover pack={p.pack} count={p.count} />
+		<div class="one-pack">
+			<PackIconWithHover pack={p.pack} count={p.count} />
+		</div>
 	{/each}
 </div>
 

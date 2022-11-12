@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { isReturnToPack, isStarterPack } from '$lib/core/card-pack'
 	import {
 		CardPackIcon,
 		CardPackIconColor,
@@ -17,6 +18,9 @@
 	}
 
 	let packLink: string | null = null
+	let packReturnTo = isReturnToPack(pack)
+	let packStarter = isStarterPack(pack)
+	$: packColored = packReturnTo || packStarter
 	switch (pack) {
 		case CardPackIcon.TheDunwichLegacy: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2021/11/18/reliving-the-legacy/'
@@ -41,10 +45,7 @@
 	}
 </script>
 
-<div on:mouseenter={mouseEnterHandler} on:mouseleave={mouseLeaveHandler}>
-	{#if count !== null}
-		<span class="count">{count}</span>
-	{/if}
+<div class="all-div" on:mouseenter={mouseEnterHandler} on:mouseleave={mouseLeaveHandler}>
 	{#if hovering}
 		<span class="pack-icon-popup">
 			<PackIconHover packIcon={pack} />
@@ -53,16 +54,23 @@
 	<a href={packLink} target="_blank" rel="noreferrer">
 		<img
 			class="pack-icon"
-			src={getPackStaticUrl(pack, CardPackIconColor.Black)}
+			class:pack-icon-return-to={packReturnTo}
+			class:pack-icon-starter={packStarter}
+			src={getPackStaticUrl(pack, packColored ? CardPackIconColor.White : CardPackIconColor.Black)}
 			alt="Pack icon"
 			draggable="false"
 		/>
 	</a>
 </div>
+{#if count !== null}
+	<span class="count">{count}</span>
+{/if}
 
 <style>
 	div {
 		position: relative;
+		width: 20px;
+		height: 15px;
 	}
 
 	.pack-icon {
@@ -81,7 +89,14 @@
 		user-select: none;
 		font-size: xx-small;
 		position: absolute;
-		margin-top: 14px;
 		color: grey;
+	}
+
+	.pack-icon-return-to {
+		filter: brightness(20%) sepia(100%) hue-rotate(100deg) saturate(6);
+	}
+
+	.pack-icon-starter {
+		filter: brightness(20%) sepia(100%) hue-rotate(300deg) saturate(6);
 	}
 </style>

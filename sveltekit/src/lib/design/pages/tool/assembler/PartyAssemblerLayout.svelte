@@ -50,11 +50,9 @@
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import FramedTextSpan from '$lib/design/components/inline/FramedTextSpan.svelte'
 	import PartyDeckEntry from '$lib/design/components/card/PartyDeckEntry.svelte'
-	import { xlink_attr } from 'svelte/internal'
 	import { browser } from '$app/environment'
 	import { getClassIconAhdb, prefixClassIcons } from '$lib/tool/script/export/ahdb-syntax'
 	import { getClassIconEmoji } from '$lib/tool/script/export/emoji'
-	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
 
 	export let protoString: string | null = null
 
