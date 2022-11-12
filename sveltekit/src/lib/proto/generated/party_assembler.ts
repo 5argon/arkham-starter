@@ -56,6 +56,10 @@ export interface PartyAssemblerProto_InputDeck {
      * @generated from protobuf field: bool published = 2;
      */
     published: boolean;
+    /**
+     * @generated from protobuf field: string comment = 3;
+     */
+    comment: string;
 }
 /**
  * @generated from protobuf message PartyAssemblerProto.PickedAssembly
@@ -202,11 +206,12 @@ class PartyAssemblerProto_InputDeck$Type extends MessageType<PartyAssemblerProto
     constructor() {
         super("PartyAssemblerProto.InputDeck", [
             { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "published", kind: "scalar", T: 8 /*ScalarType.BOOL*/ }
+            { no: 2, name: "published", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 3, name: "comment", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<PartyAssemblerProto_InputDeck>): PartyAssemblerProto_InputDeck {
-        const message = { id: "", published: false };
+        const message = { id: "", published: false, comment: "" };
         globalThis.Object.defineProperty(message, MESSAGE_TYPE, { enumerable: false, value: this });
         if (value !== undefined)
             reflectionMergePartial<PartyAssemblerProto_InputDeck>(this, message, value);
@@ -222,6 +227,9 @@ class PartyAssemblerProto_InputDeck$Type extends MessageType<PartyAssemblerProto
                     break;
                 case /* bool published */ 2:
                     message.published = reader.bool();
+                    break;
+                case /* string comment */ 3:
+                    message.comment = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -241,6 +249,9 @@ class PartyAssemblerProto_InputDeck$Type extends MessageType<PartyAssemblerProto
         /* bool published = 2; */
         if (message.published !== false)
             writer.tag(2, WireType.Varint).bool(message.published);
+        /* string comment = 3; */
+        if (message.comment !== "")
+            writer.tag(3, WireType.LengthDelimited).string(message.comment);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

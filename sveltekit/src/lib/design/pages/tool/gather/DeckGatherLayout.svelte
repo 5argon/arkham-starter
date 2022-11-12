@@ -392,7 +392,9 @@
 	player={0}
 	cardClass={p1.investigator?.class1 ?? CardClass.Neutral}
 	{fixedLabelColor}
-	deckUrl={p1.deckUrl}
+	deckInput={p1.deckUrl}
+	investigatorCode={p1r?.investigatorCode}
+	actualDeckUrl={p1r?.link}
 	pullError={p1.error}
 	mainCount={p1.mainCount}
 	sideCount={p1.sideCount}
@@ -407,7 +409,9 @@
 	player={1}
 	cardClass={p2.investigator?.class1 ?? CardClass.Neutral}
 	{fixedLabelColor}
-	deckUrl={p2.deckUrl}
+	deckInput={p2.deckUrl}
+	investigatorCode={p2r?.investigatorCode}
+	actualDeckUrl={p2r?.link}
 	pullError={p2.error}
 	mainCount={p2.mainCount}
 	sideCount={p2.sideCount}
@@ -422,7 +426,9 @@
 	player={2}
 	cardClass={p3.investigator?.class1 ?? CardClass.Neutral}
 	{fixedLabelColor}
-	deckUrl={p3.deckUrl}
+	deckInput={p3.deckUrl}
+	investigatorCode={p3r?.investigatorCode}
+	actualDeckUrl={p3r?.link}
 	pullError={p3.error}
 	mainCount={p3.mainCount}
 	sideCount={p3.sideCount}
@@ -437,7 +443,9 @@
 	player={3}
 	cardClass={p4.investigator?.class1 ?? CardClass.Neutral}
 	{fixedLabelColor}
-	deckUrl={p4.deckUrl}
+	deckInput={p4.deckUrl}
+	investigatorCode={p4r?.investigatorCode}
+	actualDeckUrl={p4r?.link}
 	pullError={p4.error}
 	mainCount={p4.mainCount}
 	sideCount={p4.sideCount}

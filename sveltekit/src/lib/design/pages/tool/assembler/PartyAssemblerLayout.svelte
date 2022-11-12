@@ -1,11 +1,27 @@
 <script lang="ts" context="module">
+	import type { GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+
 	enum PartyAssemblerSorting {
 		Overlaps,
 		CombinationOrder,
 	}
 
+	enum PartyAssemblerIconFormat {
+		ArkhamDb,
+		Emoji,
+		None,
+	}
+
 	enum PartyAssemblerFilter {
 		NoSameClass,
+	}
+
+	interface CommentInsert {
+		comment: string
+		index: number
+	}
+	function isComment(x: CommentInsert | GetDeckCardIdReturns): x is CommentInsert {
+		return 'comment' in x
 	}
 </script>
 
@@ -15,7 +31,6 @@
 		forwardDeckToOldCore,
 		forwardDeckToRcore,
 		getDeckCardIds,
-		type GetDeckCardIdReturns,
 	} from '$lib/ahdb/public-api/high-level'
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
@@ -34,7 +49,12 @@
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import FramedTextSpan from '$lib/design/components/inline/FramedTextSpan.svelte'
+	import PartyDeckEntry from '$lib/design/components/card/PartyDeckEntry.svelte'
 	import { xlink_attr } from 'svelte/internal'
+	import { browser } from '$app/environment'
+	import { getClassIconAhdb, prefixClassIcons } from '$lib/tool/script/export/ahdb-syntax'
+	import { getClassIconEmoji } from '$lib/tool/script/export/emoji'
+	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
 
 	export let protoString: string | null = null
 
@@ -47,9 +67,12 @@
 	let exportProto: string = ''
 	let parties: Party[] = []
 	let sorting: PartyAssemblerSorting = PartyAssemblerSorting.Overlaps
-	let filterNoSameClass: boolean = false
+	let filterIncrementalComposition: boolean = true
+	let filterNoSameClass: boolean = true
+	let filterLimitResults: boolean = true
 	let filterZeroOverlapOnly: boolean = false
 	let filterNoSameUser: boolean = false
+	let copyIconFormat: PartyAssemblerIconFormat = PartyAssemblerIconFormat.Emoji
 
 	let groupings: Grouping[] = [Grouping.Set]
 	let sortings: Sorting[] = [Sorting.Number]
@@ -119,13 +142,19 @@
 	$: deckCount = decksTextSplit.length
 	$: notReady = fetchingDecks || fetchingPdb
 
-	let decks: GetDeckCardIdReturns[] = []
+	// let decks: GetDeckCardIdReturns[] = []
+	let commentInserts: CommentInsert[] = []
+	let decksAndComments: (GetDeckCardIdReturns | string)[] = []
+
 	startingProtoProcessing()
 	async function startingProtoProcessing() {
 		if (protoString !== null) {
 			try {
 				const pap = PartyAssemblerProto.fromBinary(base64ToBinary(protoString))
 				const mapped = pap.inputDecks1.map((x) => {
+					if (x.comment !== '') {
+						return '// ' + x.comment
+					}
 					return x.published ? 'p:' + x.id : x.id
 				})
 				advanced = pap.advanced
@@ -143,20 +172,39 @@
 	}
 
 	async function process(fdb: FullDatabase) {
-		const extracts = decksTextSplit.map((x) => extractDeckFromUrl(x))
-		const getPromises = extracts.map((x) => getDeckCardIds(x.deck, x.published))
+		const onlyDecks = decksTextSplit.filter((x) => !x.startsWith('//'))
+		commentInserts = []
+		const deckPromiseOrComment = decksTextSplit.map<Promise<string | GetDeckCardIdReturns | null>>(
+			(x, i) => {
+				if (x.startsWith('//')) {
+					return Promise.resolve(x.substring(2).trim())
+				} else {
+					const ext = extractDeckFromUrl(x)
+					return getDeckCardIds(ext.deck, ext.published)
+				}
+			},
+		)
+		// const extracts = decksTextSplit.map((x) => extractDeckFromUrl(x))
+		// const getPromises = extracts.map((x) => getDeckCardIds(x.deck, x.published))
 		fetchingDecks = true
-		const awaited = await Promise.all(getPromises)
+		const awaited = await Promise.all(deckPromiseOrComment)
 		fetchingDecks = false
-		decks = []
-		for (let deck of awaited) {
-			if (deck !== null) {
-				decks.push(forwardRcore ? forwardDeckToRcore(deck) : forwardDeckToOldCore(deck))
+		decksAndComments = []
+		for (let item of awaited) {
+			if (item !== null && typeof item !== 'string') {
+				decksAndComments.push(forwardRcore ? forwardDeckToRcore(item) : forwardDeckToOldCore(item))
+			}
+			if (typeof item === 'string') {
+				decksAndComments.push(item)
 			}
 		}
 		const pap: PartyAssemblerProto = {
-			inputDecks1: decks.map<PartyAssemblerProto_InputDeck>((x) => {
-				return { id: x.id, published: x.published }
+			inputDecks1: decksAndComments.map<PartyAssemblerProto_InputDeck>((x) => {
+				if (typeof x !== 'string') {
+					return { id: x.id, published: x.published, comment: '' }
+				} else {
+					return { id: '', published: false, comment: x }
+				}
 			}),
 			inputDecks2: [],
 			inputDecks3: [],
@@ -166,6 +214,10 @@
 			advanced: advanced,
 		}
 		exportProto = binaryToUrlString(PartyAssemblerProto.toBinary(pap))
+		function isDeck(x: string | GetDeckCardIdReturns): x is GetDeckCardIdReturns {
+			return typeof x !== 'string'
+		}
+		const decks = decksAndComments.filter(isDeck)
 		const unfiltered = exhaustiveCheckOverlaps(decks, fdb)
 		parties = unfiltered
 		manualFilterSorter(fdb)
@@ -174,15 +226,26 @@
 	function manualFilterSorter(fdb: FullDatabase) {
 		const filtered = parties.filter((x) => customFilters(x, fdb))
 		const sorted = filtered.sort((a, b) => customSorter(a, b, fdb))
-		twoPlayerParties = sorted.filter((x) => x.decks.length === 2)
-		threePlayerParties = sorted.filter((x) => x.decks.length === 3)
-		fourPlayerParties = sorted.filter((x) => x.decks.length === 4)
+		const lim = 99
+		twoPlayerParties = sorted
+			.filter((x) => x.decks.length === 2)
+			.slice(0, filterLimitResults ? lim : undefined)
+		threePlayerParties = sorted
+			.filter((x) => x.decks.length === 3)
+			.slice(0, filterLimitResults ? lim : undefined)
+		fourPlayerParties = sorted
+			.filter((x) => x.decks.length === 4)
+			.slice(0, filterLimitResults ? lim : undefined)
 	}
 
 	function onChangeHandler(e: Event & { currentTarget: HTMLSelectElement }, fdb: FullDatabase) {
 		const value = e.currentTarget.value
 		sorting = parseInt(value)
 		manualFilterSorter(fdb)
+	}
+	function onCopyIconFormatHandler(e: Event & { currentTarget: HTMLSelectElement }) {
+		const value = e.currentTarget.value
+		copyIconFormat = parseInt(value)
 	}
 </script>
 
@@ -216,24 +279,109 @@
 		}}
 	/>
 
-	{#if !notReady && decks.length > 0}
+	{#if !notReady && decksAndComments.length > 0}
+		<ListDivider label="Download Result" />
+		{#each decksAndComments as d}
+			<div class="result-item">
+				{#if typeof d !== 'string'}
+					<PartyDeckEntry
+						deckLink={d.link}
+						deckName={d.deck}
+						investigatorCode={d.investigatorCode}
+						investigatorClass={fdb.getCard(d.investigatorCode).class1}
+					/>
+				{:else}
+					<div class="comment">{d}</div>
+				{/if}
+			</div>
+		{/each}
+
+		<span>
+			<Button
+				label="Copy Markdown to Clipboard (EXPERIMENTAL)"
+				onClick={() => {
+					const lines = decksAndComments.map((x) => {
+						if (typeof x === 'string') {
+							return '\n' + x
+						} else {
+							const inv = fdb.getCard(x.investigatorCode)
+							const cl = inv.class1
+							const nm = inv.original.name
+							let classIcon
+							switch (copyIconFormat) {
+								case PartyAssemblerIconFormat.Emoji: {
+									classIcon = getClassIconEmoji(cl)
+									break
+								}
+								case PartyAssemblerIconFormat.ArkhamDb: {
+									classIcon = getClassIconAhdb(cl)
+									break
+								}
+								default: {
+									classIcon = ''
+									break
+								}
+							}
+							const linked = `- ${classIcon} ${nm}: [${x.deck}](${x.link})`
+							return linked
+						}
+					})
+					if (browser) {
+						navigator.clipboard.writeText(lines.join('\n'))
+					}
+				}}
+			/>
+			<FramedTextSpan text="Class Icon Format" />
+			<select name="fmt" value={copyIconFormat} on:change={(e) => onCopyIconFormatHandler(e)}>
+				<option value={PartyAssemblerIconFormat.Emoji}>Emoji</option>
+				<option value={PartyAssemblerIconFormat.ArkhamDb}>ArkhamDB</option>
+				<option value={PartyAssemblerIconFormat.None}>None</option>
+			</select>
+		</span>
+
+		<ListDivider label="Incremental Composition" />
+		<p>
+			As more investigators are locked into the team, the analysis result below will be filtered
+			more and more to help you find the remaining members. They are also saved in the Sharing URL,
+			so visitor can immediately see filtered result.
+		</p>
+		(Currently there is no investigator locked in to the team.)
+		<span>
+			<Button label="Clear All" onClick={() => {}} />
+			<Button label="Gather Cards" onClick={() => {}} />
+		</span>
+		<ListDivider label="Analysis Result" />
+
 		<div class="sharing-url">
 			<TextBox
 				label="Sharing URL"
-				currentText={`https://arkham-starter.com/tool/assembly?i=${exportProto}`}
+				currentText={`https://arkham-starter.com/tool/assembler?i=${exportProto}`}
 			/>
 		</div>
-	{/if}
 
-	{#if !notReady && decks.length > 0}
-		<ListDivider label="Analysis Result" />
 		<span class="flex-item">
 			<FramedTextSpan text="Team Composition Filters" />
+			<Checkbox
+				label="Incremental Composition"
+				checked={filterIncrementalComposition}
+				onCheckChanged={(c) => {
+					filterIncrementalComposition = c
+					manualFilterSorter(fdb)
+				}}
+			/>
 			<Checkbox
 				label="No Same Class"
 				checked={filterNoSameClass}
 				onCheckChanged={(c) => {
 					filterNoSameClass = c
+					manualFilterSorter(fdb)
+				}}
+			/>
+			<Checkbox
+				label="Limit 99 Results"
+				checked={filterLimitResults}
+				onCheckChanged={(c) => {
+					filterLimitResults = c
 					manualFilterSorter(fdb)
 				}}
 			/>
@@ -298,5 +446,17 @@
 
 	.decks {
 		height: 100px;
+	}
+
+	.sharing-url {
+		margin: 8px 0px;
+	}
+
+	.result-item {
+		padding: 1px 0px;
+	}
+
+	.comment {
+		padding: 4px 0px;
 	}
 </style>

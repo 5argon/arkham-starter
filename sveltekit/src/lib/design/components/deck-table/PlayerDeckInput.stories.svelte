@@ -8,28 +8,28 @@
 <Story name="Normal">
 	<PlayerDeckInput
 		player={0}
-		deckUrl={'01234'}
+		deckInput={'01234'}
 		pullError={false}
 		pulledDeckName={'My Deck'}
 		pulling={false}
 	/>
 	<PlayerDeckInput
 		player={1}
-		deckUrl={'01234'}
+		deckInput={'01234'}
 		pullError={false}
 		pulledDeckName={'My Deck'}
 		pulling={false}
 	/>
 	<PlayerDeckInput
 		player={2}
-		deckUrl={'01234'}
+		deckInput={'01234'}
 		pullError={false}
 		pulledDeckName={'My Deck'}
 		pulling={false}
 	/>
 	<PlayerDeckInput
 		player={3}
-		deckUrl={'01234'}
+		deckInput={'01234'}
 		pullError={true}
 		pulledDeckName={'My Deck'}
 		pulling={false}
@@ -39,21 +39,21 @@
 <Story name="Fetching">
 	<PlayerDeckInput
 		player={0}
-		deckUrl={'01234'}
+		deckInput={'01234'}
 		pullError={false}
 		pulledDeckName={'My Deck'}
 		pulling={true}
 	/>
 	<PlayerDeckInput
 		player={0}
-		deckUrl={""}
+		deckInput={""}
 		pullError={false}
 		pulledDeckName={'My Deck'}
 		pulling={true}
 	/>
 	<PlayerDeckInput
 		player={0}
-		deckUrl={""}
+		deckInput={""}
 		pullError={true}
 		pulledDeckName={'My Deck'}
 		pulling={true}

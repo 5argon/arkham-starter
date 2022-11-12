@@ -66,14 +66,13 @@ export class FullDatabase {
 
 			if (!(x.original.name in this.sameName)) {
 				this.sameName[x.original.name] = []
-			} else {
-				if (
-					this.sameName[x.original.name].findIndex(
-						(y) => y.original.subname === x.original.subname,
-					) === -1
-				) {
-					this.sameName[x.original.name].push(x)
-				}
+			}
+			if (
+				this.sameName[x.original.name].findIndex(
+					(y) => y.original.subname === x.original.subname,
+				) === -1
+			) {
+				this.sameName[x.original.name].push(x)
 			}
 		})
 

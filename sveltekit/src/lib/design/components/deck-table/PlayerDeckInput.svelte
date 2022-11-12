@@ -2,11 +2,14 @@
 	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
 
 	import TextBox, { EditingLevel, NoticeLevel } from '../basic/TextBox.svelte'
+	import PartyDeckEntry from '../card/PartyDeckEntry.svelte'
 
 	export let fixedLabelColor: boolean
-	export let cardClass: CardClass 
+	export let cardClass: CardClass
+	export let investigatorCode: string | undefined
 	export let player: number
-	export let deckUrl: string
+	export let deckInput: string
+	export let actualDeckUrl: string | undefined
 	export let onDeckUrlChanged: (s: string) => void = () => {
 		// do nothing
 	}
@@ -22,7 +25,7 @@
 	let spinning: boolean = false
 	$: {
 		if (pulling) {
-			if (deckUrl !== '') {
+			if (deckInput !== '') {
 				noticeText = null
 				noticeLevel = NoticeLevel.Normal
 				spinning = true
@@ -34,10 +37,10 @@
 		} else {
 			if (pulledDeckName && !pullError) {
 				noticeText =
-					pulledDeckName +
-					(mainCount > 0 ? ` [DECK: ${mainCount}] ` : '') +
-					(sideCount > 0 ? ` [SIDE: ${sideCount}] ` : '') +
-					(ignoreCount > 0 ? ` [IGNORE: ${ignoreCount}] ` : '')
+					'Download successful.' +
+					(mainCount > 0 ? ` [Deck Count: ${mainCount} Cards] ` : '') +
+					(sideCount > 0 ? ` [Side Deck Count: ${sideCount} Cards] ` : '') +
+					(ignoreCount > 0 ? ` [Ignore Deck Limit Count: ${ignoreCount} Cards] ` : '')
 				noticeLevel = NoticeLevel.Success
 				spinning = false
 			} else if (pullError) {
@@ -62,7 +65,7 @@
 	<div class="inner-flex deck">
 		<TextBox
 			editingLevel={EditingLevel.Editable}
-			currentText={deckUrl}
+			currentText={deckInput}
 			enableNotice={true}
 			onEndEdit={onDeckUrlChanged}
 			spinnerText={spinning ? 'Gathering...' : null}
@@ -70,6 +73,14 @@
 			{noticeLevel}
 			{noticeText}
 		/>
+		{#if actualDeckUrl !== undefined && investigatorCode !== undefined}
+			<PartyDeckEntry
+				deckLink={actualDeckUrl}
+				deckName={pulledDeckName ?? ''}
+				investigatorClass={cardClass}
+				{investigatorCode}
+			/>
+		{/if}
 	</div>
 </div>
 

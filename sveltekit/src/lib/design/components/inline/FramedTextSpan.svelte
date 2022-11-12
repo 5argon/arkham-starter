@@ -2,7 +2,9 @@
 	export let text: string
 </script>
 
-<span>{text}</span>
+{#if text !== ''}
+	<span>{text}</span>
+{/if}
 
 <style>
 	span {

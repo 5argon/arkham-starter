@@ -13,7 +13,7 @@
 	export let theOnlyGroup: boolean
 	export let groupedCards: GroupedCards
 	export let previousGroupedCards: GroupedCards[]
-	export let fullDatabase: FullDatabase | null
+	export let fullDatabase: FullDatabase
 	export let columns: ExtraColumn[] = []
 	export let toggleMap: { [id: string]: boolean }
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null

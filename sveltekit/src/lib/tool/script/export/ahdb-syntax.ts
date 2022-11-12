@@ -24,7 +24,7 @@ export const ahdbIcons = {
 	action: '<span class="icon-action"></span>',
 }
 
-function getClassIcon(c: CardClass): string {
+export function getClassIconAhdb(c: CardClass): string {
 	switch (c) {
 		case CardClass.Guardian:
 			return ahdbIcons.guardian
@@ -52,8 +52,8 @@ export function prefixClassIcons(
 	if (c1 === CardClass.Neutral && c2 === null && c3 === null) {
 		return text
 	}
-	return `${getClassIcon(c1)}${c2 !== null ? getClassIcon(c2) : ''}${
-		c3 !== null ? getClassIcon(c3) : ''
+	return `${getClassIconAhdb(c1)}${c2 !== null ? getClassIconAhdb(c2) : ''}${
+		c3 !== null ? getClassIconAhdb(c3) : ''
 	} ${text}`
 }
 

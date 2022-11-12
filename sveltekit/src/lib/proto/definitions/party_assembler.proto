@@ -12,6 +12,7 @@ message PartyAssemblerProto {
 	message InputDeck {
 		string id = 1;
 		bool published = 2;
+		string comment = 3;
 	}
 
 	message PickedAssembly {

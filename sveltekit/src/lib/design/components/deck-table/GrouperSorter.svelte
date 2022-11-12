@@ -44,7 +44,7 @@
 /> -->
 
 <div class="long-span">
-	<FramedTextSpan {text} />
+		<FramedTextSpan {text} />
 	<!-- <span>
 		<input
 			class="collection-code-box"
