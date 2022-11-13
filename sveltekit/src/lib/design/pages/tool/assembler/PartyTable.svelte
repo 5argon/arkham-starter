@@ -14,7 +14,7 @@
 	<thead>
 		<td class="comp">Team Composition</td>
 		<td width={430}>Overlaps</td>
-		<td width={200}>Expansions</td>
+		<td width={200}>Required Expansions</td>
 	</thead>
 	<tbody>
 		{#each parties as p}

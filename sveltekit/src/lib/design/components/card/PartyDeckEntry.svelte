@@ -8,7 +8,7 @@
 	export let deckLink: string
 </script>
 
-<div>
+<span>
 	<a href={deckLink} target="_blank" rel="noreferrer"
 		><CardSpan
 			showImageStrip
@@ -17,7 +17,4 @@
 			class1={investigatorClass}
 		/></a
 	>
-</div>
-
-<style>
-</style>
+</span>

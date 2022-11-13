@@ -1,10 +1,18 @@
-# Party Assembler
+# Team Assembler
 
-In [Deck Gather](/tool/gather) tool, you have already decided on your party and is trying to bring out cards from your big collection as fast and efficient as possible.
+Let's say you have quite a number of unplayed decks sitting for some time, and your other members has theirs too, or maybe some teammates are OK to borrow other's deck. Anyway, it's time for a new adventure!
 
-But perhaps you are also using that page to trial and error to see which decks works together with not too many overlaps, among other things such as each player's favorite investigator or team balance. This is because many decks in arkhamdb.com are designed in vacuum of its own, not accounting for the rest of the party taking limited amount of popular cards at the same time.
+As you are all excitedly picking which decks for each players and talk about roles to fill, the biggest downer is going to be when you find out at the end that the team you made ended up wanting some of very popular cards at the same time ("Deck overlaps") despite carefully not choosing the same class of investigators. Deckbuilding Requirement is what makes this game so interesting after all.
 
-That gets quite tedious to try all the combinations among decks you have. I believe this is where computer is good at helping, try jumbling all the decks exhaustively and display insights so you can make the final call what your party could be.
+If the overlaps is difficult to resolve, it may leads to some members having to pick an another deck they have in reserve, and it may lead to chain reaction that overlaps with an another player that wasn't overlapping earlier, and so on.
+
+It can gets quite tedious to try all the combinations among decks you have, and you may have overlooked some possible cool compositions with low overlaps. I believe this is where computer is good at helping!
+
+Basically, this tool will exhaustively make a team of **every possible combinations** among decks you input, returning some insights, so you can make the final call what your party could be. It will do so for 2, 3, and 4 player count, literally hundreds of combinations with just a few input decks!
+
+All the min-maxed decks in arkhamdb uses a few cards here and there all over the place (which is also cost prohibitive) and pretty much rarely clash among other min-maxed decks. Long time fans may not have overlapping problems for long time now. But new players gotta start somewhere and along the way taking interest in deckbuilding. As they are trying to make use of what they have, it results in their early decks having high overlaps due to concentration of card creatively used to the fullest. I think this tool is very fitting for arkham-starter, a website for new generation players slowly building their collections.
+
+Ps. This tool can be think of a standalone version of the core feature of the finished arkham-starter.com website. Instead of entering decks manually, you can select and assemble your team from a lot of beginner friendly starter decks using low pack count, which would unfortunately overlaps easier, and this tool will help resolve that.
 
 ## Workflow overview
 
@@ -14,7 +22,7 @@ That gets quite tedious to try all the combinations among decks you have. I beli
 
 ## Demo
 
-This tool has a URL sharing feature which let you direct viewer to choose team comps on their own, or for yourself to continue adding more decks and get a new URL. I want to demo you this tool using this feature as well.
+This tool has a URL sharing feature which let you direct viewer to browse team comps, or for yourself to continue adding more decks and get a new URL. I want to demo you this tool using this feature as well.
 
 (Open each demo in a new tab by holding Ctrl / Cmd before clicking, or you cannot continue reading this documentation.)
 
@@ -48,7 +56,7 @@ Therefore the most suitable format is a 0 XP deck, that also lists all the cards
 
 Each overlaps will be marked with `-S` if the entry came from the Side Deck section, help you evaluate the conflict even more.
 
-## Incremental Composition
+## Incremental composition
 
 As more investigators are locked into the team, the analysis result below will be filtered more and more to help you find the remaining members.
 
@@ -69,6 +77,7 @@ Here are general guidelines :
 
 However there are some kind of overlaps that can be solved easily :
 
+- Overlaps of Permanent Asset cards can be easily pretended that you have one after spending the XP, or find a random piece of paper and write something on it. Since they do not need to go into the deck, a genuine card is not required.
 - Overlaps of cards that has a bonus copy in Revised Core Set. For example, 3 decks all using Charisma card entry **from Dunwich Legacy** will be shown as overlaps 3/2, since Dunwich box gave you 2. However you actually have 4 copies, not 2, because Revised Core Set also gave you 2 more.
 - Overlaps of cards that has a duplicate in Investigator Starter Decks. This is very likely to be **Vicious Blow** and **Deduction** entry from Core Set. (arkhamdb never pick card entries from the Starter Decks if there is one in the Core Set.) If you have Nathaniel Cho or Harvey Walters, then you have 2 more copies of each that can resolve conflict naturally.
 - Overlaps of generic Core Set draw-1 double icon skills. There are some other level 0 cards also with double icons or more, but not neutral and the draw effect is replaced with something else. Examples from the first 4 expansions :
@@ -88,7 +97,7 @@ Total combinations analyzed may be huge. You can apply some filters to narrow th
 - **Zero Overlap Only** : Only show teams with no overlap at all. You can gather cards for these teams without conflict resolution. But such results are very rare unless the decks are using very unconventional cards.
 - **No Same User** : Prevent building a team that contains deck published by the same arkhamdb.com user. Intended so that each player will get one of their own deck to play in the team. Unfortunately, arkhamdb.com does not expose username of "unpublished but public" deck. It can only do so for you for published decks. (Published deck also exposes only user ID number, there is no way to know the username from that ID.)
 
-There is also one built-in filter applied : Teams with the same investigator by name are already removed. (You cannot do so by the game rule, there is a unique star in front of investigator's name.) This make it possible to include multiple decks of the same investigator and the tool will take care of not pairing among those decks for you.
+There is also one **built-in filter** applied : Teams with the same investigator by name are already removed. (You cannot do so by the game rule, there is a unique star in front of investigator's name.) This make it possible to include multiple decks of the same investigator and the tool will take care of not pairing among those decks for you.
 
 ## Sorting
 

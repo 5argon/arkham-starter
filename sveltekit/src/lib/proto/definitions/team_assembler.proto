@@ -1,13 +1,14 @@
 syntax = "proto3";
 
-message PartyAssemblerProto {
+message TeamAssemblerProto {
 	repeated InputDeck input_decks_1 = 1;
 	repeated InputDeck input_decks_2 = 2;
 	repeated InputDeck input_decks_3 = 3;
 	repeated InputDeck input_decks_4 = 4;
-	repeated PickedAssembly picked_assembly = 5;
-	repeated UserPatch user_patches = 6;
-	bool advanced = 7;
+	repeated string current_team = 5;
+	repeated PickedAssembly picked_assembly = 6;
+	repeated UserPatch user_patches = 7;
+	bool advanced = 8;
 
 	message InputDeck {
 		string id = 1;

@@ -16,9 +16,9 @@
 </script>
 
 <svelte:head>
-	<title>arkham-starter.com | Tool | Party Assembler</title>
+	<title>arkham-starter.com | Tool | Team Assembler</title>
 </svelte:head>
 
-<PageTitle subTitle="Tool" title={'Party Assembler'} {helpMd} />
+<PageTitle subTitle="Tool" title={'Team Assembler'} {helpMd} />
 
 <PartyAssemblerLayout protoString={importProto} />

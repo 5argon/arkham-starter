@@ -1,6 +1,4 @@
 <script lang="ts" context="module">
-	import type { GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
-
 	enum PartyAssemblerSorting {
 		Overlaps,
 		CombinationOrder,
@@ -20,9 +18,6 @@
 		comment: string
 		index: number
 	}
-	function isComment(x: CommentInsert | GetDeckCardIdReturns): x is CommentInsert {
-		return 'comment' in x
-	}
 </script>
 
 <script lang="ts">
@@ -31,6 +26,7 @@
 		forwardDeckToOldCore,
 		forwardDeckToRcore,
 		getDeckCardIds,
+		type GetDeckCardIdReturns,
 	} from '$lib/ahdb/public-api/high-level'
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
@@ -38,9 +34,9 @@
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
 	import {
-		PartyAssemblerProto,
-		PartyAssemblerProto_InputDeck,
-	} from '$lib/proto/generated/party_assembler'
+		TeamAssemblerProto,
+		TeamAssemblerProto_InputDeck,
+	} from '$lib/proto/generated/team_assembler'
 	import { exhaustiveCheckOverlaps, type Party } from '$lib/tool/overlap/overlap-helpers'
 	import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
 	import PartyTable from './PartyTable.svelte'
@@ -51,8 +47,13 @@
 	import FramedTextSpan from '$lib/design/components/inline/FramedTextSpan.svelte'
 	import PartyDeckEntry from '$lib/design/components/card/PartyDeckEntry.svelte'
 	import { browser } from '$app/environment'
-	import { getClassIconAhdb, prefixClassIcons } from '$lib/tool/script/export/ahdb-syntax'
+	import { getClassIconAhdb } from '$lib/tool/script/export/ahdb-syntax'
 	import { getClassIconEmoji } from '$lib/tool/script/export/emoji'
+	import ViewModeBanner from '$lib/design/components/layout/ViewModeBanner.svelte'
+	import PartyTeamMemberItem from './PartyTeamMemberItem.svelte'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import { allIcons } from '$lib/design/icons/all-icons'
+	import { goToGather } from '$lib/deck/go-to-gather'
 
 	export let protoString: string | null = null
 
@@ -65,12 +66,13 @@
 	let exportProto: string = ''
 	let parties: Party[] = []
 	let sorting: PartyAssemblerSorting = PartyAssemblerSorting.Overlaps
-	let filterIncrementalComposition: boolean = true
+	let filterRespectCurrentTeam: boolean = true
 	let filterNoSameClass: boolean = true
 	let filterLimitResults: boolean = true
 	let filterZeroOverlapOnly: boolean = false
 	let filterNoSameUser: boolean = false
 	let copyIconFormat: PartyAssemblerIconFormat = PartyAssemblerIconFormat.Emoji
+	let viewMode: boolean = false
 
 	let groupings: Grouping[] = [Grouping.Set]
 	let sortings: Sorting[] = [Sorting.Number]
@@ -87,6 +89,7 @@
 
 	function customFilters(p: Party, fdb: FullDatabase): boolean {
 		const invs = p.decks.map((x) => fdb.getCard(x.investigatorCode))
+
 		const sameInv: { [n: string]: boolean } = {}
 		for (let i = 0; i < invs.length; i++) {
 			const x = invs[i]
@@ -94,6 +97,16 @@
 				sameInv[x.original.name] = true
 			} else {
 				return false
+			}
+		}
+
+		if (filterRespectCurrentTeam) {
+			for (let i = 0; i < currentTeam.length; i++) {
+				const x = currentTeam[i]
+				const found = p.decks.find((y) => y.id === x) !== undefined
+				if (!found) {
+					return false
+				}
 			}
 		}
 
@@ -137,29 +150,33 @@
 
 	let fdbPromise = fetchFullDatabase()
 
-	$: deckCount = decksTextSplit.length
+	$: deckCount = decksAndComments.filter((x) => typeof x !== 'string').length
 	$: notReady = fetchingDecks || fetchingPdb
 
-	// let decks: GetDeckCardIdReturns[] = []
-	let commentInserts: CommentInsert[] = []
 	let decksAndComments: (GetDeckCardIdReturns | string)[] = []
+	let decks: GetDeckCardIdReturns[] = []
+	let currentTeam: string[] = []
 
 	startingProtoProcessing()
 	async function startingProtoProcessing() {
 		if (protoString !== null) {
 			try {
-				const pap = PartyAssemblerProto.fromBinary(base64ToBinary(protoString))
-				const mapped = pap.inputDecks1.map((x) => {
+				const tap = TeamAssemblerProto.fromBinary(base64ToBinary(protoString))
+				const mapped = tap.inputDecks1.map((x) => {
 					if (x.comment !== '') {
 						return '// ' + x.comment
 					}
 					return x.published ? 'p:' + x.id : x.id
 				})
-				advanced = pap.advanced
+				advanced = tap.advanced
 				decksTextSplit = mapped
 				decksText = mapped.join('\n')
 				const pdb = await fdbPromise
-				process(pdb)
+				viewMode = true
+				await process(pdb)
+				// Need fetching decks first before applying the team.
+				currentTeam = [...tap.currentTeam.filter((x) => findFromDecks(decks, x) !== null)]
+				manualFilterSorter(pdb)
 			} catch {}
 		}
 	}
@@ -170,8 +187,7 @@
 	}
 
 	async function process(fdb: FullDatabase) {
-		const onlyDecks = decksTextSplit.filter((x) => !x.startsWith('//'))
-		commentInserts = []
+		clearTeam(fdb)
 		const deckPromiseOrComment = decksTextSplit.map<Promise<string | GetDeckCardIdReturns | null>>(
 			(x, i) => {
 				if (x.startsWith('//')) {
@@ -196,8 +212,19 @@
 				decksAndComments.push(item)
 			}
 		}
-		const pap: PartyAssemblerProto = {
-			inputDecks1: decksAndComments.map<PartyAssemblerProto_InputDeck>((x) => {
+
+		function isDeck(x: string | GetDeckCardIdReturns): x is GetDeckCardIdReturns {
+			return typeof x !== 'string'
+		}
+		decks = decksAndComments.filter(isDeck)
+		const unfiltered = exhaustiveCheckOverlaps(decks, fdb)
+		parties = unfiltered
+		manualFilterSorter(fdb)
+	}
+
+	$: {
+		const pap: TeamAssemblerProto = {
+			inputDecks1: decksAndComments.map<TeamAssemblerProto_InputDeck>((x) => {
 				if (typeof x !== 'string') {
 					return { id: x.id, published: x.published, comment: '' }
 				} else {
@@ -207,18 +234,12 @@
 			inputDecks2: [],
 			inputDecks3: [],
 			inputDecks4: [],
+			currentTeam: currentTeam.slice(0, 4),
 			pickedAssembly: [],
 			userPatches: [],
 			advanced: advanced,
 		}
-		exportProto = binaryToUrlString(PartyAssemblerProto.toBinary(pap))
-		function isDeck(x: string | GetDeckCardIdReturns): x is GetDeckCardIdReturns {
-			return typeof x !== 'string'
-		}
-		const decks = decksAndComments.filter(isDeck)
-		const unfiltered = exhaustiveCheckOverlaps(decks, fdb)
-		parties = unfiltered
-		manualFilterSorter(fdb)
+		exportProto = binaryToUrlString(TeamAssemblerProto.toBinary(pap))
 	}
 
 	function manualFilterSorter(fdb: FullDatabase) {
@@ -241,179 +262,284 @@
 		sorting = parseInt(value)
 		manualFilterSorter(fdb)
 	}
+
 	function onCopyIconFormatHandler(e: Event & { currentTarget: HTMLSelectElement }) {
 		const value = e.currentTarget.value
 		copyIconFormat = parseInt(value)
+	}
+
+	function addToTeam(deckId: string, fdb: FullDatabase) {
+		if (currentTeam.length < 4 && currentTeam.find((x) => x === deckId) === undefined) {
+			currentTeam.push(deckId)
+			currentTeam = [...currentTeam]
+			manualFilterSorter(fdb)
+		}
+	}
+
+	function clearTeam(fdb: FullDatabase) {
+		currentTeam = []
+		manualFilterSorter(fdb)
+	}
+
+	function inTheTeam(curTeam: string[], d: string): boolean {
+		return curTeam.find((x) => x === d) !== undefined
+	}
+
+	function findFromDecks(deks: GetDeckCardIdReturns[], d: string): GetDeckCardIdReturns | null {
+		const found = deks.find((x) => x.id === d)
+		return found ?? null
+	}
+
+	var currentTeamDeck1: GetDeckCardIdReturns | null = null
+	var currentTeamDeck2: GetDeckCardIdReturns | null = null
+	var currentTeamDeck3: GetDeckCardIdReturns | null = null
+	var currentTeamDeck4: GetDeckCardIdReturns | null = null
+	$: {
+		currentTeamDeck1 = null
+		currentTeamDeck2 = null
+		currentTeamDeck3 = null
+		currentTeamDeck4 = null
+		if (currentTeam.length > 0) {
+			currentTeamDeck1 = findFromDecks(decks, currentTeam[0])
+		}
+		if (currentTeam.length > 1) {
+			currentTeamDeck2 = findFromDecks(decks, currentTeam[1])
+		}
+		if (currentTeam.length > 2) {
+			currentTeamDeck3 = findFromDecks(decks, currentTeam[2])
+		}
+		if (currentTeam.length > 3) {
+			currentTeamDeck4 = findFromDecks(decks, currentTeam[3])
+		}
+	}
+	var currentTeamAll: GetDeckCardIdReturns[] = []
+	$: {
+		currentTeamAll = []
+		if (currentTeamDeck1 !== null) {
+			currentTeamAll.push(currentTeamDeck1)
+		}
+		if (currentTeamDeck2 !== null) {
+			currentTeamAll.push(currentTeamDeck2)
+		}
+		if (currentTeamDeck3 !== null) {
+			currentTeamAll.push(currentTeamDeck3)
+		}
+		if (currentTeamDeck4 !== null) {
+			currentTeamAll.push(currentTeamDeck4)
+		}
 	}
 </script>
 
 {#await fdbPromise}
 	Loading...
 {:then fdb}
-	<Checkbox
-		label="Forward to Revised Core Set"
-		checked={forwardRcore}
-		onCheckChanged={() => {
-			forwardRcore = !forwardRcore
-			process(fdb)
-		}}
-	/>
+	{#if viewMode}
+		<ViewModeBanner
+			onExitViewMode={() => {
+				viewMode = false
+			}}
+		/>
+	{/if}
 
-	<ListDivider label="Input Decks" />
+	{#if !viewMode}
+		<Checkbox
+			label="Forward to Revised Core Set"
+			checked={forwardRcore}
+			onCheckChanged={() => {
+				forwardRcore = !forwardRcore
+				process(fdb)
+			}}
+		/>
 
-	<textarea
-		placeholder="One deck per line. Can be either arkhamdb.com deck URL or deck's ID. If it is deck ID, prefix p: for published deck."
-		class="decks"
-		on:change={textAreaChangeHandler}>{decksText}</textarea
-	>
+		<ListDivider label="Input Decks" />
 
-	<Button
-		big
-		center
-		disabled={fetchingDecks}
-		label={fetchingDecks ? 'Please Wait...' : 'Analyze ' + deckCount + ' Decks'}
-		onClick={() => {
-			process(fdb)
-		}}
-	/>
+		<textarea
+			placeholder="One deck per line. Can be either arkhamdb.com deck URL or deck's ID. If it is deck ID, prefix p: for published deck."
+			class="decks"
+			on:change={textAreaChangeHandler}>{decksText}</textarea
+		>
+
+		<Button
+			big
+			center
+			disabled={fetchingDecks}
+			label={fetchingDecks ? 'Please Wait...' : 'Analyze ' + deckCount + ' Decks'}
+			onClick={() => {
+				process(fdb)
+			}}
+		/>
+	{/if}
 
 	{#if !notReady && decksAndComments.length > 0}
-		<ListDivider label="Download Result" />
-		{#each decksAndComments as d}
-			<div class="result-item">
-				{#if typeof d !== 'string'}
-					<PartyDeckEntry
-						deckLink={d.link}
-						deckName={d.deck}
-						investigatorCode={d.investigatorCode}
-						investigatorClass={fdb.getCard(d.investigatorCode).class1}
-					/>
-				{:else}
-					<div class="comment">{d}</div>
+		<div class="left-right">
+			<div class="left-right-item">
+				<ListDivider label="Included Decks" />
+				{#each decksAndComments as d}
+					<div class="result-item">
+						{#if typeof d !== 'string'}
+							<span>
+								<span class:add-to-team-button-hide={inTheTeam(currentTeam, d.id)}>
+									<Button
+										label="Add to team"
+										onClick={() => {
+											if (typeof d !== 'string') {
+												addToTeam(d.id, fdb)
+											}
+										}}><FaIcon path={allIcons.arrowRightBordered} /></Button
+									>
+								</span>
+								<PartyDeckEntry
+									deckLink={d.link}
+									deckName={d.deck}
+									investigatorCode={d.investigatorCode}
+									investigatorClass={fdb.getCard(d.investigatorCode).class1}
+								/>
+							</span>
+						{:else}
+							<div class="comment">{d}</div>
+						{/if}
+					</div>
+				{/each}
+
+				{#if !viewMode}
+					<span>
+						<Button
+							label="Copy Markdown to Clipboard (EXPERIMENTAL)"
+							onClick={() => {
+								const lines = decksAndComments.map((x) => {
+									if (typeof x === 'string') {
+										return '\n' + x
+									} else {
+										const inv = fdb.getCard(x.investigatorCode)
+										const cl = inv.class1
+										const nm = inv.original.name
+										let classIcon
+										switch (copyIconFormat) {
+											case PartyAssemblerIconFormat.Emoji: {
+												classIcon = getClassIconEmoji(cl)
+												break
+											}
+											case PartyAssemblerIconFormat.ArkhamDb: {
+												classIcon = getClassIconAhdb(cl)
+												break
+											}
+											default: {
+												classIcon = ''
+												break
+											}
+										}
+										const linked = `- ${classIcon} ${nm}: [${x.deck}](${x.link})`
+										return linked
+									}
+								})
+								if (browser) {
+									navigator.clipboard.writeText(lines.join('\n'))
+								}
+							}}
+						/>
+						<FramedTextSpan text="Class Icon Format" />
+						<select name="fmt" value={copyIconFormat} on:change={(e) => onCopyIconFormatHandler(e)}>
+							<option value={PartyAssemblerIconFormat.Emoji}>Emoji</option>
+							<option value={PartyAssemblerIconFormat.ArkhamDb}>ArkhamDB</option>
+							<option value={PartyAssemblerIconFormat.None}>None</option>
+						</select>
+					</span>
 				{/if}
 			</div>
-		{/each}
-
-		<span>
-			<Button
-				label="Copy Markdown to Clipboard (EXPERIMENTAL)"
-				onClick={() => {
-					const lines = decksAndComments.map((x) => {
-						if (typeof x === 'string') {
-							return '\n' + x
-						} else {
-							const inv = fdb.getCard(x.investigatorCode)
-							const cl = inv.class1
-							const nm = inv.original.name
-							let classIcon
-							switch (copyIconFormat) {
-								case PartyAssemblerIconFormat.Emoji: {
-									classIcon = getClassIconEmoji(cl)
-									break
-								}
-								case PartyAssemblerIconFormat.ArkhamDb: {
-									classIcon = getClassIconAhdb(cl)
-									break
-								}
-								default: {
-									classIcon = ''
-									break
-								}
-							}
-							const linked = `- ${classIcon} ${nm}: [${x.deck}](${x.link})`
-							return linked
-						}
-					})
-					if (browser) {
-						navigator.clipboard.writeText(lines.join('\n'))
-					}
-				}}
-			/>
-			<FramedTextSpan text="Class Icon Format" />
-			<select name="fmt" value={copyIconFormat} on:change={(e) => onCopyIconFormatHandler(e)}>
-				<option value={PartyAssemblerIconFormat.Emoji}>Emoji</option>
-				<option value={PartyAssemblerIconFormat.ArkhamDb}>ArkhamDB</option>
-				<option value={PartyAssemblerIconFormat.None}>None</option>
-			</select>
-		</span>
-
-		<ListDivider label="Incremental Composition" />
-		<p>
-			As more investigators are locked into the team, the analysis result below will be filtered
-			more and more to help you find the remaining members. They are also saved in the Sharing URL,
-			so visitor can immediately see filtered result.
-		</p>
-		(Currently there is no investigator locked in to the team.)
-		<span>
-			<Button label="Clear All" onClick={() => {}} />
-			<Button label="Gather Cards" onClick={() => {}} />
-		</span>
+			<div class="left-right-item">
+				<ListDivider label="Current Team" />
+				<PartyTeamMemberItem deck={currentTeamDeck1} player={0} fullDatabase={fdb} />
+				<PartyTeamMemberItem deck={currentTeamDeck2} player={1} fullDatabase={fdb} />
+				<PartyTeamMemberItem deck={currentTeamDeck3} player={2} fullDatabase={fdb} />
+				<PartyTeamMemberItem deck={currentTeamDeck4} player={3} fullDatabase={fdb} />
+				<span>
+					<Button
+						label="Clear"
+						disabled={currentTeamAll.length === 0}
+						onClick={() => clearTeam(fdb)}
+					/>
+					<Button
+						label="Gather Cards"
+						disabled={currentTeamAll.length === 0}
+						onClick={() => {
+							goToGather(currentTeamAll)
+						}}
+					/>
+				</span>
+				<p>
+					As more investigators are locked into the team, the analysis result below will be filtered
+					more and more to help you find the remaining members.
+				</p>
+			</div>
+		</div>
 		<ListDivider label="Analysis Result" />
 
-		<div class="sharing-url">
-			<TextBox
-				label="Sharing URL"
-				currentText={`https://arkham-starter.com/tool/assembler?i=${exportProto}`}
-			/>
-		</div>
+		{#if !viewMode}
+			<div class="sharing-url">
+				<TextBox
+					label="Sharing URL"
+					currentText={`https://arkham-starter.com/tool/assembler?i=${exportProto}`}
+				/>
+			</div>
 
-		<span class="flex-item">
-			<FramedTextSpan text="Team Composition Filters" />
-			<Checkbox
-				label="Incremental Composition"
-				checked={filterIncrementalComposition}
-				onCheckChanged={(c) => {
-					filterIncrementalComposition = c
-					manualFilterSorter(fdb)
-				}}
+			<span class="flex-item">
+				<FramedTextSpan text="Team Composition Filters" />
+				<Checkbox
+					label="Respect Current Team"
+					checked={filterRespectCurrentTeam}
+					onCheckChanged={(c) => {
+						filterRespectCurrentTeam = c
+						manualFilterSorter(fdb)
+					}}
+				/>
+				<Checkbox
+					label="No Same Class"
+					checked={filterNoSameClass}
+					onCheckChanged={(c) => {
+						filterNoSameClass = c
+						manualFilterSorter(fdb)
+					}}
+				/>
+				<Checkbox
+					label="Limit 99 Results"
+					checked={filterLimitResults}
+					onCheckChanged={(c) => {
+						filterLimitResults = c
+						manualFilterSorter(fdb)
+					}}
+				/>
+				<Checkbox
+					label="Zero Overlap Only"
+					checked={filterZeroOverlapOnly}
+					onCheckChanged={(c) => {
+						filterZeroOverlapOnly = c
+						manualFilterSorter(fdb)
+					}}
+				/>
+				<Checkbox
+					label="No Same User"
+					checked={filterNoSameUser}
+					onCheckChanged={(c) => {
+						filterNoSameUser = c
+						manualFilterSorter(fdb)
+					}}
+				/>
+			</span>
+			<span class="flex-item">
+				<FramedTextSpan text="Team Composition Sorting" />
+				<select name="pets" value={sorting} on:change={(e) => onChangeHandler(e, fdb)}>
+					<option value={PartyAssemblerSorting.Overlaps}>Less Overlaps First</option>
+					<option value={PartyAssemblerSorting.CombinationOrder}>Combination Order</option>
+				</select>
+			</span>
+			<GrouperSorter
+				text={'Overlaps Display'}
+				{groupings}
+				{sortings}
+				{onGroupingsChanged}
+				{onSortingsChanged}
 			/>
-			<Checkbox
-				label="No Same Class"
-				checked={filterNoSameClass}
-				onCheckChanged={(c) => {
-					filterNoSameClass = c
-					manualFilterSorter(fdb)
-				}}
-			/>
-			<Checkbox
-				label="Limit 99 Results"
-				checked={filterLimitResults}
-				onCheckChanged={(c) => {
-					filterLimitResults = c
-					manualFilterSorter(fdb)
-				}}
-			/>
-			<Checkbox
-				label="Zero Overlap Only"
-				checked={filterZeroOverlapOnly}
-				onCheckChanged={(c) => {
-					filterZeroOverlapOnly = c
-					manualFilterSorter(fdb)
-				}}
-			/>
-			<Checkbox
-				label="No Same User"
-				checked={filterNoSameUser}
-				onCheckChanged={(c) => {
-					filterNoSameUser = c
-					manualFilterSorter(fdb)
-				}}
-			/>
-		</span>
-		<span class="flex-item">
-			<FramedTextSpan text="Team Composition Sorting" />
-			<select name="pets" value={sorting} on:change={(e) => onChangeHandler(e, fdb)}>
-				<option value={PartyAssemblerSorting.Overlaps}>Less Overlaps First</option>
-				<option value={PartyAssemblerSorting.CombinationOrder}>Combination Order</option>
-			</select>
-		</span>
-		<GrouperSorter
-			text={'Overlaps Display'}
-			{groupings}
-			{sortings}
-			{onGroupingsChanged}
-			{onSortingsChanged}
-		/>
+		{/if}
 		<LimitedTab>
 			<div slot="tab1">
 				Two Players <NotificationNumber count={twoPlayerParties.length} />
@@ -440,6 +566,19 @@
 <style>
 	.flex-item {
 		margin: 4px 0px;
+	}
+
+	.left-right {
+		display: flex;
+	}
+
+	.left-right-item {
+		flex: 1;
+		padding: 0px 24px;
+	}
+
+	.add-to-team-button-hide {
+		visibility: hidden;
 	}
 
 	.decks {
