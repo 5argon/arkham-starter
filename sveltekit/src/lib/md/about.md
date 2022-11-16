@@ -2,16 +2,6 @@ After Fantasy Flight Games made the [Revised Core Set](https://www.fantasyflight
 
 This is an exciting time to create more helping contents for this game so the community could grow easier.
 
-# Tools for Arkham Horror : The Card Game
-
-Right now, it has several utilities that help you play the game. These are actually test bed for UI components I planned to use in the finished site.
-
-- [Upgrade Planner](/tool/upgrade)
-- [Card List](/tool/list)
-- [Deck Gather](/tool/gather)
-- [Campaign Reference](/tool/campaign)
-- [Explore Investigator Expansions](/explore)
-
 # What could this site do (when it is done)
 
 "Assemble your investigator party and start playing" is the purpose of this site, to be a great "starter" of Arkham Horror : The Card Game session. A site geared for someone not interested in deckbuilding at all. The biggest hurdle I am addressing is getting a party composition such that :

@@ -8,7 +8,6 @@
 	import PackInfoSpan, {
 		type PackInfoSpanItem,
 	} from '$lib/design/components/inline/PackInfoSpan.svelte'
-	import { goto } from '$app/navigation'
 	import { addPackCount, countPacks, type PackCount } from '$lib/deck/deck-count'
 	import { goToGather } from '$lib/deck/go-to-gather'
 

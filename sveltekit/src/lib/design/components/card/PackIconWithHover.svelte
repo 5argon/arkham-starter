@@ -22,6 +22,10 @@
 	let packStarter = isStarterPack(pack)
 	$: packColored = packReturnTo || packStarter
 	switch (pack) {
+		case CardPackIcon.ParallelInvestigator:{
+			packLink = 'https://www.fantasyflightgames.com/en/news/2020/5/5/beyond-our-dimension/'
+			break
+		}
 		case CardPackIcon.TheDunwichLegacy: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2021/11/18/reliving-the-legacy/'
 			break

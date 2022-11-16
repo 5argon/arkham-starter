@@ -4,21 +4,21 @@ Let's say you have quite a number of unplayed decks sitting for some time, and y
 
 As you are all excitedly picking which decks for each players and talk about roles to fill, the biggest downer is going to be when you find out at the end that the team you made ended up wanting some of very popular cards at the same time ("Deck overlaps") despite carefully not choosing the same class of investigators. Deckbuilding Requirement is what makes this game so interesting after all.
 
-If the overlaps is difficult to resolve, it may leads to some members having to pick an another deck they have in reserve, and it may lead to chain reaction that overlaps with an another player that wasn't overlapping earlier, and so on.
+If the overlaps is difficult to resolve (replacing these cards throws deck balance off), it may leads to some members having to pick an another deck they have in reserve, and it may lead to chain reaction that overlaps with an another player that wasn't overlapping earlier, and so on.
 
 It can gets quite tedious to try all the combinations among decks you have, and you may have overlooked some possible cool compositions with low overlaps. I believe this is where computer is good at helping!
 
-Basically, this tool will exhaustively make a team of **every possible combinations** among decks you input, returning some insights, so you can make the final call what your party could be. It will do so for 2, 3, and 4 player count, literally hundreds of combinations with just a few input decks!
+This tool will exhaustively make a team of **every possible combinations** among decks you input, returning some insights, so you can make the final call what your party could be. It will do so for 2, 3, and 4 player count, literally hundreds of combinations with just a few input decks.
 
-All the min-maxed decks in arkhamdb uses a few cards here and there all over the place (which is also cost prohibitive) and pretty much rarely clash among other min-maxed decks. Long time fans may not have overlapping problems for long time now. But new players gotta start somewhere and along the way taking interest in deckbuilding. As they are trying to make use of what they have, it results in their early decks having high overlaps due to concentration of card creatively used to the fullest. I think this tool is very fitting for arkham-starter, a website for new generation players slowly building their collections.
+Old time fans may not appreciate this tool that much, all the min-maxed decks in arkhamdb uses a few cards here and there all over the place (which is also cost prohibitive) and pretty much rarely clash among other min-maxed decks. But new players gotta start somewhere and along the way taking interest in deckbuilding. As they are trying to make use of what they have and built their growing deck collection, it results in high overlaps due to concentration of card creatively used to the fullest. I think this tool is very fitting for arkham-starter, a website for new generation players slowly building their collections.
 
-Ps. This tool can be think of a standalone version of the core feature of the finished arkham-starter.com website. Instead of entering decks manually, you can select and assemble your team from a lot of beginner friendly starter decks using low pack count, which would unfortunately overlaps easier, and this tool will help resolve that.
+Ps. This tool can be thought of a standalone version of the core feature of the finished arkham-starter.com website. Instead of entering decks manually, you can select and assemble your team from a lot of beginner friendly starter decks using low pack count, which would unfortunately overlaps easier, and this tool will help resolve that.
 
 ## Workflow overview
 
 1. Input tons of deck URL you are interested in, but not sure which among them would work together. They can come from different authors as well.
 2. Press "Analyze" button and wait for it to download all the decks and try out all the team compositions for you.
-3. Browse through the resulting teams which are sorted by degree of overlaps. You may find interesting comp with no or easy to resolve overlaps this way. Filtering, sorting, and Incremental Composition feature may help finding what you want faster.
+3. Browse through the resulting teams which are sorted by degree of overlaps. You may find interesting comp with no or easy to resolve overlaps this way. Filtering, sorting, and "Current Team" feature may help finding what you want faster.
 
 ## Demo
 
@@ -44,7 +44,7 @@ Supposed you go on and purchase The Dunwich Legacy Investigator Expansion follow
 
 User Valentin1331 has made that exact kind of decks, 5 decks using Revised Core Set + EotE + Dunwich expansions of 5 Dunwich investigators. Using this tool with those 5 decks are [already insightful](/tool/assembler?i=CgkKBTM2NDc4EAEKCQoFMzY0MDIQAQoJCgUzNjU0OBABCgkKBTM2NTEzEAEKCQoFMzY1MzgQAQ%3D%3D), but what if I ask to combine that result with the previous demo? Maybe there is an interesting 3 players team of Core Set + Dunwich + Edge of the Earth investigators?
 
-Visiting this demo reveals me an insight I could not found out on my own easily. There are even 2 teams with 0 overlap in Three Players section, a very rare occurence, and the team consists of both my deck and Valentin1331's deck. In the previous demo, there was no 0 overlap teams in Three Players section. So more choices reveals more possibilities, which the tool will sort up for you. There is also quite a few four players team that I think the overlaps are not hard to resolve.
+Visiting this demo reveals me an insight I could not found out on my own easily. There are even 2 teams with 0 overlap in Three Players section, a very rare occurence. In the previous demo, there was no 0 overlap teams in Three Players section. So more choices reveals more possibilities, which the tool will sort up for you. There is also quite a few four players team that I think the overlaps are not hard to resolve.
 
 This demo also shows it is possible to include comments (prefix with `//`) for organizational purpose.
 
@@ -56,15 +56,17 @@ Therefore the most suitable format is a 0 XP deck, that also lists all the cards
 
 Each overlaps will be marked with `-S` if the entry came from the Side Deck section, help you evaluate the conflict even more.
 
-## Incremental composition
+## Deck input secret features
 
-As more investigators are locked into the team, the analysis result below will be filtered more and more to help you find the remaining members.
+In the text box that you paste the deck URL or ID, if the line starts with `//`, it is a comment instead. Comment is displayed in the result as-is. The sharing URL feature remember just the deck's ID and not their readable URL, so when coming back comments can be helpful if you used a lot of decks.
 
-It can also be useful in situation like you are inviting new players to try out the game, and that player would like to play a specific deck, but you as a seasoned player can play whatever that clash the least with that deck.
+Additionally, if you type your comment in this format `// User:5argon (61394)`, deck ownership is enriched with a readable name and a link you can follow, only if the user ID matches. This is unfortunately because arkhamdb only give me the user ID with no way to get the name for published decks. We manually match the name this way. (If arkhamdb.com some day expose an API that turn ID number into name, then this feature will be removed.)
 
-There is a button near investigator portrait strip to add to the team, both in the Analysis Result below and in the Download Result above.
+## Current Team: Doing incremental composition
 
-In this section, you can also remove an investigator from the team.
+As more investigators are locked into the team, the analysis result below will be filtered more and more to help you find the remaining members. Move a deck into the team by pressing the arrow button.
+
+It can also be useful in situation like you are inviting new players to try out the game, and that player would like to play a specific deck that they liked the story of that investigator, but you as a seasoned player can play whatever that clash the least with that deck. Then you lock in the deck of that player, and browse the result below what can you choose to go with it.
 
 ## Resolving overlaps
 

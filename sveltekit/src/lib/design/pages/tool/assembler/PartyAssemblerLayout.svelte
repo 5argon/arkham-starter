@@ -14,9 +14,9 @@
 		NoSameClass,
 	}
 
-	interface CommentInsert {
-		comment: string
-		index: number
+	interface SpecialComment {
+		userId: number
+		username: string
 	}
 </script>
 
@@ -328,6 +328,25 @@
 			currentTeamAll.push(currentTeamDeck4)
 		}
 	}
+
+	var specialComments: SpecialComment[] = []
+	$: {
+		specialComments = []
+		decksAndComments.forEach((x) => {
+			if (typeof x === 'string') {
+				const parsed = tryParseSpecialComment(x)
+				if (parsed !== undefined) {
+					specialComments.push(parsed)
+				}
+			}
+		})
+	}
+
+	function tryParseSpecialComment(s: string): SpecialComment | undefined {
+		const matched = s.match('User:(.*) (([d]*))')
+	}
+
+	const pleaseWaitText = 'Analyzing decks...'
 </script>
 
 {#await fdbPromise}
@@ -363,11 +382,15 @@
 			big
 			center
 			disabled={fetchingDecks}
-			label={fetchingDecks ? 'Please Wait...' : 'Analyze ' + deckCount + ' Decks'}
+			label={fetchingDecks ? pleaseWaitText : 'Analyze ' + deckCount + ' Decks'}
 			onClick={() => {
 				process(fdb)
 			}}
 		/>
+	{/if}
+
+	{#if viewMode && fetchingDecks}
+		<p>{pleaseWaitText}</p>
 	{/if}
 
 	{#if !notReady && decksAndComments.length > 0}
@@ -468,7 +491,8 @@
 				</span>
 				<p>
 					As more investigators are locked into the team, the analysis result below will be filtered
-					more and more to help you find the remaining members.
+					more and more to help you find the remaining members. Press the arrow button in the
+					Included Decks section to add to the team.
 				</p>
 			</div>
 		</div>
