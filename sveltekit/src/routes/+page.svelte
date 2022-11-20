@@ -19,7 +19,7 @@
 </p>
 <p>
 	The site also hosts
-	<a href="/tool">additional resources and tools</a> to help with playing the game or writing your deck
+	<a href="/resource">additional resources and tools</a> to help with playing the game or writing your deck
 	guide.
 </p>
 <p>

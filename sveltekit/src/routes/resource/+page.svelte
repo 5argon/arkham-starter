@@ -15,3 +15,8 @@
 	<li><a href="/explore">Explore Investigator Expansions</a></li>
 	<li><a href="/tool/campaign">Campaign Reference</a></li>
 </ul>
+
+<h1>Custom blings</h1>
+<ul>
+	<li><a href="/proxy">Proxy Template</a></li>
+</ul>

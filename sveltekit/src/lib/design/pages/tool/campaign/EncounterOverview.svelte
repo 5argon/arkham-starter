@@ -1,12 +1,19 @@
 <script lang="ts">
-	import { EncounterSetSorting, type Campaign } from '$lib/core/campaign'
+	import {
+		EncounterSetFlag,
+		EncounterSetSorting,
+		type Campaign,
+		type EncounterSet,
+	} from '$lib/core/campaign'
 	import { Difficulty } from '$lib/core/difficulty'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
+	import { prevent_default } from 'svelte/internal'
 	import {
 		findCoreEncounters,
 		findFrequencies,
+		findUniqueEncounters,
 		findUniqueScenarios,
 		sortEncounters,
 	} from './campaign-analyze'
@@ -28,6 +35,27 @@
 	$: encounterFrequencies = findFrequencies(scenarios)
 	$: coreEncounters = sortEncounters(findCoreEncounters(campaign), sorting, encounterFrequencies)
 
+	$: uniqueEncounters = findUniqueEncounters(campaign)
+	$: commonCount =
+		campaign.commonEncounterSets?.reduce<number>((prev, cur) => {
+			return prev + cur.count
+		}, 0) ?? 0
+	$: campaignCount =
+		commonCount +
+		uniqueEncounters
+			.filter((x) => x.flag === EncounterSetFlag.Scenario)
+			.reduce<number>((prev, cur) => {
+				return prev + cur.count
+			}, 0)
+	$: returnToCount = uniqueEncounters
+		.filter((x) => x.flag === EncounterSetFlag.ReturnTo)
+		.reduce<number>((prev, cur) => {
+			return prev + cur.count
+		}, 0)
+	$: coreCount = coreEncounters.reduce<number>((prev, cur) => {
+		return prev + cur.count
+	}, 0)
+
 	function onDifficultyChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
 		difficulty = parseInt(e.currentTarget.value)
 	}
@@ -41,6 +69,7 @@
 {#if campaign.setupReferenceGraphic !== undefined}
 	<a
 		target="_blank"
+		rel="noreferrer"
 		href={'/image/custom/setup-reference/' + campaign.setupReferenceGraphic + '.png'}
 		>Print Setup Reference Card</a
 	>
@@ -60,8 +89,9 @@
 	<p>
 		If you have the campaign and would like to help out completing the missing information, head to
 		the
-		<a href="https://github.com/5argon/arkham-starter" target="_blank">Github page</a> to find out how.
-		Thank you!
+		<a href="https://github.com/5argon/arkham-starter" target="_blank" rel="noreferrer"
+			>Github page</a
+		> to find out how. Thank you!
 	</p>
 {/if}
 
@@ -109,6 +139,18 @@
 			shortScenarioName = c
 		}}
 	/>
+{/if}
+
+<ListDivider label="Stats" />
+
+{#if campaignCount > 0}
+	<div>Amount of campaign-specific encounter cards : {campaignCount} Cards</div>
+{/if}
+{#if coreCount > 0}
+	<div>Amount of core encounter cards : {coreCount} Cards</div>
+{/if}
+{#if returnToCount > 0}
+	<div>Amount of return-to encounter cards : {returnToCount} Cards</div>
 {/if}
 
 <ListDivider label="Core Encounter Sets" />

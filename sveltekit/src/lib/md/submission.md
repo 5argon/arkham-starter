@@ -81,7 +81,7 @@ One deck can be a bit of everything, so the keyword here is "primary". There are
 
 - "Enemy" : Can actually fight to kill it away or actively managing it via evasion or making it disappear. If it is a Seeker that happened to be able to evade sometimes, probably the primary role is "Clue". "Enemy" also includes helps the other members defending from them.
 - "Clue" : Good at getting clues, or make the problem disappear in order to continue getting clues. A good criteria is that the deck thinks "a piece of cake" to see 2 shroud, "happy to work on" 3 shroud, and "ok" to 4 shroud. (Standard difficulty) Remember that a Seeker may have enemy management cards, but that is likely not their primary role.
-- "Flex" : Only choose this if you think **beginners** can shapeshift, use the deck **as either role**, depending on what they happened to draw in that scenario. Like a Mystic deck with equal Shrivelling + Rite of Seeking plus some willpower boosters. If it only has a spinkle of Evidence! or similar, probably it only offer "some help" to clue finding instead of worthy to be called a flexible investigator. A deck with Flashlike + Lockpicks together with some guns look more like a flex. **Flex** deck implies it **can true-solo** to a degree that a player can have fun in Easy and sometimes on Standard if they are lucky. (OK to have trouble to actually win a campaign, this game is hard.) There is no "Solo" tag to specify.
+- "Flex" : Only choose this if you think **beginners** can shapeshift, use the deck **as either role**, depending on what they happened to draw in that scenario. Like a Mystic deck with equal Shrivelling + Rite of Seeking plus some willpower boosters. If it only has a spinkle of Evidence! or similar, probably it only offer "some help" to clue finding instead of worthy to be called a flexible investigator. A deck with Flashlight + Lockpicks together with some guns look more like a flex. **Flex** deck implies it **can true-solo** to a degree that a player can have fun in Easy and sometimes on Standard if they are lucky. (OK to have trouble to actually win a campaign, this game is hard.) There is no "Solo" tag to specify.
 
 First and foremost you are the judge of your own deck even though I may disagree. If you still think your Guardian deck with just Evidence! or Seeker deck with just Mind Over Matter is a "Flex" from beginners viewpoint, I will respect your judgement.
 
@@ -113,13 +113,24 @@ When you submit a deck, you have an opportunity to rename it to something succin
 
 # Pack Restriction
 
-Any deck can use Revised Core Set. Then we think about Investigator Expansion as a unit of purchase. It could use **up to 2 Investigator Expansion boxes**. (This includes the expansion that gives the investigator card of that deck.) Optionally, it could opt in to use **1 Starter Deck**. Parallel Investigators can be used freely as they are free to print and play.
+Any deck can use Revised Core Set. Then we think about Investigator Expansion as a unit of purchase. It could use **up to 2 Investigator Expansion boxes**. (This includes the expansion that gives the investigator card of that deck.) Optionally, it could opt in to use **1 Investigator Starter Deck** (Nathaniel Cho, Harvey Walters, ...).
 
-Therefore, all decks in this site will not cost more than 120$ to build, which is already a lot. The main draw of all the decks here is that the cards you own are valuable and get the job done with the right deck and guidance.
+
+Therefore, we have ensured that about 120$ spent (already a lot) will be able to build a team of entirely starter decks from this site. I want to give newcomers this insurance. The main draw of all the decks here is that the cards you own are valuable and get the job done with the right deck and guidance.
 
 Return To product are not eligible for use, as they are not economical.
 
 The browsing page, filtering, searching, and structure of this site are optimized for this restriction. For example, starting from any deck, you can search for an another deck to play together that does not require any additional purchases and has no overlapping cards.
+
+## Parallel Investigator
+
+Parallel Investigators front/back and/or their Advanced cards can be used freely, not counting to the 2 Investigator Expansions + 1 Starter Deck quota.
+
+You may argue that parallels are tricky and not exactly beginner friendly, however because they are free to print and play, I value the fact that parallels multiply value of what you already have more. They likely making new players with limited fund very happy.
+
+Advanced cards should be added to the Side Deck to let player know the deck is good with an Advanced version. Player can still choose to believe you or not if they don't want an Advanced one. (arkhamdb.com fixes the standard signature cards in the decks, you cannot take that out and add Advanced version in their place.)
+
+In contrary, if the Advanced cards are not in the Side Deck, then you have communicated to the player that Advanced may cause more harm than good for this deck, even though it uses Parallel front/back.
 
 ## Utilization Density
 
