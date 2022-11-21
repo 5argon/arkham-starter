@@ -10,11 +10,11 @@ Download and print these copier-friendly card frames to take care of your overla
 
 ## Premade A4 PDF
 
-If you don't want to use layout software, you can just send these files to print shop and pick the one you want after cutting.
+You can just send these files to print shop without downloading any individual graphic. May output wasted card you don't want since they are packed the way I personally want, but you save some work of using a layout software.
 
 ## Cards which often overlaps
 
-This is only from personal experience. I often build limited expansion decks, and they are very likely to overlap with each other. 
+This is only from personal experience. I often build limited expansion decks, and they are quite likely to overlap with each other. This may help to decide how many sheets to print out.
 
 ### Revised Core Set
 
@@ -33,7 +33,7 @@ This is only from personal experience. I often build limited expansion decks, an
 - Fearless
 - Leather Coat
 - Scavenging
-- "Look what I found!"
+- "Look what I found!" (Or buy Stella Clark)
 - Lucky!
 - Guts
 - Manual Dexterity

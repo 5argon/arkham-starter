@@ -12,18 +12,20 @@
 <PageTitle title={'Proxy Template'} {helpMd} />
 
 <p>
-	I blown up the contrast and exposure of these graphics so it is also friendly with photocopier,
-	which unlike a printer cannot reproduce detailed greys.
+	The part where you write stuff are edited to be whiter, photocopy-friendlier. Unlike a
+	monochrome printer it cannot reproduce detailed greys.
 </p>
 
 <ListDivider label="Premade A4 PDF" />
 
-<p>Each one is sized -2 millimeters each side from a normal card size.</p>
+When printed on A4 paper, size will come out a bit smaller than an actual card so you can overlay
+inside a sleeve and still see genuine card back. (Without the proxy paper accidentally blep off the
+edge.)
 
 <ul>
 	<li>
 		<a href="/image/custom/proxy/ahlcg-proxy-a4-1.pdf" target="_blank" rel="noreferrer"
-			>Asset, Event, Skill : 0, 1, 2 skill icons</a
+			>Asset, Event, Skill : 1, 2, 3 skill icons</a
 		>
 	</li>
 	<li>
@@ -33,7 +35,7 @@
 	</li>
 	<li>
 		<a href="/image/custom/proxy/ahlcg-proxy-a4-3.pdf" target="_blank" rel="noreferrer"
-			>Asset, Event, Skill : No skill icon</a
+			>Asset, Event, Skill : 0 skill icon</a
 		>
 	</li>
 	<li>

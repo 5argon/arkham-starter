@@ -1,4 +1,4 @@
-<h1>For writing a deck guide</h1>
+<h1>For writing arkhamdb deck description</h1>
 <ul>
 	<li><a href="/tool/upgrade">Upgrade Planner</a></li>
 	<li><a href="/tool/list">Card List</a></li>
