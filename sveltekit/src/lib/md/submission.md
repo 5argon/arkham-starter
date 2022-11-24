@@ -1,16 +1,14 @@
 **WIP! Don't send me any submission yet!**
 
-**After reading what a starter deck is** below, you can send me an e-mail with links + additional metadata (read more below) to your published deck at `pyasry@gmail.com` with a topic prefixed with `[arkham-starter.com submission]` and I will check your decks and add to the site if they conforms to the rule. You can also request **removal** of these decks, or request to put them in the same **series** of some of your other decks.
-
-# Manual submissions? What year is this? 
-
-You maybe expecting some kind of login screen that uses arkhamdb.com's credential. Then after logged in, a screen showing a list of your arkhamdb.com's deck. Then a button to submit one of them for this site, and those deck automatically appears. Then there is also a button to remove decks from submission, etc. Instead, I ask you to manually **send me an e-mail** to submit your starter decks.
+# WIP Note
 
 Unlike arkhamdb.com which has a running computer that keeps generating pages for the visitor, this site's quirk is that it is "static"! It uses no database system and pages are served extremely fast even when using mobile phone. However, it compromises some tricks that regular site can use.
 
-One thing is that new deck submissions cannot appear on the site unless I manually press "build" the site, on my laptop, after adding new decks. While this looks so prehistoric and likely won't scale well, I expect not too many authors loves to make "starter decks" (as evidenced by all the min-maxed decks worth many hundred of dollars in arkhamdb.com) and I think I can handle the manual submission... for now.
+One thing is that new deck submissions cannot appear on the site unless I manually press "build" the site, on my laptop, after adding new decks. While this looks so prehistoric and likely won't scale well, I expect not too many authors loves to make "starter decks" (as evidenced by all the min-maxed decks worth many hundred of dollars in arkhamdb.com)
 
-Also it takes more work to make a completely ergonomic site for deck authors. I would like to focus on visitors (newcomers to the game) first. It may grow into something better for you authors, later. Sorry for that!
+For the early version of this site, it probably runs on me personally contacting multiple deck authors for the inclusion of their decks and I hand-input those decks. Then I will work from there so author could submit on their own.
+
+It takes more work to make a completely ergonomic site for deck authors. I would like to focus on visitors (newcomers to the game) first. It may grow into something better for you authors, later. Sorry for that!
 
 # What is a Starter Deck
 
@@ -30,7 +28,7 @@ Decks in arkhamdb.com are very brief in explaining how to play the deck as the a
 
 That does not work for beginners that do not even know effects of each card. Decks here must put more effort in writing a guide such that even a complete beginner (that know basic rules) can play the deck, and can look out for the hot stuff inside the deck. More obscure rules that is related to the function of the deck must be explained in the deck guide.
 
-##  Ready to start a campaign with
+##  0 XP : Ready to start a campaign with
 
 In arkhamdb.com, there are many decks that lists the final state. **Beginners cannot reverse engineer these decks on their own** how would the 0 XP version looks like.
 
@@ -38,6 +36,8 @@ In arkhamdb.com, there are many decks that lists the final state. **Beginners ca
 - Then, the **Side Deck** section is used to hold all the upgrade cards, or alternative 0 XP cards to swap depending on what you said in the Description section. Which card to remove when upgrading the deck is expressed separately with the attached upgrade guide in the Description section.
 
 The point is that if beginners gathers all these cards before beginning scenario 1, they should not have to go back to their collection until the end of campaign. All the options are in the Side Deck already.
+
+Avoid using the per-scenario upgrade feature of arkhamdb.com, since it locks in how many XP the player get on each scenario. That feature is for an on-going deck currently used in a campaing. New player may feel bad if they could not match the pace. A general upgrade guide that also let the player think and modify for themselves is better.
 
 ## Standard difficulty compatible
 
@@ -68,6 +68,10 @@ Inversely, Taboo can sometimes affects the deck positively, such as Springfield'
 ## Standalone breakpoint is recommended
 
 Since the deck is forced to be 0 XP and have upgrade cards in the Side Deck, it is the best if player can follow your Description section and clearly see the progression, that they know where to stop if the deck is at 9 XP, 19 XP, or 29 XP. (And decide at which point the deck starts to function as intended. Is 29 XP too much, or required?)
+
+## Not for any particular campaign
+
+While it is good to take account of the campaign of the same expansion as the character, (e.g. Low XP to get going for Dunwich character decks, since Dunwich campaign gives low XP.) it should not be so much that the deck description telling what the player should do on each scenario of the campaign and which path to take. The deck should be usable for any campaign, especially that now we can buy Campaign Expansion separately.
 
 # Additional Metadata
 
@@ -162,5 +166,3 @@ Human (me) will take a look at your Description section if it is sufficient or n
 # Investigator-specific information
 
 There is a (quite) smart code that read your decklist and prop up the deck with **investigator-specific** information. Such as distribution of card classes in the deck, or choice you made for the deckbuilding restriction such as the subclass. You don't have to manually specify anything about this.
-
-# Submission E-Mail Example

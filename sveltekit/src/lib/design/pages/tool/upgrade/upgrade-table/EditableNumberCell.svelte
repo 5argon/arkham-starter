@@ -48,6 +48,10 @@
 <style>
 	.arkham-number {
 		font-family: 'ArkhamNumber';
+		text-align: right;
+		display: inline-block;
+		width: 20px;
+		padding-right: 2px;
 	}
 
 	.prefix-suffix {

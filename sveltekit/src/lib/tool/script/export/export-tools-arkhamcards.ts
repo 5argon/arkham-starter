@@ -40,7 +40,7 @@ function cardText(uer: ExportCard | null, opt: ExportOptions): string {
 	if (uer === null) {
 		return ''
 	}
-	if (uer.customizable) {
+	if (uer.customizable && uer.showingCustomizableChoice) {
 		return mdJustcardCustomizable(uer, opt)
 	}
 	return mdJustcard(uer, opt)

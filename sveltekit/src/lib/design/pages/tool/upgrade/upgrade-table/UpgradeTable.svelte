@@ -21,12 +21,15 @@
 	export let gs: GlobalSettings
 	export let singleMode: boolean = false
 	export let onRowDragMove: (from: number, to: number) => void
+	export let viewMode: boolean
 	let rowDragging = false
 	$: cx = calculateXps(db, rows, gs)
 </script>
 
-<div class="wrapper">
-	<UpgradeToolbar pdb={db} {toolbarEvents} {gs} />
+<div class:view-wrapper={viewMode} class:wrapper={!viewMode}>
+	{#if !viewMode}
+		<UpgradeToolbar pdb={db} {toolbarEvents} {gs} />
+	{/if}
 	{#if rows.length > 0}
 		<RowDropTarget
 			showDropTarget={rowDragging}
@@ -39,6 +42,7 @@
 		<div animate:flip={{ duration: (d) => 30 * Math.sqrt(d) }}>
 			<UpgradeRow
 				index={i}
+				{viewMode}
 				{rowDragging}
 				onRowDraggingChanged={(d) => {
 					rowDragging = d
@@ -133,7 +137,10 @@
 
 <style>
 	.wrapper {
-		margin: 0 auto;
-		max-width: 950px;
+		max-width: 900px;
+	}
+
+	.view-wrapper {
+		max-width: 700px;
 	}
 </style>

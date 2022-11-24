@@ -37,6 +37,7 @@
 	import type { ExportCard, UpgradeExportRow } from '$lib/tool/script/export/export-tools-center'
 	import { protoStringRestore } from '$lib/tool/script/export/proto-string-restore'
 	import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
+	import ViewModeBanner from '$lib/design/components/layout/ViewModeBanner.svelte'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -45,6 +46,8 @@
 	export let pageTitle: string
 	export let helpMd: string
 	export let importProto: string | null = null
+
+	$: viewMode = importProto !== null
 
 	let popupDatabase = fetchPopupDatabase()
 
@@ -64,7 +67,7 @@
 		pdb: PopupDatabase,
 		c: CalculatedXp,
 	): UpgradeExportRow {
-		function mpdb(c: string | null, pdb: PopupDatabase): ExportCard | null {
+		function mpdb(c: string | null, pdb: PopupDatabase, right: boolean): ExportCard | null {
 			if (c === null) {
 				return null
 			}
@@ -90,15 +93,15 @@
 				xp: ca.original.xp ?? null,
 				xpTaboo: ca.original.xpat,
 				customizable: ca.original.cus !== undefined,
-				showingCustomizableChoice: r.custom,
+				showingCustomizableChoice: right ? r.custom : false,
 				customizableChoiceIndex: r.customizationChoice,
 				customizableChoiceBoxes: ca.original.cus?.[r.customizationChoice].xp ?? 0,
 				customizableChoiceName: ca.original.cus?.[r.customizationChoice].n ?? '',
 			}
 		}
 		return {
-			cardLeft: mpdb(r.left, pdb),
-			cardRight: mpdb(r.right, pdb),
+			cardLeft: mpdb(r.left, pdb, false),
+			cardRight: mpdb(r.right, pdb, true),
 			divider: r.divider,
 			dividerText: r.dividerText,
 			mark: r.mark,
@@ -356,62 +359,84 @@
 {#await popupDatabase}
 	<SpinnerSpan text="Loading..." />
 {:then pdb}
-	<BigRightSider viewingLeft={!collapse}>
-		<div slot="left">
-			<div class="vertical-scroll">
-				<StagingArea
+	{#if viewMode}
+		<ViewModeBanner
+			onExitViewMode={() => {
+				viewMode = false
+			}}
+		/>
+		<UpgradeTable
+			{singleMode}
+			{viewMode}
+			db={pdb}
+			gs={globalSettings}
+			{rows}
+			{rowActionEvents}
+			{rowEditEvents}
+			{toolbarEvents}
+			onRowDragMove={(from, to) => {
+				rows = rowMoveFromTo(rows, from, to)
+			}}
+		/>
+	{:else}
+		<BigRightSider viewingLeft={!collapse}>
+			<div slot="left">
+				<div class="vertical-scroll">
+					<StagingArea
+						{singleMode}
+						{globalSettings}
+						{importText}
+						onChangeImportText={(t) => {
+							importText = t
+						}}
+						popupDatabase={pdb}
+						onCollapseChanged={(c) => {
+							collapse = c
+						}}
+						{collapse}
+						onAddStagingCards1={(c) => {
+							stagingCards1 = [...stagingCards1, c]
+						}}
+						onAddStagingCards2={(c) => {
+							stagingCards2 = [...stagingCards2, c]
+						}}
+						onAddStagingCards3={(c) => {
+							stagingCards3 = [...stagingCards3, c]
+						}}
+						onAddToLeftSide={(c) => {
+							rows = addCardToList(rows, c, false)
+						}}
+						onAddToRightSide={(c) => {
+							rows = addCardToList(rows, c, true)
+						}}
+						onImportDeck={(a, b, c) => {
+							stagingCards1 = [...a]
+							stagingCards2 = [...b]
+							stagingCards3 = [...c]
+						}}
+						{stagingCards1}
+						{stagingCards2}
+						{stagingCards3}
+					/>
+				</div>
+			</div>
+			<div slot="right">
+				<UpgradeTable
 					{singleMode}
-					{globalSettings}
-					{importText}
-					onChangeImportText={(t) => {
-						importText = t
+					{viewMode}
+					db={pdb}
+					gs={globalSettings}
+					{rows}
+					{rowActionEvents}
+					{rowEditEvents}
+					{toolbarEvents}
+					onRowDragMove={(from, to) => {
+						rows = rowMoveFromTo(rows, from, to)
 					}}
-					popupDatabase={pdb}
-					onCollapseChanged={(c) => {
-						collapse = c
-					}}
-					{collapse}
-					onAddStagingCards1={(c) => {
-						stagingCards1 = [...stagingCards1, c]
-					}}
-					onAddStagingCards2={(c) => {
-						stagingCards2 = [...stagingCards2, c]
-					}}
-					onAddStagingCards3={(c) => {
-						stagingCards3 = [...stagingCards3, c]
-					}}
-					onAddToLeftSide={(c) => {
-						rows = addCardToList(rows, c, false)
-					}}
-					onAddToRightSide={(c) => {
-						rows = addCardToList(rows, c, true)
-					}}
-					onImportDeck={(a, b, c) => {
-						stagingCards1 = [...a]
-						stagingCards2 = [...b]
-						stagingCards3 = [...c]
-					}}
-					{stagingCards1}
-					{stagingCards2}
-					{stagingCards3}
 				/>
 			</div>
-		</div>
-		<div slot="right">
-			<UpgradeTable
-				{singleMode}
-				db={pdb}
-				gs={globalSettings}
-				{rows}
-				{rowActionEvents}
-				{rowEditEvents}
-				{toolbarEvents}
-				onRowDragMove={(from, to) => {
-					rows = rowMoveFromTo(rows, from, to)
-				}}
-			/>
-		</div>
-	</BigRightSider>
+		</BigRightSider>
+	{/if}
 {/await}
 
 <style>

@@ -76,6 +76,19 @@ export function manualEdit(p: AhdbCard[]) {
   });
   addCust(p, "09042");
 
+  manualEditOne(p, "09059", (c) => {
+    c.linked_to_code = "09059b";
+  });
+  addCust(p, "09059");
+  manualEditOne(p, "09060", (c) => {
+    c.linked_to_code = "09060b";
+  });
+  addCust(p, "09060");
+  manualEditOne(p, "09061", (c) => {
+    c.linked_to_code = "09061b";
+  });
+  addCust(p, "09061");
+
   manualEditOne(p, "09079", (c) => {
     c.linked_to_code = "09079b";
   });

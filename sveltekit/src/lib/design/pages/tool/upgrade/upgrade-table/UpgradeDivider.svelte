@@ -9,6 +9,7 @@
 	export let xpCarryover: number
 	export let calculatedXpCarryover: number
 	export let unlocked: boolean
+	export let viewMode: boolean
 	export let onTextChanged: (n: string) => void = () => {
 		// do nothing
 	}
@@ -24,7 +25,7 @@
 
 <div class="flex-box">
 	<div class="flex-item flex-text">
-		<TextBox currentText={text} onChange={onTextChanged} />
+		<TextBox disabled={viewMode} currentText={text} onChange={onTextChanged} />
 	</div>
 	<!-- <div class="flex-item">
 		<CardBlockButton label="Delete" iconPath={allIcons.delete} onClick={onDelete} />
@@ -34,7 +35,11 @@
 			<EditableNumberCell
 				currentNumber={showXp}
 				suffixText={'XP'}
-				editingLevel={unlocked ? EditingLevel.Editable : EditingLevel.GreyedOut}
+				editingLevel={unlocked
+					? EditingLevel.Editable
+					: viewMode
+					? EditingLevel.JustText
+					: EditingLevel.GreyedOut}
 				onEndEdit={onXpCarryoverChanged}
 			/>
 		</div>

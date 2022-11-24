@@ -3,7 +3,7 @@
 	import help from '$lib/md/campaign-reference.md?raw'
 </script>
 
-<PageTitle subTitle="Tool" title={'Campaign Reference'} helpMd={help} />
+<PageTitle title={'Campaign Reference'} helpMd={help} />
 
 <h2>Spoiler Info</h2>
 <p>When you entered one of the campaign pages below, you will see :</p>

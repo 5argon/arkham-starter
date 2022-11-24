@@ -1,6 +1,6 @@
 <script lang="ts">
-	import SvelteMarkdown from 'svelte-markdown'
-	import mdText from '$lib/md/about.md?raw'
+	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+	import HomepageTopMenu from '$lib/design/pages/HomepageTopMenu.svelte'
 </script>
 
 <h1>arkham-starter.com</h1>
@@ -8,6 +8,8 @@
 <svelte:head>
 	<title>arkham-starter.com</title>
 </svelte:head>
+
+<HomepageTopMenu />
 
 <p>
 	arkham-starter.com is an <a href="https://arkhamdb.com" target="_blank" rel="noreferrer"
@@ -18,18 +20,17 @@
 	low amount of purchases and come with a helpful play guide.
 </p>
 <p>
-	The site also hosts
-	<a href="/resource">additional resources and tools</a> to help with playing the game or writing your deck
-	guide.
-</p>
-<p>
-	Interested in submitting your starter decks for this site?
-	<a href={'/submission'}>Read the Deck Submission guidelines here.</a>
+	This site is in development. For now you can try out my <a href="/resource">resources and tools</a
+	>, the finished site would depends on them.
 </p>
 
-<p>
-	(Decks are listed here once the site developement is complete...)
-</p>
+<ListDivider label="Random" />
+
+<p>(Decks are listed here once the site development is complete...)</p>
+
+<ListDivider label="Browse" />
+
+<p>(Decks are listed here once the site development is complete...)</p>
 
 <style>
 	p {

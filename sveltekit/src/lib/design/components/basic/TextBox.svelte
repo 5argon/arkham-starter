@@ -30,6 +30,7 @@
 	export let noticeText: string | null = null
 	export let noticeLevel: NoticeLevel = NoticeLevel.Normal
 	export let spinnerText: string | null = null
+	export let disabled: boolean = false
 	export let onChange: (n: string) => void = () => {
 		// do nothing
 	}
@@ -56,7 +57,7 @@
 
 	$: rightAlignClass = rightAlign ? 'right-align' : ''
 
-	$: disabled = spinnerText !== null || editingLevel === EditingLevel.GreyedOut
+	$: effectiveDisabled = disabled || spinnerText !== null || editingLevel === EditingLevel.GreyedOut
 	let noticeIcon: string
 	$: {
 		switch (noticeLevel) {
@@ -95,7 +96,7 @@
 		<div>{currentText}</div>
 	{:else}
 		<input
-			{disabled}
+			disabled={effectiveDisabled}
 			class={'text-box-input' + ' ' + rightAlignClass}
 			type="text"
 			placeholder={placeholderText}
@@ -106,7 +107,11 @@
 		/>
 	{/if}
 	{#if submitButtonText !== null}
-		<Button {disabled} label={submitButtonText} onClick={() => onSubmit(currentText)} />
+		<Button
+			disabled={effectiveDisabled}
+			label={submitButtonText}
+			onClick={() => onSubmit(currentText)}
+		/>
 	{/if}
 </div>
 

@@ -5,6 +5,7 @@
 <script lang="ts">
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import { EditingLevel } from '$lib/design/components/basic/TextBox.svelte'
+	import CardSpan from '$lib/design/components/card/CardSpan.svelte'
 
 	import type { Row } from '$lib/tool/upgrade/interface'
 
@@ -29,6 +30,7 @@
 	export let rowEditEvents: RowEditEvents
 	export let rowDragging: boolean = false
 	export let onRowDraggingChanged: (dragging: boolean) => void
+	export let viewMode: boolean
 
 	let leftCard: PopupDatabaseItem | null
 	let rightCard: PopupDatabaseItem | null
@@ -83,22 +85,27 @@ nested inside this div. -->
 	draggable={rowDraggable ? 'true' : false}
 	on:dragstart={rowDraggable ? dragStartHandler : undefined}
 	on:dragend={rowDraggable ? dragEndHander : undefined}
-	class={'flex-row' + ' ' + (row.divider ? 'divider-row' : '')}
+	class={'flex-row'}
+	class:divider-row={row.divider}
+	class:view-flex-row={viewMode}
 >
-	<div class="flex-item">
-		<RowActionFront
-			onDelete={rowActionEvents.onDelete}
-			onMoveRowDown={rowActionEvents.onMoveDown}
-			onMoveRowUp={rowActionEvents.onMoveUp}
-			hoveringOnGrip={(hovering) => {
-				rowDraggable = hovering
-			}}
-		/>
-	</div>
+	{#if !viewMode}
+		<div class="flex-item">
+			<RowActionFront
+				onDelete={rowActionEvents.onDelete}
+				onMoveRowDown={rowActionEvents.onMoveDown}
+				onMoveRowUp={rowActionEvents.onMoveUp}
+				hoveringOnGrip={(hovering) => {
+					rowDraggable = hovering
+				}}
+			/>
+		</div>
+	{/if}
 	{#if row.divider}
 		<div class="flex-item upgrade-divider">
 			<UpgradeDivider
 				{singleMode}
+				{viewMode}
 				text={row.dividerText}
 				xpCarryover={row.carryoverXp}
 				calculatedXpCarryover={calculatedCumulativeXp}
@@ -113,35 +120,60 @@ nested inside this div. -->
 		</div>
 	{:else}
 		<div class="flex-item">
-			<EditableSmallCell currentText={row.mark} onChange={rowEditEvents.onMarkChanged} />
+			<EditableSmallCell
+				justText={viewMode}
+				currentText={row.mark}
+				onChange={rowEditEvents.onMarkChanged}
+			/>
 		</div>
 		<div class="flex-item card-block">
 			{#if leftCard !== null}
-				<CardBlockUpDown
-					{singleMode}
-					cardId={leftCard.original.id}
-					text={leftCard.original.n}
-					subText={leftCard.original.esn ? leftCard.original.sn : null}
-					class1={leftCard.class1}
-					class2={leftCard.class2 ?? null}
-					class3={leftCard.class3 ?? null}
-					exceptional={useTaboo ? leftCard.original.ext : leftCard.original.ex}
-					restriction={leftCard.original.ir}
-					weakness={leftCard.original.wk}
-					customizable={leftCard.original.cus !== undefined}
-					xp={leftCard.original.xp}
-					xpTaboo={useTaboo ? leftCard.original.xpat : null}
-					onClickDown={rowActionEvents.onMoveDownLeft}
-					onClickUp={rowActionEvents.onMoveUpLeft}
-					onClickDelete={rowActionEvents.onDeleteLeft}
-					onDropSwap={(fi, fr, fc) => {
-						rowEditEvents.onDropSwap(fi, fr, fc, false)
-					}}
-					{index}
-					right={false}
-					disableHoverEffects={rowDragging}
-				/>
-			{:else}
+				{#if viewMode}
+					<CardSpan
+						cardId={leftCard.original.id}
+						text={leftCard.original.n}
+						subText={leftCard.original.esn ? leftCard.original.sn : null}
+						class1={leftCard.class1}
+						class2={leftCard.class2 ?? null}
+						class3={leftCard.class3 ?? null}
+						exceptional={useTaboo ? leftCard.original.ext : leftCard.original.ex}
+						restriction={leftCard.original.ir}
+						weakness={leftCard.original.wk}
+						customizable={leftCard.original.cus !== undefined}
+						xp={leftCard.original.xp}
+						xpTaboo={useTaboo ? leftCard.original.xpat : null}
+						color
+						showImageStrip
+						packIcon={leftCard.packIcon}
+						packNumber={leftCard.original.ps}
+					/>
+				{:else}
+					<CardBlockUpDown
+						{singleMode}
+						cardId={leftCard.original.id}
+						text={leftCard.original.n}
+						subText={leftCard.original.esn ? leftCard.original.sn : null}
+						class1={leftCard.class1}
+						class2={leftCard.class2 ?? null}
+						class3={leftCard.class3 ?? null}
+						exceptional={useTaboo ? leftCard.original.ext : leftCard.original.ex}
+						restriction={leftCard.original.ir}
+						weakness={leftCard.original.wk}
+						customizable={leftCard.original.cus !== undefined}
+						xp={leftCard.original.xp}
+						xpTaboo={useTaboo ? leftCard.original.xpat : null}
+						onClickDown={rowActionEvents.onMoveDownLeft}
+						onClickUp={rowActionEvents.onMoveUpLeft}
+						onClickDelete={rowActionEvents.onDeleteLeft}
+						onDropSwap={(fi, fr, fc) => {
+							rowEditEvents.onDropSwap(fi, fr, fc, false)
+						}}
+						{index}
+						right={false}
+						disableHoverEffects={rowDragging}
+					/>
+				{/if}
+			{:else if !viewMode}
 				<GreyEmpty
 					onDropSwap={(fi, fr, fc) => {
 						rowEditEvents.onDropSwap(fi, fr, fc, false)
@@ -154,35 +186,57 @@ nested inside this div. -->
 			<div class="flex-item arrow" class:bold-arrow={boldArrow}>→</div>
 			<div class="flex-item card-block">
 				{#if rightCard !== null}
-					<CardBlockUpDown
-						{singleMode}
-						cardId={rightCard.original.id}
-						text={row.custom ? customizationText : rightCard.original.n}
-						subText={rightCard.original.esn ? rightCard.original.sn : null}
-						class1={rightCard.class1}
-						class2={rightCard.class2 ?? null}
-						class3={rightCard.class3 ?? null}
-						exceptional={useTaboo ? rightCard.original.ext : rightCard.original.ex}
-						restriction={rightCard.original.ir}
-						weakness={rightCard.original.wk}
-						customizable={rightCard.original.cus !== undefined}
-						checkedBoxes={row.custom ? customizationBoxes : 0}
-						xp={rightCard.original.xp}
-						xpTaboo={useTaboo ? rightCard.original.xpat : null}
-						onClickDown={rowActionEvents.onMoveDownRight}
-						onClickUp={rowActionEvents.onMoveUpRight}
-						onClickDelete={rowActionEvents.onDeleteRight}
-						{index}
-						right={true}
-						onDropSwap={(fi, fr, fc) => {
-							rowEditEvents.onDropSwap(fi, fr, fc, true)
-						}}
-						onCustomizableCycle={() => {
-							rowEditEvents.onCustomizableCycle(popupDatabase)
-						}}
-						disableHoverEffects={rowDragging}
-					/>
-				{:else}
+					{#if viewMode}
+						<CardSpan
+							cardId={rightCard.original.id}
+							text={row.custom ? customizationText : rightCard.original.n}
+							subText={rightCard.original.esn ? rightCard.original.sn : null}
+							class1={rightCard.class1}
+							class2={rightCard.class2 ?? null}
+							class3={rightCard.class3 ?? null}
+							exceptional={useTaboo ? rightCard.original.ext : rightCard.original.ex}
+							restriction={rightCard.original.ir}
+							weakness={rightCard.original.wk}
+							customizable={rightCard.original.cus !== undefined}
+							checkedBoxes={row.custom ? customizationBoxes : 0}
+							xp={rightCard.original.xp}
+							xpTaboo={useTaboo ? rightCard.original.xpat : null}
+							color
+							showImageStrip
+							packIcon={rightCard.packIcon}
+							packNumber={rightCard.original.ps}
+						/>
+					{:else}
+						<CardBlockUpDown
+							{singleMode}
+							cardId={rightCard.original.id}
+							text={row.custom ? customizationText : rightCard.original.n}
+							subText={rightCard.original.esn ? rightCard.original.sn : null}
+							class1={rightCard.class1}
+							class2={rightCard.class2 ?? null}
+							class3={rightCard.class3 ?? null}
+							exceptional={useTaboo ? rightCard.original.ext : rightCard.original.ex}
+							restriction={rightCard.original.ir}
+							weakness={rightCard.original.wk}
+							customizable={rightCard.original.cus !== undefined}
+							checkedBoxes={row.custom ? customizationBoxes : 0}
+							xp={rightCard.original.xp}
+							xpTaboo={useTaboo ? rightCard.original.xpat : null}
+							onClickDown={rowActionEvents.onMoveDownRight}
+							onClickUp={rowActionEvents.onMoveUpRight}
+							onClickDelete={rowActionEvents.onDeleteRight}
+							{index}
+							right={true}
+							onDropSwap={(fi, fr, fc) => {
+								rowEditEvents.onDropSwap(fi, fr, fc, true)
+							}}
+							onCustomizableCycle={() => {
+								rowEditEvents.onCustomizableCycle(popupDatabase)
+							}}
+							disableHoverEffects={rowDragging}
+						/>
+					{/if}
+				{:else if !viewMode}
 					<GreyEmpty
 						onDropSwap={(fi, fr, fc) => {
 							rowEditEvents.onDropSwap(fi, fr, fc, true)
@@ -196,7 +250,11 @@ nested inside this div. -->
 			<div class="flex-item">
 				<EditableNumberCell
 					currentNumber={row.xpUnlock ? row.xp : calculatedXp}
-					editingLevel={row.xpUnlock ? EditingLevel.Editable : EditingLevel.GreyedOut}
+					editingLevel={viewMode
+						? EditingLevel.JustText
+						: row.xpUnlock
+						? EditingLevel.Editable
+						: EditingLevel.GreyedOut}
 					onEndEdit={rowEditEvents.onXpChanged}
 					suffixText="XP"
 				/>
@@ -204,13 +262,13 @@ nested inside this div. -->
 			<div class="flex-item">
 				<EditableNumberCell
 					currentNumber={calculatedCumulativeXp}
-					editingLevel={EditingLevel.GreyedOut}
+					editingLevel={viewMode ? EditingLevel.JustText : EditingLevel.GreyedOut}
 					suffixText="XP"
 				/>
 			</div>
 		{/if}
 	{/if}
-	{#if !singleMode}
+	{#if !singleMode && !viewMode}
 		<div class="flex-item">
 			{#if row.divider}
 				<RowActionBack
@@ -232,6 +290,11 @@ nested inside this div. -->
 	.flex-row {
 		display: flex;
 		align-items: center;
+	}
+
+	.view-flex-row {
+		padding: 2px 0px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 	}
 
 	.upgrade-divider {

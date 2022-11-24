@@ -17,7 +17,6 @@
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import {
 		findCoreEncounters,
-		mergeEncounters,
 		mergeEncountersPure,
 		sortEncounters,
 	} from '$lib/design/pages/tool/campaign/campaign-analyze'
@@ -57,7 +56,7 @@
 
 <t> This is a secret page that summarizes all campaigns of Arkham Horror: The Card Game. </t>
 
-<a href="/tool/campaign">Back to Campaign List</a>
+<a href="/campaign">Back to Campaign List</a>
 
 <ListDivider label="Core Encounter Set Usage" />
 

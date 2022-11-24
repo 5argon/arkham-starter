@@ -65,7 +65,7 @@
 	}
 </script>
 
-<a href="/tool/campaign">Back to Campaign List</a>
+<a href="/campaign">Back to Campaign List</a>
 {#if campaign.setupReferenceGraphic !== undefined}
 	<a
 		target="_blank"
