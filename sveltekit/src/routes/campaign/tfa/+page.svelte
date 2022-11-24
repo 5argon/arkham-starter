@@ -6,6 +6,6 @@
 	import help from '$lib/md/campaign-reference.md?raw'
 </script>
 
-<PageTitle subTitle="Tool" title={'Campaign Reference: The Forgotten Age'} helpMd={help} />
+<PageTitle title={'Campaign Reference: The Forgotten Age'} helpMd={help} />
 
 <EncounterOverview campaign={theForgottenAgeCampaign} incomplete />

@@ -6,10 +6,6 @@
 	import help from '$lib/md/campaign-reference.md?raw'
 </script>
 
-<PageTitle
-	subTitle="Tool"
-	title={'Campaign Reference: ' + theInnsmouthConspiracyCampaign.name}
-	helpMd={help}
-/>
+<PageTitle title={'Campaign Reference: ' + theInnsmouthConspiracyCampaign.name} helpMd={help} />
 
 <EncounterOverview campaign={theInnsmouthConspiracyCampaign} incomplete />

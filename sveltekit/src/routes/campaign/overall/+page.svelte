@@ -52,7 +52,7 @@
 	}
 </script>
 
-<PageTitle subTitle="Tool" title={'Campaign Reference: Overall'} helpMd={help} />
+<PageTitle title={'Campaign Reference: Overall'} helpMd={help} />
 
 <t> This is a secret page that summarizes all campaigns of Arkham Horror: The Card Game. </t>
 

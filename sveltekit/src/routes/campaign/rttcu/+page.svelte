@@ -6,10 +6,6 @@
 	import help from '$lib/md/campaign-reference.md?raw'
 </script>
 
-<PageTitle
-	subTitle="Tool"
-	title={'Campaign Reference: ' + returnToTheCircleUndoneCampaign.name}
-	helpMd={help}
-/>
+<PageTitle title={'Campaign Reference: ' + returnToTheCircleUndoneCampaign.name} helpMd={help} />
 
 <EncounterOverview campaign={returnToTheCircleUndoneCampaign} incomplete />
