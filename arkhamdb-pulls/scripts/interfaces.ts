@@ -79,7 +79,7 @@ export interface AhdbCard {
   restrictions?: null | {
     investigator: { [k: string]: string };
   };
-  deck_limit: number;
+  deck_limit?: number;
   slot: string;
   real_slot: string;
   traits?: string;
@@ -106,6 +106,7 @@ export interface AhdbCard {
   hidden?: boolean;
   linked_to_code?: string;
   linked_to_name?: string;
+  spoiler?:number;
 }
 
 export interface AhdbPack {

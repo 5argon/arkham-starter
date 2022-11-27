@@ -28,12 +28,14 @@ Decks in arkhamdb.com are very brief in explaining how to play the deck as the a
 
 That does not work for beginners that do not even know effects of each card. Decks here must put more effort in writing a guide such that even a complete beginner (that know basic rules) can play the deck, and can look out for the hot stuff inside the deck. More obscure rules that is related to the function of the deck must be explained in the deck guide.
 
-##  0 XP : Ready to start a campaign with
+##  Main Deck 0 XP : Ready to start a campaign with
 
 In arkhamdb.com, there are many decks that lists the final state. **Beginners cannot reverse engineer these decks on their own** how would the 0 XP version looks like.
 
 - We enforce a rule that the starting deck must require 0 XP, or exactly the bonus XP that the investigator or some cards like In The Thick Of It could provide.
 - Then, the **Side Deck** section is used to hold all the upgrade cards, or alternative 0 XP cards to swap depending on what you said in the Description section. Which card to remove when upgrading the deck is expressed separately with the attached upgrade guide in the Description section.
+- Any card you mentioned in the Description as upgrades or variations, they should all exist in the Side Deck. Otherwise the deck gather tool cannot take account of those cards.
+- It is possible to submit a 0 XP only deck, with empty Side Deck, and the Description tells the player to think for themselve. But this is not very recommended.
 
 The point is that if beginners gathers all these cards before beginning scenario 1, they should not have to go back to their collection until the end of campaign. All the options are in the Side Deck already.
 

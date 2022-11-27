@@ -83,57 +83,6 @@
 			})
 		}
 	}
-
-	function checkDupe(ents: DecklistEntry[], over: DecklistEntry[], fdb: FullDatabase) {
-		const cardCount: { [k: string]: number } = {}
-		function addCount(c: { [k: string]: number }, cn: string, n: number) {
-			if (!(cn in c)) {
-				c[cn] = 0
-			}
-			c[cn] += n
-		}
-		ents.forEach((x) => {
-			addCount(cardCount, x.cardId, x.amount)
-		})
-		const overQuantityCards = Object.entries(cardCount)
-			.map(([k, v]) => {
-				const card = fdb.getCard(k)
-				return { card: card, amount: v, quantity: card.original.quantity }
-			})
-			.filter((i) => {
-				if (isRandomBasicWeakness(i.card.original.code)) {
-					return false
-				}
-				return i.amount > i.quantity
-			})
-		const ov = ents.filter((x) => {
-			const found = overQuantityCards.findIndex((y) => {
-				return x.cardId === y.card.original.code
-			})
-			return found !== -1
-		})
-		const ovm = ov.map<DecklistEntry>((x) => {
-			const found = overQuantityCards.find((y) => {
-				return y.card.original.code === x.cardId
-			})
-			if (!found) {
-				return x
-			}
-			const card = fdb.getCard(x.cardId)
-			const nd: DecklistEntry = {
-				...x,
-				id: 'over' + x.label + x.id,
-				label: x.label
-					? {
-							color: x.label.color,
-							text: x.label.text + ' (' + (found.amount ?? 0) + '/' + card.original.quantity + ')',
-					  }
-					: undefined,
-			}
-			return nd
-		})
-		over.push(...ovm)
-	}
 </script>
 
 <script lang="ts">

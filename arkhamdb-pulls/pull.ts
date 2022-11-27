@@ -6,6 +6,7 @@ import { path } from "./mod.ts";
 import {
   pullsDirectory,
   pullsJson,
+  pullsUtilsCampaignDatabase,
   pullsUtilsPlayerDatabase,
   pullsUtilsPopupDatabase,
   pullsUtilsTaboo,
@@ -13,9 +14,14 @@ import {
 import { downloadImages } from "./scripts/process-user-deck/download-images.ts";
 import { extractCustomizable } from "./scripts/customizable.ts";
 import { manualEdit } from "./scripts/manual-edit.ts";
+import {
+  CampaignDatabase,
+  CampaignDatabaseItem,
+} from "./scripts/campaign-database.ts";
 
 console.log("Downloading all cards to create popup database...");
 const allCards = await publicAllCards("");
+const allCardsEncounter = await publicAllCards("/?encounter=1");
 const taboos = await publicTaboos();
 const latestTaboo: AhdbTaboo | null = taboos.length > 0 ? taboos[0] : null;
 const tabooXpMap: { [k: string]: number } = {};
@@ -54,6 +60,20 @@ allCards.forEach((x) => {
   uniquePackCode.add(x.pack_code);
   uniquePackName.add(x.pack_name);
 });
+
+const campaignCards = allCardsEncounter
+  .filter((x) => {
+    return (
+      x.deck_limit !== undefined && x.deck_limit > 0 && x.spoiler !== undefined
+    );
+  })
+  .map<CampaignDatabaseItem>((x) => {
+    return {
+      id: x.code,
+      name: x.name,
+    };
+  });
+const campaignDatabase: CampaignDatabase = campaignCards;
 
 function makeMap(s: Set<string>): {
   toNum: { [k: string]: number };
@@ -183,7 +203,11 @@ const w3 = Deno.writeTextFile(
   path.join(pullsDirectory, pullsJson, pullsUtilsTaboo),
   JSON.stringify(taboos)
 );
-await Promise.all([w1, w2, w3]);
+const w4 = Deno.writeTextFile(
+  path.join(pullsDirectory, pullsJson, pullsUtilsCampaignDatabase),
+  JSON.stringify(campaignDatabase)
+);
+await Promise.all([w1, w2, w3, w4]);
 console.log("Finished writing popup database and player database.");
 
 if (Deno.args.findIndex((x) => x === "-i") === -1) {

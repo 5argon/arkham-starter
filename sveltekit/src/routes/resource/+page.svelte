@@ -37,4 +37,5 @@
 <ul>
 	<li><a href="/tool/assembler">Team Assembler</a></li>
 	<li><a href="/tool/gather">Deck Gather</a></li>
+	<li><a href="/tool/switch">Campaign Switching</a></li>
 </ul>

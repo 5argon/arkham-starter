@@ -154,3 +154,23 @@ export function checkOverlaps(
 		uniqueOverlapCount: overlappingCount,
 	}
 }
+
+export interface IntersectResult {
+	intersects: IntersectResultItem[]
+	remains: DecklistEntry[]
+}
+
+export interface IntersectResultItem {
+	left: DecklistEntry
+	right: DecklistEntry
+}
+
+export function intersect(left: DecklistEntry[], right: DecklistEntry[]): IntersectResult {
+	// For each left card, search and remove card from the right side one by one.
+	for (let i = 0; i < left.length; i++) {
+		const leftCard = left[i]
+		for (let j = 0; j < right.length; j++) {
+			const rightCard = right[j]
+		}
+	}
+}

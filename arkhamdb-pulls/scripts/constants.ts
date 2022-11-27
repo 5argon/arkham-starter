@@ -15,6 +15,7 @@ export const pullsImagesSquareSmall ="square-small";
 export const pullsUtilsPopupDatabase = "popupdb.json";
 export const pullsUtilsPlayerDatabase = "playerdb.json";
 export const pullsUtilsTaboo = "taboo.json";
+export const pullsUtilsCampaignDatabase = "campaign.json";
 
 export const transformRepackage = "repackage.json"
 
