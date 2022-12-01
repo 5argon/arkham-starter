@@ -68,7 +68,7 @@
 			currentText={deckInput}
 			enableNotice={true}
 			onEndEdit={onDeckUrlChanged}
-			spinnerText={spinning ? 'Gathering...' : null}
+			spinnerText={spinning ? 'Downloading...' : null}
 			placeholderText={'Deck URL or deck ID. Prefix p: for published deck ID.'}
 			{noticeLevel}
 			{noticeText}

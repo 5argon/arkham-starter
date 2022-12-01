@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-message CampaignSwitchingProto {
+message CampaignSwitchProto {
 	repeated Campaign campaigns = 1;
 
 	message Campaign {

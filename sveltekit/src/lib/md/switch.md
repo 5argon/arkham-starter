@@ -11,6 +11,8 @@ This tool reveals you how to **switch from Active Campaign to Inactive Campaign*
 
 It is also useful to know if the switch is too much and you would rather dissolve all the decks back to collection.
 
+This tool is inspired by arkhamdb.com's compare decks tool ([such as this](https://arkhamdb.com/deck/compare/2533514/2091839)). But that tool only compares 2 decks instead of 2 teams of 4 decks each, plus it ignores the Side Deck.
+
 ## Example
 
 I am running Dunwich campaign using Zoey and Rex. Zoey is using 2x Blinding Light in her splash cards, and Rex of course is using 2x Deduction. Suddenly I got a visit and we want to play NotZ together using FFG Starter Deck for this night, as Roland, Daisy, Agnes team.
@@ -23,6 +25,10 @@ By using the tool with Active Campaign = [Zoey, Rex] vs. Inactive Campaign (i.e.
 - [Rex] 1x Deduction [Daisy]
 - ...
 
-With this result recorded, you precisely know how to move cards from-to teams and land on the right deck, and back when NotZ game is over, without completely destroying Zoey and Rex decks just to have one night of NotZ game. 
+You precisely know how to move minimum number of cards from Active Campaign to Inactive Campaign, and back when NotZ game is over using the "Swap" button because NotZ is now an Active Campaign, without completely disassembling Zoey and Rex decks just to have one night of NotZ game. 
 
 Also it let you work on the swap faster by having better pipeline. You iterate Zoey and Rex decks first and pick all the cards to take out, and then assemble the NotZ deck on top of those cards you just took. It is faster than try building the NotZ deck first, then realize the collection is missing some cards, which is in use in either Zoey or Rex deck, then having to find it, and repeat.
+
+## Algorithm details
+
+The player order does matter. It iterates from the first player to the last. Therefore, there is more chance that a lot of first player's deck got transferred to Inactive Campaign than subsequent decks. e.g. If someone in Inactive Campaign needs 2x Unexpected Courage, and the 1st deck and 2nd deck of Active Campaign both uses 2x Unexpected Courage, the tool would tell you to transfer 2x Unexpected Courage of the 1st deck and not touching those of the 2nd deck.

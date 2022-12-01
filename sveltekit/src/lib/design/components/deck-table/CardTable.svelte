@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { CampaignDatabase } from '$lib/core/campaign-database'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { GroupedCards } from '$lib/deck-table/decklist-entry'
 	import { extraColumnToHeader, type ExtraColumn } from '$lib/deck-table/grouping'
@@ -9,10 +10,11 @@
 	export let taboo: boolean
 	export let totalLevels: number
 	export let fullDatabase: FullDatabase
+	export let campaignDatabase: CampaignDatabase | null
 	export let columns: ExtraColumn[] = []
 	export let centered: boolean = false
 	export let hideAmount: boolean = false
-	export let scansMode :boolean = false
+	export let scansMode: boolean = false
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 </script>
 
@@ -39,6 +41,7 @@
 				previousGroupedCards={[]}
 				{totalLevels}
 				{fullDatabase}
+				{campaignDatabase}
 				{columns}
 				{taboo}
 				theOnlyGroup={groupedCards.length === 1}

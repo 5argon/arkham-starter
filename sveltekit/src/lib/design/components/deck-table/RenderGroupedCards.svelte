@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { CampaignDatabase } from '$lib/core/campaign-database'
 	import type { FullDatabase } from '$lib/core/full-database'
 
 	import { isEntry, type GroupedCards } from '$lib/deck-table/decklist-entry'
@@ -14,6 +15,7 @@
 	export let groupedCards: GroupedCards
 	export let previousGroupedCards: GroupedCards[]
 	export let fullDatabase: FullDatabase
+	export let campaignDatabase: CampaignDatabase | null
 	export let columns: ExtraColumn[] = []
 	export let toggleMap: { [id: string]: boolean }
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
@@ -53,6 +55,7 @@
 						toggled={en.id in toggleMap ? toggleMap[en.id] : false}
 						cardId={en.cardId}
 						{fullDatabase}
+						{campaignDatabase}
 						amount={hideAmount ? null : en.amount}
 						{taboo}
 					/>
@@ -73,6 +76,7 @@
 			{toggleMap}
 			{totalLevels}
 			{fullDatabase}
+			{campaignDatabase}
 			{columns}
 			{taboo}
 			{hideAmount}

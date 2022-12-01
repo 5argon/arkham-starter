@@ -101,6 +101,14 @@ export class FullDatabase {
 		return this.createUnknownCard(id)
 	}
 
+	public getShortName(fdbi: FullDatabaseItem): string {
+		const sp = fdbi.original.name.split(' ')
+		if (sp.length > 0) {
+			return sp[0]
+		}
+		return fdbi.original.name
+	}
+
 	public queryPack(packs: CardPack[]): FullDatabaseItem[] {
 		return packs
 			.flatMap<FullDatabaseItem>((x) => {

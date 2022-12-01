@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { isRandomBasicWeakness } from '$lib/ahdb/card'
+	import type { CampaignDatabase } from '$lib/core/campaign-database'
+	import { CardPack } from '$lib/core/card-pack'
 	import { type FullDatabase, shouldShowSubname } from '$lib/core/full-database'
 	import CardSpan from '../card/CardSpan.svelte'
 
@@ -7,6 +9,7 @@
 	export let cardId: string
 	export let amount: number | null
 	export let fullDatabase: FullDatabase
+	export let campaignDatabase: CampaignDatabase | null
 	export let toggled: boolean
 	export let onToggleChanged: undefined | ((t: boolean) => void) = undefined
 
@@ -14,7 +17,15 @@
 		onToggleChanged?.(!toggled)
 	}
 	$: card = fullDatabase.getCard(cardId)
+	$: campaignCard = campaignDatabase?.getById(cardId) ?? null
 	$: rbw = isRandomBasicWeakness(cardId)
+	let cardName: string
+	$: {
+		cardName = card.original.name
+		if (card.packIcon === CardPack.Unknown && campaignCard !== null) {
+			cardName = campaignCard.name
+		}
+	}
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -30,8 +41,8 @@
 		packIcon={card.packIcon}
 		packNumber={card.original.position}
 		restriction={card.original.restrictions !== undefined}
-		showImageStrip={true}
-		text={card.original.name}
+		showImageStrip={campaignCard !== null ? false : true}
+		text={cardName}
 		subText={shouldShowSubname(card, fullDatabase) ? card.original.subname : null}
 		weakness={card.original.subtype_code === 'weakness' ||
 			card.original.subtype_code === 'basicweakness'}

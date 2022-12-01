@@ -12,15 +12,27 @@
 <PageTitle title={'Proxy Template'} {helpMd} />
 
 <p>
-	The part where you write stuff are edited to be whiter, photocopy-friendlier. Unlike a
-	monochrome printer it cannot reproduce detailed greys.
+	Generic black and white card frames with the class edited out so you can focus on what's truly
+	matter : your awesome proxy art.
+</p>
+
+<p>
+	It is also photocopy-friendly. Unlike a monochrome printer it cannot reproduce detailed greys.
+</p>
+
+<p>
+	Proxies are for resolving card overlaps, creating a bit more copies of card you <b>already own</b>
+	to make unconventional team composition possible, or fix accidents such as lost cards. They are not
+	meant for you to skip buying an Investigator Expansion by getting a few cards out of it for free.
 </p>
 
 <ListDivider label="Premade A4 PDF" />
 
-When printed on A4 paper, size will come out a bit smaller than an actual card so you can overlay
-inside a sleeve and still see genuine card back. (Without the proxy paper accidentally blep off the
-edge.)
+<p>
+	They are designed so the size comes out a bit smaller than an actual card. Then you can overlay
+	inside a clear sleeve and still see genuine card back, without the proxy paper accidentally blep
+	off the edge and revealing it is a proxy from the back side.
+</p>
 
 <ul>
 	<li>
@@ -44,6 +56,8 @@ edge.)
 		>
 	</li>
 </ul>
+
+<p>Individual images below if you want an exact amount of a specific frame.</p>
 
 <ListDivider label="Asset" />
 

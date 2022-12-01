@@ -155,9 +155,10 @@ export function checkOverlaps(
 	}
 }
 
-export interface IntersectResult {
+export interface IntersectionResult {
 	intersects: IntersectResultItem[]
-	remains: DecklistEntry[]
+	remainsLeft: DecklistEntry[]
+	remainsRight: DecklistEntry[]
 }
 
 export interface IntersectResultItem {
@@ -165,12 +166,61 @@ export interface IntersectResultItem {
 	right: DecklistEntry
 }
 
-export function intersect(left: DecklistEntry[], right: DecklistEntry[]): IntersectResult {
+export function intersect(
+	leftOriginal: DecklistEntry[],
+	rightOriginal: DecklistEntry[],
+): IntersectionResult {
+	const intersects: IntersectResultItem[] = []
+	const remainsLeft: DecklistEntry[] = []
+	const remainsRight: DecklistEntry[] = []
+
+	// Make flat mapped array where each one has amount 1 for easier looping.
+	const left: DecklistEntry[] = []
+	const right: DecklistEntry[] = []
+	leftOriginal.forEach((x) => {
+		for (let i = 0; i < x.amount; i++) {
+			left.push({ ...x, amount: 1 })
+		}
+	})
+	rightOriginal.forEach((x) => {
+		for (let i = 0; i < x.amount; i++) {
+			right.push({ ...x, amount: 1 })
+		}
+	})
+
 	// For each left card, search and remove card from the right side one by one.
 	for (let i = 0; i < left.length; i++) {
 		const leftCard = left[i]
+		// Need to do it for EACH count of this left card.
+		let foundRight = false
 		for (let j = 0; j < right.length; j++) {
 			const rightCard = right[j]
+			if (rightCard.amount > 0 && leftCard.cardId === rightCard.cardId) {
+				rightCard.amount = rightCard.amount - 1
+				leftCard.amount = leftCard.amount - 1
+				intersects.push({
+					left: { ...leftCard, amount: 1 },
+					right: { ...rightCard, amount: 1 },
+				})
+				// Go to next left card.
+				foundRight = true
+				break
+			}
 		}
+		if (!foundRight) {
+			// This left card has no pair.
+			remainsLeft.push(leftCard)
+		}
+	}
+	right
+		.filter((x) => x.amount > 0)
+		.forEach((x) => {
+			remainsRight.push(x)
+		})
+
+	return {
+		intersects: intersects,
+		remainsLeft: remainsLeft,
+		remainsRight: remainsRight,
 	}
 }

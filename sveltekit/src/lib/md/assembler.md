@@ -93,10 +93,10 @@ However there are some kind of overlaps that can be solved easily :
 
 Total combinations analyzed may be huge. You can apply some filters to narrow them down.
 
-- **Incremental Composition** : Make the investigators locked into the team via "Incremental Composition" feature effective. You can turn this off to ignore the feature temporarily but still keep your team.
+- **Respect Current Team** : Make the investigators locked into the team via "Current Team" feature effective. You can turn this off to ignore the feature temporarily but still keep your team.
 - **No Same Class** : Do not include teams that has more than one of the same class. This is a popular and intuitive team composition rule. Note that some investigators of different classes can still clash into the same role and make a bad team. You still need some game knowledge to select the right one. Some investigator class can be deceiving (e.g. Edge of the Earth investigators), so turning this off may reveal something interesting too.
 - **Limit 99 Results** : Cap to only 99 results after filtering and sorting, for each tab of player count. This is because with just about ~10 input decks, the combination can explodes to something absurd like 400 results in Four Players section.
-- **Zero Overlap Only** : Only show teams with no overlap at all. You can gather cards for these teams without conflict resolution. But such results are very rare unless the decks are using very unconventional cards.
+- **Zero Overlap Only** : Only show teams with no overlap at all. You can gather cards for these teams without conflict resolution. But such results are very rare unless the decks are using very unconventional cards. So this is off by default.
 - **No Same User** : Prevent building a team that contains deck published by the same arkhamdb.com user. Intended so that each player will get one of their own deck to play in the team. Unfortunately, arkhamdb.com does not expose username of "unpublished but public" deck. It can only do so for you for published decks. (Published deck also exposes only user ID number, there is no way to know the username from that ID.)
 
 There is also one **built-in filter** applied : Teams with the same investigator by name are already removed. (You cannot do so by the game rule, there is a unique star in front of investigator's name.) This make it possible to include multiple decks of the same investigator and the tool will take care of not pairing among those decks for you.
