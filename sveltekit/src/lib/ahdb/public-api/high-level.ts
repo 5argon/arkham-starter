@@ -61,6 +61,8 @@ export interface GetDeckCardIdReturns {
 	cards1: CardAndAmount[]
 	cards2: CardAndAmount[]
 	cards3: CardAndAmount[]
+	nextDeck: number | null
+	previousDeck: number | null
 }
 
 export interface CardAndAmount {
@@ -125,5 +127,7 @@ export async function getDeckCardIds(
 		cards1: cardListToArray(d.slots),
 		cards2: cardListToArray(d.sideSlots),
 		cards3: cardListToArray(d.ignoreDeckLimitSlots),
+		nextDeck: d.next_deck,
+		previousDeck: d.previous_deck,
 	}
 }

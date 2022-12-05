@@ -18,7 +18,7 @@
 				{
 					entries: [
 						{ amount: 2, cardId: '08035', id: '08035' },
-						{ amount: 2, cardId: '02023', id: '02023', label: { text: 'P1', color: '#FEDCBA' } },
+						{ amount: 2, cardId: '02023', id: '02023', labels: [{ text: 'P1', color: '#FEDCBA' }] },
 						{ amount: 1, cardId: '01045', id: '01045' },
 						{
 							entries: [

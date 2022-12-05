@@ -2,7 +2,7 @@ import { isRandomBasicWeakness } from '$lib/ahdb/card'
 import type { CardAndAmount, GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
 import { cardClassToBackgroundClass } from '$lib/core/card-class'
 import type { FullDatabase } from '$lib/core/full-database'
-import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
+import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
 
 export interface Party {
 	decks: GetDeckCardIdReturns[]
@@ -40,7 +40,7 @@ function check(c: number[], allDecks: GetDeckCardIdReturns[], fdb: FullDatabase)
 					cardId: y.cardId,
 					amount: y.amount,
 					id: x.published ? 'p:' : '' + x.id + suffix,
-					label: { text: investigatorName + suffix, color: colorHex },
+					labels: [{ text: investigatorName + suffix, color: colorHex }],
 				}
 			})
 		}
@@ -131,15 +131,22 @@ export function checkOverlaps(
 		if (!found) {
 			return x
 		}
+		let firstLabel: DecklistLabel | undefined
+		if (x.labels !== undefined && x.labels.length > 0) {
+			firstLabel = x.labels[0]
+		}
 		const nd: DecklistEntry = {
 			...x,
-			id: 'over' + x.label + x.id,
-			label: x.label
-				? {
-						color: x.label.color,
-						text: x.label.text + ' (' + (found.amount ?? 0) + '/' + getQuantity(x.cardId) + ')',
-				  }
-				: undefined,
+			id: 'over' + x.labels + x.id,
+			labels:
+				firstLabel !== undefined
+					? [
+							{
+								color: firstLabel.color,
+								text: firstLabel.text + ' (' + (found.amount ?? 0) + '/' + getQuantity(x.cardId) + ')',
+							},
+					  ]
+					: undefined,
 		}
 		return nd
 	})

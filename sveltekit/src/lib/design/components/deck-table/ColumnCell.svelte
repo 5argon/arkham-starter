@@ -5,18 +5,20 @@
 
 	export let cardId: string
 	export let taboo: boolean
-	export let label: DecklistLabel | undefined
+	export let labels: DecklistLabel[] | undefined
 	export let fullDatabase: FullDatabase
 	export let column: ExtraColumn
 	$: card = fullDatabase.getCard(cardId)
 </script>
 
-{#if column === ExtraColumn.Label && label !== undefined}
-	<span
-		class={'label' + (label.color.indexOf('#') === -1 ? ' ' + label.color : '')}
-		style={label.color.indexOf('#') === 0 ? 'background-color:' + label.color : null}
-		>{label.text}</span
-	>
+{#if column === ExtraColumn.Label && labels !== undefined}
+	{#each labels as label}
+		<span
+			class={'label' + (label.color.indexOf('#') === -1 ? ' ' + label.color : '')}
+			style={label.color.indexOf('#') === 0 ? 'background-color:' + label.color : null}
+			>{label.text}</span
+		>
+	{/each}
 {/if}
 
 <style>

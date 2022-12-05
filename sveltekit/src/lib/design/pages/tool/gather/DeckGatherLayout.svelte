@@ -59,7 +59,7 @@
 				id: 'd' + player + c1,
 				amount: a1,
 				cardId: c1,
-				label: { text: 'P' + (player + 1), color: colorHex },
+				labels: [{ text: 'P' + (player + 1), color: colorHex }],
 			})
 		}
 		for (let i = 0; i < g.cards2.length; i++) {
@@ -69,7 +69,7 @@
 				id: 's' + player + c2,
 				amount: a2,
 				cardId: c2,
-				label: { text: 'P' + (player + 1) + '-S', color: colorHex },
+				labels: [{ text: 'P' + (player + 1) + '-S', color: colorHex }],
 			})
 		}
 		for (let i = 0; i < g.cards3.length; i++) {
@@ -79,7 +79,7 @@
 				id: 'i' + player + c3,
 				amount: a3,
 				cardId: c3,
-				label: { text: 'P' + (player + 1) + '-I', color: colorHex },
+				labels: [{ text: 'P' + (player + 1) + '-I', color: colorHex }],
 			})
 		}
 	}

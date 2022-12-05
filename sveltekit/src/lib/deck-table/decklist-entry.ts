@@ -5,7 +5,7 @@ export interface DecklistEntry {
 	id: string
 	cardId: string
 	amount: number
-	label?: DecklistLabel
+	labels?: DecklistLabel[]
 }
 
 export interface DecklistLabel {

@@ -32,7 +32,7 @@
 		type GetDeckCardIdReturns,
 	} from '$lib/ahdb/public-api/high-level'
 	import { intersect } from '$lib/tool/overlap/overlap-helpers'
-	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
+	import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
 	import TextBox from '$lib/design/components/basic/TextBox.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
@@ -287,10 +287,12 @@
 						amount: x.amount,
 						cardId: effectiveId,
 						id: shortName + effectiveId + t,
-						label: {
-							text: shortName + t,
-							color: cardClassToBackgroundClass(inv.class1),
-						},
+						labels: [
+							{
+								text: shortName + t,
+								color: cardClassToBackgroundClass(inv.class1),
+							},
+						],
 					}
 				})
 			}
@@ -323,14 +325,33 @@
 		const inactiveEntries = doSide(inactiveSideResult)
 		const intersectionResult = intersect(activeEntries, inactiveEntries)
 		transferEntries = intersectionResult.intersects.map<DecklistEntry>((x) => {
+			let leftFirstLabel: DecklistLabel | undefined
+			let rightFirstLabel: DecklistLabel | undefined
+			console.log(x.left, x.right)
+			if (x.left.labels !== undefined && x.left.labels.length > 0) {
+				leftFirstLabel = x.left.labels[0]
+			}
+			if (x.right.labels !== undefined && x.right.labels.length > 0) {
+				rightFirstLabel = x.right.labels[0]
+			}
 			const de: DecklistEntry = {
 				amount: x.left.amount,
 				cardId: x.left.cardId,
 				id: x.left.id + x.right.id,
-				label: {
-					text: (x.left.label?.text ?? '') + ' → ' + (x.right.label?.text ?? ''),
-					color: x.left.label?.color ?? '',
-				},
+				labels: [
+					{
+						text: leftFirstLabel?.text ?? '',
+						color: leftFirstLabel?.color ?? '',
+					},
+					{
+						text: '→',
+						color: '',
+					},
+					{
+						text: rightFirstLabel?.text ?? '',
+						color: rightFirstLabel?.color ?? '',
+					},
+				],
 			}
 			return de
 		})

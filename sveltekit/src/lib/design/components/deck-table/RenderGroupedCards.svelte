@@ -62,7 +62,7 @@
 				</td>
 				{#each columns as c}
 					<td>
-						<ColumnCell column={c} {taboo} cardId={en.cardId} label={en.label} {fullDatabase} />
+						<ColumnCell column={c} {taboo} cardId={en.cardId} labels={en.labels} {fullDatabase} />
 					</td>
 				{/each}
 			</tr>
