@@ -10,11 +10,13 @@
 	} from '$lib/design/components/inline/PackInfoSpan.svelte'
 	import { addPackCount, countPacks, type PackCount } from '$lib/deck/deck-count'
 	import { goToGather } from '$lib/deck/go-to-gather'
+	import type { GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
 
 	export let party: Party
 	export let fullDatabase: FullDatabase
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
+	export let onCopyMarkdown: (d: GetDeckCardIdReturns[]) => void
 	let packCount: PackCount
 
 	$: {
@@ -63,6 +65,13 @@
 						label="Gather Cards"
 						onClick={() => {
 							goToGather(party.decks)
+						}}
+					/>
+					<Button
+						block
+						label="Copy Markdown to Clipboard"
+						onClick={() => {
+							onCopyMarkdown(party.decks)
 						}}
 					/>
 				</td>

@@ -32,3 +32,41 @@ Also it let you work on the swap faster by having better pipeline. You iterate Z
 ## Algorithm details
 
 The player order does matter. It iterates from the first player to the last. Therefore, there is more chance that a lot of first player's deck got transferred to Inactive Campaign than subsequent decks. e.g. If someone in Inactive Campaign needs 2x Unexpected Courage, and the 1st deck and 2nd deck of Active Campaign both uses 2x Unexpected Courage, the tool would tell you to transfer 2x Unexpected Courage of the 1st deck and not touching those of the 2nd deck.
+
+## Using decks from ongoing campaign
+
+When you use the Upgrade feature on arkhamdb.com, or managed automatically with ArkhamCards app, it actually produces a new deck with new ID on top. If you keep the Sharing URL using ID of the starting decks, you may want to update them to the upgraded deck.
+
+If you are using the Side Deck upgrading system along the campaign, the tool could move cards in and out from the right deck.
+
+For example, Zoey intially starts the campaign with 2x Stand Together (3) on her side deck. After the first scenario, she managed to purchase 1x Stand Together (3) into the deck. (Then Emergency Cache got moved into the Side Deck instead.) An another copy is still waiting in the Side Deck.
+
+Then, suddenly I want to swap to an another campaign which Roland also has 2x Stand Together (3) in his side deck.
+
+If I use Zoey's **upgraded deck ID**, the tool would correctly report :
+
+```
+(Switch to)
+
+1x Stand Together (Zoey → Roland-S)
+1x Stand Together (Zoey-S → Roland-S)
+
+(Switch back)
+
+1x Stand Together (Roland-S → Zoey)
+1x Stand Together (Roland-S → Zoey-S)
+```
+
+But if you forgot to update Zoey's deck ID for the tool and continue using the initial ID, the tool would wrongly report : 
+
+```
+(Switch to)
+
+2x Stand Together (Zoey-S → Roland-S)
+
+(Switch back)
+
+2x Stand Together (Roland-S → Zoey-S)
+```
+
+Using the right deck ID also benefit moving Basic Weakness around. Remember that campaign may add some more, and may take the same Basic Weakness that is currently used by your other campaigns.

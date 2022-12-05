@@ -198,6 +198,16 @@ export function intersect(
 			if (rightCard.amount > 0 && leftCard.cardId === rightCard.cardId) {
 				rightCard.amount = rightCard.amount - 1
 				leftCard.amount = leftCard.amount - 1
+				if (intersects.length > 0) {
+					const previous = intersects[intersects.length - 1]
+					if (leftCard.id === previous.left.id && rightCard.id == previous.right.id) {
+						previous.left.amount++
+						previous.right.amount++
+						// Go to next left card.
+						foundRight = true
+						break
+					}
+				}
 				intersects.push({
 					left: { ...leftCard, amount: 1 },
 					right: { ...rightCard, amount: 1 },
@@ -209,13 +219,31 @@ export function intersect(
 		}
 		if (!foundRight) {
 			// This left card has no pair.
-			remainsLeft.push(leftCard)
+			if (remainsLeft.length > 0) {
+				const previous = remainsLeft[remainsLeft.length - 1]
+				if (previous.id === leftCard.id) {
+					previous.amount++
+				} else {
+					remainsLeft.push(leftCard)
+				}
+			} else {
+				remainsLeft.push(leftCard)
+			}
 		}
 	}
 	right
 		.filter((x) => x.amount > 0)
 		.forEach((x) => {
-			remainsRight.push(x)
+			if (remainsRight.length > 0) {
+				const previous = remainsRight[remainsRight.length - 1]
+				if (previous.id === x.id) {
+					previous.amount++
+				} else {
+					remainsRight.push(x)
+				}
+			} else {
+				remainsRight.push(x)
+			}
 		})
 
 	return {

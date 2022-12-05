@@ -40,6 +40,7 @@
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import { coreToRcore } from '$lib/ahdb/conversion'
 	import { CampaignDatabase, fetchCampaignDatabase } from '$lib/core/campaign-database'
+	import { goToGather } from '$lib/deck/go-to-gather'
 
 	export let protoString: string | null = null
 	let sharingUrl = ''
@@ -191,7 +192,19 @@
 		}
 	}
 
-	function openInGather(inactiveCampaign: boolean) {}
+	function openInGather(inactiveCampaign: boolean) {
+		const aaa = inactiveCampaign ? inactiveCampaignDecks : activeCampaignDecks
+		goToGather(
+			aaa.map((x) => {
+				const url = x?.deckUrl ?? ''
+				const extracted = extractDeckFromUrl(url)
+				return {
+					id: extracted.deck,
+					published: extracted.published,
+				}
+			}),
+		)
+	}
 
 	function swap(bdb: BothDatabase) {
 		swapOne(0)
@@ -283,7 +296,7 @@
 			}
 		}
 
-		function getPon(aaa: GetDeckCardIdReturns | null): PlayerOrNull {
+		function getPon(prev: PlayerOrNull, aaa: GetDeckCardIdReturns | null): PlayerOrNull {
 			if (aaa === null) {
 				return null
 			}
@@ -297,14 +310,14 @@
 			}
 		}
 
-		activeCampaignDecks[0] = getPon(activeSideResult[0])
-		activeCampaignDecks[1] = getPon(activeSideResult[1])
-		activeCampaignDecks[2] = getPon(activeSideResult[2])
-		activeCampaignDecks[3] = getPon(activeSideResult[3])
-		inactiveCampaignDecks[0] = getPon(inactiveSideResult[0])
-		inactiveCampaignDecks[1] = getPon(inactiveSideResult[1])
-		inactiveCampaignDecks[2] = getPon(inactiveSideResult[2])
-		inactiveCampaignDecks[3] = getPon(inactiveSideResult[3])
+		activeCampaignDecks[0] = getPon(activeCampaignDecks[0], activeSideResult[0])
+		activeCampaignDecks[1] = getPon(activeCampaignDecks[1], activeSideResult[1])
+		activeCampaignDecks[2] = getPon(activeCampaignDecks[2], activeSideResult[2])
+		activeCampaignDecks[3] = getPon(activeCampaignDecks[3], activeSideResult[3])
+		inactiveCampaignDecks[0] = getPon(inactiveCampaignDecks[0], inactiveSideResult[0])
+		inactiveCampaignDecks[1] = getPon(inactiveCampaignDecks[1], inactiveSideResult[1])
+		inactiveCampaignDecks[2] = getPon(inactiveCampaignDecks[2], inactiveSideResult[2])
+		inactiveCampaignDecks[3] = getPon(inactiveCampaignDecks[3], inactiveSideResult[3])
 
 		const activeEntries = doSide(activeSideResult)
 		const inactiveEntries = doSide(inactiveSideResult)

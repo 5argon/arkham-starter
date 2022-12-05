@@ -343,7 +343,41 @@
 	}
 
 	function tryParseSpecialComment(s: string): SpecialComment | undefined {
+		// TODO?
+		return undefined
 		const matched = s.match('User:(.*) (([d]*))')
+	}
+
+	function exportMarkdown(dac: (string | GetDeckCardIdReturns)[], fdb: FullDatabase) {
+		const lines = dac.map((x) => {
+			if (typeof x === 'string') {
+				return '\n' + x
+			} else {
+				const inv = fdb.getCard(x.investigatorCode)
+				const cl = inv.class1
+				const nm = inv.original.name
+				let classIcon
+				switch (copyIconFormat) {
+					case PartyAssemblerIconFormat.Emoji: {
+						classIcon = getClassIconEmoji(cl)
+						break
+					}
+					case PartyAssemblerIconFormat.ArkhamDb: {
+						classIcon = getClassIconAhdb(cl)
+						break
+					}
+					default: {
+						classIcon = ''
+						break
+					}
+				}
+				const linked = `- ${classIcon} ${nm}: [${x.deck}](${x.link})`
+				return linked
+			}
+		})
+		if (browser) {
+			navigator.clipboard.writeText(lines.join('\n'))
+		}
 	}
 
 	const pleaseWaitText = 'Analyzing decks...'
@@ -429,35 +463,7 @@
 						<Button
 							label="Copy Markdown to Clipboard (EXPERIMENTAL)"
 							onClick={() => {
-								const lines = decksAndComments.map((x) => {
-									if (typeof x === 'string') {
-										return '\n' + x
-									} else {
-										const inv = fdb.getCard(x.investigatorCode)
-										const cl = inv.class1
-										const nm = inv.original.name
-										let classIcon
-										switch (copyIconFormat) {
-											case PartyAssemblerIconFormat.Emoji: {
-												classIcon = getClassIconEmoji(cl)
-												break
-											}
-											case PartyAssemblerIconFormat.ArkhamDb: {
-												classIcon = getClassIconAhdb(cl)
-												break
-											}
-											default: {
-												classIcon = ''
-												break
-											}
-										}
-										const linked = `- ${classIcon} ${nm}: [${x.deck}](${x.link})`
-										return linked
-									}
-								})
-								if (browser) {
-									navigator.clipboard.writeText(lines.join('\n'))
-								}
+								exportMarkdown(decksAndComments, fdb)
 							}}
 						/>
 						<FramedTextSpan text="Class Icon Format" />
@@ -569,19 +575,43 @@
 				Two Players <NotificationNumber count={twoPlayerParties.length} />
 			</div>
 			<div slot="content1">
-				<PartyTable parties={twoPlayerParties} fullDatabase={fdb} {groupings} {sortings} />
+				<PartyTable
+					parties={twoPlayerParties}
+					fullDatabase={fdb}
+					{groupings}
+					{sortings}
+					onCopyMarkdown={(d) => {
+						exportMarkdown(d, fdb)
+					}}
+				/>
 			</div>
 			<div slot="tab2">
 				Three Players <NotificationNumber count={threePlayerParties.length} />
 			</div>
 			<div slot="content2">
-				<PartyTable parties={threePlayerParties} fullDatabase={fdb} {groupings} {sortings} />
+				<PartyTable
+					parties={threePlayerParties}
+					fullDatabase={fdb}
+					{groupings}
+					{sortings}
+					onCopyMarkdown={(d) => {
+						exportMarkdown(d, fdb)
+					}}
+				/>
 			</div>
 			<div slot="tab3">
 				Four Players <NotificationNumber count={fourPlayerParties.length} />
 			</div>
 			<div slot="content3">
-				<PartyTable parties={fourPlayerParties} fullDatabase={fdb} {groupings} {sortings} />
+				<PartyTable
+					parties={fourPlayerParties}
+					fullDatabase={fdb}
+					{groupings}
+					{sortings}
+					onCopyMarkdown={(d) => {
+						exportMarkdown(d, fdb)
+					}}
+				/>
 			</div>
 		</LimitedTab>
 	{/if}

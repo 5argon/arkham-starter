@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import type { Party } from '$lib/tool/overlap/overlap-helpers'
@@ -8,6 +9,7 @@
 	export let fullDatabase: FullDatabase
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
+	export let onCopyMarkdown: (d: GetDeckCardIdReturns[]) => void
 </script>
 
 <table>
@@ -18,7 +20,7 @@
 	</thead>
 	<tbody>
 		{#each parties as p}
-			<PartyRender party={p} {fullDatabase} {groupings} {sortings} />
+			<PartyRender party={p} {fullDatabase} {groupings} {sortings} {onCopyMarkdown}/>
 		{/each}
 	</tbody>
 </table>
