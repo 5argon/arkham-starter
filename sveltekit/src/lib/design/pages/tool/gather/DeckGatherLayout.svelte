@@ -29,6 +29,8 @@
 		faction: CardClass,
 		ents: DecklistEntry[],
 		fw: boolean,
+		showMain:boolean,
+		showSide:boolean,
 	) {
 		let colorHex: string
 		if (fixedColor) {
@@ -50,6 +52,7 @@
 		} else {
 			colorHex = cardClassToBackgroundClass(faction)
 		}
+		if(showMain){
 		for (let i = 0; i < g.cards1.length; i++) {
 			const c1 = fw ? coreToRcore(g.cards1[i].cardId) : g.cards1[i].cardId
 			const a1 = g.cards1[i].amount
@@ -60,6 +63,8 @@
 				labels: [{ text: 'P' + (player + 1), color: colorHex }],
 			})
 		}
+	}
+		if(showSide){
 		for (let i = 0; i < g.cards2.length; i++) {
 			const c2 = fw ? coreToRcore(g.cards2[i].cardId) : g.cards2[i].cardId
 			const a2 = g.cards2[i].amount
@@ -70,6 +75,7 @@
 				labels: [{ text: 'P' + (player + 1) + '-S', color: colorHex }],
 			})
 		}
+	}
 	}
 </script>
 
@@ -103,6 +109,8 @@
 	export let startingP3: string = ''
 	export let startingP4: string = ''
 	export let fixedLabelColor: boolean = false
+	export let showMainDeck: boolean = true
+	export let showSideDeck: boolean = true
 	export let forwardRcore: boolean = true
 
 	let sharingUrl: string = ''
@@ -235,6 +243,8 @@
 				p1.investigator?.class1 ?? CardClass.Neutral,
 				entries,
 				forwardRcore,
+				showMainDeck,
+				showSideDeck,
 			)
 		}
 		if (p2rr) {
@@ -245,6 +255,8 @@
 				p2.investigator?.class1 ?? CardClass.Neutral,
 				entries,
 				forwardRcore,
+				showMainDeck,
+				showSideDeck,
 			)
 		}
 		if (p3rr) {
@@ -255,6 +267,8 @@
 				p3.investigator?.class1 ?? CardClass.Neutral,
 				entries,
 				forwardRcore,
+				showMainDeck,
+				showSideDeck,
 			)
 		}
 		if (p4rr) {
@@ -265,6 +279,8 @@
 				p4.investigator?.class1 ?? CardClass.Neutral,
 				entries,
 				forwardRcore,
+				showMainDeck,
+				showSideDeck,
 			)
 		}
 		const checkResult = checkOverlaps(entries, (c) => fdb.getCard(c).original.quantity)
@@ -316,6 +332,22 @@
 		checked={forwardRcore}
 		onCheckChanged={() => {
 			forwardRcore = !forwardRcore
+			reactFill(p1r, p2r, p3r, p4r)
+		}}
+	/>
+	<Checkbox
+		label="Show Main Deck"
+		checked={showMainDeck}
+		onCheckChanged={() => {
+			showMainDeck = !showMainDeck
+			reactFill(p1r, p2r, p3r, p4r)
+		}}
+	/>
+	<Checkbox
+		label="Show Side Deck"
+		checked={showSideDeck}
+		onCheckChanged={() => {
+			showSideDeck = !showSideDeck
 			reactFill(p1r, p2r, p3r, p4r)
 		}}
 	/>
