@@ -1,13 +1,13 @@
 # Campaign Switching Tool
 
-This tool let you specify 2 ongoing campaigns, one campaign consists of up to 4 arkhamdb.com decks 
+This tool let you specify 2 ongoing campaigns, one campaign consists of up to 4 arkhamdb.com decks. (Therefore you can enter up to 8 decks.)
 
-- Active Campaign : It assumes that cards from your collection are pulled out to make the decks of Active Campaign as much as possible.
-- Inactive Campaign : Take all the leftover cards in the collection after building all the Active Campaign decks. These decks are likely incomplete and waiting for some hot cards to continue playing.
+- Active Campaign : Cards from your collection are pulled out to make the decks of Active Campaign as much as possible.
+- Inactive Campaign : Take all the leftover cards in the collection after building all the Active Campaign decks. These decks are likely incomplete and waiting for some hot cards inside decks of your Active Campaign to continue playing.
 
 Then it assume all other cards are stored in your collection. (So imagine you have 3 different groups of cards here.)
 
-This tool reveals you how to **switch from Active Campaign to Inactive Campaign** without dissolving all the decks back to collection first, by telling you to pick cards from which of the left deck (and also whether it is from main or side deck) to land on which of the right deck. In other words, it shows an intersection of 2 campaigns (up to 4 decks vs. 4 decks).
+This tool reveals you how to **switch from Active Campaign to Inactive Campaign** without dissolving all the decks back to collection first, by telling you to pick cards from which of the left deck (and also whether it is from main or side deck) to land on which of the right deck. In other words, it shows an **intersection** of 2 campaigns (up to 4 decks vs. 4 decks).
 
 It is also useful to know if the switch is too much and you would rather dissolve all the decks back to collection.
 
@@ -15,58 +15,42 @@ This tool is inspired by arkhamdb.com's compare decks tool ([such as this](https
 
 ## Example
 
-I am running Dunwich campaign using Zoey and Rex. Zoey is using 2x Blinding Light in her splash cards, and Rex of course is using 2x Deduction. Suddenly I got a visit and we want to play NotZ together using FFG Starter Deck for this night, as Roland, Daisy, Agnes team.
+I use my player cards and campaigns to run a 4 players Edge of the Earth campaign with my close friends. However there is also AHLCG community in a local game shop, each player their has their own player cards and I only need to bring my deck and The Dunwich Legacy campaign there to play.
 
-By using the tool with Active Campaign = [Zoey, Rex] vs. Inactive Campaign (i.e. What I am going to switch to) = [Roland, Daisy, Agnes] teams, the result would show : 
+Both campaigns alternates in irregular pattern due to life schedule of each players, so it is unwise to disassemble any deck because of the uncertainty. As a result, I need 5 decks built at the same time.
 
-- [Zoey] 1x Blinding Light [Daisy]
-- [Zoey] 1x Blinding Light [Agnes]
-- [Rex] 1x Deduction [Roland]
-- [Rex] 1x Deduction [Daisy]
-- ...
+![Example](../../../static/image/documentation/tool/switch/switch-1.png)
 
-You precisely know how to move minimum number of cards from Active Campaign to Inactive Campaign, and back when NotZ game is over using the "Swap" button because NotZ is now an Active Campaign, without completely disassembling Zoey and Rex decks just to have one night of NotZ game. 
+4 decks of Edge of the Earth party would use 4 out of 5 classes to easier resolve overlaps, since we assembled the party together. But I have less control over the other Dunwich Legacy party because they are not aware of my running Edge of the Earth campaign which class aren't used. My 1 deck in The Dunwich Legacy campaign ended up using the same class as the other 4 decks, and caused some overlaps.
 
-Also it let you work on the swap faster by having better pipeline. You iterate Zoey and Rex decks first and pick all the cards to take out, and then assemble the NotZ deck on top of those cards you just took. It is faster than try building the NotZ deck first, then realize the collection is missing some cards, which is in use in either Zoey or Rex deck, then having to find it, and repeat.
+This tool allowed me to assemble a box of 5 decks. Inside this box there are 2 "states", it is either 4 complete decks and 1 incomplete deck, or 1 complete deck and 4 incomplete decks, depending on the active campaign. I no longer need to go back to my collection knowing that everything is in this box.
+
+Assuming that Minh Thi Phan deck is that 1 deck in The Dunwich Legacy campaign, this is the output when switching from Edge of the Earth to The Dunwich Legacy, taking bits and pieces of all 4 decks.
+
+![Example](../../../static/image/documentation/tool/switch/switch-2.png)
+
+And this is when I want to switch back to play Edge of the Earth with my close friends, using the Swap button.
+
+![Example](../../../static/image/documentation/tool/switch/switch-3.png)
 
 ## Algorithm details
 
+### Transferring cards is preferred over pulling from collection
+
+For example, if **both** Active and Inactive Campaign are using 4x Knife, the tool will **transfer 4x Knife**, even though Revised Core Set gives you 10x Knife and there are more waiting in the collection.
+
+The tool assume you would rather transfer cards than going back to pick leftovers in the collection. I often pack all 5 decks of 2 campaigns in a ~300 count box. (Recommended the [Gamegenic Fourtress 320](https://www.gamegenic.com/product/fourtress-320/)) And it is reassuring that I have everything to play both campaigns inside that box and could left my big collection at home.
+
+### Player order
+
 The player order does matter. It iterates from the first player to the last. Therefore, there is more chance that a lot of first player's deck got transferred to Inactive Campaign than subsequent decks. e.g. If someone in Inactive Campaign needs 2x Unexpected Courage, and the 1st deck and 2nd deck of Active Campaign both uses 2x Unexpected Courage, the tool would tell you to transfer 2x Unexpected Courage of the 1st deck and not touching those of the 2nd deck.
 
-## Using decks from ongoing campaign
+### Using the Side Deck
 
-When you use the Upgrade feature on arkhamdb.com, or managed automatically with ArkhamCards app, it actually produces a new deck with new ID on top. If you keep the Sharing URL using ID of the starting decks, you may want to update them to the upgraded deck.
+When upgrading decks of either on-going campaigns, try moving the card that is **removed** from the deck to Side Deck. This way the card "technically exist" for the tool to detect and report the transfer.
 
-If you are using the Side Deck upgrading system along the campaign, the tool could move cards in and out from the right deck.
+For example, in your active campaign you have Zoey with Vicious Blow and is planning to upgrade to Vicious Blow (2). In the other campaign you have Ashcan Pete that is splashing Vicious Blow. Initially the tool would report the Vicious Blow transfer between Zoey and Pete.
 
-For example, Zoey intially starts the campaign with 2x Stand Together (3) on her side deck. After the first scenario, she managed to purchase 1x Stand Together (3) into the deck. (Then Emergency Cache got moved into the Side Deck instead.) An another copy is still waiting in the Side Deck.
+However after Zoey upgraded to Vicious Blow (2), if you also put her previous Vicious Blow into the Side Deck, the tool will say "transfer Vicious Blow from Zoey's Side Deck to Pete's Main Deck". If you just make Zoey's Vicious Blow disappear from her deck, tool will no longer report Vicious Blow and assume they were always in Pete's deck.
 
-Then, suddenly I want to swap to an another campaign which Roland also has 2x Stand Together (3) in his side deck.
-
-If I use Zoey's **upgraded deck ID**, the tool would correctly report :
-
-```
-(Switch to)
-
-1x Stand Together (Zoey → Roland-S)
-1x Stand Together (Zoey-S → Roland-S)
-
-(Switch back)
-
-1x Stand Together (Roland-S → Zoey)
-1x Stand Together (Roland-S → Zoey-S)
-```
-
-But if you forgot to update Zoey's deck ID for the tool and continue using the initial ID, the tool would wrongly report : 
-
-```
-(Switch to)
-
-2x Stand Together (Zoey-S → Roland-S)
-
-(Switch back)
-
-2x Stand Together (Roland-S → Zoey-S)
-```
-
-Using the right deck ID also benefit moving Basic Weakness around. Remember that campaign may add some more, and may take the same Basic Weakness that is currently used by your other campaigns.
+There are "previous" and "next" button to nudge the deck's history as they go through a campaign. Sharing URL will also change as a result.

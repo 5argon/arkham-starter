@@ -10,7 +10,6 @@
 		error: boolean
 		mainCount: number
 		sideCount: number
-		ignoreCount: number
 		investigator: FullDatabaseItem | null
 	}
 	function newDeck(startingUrl: string): Player {
@@ -20,7 +19,6 @@
 			error: false,
 			mainCount: 0,
 			sideCount: 0,
-			ignoreCount: 0,
 			investigator: null,
 		}
 	}
@@ -70,16 +68,6 @@
 				amount: a2,
 				cardId: c2,
 				labels: [{ text: 'P' + (player + 1) + '-S', color: colorHex }],
-			})
-		}
-		for (let i = 0; i < g.cards3.length; i++) {
-			const c3 = fw ? coreToRcore(g.cards3[i].cardId) : g.cards3[i].cardId
-			const a3 = g.cards3[i].amount
-			ents.push({
-				id: 'i' + player + c3,
-				amount: a3,
-				cardId: c3,
-				labels: [{ text: 'P' + (player + 1) + '-I', color: colorHex }],
 			})
 		}
 	}
@@ -181,7 +169,6 @@
 			error: !p1r && p1.deckUrl !== '' ? true : false,
 			mainCount: p1r ? sum(p1r.cards1) : 0,
 			sideCount: p1r ? sum(p1r.cards2) : 0,
-			ignoreCount: p1r ? sum(p1r.cards3) : 0,
 			investigator: p1r ? fdb.getCard(p1r.investigatorCode) : null,
 		}
 		p2 = {
@@ -190,7 +177,6 @@
 			error: !p2r && p2.deckUrl !== '' ? true : false,
 			mainCount: p2r ? sum(p2r.cards1) : 0,
 			sideCount: p2r ? sum(p2r.cards2) : 0,
-			ignoreCount: p2r ? sum(p2r.cards3) : 0,
 			investigator: p2r ? fdb.getCard(p2r.investigatorCode) : null,
 		}
 		p3 = {
@@ -199,7 +185,6 @@
 			error: !p3r && p3.deckUrl !== '' ? true : false,
 			mainCount: p3r ? sum(p3r.cards1) : 0,
 			sideCount: p3r ? sum(p3r.cards2) : 0,
-			ignoreCount: p3r ? sum(p3r.cards3) : 0,
 			investigator: p3r ? fdb.getCard(p3r.investigatorCode) : null,
 		}
 		p4 = {
@@ -208,7 +193,6 @@
 			error: !p4r && p4.deckUrl !== '' ? true : false,
 			mainCount: p4r ? sum(p4r.cards1) : 0,
 			sideCount: p4r ? sum(p4r.cards2) : 0,
-			ignoreCount: p4r ? sum(p4r.cards3) : 0,
 			investigator: p4r ? fdb.getCard(p4r.investigatorCode) : null,
 		}
 		sharingUrl = 'https://arkham-starter.com/tool/gather'
@@ -347,7 +331,6 @@
 	pullError={p1.error}
 	mainCount={p1.mainCount}
 	sideCount={p1.sideCount}
-	ignoreCount={p1.ignoreCount}
 	{pulling}
 	pulledDeckName={p1.deck}
 	onDeckUrlChanged={(s) => {
@@ -364,7 +347,6 @@
 	pullError={p2.error}
 	mainCount={p2.mainCount}
 	sideCount={p2.sideCount}
-	ignoreCount={p2.ignoreCount}
 	{pulling}
 	pulledDeckName={p2.deck}
 	onDeckUrlChanged={(s) => {
@@ -381,7 +363,6 @@
 	pullError={p3.error}
 	mainCount={p3.mainCount}
 	sideCount={p3.sideCount}
-	ignoreCount={p3.ignoreCount}
 	{pulling}
 	pulledDeckName={p3.deck}
 	onDeckUrlChanged={(s) => {
@@ -398,7 +379,6 @@
 	pullError={p4.error}
 	mainCount={p4.mainCount}
 	sideCount={p4.sideCount}
-	ignoreCount={p4.ignoreCount}
 	{pulling}
 	pulledDeckName={p4.deck}
 	onDeckUrlChanged={(s) => {

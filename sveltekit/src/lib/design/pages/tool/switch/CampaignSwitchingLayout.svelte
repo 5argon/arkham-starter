@@ -2,6 +2,8 @@
 	interface Player {
 		deckUrl: string
 		deck: string
+		nextDeck: string | undefined
+		previousDeck: string | undefined
 		published: boolean
 		error: boolean
 		investigator: FullDatabaseItem | null
@@ -96,6 +98,8 @@
 						return {
 							deck: '',
 							deckUrl: '',
+							nextDeck: undefined,
+							previousDeck: undefined,
 							error: false,
 							investigator: null,
 							published: false,
@@ -104,6 +108,8 @@
 					return {
 						deck: '',
 						deckUrl: (input.published ? 'p:' : '') + input.id,
+						nextDeck: undefined,
+						previousDeck: undefined,
 						error: false,
 						investigator: null,
 						published: input.published,
@@ -177,6 +183,8 @@
 		} else {
 			neww = {
 				deck: '',
+				nextDeck: undefined,
+				previousDeck: undefined,
 				error: false,
 				investigator: null,
 				published: extracted.published,
@@ -230,6 +238,8 @@
 			return {
 				...pon,
 				investigator: null,
+				nextDeck: undefined,
+				previousDeck: undefined,
 				error: false,
 			}
 		}
@@ -306,6 +316,8 @@
 			return {
 				deck: aaa.deck,
 				investigator: inv,
+				nextDeck: aaa.nextDeck?.toString(),
+				previousDeck: aaa.previousDeck?.toString(),
 				error: false,
 				published: aaa.published,
 				deckUrl: aaa.link,
@@ -327,7 +339,6 @@
 		transferEntries = intersectionResult.intersects.map<DecklistEntry>((x) => {
 			let leftFirstLabel: DecklistLabel | undefined
 			let rightFirstLabel: DecklistLabel | undefined
-			console.log(x.left, x.right)
 			if (x.left.labels !== undefined && x.left.labels.length > 0) {
 				leftFirstLabel = x.left.labels[0]
 			}
@@ -393,6 +404,20 @@
 					onDeckUrlChanged={(s) => {
 						onDeckChanged(d, s, i, false)
 					}}
+					nextDeck={d?.nextDeck}
+					previousDeck={d?.previousDeck}
+					onNextDeck={(dn) => {
+						if (d !== null) {
+							activeCampaignDecks[i] = { ...d, deckUrl: dn }
+							process(bdb)
+						}
+					}}
+					onPreviousDeck={(dn) => {
+						if (d !== null) {
+							activeCampaignDecks[i] = { ...d, deckUrl: dn }
+							process(bdb)
+						}
+					}}
 				/>
 			{/each}
 			<Button onClick={() => openInGather(false)} block label="Go to Deck Gather" center />
@@ -413,9 +438,23 @@
 					onDeckUrlChanged={(s) => {
 						onDeckChanged(d, s, i, true)
 					}}
+					nextDeck={d?.nextDeck}
+					previousDeck={d?.previousDeck}
+					onNextDeck={(dn) => {
+						if (d !== null) {
+							inactiveCampaignDecks[i] = { ...d, deckUrl: dn }
+							process(bdb)
+						}
+					}}
+					onPreviousDeck={(dn) => {
+						if (d !== null) {
+							inactiveCampaignDecks[i] = { ...d, deckUrl: dn }
+							process(bdb)
+						}
+					}}
 				/>
 			{/each}
-			<Button onClick={() => openInGather(false)} block label="Go to Deck Gather" center />
+			<Button onClick={() => openInGather(true)} block label="Go to Deck Gather" center />
 		</div>
 	</div>
 	<Button onClick={() => swap(bdb)} block label="Swap" big center disabled={pulling} />
@@ -434,7 +473,7 @@
 			Bookmark this URL so you can come to switch your campaign back later, using the Swap button.
 		</p>
 
-		<ListDivider label="Transfer" />
+		<ListDivider label="Transfer (Intersection)" />
 		<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
 		<CardTableGrouped
@@ -453,7 +492,7 @@
 			centered
 		/>
 
-		<ListDivider label="Remaining" />
+		<ListDivider label="Gather From Collection" />
 		<GrouperSorter
 			groupings={groupings2}
 			sortings={sortings2}

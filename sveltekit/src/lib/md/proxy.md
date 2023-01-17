@@ -8,6 +8,20 @@ Download and print these copier-friendly card frames to take care of your overla
 - If you are going to insert in front of a genuine card inside a sleeve, make sure you print a bit smaller than an actual card size.
 - You can also print just the 0 skill icon frame version and draw the frame yourself over the graphic, or print only the 4 frames one and draw less icons. But personally I think the frame is an important visual and I would like them match the amount of icons, so I made separate graphic for each.
 
+## Warning
+
+These are great for (example) :
+
+- Fix mistakes when you own the cards, but somehow you don't have them or some of them now.
+- Try out a bit more copies of a particular card than given in the box in a bigger party.
+- A placeholder to help remembering what cards are missing when moving cards out of deck, when running multiple campaigns and you need to swap in and out some cards so the decks of all campaigns appears to all use genuine cards.
+- Draw some completely custom cards.
+
+These are NOT for :
+
+- Getting only a good bit you want of an entire Investigator Expansion without having to purchase it.
+- Piracy, by proxying everything.
+
 ## Premade A4 PDF
 
 You can just send these files to print shop without downloading any individual graphic. May output wasted card you don't want since they are packed the way I personally want, but you save some work of using a layout software.
