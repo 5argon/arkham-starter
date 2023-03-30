@@ -37,6 +37,7 @@
 
 	$: selectedLanguage = languages[selectedLanguageIndex]
 	$: selectedOuter = dividerData[selectedOuterIndex]
+	$: selectedInner = selectedOuter.items[selectedInnerIndex]
 	let finalDisplays: string[] = []
 	$: {
 		if (selectedOuter.items.length > selectedInnerIndex) {
@@ -166,7 +167,9 @@
 				}}
 			/>
 		</div>
-
+		<h1>{selectedOuter.groupName}</h1>
+		<p>{selectedOuter.description}</p>
+		<h2>{selectedInner.name}</h2>
 		<div>
 			Right click and Save Image As, or drag them out of browser to your computer. They are all full
 			size image, just being displayed smaller in the browser.
