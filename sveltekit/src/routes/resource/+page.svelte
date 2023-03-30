@@ -20,11 +20,7 @@
 <h2>Custom blings</h2>
 <ul>
 	<li><a href="/proxy">Proxy Template</a></li>
-	<li>
-		<a href="https://github.com/5argon/AHLCG3mmDivider" target="_blank" rel="noreferrer"
-			>AH:LCG 3mm Dividers</a
-		>
-	</li>
+	<li><a href="/divider">The 3mm Divider</a></li>
 </ul>
 
 <h1>Standalone Tools</h1>

@@ -4,4 +4,7 @@
 			"path": "../sveltekit"
 		}
 	],
+	"settings": {
+		"deno.enable": true
+	},
 }

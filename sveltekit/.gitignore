@@ -10,4 +10,5 @@ node_modules
 .output
 
 /static/image/card
+/static/image/divider
 .yarn
