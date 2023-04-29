@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
+	import { CardClass, cardClassToBackgroundClass, cardClassToName } from '$lib/core/card-class'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import { classToBorderColorCss } from '$lib/design/interface/card-class'
 	import ClassIcon from '../inline/ClassIcon.svelte'
@@ -21,10 +21,6 @@
 	import ChosenCardRender from './ChosenCardRender.svelte'
 	import CardSquareList from './CardSquareList.svelte'
 	import { coreToRcore } from '$lib/ahdb/conversion'
-	import { sortIcons } from './deck-banner-sort-icons'
-	import PackIconWithHover from '../card/PackIconWithHover.svelte'
-	import DeckBadge from './DeckBadge.svelte'
-	import type { PackCount } from '$lib/deck/deck-count'
 	import type { PackInfoSpanItem } from '../inline/PackInfoSpan.svelte'
 	import PackInfoSpan from '../inline/PackInfoSpan.svelte'
 
@@ -151,8 +147,8 @@
 							<ParallelInfo front={parallelFront} back={parallelBack} {investigatorCode} />
 						</div>
 					{/if}
-					<div class="author">
-						{#if authorName}
+					{#if authorName}
+						<div class="author">
 							<div>
 								Author: <a href={authorUrl} target="_blank">{authorName}</a>
 							</div>
@@ -161,11 +157,35 @@
 									(Series: <a href={seriesUrl} target="_blank">{seriesName}</a>)
 								</div>
 							{/if}
-						{:else}
-							<div>(Private Deck)</div>
-						{/if}
-					</div>
+						</div>
+					{/if}
 				</div>
+				{#if chosenTraits !== null}
+					<DeckInsightItem title={chosenTraits.title} cardClass={investigatorClass}>
+						{#each chosenTraits.traits as t}
+							<span class={'trait-label ' + backgroundColorClass}>
+								{t}
+							</span>
+						{/each}
+					</DeckInsightItem>
+				{/if}
+				{#if chosenNumber !== null}
+					<DeckInsightItem title={chosenNumber.title} cardClass={investigatorClass}>
+						<span class={'trait-label ' + backgroundColorClass}>
+							{chosenNumber.number}
+						</span>
+					</DeckInsightItem>
+				{/if}
+				{#if chosenClasses !== null}
+					<DeckInsightItem title={chosenClasses.title} cardClass={investigatorClass}>
+						{#each chosenClasses.classes as t}
+							<ClassIcon cardClass={t} />
+							<span class="class-label">
+								{cardClassToName(t)}
+							</span>
+						{/each}
+					</DeckInsightItem>
+				{/if}
 				<!-- {#if !compact}
 					<CardSquareList {popupDb} {previewCards} />
 				{/if} -->
@@ -184,15 +204,6 @@
 			<DeckBadge packs={packsSorted} /> -->
 			<PackInfoSpan items={packs} />
 			<!-- {:else} -->
-			{#if chosenTraits !== null}
-				<DeckInsightItem title={chosenTraits.title} cardClass={investigatorClass}>
-					{#each chosenTraits.traits as t}
-						<span class={'trait-label ' + backgroundColorClass}>
-							{t}
-						</span>
-					{/each}
-				</DeckInsightItem>
-			{/if}
 			{#if deckDistributions !== null}
 				<DeckInsightItem title={deckDistributions.title} cardClass={investigatorClass}>
 					{#if deckDistributions.distributions.length === 3}
@@ -376,6 +387,12 @@
 
 	.trait-label {
 		font-size: small;
+		border-radius: 2px;
+		padding: 0px 4px;
+		margin-right: 2px;
+	}
+
+	.class-label {
 		border-radius: 2px;
 		padding: 0px 4px;
 		margin-right: 2px;

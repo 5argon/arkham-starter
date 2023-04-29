@@ -11,8 +11,6 @@
 	$: card = fullDatabase.getCard(cardId)
 	$: vertical = card.original.type_code !== 'investigator'
 	$: rbw = isRandomBasicWeakness(cardId)
-	$: shiftDown = amount * 10
-
 	$: width = (vertical ? 215 : 300) * sizeMultiplier
 	$: height = (vertical ? 300 : 215) * sizeMultiplier
 
@@ -26,11 +24,6 @@
 	}
 </script>
 
-{#if amount > 1}
-	<!-- <div class="behind"> -->
-		<svelte:self {cardId} {small} {fullDatabase} {toggled} {onToggleChanged} amount={amount - 1} />
-	<!-- </div> -->
-{/if}
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <span
 	class:toggle-div={onToggleChanged}
@@ -39,8 +32,6 @@
 	style={'width:' + width + 'px;' + 'height:' + height + 'px;'}
 >
 	<img
-		class:vertical
-		class:horizontal={!vertical}
 		{width}
 		{height}
 		class:normal-radius={!small}
@@ -50,10 +41,16 @@
 		loading="lazy"
 		draggable="false"
 	/>
-	{#if card.original.double_sided && card.original.backimagesrc !== undefined}
+</span>
+{#if card.original.double_sided && card.original.backimagesrc !== undefined && amount === 1}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<span
+		class:toggle-div={onToggleChanged}
+		class:toggle-div-on={toggled}
+		on:click={handler}
+		style={'width:' + width + 'px;' + 'height:' + height + 'px;'}
+	>
 		<img
-			class:vertical
-			class:horizontal={!vertical}
 			{width}
 			{height}
 			class:normal-radius={!small}
@@ -64,11 +61,17 @@
 			loading="lazy"
 			draggable="false"
 		/>
-	{/if}
-	{#if card.original.linked_to_code !== undefined}
+	</span>
+{/if}
+{#if card.original.linked_to_code !== undefined && amount === 1}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<span
+		class:toggle-div={onToggleChanged}
+		class:toggle-div-on={toggled}
+		on:click={handler}
+		style={'width:' + width + 'px;' + 'height:' + height + 'px;'}
+	>
 		<img
-			class:vertical
-			class:horizontal={!vertical}
 			{width}
 			{height}
 			class:normal-radius={!small}
@@ -79,16 +82,15 @@
 			loading="lazy"
 			draggable="false"
 		/>
-	{/if}
-</span>
+	</span>
+{/if}
+{#if amount > 1}
+	<!-- <div class="behind"> -->
+	<svelte:self {cardId} {small} {fullDatabase} {toggled} {onToggleChanged} amount={amount - 1} />
+	<!-- </div> -->
+{/if}
 
 <style>
-	.behind {
-		margin-top: -10px;
-		display: inline-block;
-		position: absolute;
-	}
-
 	span {
 		flex: 1;
 		margin: 4px;

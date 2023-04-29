@@ -33,7 +33,6 @@
 		font-weight: bold;
 		border-style: solid;
 		width: 97px;
-		margin: 0px 4px;
 		border-width: 0px 0px 1px 0px;
 	}
 

@@ -10,15 +10,15 @@
 	} from '$lib/ahdb/public-api/high-level'
 	import DeckBanner from '$lib/design/components/deck-banner/DeckBanner.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
-	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import CardTableDoubleDisplay from '$lib/design/pages/explore/CardTableDoubleDisplay.svelte'
 	import { getRepresentativeCards } from '$lib/deck/get-representative-cards'
-	import { addPackCount, countPacks, type PackCount } from '$lib/deck/deck-count'
+	import { addPackCount, countPacks } from '$lib/deck/deck-count'
 	import { CardPack } from '$lib/core/card-pack'
 	import type { PackInfoSpanItem } from '$lib/design/components/inline/PackInfoSpan.svelte'
+	import { CardClass } from '$lib/core/card-class'
 	export let data: PageData
 	interface BigDeck {
 		getReturn: GetDeckCardIdReturns
@@ -75,7 +75,6 @@
 		const b = countPacks(rcoreDeck.cards2, (c) => data.pdb.getById(c)?.packIcon ?? CardPack.Unknown)
 		const c = countPacks(rcoreDeck.cards3, (c) => data.pdb.getById(c)?.packIcon ?? CardPack.Unknown)
 		const packCount = addPackCount(addPackCount(a, b), c)
-
 		packInfoSpanItems = Object.entries(packCount).map<PackInfoSpanItem>(([packString, count]) => {
 			return {
 				pack: parseInt(packString),
@@ -101,7 +100,6 @@
 		link={deck.getReturn.link}
 		packs={packInfoSpanItems}
 		deckName={deck.getReturn.deck}
-		authorName={deck.getReturn.userId?.toString() ?? null}
 		investigatorCode={deck.getReturn.investigatorCode}
 		previewCards={representativeCards}
 	/>

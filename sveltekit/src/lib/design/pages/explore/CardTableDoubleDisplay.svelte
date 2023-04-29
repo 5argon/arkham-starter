@@ -5,6 +5,15 @@
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 
 	export let entries: DecklistEntry[]
+	export let singleRight: boolean = false
+	$: singleEntries = entries.map<DecklistEntry>((x) => {
+		return {
+			amount: 1,
+			cardId: x.cardId,
+			id: x.id,
+			labels: x.labels,
+		}
+	})
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
 	export let toggleMap: { [cardId: string]: boolean }
@@ -36,7 +45,7 @@
 		<div class="scans-flex">
 			<CardTableGrouped
 				{toggleMap}
-				{entries}
+				entries={singleRight ? singleEntries : entries}
 				{groupings}
 				{sortings}
 				{taboo}

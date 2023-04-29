@@ -22,7 +22,7 @@
 	let packStarter = isStarterPack(pack)
 	$: packColored = packReturnTo || packStarter
 	switch (pack) {
-		case CardPackIcon.ParallelInvestigator:{
+		case CardPackIcon.ParallelInvestigator: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2020/5/5/beyond-our-dimension/'
 			break
 		}
@@ -32,6 +32,14 @@
 		}
 		case CardPackIcon.ThePathToCarcosa: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2022/2/24/retreading-the-path/'
+			break
+		}
+		case CardPackIcon.TheForgottenAge: {
+			packLink = 'https://www.fantasyflightgames.com/en/news/2022/12/1/an-unforgettable-quest/'
+			break
+		}
+		case CardPackIcon.TheCircleUndone: {
+			packLink = 'https://www.fantasyflightgames.com/en/news/2023/3/9/breaking-the-spell/'
 			break
 		}
 		case CardPackIcon.EdgeOfTheEarth: {
@@ -92,7 +100,7 @@
 	.count {
 		user-select: none;
 		font-size: xx-small;
-		position: absolute;
+		display: block;
 		color: grey;
 	}
 

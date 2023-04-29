@@ -9,7 +9,8 @@
 	import { CardPackIcon } from '$lib/design/interface/card-pack'
 	import PackIconWithHover from '../card/PackIconWithHover.svelte'
 	export let items: PackInfoSpanItem[]
-	$: packsSorted = items.sort((a, b) => {
+	$: filteredItems = items.filter((i) => i.pack !== CardPackIcon.Unknown)
+	$: packsSorted = filteredItems.sort((a, b) => {
 		if (
 			a.pack === CardPackIcon.NathanielCho ||
 			a.pack === CardPackIcon.HarveyWalters ||
@@ -39,7 +40,5 @@
 		justify-items: center;
 		width: 30px;
 		border-radius: 2px;
-		margin: 0px 4px;
-		padding: 0px 4px;
 	}
 </style>

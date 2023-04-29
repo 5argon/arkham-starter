@@ -127,6 +127,7 @@
 	<ListDivider label="Investigators" />
 	<CardTableDoubleDisplay
 		{toggleMap}
+		singleRight
 		entries={getByPackFromFullDatabaseInvestigator(fdb, packs)}
 		groupings={[]}
 		sortings={[Sorting.Number]}
@@ -144,6 +145,7 @@
 
 	<CardTableDoubleDisplay
 		{toggleMap}
+		singleRight
 		entries={getByPackFromFullDatabaseWeakness(fdb, packs)}
 		groupings={[]}
 		sortings={[Sorting.Number]}
@@ -163,6 +165,7 @@
 
 	<CardTableDoubleDisplay
 		{toggleMap}
+		singleRight
 		entries={getByPackFromFullDatabase(fdb, packs)}
 		{groupings}
 		{sortings}
