@@ -3,9 +3,10 @@ import {
 	iconToNewNameConversion,
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
-import type { CardPackIcon } from '$lib/design/interface/card-pack'
+import { CardPackIcon } from '$lib/design/interface/card-pack'
 import type { LoadEvent } from '@sveltejs/kit'
 import type { CardClass } from './card-class'
+import { isRandomBasicWeakness } from '$lib/ahdb/card'
 export type LazyPopupDatabase = Promise<PopupDatabase>
 
 export class PopupDatabase {
@@ -13,7 +14,10 @@ export class PopupDatabase {
 	private map: { [k: string]: PopupDatabaseItem }
 	constructor(raw: PopupDatabaseRaw) {
 		this.cards = raw.items.map<PopupDatabaseItem>((x) => {
-			const icon = packCodeToIconConversion(raw.packCodes[x.pc])
+			let icon = packCodeToIconConversion(raw.packCodes[x.pc])
+			if (isRandomBasicWeakness(x.id)) {
+				icon = CardPackIcon.RandomBasicWeakness
+			}
 			const p: PopupDatabaseItem = {
 				original: x,
 				class1: classConversion(raw.classNames[x.c1]),

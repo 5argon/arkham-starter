@@ -206,7 +206,7 @@ export function packCodeToIconConversion(p: string): CardPack {
 		case 'rttic':
 			return CardPack.ReturnToTheInnsmouthConspiracy
 		default:
-			return CardPack.CoreSet
+			return CardPack.Unknown
 	}
 }
 

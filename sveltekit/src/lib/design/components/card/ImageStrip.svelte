@@ -3,6 +3,7 @@
 	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
 	import { classToBorderColorCss, classToFontColorCss } from '$lib/design/interface/card-class'
 	import { makePips } from '$lib/design/interface/string-util'
+	import valid from '$lib/data/valid.json'
 
 	export let name: string | null = null
 	export let showImageStrip: boolean
@@ -12,6 +13,8 @@
 	export let class3: CardClass | null = null
 	export let cardId: string | null = null
 	// export let imageBase64: string | null = null
+	const validArray: string[] = valid
+	$: exist = validArray.find((element) => element === cardId + '.png')
 
 	let showClasses: boolean
 	$: showClasses =
@@ -30,7 +33,7 @@
 	}
 </script>
 
-{#if showImageStrip}
+{#if showImageStrip && exist}
 	<span class={'image-strip' + ' ' + colorClass} title={name}>
 		<img
 			draggable={false}

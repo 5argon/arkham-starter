@@ -30,6 +30,20 @@ export function groupCards(
 	return groupCardsOneGroup(gc, groupings, sortings, 0, fdb).filter<GroupedCards>(vis)
 }
 
+export function flattenGroupedCards(gcs: GroupedCards[]): DecklistEntry[] {
+	const ret: DecklistEntry[] = []
+	gcs.forEach((gc) => {
+		gc.entries.forEach((e) => {
+			if (isEntry(e)) {
+				ret.push(e)
+			} else {
+				ret.push(...flattenGroupedCards([e]))
+			}
+		})
+	})
+	return ret
+}
+
 export interface WithCard {
 	card: FullDatabaseItem
 	dle: DecklistEntry

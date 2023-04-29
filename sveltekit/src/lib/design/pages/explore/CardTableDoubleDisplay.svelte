@@ -2,6 +2,7 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import CardLaid from '$lib/design/components/deck-table/CardLaid.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 
 	export let entries: DecklistEntry[]
@@ -23,7 +24,6 @@
 
 	export let showList: boolean
 	export let showScans: boolean
-	export let separateCount: boolean = false
 	export let small: boolean = false
 </script>
 
@@ -43,12 +43,11 @@
 	{/if}
 	{#if showScans}
 		<div class="scans-flex">
-			<CardTableGrouped
+			<CardLaid
 				{toggleMap}
-				entries={singleRight ? singleEntries : entries}
 				{groupings}
 				{sortings}
-				{taboo}
+				entries={singleRight ? singleEntries : entries}
 				{fullDatabase}
 				{onClickToggle}
 				scansMode={{ small: small }}

@@ -8,7 +8,7 @@ import tb from '../data/taboo.json'
 import { CardClass } from '$lib/design/interface/card-class'
 import { CardPackIcon } from '$lib/design/interface/card-pack'
 import type { CardPack } from './card-pack'
-import type { AhdbCard } from '$lib/ahdb/card'
+import { randomBasicWeakness, type AhdbCard, isRandomBasicWeakness } from '$lib/ahdb/card'
 import type { LoadEvent } from '@sveltejs/kit'
 export type LazyFullDatabase = Promise<FullDatabase>
 
@@ -37,7 +37,10 @@ export class FullDatabase {
 		this.sameName = {}
 		this.byPack = {}
 		const mapped = cards.map<FullDatabaseItem>((x) => {
-			const icon = packCodeToIconConversion(x.pack_code)
+			let icon = packCodeToIconConversion(x.pack_code)
+			if (isRandomBasicWeakness(x.code)) {
+				icon = CardPackIcon.RandomBasicWeakness
+			}
 			const fdi: FullDatabaseItem = {
 				class1: classConversion(x.faction_code),
 				class2: x.faction2_code !== undefined ? classConversion(x.faction2_code) : x.faction2_code,

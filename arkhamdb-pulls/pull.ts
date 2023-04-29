@@ -5,23 +5,20 @@ import { PopupDatabase, PopupDatabaseItem } from "./scripts/popup-database.ts";
 import { path } from "./mod.ts";
 import {
   pullsDirectory,
+  pullsImages,
+  pullsImagesFull,
   pullsJson,
-  pullsUtilsCampaignDatabase,
   pullsUtilsPlayerDatabase,
   pullsUtilsPopupDatabase,
   pullsUtilsTaboo,
+  pullsUtilsValid,
 } from "./scripts/constants.ts";
 import { downloadImages } from "./scripts/process-user-deck/download-images.ts";
 import { extractCustomizable } from "./scripts/customizable.ts";
 import { manualEdit } from "./scripts/manual-edit.ts";
-import {
-  CampaignDatabase,
-  CampaignDatabaseItem,
-} from "./scripts/campaign-database.ts";
 
 console.log("Downloading all cards to create popup database...");
-const allCards = await publicAllCards("");
-const allCardsEncounter = await publicAllCards("/?encounter=1");
+const allCards = await publicAllCards("/?encounter=1");
 const taboos = await publicTaboos();
 const latestTaboo: AhdbTaboo | null = taboos.length > 0 ? taboos[0] : null;
 const tabooXpMap: { [k: string]: number } = {};
@@ -60,20 +57,6 @@ allCards.forEach((x) => {
   uniquePackCode.add(x.pack_code);
   uniquePackName.add(x.pack_name);
 });
-
-const campaignCards = allCardsEncounter
-  .filter((x) => {
-    return (
-      x.deck_limit !== undefined && x.deck_limit > 0 && x.spoiler !== undefined
-    );
-  })
-  .map<CampaignDatabaseItem>((x) => {
-    return {
-      id: x.code,
-      name: x.name,
-    };
-  });
-const campaignDatabase: CampaignDatabase = campaignCards;
 
 function makeMap(s: Set<string>): {
   toNum: { [k: string]: number };
@@ -139,10 +122,10 @@ playerCards.forEach((x) => {
       return traitMap.toNum[x];
     });
   }
-  // Hidden stays in full database, but not in popup database.
-  if (x.hidden === true) {
-    return;
-  }
+  // // Hidden stays in full database, but not in popup database.
+  // if (x.hidden === true) {
+  //   return;
+  // }
   popupDatabaseItems.push({
     id: x.code,
     n: x.name,
@@ -203,11 +186,7 @@ const w3 = Deno.writeTextFile(
   path.join(pullsDirectory, pullsJson, pullsUtilsTaboo),
   JSON.stringify(taboos)
 );
-const w4 = Deno.writeTextFile(
-  path.join(pullsDirectory, pullsJson, pullsUtilsCampaignDatabase),
-  JSON.stringify(campaignDatabase)
-);
-await Promise.all([w1, w2, w3, w4]);
+await Promise.all([w1, w2, w3]);
 console.log("Finished writing popup database and player database.");
 
 if (Deno.args.findIndex((x) => x === "-i") === -1) {
@@ -217,3 +196,17 @@ if (Deno.args.findIndex((x) => x === "-i") === -1) {
 } else {
   console.log("Skipped image downloads.");
 }
+
+const pi = path.join(pullsDirectory, pullsImages);
+const fullPath = path.join(pi, pullsImagesFull);
+const validImages: string[] = [];
+for await (const dir of Deno.readDir(fullPath)) {
+  if (dir.isFile) {
+    validImages.push(path.basename(dir.name));
+  }
+}
+
+await Deno.writeTextFile(
+  path.join(pullsDirectory, pullsJson, pullsUtilsValid),
+  JSON.stringify(validImages)
+);

@@ -1,7 +1,4 @@
 export enum CardPack {
-	Unknown,
-	RandomBasicWeakness,
-
 	CoreSet,
 	RevisedCoreSet,
 	ParallelInvestigator,
@@ -29,6 +26,9 @@ export enum CardPack {
 	WinifredHabbamock,
 	JacquelineFine,
 	StellaClark,
+
+	Unknown,
+	RandomBasicWeakness,
 }
 
 export function isReturnToPack(x: CardPack): boolean {

@@ -22,6 +22,10 @@
 	let packStarter = isStarterPack(pack)
 	$: packColored = packReturnTo || packStarter
 	switch (pack) {
+		case CardPackIcon.RevisedCoreSet: {
+			packLink = 'https://www.fantasyflightgames.com/en/news/2021/6/24/revision-to-horror/'
+			break
+		}
 		case CardPackIcon.ParallelInvestigator: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2020/5/5/beyond-our-dimension/'
 			break
@@ -44,6 +48,10 @@
 		}
 		case CardPackIcon.EdgeOfTheEarth: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2021/6/3/to-edge-of-the-earth/'
+			break
+		}
+		case CardPackIcon.TheScarletKeys: {
+			packLink = 'https://www.fantasyflightgames.com/en/news/2022/6/30/scarlet-keys/'
 			break
 		}
 		case CardPackIcon.NathanielCho:

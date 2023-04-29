@@ -347,7 +347,7 @@
 	}
 
 	.head {
-		min-height: 28px;
+		padding: 4px 0px;
 		display: flex;
 		flex-wrap: nowrap;
 		align-items: center;

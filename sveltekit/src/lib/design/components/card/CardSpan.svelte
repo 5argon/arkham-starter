@@ -3,7 +3,7 @@
 	import {
 		CardPackIconColor,
 		getPackStaticUrl,
-		type CardPackIcon,
+		CardPackIcon,
 	} from '$lib/design/interface/card-pack'
 	import ClassIcon from '../inline/ClassIcon.svelte'
 	import {
@@ -40,7 +40,7 @@
 	export let checkedBoxes: number = 0
 
 	$: rbw = isRandomBasicWeakness(cardId)
-	$: effectiveText = rbw ? "Random Basic Weakness" : text
+	$: effectiveText = rbw ? 'Random Basic Weakness' : text
 
 	let colorClass: string
 	$: {
@@ -93,9 +93,8 @@
 			<span class:card-name-long={effectiveText.length >= 25} class={colorClass + ' ' + 'card-name'}
 				>{effectiveText}</span
 			>{#if subText !== null}<span class={colorClass + ' ' + 'card-subname'}>{subText}</span>{/if}
-			{#if weakness || rbw}<span
-					title="Weakness"
-					class={'pips ' + textIconFontClass}>{textIconToFontCharacter(TextIcon.Weakness)}</span
+			{#if weakness || rbw}<span title="Weakness" class={'pips ' + textIconFontClass}
+					>{textIconToFontCharacter(TextIcon.Weakness)}</span
 				>{/if}{#if restriction}<FaIcon
 					path={allIcons.investigatorRestriction}
 				/>{/if}{#if investigator}<FaIcon
@@ -109,7 +108,11 @@
 				>{/if}
 			{#if !(packNumber !== null && isUnknownCardNumber(packNumber)) && (packIcon !== null || packNumber !== null)}
 				<span class="pips pack-span"
-					>({#if packIcon !== null}<img class="pack-icon" src={packStaticUrl} alt="Pack icon" />
+					>({#if packIcon !== null && packIcon !== CardPackIcon.Unknown}<img
+							class="pack-icon"
+							src={packStaticUrl}
+							alt="Pack icon"
+						/>
 					{/if}
 					{#if packNumber !== null}<span>{packNumber}</span>{/if})</span
 				>

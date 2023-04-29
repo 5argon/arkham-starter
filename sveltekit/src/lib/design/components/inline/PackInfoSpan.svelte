@@ -9,7 +9,9 @@
 	import { CardPackIcon } from '$lib/design/interface/card-pack'
 	import PackIconWithHover from '../card/PackIconWithHover.svelte'
 	export let items: PackInfoSpanItem[]
-	$: filteredItems = items.filter((i) => i.pack !== CardPackIcon.Unknown)
+	$: filteredItems = items.filter(
+		(i) => i.pack !== CardPackIcon.Unknown && i.pack !== CardPackIcon.RandomBasicWeakness,
+	)
 	$: packsSorted = filteredItems.sort((a, b) => {
 		if (
 			a.pack === CardPackIcon.NathanielCho ||
