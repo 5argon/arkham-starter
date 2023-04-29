@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { isRandomBasicWeakness } from '$lib/ahdb/card'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import valid from '$lib/data/valid.json'
 	export let cardId: string
@@ -8,7 +7,7 @@
 	export let toggled: boolean
 	export let amount: number
 	export let onToggleChanged: undefined | ((t: boolean) => void) = undefined
-	const sizeMultiplier = small ? 0.52 : 1
+	const sizeMultiplier = small ? 0.5 : 1
 	$: card = fullDatabase.getCard(cardId)
 	$: vertical = card.original.type_code !== 'investigator'
 	$: width = (vertical ? 215 : 300) * sizeMultiplier

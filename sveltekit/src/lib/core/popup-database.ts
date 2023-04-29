@@ -218,6 +218,11 @@ export interface PopupDatabaseItemRaw {
 	 * Quantity
 	 */
 	q: number
+
+	/**
+	 * Spoiler was on in arkhamdb
+	 */
+	sp?: boolean
 }
 
 export async function fetchPopupDatabase(): LazyPopupDatabase {

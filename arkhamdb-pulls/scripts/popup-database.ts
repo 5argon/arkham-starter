@@ -142,6 +142,11 @@ export interface PopupDatabaseItem {
    * Quantity
    */
   q: number;
+
+  /**
+   * Spoiler was on in arkhamdb
+   */
+  sp?: boolean;
 }
 
 export interface CustomizableStruct {

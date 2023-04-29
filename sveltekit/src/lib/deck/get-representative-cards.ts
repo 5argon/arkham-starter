@@ -16,24 +16,45 @@ export function getRepresentativeCards(
 	sideDeck.forEach((x) => {
 		sorters.push({ card: x, side: true })
 	})
+
+	function score(s: Sorter): number {
+		const c = pdb.getById(s.card)
+		if (c === null || c.original.sp === true) {
+			return 0
+		}
+		let sc = 0
+		if (c.original.xp ?? 0 > 0) {
+			sc += 100000
+		}
+		if (!s.side) {
+			sc += 10000
+		}
+		if (c.original.cus !== undefined) {
+			sc += 5000
+		}
+		sc += (c.original.xp ?? 0) * 100
+		sc += c.packIcon * 10
+		return sc
+	}
+
 	sorters.sort((a, b) => {
-		const cardA = pdb.getById(a.card)
-		const cardB = pdb.getById(b.card)
-		if (cardA === null) {
-			return 1
-		}
-		if (cardB === null) {
-			return -1
-		}
-		if (cardA.original.xp !== cardB.original.xp) {
-			return (cardB.original.xp ?? 0) - (cardA.original.xp ?? 0)
-		} else {
-			if (a.side) {
-				return -1
-			} else {
-				return 1
-			}
-		}
+		return score(b) - score(a)
+		// if (cardA === null) {
+		// 	return 1
+		// }
+		// if (cardB === null) {
+		// 	return -1
+		// }
+		// if (a.side && !b.side) {
+		// 	return 1
+		// } else if (b.side && !a.side) {
+		// 	return -1
+		// }
+		// if (cardA.original.xp !== cardB.original.xp) {
+		// 	return (cardB.original.xp ?? 0) - (cardA.original.xp ?? 0)
+		// } else {
+		// 	return 0
+		// }
 	})
 	return sorters.map((x) => x.card).slice(0, 5)
 }

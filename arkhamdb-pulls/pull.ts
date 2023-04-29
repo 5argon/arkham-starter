@@ -161,6 +161,7 @@ playerCards.forEach((x) => {
     cs: x.cost,
     cus: extractCustomizable(x),
     q: x.quantity,
+    sp: x.spoiler !== undefined ? true : undefined,
   });
 });
 
