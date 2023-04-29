@@ -15,6 +15,7 @@
 	<li><a href="/explore">Explore Investigator Expansions</a></li>
 	<li><a href="/campaign">Campaign Reference</a></li>
 	<li><a href="/tsk-document">The Scarlet Keys : Printable Documents</a></li>
+	<li><a href="/tsk-map">The Scarlet Keys : Upscaled World Map</a></li>
 </ul>
 
 <h2>Custom blings</h2>

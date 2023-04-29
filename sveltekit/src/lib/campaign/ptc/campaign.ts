@@ -1,23 +1,80 @@
-import type { Campaign } from '$lib/core/campaign'
+import { GameComponent, type Campaign } from '$lib/core/campaign'
 import { transitions, transitionsReturnTo } from './transition'
 
 export const thePathToCarcosaCampaign: Campaign = {
 	name: 'The Path to Carcosa',
 	setupReferenceGraphic: 'The Path to Carcosa',
 	scenarioTransitions: transitions,
-	commonEncounterSets: [],
 	startingChaosBag: {
 		easy: [
-
+			GameComponent.TokenP1,
+			GameComponent.TokenP1,
+			GameComponent.Token0,
+			GameComponent.Token0,
+			GameComponent.Token0,
+			GameComponent.TokenM1,
+			GameComponent.TokenM1,
+			GameComponent.TokenM1,
+			GameComponent.TokenM2,
+			GameComponent.TokenM2,
+			GameComponent.TokenSkull,
+			GameComponent.TokenSkull,
+			GameComponent.TokenSkull,
+			GameComponent.TokenAutofail,
+			GameComponent.TokenElderSign,
 		],
 		standard: [
-
+			GameComponent.TokenP1,
+			GameComponent.Token0,
+			GameComponent.Token0,
+			GameComponent.TokenM1,
+			GameComponent.TokenM1,
+			GameComponent.TokenM1,
+			GameComponent.TokenM2,
+			GameComponent.TokenM2,
+			GameComponent.TokenM3,
+			GameComponent.TokenM4,
+			GameComponent.TokenSkull,
+			GameComponent.TokenSkull,
+			GameComponent.TokenSkull,
+			GameComponent.TokenAutofail,
+			GameComponent.TokenElderSign,
 		],
 		hard: [
-
+			GameComponent.Token0,
+			GameComponent.Token0,
+			GameComponent.Token0,
+			GameComponent.TokenM1,
+			GameComponent.TokenM1,
+			GameComponent.TokenM2,
+			GameComponent.TokenM2,
+			GameComponent.TokenM3,
+			GameComponent.TokenM4,
+			GameComponent.TokenM5,
+			GameComponent.TokenSkull,
+			GameComponent.TokenSkull,
+			GameComponent.TokenSkull,
+			GameComponent.TokenAutofail,
+			GameComponent.TokenElderSign,
 		],
 		expert: [
-
+			GameComponent.Token0,
+			GameComponent.TokenM1,
+			GameComponent.TokenM1,
+			GameComponent.TokenM2,
+			GameComponent.TokenM2,
+			GameComponent.TokenM3,
+			GameComponent.TokenM3,
+			GameComponent.TokenM4,
+			GameComponent.TokenM4,
+			GameComponent.TokenM5,
+			GameComponent.TokenM6,
+			GameComponent.TokenM8,
+			GameComponent.TokenSkull,
+			GameComponent.TokenSkull,
+			GameComponent.TokenSkull,
+			GameComponent.TokenAutofail,
+			GameComponent.TokenElderSign,
 		],
 	},
 }
@@ -28,17 +85,9 @@ export const returnToThePathToCarcosaCampaign: Campaign = {
 	scenarioTransitions: transitionsReturnTo,
 	commonEncounterSets: [],
 	startingChaosBag: {
-		easy: [
-
-		],
-		standard: [
-
-		],
-		hard: [
-
-		],
-		expert: [
-
-		],
+		easy: [],
+		standard: [],
+		hard: [],
+		expert: [],
 	},
 }

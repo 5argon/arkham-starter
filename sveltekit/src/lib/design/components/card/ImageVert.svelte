@@ -60,7 +60,7 @@
 		<img
 			draggable={false}
 			class="image-in-strip"
-			src={'/image/card/square-small/' + cardId + '.png'}
+			src={'/image/card/square/' + cardId + '.png'}
 			alt={''}
 		/>
 		{#if xp !== null}
@@ -85,8 +85,8 @@
 
 	.image-strip {
 		display: inline-block;
-		width: 24px;
-		height: 24px;
+		width: 48px;
+		height: 48px;
 		border-width: 1px 1px 1px 3px;
 		border-style: solid;
 		position: relative;
@@ -94,8 +94,8 @@
 
 	.image-in-strip {
 		user-select: none;
-		width: 22px;
-		height: 22px;
+		width: 46px;
+		height: 46px;
 		border: solid 1px white;
 		position: relative;
 	}
@@ -106,8 +106,8 @@
 		top: 100%;
 		right: 0;
 		display: flex;
-		width: 14px;
-		transform: translateY(-10px) translateX(1px);
+		width: 25px;
+		transform: translateY(-15px) translateX(-2px);
 	}
 
 	.pips {
@@ -119,7 +119,7 @@
 		position: absolute;
 		user-select: none;
 		line-height: 3px;
-		font-size: 0.5em;
+		font-size: 0.8em;
 		text-align: left;
 	}
 </style>

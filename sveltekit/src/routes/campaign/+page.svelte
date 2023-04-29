@@ -28,19 +28,20 @@
 
 <h2>Campaigns</h2>
 <p>
-	* = These are campaigns I have not played yet, I only buy the repackaged campaigns as they are
-	released. The information in these pages are made by directly copying community-made encounter set
-	table. Information in some area maybe incomplete or incorrect.
+	* = These are campaigns I have not played or has incomplete details. The information in these
+	pages are made by directly copying community-made encounter set table and I can't check
+	correctness of them.
 </p>
 <ul>
 	<li><a href="./campaign/notz">Night of the Zealot</a></li>
 	<li><a href="./campaign/dwl">The Dunwich Legacy</a></li>
-	<li><a href="./campaign/ptc">*The Path to Carcosa</a></li>
+	<li><a href="./campaign/ptc">The Path to Carcosa</a></li>
 	<li><a href="./campaign/tfa">*The Forgotten Age</a></li>
 	<li><a href="./campaign/tcu">*The Circle Undone</a></li>
 	<li><a href="./campaign/tde">*The Dream-Eaters</a></li>
 	<li><a href="./campaign/tic">*The Innsmouth Conspiracy</a></li>
 	<li><a href="./campaign/eote">Edge of the Earth</a></li>
+	<li><a href="./campaign/tsk">The Scarlet Keys</a></li>
 </ul>
 <ul>
 	<li><a href="./campaign/rtnotz">*Return to the Night of the Zealot</a></li>

@@ -5,7 +5,6 @@ export const theForgottenAgeCampaign: Campaign = {
 	name: 'The Forgotten Age',
 	setupReferenceGraphic: 'The Forgotten Age',
 	scenarioTransitions: transitions,
-	commonEncounterSets: [],
 	startingChaosBag: {
 		easy: [],
 		standard: [],
@@ -18,7 +17,6 @@ export const returnToTheForgottenAgeCampaign: Campaign = {
 	name: 'Return to the Forgotten Age',
 	setupReferenceGraphic: 'Return to the Forgotten Age',
 	scenarioTransitions: transitionsReturnTo,
-	commonEncounterSets: [],
 	startingChaosBag: {
 		easy: [],
 		standard: [],

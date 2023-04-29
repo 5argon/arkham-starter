@@ -8,4 +8,4 @@
 
 <PageTitle title={'Campaign Reference: The Forgotten Age'} helpMd={help} />
 
-<EncounterOverview campaign={theForgottenAgeCampaign} incomplete />
+<EncounterOverview campaign={theForgottenAgeCampaign} incomplete/>

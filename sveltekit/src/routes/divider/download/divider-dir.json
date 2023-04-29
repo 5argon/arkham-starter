@@ -231,6 +231,18 @@
   },
   {
     "items": [
+      "01_Guardian 32.png",
+      "02_Seeker 32.png",
+      "03_Rogue 30.png",
+      "04_Mystic 30.png",
+      "05_Survivor 30.png",
+      "06_Multi-Class 10.png",
+      "07_Neutral 6.png"
+    ],
+    "folder": "CCQ - The Circle Undone x7"
+  },
+  {
+    "items": [
       "01_By the Book.png",
       "02_Read or Die.png",
       "03_All or Nothing.png",
@@ -711,6 +723,15 @@
       "07_313-324 (Before the Black Throne).png"
     ],
     "folder": "CNR - The Circle Undone x7"
+  },
+  {
+    "items": [
+      "01_Main.png",
+      "02_Encounter.png",
+      "03_Fortune's Chosen.png",
+      "04_Plan in Shambles.png"
+    ],
+    "folder": "Standalone - Fortune and Folly x4"
   },
   {
     "items": [

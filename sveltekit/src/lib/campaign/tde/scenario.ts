@@ -36,13 +36,17 @@ export const beyondTheGatesOfSleepScenario: Scenario = {
 	name: 'Beyond the Gates of Sleep',
 	index: 1,
 	shortName: 'I-A',
-	shuffles: [
-		{ encounterSet: beyondTheGatesOfSleep, overwriteCount: 0 },
-		chillingCold,
-		agentsOfNyarlathotep,
-		dreamersCurse,
-		dreamlands,
-		zoogs,
+	setups: [
+		{
+			shuffles: [
+				{ encounterSet: beyondTheGatesOfSleep, overwriteCount: 0 },
+				chillingCold,
+				agentsOfNyarlathotep,
+				dreamersCurse,
+				dreamlands,
+				zoogs,
+			],
+		},
 	],
 }
 
@@ -50,27 +54,35 @@ export const wakingNightmareScenario: Scenario = {
 	name: 'Waking Nightmare',
 	index: 2,
 	shortName: 'I-B',
-	shuffles: [
-		{ encounterSet: wakingNightmare, overwriteCount: 0 },
-		lockedDoors,
-		strikingFear,
-		agentsOfAtlachNacha,
-		mergingRealities,
+	setups: [
+		{
+			shuffles: [
+				{ encounterSet: wakingNightmare, overwriteCount: 0 },
+				lockedDoors,
+				strikingFear,
+				agentsOfAtlachNacha,
+				mergingRealities,
+			],
+			remaining: [spiders, whispersOfHypnos],
+		},
 	],
-	setAsides: [spiders, whispersOfHypnos],
 }
 
 export const theSearchForKadathScenario: Scenario = {
 	name: 'The Search for Kadath',
 	index: 3,
 	shortName: 'II-A',
-	shuffles: [
-		{ encounterSet: theSearchForKadath, overwriteCount: 0 },
-		agentsOfNyarlathotep,
-		corsairs,
-		dreamlands,
-		whispersOfHypnos,
-		zoogs,
+	setups: [
+		{
+			shuffles: [
+				{ encounterSet: theSearchForKadath, overwriteCount: 0 },
+				agentsOfNyarlathotep,
+				corsairs,
+				dreamlands,
+				whispersOfHypnos,
+				zoogs,
+			],
+		},
 	],
 }
 
@@ -78,14 +90,18 @@ export const aThousandShapesOfHorrorScenario: Scenario = {
 	name: 'A Thousand Shapes of Horror',
 	index: 4,
 	shortName: 'II-B',
-	shuffles: [
-		{ encounterSet: aThousandShapesOfHorror, overwriteCount: 0 },
-		chillingCold,
-		ghouls,
-		lockedDoors,
-		rats,
-		creaturesOfTheUnderworld,
-		mergingRealities,
+	setups: [
+		{
+			shuffles: [
+				{ encounterSet: aThousandShapesOfHorror, overwriteCount: 0 },
+				chillingCold,
+				ghouls,
+				lockedDoors,
+				rats,
+				creaturesOfTheUnderworld,
+				mergingRealities,
+			],
+		},
 	],
 }
 
@@ -93,11 +109,15 @@ export const darkSideOfTheMoonScenario: Scenario = {
 	name: 'Dark Side of the Moon',
 	index: 5,
 	shortName: 'III-A',
-	shuffles: [
-		{ encounterSet: darkSideOfTheMoon, overwriteCount: 0 },
-		ancientEvils,
-		corsairs,
-		dreamersCurse,
+	setups: [
+		{
+			shuffles: [
+				{ encounterSet: darkSideOfTheMoon, overwriteCount: 0 },
+				ancientEvils,
+				corsairs,
+				dreamersCurse,
+			],
+		},
 	],
 }
 
@@ -105,28 +125,36 @@ export const pointOfNoReturnScenario: Scenario = {
 	name: 'Point of No Return',
 	index: 6,
 	shortName: 'III-B',
-	shuffles: [
-		{ encounterSet: pointOfNoReturn, overwriteCount: 0 },
-		ancientEvils,
-		ghouls,
-		strikingFear,
-		creaturesOfTheUnderworld,
-		whispersOfHypnos,
-	],
+	setups: [
+		{
+			shuffles: [
+				{ encounterSet: pointOfNoReturn, overwriteCount: 0 },
+				ancientEvils,
+				ghouls,
+				strikingFear,
+				creaturesOfTheUnderworld,
+				whispersOfHypnos,
+			],
 
-	setAsides: [descentIntoThePitch, terrorOfTheVale, nightgaunts, agentsOfAtlachNacha],
+			remaining: [descentIntoThePitch, terrorOfTheVale, nightgaunts, agentsOfAtlachNacha],
+		},
+	],
 }
 
 export const whereTheGodsDwellScenario: Scenario = {
 	name: 'Where the Gods Dwell',
 	index: 7,
 	shortName: 'IV-A',
-	shuffles: [
-		{ encounterSet: whereTheGodsDwell, overwriteCount: 0 },
-		darkCult,
-		agentsOfNyarlathotep,
-		dreamersCurse,
-		whispersOfHypnos,
+	setups: [
+		{
+			shuffles: [
+				{ encounterSet: whereTheGodsDwell, overwriteCount: 0 },
+				darkCult,
+				agentsOfNyarlathotep,
+				dreamersCurse,
+				whispersOfHypnos,
+			],
+		},
 	],
 }
 
@@ -134,11 +162,15 @@ export const weaverOfTheCosmosScenario: Scenario = {
 	name: 'Weaver of the Cosmos',
 	index: 8,
 	shortName: 'IV-B',
-	shuffles: [
-		{ encounterSet: weaverOfTheCosmos, overwriteCount: 0 },
-		ancientEvils,
-		chillingCold,
-		agentsOfAtlachNacha,
-		spiders,
+	setups: [
+		{
+			shuffles: [
+				{ encounterSet: weaverOfTheCosmos, overwriteCount: 0 },
+				ancientEvils,
+				chillingCold,
+				agentsOfAtlachNacha,
+				spiders,
+			],
+		},
 	],
 }

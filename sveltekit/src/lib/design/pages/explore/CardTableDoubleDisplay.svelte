@@ -14,6 +14,8 @@
 
 	export let showList: boolean
 	export let showScans: boolean
+	export let separateCount: boolean = false
+	export let small: boolean = false
 </script>
 
 <div class="flex-lr">
@@ -40,7 +42,7 @@
 				{taboo}
 				{fullDatabase}
 				{onClickToggle}
-				scansMode
+				scansMode={{ small: small }}
 			/>
 		</div>
 	{/if}
@@ -52,7 +54,7 @@
 	}
 
 	.list-flex {
-        flex-basis: 330px;
+		flex-basis: 330px;
 	}
 
 	.scans-flex {

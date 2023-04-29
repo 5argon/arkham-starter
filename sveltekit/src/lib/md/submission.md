@@ -1,14 +1,10 @@
-**WIP! Don't send me any submission yet!**
+# A note on static nature of this site
 
-# WIP Note
+Unlike arkhamdb.com which has a server that keeps generating pages for the visitor, this site's quirk is that its server is **static**, it can't generate pages, it just serve **existing pages** it knows beforehand. This make the pages served extremely fast even when using mobile phone. However, it compromises some tricks that regular site can use. In arkhamdb.com, notice how you can build a new deck and you instantly got a new page to share. That's **dynamic** website where the server can generate new pages on the fly.
 
-Unlike arkhamdb.com which has a running computer that keeps generating pages for the visitor, this site's quirk is that it is "static"! It uses no database system and pages are served extremely fast even when using mobile phone. However, it compromises some tricks that regular site can use.
+That means new starter decks here cannot appear on the site unless I manually press "build" the site, on my laptop, after adding new decks. While this looks so prehistoric, but I expect not too many authors loves to make "starter decks" that often (as evidenced by all the min-maxed decks worth many hundred of dollars in arkhamdb.com), so I think it is a reasonable path for this site. In exchange, we get insane page serving speed and low hosting cost for me.
 
-One thing is that new deck submissions cannot appear on the site unless I manually press "build" the site, on my laptop, after adding new decks. While this looks so prehistoric and likely won't scale well, I expect not too many authors loves to make "starter decks" (as evidenced by all the min-maxed decks worth many hundred of dollars in arkhamdb.com)
-
-For the early version of this site, it probably runs on me personally contacting multiple deck authors for the inclusion of their decks and I hand-input those decks. Then I will work from there so author could submit on their own.
-
-It takes more work to make a completely ergonomic site for deck authors. I would like to focus on visitors (newcomers to the game) first. It may grow into something better for you authors, later. Sorry for that!
+For this early version, I will personally contacting multiple deck authors I currently know for the inclusion of their decks, then I hand-input those decks. So if you want your starter decks in here, please let me know manually.
 
 # What is a Starter Deck
 
@@ -22,13 +18,13 @@ However, there are several restrictions that qualifies a deck for this site, oth
 
 It must limits amount of purchases, regarding the repackaged format. It make use of what's available to the fullest as opposed to picking the best pieces from across an entire collections. Right now, a unit of purchase is Revised Core Set, Investigator Expansion box, and the Starter Deck. We don't think about old Mythos Packs in this site. More details about this below how many packs can you use.
 
-## Guided 
+## Guided
 
 Decks in arkhamdb.com are very brief in explaining how to play the deck as the author assumes player looking at the decklist and know what combos are available, and know what to do for any combination that they draw. Especially if there are fan favorite cards among them that defines the play style.
 
 That does not work for beginners that do not even know effects of each card. Decks here must put more effort in writing a guide such that even a complete beginner (that know basic rules) can play the deck, and can look out for the hot stuff inside the deck. More obscure rules that is related to the function of the deck must be explained in the deck guide.
 
-##  Main Deck 0 XP : Ready to start a campaign with
+## Main Deck 0 XP : Ready to start a campaign with
 
 In arkhamdb.com, there are many decks that lists the final state. **Beginners cannot reverse engineer these decks on their own** how would the 0 XP version looks like.
 
@@ -120,7 +116,6 @@ When you submit a deck, you have an opportunity to rename it to something succin
 # Pack Restriction
 
 Any deck can use Revised Core Set. Then we think about Investigator Expansion as a unit of purchase. It could use **up to 2 Investigator Expansion boxes**. (This includes the expansion that gives the investigator card of that deck.) Optionally, it could opt in to use **1 Investigator Starter Deck** (Nathaniel Cho, Harvey Walters, ...).
-
 
 Therefore, we have ensured that about 120$ spent (already a lot) will be able to build a team of entirely starter decks from this site. I want to give newcomers this insurance. The main draw of all the decks here is that the cards you own are valuable and get the job done with the right deck and guidance.
 

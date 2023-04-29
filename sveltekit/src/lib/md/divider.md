@@ -66,7 +66,7 @@ All encounter icons were obtained from combined effort in [this thread](https://
 ## Languages
 
 - English
-- German (Contributed by : [@empty0911](https://boardgamegeek.com/user/empty0911), [@Miriamelbgg](https://boardgamegeek.com/user/Miriamelbgg))
+- German (Contributed by : [@empty0911](https://boardgamegeek.com/user/empty0911), [@Miriamelbgg](https://boardgamegeek.com/user/Miriamelbgg), [@kabelrambo](https://boardgamegeek.com/user/kabelrambo))
 - Italian (Contributed by : [@fabioflx](https://boardgamegeek.com/user/fabioflx))
 - Russian (Contributed by : [@khrabr](https://boardgamegeek.com/user/khrabr))
 - Spanish (Contributed by : [@colococolo](https://boardgamegeek.com/user/colococolo), [@Fran77](https://boardgamegeek.com/user/Fran77))
@@ -77,15 +77,20 @@ If translation is missing, file is still rendered but text area will be empty.
 
 ## Contributing translations
 
-[Click here to access a Google Sheet spredsheet](https://docs.google.com/spreadsheets/d/1jA8786alNXLDSA-LVSh4HzJ6gza1JqO1_XyImz7ncaE/edit) which Unity can load and generate the dividers.
+[Click here to access a Google Sheet spreadsheet](https://docs.google.com/spreadsheets/d/1jA8786alNXLDSA-LVSh4HzJ6gza1JqO1_XyImz7ncaE/edit) which Unity can load and generate the dividers.
 
 Other than several left columns and `en`, you can freely edit the rest. You can contribute by filling in the other language if you would like dividers in that language generated.
 
 Note that there is no fallback to `en`, it will be blank if there is no text in that cell.
 
-After you have added some translations, you can ping me somewhere, like in [BGG forum thread](https://boardgamegeek.com/thread/2766339/3mm-divider-designs-available-download), and I will regenerate the graphics.
+After you have added some translations, you can ping me somewhere, like in [BGG forum thread](https://boardgamegeek.com/thread/2766339), and I will regenerate the graphics and update them into [the download page](./divider/download).
 
 # How to make them (just in case you missed it)
 
 1. Go to [Download page](./divider/download) and hand pick all the desired divider files you want. Table of contents of all dividers are also in that download page.
 2. Go to [Printing page](./divider/print) on how to make all those files come out the right size for use.
+
+# Links
+
+- [BoardGameGeek Forum Thread](https://boardgamegeek.com/thread/2766339) : This is probably where I would be informed the quickest if you found any problem or have some requests of dividers.
+- [GitHub Repository](https://github.com/5argon/AHLCG3mmDivider) : Hosts the Unity game engine project which automatically generates all these dividers in all languages. It has no documentation, but if you are experienced in Unity you maybe able to mess around with it.

@@ -11,7 +11,7 @@
 	let previewCardsReal: PopupDatabaseItem[] = []
 	$: {
 		previewCardsReal = []
-		for (let i = 0; i < previewCards.length && i < maxCards; i += 1) {
+		for (let i = 0; i < previewCards.length && i <= maxCards ; i += 1) {
 			const card = popupDb.getById(previewCards[i])
 			if (card !== null) {
 				previewCardsReal.push(card)
@@ -54,7 +54,6 @@
 	}
 
 	.preview-card-each {
-		height: 27px; /* why we need this lol */
 		margin-right: 2px;
 	}
 </style>

@@ -9,6 +9,7 @@ import { CardClass } from '$lib/design/interface/card-class'
 import { CardPackIcon } from '$lib/design/interface/card-pack'
 import type { CardPack } from './card-pack'
 import type { AhdbCard } from '$lib/ahdb/card'
+import type { LoadEvent } from '@sveltejs/kit'
 export type LazyFullDatabase = Promise<FullDatabase>
 
 export interface FullDatabaseItem {
@@ -184,6 +185,13 @@ export async function fetchLatestTaboo(): Promise<AhdbTaboo | null> {
 
 export async function fetchFullDatabase(): LazyFullDatabase {
 	const res = await fetch('/db/playerdb.json')
+	const p = (await res.json()) as AhdbCard[]
+	const tb = await fetchLatestTaboo()
+	return new FullDatabase(p, tb)
+}
+0
+export async function fetchFullDatabaseV2(f: LoadEvent['fetch']): LazyFullDatabase {
+	const res = await f('/db/playerdb.json')
 	const p = (await res.json()) as AhdbCard[]
 	const tb = await fetchLatestTaboo()
 	return new FullDatabase(p, tb)

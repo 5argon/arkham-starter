@@ -9,7 +9,6 @@
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
-	import { prevent_default } from 'svelte/internal'
 	import {
 		findCoreEncounters,
 		findFrequencies,

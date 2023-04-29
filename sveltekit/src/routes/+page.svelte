@@ -15,9 +15,15 @@
 	arkham-starter.com is an <a href="https://arkhamdb.com" target="_blank" rel="noreferrer"
 		>arkhamdb.com</a
 	>
-	deck aggregator site, highlighting selection of <b>starter decks</b> suitable for new players to get
-	start with the game as soon as possible right at the homepage. Starter decks are decks which requires
-	low amount of purchases and come with a helpful play guide.
+	deck aggregator site, highlighting selection of <b>starter decks</b> for new players to get start
+	with the game as soon as possible right at the homepage. The focus is on simplified, upfront
+	search and filter tools that let you specify your current collection easily.
+	<b>There is no registration.</b>
+</p>
+<p>
+	Not just an individual deck, it even help you start the game with the <b>Team Assembler</b> feature.
+	Each deck has a button to add to the team. Once you have assembled an entire team, the tool will help
+	you resolve card overlaps and gather cards from your collection.
 </p>
 <p>
 	This site is in development. For now you can try out my <a href="/resource">resources and tools</a

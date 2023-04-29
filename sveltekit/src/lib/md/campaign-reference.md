@@ -12,11 +12,12 @@ These have many purposes, including :
 
 However, players come and go. Many sheets has editing disabled, and the player that stopped playing the game won't have time to maintain it anymore. Forked versions are made because someone want to continue, or just that the visualization is not to their liking.
 
-So I made a yet another version... 
+So I made a yet another version...
 
 ## What's different?
 
 - These are programmatically generated from "data", rather than me hand-placing graphics like Google Sheet authors. For the programmer, it is easier to maintain and correct mistakes, or making the same improvement/fix across all campaign pages.
+- There are starting encounter deck count for quick check before beginning the game. It includes all possible variants while keeping it spoiler free what they are.
 - Some presentation can be changed using interactive controls, such as showing or hiding encounter set name for an entire page.
 - Some HTML techs can be used, such as hovering over the icon to see the full name, or color-coding the icon. (The icons are all black from the server, they are recolored live on the site.) The hover also works on mobile phone by tapping it.
 - Google Sheets are often massive and not mobile friendly. I want to be able to reference quickly from tiny mobile phone screen without much scrolling around. (Especially not too much horizontal scrolling.)
@@ -55,29 +56,27 @@ This emulates the classic Google Sheet layout invented by the community. An over
 
 You can also click on the scenario's name on the first column to jump to a Scenario Tab, with that scenario selected for you.
 
-## Scenarios Tab
+## Scenario Tab
 
 By selecting a scenario, you will see a minimal presentation of scenario setup what are needed to play.
 
-The "Set aside" section indicates that you should not shuffle these sets together just yet. Scenario setup tells you what to do, or maybe they come into play in the middle of scenario.
+This tab is handy for small phones because they cannot handle the matrix view well. When viewing an individual scenario, line wrapping causes the icons to overflow down your vertical screen properly.
 
-This tab is also handy for small phones, because they cannot handle the matrix view well. When viewing an individual scenario, line wrapping causes the icons to overflow down your vertical screen properly.
+### Starting Encounter Deck Count
 
-### Minimum Count
+It is intended so you can setup without looking at the campaign guide. The count is there to let you check if you missed anything. Occassionally there is a card sticking on the dividers, or you are not sure if the deck is supposed to be this thin/thick or not.
 
-It is intended so you can setup without looking at the campaign guide. The minimum count is there to let you check if you missed anything. (Occassionally there is a card sticking on the dividers...)
-
-Minimum means sometimes the scenario would immediately ask you to add the set aside cards to the starting encounter deck on setup, depending on some conditions, therefore no longer matching this count. This app has no way to know if you met those conditions or not.
+If there are multiple variants, they are displayed separately. You can figure out which variant you got when you read the setup procedure. I want to keep it light on spoilers here.
 
 ### Subset
 
-If any icon is showing parentheses of number behind it, that means **not all cards** in the set are included in the encounter deck.
+If any icon is showing parentheses of an arrow and number behind it, that means **not all cards** in the set are included in the encounter deck.
 
 This almost always occur on a scenario-specific set, as that set count of cards would also include act, agenda, locations, etc. as well, that you should not shuffle into the encounter deck.
 
 Depending on setup instruction, it may occur on other generic encounter sets too. To keep spoiler minimal, please read the setup instruction why not all of them are in the deck. Though this is the most useful for replays, as when you see just the number, you can recall the setup instructions what those cards are.
 
-## Transitions Tab
+## Transition Tab
 
 An advanced tab for scenario setup nerds who want to push the limit.
 

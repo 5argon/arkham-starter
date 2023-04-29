@@ -12,14 +12,13 @@ import {
 	slotScore,
 	sortCards,
 	topLevelTypeScore,
-	typeScore,
 } from './sort-cards'
 
 export function groupCards(
 	entries: DecklistEntry[],
 	groupings: Grouping[],
 	sortings: Sorting[],
-	fdb: FullDatabase ,
+	fdb: FullDatabase,
 ): GroupedCards[] {
 	const gc: GroupedCards = {
 		groupName: null,

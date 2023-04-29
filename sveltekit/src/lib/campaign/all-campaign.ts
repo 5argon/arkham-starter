@@ -7,6 +7,7 @@ import { returnToTheForgottenAgeCampaign, theForgottenAgeCampaign } from './tfa/
 import { returnToTheCircleUndoneCampaign, theCircleUndoneCampaign } from './tcu/campaign'
 import { theDreamEatersCampaign } from './tde/campaign'
 import { theInnsmouthConspiracyCampaign } from './tic/campaign'
+import { theScarletKeysCampaign } from './tsk/campaign'
 
 /**
  * Order of this array reflects in the UI.
@@ -20,6 +21,7 @@ export const allCampaigns: Campaign[] = [
 	theDreamEatersCampaign,
 	theInnsmouthConspiracyCampaign,
 	edgeOfTheEarthCampaign,
+	theScarletKeysCampaign,
 
 	returnToTheNightOfTheZealotCampaign,
 	returnToTheDunwichLegacyCampaign,

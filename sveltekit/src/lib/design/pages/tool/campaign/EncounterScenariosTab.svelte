@@ -3,8 +3,9 @@
 		EncounterSetSorting,
 		isEncounterSetWithModification,
 		type Campaign,
+		type EncounterSetItem,
 	} from '$lib/core/campaign'
-	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
 	import {
 		findFrequencies,
 		findUniqueScenarios,
@@ -27,19 +28,22 @@
 	$: selectedScenario = scenarios[selectedScenarioIndex]
 	$: selectedScenarioEncounters = mergeEncounters(selectedScenario)
 
-	$: count = selectedScenario.shuffles.reduce<number>((p, c) => {
-		if (!isEncounterSetWithModification(c)) {
-			return p + c.count
-		} else {
-			const overwriteCount = c.overwriteCount
-			if (overwriteCount !== undefined) {
-				return p + overwriteCount
+	function computeCount(esis: EncounterSetItem[]): number {
+		const count = esis.reduce<number>((p, c) => {
+			if (!isEncounterSetWithModification(c)) {
+				return p + c.count
+			} else {
+				const overwriteCount = c.overwriteCount
+				if (overwriteCount !== undefined) {
+					return p + overwriteCount
+				}
+				return p + c.encounterSet.count
 			}
-			return p + c.encounterSet.count
-		}
-	}, 0)
+		}, 0)
+		return count
+	}
 
-	$: hasSetAside = selectedScenario.setAsides !== undefined
+	$: multipleSetups = selectedScenario.setups.length > 1
 
 	function onChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
 		onDropdownIndexChanged(parseInt(e.currentTarget.value))
@@ -66,11 +70,22 @@
 
 {#if !incomplete}
 	<ListDivider
-		label={'Starting Encounter Deck ( ' + (hasSetAside ? 'Minimum ' : '') + count + ' cards )'}
+		label={'Starting Encounter Deck' +
+			(!multipleSetups ? ` : ${computeCount(selectedScenario.setups[0].shuffles)} Cards` : '')}
 	/>
-	<EncounterIconFlex encounterSets={selectedScenario.shuffles} {showName} {sorting} {frequencies} />
+	{#each selectedScenario.setups as setup, i}
+		{#if multipleSetups}
+			<ListDivider
+				label={(setup.name ? `${setup.name} Variant` : 'Variant ' + (i + 1)) +
+					' : ' +
+					`${computeCount(setup.shuffles)} Cards`}
+				level={ListDividerLevel.Two}
+			/>
+		{/if}
+		<EncounterIconFlex encounterSets={setup.shuffles} {showName} {sorting} {frequencies} />
+	{/each}
 
-	{#if selectedScenario.setAsides !== undefined}
+	<!-- {#if selectedScenario.setAsides !== undefined}
 		<ListDivider label={'Set Aside'} />
 		<EncounterIconFlex
 			encounterSets={selectedScenario.setAsides}
@@ -78,7 +93,7 @@
 			{sorting}
 			{frequencies}
 		/>
-	{/if}
+	{/if} -->
 {/if}
 
 <style>

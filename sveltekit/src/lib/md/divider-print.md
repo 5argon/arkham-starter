@@ -20,7 +20,12 @@ If you send the files to print shop they should be able to understand that. If y
 - The next dialog, do not press Print, but press the dropdown saying "PDF" then select the "PDF" choice to save a file out of it instead.
 - After it finished saving PDF, you can now go back and press delete to remove the highlighted images. If there are more than 8 images, the produced PDF will be multi-page.
 
-Note : If you don't have any printer installed in the list, the page may not fit 8 dividers like shown because the system assume a default value of paper's edge to reserve. The information that the printer can print closer to the edge of paper comes differently depending on printer, so try installing or choosing different printer if you cannot do it.
+Note : If you don't have any printer installed in the list, the page may **not fit 8 dividers** like shown because the system assume a certain default value of paper's edge to reserve. The information that the printer can print closer to the edge of paper comes differently depending on printer. You can install "imaginary printer" on macOS just so it allows removing the margin by : 
+
+- Go to Add Printer page. Select 2nd tab "IP". (The globe icon)
+- Enter random Address, and "Internet Printing Protocol - IPP" protocol, then random Name.
+- Use : Generic PostScript Printer.
+- Now you can press Add button. Afterwards the margins should be removed and you can now fit 8 dividers in A4 page.
 
 ## Windows : Using IrfanView app
 

@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { CampaignDatabase } from '$lib/core/campaign-database'
 	import type { FullDatabase } from '$lib/core/full-database'
-	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
+	import type { DecklistEntry, GroupedCards } from '$lib/deck-table/decklist-entry'
 	import type { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import { groupCards } from '$lib/deck-table/grouping/group-cards'
 	import CardTable from './CardTable.svelte'
+	import type { ScansOption } from './RenderGroupedCards.svelte'
 
 	export let entries: DecklistEntry[]
 	$: entriesForwarded = entries.map<DecklistEntry>((x) => {
@@ -23,8 +24,17 @@
 	export let centered: boolean = false
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 	export let hideAmount: boolean = false
-	export let scansMode: boolean = false
+	export let scansMode: ScansOption | null = null
 	$: gc = groupCards(entriesForwarded, groupings, sortings, fullDatabase)
+	var flatGroup: GroupedCards[] = []
+	$: {
+		flatGroup = [
+			{
+				groupName: null,
+				entries: gc.flatMap((x) => x.entries),
+			},
+		]
+	}
 </script>
 
 <CardTable
@@ -32,7 +42,7 @@
 	{campaignDatabase}
 	{fullDatabase}
 	{taboo}
-	groupedCards={gc}
+	groupedCards={scansMode ? flatGroup : gc}
 	{columns}
 	{centered}
 	{onClickToggle}

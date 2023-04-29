@@ -30,8 +30,13 @@ export interface Scenario {
 	name: string
 	shortName?: string
 
+	setups: ScenarioSetup[]
+}
+
+export interface ScenarioSetup {
+	name?: string
 	shuffles: EncounterSetItem[]
-	setAsides?: EncounterSetItem[]
+	remaining?: EncounterSetItem[]
 	gameComponents?: GameComponent[]
 	gameComponentsPerDifficulty?: PerDifficultySettings<GameComponent[]>
 }

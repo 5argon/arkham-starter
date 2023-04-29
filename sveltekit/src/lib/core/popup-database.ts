@@ -4,6 +4,7 @@ import {
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
 import type { CardPackIcon } from '$lib/design/interface/card-pack'
+import type { LoadEvent } from '@sveltejs/kit'
 import type { CardClass } from './card-class'
 export type LazyPopupDatabase = Promise<PopupDatabase>
 
@@ -217,6 +218,12 @@ export interface PopupDatabaseItemRaw {
 
 export async function fetchPopupDatabase(): LazyPopupDatabase {
 	const res = await fetch('/db/popupdb.json')
+	const p = (await res.json()) as PopupDatabaseRaw
+	return new PopupDatabase(p)
+}
+
+export async function fetchPopupDatabaseV2(f: LoadEvent['fetch']): LazyPopupDatabase {
+	const res = await f('/db/popupdb.json')
 	const p = (await res.json()) as PopupDatabaseRaw
 	return new PopupDatabase(p)
 }
