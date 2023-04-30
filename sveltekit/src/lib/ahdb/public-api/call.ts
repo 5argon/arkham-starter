@@ -54,7 +54,6 @@ export async function realDeckPublished(deckNumber: string): Promise<AhdbRealPub
 		const doc = parser.parseFromString(s, 'text/html')
 		const username = doc.querySelector('.username')
 		if (username !== null) {
-			console.log(username)
 			const ret: AhdbRealPublished = { username: username.textContent ?? '', userUrl: '' }
 			return ret
 		}

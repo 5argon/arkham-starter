@@ -40,4 +40,12 @@
 		display: flex;
 		flex-wrap: wrap;
 	}
+
+	@media only screen and (max-width: 1000px) {
+		.card-scan-flex {
+			margin-top: 8px;
+			display: flex;
+			justify-content: center;
+		}
+	}
 </style>

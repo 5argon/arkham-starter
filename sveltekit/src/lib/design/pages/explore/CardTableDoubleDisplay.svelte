@@ -71,4 +71,14 @@
 	.scans-flex {
 		flex: 3;
 	}
+
+	@media only screen and (max-width: 1000px) {
+		.flex-lr {
+			flex-direction: column;
+		}
+
+		.list-flex {
+			margin: 0 auto;
+		}
+	}
 </style>
