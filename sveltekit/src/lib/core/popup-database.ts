@@ -47,6 +47,13 @@ export class PopupDatabase {
 		}
 		return null
 	}
+
+	getByIdThrowNull(card: string): PopupDatabaseItem {
+		if (card in this.map) {
+			return this.map[card]
+		}
+		throw "Card not found in popup database: '" + card
+	}
 }
 
 export interface PopupDatabaseItem {
@@ -157,6 +164,11 @@ export interface PopupDatabaseItemRaw {
 	 * Essentially `true` when it is an investigator signature card / weakness.
 	 */
 	ir: boolean
+
+	/**
+	 * This is an investigator card.
+	 */
+	inv: boolean
 
 	/**
 	 * Weakness.

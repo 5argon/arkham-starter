@@ -93,6 +93,11 @@ export interface PopupDatabaseItem {
   ir: boolean;
 
   /**
+   * This is an investigator card.
+   */
+  inv: boolean;
+
+  /**
    * Weakness.
    */
   wk: boolean;

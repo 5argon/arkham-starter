@@ -71,10 +71,7 @@
 </script>
 
 <span class="outer-span">
-	{#if !rbw}
-		<ImageStrip name={effectiveText} {showImageStrip} {xp} {cardId} {class1} {class2} {class3} />
-	{/if}
-
+	<ImageStrip name={effectiveText} {showImageStrip} {xp} {cardId} {class1} {class2} {class3} />
 	{#if effectiveText !== null}
 		{#if amount !== null}<span
 				class="amount"

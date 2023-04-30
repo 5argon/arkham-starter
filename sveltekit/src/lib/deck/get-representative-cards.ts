@@ -1,3 +1,4 @@
+import { isRandomBasicWeakness } from '$lib/ahdb/card'
 import type { PopupDatabase } from '$lib/core/popup-database'
 
 interface Sorter {
@@ -19,8 +20,8 @@ export function getRepresentativeCards(
 
 	function score(s: Sorter): number {
 		const c = pdb.getById(s.card)
-		if (c === null || c.original.sp === true) {
-			return 0
+		if (c === null || c.original.sp === true || isRandomBasicWeakness(c.original.id)) {
+			return -99999
 		}
 		let sc = 0
 		if (c.original.xp ?? 0 > 0) {

@@ -1,20 +1,17 @@
 <script lang="ts">
-	import type { CampaignDatabase } from '$lib/core/campaign-database'
-	import type { FullDatabase } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { GroupedCards } from '$lib/deck-table/decklist-entry'
 	import { extraColumnToHeader, type ExtraColumn } from '$lib/deck-table/grouping'
-	import RenderGroupedCards, { type ScansOption } from './RenderGroupedCards.svelte'
+	import RenderGroupedCards from './RenderGroupedCards.svelte'
 
 	export let groupedCards: GroupedCards[]
 	export let toggleMap: { [cardId: string]: boolean }
 	export let taboo: boolean
 	export let totalLevels: number
-	export let fullDatabase: FullDatabase
-	export let campaignDatabase: CampaignDatabase | null
+	export let popupDatabase: PopupDatabase
 	export let columns: ExtraColumn[] = []
 	export let centered: boolean = false
 	export let hideAmount: boolean = false
-	export let scansMode: ScansOption | null = null
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 </script>
 
@@ -40,14 +37,12 @@
 				level={0}
 				previousGroupedCards={[]}
 				{totalLevels}
-				{fullDatabase}
-				{campaignDatabase}
 				{columns}
 				{taboo}
 				theOnlyGroup={groupedCards.length === 1}
 				{hideAmount}
 				{onClickToggle}
-				{scansMode}
+				{popupDatabase}
 			/>
 		{/each}
 	</tbody>

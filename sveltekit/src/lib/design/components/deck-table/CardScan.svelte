@@ -156,6 +156,8 @@
 	}
 
 	.no-image-inner {
+		padding: 4px 0px;
+		display: block;
 		font-size: x-small;
 		text-align: center;
 	}

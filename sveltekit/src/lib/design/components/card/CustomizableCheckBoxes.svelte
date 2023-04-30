@@ -7,17 +7,17 @@
 </script>
 
 <span class="outer-span">
-	{#if checkBoxes > 0}
-		{#each Array(checkBoxes) as _, i}
-			<span class="inner-span">
-				<FaIcon path={allIcons.checkBox} />
-			</span>
-		{/each}
-	{/if}
 	{#if checkedBoxes > 0}
 		{#each Array(checkedBoxes) as _, i}
 			<span class="inner-span">
 				<FaIcon path={allIcons.checkBoxChecked} />
+			</span>
+		{/each}
+	{/if}
+	{#if checkBoxes > 0}
+		{#each Array(checkBoxes) as _, i}
+			<span class="inner-span">
+				<FaIcon path={allIcons.checkBox} />
 			</span>
 		{/each}
 	{/if}

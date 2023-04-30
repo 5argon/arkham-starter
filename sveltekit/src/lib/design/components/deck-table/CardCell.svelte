@@ -1,30 +1,44 @@
 <script lang="ts">
-	import { isRandomBasicWeakness } from '$lib/ahdb/card'
-	import type { CampaignDatabase } from '$lib/core/campaign-database'
-	import { CardPack } from '$lib/core/card-pack'
-	import { type FullDatabase, shouldShowSubname } from '$lib/core/full-database'
+	interface NewCust {
+		checkedBoxes: number
+		uncheckedBoxes: number
+		text: string
+	}
+
+	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
+	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import CardSpan from '../card/CardSpan.svelte'
 
 	export let taboo: boolean
 	export let cardId: string
 	export let amount: number | null
-	export let fullDatabase: FullDatabase
-	export let campaignDatabase: CampaignDatabase | null
+	export let customizableMetas: CustomizableMeta[] = []
+	export let popupDatabase: PopupDatabase
 	export let toggled: boolean
 	export let onToggleChanged: undefined | ((t: boolean) => void) = undefined
 
 	function handler(e: MouseEvent & { currentTarget: HTMLElement }) {
 		onToggleChanged?.(!toggled)
 	}
-	$: card = fullDatabase.getCard(cardId)
-	$: campaignCard = campaignDatabase?.getById(cardId) ?? null
-	$: rbw = isRandomBasicWeakness(cardId)
+	let card: PopupDatabaseItem
+	$: {
+		card = popupDatabase.getByIdThrowNull(cardId)
+	}
+	let realCust: NewCust[] = []
+	$: {
+		const matchedCustomizables = customizableMetas.filter((x) => {
+			return x.card === cardId
+		})
+		matchedCustomizables.forEach((x) => {
+			if (card.original.cus && card.original.cus.length > x.index) {
+				const c = card.original.cus[x.index]
+				realCust.push({ text: c.n, checkedBoxes: x.checked, uncheckedBoxes: c.xp - x.checked })
+			}
+		})
+	}
 	let cardName: string
 	$: {
-		cardName = card.original.name
-		if (card.packIcon === CardPack.Unknown && campaignCard !== null) {
-			cardName = campaignCard.name
-		}
+		cardName = card.original.n
 	}
 </script>
 
@@ -36,20 +50,36 @@
 		class1={card.class1}
 		class2={card.class2 ?? null}
 		class3={card.class3 ?? null}
-		exceptional={taboo && card.tabooExceptional ? card.tabooExceptional : card.original.exceptional}
+		exceptional={taboo ? card.original.ext : card.original.ex}
 		color={true}
 		packIcon={card.packIcon}
-		packNumber={card.original.position}
-		restriction={card.original.restrictions !== undefined}
-		showImageStrip={campaignCard !== null ? false : true}
+		packNumber={card.original.ps}
+		restriction={card.original.ir}
+		showImageStrip
 		text={cardName}
-		subText={shouldShowSubname(card, fullDatabase) ? card.original.subname : null}
-		weakness={card.original.subtype_code === 'weakness' ||
-			card.original.subtype_code === 'basicweakness'}
-		investigator={card.original.type_code === 'investigator'}
+		subText={card.original.esn ? card.original.sn : null}
+		weakness={card.original.wk}
+		investigator={card.original.inv}
 		xp={card.original.xp}
-		xpTaboo={taboo ? card.tabooXp ?? null : null}
+		xpTaboo={taboo ? card.original.xpat : null}
+		customizable={card.original.cus !== undefined}
 	/>
+	{#if card.original.cus !== undefined}
+		{#each realCust as rc}
+			<div>
+				<CardSpan
+					{cardId}
+					class1={card.class1}
+					class2={card.class2 ?? null}
+					class3={card.class3 ?? null}
+					color={true}
+					text={rc.text}
+					checkedBoxes={rc.checkedBoxes}
+					checkBoxes={rc.uncheckedBoxes}
+				/>
+			</div>
+		{/each}
+	{/if}
 </div>
 
 <style>

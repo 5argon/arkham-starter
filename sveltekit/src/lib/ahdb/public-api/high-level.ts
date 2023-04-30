@@ -63,6 +63,12 @@ export interface GetDeckCardIdReturns {
 	cards3: CardAndAmount[]
 	nextDeck: number | null
 	previousDeck: number | null
+
+	xp: number
+	xpSpent: number
+	xpAdjustment: number
+
+	decodedMeta: DecodedMeta
 }
 
 export interface CardAndAmount {
@@ -129,5 +135,54 @@ export async function getDeckCardIds(
 		cards3: cardListToArray(d.ignoreDeckLimitSlots),
 		nextDeck: d.next_deck,
 		previousDeck: d.previous_deck,
+		xp: d.xp ?? 0,
+		xpAdjustment: d.xp_adjustment,
+		xpSpent: d.xp_spent ?? 0,
+		decodedMeta: metaDecode(d.meta),
 	}
+}
+
+export interface DecodedMeta {
+	alternateFront?: string
+	alternateBack?: string
+	customizableMetas: CustomizableMeta[]
+}
+
+export interface CustomizableMeta {
+	card: string
+	index: number
+	checked: number
+	detail: string
+}
+
+function metaDecode(meta: string): DecodedMeta {
+	const json = JSON.parse(meta)
+	const dm: DecodedMeta = {
+		customizableMetas: [],
+	}
+	if ('alternate_front' in json && json.alternate_front !== '') {
+		dm.alternateFront = json.alternate_front
+	}
+	if ('alternate_back' in json && json.alternate_back !== '') {
+		dm.alternateBack = json.alternate_front
+	}
+	Object.entries(json).forEach(([key, value]) => {
+		if (key.startsWith('cus_') && typeof value === 'string') {
+			const custCard = key.slice(4)
+			const custSep = value.split(',')
+			custSep.forEach((x) => {
+				const custValue = x.split('|')
+				if (custValue.length >= 2) {
+					dm.customizableMetas.push({
+						card: custCard,
+						index: parseInt(custValue[0]),
+						checked: parseInt(custValue[1]),
+						detail: custValue.length > 2 ? custValue[2] : '',
+					})
+				}
+			})
+		}
+	})
+
+	return dm
 }

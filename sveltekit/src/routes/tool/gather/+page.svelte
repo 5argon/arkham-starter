@@ -4,6 +4,9 @@
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import DeckGatherLayout from '$lib/design/pages/tool/gather/DeckGatherLayout.svelte'
 	import helpMd from '$lib/md/gather.md?raw'
+	import type { PageData } from './$types'
+
+	export let data: PageData
 
 	let p1: string | null = null
 	let p2: string | null = null
@@ -37,4 +40,6 @@
 	startingP2={extract(p2)}
 	startingP3={extract(p3)}
 	startingP4={extract(p4)}
+	fdb={data.fdb}
+	pdb={data.pdb}
 />

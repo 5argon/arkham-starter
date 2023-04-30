@@ -40,7 +40,6 @@
 	import { exhaustiveCheckOverlaps, type Party } from '$lib/tool/overlap/overlap-helpers'
 	import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
 	import PartyTable from './PartyTable.svelte'
-	import { fetchFullDatabase, FullDatabase } from '$lib/core/full-database'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
@@ -54,8 +53,12 @@
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import { goToGather } from '$lib/deck/go-to-gather'
+	import type { PopupDatabase } from '$lib/core/popup-database'
+	import type { FullDatabase } from '$lib/core/full-database'
 
 	export let protoString: string | null = null
+	export let pdb: PopupDatabase
+	export let fdb: FullDatabase
 
 	let forwardRcore: boolean = true
 	let decksText: string = ''
@@ -148,8 +151,6 @@
 		return 0
 	}
 
-	let fdbPromise = fetchFullDatabase()
-
 	$: deckCount = decksAndComments.filter((x) => typeof x !== 'string').length
 	$: notReady = fetchingDecks || fetchingPdb
 
@@ -171,12 +172,11 @@
 				advanced = tap.advanced
 				decksTextSplit = mapped
 				decksText = mapped.join('\n')
-				const pdb = await fdbPromise
 				viewMode = true
-				await process(pdb)
+				await process(fdb)
 				// Need fetching decks first before applying the team.
 				currentTeam = [...tap.currentTeam.filter((x) => findFromDecks(decks, x) !== null)]
-				manualFilterSorter(pdb)
+				manualFilterSorter(fdb)
 			} catch {}
 		}
 	}
@@ -383,239 +383,238 @@
 	const pleaseWaitText = 'Analyzing decks...'
 </script>
 
-{#await fdbPromise}
-	Loading...
-{:then fdb}
-	{#if viewMode}
-		<ViewModeBanner
-			onExitViewMode={() => {
-				viewMode = false
-			}}
-		/>
-	{/if}
+{#if viewMode}
+	<ViewModeBanner
+		onExitViewMode={() => {
+			viewMode = false
+		}}
+	/>
+{/if}
 
-	{#if !viewMode}
-		<Checkbox
-			label="Forward to Revised Core Set"
-			checked={forwardRcore}
-			onCheckChanged={() => {
-				forwardRcore = !forwardRcore
-				process(fdb)
-			}}
-		/>
+{#if !viewMode}
+	<Checkbox
+		label="Forward to Revised Core Set"
+		checked={forwardRcore}
+		onCheckChanged={() => {
+			forwardRcore = !forwardRcore
+			process(fdb)
+		}}
+	/>
 
-		<ListDivider label="Input Decks" />
+	<ListDivider label="Input Decks" />
 
-		<textarea
-			placeholder="One deck per line. Can be either arkhamdb.com deck URL or deck's ID. If it is deck ID, prefix p: for published deck."
-			class="decks"
-			on:change={textAreaChangeHandler}>{decksText}</textarea
-		>
+	<textarea
+		placeholder="One deck per line. Can be either arkhamdb.com deck URL or deck's ID. If it is deck ID, prefix p: for published deck."
+		class="decks"
+		on:change={textAreaChangeHandler}>{decksText}</textarea
+	>
 
-		<Button
-			big
-			center
-			disabled={fetchingDecks}
-			label={fetchingDecks ? pleaseWaitText : 'Analyze ' + deckCount + ' Decks'}
-			onClick={() => {
-				process(fdb)
-			}}
-		/>
-	{/if}
+	<Button
+		big
+		center
+		disabled={fetchingDecks}
+		label={fetchingDecks ? pleaseWaitText : 'Analyze ' + deckCount + ' Decks'}
+		onClick={() => {
+			process(fdb)
+		}}
+	/>
+{/if}
 
-	{#if viewMode && fetchingDecks}
-		<p>{pleaseWaitText}</p>
-	{/if}
+{#if viewMode && fetchingDecks}
+	<p>{pleaseWaitText}</p>
+{/if}
 
-	{#if !notReady && decksAndComments.length > 0}
-		<div class="left-right">
-			<div class="left-right-item">
-				<ListDivider label="Included Decks" />
-				{#each decksAndComments as d}
-					<div class="result-item">
-						{#if typeof d !== 'string'}
-							<span>
-								<span class:add-to-team-button-hide={inTheTeam(currentTeam, d.id)}>
-									<Button
-										label="Add to team"
-										onClick={() => {
-											if (typeof d !== 'string') {
-												addToTeam(d.id, fdb)
-											}
-										}}><FaIcon path={allIcons.arrowRightBordered} /></Button
-									>
-								</span>
-								<PartyDeckEntry
-									deckLink={d.link}
-									deckName={d.deck}
-									investigatorCode={d.investigatorCode}
-									investigatorClass={fdb.getCard(d.investigatorCode).class1}
-								/>
+{#if !notReady && decksAndComments.length > 0}
+	<div class="left-right">
+		<div class="left-right-item">
+			<ListDivider label="Included Decks" />
+			{#each decksAndComments as d}
+				<div class="result-item">
+					{#if typeof d !== 'string'}
+						<span>
+							<span class:add-to-team-button-hide={inTheTeam(currentTeam, d.id)}>
+								<Button
+									label="Add to team"
+									onClick={() => {
+										if (typeof d !== 'string') {
+											addToTeam(d.id, fdb)
+										}
+									}}><FaIcon path={allIcons.arrowRightBordered} /></Button
+								>
 							</span>
-						{:else}
-							<div class="comment">{d}</div>
-						{/if}
-					</div>
-				{/each}
+							<PartyDeckEntry
+								deckLink={d.link}
+								deckName={d.deck}
+								investigatorCode={d.investigatorCode}
+								investigatorClass={fdb.getCard(d.investigatorCode).class1}
+							/>
+						</span>
+					{:else}
+						<div class="comment">{d}</div>
+					{/if}
+				</div>
+			{/each}
 
-				{#if !viewMode}
-					<span>
-						<Button
-							label="Copy Markdown to Clipboard (EXPERIMENTAL)"
-							onClick={() => {
-								exportMarkdown(decksAndComments, fdb)
-							}}
-						/>
-						<FramedTextSpan text="Class Icon Format" />
-						<select name="fmt" value={copyIconFormat} on:change={(e) => onCopyIconFormatHandler(e)}>
-							<option value={PartyAssemblerIconFormat.Emoji}>Emoji</option>
-							<option value={PartyAssemblerIconFormat.ArkhamDb}>ArkhamDB</option>
-							<option value={PartyAssemblerIconFormat.None}>None</option>
-						</select>
-					</span>
-				{/if}
-			</div>
-			<div class="left-right-item">
-				<ListDivider label="Current Team" />
-				<PartyTeamMemberItem deck={currentTeamDeck1} player={0} fullDatabase={fdb} />
-				<PartyTeamMemberItem deck={currentTeamDeck2} player={1} fullDatabase={fdb} />
-				<PartyTeamMemberItem deck={currentTeamDeck3} player={2} fullDatabase={fdb} />
-				<PartyTeamMemberItem deck={currentTeamDeck4} player={3} fullDatabase={fdb} />
+			{#if !viewMode}
 				<span>
 					<Button
-						label="Clear"
-						disabled={currentTeamAll.length === 0}
-						onClick={() => clearTeam(fdb)}
-					/>
-					<Button
-						label="Gather Cards"
-						disabled={currentTeamAll.length === 0}
+						label="Copy Markdown to Clipboard (EXPERIMENTAL)"
 						onClick={() => {
-							goToGather(currentTeamAll)
+							exportMarkdown(decksAndComments, fdb)
 						}}
 					/>
+					<FramedTextSpan text="Class Icon Format" />
+					<select name="fmt" value={copyIconFormat} on:change={(e) => onCopyIconFormatHandler(e)}>
+						<option value={PartyAssemblerIconFormat.Emoji}>Emoji</option>
+						<option value={PartyAssemblerIconFormat.ArkhamDb}>ArkhamDB</option>
+						<option value={PartyAssemblerIconFormat.None}>None</option>
+					</select>
 				</span>
-				<p>
-					As more investigators are locked into the team, the analysis result below will be filtered
-					more and more to help you find the remaining members. Press the arrow button in the
-					Included Decks section to add to the team.
-				</p>
-			</div>
+			{/if}
 		</div>
-		<ListDivider label="Analysis Result" />
-
-		{#if !viewMode}
-			<div class="sharing-url">
-				<TextBox
-					label="Sharing URL"
-					currentText={`https://arkham-starter.com/tool/assembler?i=${exportProto}`}
+		<div class="left-right-item">
+			<ListDivider label="Current Team" />
+			<PartyTeamMemberItem deck={currentTeamDeck1} player={0} fullDatabase={fdb} />
+			<PartyTeamMemberItem deck={currentTeamDeck2} player={1} fullDatabase={fdb} />
+			<PartyTeamMemberItem deck={currentTeamDeck3} player={2} fullDatabase={fdb} />
+			<PartyTeamMemberItem deck={currentTeamDeck4} player={3} fullDatabase={fdb} />
+			<span>
+				<Button
+					label="Clear"
+					disabled={currentTeamAll.length === 0}
+					onClick={() => clearTeam(fdb)}
 				/>
-			</div>
-
-			<span class="flex-item">
-				<FramedTextSpan text="Team Composition Filters" />
-				<Checkbox
-					label="Respect Current Team"
-					checked={filterRespectCurrentTeam}
-					onCheckChanged={(c) => {
-						filterRespectCurrentTeam = c
-						manualFilterSorter(fdb)
-					}}
-				/>
-				<Checkbox
-					label="No Same Class"
-					checked={filterNoSameClass}
-					onCheckChanged={(c) => {
-						filterNoSameClass = c
-						manualFilterSorter(fdb)
-					}}
-				/>
-				<Checkbox
-					label="Limit 99 Results"
-					checked={filterLimitResults}
-					onCheckChanged={(c) => {
-						filterLimitResults = c
-						manualFilterSorter(fdb)
-					}}
-				/>
-				<Checkbox
-					label="Zero Overlap Only"
-					checked={filterZeroOverlapOnly}
-					onCheckChanged={(c) => {
-						filterZeroOverlapOnly = c
-						manualFilterSorter(fdb)
-					}}
-				/>
-				<Checkbox
-					label="No Same User"
-					checked={filterNoSameUser}
-					onCheckChanged={(c) => {
-						filterNoSameUser = c
-						manualFilterSorter(fdb)
+				<Button
+					label="Gather Cards"
+					disabled={currentTeamAll.length === 0}
+					onClick={() => {
+						goToGather(currentTeamAll)
 					}}
 				/>
 			</span>
-			<span class="flex-item">
-				<FramedTextSpan text="Team Composition Sorting" />
-				<select name="pets" value={sorting} on:change={(e) => onChangeHandler(e, fdb)}>
-					<option value={PartyAssemblerSorting.Overlaps}>Less Overlaps First</option>
-					<option value={PartyAssemblerSorting.CombinationOrder}>Combination Order</option>
-				</select>
-			</span>
-			<GrouperSorter
-				text={'Overlaps Display'}
+			<p>
+				As more investigators are locked into the team, the analysis result below will be filtered
+				more and more to help you find the remaining members. Press the arrow button in the Included
+				Decks section to add to the team.
+			</p>
+		</div>
+	</div>
+	<ListDivider label="Analysis Result" />
+
+	{#if !viewMode}
+		<div class="sharing-url">
+			<TextBox
+				label="Sharing URL"
+				currentText={`https://arkham-starter.com/tool/assembler?i=${exportProto}`}
+			/>
+		</div>
+
+		<span class="flex-item">
+			<FramedTextSpan text="Team Composition Filters" />
+			<Checkbox
+				label="Respect Current Team"
+				checked={filterRespectCurrentTeam}
+				onCheckChanged={(c) => {
+					filterRespectCurrentTeam = c
+					manualFilterSorter(fdb)
+				}}
+			/>
+			<Checkbox
+				label="No Same Class"
+				checked={filterNoSameClass}
+				onCheckChanged={(c) => {
+					filterNoSameClass = c
+					manualFilterSorter(fdb)
+				}}
+			/>
+			<Checkbox
+				label="Limit 99 Results"
+				checked={filterLimitResults}
+				onCheckChanged={(c) => {
+					filterLimitResults = c
+					manualFilterSorter(fdb)
+				}}
+			/>
+			<Checkbox
+				label="Zero Overlap Only"
+				checked={filterZeroOverlapOnly}
+				onCheckChanged={(c) => {
+					filterZeroOverlapOnly = c
+					manualFilterSorter(fdb)
+				}}
+			/>
+			<Checkbox
+				label="No Same User"
+				checked={filterNoSameUser}
+				onCheckChanged={(c) => {
+					filterNoSameUser = c
+					manualFilterSorter(fdb)
+				}}
+			/>
+		</span>
+		<span class="flex-item">
+			<FramedTextSpan text="Team Composition Sorting" />
+			<select name="pets" value={sorting} on:change={(e) => onChangeHandler(e, fdb)}>
+				<option value={PartyAssemblerSorting.Overlaps}>Less Overlaps First</option>
+				<option value={PartyAssemblerSorting.CombinationOrder}>Combination Order</option>
+			</select>
+		</span>
+		<GrouperSorter
+			text={'Overlaps Display'}
+			{groupings}
+			{sortings}
+			{onGroupingsChanged}
+			{onSortingsChanged}
+		/>
+	{/if}
+	<LimitedTab>
+		<div slot="tab1">
+			Two Players <NotificationNumber count={twoPlayerParties.length} />
+		</div>
+		<div slot="content1">
+			<PartyTable
+				parties={twoPlayerParties}
+				fullDatabase={fdb}
+				popupDatabase={pdb}
 				{groupings}
 				{sortings}
-				{onGroupingsChanged}
-				{onSortingsChanged}
+				onCopyMarkdown={(d) => {
+					exportMarkdown(d, fdb)
+				}}
 			/>
-		{/if}
-		<LimitedTab>
-			<div slot="tab1">
-				Two Players <NotificationNumber count={twoPlayerParties.length} />
-			</div>
-			<div slot="content1">
-				<PartyTable
-					parties={twoPlayerParties}
-					fullDatabase={fdb}
-					{groupings}
-					{sortings}
-					onCopyMarkdown={(d) => {
-						exportMarkdown(d, fdb)
-					}}
-				/>
-			</div>
-			<div slot="tab2">
-				Three Players <NotificationNumber count={threePlayerParties.length} />
-			</div>
-			<div slot="content2">
-				<PartyTable
-					parties={threePlayerParties}
-					fullDatabase={fdb}
-					{groupings}
-					{sortings}
-					onCopyMarkdown={(d) => {
-						exportMarkdown(d, fdb)
-					}}
-				/>
-			</div>
-			<div slot="tab3">
-				Four Players <NotificationNumber count={fourPlayerParties.length} />
-			</div>
-			<div slot="content3">
-				<PartyTable
-					parties={fourPlayerParties}
-					fullDatabase={fdb}
-					{groupings}
-					{sortings}
-					onCopyMarkdown={(d) => {
-						exportMarkdown(d, fdb)
-					}}
-				/>
-			</div>
-		</LimitedTab>
-	{/if}
-{/await}
+		</div>
+		<div slot="tab2">
+			Three Players <NotificationNumber count={threePlayerParties.length} />
+		</div>
+		<div slot="content2">
+			<PartyTable
+				parties={threePlayerParties}
+				fullDatabase={fdb}
+				popupDatabase={pdb}
+				{groupings}
+				{sortings}
+				onCopyMarkdown={(d) => {
+					exportMarkdown(d, fdb)
+				}}
+			/>
+		</div>
+		<div slot="tab3">
+			Four Players <NotificationNumber count={fourPlayerParties.length} />
+		</div>
+		<div slot="content3">
+			<PartyTable
+				parties={fourPlayerParties}
+				fullDatabase={fdb}
+				popupDatabase={pdb}
+				{groupings}
+				{sortings}
+				onCopyMarkdown={(d) => {
+					exportMarkdown(d, fdb)
+				}}
+			/>
+		</div>
+	</LimitedTab>
+{/if}
 
 <style>
 	.flex-item {

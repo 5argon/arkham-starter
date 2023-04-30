@@ -70,6 +70,7 @@ export interface AhdbCard {
 		quantity?: number
 	}[]
 	hidden?: boolean
-	linked_to_code?:string
-	linked_to_name?:string
+	linked_to_code?: string
+	linked_to_name?: string
+	spoiler?: number
 }

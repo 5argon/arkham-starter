@@ -29,8 +29,8 @@
 		faction: CardClass,
 		ents: DecklistEntry[],
 		fw: boolean,
-		showMain:boolean,
-		showSide:boolean,
+		showMain: boolean,
+		showSide: boolean,
 	) {
 		let colorHex: string
 		if (fixedColor) {
@@ -52,30 +52,30 @@
 		} else {
 			colorHex = cardClassToBackgroundClass(faction)
 		}
-		if(showMain){
-		for (let i = 0; i < g.cards1.length; i++) {
-			const c1 = fw ? coreToRcore(g.cards1[i].cardId) : g.cards1[i].cardId
-			const a1 = g.cards1[i].amount
-			ents.push({
-				id: 'd' + player + c1,
-				amount: a1,
-				cardId: c1,
-				labels: [{ text: 'P' + (player + 1), color: colorHex }],
-			})
+		if (showMain) {
+			for (let i = 0; i < g.cards1.length; i++) {
+				const c1 = fw ? coreToRcore(g.cards1[i].cardId) : g.cards1[i].cardId
+				const a1 = g.cards1[i].amount
+				ents.push({
+					id: 'd' + player + c1,
+					amount: a1,
+					cardId: c1,
+					labels: [{ text: 'P' + (player + 1), color: colorHex }],
+				})
+			}
 		}
-	}
-		if(showSide){
-		for (let i = 0; i < g.cards2.length; i++) {
-			const c2 = fw ? coreToRcore(g.cards2[i].cardId) : g.cards2[i].cardId
-			const a2 = g.cards2[i].amount
-			ents.push({
-				id: 's' + player + c2,
-				amount: a2,
-				cardId: c2,
-				labels: [{ text: 'P' + (player + 1) + '-S', color: colorHex }],
-			})
+		if (showSide) {
+			for (let i = 0; i < g.cards2.length; i++) {
+				const c2 = fw ? coreToRcore(g.cards2[i].cardId) : g.cards2[i].cardId
+				const a2 = g.cards2[i].amount
+				ents.push({
+					id: 's' + player + c2,
+					amount: a2,
+					cardId: c2,
+					labels: [{ text: 'P' + (player + 1) + '-S', color: colorHex }],
+				})
+			}
 		}
-	}
 	}
 </script>
 
@@ -88,7 +88,6 @@
 		type GetDeckCardIdReturns,
 	} from '$lib/ahdb/public-api/high-level'
 	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
-	import { fetchFullDatabase, FullDatabase, type FullDatabaseItem } from '$lib/core/full-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 
@@ -103,6 +102,11 @@
 	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import { checkOverlaps } from '$lib/tool/overlap/overlap-helpers'
+	import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
+
+	export let pdb: PopupDatabase
+	export let fdb: FullDatabase
 
 	export let startingP1: string = ''
 	export let startingP2: string = ''
@@ -129,8 +133,6 @@
 	$: overlapping = overlappingEntries.length > 0
 	var overlappingCount: number
 
-	let fdbp = fetchFullDatabase()
-
 	gather()
 
 	async function gather() {
@@ -140,7 +142,6 @@
 		if (pulling) {
 			return
 		}
-		const fdb = await fdbp
 		pulling = true
 		overlapping = false
 		p1r = null
@@ -231,7 +232,6 @@
 		p3rr: GetDeckCardIdReturns | null,
 		p4rr: GetDeckCardIdReturns | null,
 	) {
-		const fdb = await fdbp
 		entries = []
 		toggleMap = {}
 		overlappingEntries = []
@@ -420,67 +420,67 @@
 
 <Button disabled={pulling} label="Gather All Cards" onClick={gather} big block center />
 
-{#await fdbp then fdb}
-	{#if !pulling && (entries.length !== 0 || overlappingEntries.length !== 0)}
-		<div class="limited-tab">
-			<LimitedTab hide2={!overlapping}>
-				<div slot="tab1">Gathered Cards</div>
-				<div slot="content1">
-					<ListDivider label="Gathered Cards" />
-					<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
+{#if !pulling && (entries.length !== 0 || overlappingEntries.length !== 0)}
+	<div class="limited-tab">
+		<LimitedTab hide2={!overlapping}>
+			<div slot="tab1">Gathered Cards</div>
+			<div slot="content1">
+				<ListDivider label="Gathered Cards" />
+				<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
+				<CardTableGrouped
+					{toggleMap}
+					{entries}
+					{groupings}
+					{sortings}
+					onClickToggle={(c, t) => {
+						toggleMap[c] = t
+						toggleMap = { ...toggleMap }
+					}}
+					taboo={true}
+					fullDatabase={fdb}
+					popupDatabase={pdb}
+					columns={[ExtraColumn.Label]}
+					centered
+				/>
+			</div>
+			<div slot="tab2">
+				<span class="deck-overlaps-tab-text">Deck Overlaps</span><NotificationNumber
+					count={overlappingCount}
+					attention
+				/>
+			</div>
+			<div slot="content2">
+				{#if overlapping}
+					<ListDivider label={'Deck Overlaps'} />
+					<p>Trobleshooting number "X/Y" on the label (X is higher than Y) means :</p>
+					<ul>
+						<li>X: Amount of this card contributed from all decks.</li>
+						<li>Y: Amount of this card you have in your collection.</li>
+					</ul>
+					<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 					<CardTableGrouped
 						{toggleMap}
-						{entries}
+						entries={overlappingEntries}
 						{groupings}
 						{sortings}
-						onClickToggle={(c, t) => {
-							toggleMap[c] = t
-							toggleMap = { ...toggleMap }
-						}}
 						taboo={true}
 						fullDatabase={fdb}
+						popupDatabase={pdb}
 						columns={[ExtraColumn.Label]}
 						centered
 					/>
-				</div>
-				<div slot="tab2">
-					<span class="deck-overlaps-tab-text">Deck Overlaps</span><NotificationNumber
-						count={overlappingCount}
-						attention
-					/>
-				</div>
-				<div slot="content2">
-					{#if overlapping}
-						<ListDivider label={'Deck Overlaps'} />
-						<p>Trobleshooting number "X/Y" on the label (X is higher than Y) means :</p>
-						<ul>
-							<li>X: Amount of this card contributed from all decks.</li>
-							<li>Y: Amount of this card you have in your collection.</li>
-						</ul>
-						<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
-						<CardTableGrouped
-							{toggleMap}
-							entries={overlappingEntries}
-							{groupings}
-							{sortings}
-							taboo={true}
-							fullDatabase={fdb}
-							columns={[ExtraColumn.Label]}
-							centered
-						/>
-					{/if}
-				</div>
-				<div slot="tab3">Count Summary</div>
-				<div slot="content3">
-					<ListDivider label={'Count Summary'} />
-					<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
-					<CountSummary {entries} {groupings} {sortings} fullDatabase={fdb} centered />
-				</div>
-			</LimitedTab>
-		</div>
-	{/if}
-{/await}
+				{/if}
+			</div>
+			<div slot="tab3">Count Summary</div>
+			<div slot="content3">
+				<ListDivider label={'Count Summary'} />
+				<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
+				<CountSummary {entries} {groupings} {sortings} fullDatabase={fdb} centered />
+			</div>
+		</LimitedTab>
+	</div>
+{/if}
 
 <style>
 	.options {

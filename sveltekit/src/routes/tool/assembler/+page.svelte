@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
+	import type { FullDatabase } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
 
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import PartyAssemblerLayout from '$lib/design/pages/tool/assembler/PartyAssemblerLayout.svelte'
 	import helpMd from '$lib/md/assembler.md?raw'
+	import type { PageData } from './$types'
+
+	export let data: PageData
 
 	let importProto: string | null = null
 	$: {
@@ -21,4 +26,4 @@
 
 <PageTitle subTitle="Tool" title={'Team Assembler'} {helpMd} />
 
-<PartyAssemblerLayout protoString={importProto} />
+<PartyAssemblerLayout fdb={data.fdb} pdb={data.pdb} protoString={importProto} />

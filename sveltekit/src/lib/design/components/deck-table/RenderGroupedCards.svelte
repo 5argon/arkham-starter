@@ -1,18 +1,11 @@
-<script lang="ts" context="module">
-	export interface ScansOption {
-		small: boolean
-	}
-</script>
 
 <script lang="ts">
-	import type { CampaignDatabase } from '$lib/core/campaign-database'
-	import type { FullDatabase } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
 
 	import { isEntry, type GroupedCards } from '$lib/deck-table/decklist-entry'
 	import type { ExtraColumn } from '$lib/deck-table/grouping'
 	import CardCell from './CardCell.svelte'
 	import CardGroup from './CardGroup.svelte'
-	import CardScan from './CardScan.svelte'
 	import ColumnCell from './ColumnCell.svelte'
 	export let taboo: boolean
 	export let level: number
@@ -20,13 +13,11 @@
 	export let theOnlyGroup: boolean
 	export let groupedCards: GroupedCards
 	export let previousGroupedCards: GroupedCards[]
-	export let fullDatabase: FullDatabase
-	export let campaignDatabase: CampaignDatabase | null
+	export let popupDatabase: PopupDatabase
 	export let columns: ExtraColumn[] = []
 	export let toggleMap: { [id: string]: boolean }
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 	export let hideAmount: boolean = false
-	export let scansMode: ScansOption | null = null
 	$: spanning = columns.length + 1
 </script>
 
@@ -43,51 +34,31 @@
 {/if}
 {#each groupedCards.entries as en, index}
 	{#if isEntry(en)}
-		{#if scansMode && fullDatabase !== null}
-			<CardScan
-				small={scansMode.small}
-				cardId={en.cardId}
-				amount={en.amount}
-				{fullDatabase}
-				toggled={en.id in toggleMap ? toggleMap[en.id] : false}
-				onToggleChanged={onClickToggle === null
-					? undefined
-					: (t) => {
-							// It is surely entry at this point but Svelte
-							// is not powerful enough to carry the type narrowing to here.
-							if (onClickToggle !== null && isEntry(en)) {
-								onClickToggle(en.id, t)
-							}
-					  }}
-			/>
-		{:else}
-			<tr>
-				<td class={index % 2 === 0 ? 'even' : 'odd'}>
-					<CardCell
-						onToggleChanged={onClickToggle === null
-							? undefined
-							: (t) => {
-									// It is surely entry at this point but Svelte
-									// is not powerful enough to carry the type narrowing to here.
-									if (onClickToggle !== null && isEntry(en)) {
-										onClickToggle(en.id, t)
-									}
-							  }}
-						toggled={en.id in toggleMap ? toggleMap[en.id] : false}
-						cardId={en.cardId}
-						{fullDatabase}
-						{campaignDatabase}
-						amount={hideAmount ? null : en.amount}
-						{taboo}
-					/>
+		<tr>
+			<td class={index % 2 === 0 ? 'even' : 'odd'}>
+				<CardCell
+					onToggleChanged={onClickToggle === null
+						? undefined
+						: (t) => {
+								// It is surely entry at this point but Svelte
+								// is not powerful enough to carry the type narrowing to here.
+								if (onClickToggle !== null && isEntry(en)) {
+									onClickToggle(en.id, t)
+								}
+						  }}
+					toggled={en.id in toggleMap ? toggleMap[en.id] : false}
+					cardId={en.cardId}
+					{popupDatabase}
+					amount={hideAmount ? null : en.amount}
+					{taboo}
+				/>
+			</td>
+			{#each columns as c}
+				<td>
+					<ColumnCell column={c} {taboo} cardId={en.cardId} labels={en.labels} />
 				</td>
-				{#each columns as c}
-					<td>
-						<ColumnCell column={c} {taboo} cardId={en.cardId} labels={en.labels} {fullDatabase} />
-					</td>
-				{/each}
-			</tr>
-		{/if}
+			{/each}
+		</tr>
 	{:else}
 		<!-- theOnlyGroup in effect for only the topmost level. This is surely deeper level grouping. -->
 		<svelte:self
@@ -96,14 +67,12 @@
 			previousGroupedCards={[...previousGroupedCards, groupedCards]}
 			{toggleMap}
 			{totalLevels}
-			{fullDatabase}
-			{campaignDatabase}
+			{popupDatabase}
 			{columns}
 			{taboo}
 			{hideAmount}
 			{onClickToggle}
 			theOnlyGroup={false}
-			{scansMode}
 		/>
 	{/if}
 {/each}

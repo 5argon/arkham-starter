@@ -1,14 +1,11 @@
 <script lang="ts">
-	import type { FullDatabase } from '$lib/core/full-database'
 	import type { DecklistLabel } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn } from '$lib/deck-table/grouping'
 
 	export let cardId: string
 	export let taboo: boolean
 	export let labels: DecklistLabel[] | undefined
-	export let fullDatabase: FullDatabase
 	export let column: ExtraColumn
-	$: card = fullDatabase.getCard(cardId)
 </script>
 
 {#if column === ExtraColumn.Label && labels !== undefined}

@@ -93,6 +93,7 @@
 		}}
 		taboo={true}
 		{fullDatabase}
+		{popupDatabase}
 		showList
 		showScans
 		small
@@ -111,6 +112,7 @@
 			}}
 			taboo={true}
 			{fullDatabase}
+			{popupDatabase}
 			showList
 			showScans
 			small

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { FullDatabase } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import CardLaid from '$lib/design/components/deck-table/CardLaid.svelte'
@@ -20,6 +21,7 @@
 	export let toggleMap: { [cardId: string]: boolean }
 	export let taboo: boolean
 	export let fullDatabase: FullDatabase
+	export let popupDatabase: PopupDatabase
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 
 	export let showList: boolean
@@ -37,6 +39,7 @@
 				{sortings}
 				{taboo}
 				{fullDatabase}
+				{popupDatabase}
 				{onClickToggle}
 			/>
 		</div>
@@ -50,7 +53,7 @@
 				entries={singleRight ? singleEntries : entries}
 				{fullDatabase}
 				{onClickToggle}
-				scansMode={{ small: small }}
+				{small}
 			/>
 		</div>
 	{/if}

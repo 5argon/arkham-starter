@@ -158,6 +158,7 @@ playerCards.forEach((x) => {
         : undefined,
     ir: x.restrictions !== undefined && x.restrictions !== null,
     wk: x.subtype_code !== undefined && x.subtype_code === "weakness",
+    inv: x.subtype_code !== undefined && x.type_code === "investigator",
     cs: x.cost,
     cus: extractCustomizable(x),
     q: x.quantity,

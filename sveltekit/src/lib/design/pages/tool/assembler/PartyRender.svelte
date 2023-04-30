@@ -11,9 +11,11 @@
 	import { addPackCount, countPacks, type PackCount } from '$lib/deck/deck-count'
 	import { goToGather } from '$lib/deck/go-to-gather'
 	import type { GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+	import type { PopupDatabase } from '$lib/core/popup-database'
 
 	export let party: Party
 	export let fullDatabase: FullDatabase
+	export let popupDatabase: PopupDatabase
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
 	export let onCopyMarkdown: (d: GetDeckCardIdReturns[]) => void
@@ -85,6 +87,7 @@
 			{groupings}
 			{sortings}
 			{fullDatabase}
+			{popupDatabase}
 			taboo={true}
 			columns={[ExtraColumn.Label]}
 		/>

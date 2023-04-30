@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { CardPack } from '$lib/core/card-pack'
-	import { fetchFullDatabase, FullDatabase, type LazyFullDatabase } from '$lib/core/full-database'
+	import type { FullDatabase } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
@@ -13,6 +13,8 @@
 	import CardTableDoubleDisplay from './CardTableDoubleDisplay.svelte'
 	import ExploreMenu from './ExploreMenu.svelte'
 
+	export let fdb: FullDatabase
+	export let pdb: PopupDatabase
 	export let pageTitle: string
 	export let exploreInput: ExploreInput
 
@@ -33,8 +35,6 @@
 		sortings = s
 	}
 
-	let fdbp: LazyFullDatabase = fetchFullDatabase()
-
 	function getByPackFromFullDatabaseInvestigator(
 		fdb: FullDatabase,
 		ps: CardPack[],
@@ -42,7 +42,8 @@
 		const inPack = fdb.queryPack(ps)
 		const investigator = inPack.filter((x) => {
 			const r =
-				x.original.type_code === 'investigator' || typeof x.original.restrictions === 'object'
+				(x.original.type_code === 'investigator' || typeof x.original.restrictions === 'object') &&
+				x.original.spoiler === undefined
 			return r
 		})
 		return investigator.map<DecklistEntry>((x) => {
@@ -59,7 +60,8 @@
 			const r =
 				x.original.type_code !== 'investigator' &&
 				typeof x.original.restrictions !== 'object' &&
-				x.original.subtype_code !== 'basicweakness'
+				x.original.subtype_code !== 'basicweakness' &&
+				x.original.spoiler === undefined
 			return r
 		})
 		return notInvestigator.map<DecklistEntry>((x) => {
@@ -91,94 +93,93 @@
 
 <ExploreMenu />
 
-{#await fdbp}
-	Loading...
-{:then fdb}
-	<div class="tab">
-		<LimitedTab
-			onChangeActive={(i) => {
-				switch (i) {
-					case 0: {
-						showList = true
-						showScans = true
-						break
-					}
-					case 1: {
-						showList = true
-						showScans = false
-						break
-					}
-					case 2: {
-						showList = false
-						showScans = true
-						break
-					}
+<div class="tab">
+	<LimitedTab
+		onChangeActive={(i) => {
+			switch (i) {
+				case 0: {
+					showList = true
+					showScans = true
+					break
 				}
-			}}
-		>
-			<div slot="tab1">List and Scans</div>
-			<div slot="content1" />
-			<div slot="tab2">List Only</div>
-			<div slot="content2" />
-			<div slot="tab3">Scans Only</div>
-			<div slot="content3" />
-		</LimitedTab>
-	</div>
-	<ListDivider label="Investigators" />
-	<CardTableDoubleDisplay
-		{toggleMap}
-		singleRight
-		entries={getByPackFromFullDatabaseInvestigator(fdb, packs)}
-		groupings={[]}
-		sortings={[Sorting.Number]}
-		taboo={true}
-		fullDatabase={fdb}
-		onClickToggle={(c, t) => {
-			toggleMap[c] = t
-			toggleMap = { ...toggleMap }
+				case 1: {
+					showList = true
+					showScans = false
+					break
+				}
+				case 2: {
+					showList = false
+					showScans = true
+					break
+				}
+			}
 		}}
-		{showList}
-		{showScans}
-	/>
+	>
+		<div slot="tab1">List and Scans</div>
+		<div slot="content1" />
+		<div slot="tab2">List Only</div>
+		<div slot="content2" />
+		<div slot="tab3">Scans Only</div>
+		<div slot="content3" />
+	</LimitedTab>
+</div>
+<ListDivider label="Investigators" />
+<CardTableDoubleDisplay
+	{toggleMap}
+	singleRight
+	entries={getByPackFromFullDatabaseInvestigator(fdb, packs)}
+	groupings={[]}
+	sortings={[Sorting.Number]}
+	taboo={true}
+	fullDatabase={fdb}
+	popupDatabase={pdb}
+	onClickToggle={(c, t) => {
+		toggleMap[c] = t
+		toggleMap = { ...toggleMap }
+	}}
+	{showList}
+	{showScans}
+/>
 
-	<ListDivider label="Basic Weakness" />
+<ListDivider label="Basic Weakness" />
 
-	<CardTableDoubleDisplay
-		{toggleMap}
-		singleRight
-		entries={getByPackFromFullDatabaseWeakness(fdb, packs)}
-		groupings={[]}
-		sortings={[Sorting.Number]}
-		taboo={true}
-		fullDatabase={fdb}
-		onClickToggle={(c, t) => {
-			toggleMap[c] = t
-			toggleMap = { ...toggleMap }
-		}}
-		{showList}
-		{showScans}
-	/>
+<CardTableDoubleDisplay
+	{toggleMap}
+	singleRight
+	entries={getByPackFromFullDatabaseWeakness(fdb, packs)}
+	groupings={[]}
+	sortings={[Sorting.Number]}
+	taboo={true}
+	fullDatabase={fdb}
+	popupDatabase={pdb}
+	onClickToggle={(c, t) => {
+		toggleMap[c] = t
+		toggleMap = { ...toggleMap }
+	}}
+	{showList}
+	{showScans}
+/>
 
-	<ListDivider label="The Rest of Player Cards" />
+<ListDivider label="The Rest of Player Cards" />
 
-	<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
+<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
-	<CardTableDoubleDisplay
-		{toggleMap}
-		singleRight
-		entries={getByPackFromFullDatabase(fdb, packs)}
-		{groupings}
-		{sortings}
-		taboo={true}
-		fullDatabase={fdb}
-		onClickToggle={(c, t) => {
-			toggleMap[c] = t
-			toggleMap = { ...toggleMap }
-		}}
-		{showList}
-		{showScans}
-	/>
-{/await}
+<CardTableDoubleDisplay
+	{toggleMap}
+	singleRight
+	entries={getByPackFromFullDatabase(fdb, packs)}
+	{groupings}
+	{sortings}
+	taboo={true}
+	fullDatabase={fdb}
+	popupDatabase={pdb}
+	onClickToggle={(c, t) => {
+		toggleMap[c] = t
+		toggleMap = { ...toggleMap }
+	}}
+	{showList}
+	{showScans}
+/>
 
 <style>
 	.tab {

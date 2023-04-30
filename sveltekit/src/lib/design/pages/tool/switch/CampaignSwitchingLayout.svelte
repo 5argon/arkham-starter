@@ -10,7 +10,7 @@
 	}
 	interface BothDatabase {
 		fdb: FullDatabase
-		cdb: CampaignDatabase
+		pdb: PopupDatabase
 	}
 	type PlayerOrNull = Player | null
 </script>
@@ -43,6 +43,7 @@
 	import { coreToRcore } from '$lib/ahdb/conversion'
 	import { CampaignDatabase, fetchCampaignDatabase } from '$lib/core/campaign-database'
 	import { goToGather } from '$lib/deck/go-to-gather'
+	import { fetchPopupDatabase, type PopupDatabase } from '$lib/core/popup-database'
 
 	export let protoString: string | null = null
 	let sharingUrl = ''
@@ -82,11 +83,11 @@
 
 	let fixedLabelColor = false
 	let fdbPromise = fetchFullDatabase()
-	let cdbPromise = fetchCampaignDatabase()
-	let bothPromises: Promise<BothDatabase> = Promise.all([fdbPromise, cdbPromise]).then((x) => {
+	let pdbDatabase = fetchPopupDatabase()
+	let bothPromises: Promise<BothDatabase> = Promise.all([fdbPromise, pdbDatabase]).then((x) => {
 		return {
 			fdb: x[0],
-			cdb: x[1],
+			pdb: x[1],
 		}
 	})
 	startingProtoProcessing()
@@ -487,7 +488,7 @@
 			}}
 			taboo={true}
 			fullDatabase={bdb.fdb}
-			campaignDatabase={bdb.cdb}
+			popupDatabase={bdb.pdb}
 			columns={[ExtraColumn.Label]}
 			centered
 		/>
@@ -518,7 +519,7 @@
 					}}
 					taboo={true}
 					fullDatabase={bdb.fdb}
-					campaignDatabase={bdb.cdb}
+					popupDatabase={bdb.pdb}
 					columns={[ExtraColumn.Label]}
 					centered
 				/>
@@ -536,7 +537,7 @@
 					}}
 					taboo={true}
 					fullDatabase={bdb.fdb}
-					campaignDatabase={bdb.cdb}
+					popupDatabase={bdb.pdb}
 					columns={[ExtraColumn.Label]}
 					centered
 				/>

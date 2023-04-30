@@ -2,6 +2,23 @@
 	"hosting": {
 		"public": "build",
 		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-		"cleanUrls": true
+		"cleanUrls": true,
+		"redirects": [
+			{
+				"source": "/deck/view/:deckid*",
+				"destination": "/deck/view?id=:deckid",
+				"type": 301
+			},
+			{
+				"source": "/decklist/view/:deckid",
+				"destination": "/decklist/view?id=:deckid",
+				"type": 301
+			},
+			{
+				"source": "/decklist/view/:deckid/:deckname",
+				"destination": "/decklist/view?id=:deckid",
+				"type": 301
+			}
+		]
 	}
 }
