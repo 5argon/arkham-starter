@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
@@ -24,6 +25,7 @@
 	export let centered: boolean = false
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 	export let hideAmount: boolean = false
+	export let customizableMetas: CustomizableMeta[] = []
 	$: gc = groupCards(entriesForwarded, groupings, sortings, fullDatabase)
 </script>
 
@@ -37,4 +39,5 @@
 	{onClickToggle}
 	totalLevels={groupings.length}
 	{hideAmount}
+	{customizableMetas}
 />

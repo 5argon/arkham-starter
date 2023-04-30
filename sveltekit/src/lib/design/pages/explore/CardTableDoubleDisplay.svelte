@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
@@ -28,6 +29,7 @@
 	export let showList: boolean
 	export let showScans: boolean
 	export let small: boolean = false
+	export let customizableMetas: CustomizableMeta[] = []
 </script>
 
 <div class="flex-lr">
@@ -43,6 +45,7 @@
 				{fullDatabase}
 				{popupDatabase}
 				{onClickToggle}
+				{customizableMetas}
 			/>
 		</div>
 	{/if}

@@ -7,6 +7,8 @@
 
 	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import { allIcons } from '$lib/design/icons/all-icons'
 	import CardSpan from '../card/CardSpan.svelte'
 
 	export let taboo: boolean
@@ -29,12 +31,14 @@
 		const matchedCustomizables = customizableMetas.filter((x) => {
 			return x.card === cardId
 		})
+		const newRealCust: NewCust[] = []
 		matchedCustomizables.forEach((x) => {
 			if (card.original.cus && card.original.cus.length > x.index) {
 				const c = card.original.cus[x.index]
-				realCust.push({ text: c.n, checkedBoxes: x.checked, uncheckedBoxes: c.xp - x.checked })
+				newRealCust.push({ text: c.n, checkedBoxes: x.checked, uncheckedBoxes: c.xp - x.checked })
 			}
 		})
+		realCust = newRealCust
 	}
 	let cardName: string
 	$: {
@@ -66,7 +70,8 @@
 	/>
 	{#if card.original.cus !== undefined}
 		{#each realCust as rc}
-			<div>
+			<div class="cust">
+				<FaIcon path={allIcons.rightSingle} />
 				<CardSpan
 					{cardId}
 					class1={card.class1}
@@ -90,5 +95,9 @@
 
 	.toggle-div-on {
 		filter: grayscale() opacity(0.2);
+	}
+
+	.cust {
+		display: flex;
 	}
 </style>

@@ -6,6 +6,7 @@
 		getDeckCardIds,
 		type GetDeckCardIdReturns,
 		forwardDeckToRcore,
+		type CustomizableMeta,
 	} from '$lib/ahdb/public-api/high-level'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
@@ -33,6 +34,7 @@
 	let sortings: Sorting[] = [Sorting.Class, Sorting.Set]
 	let toggleMap: { [cardId: string]: boolean } = {}
 	let sideToggleMap: { [cardId: string]: boolean } = {}
+	let customizableMetas: CustomizableMeta[] = []
 	function onGroupingsChanged(g: Grouping[]) {
 		groupings = g
 	}
@@ -65,6 +67,7 @@
 				id: x.cardId,
 			}
 		})
+		customizableMetas = rcoreDeck.decodedMeta.customizableMetas
 	})
 </script>
 
@@ -97,6 +100,7 @@
 		showList
 		showScans
 		small
+		{customizableMetas}
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 	/>
 

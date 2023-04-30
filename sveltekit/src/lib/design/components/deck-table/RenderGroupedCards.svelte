@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 
 	import { isEntry, type GroupedCards } from '$lib/deck-table/decklist-entry'
@@ -17,6 +18,7 @@
 	export let toggleMap: { [id: string]: boolean }
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 	export let hideAmount: boolean = false
+	export let customizableMetas: CustomizableMeta[] = []
 	$: spanning = columns.length + 1
 </script>
 
@@ -49,6 +51,7 @@
 					cardId={en.cardId}
 					{popupDatabase}
 					amount={hideAmount ? null : en.amount}
+					{customizableMetas}
 					{taboo}
 				/>
 			</td>

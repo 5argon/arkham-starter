@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { GroupedCards } from '$lib/deck-table/decklist-entry'
 	import { extraColumnToHeader, type ExtraColumn } from '$lib/deck-table/grouping'
@@ -12,6 +13,7 @@
 	export let columns: ExtraColumn[] = []
 	export let centered: boolean = false
 	export let hideAmount: boolean = false
+	export let customizableMetas: CustomizableMeta[] = []
 	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
 </script>
 
@@ -43,6 +45,7 @@
 				{hideAmount}
 				{onClickToggle}
 				{popupDatabase}
+				{customizableMetas}
 			/>
 		{/each}
 	</tbody>
