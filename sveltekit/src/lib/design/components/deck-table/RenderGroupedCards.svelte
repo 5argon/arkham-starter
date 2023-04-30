@@ -1,4 +1,3 @@
-
 <script lang="ts">
 	import type { PopupDatabase } from '$lib/core/popup-database'
 
@@ -55,7 +54,7 @@
 			</td>
 			{#each columns as c}
 				<td>
-					<ColumnCell column={c} {taboo} cardId={en.cardId} labels={en.labels} />
+					<ColumnCell {popupDatabase} column={c} cardId={en.cardId} labels={en.labels} />
 				</td>
 			{/each}
 		</tr>

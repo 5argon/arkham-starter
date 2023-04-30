@@ -16,6 +16,8 @@ I did just that and remove the Description section to make some room. (And of co
 
 Everything has pack icon and collector's number. Beginner has limited collection and don't know where all the meta cards everyone are abusing came from, UI that help learning Investigator Expansion should be priority. It also helps finding the cards by looking just at the bottom right corner, especially for newcomers that hadn't decided on how to organize their cards just yet.
 
+Also you can see commit skill icons for each card. I think beginners need to familiarize with icons and how important they are on each card as a basic teamplay feature.
+
 ## Some feature highlights
 
 - You can click on the card to toggle it, to help when assembling the deck.
@@ -30,3 +32,4 @@ Everything has pack icon and collector's number. Beginner has limited collection
 Many more are unsupported, but for example :
 
 - Nothing about XP, next, previous deck : Not in priority since all the starter decks in this site would be at 0 XP.
+- Inspecting (magnifying) a card will come later. There should be a check box that determine whether it should inspect or toggle a card on touching it.

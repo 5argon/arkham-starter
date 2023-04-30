@@ -2,7 +2,7 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
-	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import type { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import CardLaid from '$lib/design/components/deck-table/CardLaid.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 
@@ -18,6 +18,7 @@
 	})
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
+	export let columns: ExtraColumn[] = []
 	export let toggleMap: { [cardId: string]: boolean }
 	export let taboo: boolean
 	export let fullDatabase: FullDatabase
@@ -35,6 +36,7 @@
 			<CardTableGrouped
 				{toggleMap}
 				{entries}
+				{columns}
 				{groupings}
 				{sortings}
 				{taboo}
@@ -65,7 +67,7 @@
 	}
 
 	.list-flex {
-		flex-basis: 330px;
+		flex-basis: 380px;
 	}
 
 	.scans-flex {

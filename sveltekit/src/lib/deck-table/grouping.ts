@@ -30,13 +30,13 @@ export function extraColumnToHeader(c: ExtraColumn): string {
 		case ExtraColumn.Label:
 			return ''
 		case ExtraColumn.Cost:
-			return 'Cost'
+			return ''
 		case ExtraColumn.Icons:
-			return 'Icons'
+			return ''
 		case ExtraColumn.Set:
-			return 'Set'
+			return ''
 		case ExtraColumn.Traits:
-			return 'Traits'
+			return ''
 		default:
 			return ''
 	}

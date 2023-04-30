@@ -8,7 +8,7 @@
 		forwardDeckToRcore,
 	} from '$lib/ahdb/public-api/high-level'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
-	import { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import CardTableDoubleDisplay from '$lib/design/pages/explore/CardTableDoubleDisplay.svelte'
@@ -97,6 +97,7 @@
 		showList
 		showScans
 		small
+		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 	/>
 
 	{#if sideEntries.length > 0}
@@ -116,6 +117,7 @@
 			showList
 			showScans
 			small
+			columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 		/>
 	{/if}
 {/if}

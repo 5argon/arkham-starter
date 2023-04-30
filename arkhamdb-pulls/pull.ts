@@ -145,8 +145,8 @@ playerCards.forEach((x) => {
     sag: x.skill_agility,
     scm: x.skill_combat,
     sit: x.skill_intellect,
-    swi: x.skill_wild,
-    swl: x.skill_willpower,
+    swi: x.skill_willpower,
+    swl: x.skill_wild,
     c1: classNameMap.toNum[x.faction_code],
     c2:
       x.faction2_code !== undefined
