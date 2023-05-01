@@ -23,6 +23,25 @@ export function sortCards(entries: WithCard[], sortings: Sorting[]): DecklistEnt
 	return ret
 }
 
+export function sortingToName(s: Sorting): string {
+	switch (s) {
+		case Sorting.Number:
+			return 'Number'
+		case Sorting.Class:
+			return 'Class'
+		case Sorting.Set:
+			return 'Expansion'
+		case Sorting.Type:
+			return 'Type'
+		case Sorting.Name:
+			return 'Name'
+		case Sorting.Level:
+			return 'Level'
+		default:
+			return 'Unknown'
+	}
+}
+
 function vs(a: WithCard, b: WithCard, s: Sorting): number {
 	switch (s) {
 		case Sorting.Number: {
@@ -46,7 +65,7 @@ function vs(a: WithCard, b: WithCard, s: Sorting): number {
 		case Sorting.Set: {
 			return a.card.packIcon - b.card.packIcon
 		}
-		case Sorting.Level : {
+		case Sorting.Level: {
 			const undefinedXp = -99
 			return (a.card.original.xp ?? undefinedXp) - (b.card.original.xp ?? undefinedXp)
 		}
@@ -110,9 +129,9 @@ export function topLevelTypeScore(typeCode: string): number {
 	}
 }
 
-export const multipleSlotsString = "Multiple Slots"
-export const noSlotString= "No Slot"
-export const nonAssetString = "Non-Asset"
+export const multipleSlotsString = 'Multiple Slots'
+export const noSlotString = 'No Slot'
+export const nonAssetString = 'Non-Asset'
 
 export function slotScore(slot: string): number {
 	switch (slot) {

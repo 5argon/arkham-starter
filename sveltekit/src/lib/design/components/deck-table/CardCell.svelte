@@ -29,7 +29,7 @@
 	let realCust: NewCust[] = []
 	$: {
 		const matchedCustomizables = customizableMetas.filter((x) => {
-			return x.card === cardId
+			return x.card === cardId && x.checked > 0
 		})
 		const newRealCust: NewCust[] = []
 		matchedCustomizables.forEach((x) => {

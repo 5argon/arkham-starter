@@ -1,8 +1,8 @@
 <script lang="ts">
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import { onMount } from 'svelte'
 	import { page } from '$app/stores'
 	import { goto } from '$app/navigation'
+	import { browser } from '$app/environment'
 	import {
 		getDeckCardIds,
 		type GetDeckCardIdReturns,
@@ -20,6 +20,7 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import AhdbDeckTextbox from '../deck-table/AhdbDeckTextbox.svelte'
+	import InvestigatorFrontBack from '../card/InvestigatorFrontBack.svelte'
 
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
@@ -48,9 +49,10 @@
 	}
 
 	$: {
-		// Reactive to URL params in case this page navigates to itself only changing the param.
-		const url = $page.url.searchParams.get('id')
-		urlFunc(url)
+		if (browser) {
+			const deckId = $page.url.searchParams.get('id')
+			urlFunc(deckId)
+		}
 	}
 
 	const urlFunc = async (deckId: string | null) => {
@@ -89,14 +91,14 @@
 				id: x.cardId,
 			}
 		})
-		customizableMetas = rcoreDeck.decodedMeta.customizableMetas
+		customizableMetas = rcoreDeck.decodedMeta.customizableMetas ?? []
 	}
 
-	function onExtractDeck(gd: ExtractResult) {
+	async function onExtractDeck(gd: ExtractResult) {
 		if (gd.published) {
-			goto('/decklist/view?id=' + gd.deck)
+			await goto('/decklist/view?id=' + gd.deck)
 		} else {
-			goto('/deck/view?id=' + gd.deck)
+			await goto('/deck/view?id=' + gd.deck)
 		}
 	}
 </script>
@@ -115,9 +117,17 @@
 	{/if}
 	<AhdbDeckTextbox {onExtractDeck} noImport />
 {:else}
-	<DeckBannerHigher {popupDatabase} deck={deck.getReturn} />
+	<div class="head-flex">
+		<div class="head-flex-banner">
+			<DeckBannerHigher {popupDatabase} deck={deck.getReturn} />
+		</div>
+		<div class="head-flex-inv">
+			<InvestigatorFrontBack {fullDatabase} deck={deck.getReturn} />
+		</div>
+	</div>
 	<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
+	<ListDivider label={'Deck ( ' + entries.reduce((a, b) => a + b.amount, 0) + ' Cards )'} />
 	<CardTableDoubleDisplay
 		{toggleMap}
 		{entries}
@@ -138,7 +148,9 @@
 	/>
 
 	{#if sideEntries.length > 0}
-		<ListDivider label={'Side Deck'} />
+		<ListDivider
+			label={'Side Deck ( ' + sideEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
+		/>
 		<CardTableDoubleDisplay
 			toggleMap={sideToggleMap}
 			entries={sideEntries}
@@ -158,3 +170,33 @@
 		/>
 	{/if}
 {/if}
+
+<style>
+	.head-flex {
+		display: flex;
+	}
+
+	.head-flex-banner {
+		flex: 4;
+		max-width: 750px;
+	}
+
+	.head-flex-inv {
+		flex: 2;
+	}
+
+	@media (max-width: 1000px) {
+		.head-flex {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.head-flex-banner {
+			flex: 1;
+		}
+
+		.head-flex-inv {
+			flex: 1;
+		}
+	}
+</style>

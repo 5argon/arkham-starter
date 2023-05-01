@@ -4,14 +4,25 @@
 	export let cardId: string
 	export let small: boolean
 	export let fullDatabase: FullDatabase
-	export let toggled: boolean
+	export let toggled: boolean | boolean[]
 	export let amount: number
 	export let onToggleChanged: undefined | ((t: boolean) => void) = undefined
+	export let unlink: boolean = false
+	export let linkedOnly: boolean = false
 	const sizeMultiplier = small ? 0.5 : 1
 	$: card = fullDatabase.getCard(cardId)
 	$: vertical = card.original.type_code !== 'investigator'
 	$: width = (vertical ? 215 : 300) * sizeMultiplier
 	$: height = (vertical ? 300 : 215) * sizeMultiplier
+
+	let thisCopyToggled: boolean
+	$: {
+		if (Array.isArray(toggled)) {
+			thisCopyToggled = toggled[amount - 1]
+		} else {
+			thisCopyToggled = toggled
+		}
+	}
 
 	const validArray: string[] = valid
 	$: exist = validArray.find((element) => element === cardId + '.png')
@@ -31,7 +42,7 @@
 	<span
 		class="outer no-image"
 		class:toggle-div={onToggleChanged}
-		class:toggle-div-on={toggled}
+		class:toggle-div-on={thisCopyToggled}
 		class:normal-radius={!small}
 		class:small-radius={small}
 		on:click={handler}
@@ -49,31 +60,12 @@
 		/>
 	</span>
 {:else}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<span
-		class="outer"
-		class:toggle-div={onToggleChanged}
-		class:toggle-div-on={toggled}
-		on:click={handler}
-		style={'width:' + width + 'px;' + 'height:' + height + 'px;'}
-	>
-		<img
-			{width}
-			{height}
-			class:normal-radius={!small}
-			class:small-radius={small}
-			src={'/image/card/full/' + cardId + '.png'}
-			alt={card.original.name}
-			loading="lazy"
-			draggable="false"
-		/>
-	</span>
-	{#if card.original.double_sided && card.original.backimagesrc !== undefined && amount === 1}
+	{#if !linkedOnly}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<span
 			class="outer"
 			class:toggle-div={onToggleChanged}
-			class:toggle-div-on={toggled}
+			class:toggle-div-on={thisCopyToggled}
 			on:click={handler}
 			style={'width:' + width + 'px;' + 'height:' + height + 'px;'}
 		>
@@ -82,35 +74,58 @@
 				{height}
 				class:normal-radius={!small}
 				class:small-radius={small}
-				class={'alt-card'}
-				src={'/image/card/full/' + backCodeExtract(card.original.backimagesrc) + '.png'}
+				src={'/image/card/full/' + cardId + '.png'}
 				alt={card.original.name}
 				loading="lazy"
 				draggable="false"
 			/>
 		</span>
 	{/if}
-	{#if card.original.linked_to_code !== undefined && amount === 1}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<span
-			class="outer"
-			class:toggle-div={onToggleChanged}
-			class:toggle-div-on={toggled}
-			on:click={handler}
-			style={'width:' + width + 'px;' + 'height:' + height + 'px;'}
-		>
-			<img
-				{width}
-				{height}
-				class:normal-radius={!small}
-				class:small-radius={small}
-				class={'alt-card'}
-				src={'/image/card/full/' + card.original.linked_to_code + '.png'}
-				alt={card.original.name}
-				loading="lazy"
-				draggable="false"
-			/>
-		</span>
+	{#if !unlink || linkedOnly}
+		{#if card.original.double_sided && card.original.backimagesrc !== undefined && amount === 1}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<span
+				class="outer"
+				class:toggle-div={onToggleChanged}
+				class:toggle-div-on={thisCopyToggled}
+				on:click={handler}
+				style={'width:' + width + 'px;' + 'height:' + height + 'px;'}
+			>
+				<img
+					{width}
+					{height}
+					class:normal-radius={!small}
+					class:small-radius={small}
+					class={'alt-card'}
+					src={'/image/card/full/' + backCodeExtract(card.original.backimagesrc) + '.png'}
+					alt={card.original.name}
+					loading="lazy"
+					draggable="false"
+				/>
+			</span>
+		{/if}
+		{#if card.original.linked_to_code !== undefined && amount === 1}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<span
+				class="outer"
+				class:toggle-div={onToggleChanged}
+				class:toggle-div-on={thisCopyToggled}
+				on:click={handler}
+				style={'width:' + width + 'px;' + 'height:' + height + 'px;'}
+			>
+				<img
+					{width}
+					{height}
+					class:normal-radius={!small}
+					class:small-radius={small}
+					class={'alt-card'}
+					src={'/image/card/full/' + card.original.linked_to_code + '.png'}
+					alt={card.original.name}
+					loading="lazy"
+					draggable="false"
+				/>
+			</span>
+		{/if}
 	{/if}
 {/if}
 {#if amount > 1}

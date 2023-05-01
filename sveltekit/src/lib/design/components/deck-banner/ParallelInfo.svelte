@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { coreToRcore } from '$lib/ahdb/conversion'
+
 	export let investigatorCode: string
 	export let front: boolean = false
 	export let back: boolean = false
@@ -6,24 +8,24 @@
 
 	let parallelLink: string | null = null
 	$: {
-		switch (investigatorCode) {
-			case '01001': {
+		switch (coreToRcore(investigatorCode)) {
+			case '01501': {
 				parallelLink = 'https://www.fantasyflightgames.com/en/news/2021/6/18/by-the-book/'
 				break
 			}
-			case '01002': {
+			case '01502': {
 				parallelLink = 'https://www.fantasyflightgames.com/en/news/2020/5/5/beyond-our-dimension/'
 				break
 			}
-			case '01003': {
+			case '01503': {
 				parallelLink = 'https://www.fantasyflightgames.com/en/news/2020/8/13/all-or-nothing/'
 				break
 			}
-			case '01004': {
+			case '01504': {
 				parallelLink = 'https://www.fantasyflightgames.com/en/news/2020/12/3/bad-blood/'
 				break
 			}
-			case '01005': {
+			case '01505': {
 				parallelLink = 'https://www.fantasyflightgames.com/en/news/2021/12/30/red-tide-rising-1/'
 				break
 			}

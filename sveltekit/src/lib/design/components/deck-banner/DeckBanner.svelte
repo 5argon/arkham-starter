@@ -11,6 +11,7 @@
 		ChosenCards,
 		ChosenClasses,
 		ChosenNumber,
+		ChosenSkills,
 		ChosenTraits,
 		DeckDistribution,
 		XpDistributionData,
@@ -23,6 +24,7 @@
 	import { coreToRcore } from '$lib/ahdb/conversion'
 	import type { PackInfoSpanItem } from '../inline/PackInfoSpan.svelte'
 	import PackInfoSpan from '../inline/PackInfoSpan.svelte'
+	import SkillIcon from '../inline/SkillIcon.svelte'
 
 	export let authorName: string | null = null
 	export let authorUrl: string | null = null
@@ -39,6 +41,7 @@
 	export let previewCards: string[]
 
 	export let chosenCards: ChosenCards[] = []
+	export let chosenSkills: ChosenSkills | null = null
 	export let chosenClasses: ChosenClasses | null = null
 	export let chosenTraits: ChosenTraits | null = null
 	export let chosenNumber: ChosenNumber | null = null
@@ -186,6 +189,13 @@
 						{/each}
 					</DeckInsightItem>
 				{/if}
+				{#if chosenSkills !== null}
+					<DeckInsightItem title={chosenSkills.title} cardClass={investigatorClass}>
+						{#each chosenSkills.skills as t}
+							<SkillIcon icon={t} />
+						{/each}
+					</DeckInsightItem>
+				{/if}
 				<!-- {#if !compact}
 					<CardSquareList {popupDb} {previewCards} />
 				{/if} -->
@@ -248,13 +258,13 @@
 		border-width: 1px 1px 1px 4px;
 		border-style: solid;
 		box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1);
-		max-width: 850px;
 	}
 
 	.content {
 		padding: 4px 8px;
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: space-between;
 	}
 
 	.parallel-info {
@@ -262,7 +272,7 @@
 	}
 
 	.first-block {
-		flex-basis: 380px;
+		flex-basis: 340px;
 		flex-grow: 1;
 		display: flex;
 		align-items: center;
@@ -313,7 +323,6 @@
 		border-width: 0px 0px 0px 1px;
 		border-style: solid;
 		flex-basis: 250px;
-		flex-grow: 2;
 		margin: 4px 0px;
 		padding-left: 4px;
 	}

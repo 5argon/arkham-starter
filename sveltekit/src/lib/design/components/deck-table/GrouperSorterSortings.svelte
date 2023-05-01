@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import { sortingToName } from '$lib/deck-table/grouping/sort-cards'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import Button from '../basic/Button.svelte'
@@ -29,12 +30,12 @@
 	<span class="flex-item">
 		<select name="pets" value={g} on:change={(e) => onChangeHandler(i, e)}>
 			<option value={remove}>(Remove)</option>
-			<option value={Sorting.Number}>Number</option>
-			<option value={Sorting.Class}>Class</option>
-			<option value={Sorting.Set}>Set</option>
-			<option value={Sorting.Type}>Type</option>
-			<option value={Sorting.Name}>Name</option>
-			<option value={Sorting.Level}>Level</option>
+			<option value={Sorting.Number}>{sortingToName(Sorting.Number)}</option>
+			<option value={Sorting.Class}>{sortingToName(Sorting.Class)}</option>
+			<option value={Sorting.Set}>{sortingToName(Sorting.Set)}</option>
+			<option value={Sorting.Type}>{sortingToName(Sorting.Type)}</option>
+			<option value={Sorting.Name}>{sortingToName(Sorting.Name)}</option>
+			<option value={Sorting.Level}>{sortingToName(Sorting.Level)}</option>
 		</select>
 	</span>
 	{#if i < sortings.length - 1}

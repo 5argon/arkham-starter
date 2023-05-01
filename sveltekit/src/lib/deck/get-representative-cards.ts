@@ -10,17 +10,25 @@ export function getRepresentativeCards(
 	sideDeck: string[],
 	pdb: PopupDatabase,
 ): string[] {
-	const sorters: Sorter[] = []
+	let sorters: Sorter[] = []
 	mainDeck.forEach((x) => {
 		sorters.push({ card: x, side: false })
 	})
 	sideDeck.forEach((x) => {
 		sorters.push({ card: x, side: true })
 	})
+	sorters = sorters.filter((x) => {
+		return !isRandomBasicWeakness(x.card)
+	})
 
 	function score(s: Sorter): number {
 		const c = pdb.getById(s.card)
-		if (c === null || c.original.sp === true || isRandomBasicWeakness(c.original.id)) {
+		if (
+			c === null ||
+			c.original.sp === true ||
+			isRandomBasicWeakness(c.original.id) ||
+			c.original.wk
+		) {
 			return -99999
 		}
 		let sc = 0

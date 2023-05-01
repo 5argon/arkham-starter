@@ -25,7 +25,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: baseline;
-		margin-bottom: 4px;
+		margin: 2px 0px;
 	}
 
 	.title {

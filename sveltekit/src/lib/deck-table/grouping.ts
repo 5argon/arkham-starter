@@ -6,6 +6,7 @@ export enum Grouping {
 	Level015 = 5,
 	Slot = 6,
 	EffectiveIcons = 7,
+	Cost = 8,
 }
 
 export enum Sorting {

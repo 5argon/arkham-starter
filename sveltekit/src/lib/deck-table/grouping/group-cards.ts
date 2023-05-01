@@ -242,7 +242,7 @@ function groupCardsOneGroup(
 		}
 		case Grouping.Level: {
 			const st: { [k: number]: { entries: DecklistEntry[]; level: number } } = {}
-			const undefinedXp = -99
+			const undefinedXp = 99
 			cs.forEach((x) => {
 				const sn: number = x.card.original.xp ?? undefinedXp
 				if (!(sn in st)) {
@@ -266,7 +266,7 @@ function groupCardsOneGroup(
 		}
 		case Grouping.Level015: {
 			const st: { [k: number]: { entries: DecklistEntry[]; level: number } } = {}
-			const undefinedXp = -99
+			const undefinedXp = 99
 			const level15 = 15
 			cs.forEach((x) => {
 				const actualLevel: number = x.card.original.xp ?? undefinedXp
@@ -300,6 +300,77 @@ function groupCardsOneGroup(
 						entries: v.entries,
 						groupName:
 							v.level === undefinedXp ? 'Level -' : v.level === 0 ? 'Level 0' : 'Level 1~5',
+					}
+				})
+			groups = sorted
+			break
+		}
+		case Grouping.Cost: {
+			const st: { [k: number]: { entries: DecklistEntry[]; cost: number } } = {}
+			const noCost = 99
+			const cost3p = 15
+			const costX = 20
+			cs.forEach((x) => {
+				const actualCost: number | undefined = x.card.original.cost
+				let groupingCost: number
+				switch (actualCost) {
+					case undefined: {
+						groupingCost = noCost
+						break
+					}
+					case 0: {
+						groupingCost = 0
+						break
+					}
+					case 1: {
+						groupingCost = 1
+						break
+					}
+					case 2: {
+						groupingCost = 2
+						break
+					}
+					case -2: {
+						groupingCost = costX
+						break
+					}
+					default: {
+						groupingCost = cost3p
+						break
+					}
+				}
+				if (!(groupingCost in st)) {
+					st[groupingCost] = { entries: [], cost: groupingCost }
+				}
+				st[groupingCost].entries.push(x.dle)
+				st[groupingCost].cost = groupingCost
+			})
+			const sorted = Object.entries(st)
+				.sort(([, v], [, v2]) => {
+					return v.cost - v2.cost
+				})
+				.map<GroupedCards>(([, v]) => {
+					if (v.cost === costX) {
+						return {
+							entries: v.entries,
+							groupName: 'Cost X',
+						}
+					}
+					if (v.cost === cost3p) {
+						return {
+							entries: v.entries,
+							groupName: 'Cost 3+',
+						}
+					}
+					if (v.cost === noCost) {
+						return {
+							entries: v.entries,
+							groupName: 'No Cost',
+						}
+					}
+					return {
+						entries: v.entries,
+						groupName: 'Cost ' + v.cost,
 					}
 				})
 			groups = sorted

@@ -26,6 +26,25 @@ export function cardClassToName(c: CardClass): string {
 	}
 }
 
+export function classCodeToCardClass(c: string): CardClass {
+	switch (c) {
+		case 'guardian':
+			return CardClass.Guardian
+		case 'seeker':
+			return CardClass.Seeker
+		case 'rogue':
+			return CardClass.Rogue
+		case 'mystic':
+			return CardClass.Mystic
+		case 'survivor':
+			return CardClass.Survivor
+		case 'neutral':
+			return CardClass.Neutral
+		default:
+			return CardClass.Neutral
+	}
+}
+
 export function cardClassToBackgroundClass(c: CardClass): string {
 	switch (c) {
 		case CardClass.Guardian:

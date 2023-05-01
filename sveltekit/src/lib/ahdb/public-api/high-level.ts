@@ -1,3 +1,8 @@
+import {
+	cardClassToBackgroundClass,
+	type CardClass,
+	classCodeToCardClass,
+} from '$lib/core/card-class'
 import { coreToRcore, rcoreToCore } from '../conversion'
 import type { CardList } from '../deck'
 import { publicDeckPersonal, publicDeckPublished } from './call'
@@ -84,6 +89,7 @@ export function forwardDeckToRcore(d: GetDeckCardIdReturns): GetDeckCardIdReturn
 	}
 	return {
 		...d,
+		investigatorCode: coreToRcore(d.investigatorCode),
 		cards1: fw(d.cards1),
 		cards2: fw(d.cards2),
 		cards3: fw(d.cards3),
@@ -118,6 +124,7 @@ export async function getDeckCardIds(
 	}
 
 	const d = published ? await publicDeckPublished(deck) : await publicDeckPersonal(deck)
+	console.log(d)
 	if (d === null) {
 		return null
 	}
@@ -145,7 +152,12 @@ export async function getDeckCardIds(
 export interface DecodedMeta {
 	alternateFront?: string
 	alternateBack?: string
-	customizableMetas: CustomizableMeta[]
+	customizableMetas?: CustomizableMeta[]
+	factionSelected?: CardClass
+	optionSelected?: string
+	deckSizeSelected?: number
+	faction1?: CardClass
+	faction2?: CardClass
 }
 
 export interface CustomizableMeta {
@@ -156,6 +168,9 @@ export interface CustomizableMeta {
 }
 
 function metaDecode(meta: string): DecodedMeta {
+	if (meta === '') {
+		return {}
+	}
 	const json = JSON.parse(meta)
 	const dm: DecodedMeta = {
 		customizableMetas: [],
@@ -164,8 +179,24 @@ function metaDecode(meta: string): DecodedMeta {
 		dm.alternateFront = json.alternate_front
 	}
 	if ('alternate_back' in json && json.alternate_back !== '') {
-		dm.alternateBack = json.alternate_front
+		dm.alternateBack = json.alternate_back
 	}
+	if ('faction_selected' in json) {
+		dm.factionSelected = classCodeToCardClass(json.faction_selected)
+	}
+	if ('faction_1' in json) {
+		dm.faction1 = classCodeToCardClass(json.faction_1)
+	}
+	if ('faction_2' in json) {
+		dm.faction2 = classCodeToCardClass(json.faction_2)
+	}
+	if ('option_selected' in json) {
+		dm.optionSelected = json.option_selected
+	}
+	if ('deck_size_selected' in json) {
+		dm.deckSizeSelected = json.deck_size_selected
+	}
+	const customizableMetas: CustomizableMeta[] = []
 	Object.entries(json).forEach(([key, value]) => {
 		if (key.startsWith('cus_') && typeof value === 'string') {
 			const custCard = key.slice(4)
@@ -173,7 +204,7 @@ function metaDecode(meta: string): DecodedMeta {
 			custSep.forEach((x) => {
 				const custValue = x.split('|')
 				if (custValue.length >= 2) {
-					dm.customizableMetas.push({
+					customizableMetas.push({
 						card: custCard,
 						index: parseInt(custValue[0]),
 						checked: parseInt(custValue[1]),
@@ -183,6 +214,6 @@ function metaDecode(meta: string): DecodedMeta {
 			})
 		}
 	})
-
+	dm.customizableMetas = customizableMetas
 	return dm
 }
