@@ -2,11 +2,13 @@
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import { onMount } from 'svelte'
 	import { page } from '$app/stores'
+	import { goto } from '$app/navigation'
 	import {
 		getDeckCardIds,
 		type GetDeckCardIdReturns,
 		forwardDeckToRcore,
 		type CustomizableMeta,
+		type ExtractResult,
 	} from '$lib/ahdb/public-api/high-level'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
@@ -17,6 +19,7 @@
 	import helpMd from '$lib/md/deck-viewer.md?raw'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
+	import AhdbDeckTextbox from '../deck-table/AhdbDeckTextbox.svelte'
 
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
@@ -27,6 +30,8 @@
 	}
 	let deck: BigDeck | null = null
 	let loading: boolean = true
+	let failed: boolean = false
+	let fallback: boolean = false
 
 	let entries: DecklistEntry[] = []
 	let sideEntries: DecklistEntry[] = []
@@ -41,16 +46,33 @@
 	function onSortingsChanged(s: Sorting[]) {
 		sortings = s
 	}
-	onMount(async () => {
-		const deckId = $page.url.searchParams.get('id')
+
+	$: {
+		// Reactive to URL params in case this page navigates to itself only changing the param.
+		const url = $page.url.searchParams.get('id')
+		urlFunc(url)
+	}
+
+	const urlFunc = async (deckId: string | null) => {
 		if (deckId === null) {
+			loading = false
+			fallback = true
+			failed = false
+			deck = null
 			return
 		}
+		loading = true
 		const d = await getDeckCardIds(deckId, published)
 		loading = false
 		if (d === null) {
+			fallback = true
+			failed = true
 			return
 		}
+		deckProcess(d)
+	}
+
+	function deckProcess(d: GetDeckCardIdReturns) {
 		const rcoreDeck = forwardDeckToRcore(d)
 		deck = { getReturn: d }
 		entries = rcoreDeck.cards1.map<DecklistEntry>((x) => {
@@ -68,7 +90,15 @@
 			}
 		})
 		customizableMetas = rcoreDeck.decodedMeta.customizableMetas
-	})
+	}
+
+	function onExtractDeck(gd: ExtractResult) {
+		if (gd.published) {
+			goto('/decklist/view?id=' + gd.deck)
+		} else {
+			goto('/deck/view?id=' + gd.deck)
+		}
+	}
 </script>
 
 <svelte:head>
@@ -80,7 +110,10 @@
 {#if loading}
 	Loading
 {:else if deck === null}
-	Deck loading failed.
+	{#if failed}
+		Deck loading failed.
+	{/if}
+	<AhdbDeckTextbox {onExtractDeck} noImport />
 {:else}
 	<DeckBannerHigher {popupDatabase} deck={deck.getReturn} />
 	<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />

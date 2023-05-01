@@ -17,7 +17,8 @@
 	>
 	deck aggregator site, highlighting selection of <b>starter decks</b> for new players to get start
 	with the game as soon as possible right at the homepage. The focus is on simplified, upfront
-	search and filter tools that let you specify your current collection easily.
+	search and filter tools that let you specify your current collection easily. The deck viewer is
+	also designed to be beginner-friendly.
 	<b>There is no registration.</b>
 </p>
 <p>

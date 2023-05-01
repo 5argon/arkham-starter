@@ -25,8 +25,10 @@
 </ul>
 
 <h1>Standalone Tools</h1>
-<h2>For writing arkhamdb deck description</h2>
+
+<h2>Works with arkhamdb.com</h2>
 <ul>
+	<li><a href="/deck/view">Alternate Deck Viewer</a></li>
 	<li><a href="/tool/upgrade">Upgrade Planner</a></li>
 	<li><a href="/tool/list">Card List</a></li>
 </ul>
