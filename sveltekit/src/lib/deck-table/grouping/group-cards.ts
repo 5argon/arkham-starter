@@ -242,9 +242,13 @@ function groupCardsOneGroup(
 		}
 		case Grouping.Level: {
 			const st: { [k: number]: { entries: DecklistEntry[]; level: number } } = {}
-			const undefinedXp = 99
+			const customizable = 99
+			const undefinedXp = 999
 			cs.forEach((x) => {
-				const sn: number = x.card.original.xp ?? undefinedXp
+				let sn: number = x.card.original.xp ?? undefinedXp
+				if (x.card.original.customization_options !== undefined) {
+					sn = customizable
+				}
 				if (!(sn in st)) {
 					st[sn] = { entries: [], level: sn }
 				}
@@ -256,9 +260,21 @@ function groupCardsOneGroup(
 					return parseInt(k) - parseInt(k2)
 				})
 				.map<GroupedCards>(([, v]) => {
+					if (v.level === undefinedXp) {
+						return {
+							entries: v.entries,
+							groupName: 'No Level',
+						}
+					}
+					if (v.level === customizable) {
+						return {
+							entries: v.entries,
+							groupName: 'Customizable',
+						}
+					}
 					return {
 						entries: v.entries,
-						groupName: v.level === undefinedXp ? 'Level -' : 'Level ' + v.level,
+						groupName: 'Level ' + v.level,
 					}
 				})
 			groups = sorted

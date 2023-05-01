@@ -38,6 +38,7 @@
 	export let customizable: boolean = false
 	export let checkBoxes: number = 0
 	export let checkedBoxes: number = 0
+	export let forceSmall: boolean = false
 
 	$: rbw = isRandomBasicWeakness(cardId)
 	$: effectiveText = rbw ? 'Random Basic Weakness' : text
@@ -87,8 +88,9 @@
 		{/if}
 		<span class="card-name-container">
 			<CustomizableCheckBoxes {checkBoxes} {checkedBoxes} />
-			<span class:card-name-long={effectiveText.length >= 25} class={colorClass + ' ' + 'card-name'}
-				>{effectiveText}</span
+			<span
+				class:card-name-long={forceSmall || effectiveText.length >= 25}
+				class={colorClass + ' ' + 'card-name'}>{effectiveText}</span
 			>{#if subText !== null}<span class={colorClass + ' ' + 'card-subname'}>{subText}</span>{/if}
 			{#if weakness || rbw}<span title="Weakness" class={'pips ' + textIconFontClass}
 					>{textIconToFontCharacter(TextIcon.Weakness)}</span

@@ -26,18 +26,25 @@
 	$: {
 		card = popupDatabase.getByIdThrowNull(cardId)
 	}
+	let custXp: number
 	let realCust: NewCust[] = []
 	$: {
-		const matchedCustomizables = customizableMetas.filter((x) => {
-			return x.card === cardId && x.checked > 0
-		})
+		const matchedCustomizables = customizableMetas
+			.filter((x) => {
+				return x.card === cardId && x.checked > 0
+			})
+			.sort((a, b) => a.index - b.index)
 		const newRealCust: NewCust[] = []
+
 		matchedCustomizables.forEach((x) => {
 			if (card.original.cus && card.original.cus.length > x.index) {
 				const c = card.original.cus[x.index]
 				newRealCust.push({ text: c.n, checkedBoxes: x.checked, uncheckedBoxes: c.xp - x.checked })
 			}
 		})
+
+		const totalChecked = matchedCustomizables.reduce((a, b) => a + b.checked, 0)
+		custXp = Math.ceil(totalChecked / 2)
 		realCust = newRealCust
 	}
 	let cardName: string
@@ -64,7 +71,7 @@
 		subText={card.original.esn ? card.original.sn : null}
 		weakness={card.original.wk}
 		investigator={card.original.inv}
-		xp={card.original.xp}
+		xp={custXp > 0 ? custXp : card.original.xp}
 		xpTaboo={taboo ? card.original.xpat : null}
 		customizable={card.original.cus !== undefined}
 	/>
@@ -81,6 +88,7 @@
 					text={rc.text}
 					checkedBoxes={rc.checkedBoxes}
 					checkBoxes={rc.uncheckedBoxes}
+					forceSmall
 				/>
 			</div>
 		{/each}
