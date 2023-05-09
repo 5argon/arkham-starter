@@ -19,6 +19,7 @@ import { manualEdit } from "./scripts/manual-edit.ts";
 
 console.log("Downloading all cards to create popup database...");
 const allCards = await publicAllCards("/?encounter=1");
+console.log("DONE")
 const taboos = await publicTaboos();
 const latestTaboo: AhdbTaboo | null = taboos.length > 0 ? taboos[0] : null;
 const tabooXpMap: { [k: string]: number } = {};

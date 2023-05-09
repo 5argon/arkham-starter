@@ -1,5 +1,4 @@
 import {
-	cardClassToBackgroundClass,
 	type CardClass,
 	classCodeToCardClass,
 } from '$lib/core/card-class'
