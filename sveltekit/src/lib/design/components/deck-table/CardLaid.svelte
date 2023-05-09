@@ -9,29 +9,41 @@
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
 	export let small: boolean
-	export let toggleMap: { [cardId: string]: boolean }
+	export let toggleMap: { [cardId: string]: boolean[] }
 	export let fullDatabase: FullDatabase
-	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
+	export let onClickToggle:
+		| ((id: string, copy: number, maxCopy: number, t: boolean) => void)
+		| null = null
 	$: gc = groupCards(entries, groupings, sortings, fullDatabase)
 	$: linear = flattenGroupedCards(gc)
+	$: getToggled = (en: DecklistEntry, i: number): boolean[] => {
+		if (!(en.id in toggleMap)) {
+			return new Array(en.amount).fill(false)
+		}
+		const tg = toggleMap[en.id]
+		return [tg[i]]
+	}
 </script>
 
 <div class="card-scan-flex">
 	{#each linear as en}
-		<CardScan
-			{small}
-			cardId={en.cardId}
-			amount={en.amount}
-			{fullDatabase}
-			toggled={en.id in toggleMap ? toggleMap[en.id] : false}
-			onToggleChanged={onClickToggle === null
-				? undefined
-				: (t) => {
-						if (onClickToggle) {
-							onClickToggle(en.id, t)
-						}
-				  }}
-		/>
+		{#each new Array(en.amount) as _, i}
+			<CardScan
+				{small}
+				cardId={en.cardId}
+				amount={1}
+				unlink={i !== en.amount - 1}
+				{fullDatabase}
+				toggled={getToggled(en, i)}
+				onToggleChanged={onClickToggle === null
+					? undefined
+					: (c, maxCopy, t) => {
+							if (onClickToggle) {
+								onClickToggle(en.id, i, en.amount, t)
+							}
+					  }}
+			/>
+		{/each}
 	{/each}
 </div>
 

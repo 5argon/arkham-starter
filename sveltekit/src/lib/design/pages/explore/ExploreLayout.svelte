@@ -18,7 +18,7 @@
 	export let pageTitle: string
 	export let exploreInput: ExploreInput
 
-	let toggleMap: { [cardId: string]: boolean } = {}
+	let toggleMap: { [cardId: string]: boolean[] } = {}
 
 	// Copy from input, then allow changing these states in client side.
 	let groupings: Grouping[] = exploreInput.groupings
@@ -133,8 +133,8 @@
 	taboo={true}
 	fullDatabase={fdb}
 	popupDatabase={pdb}
-	onClickToggle={(c, t) => {
-		toggleMap[c] = t
+	onClickToggle={(id, newToggles) => {
+		toggleMap[id] = newToggles
 		toggleMap = { ...toggleMap }
 	}}
 	{showList}
@@ -152,8 +152,8 @@
 	taboo={true}
 	fullDatabase={fdb}
 	popupDatabase={pdb}
-	onClickToggle={(c, t) => {
-		toggleMap[c] = t
+	onClickToggle={(id, newToggles) => {
+		toggleMap[id] = newToggles
 		toggleMap = { ...toggleMap }
 	}}
 	{showList}
@@ -173,8 +173,8 @@
 	taboo={true}
 	fullDatabase={fdb}
 	popupDatabase={pdb}
-	onClickToggle={(c, t) => {
-		toggleMap[c] = t
+	onClickToggle={(id, newToggles) => {
+		toggleMap[id] = newToggles
 		toggleMap = { ...toggleMap }
 	}}
 	{showList}

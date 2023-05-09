@@ -16,14 +16,14 @@
 	})
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
-	export let toggleMap: { [cardId: string]: boolean }
+	export let toggleMap: { [cardId: string]: boolean[] }
 	export let taboo: boolean
 	// TODO: Remove if possible
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
 	export let columns: ExtraColumn[] = []
 	export let centered: boolean = false
-	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
+	export let onClickToggle: ((id: string, copy: number, t: boolean) => void) | null = null
 	export let hideAmount: boolean = false
 	export let customizableMetas: CustomizableMeta[] = []
 	$: gc = groupCards(entriesForwarded, groupings, sortings, fullDatabase)

@@ -1,4 +1,4 @@
-# Alternate arkhamdb.com Deck Viewer
+# Alternate arkhamdb Deck Viewer
 
 The real purpose of this site is to host starter decks for newcomers that do not want to immediately deckbuild, so I want to develop the UI that helps them the most to understand all the cards at glance, and quickly gather cards from that deck to get the game started. Since this site does not need any deckbuilding feature, I have more room to work on better presentation for viewing.
 

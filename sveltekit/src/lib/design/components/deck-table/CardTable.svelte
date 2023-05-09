@@ -6,7 +6,7 @@
 	import RenderGroupedCards from './RenderGroupedCards.svelte'
 
 	export let groupedCards: GroupedCards[]
-	export let toggleMap: { [cardId: string]: boolean }
+	export let toggleMap: { [cardId: string]: boolean[] }
 	export let taboo: boolean
 	export let totalLevels: number
 	export let popupDatabase: PopupDatabase
@@ -14,7 +14,7 @@
 	export let centered: boolean = false
 	export let hideAmount: boolean = false
 	export let customizableMetas: CustomizableMeta[] = []
-	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
+	export let onClickToggle: ((id: string, copy: number, t: boolean) => void) | null = null
 </script>
 
 <table class:centered>

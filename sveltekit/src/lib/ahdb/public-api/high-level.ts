@@ -124,7 +124,6 @@ export async function getDeckCardIds(
 	}
 
 	const d = published ? await publicDeckPublished(deck) : await publicDeckPersonal(deck)
-	console.log(d)
 	if (d === null) {
 		return null
 	}

@@ -2,7 +2,7 @@
 	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 
-	import { isEntry, type GroupedCards } from '$lib/deck-table/decklist-entry'
+	import { isEntry, type GroupedCards, type DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { ExtraColumn } from '$lib/deck-table/grouping'
 	import CardCell from './CardCell.svelte'
 	import CardGroup from './CardGroup.svelte'
@@ -15,11 +15,25 @@
 	export let previousGroupedCards: GroupedCards[]
 	export let popupDatabase: PopupDatabase
 	export let columns: ExtraColumn[] = []
-	export let toggleMap: { [id: string]: boolean }
-	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
+	export let toggleMap: { [id: string]: boolean[] }
+	export let onClickToggle: ((id: string, copy: number, t: boolean) => void) | null = null
 	export let hideAmount: boolean = false
 	export let customizableMetas: CustomizableMeta[] = []
 	$: spanning = columns.length + 1
+
+	function getCellToggled(tm: { [id: string]: boolean[] }, en: DecklistEntry): boolean {
+		if (!(en.id in tm)) {
+			return false
+		}
+		const toggles = tm[en.id]
+		const re =
+			toggles.find((t) => {
+				return t === false
+			}) === undefined
+				? true
+				: false
+		return re
+	}
 </script>
 
 {#if groupedCards.groupName !== null && !theOnlyGroup}
@@ -40,14 +54,15 @@
 				<CardCell
 					onToggleChanged={onClickToggle === null
 						? undefined
-						: (t) => {
+						: (copy, t) => {
 								// It is surely entry at this point but Svelte
 								// is not powerful enough to carry the type narrowing to here.
 								if (onClickToggle !== null && isEntry(en)) {
-									onClickToggle(en.id, t)
+									// Clicking on cell either toggles or untoggles all copies.
+									onClickToggle(en.id, copy, t)
 								}
 						  }}
-					toggled={en.id in toggleMap ? toggleMap[en.id] : false}
+					toggled={getCellToggled(toggleMap, en)}
 					cardId={en.cardId}
 					{popupDatabase}
 					amount={hideAmount ? null : en.amount}

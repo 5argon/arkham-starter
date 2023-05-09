@@ -38,8 +38,8 @@
 	let sideEntries: DecklistEntry[] = []
 	let groupings: Grouping[] = [Grouping.Type]
 	let sortings: Sorting[] = [Sorting.Class, Sorting.Set]
-	let toggleMap: { [cardId: string]: boolean } = {}
-	let sideToggleMap: { [cardId: string]: boolean } = {}
+	let toggleMap: { [cardId: string]: boolean[] } = {}
+	let sideToggleMap: { [cardId: string]: boolean[] } = {}
 	let customizableMetas: CustomizableMeta[] = []
 	function onGroupingsChanged(g: Grouping[]) {
 		groupings = g
@@ -107,7 +107,7 @@
 	<title>arkham-starter.com | Deck Viewer</title>
 </svelte:head>
 
-<PageTitle title={'Alternate arkhamdb.com Deck Viewer'} {helpMd} />
+<PageTitle title={'Alternate arkhamdb Deck Viewer'} {helpMd} />
 
 {#if loading}
 	Loading
@@ -133,8 +133,8 @@
 		{entries}
 		{groupings}
 		{sortings}
-		onClickToggle={(c, t) => {
-			toggleMap[c] = t
+		onClickToggle={(id, newToggles) => {
+			toggleMap[id] = newToggles
 			toggleMap = { ...toggleMap }
 		}}
 		taboo={true}
@@ -156,8 +156,8 @@
 			entries={sideEntries}
 			{groupings}
 			{sortings}
-			onClickToggle={(c, t) => {
-				sideToggleMap[c] = t
+			onClickToggle={(id, newToggles) => {
+				sideToggleMap[id] = newToggles
 				sideToggleMap = { ...sideToggleMap }
 			}}
 			taboo={true}

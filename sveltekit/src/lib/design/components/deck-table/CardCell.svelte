@@ -17,10 +17,10 @@
 	export let customizableMetas: CustomizableMeta[] = []
 	export let popupDatabase: PopupDatabase
 	export let toggled: boolean
-	export let onToggleChanged: undefined | ((t: boolean) => void) = undefined
+	export let onToggleChanged: undefined | ((copy:number, t: boolean) => void) = undefined
 
 	function handler(e: MouseEvent & { currentTarget: HTMLElement }) {
-		onToggleChanged?.(!toggled)
+		onToggleChanged?.(amount ?? 0, !toggled)
 	}
 	let card: PopupDatabaseItem
 	$: {

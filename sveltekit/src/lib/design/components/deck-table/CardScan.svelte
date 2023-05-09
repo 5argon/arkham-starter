@@ -6,7 +6,8 @@
 	export let fullDatabase: FullDatabase
 	export let toggled: boolean | boolean[]
 	export let amount: number
-	export let onToggleChanged: undefined | ((t: boolean) => void) = undefined
+	export let onToggleChanged: undefined | ((copy: number, maxCopy: number, t: boolean) => void) =
+		undefined
 	export let unlink: boolean = false
 	export let linkedOnly: boolean = false
 	const sizeMultiplier = small ? 0.5 : 1
@@ -33,7 +34,7 @@
 	}
 
 	function handler(e: MouseEvent & { currentTarget: HTMLElement }) {
-		onToggleChanged?.(!toggled)
+		onToggleChanged?.(amount - 1, amount, !thisCopyToggled)
 	}
 </script>
 
@@ -127,11 +128,6 @@
 			</span>
 		{/if}
 	{/if}
-{/if}
-{#if amount > 1}
-	<!-- <div class="behind"> -->
-	<svelte:self {cardId} {small} {fullDatabase} {toggled} {onToggleChanged} amount={amount - 1} />
-	<!-- </div> -->
 {/if}
 
 <style>

@@ -315,7 +315,7 @@ function groupCardsOneGroup(
 					return {
 						entries: v.entries,
 						groupName:
-							v.level === undefinedXp ? 'Level -' : v.level === 0 ? 'Level 0' : 'Level 1~5',
+							v.level === undefinedXp ? 'No Level' : v.level === 0 ? 'Level 0' : 'Level 1~5',
 					}
 				})
 			groups = sorted

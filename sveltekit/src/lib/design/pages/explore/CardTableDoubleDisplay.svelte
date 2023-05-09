@@ -20,11 +20,11 @@
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
 	export let columns: ExtraColumn[] = []
-	export let toggleMap: { [cardId: string]: boolean }
+	export let toggleMap: { [cardId: string]: boolean[] }
 	export let taboo: boolean
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
-	export let onClickToggle: ((id: string, t: boolean) => void) | null = null
+	export let onClickToggle: ((id: string, newToggles: boolean[]) => void) | null = null
 
 	export let showList: boolean
 	export let showScans: boolean
@@ -44,7 +44,12 @@
 				{taboo}
 				{fullDatabase}
 				{popupDatabase}
-				{onClickToggle}
+				onClickToggle={(id, copy, toggle) => {
+					// Toggles all copies the same way.
+					if (onClickToggle === null) return
+					const toggles = new Array(copy).fill(toggle)
+					onClickToggle(id, toggles)
+				}}
 				{customizableMetas}
 			/>
 		</div>
@@ -57,7 +62,17 @@
 				{sortings}
 				entries={singleRight ? singleEntries : entries}
 				{fullDatabase}
-				{onClickToggle}
+				onClickToggle={(id, copy, maxCopy, toggle) => {
+					if (onClickToggle === null) return
+					let toggles
+					if (!(id in toggleMap)) {
+						toggles = new Array(maxCopy).fill(false)
+					} else {
+						toggles = [...toggleMap[id]]
+					}
+					toggles[copy] = toggle
+					onClickToggle(id, toggles)
+				}}
 				{small}
 			/>
 		</div>
