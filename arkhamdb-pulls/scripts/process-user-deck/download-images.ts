@@ -5,6 +5,7 @@ import {
   pullsDirectory,
   pullsImages,
   pullsImagesFull,
+  pullsImagesFullSmall,
   pullsImagesSquare,
   pullsImagesSquareSmall,
   pullsImagesStrip,
@@ -15,11 +16,13 @@ export async function downloadImages(cards: AhdbCard[]): Promise<void> {
   const pi = path.join(pullsDirectory, pullsImages);
   await emptyDir(pi);
   const fullPath = path.join(pi, pullsImagesFull);
+  const fullSmallPath = path.join(pi, pullsImagesFullSmall);
   const squarePath = path.join(pi, pullsImagesSquare);
   const stripPath = path.join(pi, pullsImagesStrip);
   const squareSmallPath = path.join(pi, pullsImagesSquareSmall);
   await Promise.all([
     emptyDir(fullPath),
+    emptyDir(fullSmallPath),
     emptyDir(squarePath),
     emptyDir(stripPath),
     emptyDir(squareSmallPath),
@@ -31,7 +34,8 @@ export async function downloadImages(cards: AhdbCard[]): Promise<void> {
         fullPath,
         squarePath,
         stripPath,
-        squareSmallPath
+        squareSmallPath,
+        fullSmallPath
       )
     )
   );
@@ -42,7 +46,8 @@ async function downloadImageAndProcessSingleCard(
   fullPath: string,
   squarePath: string,
   stripPath: string,
-  squareSmallPath: string
+  squareSmallPath: string,
+  fullSmallPath: string
 ): Promise<void> {
   function backCodeExtract(s: string): string {
     const filename = s.match(/([\w\d_-]*)\.?[^\\\/]*$/i);
@@ -59,7 +64,8 @@ async function downloadImageAndProcessSingleCard(
     fullPath,
     squarePath,
     stripPath,
-    squareSmallPath
+    squareSmallPath,
+    fullSmallPath
   );
 }
 
@@ -125,7 +131,8 @@ async function processSingleCard(
   fullPath: string,
   squarePath: string,
   stripPath: string,
-  squareSmallPath: string
+  squareSmallPath: string,
+  fullSmallPath: string
 ): Promise<void> {
   const p = path.join(fullPath, card.code + ".png");
   let read: Uint8Array;
@@ -279,6 +286,7 @@ async function processSingleCard(
   const p1 = path.join(squarePath, card.code + ".png");
   const p2 = path.join(stripPath, card.code + ".png");
   const p3 = path.join(squareSmallPath, card.code + ".png");
+  const p4 = path.join(fullSmallPath, card.code + ".png");
   const w1 = Deno.writeFile(
     p1,
     await resize(await square.encode(), { width: 128, height: 128 })
@@ -291,5 +299,9 @@ async function processSingleCard(
     p3,
     await resize(await squareSmall.encode(), { width: 32, height: 32 })
   );
-  await Promise.all([w1, w2, w3]);
+  const w4 = Deno.writeFile(
+    p4,
+    await resize(await image.encode(), { aspectRatio: true, height: 300 })
+  );
+  await Promise.all([w1, w2, w3, w4]);
 }

@@ -8,6 +8,7 @@ export const pullsImages = "card";
 export const pullsJson = "json";
 
 export const pullsImagesFull = "full";
+export const pullsImagesFullSmall = "full-small";
 export const pullsImagesSquare = "square";
 export const pullsImagesStrip = "strip";
 export const pullsImagesSquareSmall ="square-small";

@@ -16,6 +16,8 @@
 	$: width = (vertical ? 215 : 300) * sizeMultiplier
 	$: height = (vertical ? 300 : 215) * sizeMultiplier
 
+	$: srcPath = small ? 'full-small' : 'full'
+
 	let thisCopyToggled: boolean
 	$: {
 		if (Array.isArray(toggled)) {
@@ -75,7 +77,7 @@
 				{height}
 				class:normal-radius={!small}
 				class:small-radius={small}
-				src={'/image/card/full/' + cardId + '.png'}
+				src={`/image/card/${srcPath}/` + cardId + '.png'}
 				alt={card.original.name}
 				loading="lazy"
 				draggable="false"

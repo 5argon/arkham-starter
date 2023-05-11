@@ -40,6 +40,7 @@
 	export let checkedBoxes: number = 0
 	export let forceSmall: boolean = false
 
+	$: hasBoxes = checkBoxes > 0 || checkedBoxes > 0
 	$: rbw = isRandomBasicWeakness(cardId)
 	$: effectiveText = rbw ? 'Random Basic Weakness' : text
 
@@ -79,7 +80,7 @@
 				class:amount-minus={amount < 0}
 				class:amount-two-digit={amount >= 10}>{amount}</span
 			><span class="amount-x">x</span>{/if}
-		{#if checkBoxes === 0 && checkedBoxes === 0}
+		{#if !hasBoxes}
 			<span class="all-class-icons">
 				{#if class1 !== null}<ClassIcon cardClass={class1} />{/if}{#if class2 !== null}<ClassIcon
 						cardClass={class2}

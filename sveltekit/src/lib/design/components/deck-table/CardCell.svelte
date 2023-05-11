@@ -3,13 +3,16 @@
 		checkedBoxes: number
 		uncheckedBoxes: number
 		text: string
+		detail: string
 	}
 
 	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
+	import { CommitIcon } from '$lib/core/commit-icon'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import CardSpan from '../card/CardSpan.svelte'
+	import SkillIcon from '../inline/SkillIcon.svelte'
 
 	export let taboo: boolean
 	export let cardId: string
@@ -17,7 +20,7 @@
 	export let customizableMetas: CustomizableMeta[] = []
 	export let popupDatabase: PopupDatabase
 	export let toggled: boolean
-	export let onToggleChanged: undefined | ((copy:number, t: boolean) => void) = undefined
+	export let onToggleChanged: undefined | ((copy: number, t: boolean) => void) = undefined
 
 	function handler(e: MouseEvent & { currentTarget: HTMLElement }) {
 		onToggleChanged?.(amount ?? 0, !toggled)
@@ -31,7 +34,7 @@
 	$: {
 		const matchedCustomizables = customizableMetas
 			.filter((x) => {
-				return x.card === cardId && x.checked > 0
+				return x.card === cardId
 			})
 			.sort((a, b) => a.index - b.index)
 		const newRealCust: NewCust[] = []
@@ -39,7 +42,15 @@
 		matchedCustomizables.forEach((x) => {
 			if (card.original.cus && card.original.cus.length > x.index) {
 				const c = card.original.cus[x.index]
-				newRealCust.push({ text: c.n, checkedBoxes: x.checked, uncheckedBoxes: c.xp - x.checked })
+				const zeroMax = c.xp === 0
+				if (zeroMax || x.checked > 0) {
+					newRealCust.push({
+						text: processText(c.n),
+						checkedBoxes: x.checked,
+						uncheckedBoxes: c.xp - x.checked,
+						detail: processDetail(x.detail),
+					})
+				}
 			}
 		})
 
@@ -47,6 +58,33 @@
 		custXp = Math.ceil(totalChecked / 2)
 		realCust = newRealCust
 	}
+
+	function processText(d: string): string {
+		const tryGetCard = popupDatabase.getById(d)
+		const regex = /\[\[(.*?)\]\]/g
+		const result = d.replace(regex, '$1').replace('_____', '')
+		return result
+	}
+
+	function processDetail(d: string): string {
+		const tryGetCard = popupDatabase.getById(d)
+		if (tryGetCard !== null) {
+			return tryGetCard.original.n
+		} else if (d.includes('^')) {
+			const split = d.split('^')
+			return split
+				.map<string>((x) => {
+					const tryGetCard = popupDatabase.getById(x)
+					if (tryGetCard !== null) {
+						return tryGetCard.original.n
+					}
+					return x
+				})
+				.join(', ')
+		}
+		return d
+	}
+
 	let cardName: string
 	$: {
 		cardName = card.original.n
@@ -81,15 +119,25 @@
 				<FaIcon path={allIcons.rightSingle} />
 				<CardSpan
 					{cardId}
-					class1={card.class1}
-					class2={card.class2 ?? null}
-					class3={card.class3 ?? null}
 					color={true}
 					text={rc.text}
 					checkedBoxes={rc.checkedBoxes}
 					checkBoxes={rc.uncheckedBoxes}
 					forceSmall
 				/>
+				<span class="detail">
+					{#if rc.detail === 'willpower'}
+						<SkillIcon icon={CommitIcon.Willpower} />
+					{:else if rc.detail === 'intellect'}
+						<SkillIcon icon={CommitIcon.Intellect} />
+					{:else if rc.detail === 'combat'}
+						<SkillIcon icon={CommitIcon.Combat} />
+					{:else if rc.detail === 'agility'}
+						<SkillIcon icon={CommitIcon.Agility} />
+					{:else}
+						{rc.detail}
+					{/if}
+				</span>
 			</div>
 		{/each}
 	{/if}
@@ -107,5 +155,13 @@
 
 	.cust {
 		display: flex;
+		align-items: center;
+	}
+
+	.detail {
+		margin-left: 4px;
+		font-size: 0.8em;
+		text-decoration: underline;
+		color: grey;
 	}
 </style>
