@@ -2,7 +2,11 @@
 </script>
 
 <script lang="ts">
-	import { forwardDeckToRcore, type GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+	import {
+		forwardDeckToRcore,
+		type ArkhamStarterDeckData,
+		type GetDeckCardIdReturns,
+	} from '$lib/ahdb/public-api/high-level'
 	import { CardPack } from '$lib/core/card-pack'
 	import { CommitIcon } from '$lib/core/commit-icon'
 	import type { PopupDatabase } from '$lib/core/popup-database'
@@ -20,6 +24,8 @@
 	import DeckBanner from './DeckBanner.svelte'
 	export let popupDatabase: PopupDatabase
 	export let deck: GetDeckCardIdReturns
+	export let ahst: ArkhamStarterDeckData | null = null
+	export let viewerPage: boolean = false
 	let packInfoSpanItems: PackInfoSpanItem[]
 	const rcoreDeck = forwardDeckToRcore(deck)
 	const representativeCards = getRepresentativeCards(
@@ -55,36 +61,38 @@
 	const parBack: boolean =
 		altBack !== undefined &&
 		(popupDatabase.getById(altBack)?.packIcon === CardPackIcon.ParallelInvestigator ?? false)
-	let chosenClasses: ChosenClasses | undefined
+
+	let chosenClasses: ChosenClasses | null = null
 	$: {
 		if (deck.decodedMeta.factionSelected !== undefined) {
 			chosenClasses = {
 				title: 'Secondary Class',
 				classes: [deck.decodedMeta.factionSelected],
 			}
-		}
-		if (deck.decodedMeta.faction1 !== undefined && deck.decodedMeta.faction2 !== undefined) {
+		} else if (deck.decodedMeta.faction1 !== undefined && deck.decodedMeta.faction2 !== undefined) {
 			chosenClasses = {
 				title: 'Class Choices',
 				classes: [deck.decodedMeta.faction1, deck.decodedMeta.faction2],
 			}
+		} else {
+			chosenClasses = null
 		}
 	}
 
-	let chosenTraits: ChosenTraits | undefined
+	let chosenTraits: ChosenTraits | null = null
 	$: {
 		if (deck.decodedMeta.optionSelected === 'both') {
 			chosenTraits = { title: 'Trait Choice', traits: ['Blessed', 'Cursed'] }
-		}
-		if (deck.decodedMeta.optionSelected === 'blessed') {
+		} else if (deck.decodedMeta.optionSelected === 'blessed') {
 			chosenTraits = { title: 'Trait Choice', traits: ['Blessed'] }
-		}
-		if (deck.decodedMeta.optionSelected === 'cursed') {
+		} else if (deck.decodedMeta.optionSelected === 'cursed') {
 			chosenTraits = { title: 'Trait Choice', traits: ['Cursed'] }
+		} else {
+			chosenTraits = null
 		}
 	}
 
-	let chosenSkills: ChosenSkills | undefined
+	let chosenSkills: ChosenSkills | null = null
 	$: {
 		const willDiscipline = '08011a'
 		const intDiscipline = '08012a'
@@ -123,24 +131,28 @@
 				title: 'Discipline',
 				skills: disciplines,
 			}
+		} else {
+			chosenNumber = null
 		}
 	}
-	let chosenNumber: ChosenNumber | undefined
+	let chosenNumber: ChosenNumber | null = null
 	$: {
 		if (deck.decodedMeta.deckSizeSelected !== undefined) {
 			chosenNumber = {
 				title: 'Deck Size',
 				number: deck.decodedMeta.deckSizeSelected,
 			}
+		} else {
+			chosenNumber = null
 		}
 	}
 </script>
 
 <DeckBanner
 	popupDb={popupDatabase}
-	link={deck.link}
+	link={!viewerPage ? './deck/' + deck.id : deck.link}
 	packs={packInfoSpanItems}
-	deckName={deck.deck}
+	deckName={ahst?.rename ?? deck.deck}
 	investigatorCode={deck.investigatorCode}
 	previewCards={representativeCards}
 	parallelFront={parFront}
@@ -149,4 +161,10 @@
 	{chosenTraits}
 	{chosenSkills}
 	{chosenNumber}
+	excerpt={ahst?.excerpt}
+	authorName={ahst?.authorName}
+	authorUrl={ahst !== null
+		? `https://arkhamdb.com/user/profile/${ahst.authorId}/${ahst.authorUsername}`
+		: undefined}
+	seriesName={ahst?.series}
 />

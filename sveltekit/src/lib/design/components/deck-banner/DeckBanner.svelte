@@ -33,6 +33,7 @@
 	export let investigatorCode: string
 	export let parallelFront: boolean = false
 	export let parallelBack: boolean = false
+	export let excerpt: string | null = null
 	export let deckName: string
 	export let packs: PackInfoSpanItem[]
 	export let popupDb: PopupDatabase
@@ -157,7 +158,7 @@
 							</div>
 							{#if seriesName !== null}
 								<div class="series">
-									(Series: <a href={seriesUrl} target="_blank">{seriesName}</a>)
+									(<a href={seriesUrl} target="_blank">{seriesName}</a>)
 								</div>
 							{/if}
 						</div>
@@ -250,6 +251,9 @@
 			{/each}
 			<!-- {/if} -->
 		</div>
+	</div>
+	<div class={'excerpt'}>
+		{excerpt}
 	</div>
 </div>
 
@@ -405,5 +409,16 @@
 		border-radius: 2px;
 		padding: 0px 4px;
 		margin-right: 2px;
+	}
+
+	.excerpt {
+		display: flex;
+		align-items: center;
+		min-height: 50px;
+		font-size: small;
+		margin: 8px 8px;
+		padding: 4px 8px;
+		border: 1px solid rgba(0, 0, 0, 0.159);
+		border-radius: 4px;
 	}
 </style>

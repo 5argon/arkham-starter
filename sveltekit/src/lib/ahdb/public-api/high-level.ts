@@ -1,6 +1,6 @@
 import { type CardClass, classCodeToCardClass } from '$lib/core/card-class'
 import { coreToRcore, rcoreToCore } from '../conversion'
-import type { CardList } from '../deck'
+import type { AhdbDeck, CardList } from '../deck'
 import { publicDeckPersonal, publicDeckPublished } from './call'
 import { realUrlDeck, realUrlDecklist } from './constants'
 
@@ -47,6 +47,15 @@ export function extractDeckFromUrl(url: string): ExtractResult {
 
 	// If no match, assume the input is already deck code, hopefully.
 	return { deck: url, published: false }
+}
+
+export interface ArkhamStarterDeckData {
+	authorName: string
+	authorId: string
+	authorUsername: string
+	series: string
+	rename: string
+	excerpt: string
 }
 
 export interface GetDeckCardIdReturns {
@@ -110,6 +119,16 @@ export async function getDeckCardIds(
 	deck: string,
 	published: boolean,
 ): Promise<GetDeckCardIdReturns | null> {
+	const d = published ? await publicDeckPublished(deck) : await publicDeckPersonal(deck)
+	if (d === null) {
+		return null
+	}
+	return ahdbToOurs(d, published)
+}
+
+export function ahdbToOurs(d: AhdbDeck, published: boolean): GetDeckCardIdReturns {
+	const userId: number | null = d.user_id
+	const link = published ? [...realUrlDecklist, d.id].join('/') : [...realUrlDeck, d.id].join('/')
 	function cardListToArray(cl: CardList): CardAndAmount[] {
 		if (cl === null) {
 			return []
@@ -119,14 +138,8 @@ export async function getDeckCardIds(
 		})
 	}
 
-	const d = published ? await publicDeckPublished(deck) : await publicDeckPersonal(deck)
-	if (d === null) {
-		return null
-	}
-	const userId: number | null = d.user_id
-	const link = published ? [...realUrlDecklist, deck].join('/') : [...realUrlDeck, deck].join('/')
 	return {
-		id: deck,
+		id: d.id.toString(),
 		published: published,
 		userId: userId,
 		link: link,

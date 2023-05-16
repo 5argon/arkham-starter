@@ -1,6 +1,43 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
+	import type { DeckEntry } from '$lib/deck/deck'
+	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+	import DeckBannerHigher from '$lib/design/components/deck-banner/DeckBannerHigher.svelte'
 	import HomepageTopMenu from '$lib/design/pages/HomepageTopMenu.svelte'
+	import type { PageData } from './$types'
+	import { fade, fly } from 'svelte/transition'
+
+	export let data: PageData
+
+	let shuffledEntries: DeckEntry[] = []
+
+	function shuffle(a: DeckEntry[]) {
+		const array = [...a]
+		let currentIndex = array.length,
+			randomIndex
+
+		// While there remain elements to shuffle.
+		while (currentIndex != 0) {
+			// Pick a remaining element.
+			randomIndex = Math.floor(Math.random() * currentIndex)
+			currentIndex--
+
+			// And swap it with the current element.
+			;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+		}
+
+		return array
+	}
+
+	function randomize() {
+		shuffledEntries = shuffle([...data.deckEntries]).slice(0, 6)
+		// shuffledEntries = data.deckEntries
+	}
+
+	if (browser) {
+		randomize()
+	}
 </script>
 
 <h1>arkham-starter.com</h1>
@@ -15,33 +52,71 @@
 	arkham-starter.com is an <a href="https://arkhamdb.com" target="_blank" rel="noreferrer"
 		>arkhamdb.com</a
 	>
-	deck aggregator site, highlighting selection of <b>starter decks</b> for new players to get start
-	with the game as soon as possible right at the homepage. The focus is on simplified, upfront
-	search and filter tools that let you specify your current collection easily. The deck viewer is
-	also designed to be beginner-friendly.
-	<b>There is no registration.</b>
+	deck aggregator site. "Starter decks" requires low amount of Investigator Expansion purchases to build.
+	No matter which expansion you choose to start with first, I hope there is something to get started
+	with right away in this site.
 </p>
 <p>
-	Not just an individual deck, it even help you start the game with the <b>Team Assembler</b> feature.
-	Each deck has a button to add to the team. Once you have assembled an entire team, the tool will help
-	you resolve card overlaps and gather cards from your collection.
-</p>
-<p>
-	This site is in development. For now you can try out my <a href="/resource">resources and tools</a
-	>, the finished site would depends on them.
+	I'm currently testing the deck listing UI below. The beginner-friendly deck search and filter tool
+	is also in development. For now you can scroll through this clumsy, randomized list below. Or try
+	out my <a href="/resource">resources and tools</a> which the finished site would depends on them.
 </p>
 
-<ListDivider label="Random" />
+<ListDivider label="Random Six Starter Decks" />
 
-<p>(Decks are listed here once the site development is complete...)</p>
+<div class="help">
+	(Use the search and filter tool above, and this section will be replaced with actual results that
+	your current collection could build.)
+	<div>
+		<Button
+			label={'Randomize Again'}
+			block
+			center
+			onClick={() => {
+				randomize()
+			}}
+		/>
+	</div>
+</div>
 
-<ListDivider label="Browse" />
-
-<p>(Decks are listed here once the site development is complete...)</p>
+<div class="flex">
+	{#each shuffledEntries as d, i (d.deck.id + i.toString())}
+		<div class="flex-inner" in:fly={{ x: 18, duration: 100 }}>
+			<DeckBannerHigher
+				popupDatabase={data.pdb}
+				deck={d.deck}
+				ahst={{
+					rename: d.modifiedDeckName,
+					excerpt: d.raw.excerpt,
+					authorId: d.raw.arkhamdbUserId,
+					authorName: d.raw.user,
+					authorUsername: d.raw.userUrl,
+					series: d.raw.series,
+				}}
+			/>
+		</div>
+	{/each}
+</div>
 
 <style>
 	p {
 		max-width: 800px;
+		margin: 8px auto;
+	}
+
+	.flex {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		row-gap: 12px;
+		column-gap: 24px;
+	}
+
+	.flex-inner {
+		flex-basis: 660px;
+	}
+
+	.help {
 		margin: 8px auto;
 	}
 </style>

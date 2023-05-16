@@ -1,0 +1,40 @@
+import type { AhdbDeck } from '$lib/ahdb/deck'
+import { getDeckCardIds, type GetDeckCardIdReturns } from '../ahdb/public-api/high-level'
+
+export interface RawDeck {
+	user: string
+	userUrl: string
+	arkhamdbUserId: string
+	id: string
+	renameRegex: string
+	series: string
+	seriesUrl: string
+	upgrade: string
+	upgradeBreakpoint1: string
+	upgradeBreakpoint2: string
+	excerpt: string
+}
+
+export interface DeckEntry {
+	modifiedDeckName: string
+	deck: GetDeckCardIdReturns
+	raw: RawDeck
+}
+
+export interface DeckEntryBeforeProcess {
+	modifiedDeckName: string
+	deck: AhdbDeck
+	raw: RawDeck
+}
+
+export async function processRawDeck(r: RawDeck): Promise<DeckEntry | null> {
+	const deck = await getDeckCardIds(r.id, true)
+	if (deck === null) {
+		return null
+	}
+	return {
+		raw: r,
+		deck: deck,
+		modifiedDeckName: deck.deck.replace(new RegExp(r.renameRegex), ''),
+	}
+}
