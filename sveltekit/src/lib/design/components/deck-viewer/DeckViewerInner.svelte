@@ -62,18 +62,20 @@
 	</div>
 	<div class="head-flex-inv">
 		<InvestigatorFrontBack {fullDatabase} deck={deckInput} />
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div
-			class="ahdb-button"
-			on:click={() => {
-				window.open('https://arkhamdb.com/decklist/view/' + deckInput.id)
-			}}
-		>
-			<div class="ahdb-button-read">Read full deck guide or leave comment at arkhamdb.com</div>
-			<div class="ahdb-button-like">
-				Press the like button (♥) there to show the author some love.
+		{#if deckInput.published}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div
+				class="ahdb-button"
+				on:click={() => {
+					window.open('https://arkhamdb.com/decklist/view/' + deckInput.id)
+				}}
+			>
+				<div class="ahdb-button-read">Read full deck guide or leave comment at arkhamdb.com</div>
+				<div class="ahdb-button-like">
+					Press the like button (♥) there to show the author some love.
+				</div>
 			</div>
-		</div>
+		{/if}
 	</div>
 </div>
 <GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />

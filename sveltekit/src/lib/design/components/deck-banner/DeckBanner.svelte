@@ -252,9 +252,11 @@
 			<!-- {/if} -->
 		</div>
 	</div>
-	<div class={'excerpt'}>
-		{excerpt}
-	</div>
+	{#if excerpt !== null}
+		<div class={'excerpt'}>
+			{excerpt}
+		</div>
+	{/if}
 </div>
 
 <style>

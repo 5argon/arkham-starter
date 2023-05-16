@@ -57,16 +57,14 @@
 	with right away in this site.
 </p>
 <p>
-	I'm currently testing the deck listing UI below. The beginner-friendly deck search and filter tool
-	is also in development. For now you can scroll through this clumsy, randomized list below. Or try
-	out my <a href="/resource">resources and tools</a> which the finished site would depends on them.
+	I'm currently testing the deck listing UI (below). The search and filter tool is in development.
+	For now decks are completely randomized from the database with no way to browse them. You can also
+	try out my standalone <a href="/resource">resources and tools</a>.
 </p>
 
 <ListDivider label="Random Six Starter Decks" />
 
 <div class="help">
-	(Use the search and filter tool above, and this section will be replaced with actual results that
-	your current collection could build.)
 	<div>
 		<Button
 			label={'Randomize Again'}

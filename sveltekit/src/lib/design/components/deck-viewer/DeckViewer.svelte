@@ -21,15 +21,13 @@
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import AhdbDeckTextbox from '../deck-table/AhdbDeckTextbox.svelte'
 	import InvestigatorFrontBack from '../card/InvestigatorFrontBack.svelte'
+	import DeckViewerInner from './DeckViewerInner.svelte'
 
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
 	export let published: boolean
 
-	interface BigDeck {
-		getReturn: GetDeckCardIdReturns
-	}
-	let deck: BigDeck | null = null
+	let deck: GetDeckCardIdReturns | null = null
 	let loading: boolean = true
 	let failed: boolean = false
 	let fallback: boolean = false
@@ -71,27 +69,7 @@
 			failed = true
 			return
 		}
-		deckProcess(d)
-	}
-
-	function deckProcess(d: GetDeckCardIdReturns) {
-		const rcoreDeck = forwardDeckToRcore(d)
-		deck = { getReturn: d }
-		entries = rcoreDeck.cards1.map<DecklistEntry>((x) => {
-			return {
-				amount: x.amount,
-				cardId: x.cardId,
-				id: x.cardId,
-			}
-		})
-		sideEntries = rcoreDeck.cards2.map<DecklistEntry>((x) => {
-			return {
-				amount: x.amount,
-				cardId: x.cardId,
-				id: x.cardId,
-			}
-		})
-		customizableMetas = rcoreDeck.decodedMeta.customizableMetas ?? []
+		deck = d
 	}
 
 	async function onExtractDeck(gd: ExtractResult) {
@@ -117,86 +95,5 @@
 	{/if}
 	<AhdbDeckTextbox {onExtractDeck} noImport />
 {:else}
-	<div class="head-flex">
-		<div class="head-flex-banner">
-			<DeckBannerHigher {popupDatabase} deck={deck.getReturn} />
-		</div>
-		<div class="head-flex-inv">
-			<InvestigatorFrontBack {fullDatabase} deck={deck.getReturn} />
-		</div>
-	</div>
-	<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
-
-	<ListDivider label={'Deck ( ' + entries.reduce((a, b) => a + b.amount, 0) + ' Cards )'} />
-	<CardTableDoubleDisplay
-		{toggleMap}
-		{entries}
-		{groupings}
-		{sortings}
-		onClickToggle={(id, newToggles) => {
-			toggleMap[id] = newToggles
-			toggleMap = { ...toggleMap }
-		}}
-		taboo={true}
-		{fullDatabase}
-		{popupDatabase}
-		showList
-		showScans
-		small
-		{customizableMetas}
-		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
-	/>
-
-	{#if sideEntries.length > 0}
-		<ListDivider
-			label={'Side Deck ( ' + sideEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
-		/>
-		<CardTableDoubleDisplay
-			toggleMap={sideToggleMap}
-			entries={sideEntries}
-			{groupings}
-			{sortings}
-			onClickToggle={(id, newToggles) => {
-				sideToggleMap[id] = newToggles
-				sideToggleMap = { ...sideToggleMap }
-			}}
-			taboo={true}
-			{fullDatabase}
-			{popupDatabase}
-			showList
-			showScans
-			small
-			columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
-		/>
-	{/if}
+	<DeckViewerInner {fullDatabase} {popupDatabase} deckInput={deck} />
 {/if}
-
-<style>
-	.head-flex {
-		display: flex;
-	}
-
-	.head-flex-banner {
-		flex: 4;
-		max-width: 750px;
-	}
-
-	.head-flex-inv {
-		flex: 2;
-	}
-
-	@media (max-width: 1000px) {
-		.head-flex {
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.head-flex-banner {
-			flex: 1;
-		}
-
-		.head-flex-inv {
-			flex: 1;
-		}
-	}
-</style>
