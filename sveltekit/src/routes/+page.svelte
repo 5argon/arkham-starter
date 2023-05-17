@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
-	import type { DeckEntry } from '$lib/deck/deck'
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import DeckBannerHigher from '$lib/design/components/deck-banner/DeckBannerHigher.svelte'
 	import HomepageTopMenu from '$lib/design/pages/HomepageTopMenu.svelte'
 	import type { PageData } from './$types'
-	import { fade, fly } from 'svelte/transition'
+	import { fly } from 'svelte/transition'
+	import type { DeckEntry } from '$lib/deck/deck'
 
 	export let data: PageData
 

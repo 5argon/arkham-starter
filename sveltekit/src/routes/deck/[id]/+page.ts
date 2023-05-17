@@ -39,3 +39,10 @@ export const load: PageLoad<Ret> = async (pl) => {
 		},
 	}
 }
+
+export const entries = async () => {
+	const rawDecks = decksJson as unknown as DeckEntryBeforeProcess[]
+	return rawDecks.map((x) => {
+		return { id: x.raw.id }
+	})
+}
