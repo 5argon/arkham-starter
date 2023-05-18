@@ -5,7 +5,7 @@ import {
 } from '$lib/ahdb/public-api/high-level'
 import { FullDatabase, fetchFullDatabaseV2 } from '$lib/core/full-database'
 import { PopupDatabase, fetchPopupDatabaseV2 } from '$lib/core/popup-database'
-import type { PageLoad } from './$types'
+import type { EntryGenerator, PageLoad } from './$types'
 import decksJson from '$lib/data/decks.json'
 import type { DeckEntryBeforeProcess } from '$lib/deck/deck'
 
@@ -40,7 +40,7 @@ export const load: PageLoad<Ret> = async (pl) => {
 	}
 }
 
-export const entries = async () => {
+export const entries: EntryGenerator = async () => {
 	const rawDecks = decksJson as unknown as DeckEntryBeforeProcess[]
 	return rawDecks.map((x) => {
 		return { id: x.raw.id }

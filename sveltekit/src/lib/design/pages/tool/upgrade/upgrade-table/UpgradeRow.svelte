@@ -51,10 +51,13 @@
 	$: {
 		if (row.custom && rightCard !== null) {
 			const cus = rightCard.original.cus
-			if (cus !== undefined && row.customizationChoice < cus.length) {
-				const selectedCus = cus[row.customizationChoice]
-				customizationText = selectedCus.n
-				customizationBoxes = selectedCus.xp
+			if (cus !== undefined) {
+				const removedZero = cus.filter((x) => x.xp > 0)
+				if (row.customizationChoice < removedZero.length) {
+					const selectedCus = removedZero[row.customizationChoice]
+					customizationText = selectedCus.n
+					customizationBoxes = selectedCus.xp
+				}
 			}
 		}
 	}

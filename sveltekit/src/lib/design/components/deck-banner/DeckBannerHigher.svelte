@@ -150,7 +150,7 @@
 
 <DeckBanner
 	popupDb={popupDatabase}
-	link={!viewerPage ? './deck/' + deck.id : deck.link}
+	link={!viewerPage ? './deck/view/' + deck.id : deck.link}
 	packs={packInfoSpanItems}
 	deckName={ahst?.rename ?? deck.deck}
 	investigatorCode={deck.investigatorCode}

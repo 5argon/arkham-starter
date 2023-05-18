@@ -265,7 +265,8 @@
 				if (rightCard !== null) {
 					const customizationOptions = rightCard.original.cus
 					if (customizationOptions !== undefined) {
-						rows[i] = customizationCycle(rows[i], customizationOptions.length)
+						const noZeroOptions = customizationOptions.filter((x) => x.xp > 0)
+						rows[i] = customizationCycle(rows[i], noZeroOptions.length)
 					}
 				}
 			}

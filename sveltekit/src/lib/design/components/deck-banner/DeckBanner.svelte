@@ -112,7 +112,7 @@
 			class:deck-name-without-link={link === null}
 			class="deck-name"
 		>
-			<span> {deckName}</span>
+			<span>{deckName}</span>
 		</a>
 	</div>
 	<div class={'content'}>
