@@ -86,15 +86,17 @@ function findXp(
 	const c = db.getById(card)
 	if (c !== null) {
 		const cus = c.original.cus
-		if (customizing !== false && cus !== undefined && customizing < cus.length) {
-			const choice = cus[customizing]
-			return choice.xp
-		} else {
-			return (
-				((c.original.xp ?? 0) + (gs.taboo ? c.original.xpat : 0)) *
-				(c.original.ex || (gs.taboo && c.original.ext) ? 2 : 1)
-			)
+		if (customizing !== false && cus !== undefined) {
+			const noZeroCus = cus.filter((x) => x.xp > 0)
+			if (customizing < noZeroCus.length) {
+				const choice = noZeroCus[customizing]
+				return choice.xp
+			}
 		}
+		return (
+			((c.original.xp ?? 0) + (gs.taboo ? c.original.xpat : 0)) *
+			(c.original.ex || (gs.taboo && c.original.ext) ? 2 : 1)
+		)
 	} else {
 		return 0
 	}

@@ -75,6 +75,7 @@
 			if (ca === null) {
 				return null
 			}
+			const noZeroCus = ca.original.cus?.filter((x) => x.xp > 0) ?? undefined
 			return {
 				cardName: ca.original.n,
 				class1: ca.class1,
@@ -95,8 +96,8 @@
 				customizable: ca.original.cus !== undefined,
 				showingCustomizableChoice: right ? r.custom : false,
 				customizableChoiceIndex: r.customizationChoice,
-				customizableChoiceBoxes: ca.original.cus?.[r.customizationChoice].xp ?? 0,
-				customizableChoiceName: ca.original.cus?.[r.customizationChoice].n ?? '',
+				customizableChoiceBoxes: noZeroCus?.[r.customizationChoice].xp ?? 0,
+				customizableChoiceName: noZeroCus?.[r.customizationChoice].n ?? '',
 			}
 		}
 		return {
