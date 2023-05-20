@@ -6,21 +6,15 @@
 	import {
 		getDeckCardIds,
 		type GetDeckCardIdReturns,
-		forwardDeckToRcore,
 		type CustomizableMeta,
 		type ExtractResult,
 	} from '$lib/ahdb/public-api/high-level'
-	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
-	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
+	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
-	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-	import CardTableDoubleDisplay from '$lib/design/pages/explore/CardTableDoubleDisplay.svelte'
-	import DeckBannerHigher from '$lib/design/components/deck-banner/DeckBannerHigher.svelte'
 	import helpMd from '$lib/md/deck-viewer.md?raw'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import AhdbDeckTextbox from '../deck-table/AhdbDeckTextbox.svelte'
-	import InvestigatorFrontBack from '../card/InvestigatorFrontBack.svelte'
 	import DeckViewerInner from './DeckViewerInner.svelte'
 
 	export let fullDatabase: FullDatabase

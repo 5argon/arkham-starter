@@ -31,6 +31,7 @@
 	<li><a href="/deck/view">Alternate Deck Viewer</a></li>
 	<li><a href="/tool/upgrade">Upgrade Planner</a></li>
 	<li><a href="/tool/list">Card List</a></li>
+	<li><a href="/tool/query">Query</a></li>
 </ul>
 
 <h2>For starting the game</h2>

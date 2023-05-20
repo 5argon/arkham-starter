@@ -19,7 +19,7 @@ import { manualEdit } from "./scripts/manual-edit.ts";
 
 console.log("Downloading all cards to create popup database...");
 const allCards = await publicAllCards("/?encounter=1");
-console.log("DONE")
+console.log("DONE");
 const taboos = await publicTaboos();
 const latestTaboo: AhdbTaboo | null = taboos.length > 0 ? taboos[0] : null;
 const tabooXpMap: { [k: string]: number } = {};
@@ -158,8 +158,10 @@ playerCards.forEach((x) => {
         ? classNameMap.toNum[x.faction3_code]
         : undefined,
     ir: x.restrictions !== undefined && x.restrictions !== null,
-    wk: x.subtype_code !== undefined && x.subtype_code === "weakness",
-    inv: x.subtype_code !== undefined && x.type_code === "investigator",
+    wk:
+      x.subtype_code !== undefined &&
+      (x.subtype_code === "weakness" || x.subtype_code === "basicweakness"),
+    inv: x.type_code !== undefined && x.type_code === "investigator",
     cs: x.cost,
     cus: extractCustomizable(x),
     q: x.quantity,

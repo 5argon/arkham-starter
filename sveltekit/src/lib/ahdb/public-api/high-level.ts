@@ -56,6 +56,7 @@ export interface ArkhamStarterDeckData {
 	series: string
 	rename: string
 	excerpt: string
+	extraCards: string[]
 }
 
 export interface GetDeckCardIdReturns {

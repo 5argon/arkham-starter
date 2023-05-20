@@ -30,7 +30,7 @@ export interface AhdbCard {
 	real_name: string
 	subname: string
 	cost?: number
-	text: string
+	text?: string
 	real_text: string
 	quantity: number
 	skill_combat?: number
@@ -73,4 +73,26 @@ export interface AhdbCard {
 	linked_to_code?: string
 	linked_to_name?: string
 	spoiler?: number
+	deck_options?: AhdbDeckOption[]
+	tags?: string
+}
+
+export interface AhdbDeckOption {
+	faction?: string[]
+	faction_select?: string[]
+	not?: boolean
+	trait?: string[]
+	level?: { min: number; max: number }
+	text?: string[]
+	tag?: string[]
+	limit?: number
+	error?: string
+	atleast: { factions: number; min: number }
+	name?: string
+	id?: string
+	option_select?: AhdbDeckOption[]
+	uses?: string[]
+	size?: number
+	type?: string[]
+	deck_size_select?: string[]
 }

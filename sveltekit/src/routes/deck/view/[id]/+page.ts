@@ -36,6 +36,7 @@ export const load: PageLoad<Ret> = async (pl) => {
 			authorName: deck.raw.user,
 			authorUsername: deck.raw.userUrl,
 			series: deck.raw.series,
+			extraCards: [],
 		},
 	}
 }

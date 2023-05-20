@@ -8,7 +8,7 @@ import tb from '../data/taboo.json'
 import { CardClass } from '$lib/design/interface/card-class'
 import { CardPackIcon } from '$lib/design/interface/card-pack'
 import type { CardPack } from './card-pack'
-import { randomBasicWeakness, type AhdbCard, isRandomBasicWeakness } from '$lib/ahdb/card'
+import { type AhdbCard, isRandomBasicWeakness } from '$lib/ahdb/card'
 import type { LoadEvent } from '@sveltejs/kit'
 export type LazyFullDatabase = Promise<FullDatabase>
 
@@ -32,10 +32,12 @@ export class FullDatabase {
 	private cardsMap: { [k: string]: FullDatabaseItem }
 	private sameName: { [k: string]: FullDatabaseItem[] }
 	private byPack: { [k: string]: FullDatabaseItem[] }
+	private allInvestigators: FullDatabaseItem[]
 	constructor(cards: AhdbCard[], taboo: AhdbTaboo | null) {
 		this.cardsMap = {}
 		this.sameName = {}
 		this.byPack = {}
+		this.allInvestigators = []
 		const mapped = cards.map<FullDatabaseItem>((x) => {
 			let icon = packCodeToIconConversion(x.pack_code)
 			if (isRandomBasicWeakness(x.code)) {
@@ -67,6 +69,10 @@ export class FullDatabase {
 				this.byPack[x.packIcon] = []
 			}
 			this.byPack[x.packIcon].push(x)
+
+			if (x.original.type_code === 'investigator') {
+				this.allInvestigators.push(x)
+			}
 
 			if (!(x.original.name in this.sameName)) {
 				this.sameName[x.original.name] = []
@@ -122,6 +128,10 @@ export class FullDatabase {
 				throw new Error('Pack not found ' + x)
 			})
 			.filter((x) => x.original.hidden !== true)
+	}
+
+	public queryAllInvestigators(): FullDatabaseItem[] {
+		return this.allInvestigators
 	}
 
 	private createUnknownCard(id: string): FullDatabaseItem {

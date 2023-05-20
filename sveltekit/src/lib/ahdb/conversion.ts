@@ -230,10 +230,14 @@ export function classConversion(c: string): CardClass {
 }
 
 export function coreToRcore(cardId: string): string {
-	if (cardId in coreToRcoreMap) {
+	if (isOldCore(cardId)) {
 		return coreToRcoreMap[cardId]
 	}
 	return cardId
+}
+
+export function isOldCore(cardId: string): boolean {
+	return cardId in coreToRcoreMap
 }
 
 export function rcoreToCore(cardId: string): string {

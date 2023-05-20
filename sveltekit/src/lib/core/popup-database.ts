@@ -7,10 +7,12 @@ import { CardPackIcon } from '$lib/design/interface/card-pack'
 import type { LoadEvent } from '@sveltejs/kit'
 import type { CardClass } from './card-class'
 import { isRandomBasicWeakness } from '$lib/ahdb/card'
+import Fuse from 'fuse.js'
 export type LazyPopupDatabase = Promise<PopupDatabase>
 
 export class PopupDatabase {
 	private cards: PopupDatabaseItem[]
+	private fuse: Fuse<PopupDatabaseItem>
 	private map: { [k: string]: PopupDatabaseItem }
 	constructor(raw: PopupDatabaseRaw) {
 		this.cards = raw.items.map<PopupDatabaseItem>((x) => {
@@ -39,6 +41,9 @@ export class PopupDatabase {
 			makeMap[x.original.id] = x
 		})
 		this.map = makeMap
+		this.fuse = new Fuse<PopupDatabaseItem>(this.cards, {
+			keys: ['original.n'],
+		})
 	}
 
 	getById(card: string): PopupDatabaseItem | null {
@@ -52,7 +57,12 @@ export class PopupDatabase {
 		if (card in this.map) {
 			return this.map[card]
 		}
-		throw "Card not found in popup database: '" + card
+		throw 'Card not found in popup database: ' + card
+	}
+
+	fuzzySearch(s: string): PopupDatabaseItem[] {
+		const result = this.fuse.search('="' + s + '"')
+		return result.map((x) => x.item)
 	}
 }
 

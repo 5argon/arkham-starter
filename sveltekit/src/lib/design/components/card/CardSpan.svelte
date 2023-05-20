@@ -171,7 +171,7 @@
 	}
 
 	.card-subname {
-		max-width: 55px;
+		max-width: 65px;
 		max-height: 18px;
 		line-height: 1em;
 		margin-left: 4px;

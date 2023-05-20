@@ -100,9 +100,11 @@
 			class={'text-box-input' + ' ' + rightAlignClass}
 			type="text"
 			placeholder={placeholderText}
+			autocomplete={'off'}
 			on:change={inputEndEditHandler}
 			on:input={inputChangeHandler}
 			on:keyup={inputKeyboardHandler}
+			on:blur={inputEndEditHandler}
 			value={currentText}
 		/>
 	{/if}
