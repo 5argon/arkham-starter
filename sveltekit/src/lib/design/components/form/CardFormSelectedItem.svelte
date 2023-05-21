@@ -18,6 +18,8 @@
 	<CardSpan
 		cardId={card.original.id}
 		class1={card.class1}
+		class2={card.class2 ?? null}
+		class3={card.class3 ?? null}
 		exceptional={card.original.ext}
 		color={true}
 		packIcon={card.packIcon}

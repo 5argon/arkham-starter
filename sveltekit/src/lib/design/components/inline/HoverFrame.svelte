@@ -8,7 +8,7 @@
 		padding: 2px 8px;
 		user-select: none;
 		box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.13);
-		background-color: rgba(255, 255, 255, 0.8);
-		backdrop-filter: blur(5px);
+		background-color: rgba(255, 255, 255, 0.9);
+		backdrop-filter: blur(3px);
 	}
 </style>

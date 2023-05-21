@@ -23,10 +23,12 @@
 	let rcoreDeck: GetDeckCardIdReturns
 	let entries: DecklistEntry[] = []
 	let sideEntries: DecklistEntry[] = []
+	let extraEntries: DecklistEntry[] = []
 	let groupings: Grouping[] = [Grouping.Type]
 	let sortings: Sorting[] = [Sorting.Class, Sorting.Set]
 	let toggleMap: { [cardId: string]: boolean[] } = {}
 	let sideToggleMap: { [cardId: string]: boolean[] } = {}
+	let extraToggleMap: { [cardId: string]: boolean[] } = {}
 	let customizableMetas: CustomizableMeta[] = []
 	function onGroupingsChanged(g: Grouping[]) {
 		groupings = g
@@ -45,12 +47,18 @@
 				id: x.cardId,
 			}
 		})
-		sideEntries = rcoreDeck.cards2.map<DecklistEntry>((x) => {
+		const side = rcoreDeck.cards2.map<DecklistEntry>((x) => {
 			return {
 				amount: x.amount,
 				cardId: x.cardId,
 				id: x.cardId,
 			}
+		})
+		sideEntries = side.filter((x) => {
+			return !ahst?.extraCards.includes(x.cardId) ?? true
+		})
+		extraEntries = side.filter((x) => {
+			return ahst?.extraCards.includes(x.cardId) ?? false
 		})
 		customizableMetas = rcoreDeck.decodedMeta.customizableMetas ?? []
 	}
@@ -112,6 +120,29 @@
 		onClickToggle={(id, newToggles) => {
 			sideToggleMap[id] = newToggles
 			sideToggleMap = { ...sideToggleMap }
+		}}
+		taboo={true}
+		{fullDatabase}
+		{popupDatabase}
+		showList
+		showScans
+		small
+		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+	/>
+{/if}
+
+{#if extraEntries.length > 0}
+	<ListDivider
+		label={'Optional ( ' + extraEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
+	/>
+	<CardTableDoubleDisplay
+		toggleMap={extraToggleMap}
+		entries={extraEntries}
+		{groupings}
+		{sortings}
+		onClickToggle={(id, newToggles) => {
+			extraToggleMap[id] = newToggles
+			extraToggleMap = { ...extraToggleMap }
 		}}
 		taboo={true}
 		{fullDatabase}

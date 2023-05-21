@@ -5,6 +5,7 @@
 	import CardFormSelectedItem from './CardFormSelectedItem.svelte'
 
 	export let title: string | undefined = undefined
+	export let placeholder: string | undefined = undefined
 	export let popupDatabase: PopupDatabase
 	export let filter: (pdbi: PopupDatabaseItem) => boolean = () => {
 		return true
@@ -40,7 +41,7 @@
 
 <TextBox
 	{currentText}
-	placeholderText="Card Name"
+	placeholderText={placeholder}
 	onChange={(t) => {
 		currentText = t
 		showingPopup = true

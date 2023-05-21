@@ -12,7 +12,13 @@ export interface RawDeck {
 	upgrade: string
 	upgradeBreakpoint1: string
 	upgradeBreakpoint2: string
+	sideExtras: string
 	excerpt: string
+}
+
+export function decodeSideExtras(s: string): string[] {
+	const r = s.replace(/[[\]]/g, '')
+	return r.split(',').map((x) => x.trim())
 }
 
 export interface DeckEntry {

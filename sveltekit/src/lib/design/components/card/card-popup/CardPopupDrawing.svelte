@@ -84,7 +84,7 @@
 	}
 
 	.frame {
-		width: 360px;
+		width: 380px;
 		position: absolute;
 		margin-top: -150px;
 	}

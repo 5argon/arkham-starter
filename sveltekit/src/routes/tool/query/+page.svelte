@@ -7,7 +7,6 @@
 	import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn } from '$lib/deck-table/grouping'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-	import TextBox from '$lib/design/components/basic/TextBox.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 	import CardForm from '$lib/design/components/form/CardForm.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
@@ -59,8 +58,8 @@
 </p>
 
 <p>
-	Caveat is that it performs the check card-by-card, independently. Therefore it can't account for
-	amount limit on that restriction. For example, if you list six Lv. 0 Survivor cards, it shows Zoey
+	Caveat is that it performs the check card-by-card. Therefore it can't account for amount limit on
+	when all your query are combined. For example, if you list six Lv. 0 Survivor cards, it shows Zoey
 	Samaras as one of the result despite she can only take five off-class cards.
 </p>
 
@@ -74,6 +73,7 @@
 	}}
 	{selected}
 	title={'Search Result'}
+	placeholder={"Search by card's name"}
 	filter={(pdbi) => {
 		return (
 			pdbi.original.inv === false &&

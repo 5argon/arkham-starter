@@ -27,7 +27,15 @@ export function whoCanUse(fdb: FullDatabase, cardIds: string[]): WhoCanUseReturn
 	const result = whoOfEach.reduce((a, b) =>
 		a.filter((c) =>
 			b.some((x) => {
-				return x.investigator.original.code === c.investigator.original.code
+				const sameFactionSelect =
+					x.factionSelect.length === c.factionSelect.length &&
+					x.factionSelect.every((v, i) => v === c.factionSelect[i])
+
+				return (
+					sameFactionSelect &&
+					x.optionSelect === c.optionSelect &&
+					x.investigator.original.code === c.investigator.original.code
+				)
 			}),
 		),
 	)
@@ -83,19 +91,25 @@ function whoCode(card: FullDatabaseItem, investigators: FullDatabaseItem[]): Who
 						})
 					})
 				} else {
-					// Only Charlie Kane, I don't want to code generically lol.
-					// const fs = factionSelects[0]
-					// const fs2 = factionSelects[1]
-					// for(let i = 0 ; i < fs.faction_select?.length
-					// fs.faction_select?.forEach((y) => {
-					// 	const newOption: AhdbDeckOption[] = [...opts, { ...fs, faction: [y] }]
-					// 	expandedInvestigators.push({
-					// 		investigator: x,
-					// 		factionSelect: [y],
-					// 		optionSelect: -1,
-					// 		options: newOption,
-					// 	})
-					// })
+					const fs = factionSelects[0].faction_select
+					const fs2 = factionSelects[1].faction_select
+					if (fs !== undefined && fs2 !== undefined) {
+						for (let i = 0; i < fs.length; i++) {
+							for (let j = i + 1; j < fs2.length; j++) {
+								const newOption: AhdbDeckOption[] = [
+									...opts,
+									{ ...factionSelects[0], faction: [fs[i]] },
+									{ ...factionSelects[1], faction: [fs2[j]] },
+								]
+								expandedInvestigators.push({
+									investigator: x,
+									factionSelect: [fs[i], fs2[j]],
+									optionSelect: '',
+									options: newOption,
+								})
+							}
+						}
+					}
 				}
 			}
 		}

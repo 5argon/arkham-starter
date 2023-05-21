@@ -30,7 +30,7 @@
 	const rcoreDeck = forwardDeckToRcore(deck)
 	const representativeCards = getRepresentativeCards(
 		rcoreDeck.cards1.map((x) => x.cardId),
-		rcoreDeck.cards2.map((x) => x.cardId),
+		rcoreDeck.cards2.map((x) => x.cardId).filter((x) => !ahst?.extraCards.includes(x) ?? true),
 		popupDatabase,
 	)
 	const a = countPacks(
@@ -38,7 +38,7 @@
 		(c) => popupDatabase.getById(c)?.packIcon ?? CardPack.Unknown,
 	)
 	const b = countPacks(
-		rcoreDeck.cards2,
+		rcoreDeck.cards2.filter((x) => !ahst?.extraCards.includes(x.cardId) ?? true),
 		(c) => popupDatabase.getById(c)?.packIcon ?? CardPack.Unknown,
 	)
 	const c = countPacks(
@@ -150,7 +150,7 @@
 
 <DeckBanner
 	popupDb={popupDatabase}
-	link={!viewerPage ? './deck/view/' + deck.id : deck.link}
+	link={!viewerPage ? './deck/' + deck.id : deck.link}
 	packs={packInfoSpanItems}
 	deckName={ahst?.rename ?? deck.deck}
 	investigatorCode={deck.investigatorCode}

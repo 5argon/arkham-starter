@@ -7,7 +7,7 @@ import { FullDatabase, fetchFullDatabaseV2 } from '$lib/core/full-database'
 import { PopupDatabase, fetchPopupDatabaseV2 } from '$lib/core/popup-database'
 import type { EntryGenerator, PageLoad } from './$types'
 import decksJson from '$lib/data/decks.json'
-import type { DeckEntryBeforeProcess } from '$lib/deck/deck'
+import { decodeSideExtras, type DeckEntryBeforeProcess } from '$lib/deck/deck'
 
 interface Ret {
 	fdb: FullDatabase
@@ -36,7 +36,7 @@ export const load: PageLoad<Ret> = async (pl) => {
 			authorName: deck.raw.user,
 			authorUsername: deck.raw.userUrl,
 			series: deck.raw.series,
-			extraCards: [],
+			extraCards: decodeSideExtras(deck.raw.sideExtras),
 		},
 	}
 }

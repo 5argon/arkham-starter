@@ -6,7 +6,7 @@
 	import HomepageTopMenu from '$lib/design/pages/HomepageTopMenu.svelte'
 	import type { PageData } from './$types'
 	import { fly } from 'svelte/transition'
-	import type { DeckEntry } from '$lib/deck/deck'
+	import { decodeSideExtras, type DeckEntry } from '$lib/deck/deck'
 
 	export let data: PageData
 
@@ -90,6 +90,7 @@
 					authorName: d.raw.user,
 					authorUsername: d.raw.userUrl,
 					series: d.raw.series,
+					extraCards: decodeSideExtras(d.raw.sideExtras),
 				}}
 			/>
 		</div>
