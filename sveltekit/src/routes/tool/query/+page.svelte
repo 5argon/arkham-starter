@@ -53,8 +53,9 @@
 <PageTitle title="Query" />
 
 <p>
-	Super niche query tool which takes a list of combo cards you are interested in then it shows which
-	investigator can have them together in their deck.
+	Query eligible investigators that could run combo cards you are interested in <b>together</b> in their
+	deck. Essentially an inversed deckbuilder in a sense that regular arkhamdb deckbuilder have you select
+	an investigator first, then it shows all eligible cards.
 </p>
 
 <p>

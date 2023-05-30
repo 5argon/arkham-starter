@@ -1,6 +1,31 @@
 [
   {
     "items": [
+      "01_Archaic Evils.png",
+      "02_Architects of Chaos.png",
+      "03_Awakened Madness.png",
+      "04_Countermeasures.png",
+      "05_Cult of Cthulhu.png",
+      "06_Deep Dreams.png",
+      "07_Grand Compass.png",
+      "08_Shadowy Agents.png",
+      "09_Spawn of R'lyeh.png",
+      "10_Storm and Sea.png",
+      "11_Unfriendly Ports.png",
+      "12_Unnatural Stone.png",
+      "13_Across Dreadful Waters.png",
+      "14_Blood From Stones.png",
+      "15_Crumbling Masonry.png",
+      "16_Going Twice.png",
+      "17_Lost Moorings.png",
+      "18_Private Lives.png",
+      "19_Pyroclastic Flow.png",
+      "20_Tomb of Dead Dreams.png"
+    ],
+    "folder": "Custom - Cyclopean Foundations x20"
+  },
+  {
+    "items": [
       "01_001-010 (Return to the Night of the Zealot).png",
       "02_001-010 (Return to the Dunwich Legacy).png",
       "03_001-010 (Return to the Path to Carcosa).png",
@@ -27,6 +52,12 @@
       "06_Neutral 9.png"
     ],
     "folder": "CCQ - The Scarlet Keys x6"
+  },
+  {
+    "items": [
+      "01_Return to the Dunwich Legacy 20.png"
+    ],
+    "folder": "CCQ - Return To x1"
   },
   {
     "items": [
@@ -372,6 +403,27 @@
   },
   {
     "items": [
+      "01_Anachronism.png",
+      "02_Artificial Intelligence.png",
+      "03_Boogeyman.png",
+      "04_Dark Past.png",
+      "05_Deep Space.png",
+      "06_Endtimes.png",
+      "07_Hastur's Gaze.png",
+      "08_Interstellar Predators.png",
+      "09_Electric Nightmare.png",
+      "10_Fragment of Carcosa.png",
+      "11_In the Shadow of Earth.png",
+      "12_Lost Quantum.png",
+      "13_Starfall.png",
+      "14_Strange Moons.png",
+      "15_The Machine in Yellow.png",
+      "16_The Tatterdemalion.png"
+    ],
+    "folder": "Custom - Dark Matter x16"
+  },
+  {
+    "items": [
       "01_Agents of Dagon.png",
       "02_Agents of Hydra.png",
       "03_Creatures of the Deep.png",
@@ -424,6 +476,30 @@
       "14_The Midnight Masks (5 encounter cards).png"
     ],
     "folder": "Core Set x14"
+  },
+  {
+    "items": [
+      "01_Alice in Arkham.png",
+      "02_Card Guards.png",
+      "03_Cheshire Cat.png",
+      "04_Chessmen.png",
+      "05_Gurathnaka's Shadows.png",
+      "06_Jabberwock.png",
+      "07_Riddles and Games.png",
+      "08_Walrus and Carpenter.png",
+      "09_Warped Reality.png",
+      "10_Wonderland Banes.png",
+      "11_Wonderland Boons.png",
+      "12_A Sea of Troubles.png",
+      "13_Arkham in Wonderland.png",
+      "14_Bleeding Hearts.png",
+      "15_Fool's Mate.png",
+      "16_Lucid Nightmare.png",
+      "17_Sibling Rivalry.png",
+      "18_Tempest in a Teapot.png",
+      "19_Wild Snark Chase.png"
+    ],
+    "folder": "Custom - Alice in Wonderland x19"
   },
   {
     "items": [

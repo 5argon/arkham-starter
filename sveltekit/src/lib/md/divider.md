@@ -71,7 +71,7 @@ All encounter icons were obtained from combined effort in [this thread](https://
 - Russian (Contributed by : [@khrabr](https://boardgamegeek.com/user/khrabr))
 - Spanish (Contributed by : [@colococolo](https://boardgamegeek.com/user/colococolo), [@Fran77](https://boardgamegeek.com/user/Fran77))
 - French (Contributed by : [@retsnimel](https://boardgamegeek.com/user/retsnimel))
-- Portuguese (Contributed by : [@vinimsouza](https://boardgamegeek.com/user/vinimsouza))
+- Portuguese (Contributed by : [@vinimsouza](https://boardgamegeek.com/user/vinimsouza), [@benq10r](https://boardgamegeek.com/user/benq10r))
 
 If translation is missing, file is still rendered but text area will be empty.
 
