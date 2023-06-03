@@ -11,6 +11,8 @@
 	export let small: boolean
 	export let toggleMap: { [cardId: string]: boolean[] }
 	export let fullDatabase: FullDatabase
+	export let showLabel: boolean = false
+	export let showOwner: boolean = false
 	export let onClickToggle:
 		| ((id: string, copy: number, maxCopy: number, t: boolean) => void)
 		| null = null
@@ -35,6 +37,7 @@
 				unlink={i !== en.amount - 1}
 				{fullDatabase}
 				toggled={getToggled(en, i)}
+				labels={showLabel ? en.labels?.map((x) => x.text) ?? null : null}
 				onToggleChanged={onClickToggle === null
 					? undefined
 					: (c, maxCopy, t) => {

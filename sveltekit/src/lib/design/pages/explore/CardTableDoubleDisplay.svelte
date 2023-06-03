@@ -25,6 +25,7 @@
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
 	export let onClickToggle: ((id: string, newToggles: boolean[]) => void) | null = null
+	export let showLabelOnScans: boolean = false
 
 	export let showList: boolean
 	export let showScans: boolean
@@ -61,6 +62,7 @@
 				{groupings}
 				{sortings}
 				entries={singleRight ? singleEntries : entries}
+				showLabel={showLabelOnScans}
 				{fullDatabase}
 				onClickToggle={(id, copy, maxCopy, toggle) => {
 					if (onClickToggle === null) return
@@ -85,7 +87,7 @@
 	}
 
 	.list-flex {
-		flex-basis: 380px;
+		flex-basis: 400px;
 	}
 
 	.scans-flex {

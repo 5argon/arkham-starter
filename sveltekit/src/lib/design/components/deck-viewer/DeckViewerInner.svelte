@@ -14,6 +14,7 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import InvestigatorFrontBack from '../card/InvestigatorFrontBack.svelte'
+	import Checkbox from '../basic/Checkbox.svelte'
 
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
@@ -24,11 +25,20 @@
 	let entries: DecklistEntry[] = []
 	let sideEntries: DecklistEntry[] = []
 	let extraEntries: DecklistEntry[] = []
+
+	let allEntries: DecklistEntry[] = []
+	$: {
+		allEntries = [...entries, ...sideEntries, ...extraEntries]
+	}
+
 	let groupings: Grouping[] = [Grouping.Type]
 	let sortings: Sorting[] = [Sorting.Class, Sorting.Set]
 	let toggleMap: { [cardId: string]: boolean[] } = {}
 	let sideToggleMap: { [cardId: string]: boolean[] } = {}
 	let extraToggleMap: { [cardId: string]: boolean[] } = {}
+	let allToggleMap: { [cardId: string]: boolean[] } = {}
+	let coalesce: boolean = false
+
 	let customizableMetas: CustomizableMeta[] = []
 	function onGroupingsChanged(g: Grouping[]) {
 		groupings = g
@@ -44,16 +54,21 @@
 			return {
 				amount: x.amount,
 				cardId: x.cardId,
-				id: x.cardId,
+				id: 'Main' + x.cardId,
 			}
 		})
+
 		const side = rcoreDeck.cards2.map<DecklistEntry>((x) => {
 			return {
 				amount: x.amount,
 				cardId: x.cardId,
-				id: x.cardId,
+				id: 'Side' + x.cardId,
+				labels: [
+					{ color: '#EEEEEE', text: ahst?.extraCards.includes(x.cardId) ? 'Optional' : 'Side' },
+				],
 			}
 		})
+
 		sideEntries = side.filter((x) => {
 			return !ahst?.extraCards.includes(x.cardId) ?? true
 		})
@@ -86,40 +101,26 @@
 		{/if}
 	</div>
 </div>
+
+<Checkbox
+	label={'Gather View'}
+	checked={coalesce}
+	onCheckChanged={(t) => {
+		coalesce = t
+	}}
+/>
 <GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
-<ListDivider label={'Deck ( ' + entries.reduce((a, b) => a + b.amount, 0) + ' Cards )'} />
-<CardTableDoubleDisplay
-	{toggleMap}
-	{entries}
-	{groupings}
-	{sortings}
-	onClickToggle={(id, newToggles) => {
-		toggleMap[id] = newToggles
-		toggleMap = { ...toggleMap }
-	}}
-	taboo={true}
-	{fullDatabase}
-	{popupDatabase}
-	showList
-	showScans
-	small
-	{customizableMetas}
-	columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
-/>
-
-{#if sideEntries.length > 0}
-	<ListDivider
-		label={'Side Deck ( ' + sideEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
-	/>
+{#if !coalesce}
+	<ListDivider label={'Deck ( ' + entries.reduce((a, b) => a + b.amount, 0) + ' Cards )'} />
 	<CardTableDoubleDisplay
-		toggleMap={sideToggleMap}
-		entries={sideEntries}
+		{toggleMap}
+		{entries}
 		{groupings}
 		{sortings}
 		onClickToggle={(id, newToggles) => {
-			sideToggleMap[id] = newToggles
-			sideToggleMap = { ...sideToggleMap }
+			toggleMap[id] = newToggles
+			toggleMap = { ...toggleMap }
 		}}
 		taboo={true}
 		{fullDatabase}
@@ -127,22 +128,71 @@
 		showList
 		showScans
 		small
+		{customizableMetas}
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 	/>
+
+	{#if sideEntries.length > 0}
+		<ListDivider
+			label={'Side Deck ( ' + sideEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
+		/>
+		<CardTableDoubleDisplay
+			toggleMap={sideToggleMap}
+			entries={sideEntries}
+			{groupings}
+			{sortings}
+			onClickToggle={(id, newToggles) => {
+				sideToggleMap[id] = newToggles
+				sideToggleMap = { ...sideToggleMap }
+			}}
+			taboo={true}
+			{fullDatabase}
+			{popupDatabase}
+			showList
+			showScans
+			small
+			columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		/>
+	{/if}
+
+	{#if extraEntries.length > 0}
+		<ListDivider
+			label={'Optional ( ' + extraEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
+		/>
+		<CardTableDoubleDisplay
+			toggleMap={extraToggleMap}
+			entries={extraEntries}
+			{groupings}
+			{sortings}
+			onClickToggle={(id, newToggles) => {
+				extraToggleMap[id] = newToggles
+				extraToggleMap = { ...extraToggleMap }
+			}}
+			taboo={true}
+			{fullDatabase}
+			{popupDatabase}
+			showList
+			showScans
+			small
+			columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		/>
+	{/if}
 {/if}
 
-{#if extraEntries.length > 0}
+{#if coalesce}
 	<ListDivider
-		label={'Optional ( ' + extraEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
+		label={'Deck, Side Deck, Optional ( ' +
+			allEntries.reduce((a, b) => a + b.amount, 0) +
+			' Cards )'}
 	/>
 	<CardTableDoubleDisplay
-		toggleMap={extraToggleMap}
-		entries={extraEntries}
+		toggleMap={allToggleMap}
+		entries={allEntries}
 		{groupings}
 		{sortings}
 		onClickToggle={(id, newToggles) => {
-			extraToggleMap[id] = newToggles
-			extraToggleMap = { ...extraToggleMap }
+			allToggleMap[id] = newToggles
+			allToggleMap = { ...allToggleMap }
 		}}
 		taboo={true}
 		{fullDatabase}
@@ -150,7 +200,8 @@
 		showList
 		showScans
 		small
-		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		columns={[ExtraColumn.Cost, ExtraColumn.Icons, ExtraColumn.Label]}
+		showLabelOnScans
 	/>
 {/if}
 

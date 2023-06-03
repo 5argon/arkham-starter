@@ -71,7 +71,7 @@
 				/>
 			</td>
 			{#each columns as c}
-				<td>
+				<td class={index % 2 === 0 ? 'even' : 'odd'}>
 					<ColumnCell {popupDatabase} column={c} cardId={en.cardId} labels={en.labels} />
 				</td>
 			{/each}

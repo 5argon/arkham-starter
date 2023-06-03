@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { FullDatabase } from '$lib/core/full-database'
 	import valid from '$lib/data/valid.json'
+	import ColumnLabel from './ColumnLabel.svelte'
 	export let cardId: string
 	export let small: boolean
 	export let fullDatabase: FullDatabase
@@ -10,11 +11,14 @@
 		undefined
 	export let unlink: boolean = false
 	export let linkedOnly: boolean = false
+	export let labels: string[] | null = null
 	const sizeMultiplier = small ? 0.5 : 1
+	const fixedWidth = 215
+	const fixedHeight = 300
 	$: card = fullDatabase.getCard(cardId)
 	$: vertical = card.original.type_code !== 'investigator'
-	$: width = (vertical ? 215 : 300) * sizeMultiplier
-	$: height = (vertical ? 300 : 215) * sizeMultiplier
+	$: width = (vertical ? fixedWidth : fixedHeight) * sizeMultiplier
+	$: height = (vertical ? fixedHeight : fixedWidth) * sizeMultiplier
 
 	$: srcPath = small ? 'full-small' : 'full'
 
@@ -66,12 +70,19 @@
 	{#if !linkedOnly}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<span
-			class="outer"
+			class="outer label-outer"
 			class:toggle-div={onToggleChanged}
 			class:toggle-div-on={thisCopyToggled}
 			on:click={handler}
 			style={'width:' + width + 'px;' + 'height:' + height + 'px;'}
 		>
+			{#if labels !== null}
+				{#each labels as l}
+					<span class="label">
+						<ColumnLabel label={{ text: l, color: '#EEEEEE' }} />
+					</span>
+				{/each}
+			{/if}
 			<img
 				{width}
 				{height}
@@ -177,5 +188,15 @@
 
 	.outer {
 		margin: 4px;
+	}
+
+	.label-outer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.label {
+		position: absolute;
 	}
 </style>

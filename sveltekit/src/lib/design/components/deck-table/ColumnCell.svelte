@@ -5,6 +5,7 @@
 	import { ExtraColumn } from '$lib/deck-table/grouping'
 	import CostCircle from '../inline/CostCircle.svelte'
 	import SkillIcon from '../inline/SkillIcon.svelte'
+	import ColumnLabel from './ColumnLabel.svelte'
 
 	export let cardId: string
 	export let popupDatabase: PopupDatabase
@@ -34,11 +35,7 @@
 <span class="skill-flex">
 	{#if column === ExtraColumn.Label && labels !== undefined}
 		{#each labels as label}
-			<span
-				class={'label' + (label.color.indexOf('#') === -1 ? ' ' + label.color : '')}
-				style={label.color.indexOf('#') === 0 ? 'background-color:' + label.color : null}
-				>{label.text}</span
-			>
+			<ColumnLabel {label} />
 		{/each}
 	{/if}
 
@@ -66,14 +63,6 @@
 </span>
 
 <style>
-	.label {
-		font-size: x-small;
-		padding: 1px 4px;
-		border-radius: 2px;
-		white-space: nowrap;
-		margin: 0px 1px;
-	}
-
 	.skill-flex {
 		display: flex;
 	}
