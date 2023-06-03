@@ -119,7 +119,7 @@
 
 	let sharingUrl: string = ''
 	let entries: DecklistEntry[] = []
-	let toggleMap: { [cardId: string]: boolean } = {}
+	let toggleMap: { [cardId: string]: boolean[] } = {}
 	let overlappingEntries: DecklistEntry[] = []
 	let p1: Player = newDeck(startingP1)
 	let p2: Player = newDeck(startingP2)
@@ -433,8 +433,8 @@
 					{entries}
 					{groupings}
 					{sortings}
-					onClickToggle={(c, t) => {
-						toggleMap[c] = t
+					onClickToggle={(c, n, t) => {
+						toggleMap[c] = [t]
 						toggleMap = { ...toggleMap }
 					}}
 					taboo={true}
