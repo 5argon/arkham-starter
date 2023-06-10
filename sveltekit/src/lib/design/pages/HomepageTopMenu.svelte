@@ -3,7 +3,7 @@
 </script>
 
 <div>
-	<HomepageTopMenuItem text={'Resources and Tools'} link={'/resource'} />
+	<!-- <HomepageTopMenuItem text={'Resources and Tools'} link={'/resource'} /> -->
 </div>
 
 <style>

@@ -17,11 +17,13 @@ export const allIcons = {
 	loading: ic('spinner-third-duotone'),
 	manual: ic('book-solid'),
 	plus: ic('plus-solid'),
+	minus: ic('minus-solid'),
 	grip: ic('grip-dots-vertical-regular'),
 	customizable: ic('wrench-solid'),
 	checkBox: ic('square-regular'),
 	checkBoxChecked: ic('square-check-regular'),
 	investigator: ic('person-solid'),
+	expand: ic('arrow-up-right-and-arrow-down-left-from-center-regular'),
 }
 
 function ic(s: string): string {
