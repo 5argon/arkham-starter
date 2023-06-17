@@ -60,7 +60,7 @@
 					id: 'd' + player + c1,
 					amount: a1,
 					cardId: c1,
-					labels: [{ text: 'P' + (player + 1), color: colorHex }],
+					labels: [{ color: colorHex, cardId: g.investigatorCode }],
 				})
 			}
 		}
@@ -72,7 +72,10 @@
 					id: 's' + player + c2,
 					amount: a2,
 					cardId: c2,
-					labels: [{ text: 'P' + (player + 1) + '-S', color: colorHex }],
+					labels: [
+						{ color: colorHex, cardId: g.investigatorCode },
+						{ text: 'Side', color: colorHex },
+					],
 				})
 			}
 		}
@@ -104,6 +107,7 @@
 	import { checkOverlaps } from '$lib/tool/overlap/overlap-helpers'
 	import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
+	import CardTableDoubleDisplay from '../../explore/CardTableDoubleDisplay.svelte'
 
 	export let pdb: PopupDatabase
 	export let fdb: FullDatabase
@@ -427,21 +431,22 @@
 			<div slot="content1">
 				<ListDivider label="Gathered Cards" />
 				<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
-
-				<CardTableGrouped
+				<CardTableDoubleDisplay
 					{toggleMap}
 					{entries}
 					{groupings}
 					{sortings}
-					onClickToggle={(c, n, t) => {
-						toggleMap[c] = [t]
-						toggleMap = { ...toggleMap }
-					}}
 					taboo={true}
+					onClickToggle={(id, newToggles) => {
+						toggleMap[id] = newToggles
+					}}
+					small
+					showLabelOnScans
 					fullDatabase={fdb}
 					popupDatabase={pdb}
 					columns={[ExtraColumn.Label]}
-					centered
+					showList
+					showScans
 				/>
 			</div>
 			<div slot="tab2">

@@ -15,12 +15,12 @@
 		<div><TopBarButton text="Resources and Tools" link="/resource" /></div>
 	</div>
 	<div class="right">
-		<div class="text">Current Team</div>
+		<!-- <div class="text">Current Team</div>
 		<TeamSlot index={0} />
 		<TeamSlot index={1} />
 		<TeamSlot index={2} />
 		<TeamSlot index={3} />
-		<Button label="View Team" onClick={() => {}}><FaIcon path={allIcons.expand} /></Button>
+		<Button label="View Team" onClick={() => {}}><FaIcon path={allIcons.expand} /></Button> -->
 	</div>
 </div>
 

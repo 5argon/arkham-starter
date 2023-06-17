@@ -9,8 +9,9 @@ export interface DecklistEntry {
 }
 
 export interface DecklistLabel {
-	text: string
-	color: string
+	text?: string
+	color?: string
+	cardId?: string
 }
 
 export function isEntry(d: DecklistEntry | GroupedCards): d is DecklistEntry {

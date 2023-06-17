@@ -35,7 +35,7 @@
 <span class="skill-flex">
 	{#if column === ExtraColumn.Label && labels !== undefined}
 		{#each labels as label}
-			<ColumnLabel {label} />
+			<ColumnLabel {popupDatabase} {label} />
 		{/each}
 	{/if}
 
