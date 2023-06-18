@@ -84,7 +84,7 @@
 		<DeckBannerHigher {popupDatabase} deck={deckInput} {ahst} viewerPage />
 	</div>
 	<div class="head-flex-inv">
-		<InvestigatorFrontBack {fullDatabase} deck={deckInput} />
+		<InvestigatorFrontBack {popupDatabase} {fullDatabase} deck={deckInput} />
 		{#if deckInput.published}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { FullDatabase } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import { flattenGroupedCards, groupCards } from '$lib/deck-table/grouping/group-cards'
@@ -11,6 +12,7 @@
 	export let small: boolean
 	export let toggleMap: { [cardId: string]: boolean[] }
 	export let fullDatabase: FullDatabase
+	export let popupDatabase: PopupDatabase
 	export let showLabel: boolean = false
 	export let showOwner: boolean = false
 	export let onClickToggle:
@@ -25,6 +27,22 @@
 		const tg = toggleMap[en.id]
 		return [tg[i]]
 	}
+
+	function getInvestigator(en: DecklistEntry): string | undefined {
+		if (en.labels !== undefined && en.labels.length >= 1) {
+			const firstLabel = en.labels[0]
+			return firstLabel.cardId
+		}
+		return undefined
+	}
+
+	function getLabels(en: DecklistEntry): string[] | undefined {
+		const labels = en.labels
+		if (labels !== undefined) {
+			return labels.filter((x) => x.text !== undefined).map((x) => x.text ?? '')
+		}
+		return undefined
+	}
 </script>
 
 <div class="card-scan-flex">
@@ -35,9 +53,11 @@
 				cardId={en.cardId}
 				amount={1}
 				unlink={i !== en.amount - 1}
+				{popupDatabase}
 				{fullDatabase}
 				toggled={getToggled(en, i)}
-				labels={showLabel ? en.labels?.map((x) => x.text) ?? null : null}
+				investigatorStrip={getInvestigator(en)}
+				labels={getLabels(en)}
 				onToggleChanged={onClickToggle === null
 					? undefined
 					: (c, maxCopy, t) => {

@@ -130,6 +130,7 @@
 
 	.amount {
 		width: 8px;
+		margin-left: 4px;
 		user-select: none;
 		font-family: 'ArkhamNumber';
 		font-size: 0.9em;
@@ -201,6 +202,7 @@
 
 	.all-class-icons {
 		height: 16px;
+		margin-left: 2px;
 		margin-right: 2px;
 		flex-shrink: 0;
 	}

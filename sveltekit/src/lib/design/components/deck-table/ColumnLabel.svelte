@@ -37,12 +37,15 @@
 </div>
 
 <style>
+	.outer-div {
+	}
+
 	.label {
 		font-size: x-small;
 		padding: 1px 4px;
 		border-radius: 2px;
 		white-space: nowrap;
-		margin: 0px 1px;
+		margin: 0px 2px;
 	}
 
 	.skill-flex {

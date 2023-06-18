@@ -61,6 +61,7 @@
 				{toggleMap}
 				{groupings}
 				{sortings}
+				{popupDatabase}
 				entries={singleRight ? singleEntries : entries}
 				showLabel={showLabelOnScans}
 				{fullDatabase}
