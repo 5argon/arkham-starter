@@ -1,14 +1,29 @@
-import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
-import { CardPack } from '$lib/core/card-pack'
+import type { CardAndAmount, GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+import { CardPack, cardPackToRevised } from '$lib/core/card-pack'
 
 export type PackCount = { [pack: number]: number }
+
+export function countPacksHigher(
+	rcoreDeck: GetDeckCardIdReturns,
+	extraCards: string[],
+	getPack: (c: string) => CardPack,
+): PackCount {
+	const a = countPacks(rcoreDeck.cards1, getPack)
+	const b = countPacks(
+		rcoreDeck.cards2.filter((x) => !extraCards.includes(x.cardId)),
+		getPack,
+	)
+	const c = countPacks(rcoreDeck.cards3, getPack)
+	const packCount = addPackCount(addPackCount(a, b), c)
+	return packCount
+}
 
 export function countPacks(cards: CardAndAmount[], getPack: (c: string) => CardPack): PackCount {
 	const pc: PackCount = {}
 	cards.forEach((x) => {
-		let pack = getPack(x.cardId)
-		if (pack === CardPack.CoreSet) {
-			pack = CardPack.RevisedCoreSet
+		const pack = cardPackToRevised(getPack(x.cardId))
+		if (pack === CardPack.Unknown || pack === CardPack.RandomBasicWeakness) {
+			return
 		}
 		if (!(pack in pc)) {
 			pc[pack] = 0

@@ -7,8 +7,11 @@
 	import type { PageData } from './$types'
 	import { fly } from 'svelte/transition'
 	import { decodeSideExtras, type DeckEntry } from '$lib/deck/deck'
+	import ExpansionCombinations from '$lib/design/pages/home/ExpansionCombinations.svelte'
 
 	export let data: PageData
+	let inner = false
+	let expansionCombinations = false
 
 	let shuffledEntries: DeckEntry[] = []
 
@@ -54,48 +57,72 @@
 	>
 	deck aggregator site. "Starter decks" requires low amount of Investigator Expansion purchases to build.
 	No matter which expansion you choose to start with first, I hope there is something to get started
-	with right away in this site.
-</p>
-<p>
-	I'm currently testing the deck listing UI (below). The search and filter tool is in development.
-	For now decks are completely randomized from the database with no way to browse them. You can also
-	try out my standalone <a href="/resource">resources and tools</a>.
+	with right away. <a href="/about">About me and this site</a>.
 </p>
 
-<ListDivider label="Random Six Starter Decks" />
-
-<div class="help">
+{#if expansionCombinations}
+	<ExpansionCombinations
+		popupDatabase={data.pdb}
+		deckEntries={data.deckEntries}
+		onBack={() => {
+			inner = false
+			expansionCombinations = false
+		}}
+	/>
+{/if}
+{#if !inner}
+	<!-- <ListDivider label="Browse" />
 	<div>
 		<Button
-			label={'Randomize Again'}
-			block
-			center
+			label="By Expansion Combinations"
 			onClick={() => {
-				randomize()
+				inner = true
+				expansionCombinations = true
 			}}
 		/>
-	</div>
-</div>
+		<Button
+			label="By Investigator"
+			onClick={() => {
+				// TODO
+			}}
+		/>
+	</div> -->
 
-<div class="flex">
-	{#each shuffledEntries as d, i (d.deck.id + i.toString())}
-		<div class="flex-inner" in:fly={{ x: 18, duration: 100 }}>
-			<DeckBannerHigher
-				popupDatabase={data.pdb}
-				deck={d.deck}
-				ahst={{
-					rename: d.modifiedDeckName,
-					excerpt: d.raw.excerpt,
-					authorId: d.raw.arkhamdbUserId,
-					authorName: d.raw.user,
-					authorUsername: d.raw.userUrl,
-					series: d.raw.series,
-					extraCards: decodeSideExtras(d.raw.sideExtras),
+	<ListDivider label="Random Six Starter Decks" />
+
+	<div class="help">
+		<div>
+			<Button
+				label={'Randomize Again'}
+				block
+				center
+				onClick={() => {
+					randomize()
 				}}
 			/>
 		</div>
-	{/each}
-</div>
+	</div>
+
+	<div class="flex">
+		{#each shuffledEntries as d, i (d.deck.id + i.toString())}
+			<div class="flex-inner" in:fly={{ x: 18, duration: 100 }}>
+				<DeckBannerHigher
+					popupDatabase={data.pdb}
+					deck={d.deck}
+					ahst={{
+						rename: d.modifiedDeckName,
+						excerpt: d.raw.excerpt,
+						authorId: d.raw.arkhamdbUserId,
+						authorName: d.raw.user,
+						authorUsername: d.raw.userUrl,
+						series: d.raw.series,
+						extraCards: decodeSideExtras(d.raw.sideExtras),
+					}}
+				/>
+			</div>
+		{/each}
+	</div>
+{/if}
 
 <style>
 	p {

@@ -45,8 +45,11 @@
 </ul>
 <ul>
 	<li><a href="./campaign/rtnotz">*Return to the Night of the Zealot</a></li>
-	<li><a href="./campaign/rtdwl">*Return to the Dunwich Legacy</a></li>
+	<li><a href="./campaign/rtdwl">Return to the Dunwich Legacy</a></li>
 	<li><a href="./campaign/rtptc">*Return to the Path to Carcosa</a></li>
 	<li><a href="./campaign/rttfa">*Return to the Forgotten Age</a></li>
 	<li><a href="./campaign/rttcu">*Return to the Circle Undone</a></li>
+</ul>
+<ul>
+	<li><a href="./campaign/overall">Overall</a></li>
 </ul>

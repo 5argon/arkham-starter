@@ -52,9 +52,9 @@
 	let remainingTabIndex = 1
 	let forwardRcore: boolean = true
 
-	let toggleMapTransfer: { [cardId: string]: boolean } = {}
-	let toggleMapRemainingActive: { [cardId: string]: boolean } = {}
-	let toggleMapRemainingInactive: { [cardId: string]: boolean } = {}
+	let toggleMapTransfer: { [cardId: string]: boolean[] } = {}
+	let toggleMapRemainingActive: { [cardId: string]: boolean[] } = {}
+	let toggleMapRemainingInactive: { [cardId: string]: boolean[] } = {}
 
 	let groupings: Grouping[] = []
 	let sortings: Sorting[] = []
@@ -482,8 +482,8 @@
 			entries={transferEntries}
 			{groupings}
 			{sortings}
-			onClickToggle={(c, t) => {
-				toggleMapTransfer[c] = t
+			onClickToggle={(id, copy, t) => {
+				toggleMapTransfer[id] = new Array(copy).fill(t)
 				toggleMapTransfer = { ...toggleMapTransfer }
 			}}
 			taboo={true}
@@ -513,8 +513,8 @@
 					entries={remainingActiveEntries}
 					groupings={groupings2}
 					sortings={sortings2}
-					onClickToggle={(c, t) => {
-						toggleMapRemainingActive[c] = t
+					onClickToggle={(id, copy, t) => {
+						toggleMapRemainingActive[id] = new Array(copy).fill(t)
 						toggleMapRemainingActive = { ...toggleMapRemainingActive }
 					}}
 					taboo={true}
@@ -531,8 +531,8 @@
 					entries={remainingInactiveEntries}
 					groupings={groupings2}
 					sortings={sortings2}
-					onClickToggle={(c, t) => {
-						toggleMapRemainingInactive[c] = t
+					onClickToggle={(id, copy, t) => {
+						toggleMapRemainingInactive[id] = new Array(copy).fill(t)
 						toggleMapRemainingInactive = { ...toggleMapRemainingInactive }
 					}}
 					taboo={true}

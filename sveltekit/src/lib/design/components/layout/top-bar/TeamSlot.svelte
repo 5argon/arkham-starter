@@ -4,4 +4,12 @@
 	export let index: number
 </script>
 
-<CardSpan cardId="01502" showImageStrip color />
+<span>
+	<CardSpan cardId="01502" showImageStrip color />
+</span>
+
+<style>
+	span {
+		margin: 0px 2px;
+	}
+</style>

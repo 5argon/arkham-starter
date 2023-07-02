@@ -31,6 +31,13 @@ export enum CardPack {
 	RandomBasicWeakness,
 }
 
+export function cardPackToRevised(x: CardPack): CardPack {
+	if (x === CardPack.CoreSet) {
+		return CardPack.RevisedCoreSet
+	}
+	return x
+}
+
 export function isReturnToPack(x: CardPack): boolean {
 	if (
 		x === CardPack.ReturnToTheNightOfTheZealot ||

@@ -8,4 +8,4 @@
 
 <PageTitle title={'Campaign Reference: ' + returnToTheDunwichLegacyCampaign.name} helpMd={help} />
 
-<EncounterOverview campaign={returnToTheDunwichLegacyCampaign} incomplete />
+<EncounterOverview campaign={returnToTheDunwichLegacyCampaign} />

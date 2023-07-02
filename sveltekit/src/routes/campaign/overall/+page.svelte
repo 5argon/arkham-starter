@@ -54,7 +54,10 @@
 
 <PageTitle title={'Campaign Reference: Overall'} helpMd={help} />
 
-<t> This is a secret page that summarizes all campaigns of Arkham Horror: The Card Game. </t>
+<t>
+	This is a page that summarizes encounter sets usage for all campaigns of Arkham Horror: The Card
+	Game.
+</t>
 
 <a href="/campaign">Back to Campaign List</a>
 

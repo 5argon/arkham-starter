@@ -221,9 +221,24 @@ export const returnToExtracurricularActivityScenario: Scenario = {
 	shortName: 'I-A',
 	setups: [
 		{
+			name: 'As 1st Scenario',
 			shuffles: [
 				{ encounterSet: extracurricularActivity, overwriteCount: 0 },
-				{ encounterSet: returnToExtracurricularActivity, overwriteCount: 0 },
+				{ encounterSet: returnToExtracurricularActivity, overwriteCount: 2 },
+				bishopsThralls,
+				sorcery,
+				whippoorwills,
+				beyondTheThreshold,
+				resurgentEvils,
+				secretDoors,
+				yogSothothsEmissaries,
+			],
+		},
+		{
+			name: 'As 2nd Scenario',
+			shuffles: [
+				{ encounterSet: extracurricularActivity, overwriteCount: 0 },
+				{ encounterSet: returnToExtracurricularActivity, overwriteCount: 1 },
 				bishopsThralls,
 				sorcery,
 				whippoorwills,
@@ -243,8 +258,8 @@ export const returnToTheHouseAlwaysWinsScenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: theHouseAlwaysWins, overwriteCount: 0 },
-				{ encounterSet: returnToTheHouseAlwaysWins, overwriteCount: 0 },
+				{ encounterSet: theHouseAlwaysWins, overwriteCount: 4 },
+				{ encounterSet: returnToTheHouseAlwaysWins, overwriteCount: 4 },
 				rats,
 				badLuck,
 				naomisCrew,
@@ -261,8 +276,8 @@ export const returnToTheMiskatonicMuseumScenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: theMiskatonicMuseum, overwriteCount: 0 },
-				{ encounterSet: returnToTheMiskatonicMuseum, overwriteCount: 0 },
+				{ encounterSet: theMiskatonicMuseum, overwriteCount: 10 },
+				{ encounterSet: returnToTheMiskatonicMuseum, overwriteCount: 4 },
 				badLuck,
 				sorcery,
 				beyondTheThreshold,
@@ -281,7 +296,7 @@ export const returnToTheEssexCountyExpressScenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: theEssexCountyExpress, overwriteCount: 0 },
+				{ encounterSet: theEssexCountyExpress, overwriteCount: 13 },
 				{ encounterSet: returnToTheEssexCountyExpress, overwriteCount: 0 },
 				darkCult,
 				beyondTheThreshold,
@@ -299,12 +314,24 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: bloodOnTheAltar, overwriteCount: 0 },
+				{ encounterSet: bloodOnTheAltar, overwriteCount: 13 },
 				{ encounterSet: returnToBloodOnTheAltar, overwriteCount: 0 },
 				nightgaunts,
 				dunwich,
 				whippoorwills,
 				resurgentEvils,
+			],
+			remaining: [naomisCrew],
+		},
+		{
+			shuffles: [
+				{ encounterSet: bloodOnTheAltar, overwriteCount: 13 },
+				{ encounterSet: returnToBloodOnTheAltar, overwriteCount: 1 },
+				nightgaunts,
+				dunwich,
+				whippoorwills,
+				resurgentEvils,
+				naomisCrew,
 			],
 			remaining: [naomisCrew],
 		},
@@ -318,8 +345,8 @@ export const returnToUndimensionedAndUnseenScenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: undimensionedAndUnseen, overwriteCount: 0 },
-				{ encounterSet: returnToUndimensionedAndUnseen, overwriteCount: 0 },
+				{ encounterSet: undimensionedAndUnseen, overwriteCount: 11 },
+				{ encounterSet: returnToUndimensionedAndUnseen, overwriteCount: 2 },
 				beastThralls,
 				dunwich,
 				whippoorwills,
@@ -336,7 +363,7 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: whereDoomAwaits, overwriteCount: 0 },
+				{ encounterSet: whereDoomAwaits, overwriteCount: 12 },
 				{ encounterSet: returnToWhereDoomAwaits, overwriteCount: 0 },
 				beastThralls,
 				bishopsThralls,
@@ -345,7 +372,19 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 				erraticFear,
 				resurgentEvils,
 			],
-			remaining: [hideousAbominations],
+		},
+		{
+			shuffles: [
+				{ encounterSet: whereDoomAwaits, overwriteCount: 12 },
+				{ encounterSet: returnToWhereDoomAwaits, overwriteCount: 0 },
+				beastThralls,
+				bishopsThralls,
+				sorcery,
+				creepingCold,
+				erraticFear,
+				resurgentEvils,
+				{ encounterSet: hideousAbominations, overwriteCount: 2 },
+			],
 		},
 	],
 }
@@ -357,8 +396,8 @@ export const returnToLostInTimeAndSpaceScenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: lostInTimeAndSpace, overwriteCount: 0 },
-				{ encounterSet: returnToLostInTimeAndSpace, overwriteCount: 0 },
+				{ encounterSet: lostInTimeAndSpace, overwriteCount: 23 },
+				{ encounterSet: returnToLostInTimeAndSpace, overwriteCount: 3 },
 				hideousAbominations,
 				sorcery,
 				beyondTheThreshold,
