@@ -142,8 +142,10 @@ export function checkOverlaps(
 				firstLabel !== undefined
 					? [
 							{
+								cardId: firstLabel.cardId,
 								color: firstLabel.color,
-								text: firstLabel.text + ' (' + (found.amount ?? 0) + '/' + getQuantity(x.cardId) + ')',
+								text:
+									(firstLabel.text ?? "") + ' ' + (found.amount ?? 0) + '/' + getQuantity(x.cardId) ,
 							},
 					  ]
 					: undefined,
