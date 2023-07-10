@@ -139,7 +139,7 @@ export const theUnspeakableOathScenario: Scenario = {
 		{
 			shuffles: [
 				{ encounterSet: theUnspeakableOath, overwriteCount: 7 },
-				agentsOfHastur,
+				{ encounterSet: agentsOfHastur, overwriteCount: 2 },
 				decayAndFilth,
 				delusions,
 				{ encounterSet: hastursGift, overwriteCount: 2 },
