@@ -40,7 +40,7 @@ export const dividerData: DividerToc = [
 	{
 		groupName: 'Player Cards : CCQ (Cycle Class Quantity)',
 		description:
-			'Alternate player card organization by Investigator Expansion, then by class of that expansion.',
+			'Alternate player card organization by Investigator Expansion, then by class of that expansion. The encounter set-like quantity counter can prevent lost card.',
 		items: [
 			{ name: 'CCQ - Core Set', count: 8, description: '' },
 			{ name: 'CCQ - Revised Core Set', count: 8, description: '' },
@@ -48,6 +48,7 @@ export const dividerData: DividerToc = [
 			{ name: 'CCQ - The Path to Carcosa', count: 6, description: '' },
 			{ name: 'CCQ - The Forgotten Age', count: 6, description: '' },
 			{ name: 'CCQ - The Circle Undone', count: 7, description: '' },
+			{ name: 'CCQ - The Dream-Eaters', count: 6, description: '' },
 			{ name: 'CCQ - Edge of the Earth', count: 11, description: '' },
 			{ name: 'CCQ - The Scarlet Keys', count: 6, description: '' },
 		],

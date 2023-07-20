@@ -38,9 +38,10 @@
     "items": [
       "01_Basic Weakness.png",
       "02_Bonded.png",
-      "03_Permanent.png"
+      "03_Permanent.png",
+      "04_Proxy.png"
     ],
-    "folder": "Player - Misc x3"
+    "folder": "Player - Misc x4"
   },
   {
     "items": [
@@ -774,6 +775,17 @@
       "14_Return to Lost in Time and Space.png"
     ],
     "folder": "Campaign - Return to the Dunwich Legacy x14"
+  },
+  {
+    "items": [
+      "01_Guardian 27.png",
+      "02_Seeker 33.png",
+      "03_Rogue 32.png",
+      "04_Mystic 31.png",
+      "05_Survivor 27.png",
+      "06_Neutral 16.png"
+    ],
+    "folder": "CCQ - The Dream-Eaters x6"
   },
   {
     "items": [
