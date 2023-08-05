@@ -141,12 +141,8 @@ export const dancingMad2Scenario: Scenario = {
 				{ encounterSet: agentsOfTheOutside, overwriteCount: 2 },
 				cleanupCrew,
 				crimsonConspiracy,
-				{ encounterSet: secretWar, overwriteCount: 2 },
-				shadowOfADoubt,
-			],
-			remaining: [
-				{ encounterSet: agentsOfTheOutside, overwriteCount: 2 },
 				{ encounterSet: secretWar, overwriteCount: 5 },
+				shadowOfADoubt,
 			],
 		},
 	],
@@ -197,7 +193,7 @@ export const dogsOfWar2Scenario: Scenario = {
 		{
 			shuffles: [
 				{ encounterSet: dogsOfWar, overwriteCount: 6 },
-				cleanupCrew,
+				{ encounterSet: cleanupCrew, overwriteCount: 5 },
 				scarletSorcery,
 				spatialAnomaly,
 				spreadingCorruption,
