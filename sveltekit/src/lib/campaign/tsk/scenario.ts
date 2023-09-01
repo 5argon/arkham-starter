@@ -247,8 +247,8 @@ export const withoutATraceScenario: Scenario = {
 			shuffles: [
 				{ encounterSet: withoutATrace, overwriteCount: 0 },
 				agentsOfTheOutside,
-				beyondTheBeyond,
-				outsiders,
+				{ encounterSet: beyondTheBeyond, overwriteCount: 2 },
+				{ encounterSet: outsiders, overwriteCount: 5 },
 				secretWar,
 				spreadingCorruption,
 			],

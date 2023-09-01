@@ -2,9 +2,11 @@
 
 "Profile" is a career profile screen of sorts similar to live service competitive online games. This kind of system aims to motivate the player to do better, to try something new and fill the blanks, or simply to admire or show off their love of the game to social networks.
 
+The UI will provide customizable "blank spots" to suit your needs. For example, if you don't care about Easy and Expert difficulty you can turn it off so it doesn't appear that you are "missing out" not having cleared Easy or Expert of a campaign.
+
 By importing **final state of campaigns** you had accumulated, the system will analyze and present fun information back to you. You may remembered which campaign you had cleared Standard or Hard already, but it maybe hard to answer more complex question like :
 
-- Which card you hadn't managed to purchas into the deck at all?
+- Which card you hadn't managed to purchase into the deck at all?
 - Which Investigator Expansion as a whole is under-utilized?
 - Did we ever took a particular branch in the story in a particular campaign?
 - Unique official achievements (in newer releases and Return To) you had unlocked across all plays.

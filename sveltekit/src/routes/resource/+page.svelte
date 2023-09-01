@@ -22,6 +22,7 @@
 <ul>
 	<li><a href="/proxy">Proxy Template</a></li>
 	<li><a href="/divider">The 3mm Divider</a></li>
+	<li><a href="/taboo">Taboo</a></li>
 </ul>
 
 <h1>Standalone Tools</h1>
