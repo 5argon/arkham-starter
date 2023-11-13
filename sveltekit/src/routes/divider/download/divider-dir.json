@@ -108,16 +108,6 @@
   },
   {
     "items": [
-      "01_Main.png",
-      "02_Encounter.png",
-      "03_Mi-Go Incursion.png",
-      "04_Single Group.png",
-      "05_Epic Multiplayer.png"
-    ],
-    "folder": "Standalone - The Blob That Ate Everything x5"
-  },
-  {
-    "items": [
       "01_The Gathering.png",
       "02_The Midnight Masks.png",
       "03_The Devourer Below.png"
@@ -220,7 +210,7 @@
   {
     "items": [
       "01_Agents of Azathoth.png",
-      "02_Annette's Coven.png",
+      "02_Anette's Coven.png",
       "03_City of Sins.png",
       "04_Inexorable Fate.png",
       "05_Music of the Damned.png",
@@ -272,16 +262,6 @@
       "07_Neutral 6.png"
     ],
     "folder": "CCQ - The Circle Undone x7"
-  },
-  {
-    "items": [
-      "01_By the Book.png",
-      "02_Read or Die.png",
-      "03_All or Nothing.png",
-      "04_Bad Blood.png",
-      "05_Red Tide Rising.png"
-    ],
-    "folder": "Challenge Scenario x5"
   },
   {
     "items": [
@@ -682,6 +662,19 @@
   },
   {
     "items": [
+      "01_Main.png",
+      "02_Encounter.png",
+      "03_Mi-Go Incursion.png",
+      "04_Single Group.png",
+      "05_Epic Multiplayer.png",
+      "06_Main (Else).png",
+      "07_The Blob That Ate Everything Else.png",
+      "08_Mi-Go Incursion II.png"
+    ],
+    "folder": "Standalone - The Blob That Ate Everything x8"
+  },
+  {
+    "items": [
       "01_Agents of the Outside.png",
       "02_Agents of Yuggoth.png",
       "03_Beyond the Beyond.png",
@@ -786,6 +779,17 @@
       "06_Neutral 16.png"
     ],
     "folder": "CCQ - The Dream-Eaters x6"
+  },
+  {
+    "items": [
+      "01_By the Book.png",
+      "02_Read or Die.png",
+      "03_All or Nothing.png",
+      "04_Bad Blood.png",
+      "05_Red Tide Rising.png",
+      "06_Laid to Rest.png"
+    ],
+    "folder": "Challenge Scenario x6"
   },
   {
     "items": [
