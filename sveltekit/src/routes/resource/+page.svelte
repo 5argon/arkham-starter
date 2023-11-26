@@ -14,15 +14,16 @@
 <ul>
 	<li><a href="/explore">Explore Investigator Expansions</a></li>
 	<li><a href="/campaign">Campaign Reference</a></li>
-	<li><a href="/tsk-document">The Scarlet Keys : Printable Documents</a></li>
-	<li><a href="/tsk-map">The Scarlet Keys : Upscaled World Map</a></li>
 </ul>
 
 <h2>Custom blings</h2>
 <ul>
 	<li><a href="/proxy">Proxy Template</a></li>
 	<li><a href="/divider">The 3mm Divider</a></li>
-	<li><a href="/taboo">Taboo</a></li>
+	<li><a href="/errata">Errata Patch Cards</a></li>
+	<li><a href="/supply">The Forgotten Age : Supply Cards</a></li>
+	<li><a href="/tsk-document">The Scarlet Keys : Printable Documents</a></li>
+	<li><a href="/tsk-map">The Scarlet Keys : Upscaled World Map</a></li>
 </ul>
 
 <h1>Standalone Tools</h1>

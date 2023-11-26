@@ -59,7 +59,7 @@
 	</select>
 </div>
 
-<ListDivider label={'Gather These Encounter Sets'} />
+<ListDivider label={'Gather'} />
 <EncounterIconFlex
 	encounterSets={selectedScenarioEncounters}
 	{showName}

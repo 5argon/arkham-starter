@@ -119,6 +119,12 @@ export function manualEdit(p: AhdbCard[]) {
     c.linked_to_code = "09119b";
     addCust(c, p, "09119");
   });
+
+  // Parallel Pete
+  manualEditOne(p, "90046", (c) => {
+    c.double_sided = true;
+    c.backimagesrc = "/bundles/cards/90046b.png";
+  });
 }
 
 function addCust(card: AhdbCard, p: AhdbCard[], c: string) {

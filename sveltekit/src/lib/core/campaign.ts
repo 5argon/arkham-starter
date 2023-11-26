@@ -1,3 +1,5 @@
+import type { W } from "vitest/dist/types-2b1c412e"
+
 export interface EncounterSet {
 	name: string
 	icon: string
@@ -37,8 +39,20 @@ export interface ScenarioSetup {
 	name?: string
 	shuffles: EncounterSetItem[]
 	remaining?: EncounterSetItem[]
+	specialGather?: EncounterSetItem[]
+	additionalWeakness?: AdditionalWeakness[],
+	customRemove?: CustomRemove,
 	gameComponents?: GameComponent[]
 	gameComponentsPerDifficulty?: PerDifficultySettings<GameComponent[]>
+}
+
+export interface AdditionalWeakness{ 
+	trait: string
+}
+
+export interface CustomRemove {
+	count: number
+	why:string
 }
 
 export type EncounterSetItem = EncounterSet | EncounterSetWithModification
@@ -46,6 +60,7 @@ export type EncounterSetItem = EncounterSet | EncounterSetWithModification
 export interface EncounterSetWithModification {
 	encounterSet: EncounterSet
 	overwriteCount?: number
+	what?:string[]
 }
 
 export function isEncounterSetWithModification(

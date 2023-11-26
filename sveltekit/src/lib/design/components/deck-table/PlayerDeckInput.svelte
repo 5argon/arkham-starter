@@ -63,7 +63,7 @@
 			}
 		}
 	}
-	$: playerClass = 'player-' + (player + 1) + '-bg'
+	$: playerClass = 'player-' + ((player % 4) + 1) + '-bg'
 	$: classClass = cardClassToBackgroundClass(cardClass)
 </script>
 

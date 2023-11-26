@@ -10,6 +10,7 @@ import {
 	strikingFear,
 } from '../notz/encounter'
 import {
+	armitagesFate,
 	badLuck,
 	beastThralls,
 	beyondTheThreshold,
@@ -136,6 +137,16 @@ export const bloodOnTheAltarScenario: Scenario = {
 				dunwich,
 				whippoorwills,
 			],
+			customRemove: { count: 3, why: 'Three random encounter cards under locations.' },
+			specialGather: [
+				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
+				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
+				{
+					encounterSet: extracurricularActivity,
+					overwriteCount: 1,
+					what: ['Professor Warren Rice'],
+				},
+			],
 		},
 		{
 			shuffles: [
@@ -145,6 +156,16 @@ export const bloodOnTheAltarScenario: Scenario = {
 				dunwich,
 				whippoorwills,
 				naomisCrew,
+			],
+			customRemove: { count: 3, why: 'Three random encounter cards under locations.' },
+			specialGather: [
+				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
+				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
+				{
+					encounterSet: extracurricularActivity,
+					overwriteCount: 1,
+					what: ['Professor Warren Rice'],
+				},
 			],
 		},
 	],
@@ -162,6 +183,17 @@ export const undimensionedAndUnseenScenario: Scenario = {
 				beastThralls,
 				dunwich,
 				whippoorwills,
+			],
+			additionalWeakness: [
+				{
+					trait: 'Madness',
+				},
+				{
+					trait: 'Injury',
+				},
+				{
+					trait: 'Pact',
+				},
 			],
 		},
 	],
@@ -182,6 +214,12 @@ export const whereDoomAwaitsScenario: Scenario = {
 				bishopsThralls,
 				sorcery,
 			],
+			gameComponentsPerDifficulty: {
+				easy: [GameComponent.TokenM3],
+				standard: [GameComponent.TokenM5],
+				hard: [GameComponent.TokenM6],
+				expert: [GameComponent.TokenM7],
+			},
 		},
 		{
 			shuffles: [
@@ -194,6 +232,12 @@ export const whereDoomAwaitsScenario: Scenario = {
 				sorcery,
 				{ encounterSet: hideousAbominations, overwriteCount: 2 },
 			],
+			gameComponentsPerDifficulty: {
+				easy: [GameComponent.TokenM3],
+				standard: [GameComponent.TokenM5],
+				hard: [GameComponent.TokenM6],
+				expert: [GameComponent.TokenM7],
+			},
 		},
 	],
 }
@@ -315,13 +359,22 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 		{
 			shuffles: [
 				{ encounterSet: bloodOnTheAltar, overwriteCount: 13 },
-				{ encounterSet: returnToBloodOnTheAltar, overwriteCount: 0 },
 				nightgaunts,
 				dunwich,
 				whippoorwills,
 				resurgentEvils,
 			],
-			remaining: [naomisCrew],
+			remaining: [returnToBloodOnTheAltar],
+			customRemove: { count: 3, why: 'Three random encounter cards under locations.' },
+			specialGather: [
+				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
+				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
+				{
+					encounterSet: extracurricularActivity,
+					overwriteCount: 1,
+					what: ['Professor Warren Rice'],
+				},
+			],
 		},
 		{
 			shuffles: [
@@ -334,6 +387,19 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 				naomisCrew,
 			],
 			remaining: [naomisCrew],
+			customRemove: {
+				count: 3,
+				why: "Three non-Naomi's Crew encounter cards under locations.",
+			},
+			specialGather: [
+				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
+				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
+				{
+					encounterSet: extracurricularActivity,
+					overwriteCount: 1,
+					what: ['Professor Warren Rice'],
+				},
+			],
 		},
 	],
 }
@@ -351,6 +417,17 @@ export const returnToUndimensionedAndUnseenScenario: Scenario = {
 				dunwich,
 				whippoorwills,
 				erraticFear,
+			],
+			additionalWeakness: [
+				{
+					trait: 'Madness',
+				},
+				{
+					trait: 'Injury',
+				},
+				{
+					trait: 'Pact',
+				},
 			],
 		},
 	],
@@ -372,6 +449,12 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 				erraticFear,
 				resurgentEvils,
 			],
+			gameComponentsPerDifficulty: {
+				easy: [GameComponent.TokenM3],
+				standard: [GameComponent.TokenM5],
+				hard: [GameComponent.TokenM6],
+				expert: [GameComponent.TokenM7],
+			},
 		},
 		{
 			shuffles: [
@@ -385,6 +468,12 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 				resurgentEvils,
 				{ encounterSet: hideousAbominations, overwriteCount: 2 },
 			],
+			gameComponentsPerDifficulty: {
+				easy: [GameComponent.TokenM3],
+				standard: [GameComponent.TokenM5],
+				hard: [GameComponent.TokenM6],
+				expert: [GameComponent.TokenM7],
+			},
 		},
 	],
 }

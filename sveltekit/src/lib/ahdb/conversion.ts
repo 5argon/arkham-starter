@@ -115,6 +115,7 @@ export function packCodeToIconConversion(p: string): CardPack {
 		case 'bad':
 		case 'btb':
 		case 'rtr':
+		case 'otr':
 			return CardPack.ParallelInvestigator
 		case 'books':
 		case 'hoth':

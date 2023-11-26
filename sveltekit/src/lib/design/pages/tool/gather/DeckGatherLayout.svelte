@@ -47,6 +47,17 @@
 					break
 				case 3:
 					colorHex = 'player-4-bg'
+				case 4:
+					colorHex = 'player-1-bg'
+					break
+				case 5:
+					colorHex = 'player-2-bg'
+					break
+				case 6:
+					colorHex = 'player-3-bg'
+					break
+				case 7:
+					colorHex = 'player-4-bg'
 					break
 			}
 		} else {
@@ -116,6 +127,10 @@
 	export let startingP2: string = ''
 	export let startingP3: string = ''
 	export let startingP4: string = ''
+	export let startingP5: string = ''
+	export let startingP6: string = ''
+	export let startingP7: string = ''
+	export let startingP8: string = ''
 	export let fixedLabelColor: boolean = false
 	export let showMainDeck: boolean = true
 	export let showSideDeck: boolean = true
@@ -129,11 +144,21 @@
 	let p2: Player = newDeck(startingP2)
 	let p3: Player = newDeck(startingP3)
 	let p4: Player = newDeck(startingP4)
+	let p5: Player = newDeck(startingP5)
+	let p6: Player = newDeck(startingP6)
+	let p7: Player = newDeck(startingP7)
+	let p8: Player = newDeck(startingP8)
 	let p1r: GetDeckCardIdReturns | null = null
 	let p2r: GetDeckCardIdReturns | null = null
 	let p3r: GetDeckCardIdReturns | null = null
 	let p4r: GetDeckCardIdReturns | null = null
+	let p5r: GetDeckCardIdReturns | null = null
+	let p6r: GetDeckCardIdReturns | null = null
+	let p7r: GetDeckCardIdReturns | null = null
+	let p8r: GetDeckCardIdReturns | null = null
 	let pulling: boolean = false
+	let eightMode: boolean =
+		startingP5 !== '' || startingP6 !== '' || startingP7 !== '' || startingP8 !== ''
 	$: overlapping = overlappingEntries.length > 0
 	var overlappingCount: number
 
@@ -152,10 +177,18 @@
 		p2r = null
 		p3r = null
 		p4r = null
+		p5r = null
+		p6r = null
+		p7r = null
+		p8r = null
 		const p1x = extractDeckFromUrl(p1.deckUrl)
 		const p2x = extractDeckFromUrl(p2.deckUrl)
 		const p3x = extractDeckFromUrl(p3.deckUrl)
 		const p4x = extractDeckFromUrl(p4.deckUrl)
+		const p5x = extractDeckFromUrl(p5.deckUrl)
+		const p6x = extractDeckFromUrl(p6.deckUrl)
+		const p7x = extractDeckFromUrl(p7.deckUrl)
+		const p8x = extractDeckFromUrl(p8.deckUrl)
 		async function getDeck(p: Player, x: ExtractResult): Promise<GetDeckCardIdReturns | null> {
 			if (x.deck === '') {
 				return null
@@ -167,10 +200,18 @@
 		const p2p = getDeck(p2, p2x)
 		const p3p = getDeck(p3, p3x)
 		const p4p = getDeck(p4, p4x)
+		const p5p = getDeck(p5, p5x)
+		const p6p = getDeck(p6, p6x)
+		const p7p = getDeck(p7, p7x)
+		const p8p = getDeck(p8, p8x)
 		p1r = await p1p
 		p2r = await p2p
 		p3r = await p3p
 		p4r = await p4p
+		p5r = await p5p
+		p6r = await p6p
+		p7r = await p7p
+		p8r = await p8p
 		function sum(a: CardAndAmount[]): number {
 			return a.reduce((p, c) => {
 				return p + c.amount
@@ -208,8 +249,40 @@
 			sideCount: p4r ? sum(p4r.cards2) : 0,
 			investigator: p4r ? fdb.getCard(p4r.investigatorCode) : null,
 		}
+		p5 = {
+			...p5,
+			deck: p5r ? p5r.deck : '',
+			error: !p5r && p5.deckUrl !== '' ? true : false,
+			mainCount: p5r ? sum(p5r.cards1) : 0,
+			sideCount: p5r ? sum(p5r.cards2) : 0,
+			investigator: p5r ? fdb.getCard(p5r.investigatorCode) : null,
+		}
+		p6 = {
+			...p6,
+			deck: p6r ? p6r.deck : '',
+			error: !p6r && p6.deckUrl !== '' ? true : false,
+			mainCount: p6r ? sum(p6r.cards1) : 0,
+			sideCount: p6r ? sum(p6r.cards2) : 0,
+			investigator: p6r ? fdb.getCard(p6r.investigatorCode) : null,
+		}
+		p7 = {
+			...p7,
+			deck: p7r ? p7r.deck : '',
+			error: !p7r && p7.deckUrl !== '' ? true : false,
+			mainCount: p7r ? sum(p7r.cards1) : 0,
+			sideCount: p7r ? sum(p7r.cards2) : 0,
+			investigator: p7r ? fdb.getCard(p7r.investigatorCode) : null,
+		}
+		p8 = {
+			...p8,
+			deck: p8r ? p8r.deck : '',
+			error: !p8r && p8.deckUrl !== '' ? true : false,
+			mainCount: p8r ? sum(p8r.cards1) : 0,
+			sideCount: p8r ? sum(p8r.cards2) : 0,
+			investigator: p8r ? fdb.getCard(p8r.investigatorCode) : null,
+		}
 		sharingUrl = 'https://arkham-starter.com/tool/gather'
-		reactFill(p1r, p2r, p3r, p4r)
+		reactFill(p1r, p2r, p3r, p4r, p5r, p6r, p7r, p8r)
 		const su: string[] = []
 		if (p1r) {
 			su.push('p1=' + (p1x.published ? 'p-' : '') + p1x.deck)
@@ -223,6 +296,18 @@
 		if (p4r) {
 			su.push('p4=' + (p4x.published ? 'p-' : '') + p4x.deck)
 		}
+		if (p5r) {
+			su.push('p5=' + (p5x.published ? 'p-' : '') + p5x.deck)
+		}
+		if (p6r) {
+			su.push('p6=' + (p6x.published ? 'p-' : '') + p6x.deck)
+		}
+		if (p7r) {
+			su.push('p7=' + (p7x.published ? 'p-' : '') + p7x.deck)
+		}
+		if (p8r) {
+			su.push('p8=' + (p8x.published ? 'p-' : '') + p8x.deck)
+		}
 		if (su.length > 0) {
 			sharingUrl += '?' + su.join('&')
 		}
@@ -235,6 +320,10 @@
 		p2rr: GetDeckCardIdReturns | null,
 		p3rr: GetDeckCardIdReturns | null,
 		p4rr: GetDeckCardIdReturns | null,
+		p5rr: GetDeckCardIdReturns | null,
+		p6rr: GetDeckCardIdReturns | null,
+		p7rr: GetDeckCardIdReturns | null,
+		p8rr: GetDeckCardIdReturns | null,
 	) {
 		entries = []
 		toggleMap = {}
@@ -287,6 +376,54 @@
 				showSideDeck,
 			)
 		}
+		if (p5rr) {
+			fillIn(
+				p5rr,
+				4,
+				fixedLabelColor,
+				p5.investigator?.class1 ?? CardClass.Neutral,
+				entries,
+				forwardRcore,
+				showMainDeck,
+				showSideDeck,
+			)
+		}
+		if (p6rr) {
+			fillIn(
+				p6rr,
+				5,
+				fixedLabelColor,
+				p6.investigator?.class1 ?? CardClass.Neutral,
+				entries,
+				forwardRcore,
+				showMainDeck,
+				showSideDeck,
+			)
+		}
+		if (p7rr) {
+			fillIn(
+				p7rr,
+				6,
+				fixedLabelColor,
+				p7.investigator?.class1 ?? CardClass.Neutral,
+				entries,
+				forwardRcore,
+				showMainDeck,
+				showSideDeck,
+			)
+		}
+		if (p8rr) {
+			fillIn(
+				p8rr,
+				7,
+				fixedLabelColor,
+				p8.investigator?.class1 ?? CardClass.Neutral,
+				entries,
+				forwardRcore,
+				showMainDeck,
+				showSideDeck,
+			)
+		}
 		const checkResult = checkOverlaps(entries, (c) => fdb.getCard(c).original.quantity)
 		overlappingEntries.push(...checkResult.overlapReports)
 		overlappingCount = checkResult.uniqueOverlapCount
@@ -323,12 +460,20 @@
 			toggleMap = {}
 		}}
 	/>
+	{#if !eightMode}
+		<Button
+			label="Expand to 8 Decks"
+			onClick={() => {
+				eightMode = true
+			}}
+		/>
+	{/if}
 	<Checkbox
 		label="Fixed Label Color"
 		checked={fixedLabelColor}
 		onCheckChanged={() => {
 			fixedLabelColor = !fixedLabelColor
-			reactFill(p1r, p2r, p3r, p4r)
+			reactFill(p1r, p2r, p3r, p4r, p5r, p6r, p7r, p8r)
 		}}
 	/>
 	<Checkbox
@@ -336,7 +481,7 @@
 		checked={forwardRcore}
 		onCheckChanged={() => {
 			forwardRcore = !forwardRcore
-			reactFill(p1r, p2r, p3r, p4r)
+			reactFill(p1r, p2r, p3r, p4r, p5r, p6r, p7r, p8r)
 		}}
 	/>
 	<Checkbox
@@ -344,7 +489,7 @@
 		checked={showMainDeck}
 		onCheckChanged={() => {
 			showMainDeck = !showMainDeck
-			reactFill(p1r, p2r, p3r, p4r)
+			reactFill(p1r, p2r, p3r, p4r, p5r, p6r, p7r, p8r)
 		}}
 	/>
 	<Checkbox
@@ -352,7 +497,7 @@
 		checked={showSideDeck}
 		onCheckChanged={() => {
 			showSideDeck = !showSideDeck
-			reactFill(p1r, p2r, p3r, p4r)
+			reactFill(p1r, p2r, p3r, p4r, p5r, p6r, p7r, p8r)
 		}}
 	/>
 </div>
@@ -421,6 +566,72 @@
 		p4 = { ...p4, deckUrl: s }
 	}}
 />
+{#if eightMode}
+	<PlayerDeckInput
+		player={4}
+		cardClass={p5.investigator?.class1 ?? CardClass.Neutral}
+		{fixedLabelColor}
+		deckInput={p5.deckUrl}
+		investigatorCode={p5r?.investigatorCode}
+		actualDeckUrl={p5r?.link}
+		pullError={p5.error}
+		mainCount={p5.mainCount}
+		sideCount={p5.sideCount}
+		{pulling}
+		pulledDeckName={p5.deck}
+		onDeckUrlChanged={(s) => {
+			p5 = { ...p5, deckUrl: s }
+		}}
+	/>
+	<PlayerDeckInput
+		player={5}
+		cardClass={p6.investigator?.class1 ?? CardClass.Neutral}
+		{fixedLabelColor}
+		deckInput={p6.deckUrl}
+		investigatorCode={p6r?.investigatorCode}
+		actualDeckUrl={p6r?.link}
+		pullError={p6.error}
+		mainCount={p6.mainCount}
+		sideCount={p6.sideCount}
+		{pulling}
+		pulledDeckName={p6.deck}
+		onDeckUrlChanged={(s) => {
+			p6 = { ...p6, deckUrl: s }
+		}}
+	/>
+	<PlayerDeckInput
+		player={6}
+		cardClass={p7.investigator?.class1 ?? CardClass.Neutral}
+		{fixedLabelColor}
+		deckInput={p7.deckUrl}
+		investigatorCode={p7r?.investigatorCode}
+		actualDeckUrl={p7r?.link}
+		pullError={p7.error}
+		mainCount={p7.mainCount}
+		sideCount={p7.sideCount}
+		{pulling}
+		pulledDeckName={p7.deck}
+		onDeckUrlChanged={(s) => {
+			p7 = { ...p7, deckUrl: s }
+		}}
+	/>
+	<PlayerDeckInput
+		player={7}
+		cardClass={p8.investigator?.class1 ?? CardClass.Neutral}
+		{fixedLabelColor}
+		deckInput={p8.deckUrl}
+		investigatorCode={p8r?.investigatorCode}
+		actualDeckUrl={p8r?.link}
+		pullError={p8.error}
+		mainCount={p8.mainCount}
+		sideCount={p8.sideCount}
+		{pulling}
+		pulledDeckName={p8.deck}
+		onDeckUrlChanged={(s) => {
+			p8 = { ...p8, deckUrl: s }
+		}}
+	/>
+{/if}
 
 <Button disabled={pulling} label="Gather All Cards" onClick={gather} big block center />
 
