@@ -56,12 +56,6 @@
   },
   {
     "items": [
-      "01_Return to the Dunwich Legacy 20.png"
-    ],
-    "folder": "CCQ - Return To x1"
-  },
-  {
-    "items": [
       "01_Guardian 0.png",
       "02_Guardian 15.png",
       "03_Multi-Class 0.png",
@@ -590,6 +584,16 @@
       "24_Stirring in the Deep.png"
     ],
     "folder": "Campaign - Edge of the Earth x24"
+  },
+  {
+    "items": [
+      "01_Return to the Night of the Zealot 20.png",
+      "02_Return to the Dunwich Legacy 20.png",
+      "03_Return to the Path to Carcosa 20.png",
+      "04_Return to the Forgotten Age 22.png",
+      "05_Return to the Circle Undone 23.png"
+    ],
+    "folder": "CCQ - Return To x5"
   },
   {
     "items": [

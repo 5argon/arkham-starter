@@ -44,6 +44,7 @@ export const dividerData: DividerToc = [
 		items: [
 			{ name: 'CCQ - Core Set', count: 8, description: '' },
 			{ name: 'CCQ - Revised Core Set', count: 8, description: '' },
+			{ name: 'CCQ - Investigator Starter Decks', count: 5, description: '' },
 			{ name: 'CCQ - The Dunwich Legacy', count: 6, description: '' },
 			{ name: 'CCQ - The Path to Carcosa', count: 6, description: '' },
 			{ name: 'CCQ - The Forgotten Age', count: 6, description: '' },
@@ -51,6 +52,7 @@ export const dividerData: DividerToc = [
 			{ name: 'CCQ - The Dream-Eaters', count: 6, description: '' },
 			{ name: 'CCQ - Edge of the Earth', count: 11, description: '' },
 			{ name: 'CCQ - The Scarlet Keys', count: 6, description: '' },
+			{ name: 'CCQ - Return To', count: 5, description: '' },
 		],
 		link: 'something',
 	},
