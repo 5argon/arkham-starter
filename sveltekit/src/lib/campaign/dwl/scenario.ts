@@ -76,10 +76,12 @@ export const theHouseAlwaysWinsScenario: Scenario = {
 				badLuck,
 				naomisCrew,
 			],
-			gameComponents: [GameComponent.TokenElderThing],
 			remaining: [strikingFear, hideousAbominations],
 		},
 	],
+	commonSetup: {
+		gameComponents: [GameComponent.TokenElderThing],
+	},
 }
 
 export const theMiskatonicMuseumScenario: Scenario = {
@@ -96,9 +98,11 @@ export const theMiskatonicMuseumScenario: Scenario = {
 				sorcery,
 				theBeyond,
 			],
-			gameComponents: [GameComponent.TokenTablet],
 		},
 	],
+	commonSetup: {
+		gameComponents: [GameComponent.TokenTablet],
+	},
 }
 
 export const theEssexCountyExpressScenario: Scenario = {
@@ -114,14 +118,16 @@ export const theEssexCountyExpressScenario: Scenario = {
 				strikingFear,
 				theBeyond,
 			],
-			gameComponentsPerDifficulty: {
-				easy: [GameComponent.TokenM2],
-				standard: [GameComponent.TokenM3],
-				hard: [GameComponent.TokenM4],
-				expert: [GameComponent.TokenM5],
-			},
 		},
 	],
+	commonSetup: {
+		gameComponentsPerDifficulty: {
+			easy: [GameComponent.TokenM2],
+			standard: [GameComponent.TokenM3],
+			hard: [GameComponent.TokenM4],
+			expert: [GameComponent.TokenM5],
+		},
+	},
 }
 
 export const bloodOnTheAltarScenario: Scenario = {
@@ -137,16 +143,6 @@ export const bloodOnTheAltarScenario: Scenario = {
 				dunwich,
 				whippoorwills,
 			],
-			customRemove: { count: 3, why: 'Attach under locations.' },
-			specialGather: [
-				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
-				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
-				{
-					encounterSet: extracurricularActivity,
-					overwriteCount: 1,
-					what: ['Professor Warren Rice'],
-				},
-			],
 		},
 		{
 			shuffles: [
@@ -157,18 +153,20 @@ export const bloodOnTheAltarScenario: Scenario = {
 				whippoorwills,
 				naomisCrew,
 			],
-			customRemove: { count: 3, why: 'Attach under locations.' },
-			specialGather: [
-				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
-				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
-				{
-					encounterSet: extracurricularActivity,
-					overwriteCount: 1,
-					what: ['Professor Warren Rice'],
-				},
-			],
 		},
 	],
+	commonSetup: {
+		customRemove: { count: 3, why: 'Attach under locations.' },
+		specialGather: [
+			{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
+			{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
+			{
+				encounterSet: extracurricularActivity,
+				overwriteCount: 1,
+				what: ['Professor Warren Rice'],
+			},
+		],
+	},
 }
 
 export const undimensionedAndUnseenScenario: Scenario = {
@@ -184,19 +182,21 @@ export const undimensionedAndUnseenScenario: Scenario = {
 				dunwich,
 				whippoorwills,
 			],
-			additionalWeakness: [
-				{
-					trait: 'Madness',
-				},
-				{
-					trait: 'Injury',
-				},
-				{
-					trait: 'Pact',
-				},
-			],
 		},
 	],
+	commonSetup: {
+		additionalWeakness: [
+			{
+				trait: 'Madness',
+			},
+			{
+				trait: 'Injury',
+			},
+			{
+				trait: 'Pact',
+			},
+		],
+	},
 }
 
 export const whereDoomAwaitsScenario: Scenario = {
@@ -214,12 +214,6 @@ export const whereDoomAwaitsScenario: Scenario = {
 				bishopsThralls,
 				sorcery,
 			],
-			gameComponentsPerDifficulty: {
-				easy: [GameComponent.TokenM3],
-				standard: [GameComponent.TokenM5],
-				hard: [GameComponent.TokenM6],
-				expert: [GameComponent.TokenM7],
-			},
 		},
 		{
 			shuffles: [
@@ -232,14 +226,16 @@ export const whereDoomAwaitsScenario: Scenario = {
 				sorcery,
 				{ encounterSet: hideousAbominations, overwriteCount: 2 },
 			],
-			gameComponentsPerDifficulty: {
-				easy: [GameComponent.TokenM3],
-				standard: [GameComponent.TokenM5],
-				hard: [GameComponent.TokenM6],
-				expert: [GameComponent.TokenM7],
-			},
 		},
 	],
+	commonSetup: {
+		gameComponentsPerDifficulty: {
+			easy: [GameComponent.TokenM3],
+			standard: [GameComponent.TokenM5],
+			hard: [GameComponent.TokenM6],
+			expert: [GameComponent.TokenM7],
+		},
+	},
 }
 
 export const lostInTimeAndSpaceScenario: Scenario = {
@@ -349,6 +345,14 @@ export const returnToTheEssexCountyExpressScenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		gameComponentsPerDifficulty: {
+			easy: [GameComponent.TokenM2],
+			standard: [GameComponent.TokenM3],
+			hard: [GameComponent.TokenM4],
+			expert: [GameComponent.TokenM5],
+		},
+	},
 }
 
 export const returnToBloodOnTheAltarScenario: Scenario = {
@@ -365,16 +369,6 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 				resurgentEvils,
 			],
 			remaining: [returnToBloodOnTheAltar],
-			customRemove: { count: 3, why: 'Three random encounter cards under locations.' },
-			specialGather: [
-				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
-				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
-				{
-					encounterSet: extracurricularActivity,
-					overwriteCount: 1,
-					what: ['Professor Warren Rice'],
-				},
-			],
 		},
 		{
 			shuffles: [
@@ -387,21 +381,23 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 				naomisCrew,
 			],
 			remaining: [naomisCrew],
-			customRemove: {
-				count: 3,
-				why: "Three non-Naomi's Crew encounter cards under locations.",
-			},
-			specialGather: [
-				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
-				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
-				{
-					encounterSet: extracurricularActivity,
-					overwriteCount: 1,
-					what: ['Professor Warren Rice'],
-				},
-			],
 		},
 	],
+	commonSetup: {
+		customRemove: {
+			count: 3,
+			why: "Attach under locations, non-Naomi's Crew.",
+		},
+		specialGather: [
+			{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
+			{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
+			{
+				encounterSet: extracurricularActivity,
+				overwriteCount: 1,
+				what: ['Professor Warren Rice'],
+			},
+		],
+	},
 }
 
 export const returnToUndimensionedAndUnseenScenario: Scenario = {
@@ -418,19 +414,21 @@ export const returnToUndimensionedAndUnseenScenario: Scenario = {
 				whippoorwills,
 				erraticFear,
 			],
-			additionalWeakness: [
-				{
-					trait: 'Madness',
-				},
-				{
-					trait: 'Injury',
-				},
-				{
-					trait: 'Pact',
-				},
-			],
 		},
 	],
+	commonSetup: {
+		additionalWeakness: [
+			{
+				trait: 'Madness',
+			},
+			{
+				trait: 'Injury',
+			},
+			{
+				trait: 'Pact',
+			},
+		],
+	},
 }
 
 export const returnToWhereDoomAwaitsScenario: Scenario = {
@@ -449,12 +447,6 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 				erraticFear,
 				resurgentEvils,
 			],
-			gameComponentsPerDifficulty: {
-				easy: [GameComponent.TokenM3],
-				standard: [GameComponent.TokenM5],
-				hard: [GameComponent.TokenM6],
-				expert: [GameComponent.TokenM7],
-			},
 		},
 		{
 			shuffles: [
@@ -468,14 +460,16 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 				resurgentEvils,
 				{ encounterSet: hideousAbominations, overwriteCount: 2 },
 			],
-			gameComponentsPerDifficulty: {
-				easy: [GameComponent.TokenM3],
-				standard: [GameComponent.TokenM5],
-				hard: [GameComponent.TokenM6],
-				expert: [GameComponent.TokenM7],
-			},
 		},
 	],
+	commonSetup: {
+		gameComponentsPerDifficulty: {
+			easy: [GameComponent.TokenM3],
+			standard: [GameComponent.TokenM5],
+			hard: [GameComponent.TokenM6],
+			expert: [GameComponent.TokenM7],
+		},
+	},
 }
 
 export const returnToLostInTimeAndSpaceScenario: Scenario = {
