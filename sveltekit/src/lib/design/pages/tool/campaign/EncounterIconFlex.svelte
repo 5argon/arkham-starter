@@ -49,6 +49,7 @@
 		return sortEncountersScore(encounterA, encounterB, sorting, frequencies)
 	})
 	export let showName: boolean = false
+	export let showSetCount: boolean = false
 	export let hideNumbers: boolean = false
 	let encounterSetsExtracted: EncounterSet[] = []
 	let showingNumbers: (number | null)[] = []
@@ -87,7 +88,7 @@
 			<EncounterIconWithLabel
 				iconPath={ce.icon}
 				iconName={ce.name}
-				subText={makeSetCountText(ce)}
+				subText={showSetCount ? makeSetCountText(ce) : ''}
 				coreSet={ce.flag === EncounterSetFlag.Core}
 				returnToSet={ce.flag === EncounterSetFlag.ReturnTo}
 				{showName}

@@ -25,6 +25,7 @@
 	let scenarioTabIndex: number = 0
 	let transitionTabIndex: number = 0
 	let showName: boolean = false
+	let showSetCount: boolean = false
 	let shortScenarioName: boolean = false
 	let advanced: boolean = false
 	let difficulty: Difficulty = Difficulty.Standard
@@ -104,6 +105,13 @@
 			showName = c
 		}}
 	/>
+	<Checkbox
+		label={'Show Set Count'}
+		checked={showSetCount}
+		onCheckChanged={(c) => {
+			showSetCount = c
+		}}
+	/>
 </div>
 <div class="settings-item">
 	<Checkbox
@@ -156,6 +164,7 @@
 <EncounterIconFlex
 	encounterSets={coreEncounters}
 	{showName}
+	{showSetCount}
 	hideNumbers
 	{sorting}
 	frequencies={encounterFrequencies}
@@ -193,6 +202,7 @@
 			<EncounterScenariosTab
 				{campaign}
 				{showName}
+				{showSetCount}
 				{sorting}
 				dropdownIndex={scenarioTabIndex}
 				onDropdownIndexChanged={(n) => {

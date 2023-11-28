@@ -137,7 +137,7 @@ export const bloodOnTheAltarScenario: Scenario = {
 				dunwich,
 				whippoorwills,
 			],
-			customRemove: { count: 3, why: 'Three random encounter cards under locations.' },
+			customRemove: { count: 3, why: 'Attach under locations.' },
 			specialGather: [
 				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
 				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
@@ -157,7 +157,7 @@ export const bloodOnTheAltarScenario: Scenario = {
 				whippoorwills,
 				naomisCrew,
 			],
-			customRemove: { count: 3, why: 'Three random encounter cards under locations.' },
+			customRemove: { count: 3, why: 'Attach under locations.' },
 			specialGather: [
 				{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
 				{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },

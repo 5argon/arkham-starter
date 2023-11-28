@@ -23,8 +23,9 @@
 			enableHover={!showName}
 		/>
 	</div>
-	{#if showName}<span class="show-name" class:name-with-number={number !== null}>{iconName}</span
-		>{#if subText !== ''}<span class="sub-text">{subText}</span>{/if}{/if}
+	{#if showName}<span class="show-name" class:name-with-number={number !== null}>{iconName}</span>
+	{/if}
+	{#if subText !== ''}<span class="sub-text">{subText}</span>{/if}
 	{#if number !== null}<span class="number">(→{number})</span>{/if}
 </div>
 
