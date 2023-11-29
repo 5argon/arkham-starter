@@ -3,7 +3,6 @@ import { transitions } from './transition'
 
 export const theInnsmouthConspiracyCampaign: Campaign = {
 	name: 'The Innsmouth Conspiracy',
-	setupReferenceGraphic: 'The Innsmouth Conspiracy',
 	scenarioTransitions: transitions,
 	commonEncounterSets: [],
 	startingChaosBag: {

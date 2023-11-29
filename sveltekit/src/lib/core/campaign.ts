@@ -31,6 +31,7 @@ export interface Scenario {
 	index: number
 	name: string
 	shortName?: string
+	diagram?: string
 
 	setups: ScenarioSetup[]
 	commonSetup?: ScenarioSetupSub

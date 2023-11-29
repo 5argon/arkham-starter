@@ -21,8 +21,12 @@
 	</li>
 	<li>
 		In "Scenarios" tab, you will additionally see a minimalistic representation of that scenario's
-		setup instruction, represented by encounter set icons and numbers. There is no text instruction
-		other than "set aside".
+		setup instruction, represented by encounter set icons and numbers, and some important reminders
+		such as added Basic Weakness or Chaos Bag changes during Intro or Setup. (Light spoiler)
+	</li>
+	<li>
+		In "Diagrams" tab contains a sanity check image that helps reminding you of scenario's details.
+		Don't use it unless you already know the scenario inside out. (Heavy spoiler)
 	</li>
 </ul>
 

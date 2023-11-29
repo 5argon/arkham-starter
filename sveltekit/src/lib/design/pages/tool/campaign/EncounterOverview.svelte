@@ -6,6 +6,7 @@
 		type EncounterSet,
 	} from '$lib/core/campaign'
 	import { Difficulty } from '$lib/core/difficulty'
+	import Button from '$lib/design/components/basic/Button.svelte'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
@@ -16,6 +17,7 @@
 		findUniqueScenarios,
 		sortEncounters,
 	} from './campaign-analyze'
+	import EncounterDiagramsTab from './EncounterDiagramsTab.svelte'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	import EncounterMatrixTab from './EncounterMatrixTab.svelte'
 	import EncounterScenariosTab from './EncounterScenariosTab.svelte'
@@ -66,15 +68,6 @@
 </script>
 
 <a href="/campaign">Back to Campaign List</a>
-{#if campaign.setupReferenceGraphic !== undefined}
-	<a
-		target="_blank"
-		rel="noreferrer"
-		href={'/image/custom/setup-reference/' + campaign.setupReferenceGraphic + '.png'}
-		>Print Setup Reference Card</a
-	>
-{/if}
-
 {#if incomplete}
 	<p>
 		<strong>** INCOMPLETE **</strong> I only buy repackaged campaigns and have not played this campaign
@@ -92,6 +85,19 @@
 		<a href="https://github.com/5argon/arkham-starter" target="_blank" rel="noreferrer"
 			>Github page</a
 		> to find out how. Thank you!
+	</p>
+{/if}
+
+{#if campaign.setupReferenceGraphic !== undefined}
+	<ListDivider label="Download Setup Reference Cards" />
+	<a target="_blank" rel="noreferrer" href={campaign.setupReferenceGraphic}
+		>Click Here (Google Drive)</a
+	>
+
+	<p>
+		Note : The backside (_B.png) of setup reference cards contains a diagram that <b
+			>may spoils the scenario.</b
+		>
 	</p>
 {/if}
 
@@ -211,23 +217,14 @@
 				{incomplete}
 			/>
 		</div>
-		<div slot="tab3">Transitions</div>
+		<div slot="tab3">Diagrams (Contains Spoiler)</div>
 		<div slot="content3">
-			<EncounterTransitionsTab
+			<EncounterDiagramsTab
 				{campaign}
-				{advanced}
-				{sorting}
-				dropdownIndexScenario={scenarioTabIndex}
-				dropdownIndexTransition={transitionTabIndex}
-				onDropdownIndexScenarioChanged={(n) => {
+				dropdownIndex={scenarioTabIndex}
+				onDropdownIndexChanged={(n) => {
 					scenarioTabIndex = n
-					// Is it right that this logic is not inside the component?
-					transitionTabIndex = 0
 				}}
-				onDropdownIndexTransitionChanged={(n) => {
-					transitionTabIndex = n
-				}}
-				{showName}
 			/>
 		</div>
 	</LimitedTab>

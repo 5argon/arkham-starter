@@ -16,8 +16,6 @@
 	} from './campaign-analyze'
 	import CustomSetupRender from './CustomSetupRender.svelte'
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
-	import EncounterIconWithLabel from './EncounterIconWithLabel.svelte'
-	import { gameComponentsToString, makeSetCountText } from './helper'
 	export let campaign: Campaign
 	export let sorting: EncounterSetSorting
 	export let incomplete: boolean = false

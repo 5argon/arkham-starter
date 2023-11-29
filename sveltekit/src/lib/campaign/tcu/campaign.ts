@@ -3,7 +3,6 @@ import { transitions, transitionsReturnTo } from './transition'
 
 export const theCircleUndoneCampaign: Campaign = {
 	name: 'The Circle Undone',
-	setupReferenceGraphic: 'The Circle Undone',
 	scenarioTransitions: transitions,
 	commonEncounterSets: [],
 	startingChaosBag: {
@@ -16,7 +15,6 @@ export const theCircleUndoneCampaign: Campaign = {
 
 export const returnToTheCircleUndoneCampaign: Campaign = {
 	name: 'Return to the Circle Undone',
-	setupReferenceGraphic: 'Return to the Circle Undone',
 	scenarioTransitions: transitionsReturnTo,
 	commonEncounterSets: [],
 	startingChaosBag: {

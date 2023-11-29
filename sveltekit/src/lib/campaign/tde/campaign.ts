@@ -3,7 +3,6 @@ import { transitions } from './transition'
 
 export const theDreamEatersCampaign: Campaign = {
 	name: 'The Dream-Eaters',
-	setupReferenceGraphic: 'The Dream-Eaters',
 	scenarioTransitions: transitions,
 	commonEncounterSets: [],
 	startingChaosBag: {

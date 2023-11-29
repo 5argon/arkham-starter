@@ -19,6 +19,10 @@ input {
 	font-family: 'Ahlcg';
 }
 
+.arkham-text-font {
+	font-family: 'SerifText';
+}
+
 a, a:visited {
 	color: inherit;
 }

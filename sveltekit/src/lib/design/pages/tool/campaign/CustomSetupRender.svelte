@@ -62,7 +62,7 @@
 					coreSet={sg.encounterSet.flag === EncounterSetFlag.Core}
 					returnToSet={sg.encounterSet.flag === EncounterSetFlag.ReturnTo}
 					scenarioSet={sg.encounterSet.flag === EncounterSetFlag.Scenario}
-					subText={showSetCount ? sg.what?.join(', ') : ''}
+					subText={sg.what?.join(', ')}
 					{showName}
 				/>
 			{:else}

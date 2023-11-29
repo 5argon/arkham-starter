@@ -48,6 +48,7 @@ export const extracurricularActivityScenario: Scenario = {
 	index: 1,
 	name: 'Extracurricular Activity',
 	shortName: 'I-A',
+	diagram: 'Dunwich_1_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -68,6 +69,7 @@ export const theHouseAlwaysWinsScenario: Scenario = {
 	index: 2,
 	name: 'The House Always Wins',
 	shortName: 'I-B',
+	diagram: 'Dunwich_2_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -88,6 +90,7 @@ export const theMiskatonicMuseumScenario: Scenario = {
 	index: 5,
 	name: 'The Miskatonic Museum',
 	shortName: 'II',
+	diagram: 'Dunwich_3_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -109,6 +112,7 @@ export const theEssexCountyExpressScenario: Scenario = {
 	index: 6,
 	name: 'The Essex County Express',
 	shortName: 'III',
+	diagram: 'Dunwich_4_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -134,6 +138,7 @@ export const bloodOnTheAltarScenario: Scenario = {
 	index: 7,
 	name: 'Blood on the Altar',
 	shortName: 'IV',
+	diagram: 'Dunwich_5_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -173,6 +178,7 @@ export const undimensionedAndUnseenScenario: Scenario = {
 	index: 8,
 	name: 'Undimensioned and Unseen',
 	shortName: 'V',
+	diagram: 'Dunwich_6_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -203,6 +209,7 @@ export const whereDoomAwaitsScenario: Scenario = {
 	index: 9,
 	name: 'Where Doom Awaits',
 	shortName: 'VI',
+	diagram: 'Dunwich_7_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -242,6 +249,7 @@ export const lostInTimeAndSpaceScenario: Scenario = {
 	index: 10,
 	name: 'Lost in Time and Space',
 	shortName: 'VII',
+	diagram: 'Dunwich_8_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -259,6 +267,7 @@ export const returnToExtracurricularActivityScenario: Scenario = {
 	index: 1,
 	name: 'Extracurricular Activity',
 	shortName: 'I-A',
+	diagram: 'RT_Dunwich_1_B.png',
 	setups: [
 		{
 			name: 'As 1st Scenario',
@@ -295,6 +304,7 @@ export const returnToTheHouseAlwaysWinsScenario: Scenario = {
 	index: 2,
 	name: 'The House Always Wins',
 	shortName: 'I-B',
+	diagram: 'RT_Dunwich_2_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -313,6 +323,7 @@ export const returnToTheMiskatonicMuseumScenario: Scenario = {
 	index: 5,
 	name: 'The Miskatonic Museum',
 	shortName: 'II',
+	diagram: 'RT_Dunwich_3_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -333,6 +344,7 @@ export const returnToTheEssexCountyExpressScenario: Scenario = {
 	index: 6,
 	name: 'The Essex County Express',
 	shortName: 'III',
+	diagram: 'RT_Dunwich_4_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -359,6 +371,7 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 	index: 7,
 	name: 'Blood on the Altar',
 	shortName: 'IV',
+	diagram: 'RT_Dunwich_5_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -404,6 +417,7 @@ export const returnToUndimensionedAndUnseenScenario: Scenario = {
 	index: 8,
 	name: 'Undimensioned and Unseen',
 	shortName: 'V',
+	diagram: 'RT_Dunwich_6_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -435,6 +449,7 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 	index: 9,
 	name: 'Where Doom Awaits',
 	shortName: 'VI',
+	diagram: 'RT_Dunwich_7_B.png',
 	setups: [
 		{
 			shuffles: [
@@ -476,6 +491,7 @@ export const returnToLostInTimeAndSpaceScenario: Scenario = {
 	index: 10,
 	name: 'Lost in Time and Space',
 	shortName: 'VII',
+	diagram: 'RT_Dunwich_8_B.png',
 	setups: [
 		{
 			shuffles: [
