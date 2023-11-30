@@ -9,6 +9,7 @@
 	export let returnToSet: boolean = false
 	export let showName: boolean = false
 	export let number: number | null = null
+	export let disableHover: boolean = false
 </script>
 
 <div class="wrap">
@@ -20,7 +21,7 @@
 			{coreSet}
 			{returnToSet}
 			{scenarioSet}
-			enableHover={!showName}
+			enableHover={!disableHover && !showName}
 		/>
 	</div>
 	{#if showName}<span class="show-name" class:name-with-number={number !== null}>{iconName}</span>
@@ -49,5 +50,6 @@
 	.sub-text {
 		color: grey;
 		font-size: x-small;
+		margin-left: 2px;
 	}
 </style>

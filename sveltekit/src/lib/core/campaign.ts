@@ -37,10 +37,14 @@ export interface Scenario {
 	commonSetup?: ScenarioSetupSub
 }
 
-export interface ScenarioSetup {
+export type ScenarioSetup = {
 	name?: string
 	shuffles: EncounterSetItem[]
 	remaining?: EncounterSetItem[]
+} & ScenarioSetupSub
+
+export interface ScenarioSetupSub {
+	notes?: ScenarioNote[]
 	specialGather?: EncounterSetItem[]
 	additionalWeakness?: AdditionalWeakness[]
 	customRemove?: CustomRemove
@@ -48,12 +52,9 @@ export interface ScenarioSetup {
 	gameComponentsPerDifficulty?: PerDifficultySettings<GameComponent[]>
 }
 
-export interface ScenarioSetupSub {
-	specialGather?: EncounterSetItem[]
-	additionalWeakness?: AdditionalWeakness[]
-	customRemove?: CustomRemove
-	gameComponents?: GameComponent[]
-	gameComponentsPerDifficulty?: PerDifficultySettings<GameComponent[]>
+export interface ScenarioNote {
+	encounterSet?: EncounterSet
+	what: string
 }
 
 export interface AdditionalWeakness {

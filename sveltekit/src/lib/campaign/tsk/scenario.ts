@@ -254,6 +254,9 @@ export const withoutATraceScenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		notes: [{ encounterSet: outsiders, what: 'The Apocalyptic Presage enemy is set aside, out of play.' }],
+	},
 }
 
 export const congressOfTheKeys1Scenario: Scenario = {
@@ -271,15 +274,60 @@ export const congressOfTheKeys1Scenario: Scenario = {
 			],
 			remaining: [
 				agentsOfTheOutside,
-				beyondTheBeyond,
+				{ encounterSet: beyondTheBeyond, overwriteCount: 2 },
 				outsiders,
 				secretWar,
 				ancientEvils,
-				strikingFear,
+				{ encounterSet: strikingFear, overwriteCount: 4 },
 				redCoterie,
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				what: 'Consult v.II / v.III instruction for the 2nd encounter deck.',
+			},
+			{
+				encounterSet: redCoterie,
+				what: 'Do not gather Coterie enemies who voted “nay,” abstained, or were eerily silent (not counting The Red-Gloved Man).',
+			},
+			{
+				encounterSet: redCoterie,
+				what: 'Remember to add remaining "yea" members that was not spawned to the encounter deck. (The encounter deck could be bigger than above\'s card count.)',
+			},
+		],
+		specialGather: [
+			{
+				encounterSet: withoutATrace,
+				what: ['The Red-Gloved Man (Conspirator)'],
+			},
+			{
+				encounterSet: withoutATrace,
+				what: ['Aliki Zoni Uperetria (Conspirator)'],
+			},
+			{
+				encounterSet: dealingsInTheDark,
+				what: ['Ece Şahin (Conspirator)'],
+			},
+			{
+				encounterSet: sanguineShadows,
+				what: ['La Chica Roja (Conspirator)'],
+			},
+			{
+				encounterSet: dancingMad,
+				what: ['Desiderio Delgado Álvarez (Conspirator)'],
+			},
+			{
+				encounterSet: onThinIce,
+				what: ['Thorne (Conspirator)'],
+			},
+			{
+				encounterSet: dogsOfWar,
+				what: ['The Claret Knight (Conspirator)'],
+			},
+		],
+	},
 }
 
 export const congressOfTheKeys2Scenario: Scenario = {
@@ -291,16 +339,54 @@ export const congressOfTheKeys2Scenario: Scenario = {
 			shuffles: [
 				{ encounterSet: congressOfTheKey, overwriteCount: 0 },
 				agentsOfTheOutside,
-				beyondTheBeyond,
+				{ encounterSet: beyondTheBeyond, overwriteCount: 2 },
 				outsiders,
 				secretWar,
 				spreadingCorruption,
 				ancientEvils,
-				strikingFear,
+				{ encounterSet: strikingFear, overwriteCount: 4 },
 			],
 			remaining: [redCoterie],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: strikingFear,
+				what: '3x Rotting Remains are removed from the set.',
+			},
+		],
+		specialGather: [
+			{
+				encounterSet: withoutATrace,
+				what: ['The Red-Gloved Man (Conspirator)'],
+			},
+			{
+				encounterSet: withoutATrace,
+				what: ['Aliki Zoni Uperetria (Conspirator)'],
+			},
+			{
+				encounterSet: dealingsInTheDark,
+				what: ['Ece Şahin (Conspirator)'],
+			},
+			{
+				encounterSet: sanguineShadows,
+				what: ['La Chica Roja (Conspirator)'],
+			},
+			{
+				encounterSet: dancingMad,
+				what: ['Desiderio Delgado Álvarez (Conspirator)'],
+			},
+			{
+				encounterSet: onThinIce,
+				what: ['Thorne (Conspirator)'],
+			},
+			{
+				encounterSet: dogsOfWar,
+				what: ['The Claret Knight (Conspirator)'],
+			},
+		],
+	},
 }
 
 export const congressOfTheKeys3Scenario: Scenario = {
@@ -312,14 +398,60 @@ export const congressOfTheKeys3Scenario: Scenario = {
 			shuffles: [
 				{ encounterSet: congressOfTheKey, overwriteCount: 0 },
 				agentsOfTheOutside,
-				beyondTheBeyond,
+				{ encounterSet: beyondTheBeyond, overwriteCount: 2 },
 				outsiders,
 				secretWar,
 				spreadingCorruption,
 				ancientEvils,
-				strikingFear,
+				{ encounterSet: strikingFear, overwriteCount: 4 },
 			],
 			remaining: [redCoterie],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: redCoterie,
+				what: 'Do not gather Coterie enemies who voted “yea,” “nay,” or abstained.',
+			},
+			{
+				encounterSet: redCoterie,
+				what: 'Remember to add remaining "eerily silent" members that was not spawned to the encounter deck. (The encounter deck could be bigger than above\'s card count.)',
+			},
+			{
+				encounterSet: strikingFear,
+				what: '3x Rotting Remains are removed from the set.',
+			},
+		],
+		specialGather: [
+			{
+				encounterSet: withoutATrace,
+				what: ['The Red-Gloved Man (Conspirator)'],
+			},
+			{
+				encounterSet: withoutATrace,
+				what: ['Aliki Zoni Uperetria (Conspirator)'],
+			},
+			{
+				encounterSet: dealingsInTheDark,
+				what: ['Ece Şahin (Conspirator)'],
+			},
+			{
+				encounterSet: sanguineShadows,
+				what: ['La Chica Roja (Conspirator)'],
+			},
+			{
+				encounterSet: dancingMad,
+				what: ['Desiderio Delgado Álvarez (Conspirator)'],
+			},
+			{
+				encounterSet: onThinIce,
+				what: ['Thorne (Conspirator)'],
+			},
+			{
+				encounterSet: dogsOfWar,
+				what: ['The Claret Knight (Conspirator)'],
+			},
+		],
+	},
 }

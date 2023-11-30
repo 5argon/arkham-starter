@@ -52,6 +52,27 @@
 			</tr>
 		</table>
 	{/if}
+	{#if setup.notes !== undefined}
+		<li>Notes :</li>
+		{#each setup.notes as n}
+			<div class="note-pad">
+				{#if n.encounterSet !== undefined}
+					<EncounterIconWithLabel
+						iconPath={n.encounterSet.icon}
+						iconName={n.encounterSet.name}
+						coreSet={n.encounterSet.flag === EncounterSetFlag.Core}
+						returnToSet={n.encounterSet.flag === EncounterSetFlag.ReturnTo}
+						scenarioSet={n.encounterSet.flag === EncounterSetFlag.Scenario}
+						subText={n.what}
+						{showName}
+						disableHover
+					/>
+				{:else}
+					<div class="sub-text">{n.what}</div>
+				{/if}
+			</div>
+		{/each}
+	{/if}
 	{#if setup.specialGather !== undefined}
 		<li>Additional cards :</li>
 		{#each setup.specialGather as sg}
@@ -64,6 +85,7 @@
 					scenarioSet={sg.encounterSet.flag === EncounterSetFlag.Scenario}
 					subText={sg.what?.join(', ')}
 					{showName}
+					disableHover
 				/>
 			{:else}
 				<EncounterIconWithLabel
@@ -82,11 +104,20 @@
 <style>
 	.min-diff {
 		min-width: 60px;
-        padding-left: 16px;
+		padding-left: 16px;
 	}
 
 	.custom-remove {
 		color: grey;
 		font-size: small;
+	}
+
+	.note-pad {
+		margin: 12px 0px;
+	}
+
+	.sub-text {
+		color: grey;
+		font-size: x-small;
 	}
 </style>
