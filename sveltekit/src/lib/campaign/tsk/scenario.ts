@@ -111,6 +111,17 @@ export const dealingsInTheDarkScenario: Scenario = {
 			remaining: [{ encounterSet: agentsOfYuggoth, overwriteCount: 1 }],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				what: 'The starting encounter deck count is reduced equal to amount of players, since each investigator draws a Cultist enemy at the start.',
+			},
+			{
+				encounterSet: agentsOfYuggoth,
+				what: 'The Emissary from Yuggoth enemy is set aside, out of play.',
+			},
+		],
+	},
 }
 
 export const dancingMad1Scenario: Scenario = {
@@ -146,6 +157,18 @@ export const dancingMad2Scenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: agentsOfTheOutside,
+				what: '2x Paradigm Effacer are set aside, out of play.',
+			},
+			{
+				encounterSet: secretWar,
+				what: '2x Otherworldly Mimic are set aside, out of play.',
+			},
+		],
+	},
 }
 
 export const onThinIceScenario: Scenario = {
@@ -200,6 +223,14 @@ export const dogsOfWar2Scenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: cleanupCrew,
+				what: 'Coterie Assassin (A) starts the game concealed, with 1 additional decoy for each other investigator in the game.',
+			},
+		],
+	},
 }
 
 export const dogsOfWar3Scenario: Scenario = {
@@ -255,7 +286,9 @@ export const withoutATraceScenario: Scenario = {
 		},
 	],
 	commonSetup: {
-		notes: [{ encounterSet: outsiders, what: 'The Apocalyptic Presage enemy is set aside, out of play.' }],
+		notes: [
+			{ encounterSet: outsiders, what: 'The Apocalyptic Presage enemy is set aside, out of play.' },
+		],
 	},
 }
 
