@@ -16,4 +16,9 @@
 	<a href="/explore/win">win</a>
 	<a href="/explore/jac">jac</a>
 	<a href="/explore/ste">ste</a>
+    |
+	<a href="/explore/rtdwl">rtdwl</a>
+	<a href="/explore/rtptc">rtptc</a>
+	<a href="/explore/rttfa">rttfa</a>
+	<a href="/explore/rttcu">rttcu</a>
 </span>
