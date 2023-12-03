@@ -1,6 +1,6 @@
 {
 	"hosting": {
-		"public": "./sveltekit/build",
+		"public": "./arkham-starter-sveltekit/build",
 		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
 		"cleanUrls": true,
 		"redirects": [

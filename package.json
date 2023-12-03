@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "sveltekit",
+    "arkham-starter-sveltekit",
     "functions-firestore"
   ],
   "devDependencies": {
