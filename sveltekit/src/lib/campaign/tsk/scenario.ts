@@ -39,6 +39,7 @@ import {
 
 export const riddlesAndRainScenario: Scenario = {
 	name: 'Riddles and Rain',
+	diagram: 'TSK_1_B.png',
 	index: 1,
 	shortName: '5-A',
 	setups: [
@@ -55,10 +56,16 @@ export const riddlesAndRainScenario: Scenario = {
 			remaining: [crimsonConspiracy, outsiders],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{ what: 'Concealed Mini-Cards (4) : The Red-Gloved Man, Coterie Agents (A, B, and C).' },
+		],
+	},
 }
 
 export const deadHeatScenario: Scenario = {
 	name: 'Dead Heat',
+	diagram: 'TSK_2_A.png',
 	index: 2,
 	shortName: '11-B',
 	setups: [
@@ -76,6 +83,7 @@ export const deadHeatScenario: Scenario = {
 
 export const sanguineShadowsScenario: Scenario = {
 	name: 'Sanguine Shadows',
+	diagram: 'TSK_3_B.png',
 	index: 3,
 	shortName: '16-D',
 	setups: [
@@ -91,11 +99,15 @@ export const sanguineShadowsScenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		notes: [{ what: 'Concealed Mini-Cards (2) : La Chica Roja and Apportioned Ka.' }],
+	},
 }
 
 export const dealingsInTheDarkScenario: Scenario = {
 	name: 'Dealings in the Dark',
 	index: 4,
+	diagram: 'TSK_4_B.png',
 	shortName: '21-F',
 	setups: [
 		{
@@ -114,6 +126,9 @@ export const dealingsInTheDarkScenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
+				what: 'Concealed Mini-Cards (8) : 3x Acolyte (any), Wizard of the Order, Sinister Aspirants (A, B and C), and Emissary from Yuggoth.',
+			},
+			{
 				what: 'The starting encounter deck count is reduced equal to amount of players, since each investigator draws a Cultist enemy at the start.',
 			},
 			{
@@ -127,6 +142,7 @@ export const dealingsInTheDarkScenario: Scenario = {
 export const dancingMad1Scenario: Scenario = {
 	name: 'Dancing Mad (v. I)',
 	index: 5,
+	diagram: 'TSK_5_A.png',
 	shortName: '28-I (v. I)',
 	setups: [
 		{
@@ -139,11 +155,19 @@ export const dancingMad1Scenario: Scenario = {
 			remaining: [cleanupCrew, crimsonConspiracy],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				what: 'Concealed Mini-Cards (8) : Desiderio Delgado Álvarez, Coterie Agents (A, B and C), Coterie Assassins (A and B), and Coterie Enforcers (A and B).',
+			},
+		],
+	},
 }
 
 export const dancingMad2Scenario: Scenario = {
 	name: 'Dancing Mad (v. II)',
 	index: 6,
+	diagram: 'TSK_5_A.png',
 	shortName: '28-I (v.II)',
 	setups: [
 		{
@@ -160,6 +184,9 @@ export const dancingMad2Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
+				what: 'Concealed Mini-Cards (8) : Desiderio Delgado Álvarez, Coterie Agents (A, B and C), Coterie Assassins (A and B), and Coterie Enforcers (A and B).',
+			},
+			{
 				encounterSet: agentsOfTheOutside,
 				what: '2x Paradigm Effacer are set aside, out of play.',
 			},
@@ -174,6 +201,7 @@ export const dancingMad2Scenario: Scenario = {
 export const onThinIceScenario: Scenario = {
 	name: 'On Thin Ice',
 	index: 7,
+	diagram: 'TSK_6_B.png',
 	shortName: '33-K',
 	setups: [
 		{
@@ -189,11 +217,19 @@ export const onThinIceScenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				what: "Concealed Mini-Cards (9) : Emissary from Yuggoth, and Coterie Agents (A, B and C). Also gather the Void Chimera's mini-card and the four special Void Chimera decoys.",
+			},
+		],
+	},
 }
 
 export const dogsOfWar1Scenario: Scenario = {
 	name: 'Dogs of War (v. I)',
 	index: 8,
+	diagram: 'TSK_7_B.png',
 	shortName: '38-N (v. I)',
 	setups: [
 		{
@@ -211,6 +247,7 @@ export const dogsOfWar1Scenario: Scenario = {
 export const dogsOfWar2Scenario: Scenario = {
 	name: 'Dogs of War (v. II)',
 	index: 9,
+	diagram: 'TSK_7_B.png',
 	shortName: '38-N (v. II)',
 	setups: [
 		{
@@ -226,6 +263,9 @@ export const dogsOfWar2Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
+				what: 'Concealed Mini-Cards (4) : Coterie Assassins (A and B) and Coterie Enforcers (A and B).',
+			},
+			{
 				encounterSet: cleanupCrew,
 				what: 'Coterie Assassin (A) starts the game concealed, with 1 additional decoy for each other investigator in the game.',
 			},
@@ -236,6 +276,7 @@ export const dogsOfWar2Scenario: Scenario = {
 export const dogsOfWar3Scenario: Scenario = {
 	name: 'Dogs of War (v. III)',
 	index: 10,
+	diagram: 'TSK_7_B.png',
 	shortName: '38-N (v. III)',
 	setups: [
 		{
@@ -249,11 +290,19 @@ export const dogsOfWar3Scenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				what: 'Concealed Mini-Cards (4) : Coterie Assassins (A and B) and Coterie Enforcers (A and B).',
+			},
+		],
+	},
 }
 
 export const shadesOfSufferingScenario: Scenario = {
 	name: 'Shades of Suffering',
 	index: 11,
+	diagram: 'TSK_8_B.png',
 	shortName: '46-Q',
 	setups: [
 		{
@@ -267,11 +316,19 @@ export const shadesOfSufferingScenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				what: 'Concealed Mini-Card (1) : Tzu San Niang.',
+			},
+		],
+	},
 }
 
 export const withoutATraceScenario: Scenario = {
 	name: 'Without a Trace',
 	index: 12,
+	diagram: 'TSK_9_A.png',
 	shortName: '56-Y',
 	setups: [
 		{
@@ -287,6 +344,7 @@ export const withoutATraceScenario: Scenario = {
 	],
 	commonSetup: {
 		notes: [
+			{ what: 'Concealed Mini-Cards (3) : City of Remnants (L, M and R).' },
 			{ encounterSet: outsiders, what: 'The Apocalyptic Presage enemy is set aside, out of play.' },
 		],
 	},
