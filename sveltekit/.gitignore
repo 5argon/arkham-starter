@@ -12,3 +12,4 @@ node_modules
 /static/image/card
 /static/image/divider
 .yarn
+/.firebase

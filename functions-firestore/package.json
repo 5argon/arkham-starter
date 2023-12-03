@@ -1,15 +1,9 @@
 {
-  "name": "firebase-functions-firestore",
+  "name": "@5argon/functions-firestore",
+  "version": "1.0.0",
   "packageManager": "yarn@4.0.2",
   "dependencies": {
     "firebase-admin": "^11.11.1",
     "firebase-functions": "^4.5.0"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "eslint": "^8.55.0",
-    "prettier": "^3.1.0",
-    "typescript": "^5.3.2"
   }
 }
