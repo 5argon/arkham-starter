@@ -95,9 +95,7 @@
 	>
 
 	<p>
-		Note : The backside (_B.png) of setup reference cards contains a diagram that <b
-			>may spoils the scenario.</b
-		>
+		Note : The setup reference cards contains information that <b>may spoil the scenario.</b>
 	</p>
 {/if}
 

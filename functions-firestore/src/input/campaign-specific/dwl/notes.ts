@@ -1,3 +1,5 @@
+import { CampaignNote as CN } from "../../common/campaign"
+
 export enum CampaignNote {
   // The House Always Wins
   NaomiHasBack = "naomi_has_back",
@@ -58,3 +60,41 @@ export enum CampaignNote {
   YogSothothFled = "yog_sothoth_fled",
   YogSothothBecameOneWithReality = "yog_sothoth_became_one_with_reality",
 }
+
+export const notes: CN<CampaignNote>[] = [
+  CampaignNote.NaomiHasBack,
+  CampaignNote.BoneToPick,
+  CampaignNote.UnconsciousForSeveralHours,
+  CampaignNote.FrancisMorganKidnapped,
+  CampaignNote.FrancisMorganRescued,
+  CampaignNote.StudentsRescued,
+  CampaignNote.FailedToSaveStudents,
+  CampaignNote.ExperimentDefeated,
+  CampaignNote.WarrenRiceRescued,
+  CampaignNote.WarrenRiceKidnapped,
+  CampaignNote.HenryArmitageKidnapped,
+  CampaignNote.HenryArmitageRescued,
+  CampaignNote.FailedToRecoverNecronomicon,
+  CampaignNote.DestroyedNecronomicon,
+  CampaignNote.TookNecronomicon,
+  CampaignNote.InvestigatorDelayed,
+  CampaignNote.NecronomiconStolen,
+  CampaignNote.RitualCompleted,
+  CampaignNote.KilledSilasBishop,
+  CampaignNote.RestoredSilasBishop,
+  CampaignNote.BanishedSilasBishop,
+  CampaignNote.HenryArmitageSurvived,
+  CampaignNote.WarrenRiceSurvived,
+  CampaignNote.EarlSawyerSurvived,
+  CampaignNote.FrancisMorganSurvived,
+  CampaignNote.ZebulonWhateleySurvived,
+  CampaignNote.CalmedTownsfolk,
+  CampaignNote.WarnedTownsfolk,
+  { note: CampaignNote.BroodEscaped, type: "number" },
+  CampaignNote.NoBroodEscaped,
+  CampaignNote.EnteredTheGate,
+  CampaignNote.YogSothothEscaped,
+  CampaignNote.ClosedTear,
+  CampaignNote.YogSothothFled,
+  CampaignNote.YogSothothBecameOneWithReality,
+]

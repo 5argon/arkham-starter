@@ -9,16 +9,23 @@ export interface CampaignBaseInput<T> {
   campaignNotes: CampaignNoteInput<T>[]
 }
 
-export interface CampaignNote<T> {
-  note: T
-  type: "boolean" | "number"
-}
+/**
+ * If not object, type is assumed to be boolean.
+ */
+export type CampaignNote<T> =
+  | T
+  | {
+      note: T
+      type: "boolean" | "number"
+    }
 
-export interface CampaignNoteInput<T> {
-  note: T
+export type CampaignNoteInput<T> =
+  | T
+  | {
+      note: T
 
-  /**
-   * Only required if it has numerical parameter to remember.
-   */
-  amount?: number
-}
+      /**
+       * Only required if it has numerical parameter to remember.
+       */
+      amount?: number
+    }

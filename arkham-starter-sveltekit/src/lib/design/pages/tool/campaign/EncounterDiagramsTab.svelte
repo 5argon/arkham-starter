@@ -60,8 +60,7 @@
 	{#if campaign.setupReferenceGraphic !== undefined}
 		<p>
 			It is also designed in a card format with bleed for you to print for offline use. To download
-			a higher resolution version with content of "Scenarios" tab on the other side of the
-			same card, <b
+			a higher resolution version and also the other side of the card, <b
 				><a href={campaign.setupReferenceGraphic} target="_blank"
 					>click here to go to Google Drive where I hosted them</a
 				></b

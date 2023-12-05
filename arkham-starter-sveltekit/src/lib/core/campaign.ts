@@ -1,5 +1,3 @@
-import type { W } from 'vitest/dist/types-2b1c412e'
-
 export interface EncounterSet {
 	name: string
 	icon: string

@@ -1,0 +1,7 @@
+{
+	"files": [],
+	"references": [
+		{ "path": "functions-firestore/tsconfig.json" },
+		{ "path": "arkham-starter-sveltekit/tsconfig.json" }
+	]
+}

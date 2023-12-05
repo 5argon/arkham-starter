@@ -4,6 +4,7 @@ export interface Investigator {
   /**
    * The state of this deck (along with all its upgrade chain) at the time of import is downloaded from arkhamdb.com.
    * From that point on it will be unaffected by changes in arkhamdb.com, unless asked to "refresh".
+   * This also contains XP information.
    */
   arkhamDbDeckId: number
 
