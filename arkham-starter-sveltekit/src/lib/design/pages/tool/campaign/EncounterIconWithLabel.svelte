@@ -49,7 +49,7 @@
 
 	.sub-text {
 		color: grey;
-		font-size: x-small;
+		font-size: 0.8rem;
 		margin-left: 2px;
 	}
 </style>

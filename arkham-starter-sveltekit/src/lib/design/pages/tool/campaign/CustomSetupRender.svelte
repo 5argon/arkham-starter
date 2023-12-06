@@ -113,11 +113,16 @@
 	}
 
 	.note-pad {
-		margin: 12px 0px;
+		padding: 8px 0px;
 	}
 
 	.sub-text {
 		color: grey;
-		font-size: x-small;
+		font-size: 0.8rem;
+	}
+
+	ul {
+		list-style: none;
+		padding-inline-start: 0px;
 	}
 </style>

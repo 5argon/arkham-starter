@@ -11,10 +11,6 @@
 	<li>All scenario names.</li>
 	<li>All encounter set icon graphics.</li>
 	<li>Which encounter set icon are used in which scenario, presented in a matrix.</li>
-</ul>
-
-<h3>Require interactions</h3>
-<ul>
 	<li>
 		When hovering on the encounter set icon or toggle "Show Name", you will additionally see the
 		encounter set's name.
@@ -40,7 +36,7 @@
 	<li><a href="./campaign/notz">Night of the Zealot</a></li>
 	<li><a href="./campaign/dwl">The Dunwich Legacy</a></li>
 	<li><a href="./campaign/ptc">The Path to Carcosa</a></li>
-	<li><a href="./campaign/tfa">*The Forgotten Age</a></li>
+	<li><a href="./campaign/tfa">The Forgotten Age</a></li>
 	<li><a href="./campaign/tcu">*The Circle Undone</a></li>
 	<li><a href="./campaign/tde">*The Dream-Eaters</a></li>
 	<li><a href="./campaign/tic">*The Innsmouth Conspiracy</a></li>
