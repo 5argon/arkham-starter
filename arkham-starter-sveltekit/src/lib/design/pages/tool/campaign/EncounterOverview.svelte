@@ -27,7 +27,7 @@
 	let scenarioTabIndex: number = 0
 	let transitionTabIndex: number = 0
 	let showName: boolean = false
-	let showSetCount: boolean = false
+	let showSetCount: boolean = true
 	let shortScenarioName: boolean = false
 	let advanced: boolean = false
 	let difficulty: Difficulty = Difficulty.Standard

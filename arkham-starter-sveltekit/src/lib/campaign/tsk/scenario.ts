@@ -79,6 +79,14 @@ export const deadHeatScenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: deadHeat,
+				what: '2x Ancient Raider are set aside, out of play, along with unique enemies. The story card is also set aside at start.',
+			},
+		],
+	},
 }
 
 export const sanguineShadowsScenario: Scenario = {
