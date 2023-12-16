@@ -9,7 +9,6 @@
 	import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
 
 	export let singleMode: boolean = false
-	export let collapse: boolean = false
 	export let globalSettings: GlobalSettings
 	export let label: string
 	export let popupDatabase: PopupDatabase
@@ -22,9 +21,6 @@
 		cards = stagingCards.map((x) => popupDatabase.getById(x.cardId))
 	}
 	export let onAddStagingCards: (cardId: CardAndAmount) => void = () => {
-		// do nothing
-	}
-	export let onDelete: (cardId: string) => void = () => {
 		// do nothing
 	}
 	export let onAddToLeftSide: (cardId: string) => void = () => {
@@ -55,95 +51,41 @@
 </script>
 
 <div class="stack-padding">
-	<ListDivider {label} level={ListDividerLevel.One} />
-	{#if !collapse}
-		<div class="add-card">
-			<TextBox
-				currentText={addCardTextboxText}
-				editingLevel={EditingLevel.Editable}
-				label={'Manually add a card to this list'}
-				onChange={(n) => (addCardTextboxText = n)}
-				onSubmit={(n) => addCardInputHandling(n)}
-				{noticeLevel}
-				enableNotice
-				noticeText={cardNoticeString}
-				placeholderText={'Use ArkhamDB card ID, for example 01016'}
-				rightAlign={false}
-				submitButtonText={'Add'}
-			/>
-		</div>
+	{#if stagingCards.length > 0}
+		<ListDivider {label} level={ListDividerLevel.One} />
 	{/if}
 	{#each cards as c, i (c?.original.id ?? 0)}
 		{#if c !== null}
-			{#if collapse}
-				<div in:fly={{ y: -20, duration: 300 }}>
-					<CardBlockLeftRight
-						{singleMode}
-						cardId={c.original.id}
-						amount={stagingCards[i].amount}
-						showImageStrip={true}
-						collapse={true}
-						text={c.original.n}
-						subText={c.original.esn ? c.original.sn : null}
-						class1={c.class1}
-						class2={c.class2 ?? null}
-						class3={c.class3 ?? null}
-						exceptional={globalSettings.taboo ? c.original.ext : c.original.ex}
-						restriction={c.original.ir}
-						weakness={c.original.wk}
-						customizable={c.original.cus !== undefined}
-						xp={c.original.xp}
-						xpTaboo={globalSettings.taboo ? c.original.xpat : null}
-						onClickLeft={() => {
-							if (c !== null) {
-								onAddToLeftSide(c.original.id)
-							}
-						}}
-						onClickRight={() => {
-							if (c !== null) {
-								onAddToRightSide(c.original.id)
-							}
-						}}
-					/>
-				</div>
-			{:else}
-				<div in:fly={{ x: -20, duration: 300 }}>
-					<CardBlockLeftRight
-						{singleMode}
-						cardId={c.original.id}
-						amount={stagingCards[i].amount}
-						showImageStrip={true}
-						text={c.original.n}
-						subText={c.original.esn ? c.original.sn : null}
-						class1={c.class1}
-						class2={c.class2 ?? null}
-						class3={c.class3 ?? null}
-						exceptional={globalSettings.taboo ? c.original.ext : c.original.ex}
-						restriction={c.original.ir}
-						weakness={c.original.wk}
-						customizable={c.original.cus !== undefined}
-						xp={c.original.xp}
-						xpTaboo={globalSettings.taboo ? c.original.xpat : null}
-						packNumber={c.original.ps}
-						packIcon={c.packIcon}
-						onClickDelete={() => {
-							if (c !== null) {
-								onDelete(c.original.id)
-							}
-						}}
-						onClickLeft={() => {
-							if (c !== null) {
-								onAddToLeftSide(c.original.id)
-							}
-						}}
-						onClickRight={() => {
-							if (c !== null) {
-								onAddToRightSide(c.original.id)
-							}
-						}}
-					/>
-				</div>
-			{/if}
+			<div in:fly={{ y: -20, duration: 300 }}>
+				<CardBlockLeftRight
+					{singleMode}
+					cardId={c.original.id}
+					amount={stagingCards[i].amount}
+					showImageStrip={true}
+					collapse={true}
+					text={c.original.n}
+					subText={c.original.esn ? c.original.sn : null}
+					class1={c.class1}
+					class2={c.class2 ?? null}
+					class3={c.class3 ?? null}
+					exceptional={globalSettings.taboo ? c.original.ext : c.original.ex}
+					restriction={c.original.ir}
+					weakness={c.original.wk}
+					customizable={c.original.cus !== undefined}
+					xp={c.original.xp}
+					xpTaboo={globalSettings.taboo ? c.original.xpat : null}
+					onClickLeft={() => {
+						if (c !== null) {
+							onAddToLeftSide(c.original.id)
+						}
+					}}
+					onClickRight={() => {
+						if (c !== null) {
+							onAddToRightSide(c.original.id)
+						}
+					}}
+				/>
+			</div>
 		{:else}
 			<UnknownCardBlock cardId={stagingCards[i].cardId} />
 		{/if}

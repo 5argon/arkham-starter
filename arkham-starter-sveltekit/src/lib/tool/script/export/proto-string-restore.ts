@@ -49,8 +49,8 @@ export function protoStringRestore(s: string): RestoreResult {
 			showLinkText: '(View at arkham-starter.com)',
 			upgradeExportStyle: UpgradeExportOptions_UpgradeExportStyle.MarkdownArkhamDb,
 		},
-		rows: pt.upgradeRows.map((x) => {
-			return {
+		rows: pt.upgradeRows.map<Row>((x) => {
+			const r: Row = {
 				carryoverXp: x.cumulativeXp,
 				divider: x.divider,
 				dividerText: x.dividerText,
@@ -63,6 +63,7 @@ export function protoStringRestore(s: string): RestoreResult {
 				custom: x.rightCustom,
 				customizationChoice: x.rightCustomChoice,
 			}
+			return r
 		}),
 	}
 }

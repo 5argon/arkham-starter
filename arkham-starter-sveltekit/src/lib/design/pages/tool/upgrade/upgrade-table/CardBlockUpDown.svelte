@@ -12,12 +12,6 @@
 	export let onClickDelete: () => void = () => {
 		// do nothing
 	}
-	export let onClickUp: () => void = () => {
-		// do nothing
-	}
-	export let onClickDown: () => void = () => {
-		// do nothing
-	}
 	export let onDropSwap: (fromIndex: number, fromRight: boolean, swapTo: string) => void = () => {
 		// do nothing
 	}

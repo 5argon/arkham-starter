@@ -19,13 +19,15 @@ function eachRow(uer: UpgradeExportRow, opt: ExportOptions, simpleList: boolean)
 	}
 	const cardLeft = cardText(uer.cardLeft, opt)
 	const cardRight = cardText(uer.cardRight, opt)
+	const onlyRightCard = uer.cardLeft === null && uer.cardRight !== null
+	const transitionCharacter = onlyRightCard ? '+' : '→'
 	if (!simpleList) {
 		const secondLineSuffix = `(**${uer.xp}, ${uer.xpCumulative}** XP)`
 
 		if (uer.cardLeft === null) {
 			return `- ${secondLineSuffix} ${cardRight}`
 		}
-		return `- ${secondLineSuffix} ${cardLeft} → ${cardRight}`
+		return `- ${secondLineSuffix} ${cardLeft} ${transitionCharacter} ${cardRight}`
 	} else {
 		return `- ${cardLeft}`
 	}

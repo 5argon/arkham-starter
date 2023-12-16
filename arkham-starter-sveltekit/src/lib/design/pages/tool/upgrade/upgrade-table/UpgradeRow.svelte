@@ -7,7 +7,7 @@
 	import { EditingLevel } from '$lib/design/components/basic/TextBox.svelte'
 	import CardSpan from '$lib/design/components/card/CardSpan.svelte'
 
-	import type { Row } from '$lib/tool/upgrade/interface'
+	import { placeholderCard, type Row } from '$lib/tool/upgrade/interface'
 
 	import type { RowActionEvents, RowEditEvents } from '$lib/tool/upgrade/upgrade-table/row-events'
 	import CardBlockUpDown from './CardBlockUpDown.svelte'
@@ -45,6 +45,9 @@
 		rightCard !== null &&
 		leftCard.original.n === rightCard.original.n &&
 		(leftCard.original.xp ?? 0) < (rightCard.original.xp ?? 0)
+
+	$: onlyRightCard = rightCard !== null && leftCard === null
+	$: transitionCharacter = onlyRightCard ? '+' : '→'
 
 	let customizationText: string = ''
 	let customizationBoxes: number = 0
@@ -91,6 +94,8 @@ nested inside this div. -->
 	class={'flex-row'}
 	class:divider-row={row.divider}
 	class:view-flex-row={viewMode}
+	role="row"
+	tabindex={index}
 >
 	{#if !viewMode}
 		<div class="flex-item">
@@ -165,8 +170,6 @@ nested inside this div. -->
 						customizable={leftCard.original.cus !== undefined}
 						xp={leftCard.original.xp}
 						xpTaboo={useTaboo ? leftCard.original.xpat : null}
-						onClickDown={rowActionEvents.onMoveDownLeft}
-						onClickUp={rowActionEvents.onMoveUpLeft}
 						onClickDelete={rowActionEvents.onDeleteLeft}
 						onDropSwap={(fi, fr, fc) => {
 							rowEditEvents.onDropSwap(fi, fr, fc, false)
@@ -177,16 +180,31 @@ nested inside this div. -->
 					/>
 				{/if}
 			{:else if !viewMode}
-				<GreyEmpty
-					onDropSwap={(fi, fr, fc) => {
-						rowEditEvents.onDropSwap(fi, fr, fc, false)
-					}}
-					disableHoverEffects={rowDragging}
-				/>
+				{#if row.left === placeholderCard}
+					<CardBlockUpDown
+						{singleMode}
+						text=""
+						cardId={placeholderCard}
+						onClickDelete={rowActionEvents.onDeleteLeft}
+						{index}
+						right={false}
+						onDropSwap={(fi, fr, fc) => {
+							rowEditEvents.onDropSwap(fi, fr, fc, false)
+						}}
+						disableHoverEffects={rowDragging}
+					/>
+				{:else}
+					<GreyEmpty
+						onDropSwap={(fi, fr, fc) => {
+							rowEditEvents.onDropSwap(fi, fr, fc, false)
+						}}
+						disableHoverEffects={rowDragging}
+					/>
+				{/if}
 			{/if}
 		</div>
 		{#if !singleMode}
-			<div class="flex-item arrow" class:bold-arrow={boldArrow}>→</div>
+			<div class="flex-item arrow" class:bold-arrow={boldArrow}>{transitionCharacter}</div>
 			<div class="flex-item card-block">
 				{#if rightCard !== null}
 					{#if viewMode}
@@ -225,8 +243,6 @@ nested inside this div. -->
 							checkedBoxes={row.custom ? customizationBoxes : 0}
 							xp={rightCard.original.xp}
 							xpTaboo={useTaboo ? rightCard.original.xpat : null}
-							onClickDown={rowActionEvents.onMoveDownRight}
-							onClickUp={rowActionEvents.onMoveUpRight}
 							onClickDelete={rowActionEvents.onDeleteRight}
 							{index}
 							right={true}
@@ -240,12 +256,27 @@ nested inside this div. -->
 						/>
 					{/if}
 				{:else if !viewMode}
-					<GreyEmpty
-						onDropSwap={(fi, fr, fc) => {
-							rowEditEvents.onDropSwap(fi, fr, fc, true)
-						}}
-						disableHoverEffects={rowDragging}
-					/>
+					{#if row.right === placeholderCard}
+						<CardBlockUpDown
+							{singleMode}
+							text=""
+							cardId={placeholderCard}
+							onClickDelete={rowActionEvents.onDeleteRight}
+							{index}
+							right={true}
+							onDropSwap={(fi, fr, fc) => {
+								rowEditEvents.onDropSwap(fi, fr, fc, true)
+							}}
+							disableHoverEffects={rowDragging}
+						/>
+					{:else}
+						<GreyEmpty
+							onDropSwap={(fi, fr, fc) => {
+								rowEditEvents.onDropSwap(fi, fr, fc, true)
+							}}
+							disableHoverEffects={rowDragging}
+						/>
+					{/if}
 				{/if}
 			</div>
 		{/if}

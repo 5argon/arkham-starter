@@ -11,3 +11,6 @@ export interface Row {
 	custom: boolean
 	customizationChoice: number
 }
+
+
+export const placeholderCard = "p"

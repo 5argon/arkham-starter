@@ -140,6 +140,7 @@
 
 	.label {
 		font-weight: bold;
+		margin-bottom: 4px;
 	}
 
 	.outer-flex {

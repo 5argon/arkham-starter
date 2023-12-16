@@ -34,7 +34,7 @@
 				{#each cards as c, i}
 					{#if c !== null}
 						<div class="card-row-height" style={'height:' + cardRowHeight + 'px'}>
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<!-- svelte-ignore a11y-no-static-element-interactions -->
 							<div
 								class="card-row"
 								class:selected={selectedIndex === i}

@@ -94,10 +94,11 @@ function upgradeExportRow(
 	const leftCard = row.cardLeft !== null ? mdCardAndInfo(row.cardLeft, eo, ueo.ignoreSmall) : null
 	const rightCard =
 		row.cardRight !== null ? mdCardAndInfo(row.cardRight, eo, ueo.ignoreSmall) : null
+	const onlyRight = row.cardLeft === null && row.cardRight !== null
 	const arrow =
 		row.cardLeft !== null && row.cardRight !== null
-			? arrowColumn(row.cardLeft.cardName === row.cardRight.cardName, ueo)
-			: arrowColumn(false, ueo)
+			? arrowColumn(onlyRight, row.cardLeft.cardName === row.cardRight.cardName)
+			: arrowColumn(onlyRight, false)
 	const xp = xpColumn(row.xp, ueo.xpSuffix)
 	const xpCumulative = xpColumn(row.xpCumulative, ueo.xpSuffix)
 	const all: string[] = ['', mark, leftCard ?? '  ', arrow, rightCard ?? '  ', xp, xpCumulative, '']
@@ -116,10 +117,11 @@ function mdMarkColumn(mark: string): string {
 	return nbsp + mark + nbsp
 }
 
-function arrowColumn(isUpgrade: boolean, opt: UpgradeExportOptions): string {
+function arrowColumn(onlyRight: boolean, isUpgrade: boolean): string {
+	const transitionCharacter = onlyRight ? '+' : '→'
 	const arrow = isUpgrade
-		? wrapColor(opt.arrow?.character ?? '', CardClass.Survivor, null, null)
-		: opt.arrow?.character ?? ''
+		? wrapColor(transitionCharacter, CardClass.Survivor, null, null)
+		: transitionCharacter
 	return nbsp + arrow + nbsp
 }
 

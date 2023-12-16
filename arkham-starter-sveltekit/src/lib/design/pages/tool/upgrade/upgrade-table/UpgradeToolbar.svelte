@@ -10,7 +10,6 @@
 	export let gs: GlobalSettings
 </script>
 
-<div>New! You can grab a row in addition to grabbing a card! (Sometimes bugged, sorry for that.)</div>
 <div>
 	<Button label="Add Card Row" onClick={toolbarEvents.onAddCardRow} />
 	<Button label="Add Divider Row" onClick={toolbarEvents.onAddDividerRow} />

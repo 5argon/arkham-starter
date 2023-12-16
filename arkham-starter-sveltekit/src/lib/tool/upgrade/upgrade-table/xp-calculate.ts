@@ -1,6 +1,6 @@
 import type { PopupDatabase } from '$lib/core/popup-database'
 import type { GlobalSettings } from '$lib/proto/generated/global_settings'
-import type { Row } from '../interface'
+import { placeholderCard, type Row } from '../interface'
 
 export interface CalculatedXp {
 	costs: number[]
@@ -50,6 +50,9 @@ function findXpDifference(
 	customizing: number | false,
 ): number {
 	if (cardLeft === null && cardRight === null) {
+		return 0
+	}
+	if (cardRight === placeholderCard) {
 		return 0
 	}
 	let leftXp = 0

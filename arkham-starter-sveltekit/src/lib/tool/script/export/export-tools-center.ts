@@ -7,6 +7,7 @@ import {
 	UpgradeExportProto,
 	UpgradeExportRow as UpgradeExportRowProto,
 } from '$lib/proto/generated/upgrade_export'
+import { placeholderCard } from '$lib/tool/upgrade/interface'
 import { upgradeExportArkhamCards } from './export-tools-arkhamcards'
 import { upgradeExportArkhamDb } from './export-tools-arkhamdb'
 import { binaryToUrlString } from './options'
@@ -97,6 +98,8 @@ export interface UpgradeExportRow {
 	mark: string
 	cardLeft: ExportCard | null
 	cardRight: ExportCard | null
+	leftPlaceholder: boolean
+	rightPlaceholder: boolean
 	xp: number
 	xpUnlocked: boolean
 	xpCumulative: number
@@ -123,8 +126,8 @@ export function upgradeExportToProtoString(eo: UpgradeExport): string {
 		upgradeExportOptions: eo.upgradeExportOptions,
 		upgradeRows: eo.upgradeRows.map<UpgradeExportRowProto>((x) => {
 			return {
-				cardLeft: x.cardLeft?.id ?? '',
-				cardRight: x.cardRight?.id ?? '',
+				cardLeft: x.leftPlaceholder ? placeholderCard : x.cardLeft?.id ?? '',
+				cardRight: x.rightPlaceholder ? placeholderCard : x.cardRight?.id ?? '',
 				cumulativeXp: x.xpCumulative,
 				cumulativeXpUnlocked: x.xpCumulativeUnlocked,
 				divider: x.divider,

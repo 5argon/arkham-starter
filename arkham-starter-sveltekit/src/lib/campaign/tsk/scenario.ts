@@ -21,6 +21,7 @@ import {
 	deadHeat,
 	dealingsInTheDark,
 	dogsOfWar,
+	globetrotting,
 	mysteriesAbound,
 	onThinIce,
 	outsiders,
@@ -385,7 +386,11 @@ export const congressOfTheKeys1Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Consult v.II / v.III instruction for the 2nd encounter deck.',
+				what: 'Concealed Mini-Cards (5) : City of Remnants (L, M, and R), Mimetic Nemesis, and The Red-Gloved Man.',
+			},
+			{
+				encounterSet: spreadingCorruption,
+				what: 'Reference v.II / v.III instruction for the 2nd encounter deck, but exclude the Spreading Corruption set which is already in the 1st deck. (You should have 26 cards.)',
 			},
 			{
 				encounterSet: redCoterie,
@@ -395,8 +400,60 @@ export const congressOfTheKeys1Scenario: Scenario = {
 				encounterSet: redCoterie,
 				what: 'Remember to add remaining "yea" members that was not spawned to the encounter deck. (The encounter deck could be bigger than above\'s card count.)',
 			},
+			{
+				encounterSet: redCoterie,
+				what: 'For each Coterie enemy gathered, check if they are the bearer of any key(s) and also gather those keys.',
+			},
 		],
 		specialGather: [
+			{
+				encounterSet: riddlesAndRain,
+				what: ['The Eye of Ravens (Key)'],
+			},
+			{
+				encounterSet: dancingMad,
+				what: ['Desiderio Delgado Álvarez (Conspirator)'],
+			},
+			{
+				encounterSet: deadHeat,
+				what: ['The Last Blossom (Key)'],
+			},
+			{
+				encounterSet: dealingsInTheDark,
+				what: ['Ece Şahin (Conspirator)'],
+			},
+			{
+				encounterSet: dealingsInTheDark,
+				what: ['The Twisted Antiprism (Key)'],
+			},
+			{
+				encounterSet: dogsOfWar,
+				what: ['The Claret Knight (Conspirator)'],
+			},
+			{
+				encounterSet: dogsOfWar,
+				what: ['The Light of Pharos (Key)'],
+			},
+			{
+				encounterSet: onThinIce,
+				what: ['Thorne (Conspirator)'],
+			},
+			{
+				encounterSet: onThinIce,
+				what: ['The Sable Glass (Key)'],
+			},
+			{
+				encounterSet: sanguineShadows,
+				what: ['La Chica Roja (Conspirator)'],
+			},
+			{
+				encounterSet: sanguineShadows,
+				what: ['The Weeping Lady (Key)'],
+			},
+			{
+				encounterSet: shadesOfSuffering,
+				what: ['The Shade Reaper (Key)'],
+			},
 			{
 				encounterSet: withoutATrace,
 				what: ['The Red-Gloved Man (Conspirator)'],
@@ -406,24 +463,16 @@ export const congressOfTheKeys1Scenario: Scenario = {
 				what: ['Aliki Zoni Uperetria (Conspirator)'],
 			},
 			{
-				encounterSet: dealingsInTheDark,
-				what: ['Ece Şahin (Conspirator)'],
+				encounterSet: globetrotting,
+				what: ['The Mirroring Blade (Key)'],
 			},
 			{
-				encounterSet: sanguineShadows,
-				what: ['La Chica Roja (Conspirator)'],
+				encounterSet: globetrotting,
+				what: ['The Bale Engine (Key)'],
 			},
 			{
-				encounterSet: dancingMad,
-				what: ['Desiderio Delgado Álvarez (Conspirator)'],
-			},
-			{
-				encounterSet: onThinIce,
-				what: ['Thorne (Conspirator)'],
-			},
-			{
-				encounterSet: dogsOfWar,
-				what: ['The Claret Knight (Conspirator)'],
+				encounterSet: globetrotting,
+				what: ['The Ruinous Chime (Key)'],
 			},
 		],
 	},
@@ -450,12 +499,69 @@ export const congressOfTheKeys2Scenario: Scenario = {
 	],
 	commonSetup: {
 		notes: [
+			{ what: 'Concealed Mini-Cards (4) : City of Remnants (L, M, and R) and Mimetic Nemesis.' },
+			{
+				encounterSet: redCoterie,
+				what: 'For each Coterie enemy gathered, check if they are the bearer of any key(s) and also gather those keys.',
+			},
+			{
+				encounterSet: beyondTheBeyond,
+				what: 'Remaining 9 cards forms the Otherworld deck.',
+			},
 			{
 				encounterSet: strikingFear,
 				what: '3x Rotting Remains are removed from the set.',
 			},
 		],
 		specialGather: [
+			{
+				encounterSet: riddlesAndRain,
+				what: ['The Eye of Ravens (Key)'],
+			},
+			{
+				encounterSet: dancingMad,
+				what: ['Desiderio Delgado Álvarez (Conspirator)'],
+			},
+			{
+				encounterSet: deadHeat,
+				what: ['The Last Blossom (Key)'],
+			},
+			{
+				encounterSet: dealingsInTheDark,
+				what: ['Ece Şahin (Conspirator)'],
+			},
+			{
+				encounterSet: dealingsInTheDark,
+				what: ['The Twisted Antiprism (Key)'],
+			},
+			{
+				encounterSet: dogsOfWar,
+				what: ['The Claret Knight (Conspirator)'],
+			},
+			{
+				encounterSet: dogsOfWar,
+				what: ['The Light of Pharos (Key)'],
+			},
+			{
+				encounterSet: onThinIce,
+				what: ['Thorne (Conspirator)'],
+			},
+			{
+				encounterSet: onThinIce,
+				what: ['The Sable Glass (Key)'],
+			},
+			{
+				encounterSet: sanguineShadows,
+				what: ['La Chica Roja (Conspirator)'],
+			},
+			{
+				encounterSet: sanguineShadows,
+				what: ['The Weeping Lady (Key)'],
+			},
+			{
+				encounterSet: shadesOfSuffering,
+				what: ['The Shade Reaper (Key)'],
+			},
 			{
 				encounterSet: withoutATrace,
 				what: ['The Red-Gloved Man (Conspirator)'],
@@ -465,24 +571,16 @@ export const congressOfTheKeys2Scenario: Scenario = {
 				what: ['Aliki Zoni Uperetria (Conspirator)'],
 			},
 			{
-				encounterSet: dealingsInTheDark,
-				what: ['Ece Şahin (Conspirator)'],
+				encounterSet: globetrotting,
+				what: ['The Mirroring Blade (Key)'],
 			},
 			{
-				encounterSet: sanguineShadows,
-				what: ['La Chica Roja (Conspirator)'],
+				encounterSet: globetrotting,
+				what: ['The Bale Engine (Key)'],
 			},
 			{
-				encounterSet: dancingMad,
-				what: ['Desiderio Delgado Álvarez (Conspirator)'],
-			},
-			{
-				encounterSet: onThinIce,
-				what: ['Thorne (Conspirator)'],
-			},
-			{
-				encounterSet: dogsOfWar,
-				what: ['The Claret Knight (Conspirator)'],
+				encounterSet: globetrotting,
+				what: ['The Ruinous Chime (Key)'],
 			},
 		],
 	},
@@ -510,6 +608,9 @@ export const congressOfTheKeys3Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
+				what: 'Concealed Mini-Cards (5) : City of Remnants (L, M, and R), Mimetic Nemesis, and The Red-Gloved Man.',
+			},
+			{
 				encounterSet: redCoterie,
 				what: 'Do not gather Coterie enemies who voted “yea,” “nay,” or abstained.',
 			},
@@ -518,11 +619,67 @@ export const congressOfTheKeys3Scenario: Scenario = {
 				what: 'Remember to add remaining "eerily silent" members that was not spawned to the encounter deck. (The encounter deck could be bigger than above\'s card count.)',
 			},
 			{
+				encounterSet: redCoterie,
+				what: 'For each Coterie enemy gathered, check if they are the bearer of any key(s) and also gather those keys.',
+			},
+			{
+				encounterSet: beyondTheBeyond,
+				what: 'Remaining 9 cards forms the Otherworld deck.',
+			},
+			{
 				encounterSet: strikingFear,
 				what: '3x Rotting Remains are removed from the set.',
 			},
 		],
 		specialGather: [
+			{
+				encounterSet: riddlesAndRain,
+				what: ['The Eye of Ravens (Key)'],
+			},
+			{
+				encounterSet: dancingMad,
+				what: ['Desiderio Delgado Álvarez (Conspirator)'],
+			},
+			{
+				encounterSet: deadHeat,
+				what: ['The Last Blossom (Key)'],
+			},
+			{
+				encounterSet: dealingsInTheDark,
+				what: ['Ece Şahin (Conspirator)'],
+			},
+			{
+				encounterSet: dealingsInTheDark,
+				what: ['The Twisted Antiprism (Key)'],
+			},
+			{
+				encounterSet: dogsOfWar,
+				what: ['The Claret Knight (Conspirator)'],
+			},
+			{
+				encounterSet: dogsOfWar,
+				what: ['The Light of Pharos (Key)'],
+			},
+			{
+				encounterSet: onThinIce,
+				what: ['Thorne (Conspirator)'],
+			},
+			{
+				encounterSet: onThinIce,
+				what: ['The Sable Glass (Key)'],
+			},
+			{
+				encounterSet: sanguineShadows,
+				what: ['La Chica Roja (Conspirator)'],
+			},
+			{
+				encounterSet: sanguineShadows,
+				what: ['The Weeping Lady (Key)'],
+			},
+			{
+				encounterSet: shadesOfSuffering,
+				what: ['The Shade Reaper (Key)'],
+			},
 			{
 				encounterSet: withoutATrace,
 				what: ['The Red-Gloved Man (Conspirator)'],
@@ -532,24 +689,16 @@ export const congressOfTheKeys3Scenario: Scenario = {
 				what: ['Aliki Zoni Uperetria (Conspirator)'],
 			},
 			{
-				encounterSet: dealingsInTheDark,
-				what: ['Ece Şahin (Conspirator)'],
+				encounterSet: globetrotting,
+				what: ['The Mirroring Blade (Key)'],
 			},
 			{
-				encounterSet: sanguineShadows,
-				what: ['La Chica Roja (Conspirator)'],
+				encounterSet: globetrotting,
+				what: ['The Bale Engine (Key)'],
 			},
 			{
-				encounterSet: dancingMad,
-				what: ['Desiderio Delgado Álvarez (Conspirator)'],
-			},
-			{
-				encounterSet: onThinIce,
-				what: ['Thorne (Conspirator)'],
-			},
-			{
-				encounterSet: dogsOfWar,
-				what: ['The Claret Knight (Conspirator)'],
+				encounterSet: globetrotting,
+				what: ['The Ruinous Chime (Key)'],
 			},
 		],
 	},

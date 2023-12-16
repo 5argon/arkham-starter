@@ -22,7 +22,7 @@
 	} from '$lib/tool/upgrade/upgrade-table/row-operations'
 	import SpinnerSpan from '$lib/design/components/basic/SpinnerSpan.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import type { Row } from '$lib/tool/upgrade/interface'
+	import { placeholderCard, type Row } from '$lib/tool/upgrade/interface'
 	import Modal from '$lib/design/components/layout/Modal.svelte'
 	import UpgradeExportModalContent from '../export/UpgradeExportModalContent.svelte'
 	import { calculateXps, type CalculatedXp } from '$lib/tool/upgrade/upgrade-table/xp-calculate'
@@ -38,6 +38,7 @@
 	import { protoStringRestore } from '$lib/tool/script/export/proto-string-restore'
 	import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
 	import ViewModeBanner from '$lib/design/components/layout/ViewModeBanner.svelte'
+	import CardForm from '$lib/design/components/form/CardForm.svelte'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.
@@ -68,7 +69,7 @@
 		c: CalculatedXp,
 	): UpgradeExportRow {
 		function mpdb(c: string | null, pdb: PopupDatabase, right: boolean): ExportCard | null {
-			if (c === null) {
+			if (c === null || c === placeholderCard) {
 				return null
 			}
 			const ca = pdb.getById(c)
@@ -103,6 +104,8 @@
 		return {
 			cardLeft: mpdb(r.left, pdb, false),
 			cardRight: mpdb(r.right, pdb, true),
+			leftPlaceholder: r.left === placeholderCard,
+			rightPlaceholder: r.right === placeholderCard,
 			divider: r.divider,
 			dividerText: r.dividerText,
 			mark: r.mark,
@@ -274,8 +277,6 @@
 		},
 	}
 
-	let collapse: boolean = true
-
 	let upgradeExportOptions: UpgradeExportOptions = {
 		upgradeUrl: true,
 		arrow: {
@@ -381,7 +382,7 @@
 			}}
 		/>
 	{:else}
-		<BigRightSider viewingLeft={!collapse}>
+		<BigRightSider viewingLeft={false}>
 			<div slot="left">
 				<div class="vertical-scroll">
 					<StagingArea
@@ -392,12 +393,8 @@
 							importText = t
 						}}
 						popupDatabase={pdb}
-						onCollapseChanged={(c) => {
-							collapse = c
-						}}
-						{collapse}
 						onAddStagingCards1={(c) => {
-							stagingCards1 = [...stagingCards1, c]
+							stagingCards1 = []
 						}}
 						onAddStagingCards2={(c) => {
 							stagingCards2 = [...stagingCards2, c]
@@ -445,6 +442,7 @@
 	.vertical-scroll {
 		height: calc(100vh - 220px);
 		overflow: scroll;
+		padding-left: 4px;
 		padding-right: 18px;
 	}
 </style>
