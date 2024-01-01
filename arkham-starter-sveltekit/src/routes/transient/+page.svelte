@@ -14,8 +14,8 @@
 	table. Committed cards are there to count the icons after pulling the token. Exhausted cards are
 	tapped. Event and treachery can become attachment (to even Act or Agenda) and retain their text
 	box to read. Resources are being used as many kind of counters. Clues are sometimes for the
-	enemies and doom are sometimes what you want. Even damage and horror tokens are utilized to
-	represent states of the location!
+	enemies and doom are sometimes what you want. Chaos tokens gets onto play area with Seal
+	mechanics. Even damage and horror tokens are utilized to represent states of the location!
 </p>
 
 <p>

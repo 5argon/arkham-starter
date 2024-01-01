@@ -1,12 +1,32 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		},
-	{
-		"name": "arkham-starter-sveltekit",
-		"path": "../arkham-starter-sveltekit"
-	},
-	],
-	"settings": {}
+  "folders": [
+    {
+      "name": "Root",
+      "path": ".."
+    },
+    {
+      "name": "[arkham-starter.com] SvelteKit",
+      "path": "../arkham-starter-sveltekit"
+    },
+    {
+      "name": "[arkham-profile.com] Database",
+      "path": "../functions-firestore"
+    }
+  ],
+  "settings": {
+    "search.exclude": {
+      "**/.yarn": true,
+      "**/.pnp.*": true
+    },
+    "eslint.nodePath": ".yarn/sdks",
+    "typescript.tsdk": ".yarn/sdks/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    "deno.enable": true,
+    "deno.lint": true,
+    "deno.unstable": true
+  }
 }

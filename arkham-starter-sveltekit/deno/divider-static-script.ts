@@ -1,4 +1,4 @@
-import { walk } from 'https://deno.land/std@0.181.0/fs/mod.ts'
+import { walk } from 'https://deno.land/std@0.210.0/fs/mod.ts'
 
 type Result = ResultItem[]
 
@@ -31,7 +31,7 @@ for await (const entry of walk('static/image/divider', { includeDirs: false })) 
 
 const result: ResultItem2[] = []
 map.forEach((v, k) => {
-    const arr = Array.from(v).sort()
+	const arr = Array.from(v).sort()
 	result.push({ items: arr, folder: k })
 })
 // for await (const entry of walk('static/image/divider', { maxDepth: 1, includeFiles: false })) {

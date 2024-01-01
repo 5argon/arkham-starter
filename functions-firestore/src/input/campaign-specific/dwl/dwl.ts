@@ -1,21 +1,50 @@
-import { CampaignBaseInput } from "../../common/campaign"
+import { CampaignEndState } from "../../common/campaign"
 import { CampaignNote } from "./notes"
 
 export interface TheDunwichLegacyCampaign
-  extends CampaignBaseInput<CampaignNote> {
+  extends CampaignEndState<CampaignNote> {
   returnTo: boolean
-  sacrificedToYogSothoth: SacrificedToYogSothoth
+  scenarioQuestionaire: TheDunwichLegacyScenarioQuestionaire
+  identifiedStrangeSolution: boolean
+  surviveBeyondTheVeil: boolean
+  henryFrancisWarrenInPlay: boolean
+  threeWhippoorwillsDefeatedInOneTurn: boolean
 }
 
-export interface SpecStep {
-  name: string
+export interface TheDunwichLegacyScenarioQuestionaire {
+  extracurricularActivity: {
+    firstScenario: boolean
+    alchemicalConcoctionKill: boolean | undefined
+  } & BaseScenarioQuestionaire
+
+  theHouseAlwaysWins: {
+    firstScenario: boolean
+    cheated: boolean
+    resignedBeforeAct3: boolean | undefined
+  } & BaseScenarioQuestionaire
+
+  theMiskatonicMuseum: {
+    getInMuseum: "test" | "clue" | undefined
+    storyAllyDead: boolean | undefined
+    huntingHorrorDefeated: number | undefined
+    shadowSpawnedResources: number | undefined
+  } & BaseScenarioQuestionaire
+
+  theEssexCountyExpress: {
+    helplessPassengerLeftPlay: number | undefined
+  } & BaseScenarioQuestionaire
+
+  bloodOnTheAltar: {
+    sacrificedAllyCardIds: string[] | undefined
+    removedLocation: number | undefined
+  } & BaseScenarioQuestionaire
+
+  undimensionedAndUnseen: {
+    broodEscaped: number | undefined
+  }
 }
 
-export interface SacrificedToYogSothoth {
-  henryArmitage: boolean
-  warrenRice: boolean
-  earlSawyer: boolean
-  francisMorgan: boolean
-  zebulonWhateley: boolean
-  allyCardIds: string[]
+interface BaseScenarioQuestionaire {
+  xp: number
+  resolution: number
 }

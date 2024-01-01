@@ -11,5 +11,6 @@ node_modules
 
 /static/image/card
 /static/image/divider
+/static/image/custom/utility-mini-card/full
 .yarn
 /.firebase

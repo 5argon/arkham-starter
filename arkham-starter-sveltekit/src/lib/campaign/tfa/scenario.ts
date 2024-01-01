@@ -52,7 +52,7 @@ import {
 
 export const theUntamedWildsScenario: Scenario = {
 	index: 1,
-	diagram:"TFA_1_B.png",
+	diagram: 'TFA_1_B.png',
 	name: 'The Untamed Wilds',
 	shortName: 'I',
 	setups: [
@@ -97,7 +97,7 @@ export const theUntamedWildsScenario: Scenario = {
 
 export const theDoomOfEztliScenario: Scenario = {
 	index: 2,
-	diagram:"TFA_2_B.png",
+	diagram: 'TFA_2_B.png',
 	name: 'The Doom of Eztli',
 	shortName: 'II',
 	setups: [
@@ -137,7 +137,7 @@ export const theDoomOfEztliScenario: Scenario = {
 
 export const threadsOfFateScenario: Scenario = {
 	index: 3,
-	diagram:"TFA_3_B.png",
+	diagram: 'TFA_3_B.png',
 	name: 'Threads of Fate',
 	shortName: 'III',
 	setups: [
@@ -156,7 +156,7 @@ export const threadsOfFateScenario: Scenario = {
 
 export const theBoundaryBeyondScenario: Scenario = {
 	index: 4,
-	diagram:"TFA_4_B.png",
+	diagram: 'TFA_4_B.png',
 	name: 'The Boundary Beyond',
 	shortName: 'IV',
 	setups: [
@@ -198,6 +198,9 @@ export const theBoundaryBeyondScenario: Scenario = {
 				what: 'Exploration deck count : 16 cards. (4x Treacheries, 12x Locations)',
 			},
 			{
+				what: 'You might need a Madness or Injury random basic weakness.',
+			},
+			{
 				encounterSet: theBoundaryBeyond,
 				what: '1x Window to Another Time and 1x Timeline Destabilization are in the exploration deck.',
 			},
@@ -211,7 +214,7 @@ export const theBoundaryBeyondScenario: Scenario = {
 
 export const heartOfTheEldersPart1Scenario: Scenario = {
 	index: 5,
-	diagram:"TFA_5_B.png",
+	diagram: 'TFA_5_B.png',
 	name: 'Heart of the Elders, Part I',
 	shortName: 'V-A',
 	setups: [
@@ -253,7 +256,7 @@ export const heartOfTheEldersPart1Scenario: Scenario = {
 
 export const heartOfTheEldersPart2Scenario: Scenario = {
 	index: 6,
-	diagram:"TFA_6_B.png",
+	diagram: 'TFA_6_B.png',
 	name: 'Heart of the Elders, Part II',
 	shortName: 'V-B',
 	setups: [
@@ -297,7 +300,7 @@ export const heartOfTheEldersPart2Scenario: Scenario = {
 
 export const theCityOfArchivesScenario: Scenario = {
 	index: 7,
-	diagram:"TFA_7_B.png",
+	diagram: 'TFA_7_B.png',
 	name: 'The City of Archives',
 	shortName: 'VI',
 	setups: [
@@ -323,7 +326,7 @@ export const theCityOfArchivesScenario: Scenario = {
 
 export const theDepthsOfYothScenario: Scenario = {
 	index: 8,
-	diagram:"TFA_8_B.png",
+	diagram: 'TFA_8_B.png',
 	name: 'The Depths of Yoth',
 	shortName: 'VII',
 	setups: [
@@ -351,7 +354,7 @@ export const theDepthsOfYothScenario: Scenario = {
 
 export const shatteredAeonsScenario: Scenario = {
 	index: 9,
-	diagram:"TFA_9_B.png",
+	diagram: 'TFA_9_B.png',
 	name: 'Shattered Aeons',
 	shortName: 'VIII',
 	setups: [

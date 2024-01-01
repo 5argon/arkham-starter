@@ -1,0 +1,8 @@
+{
+  "name": "@5argon/ahlcg-campaign-data",
+  "version": "1.0.0",
+  "packageManager": "yarn@4.0.2",
+  "dependencies": {
+    "react-intl": "^6.5.5"
+  }
+}
