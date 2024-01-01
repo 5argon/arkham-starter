@@ -1,0 +1,250 @@
+[
+  {
+    "hash": "DWLC-A Baleful Welcome",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "DWLC-Broken Rails",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "DWLC-Claws of Steam",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "DWLC-Something in the Drinks",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEC-Ice and Death Randomizer",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEC-Supplies",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEC-The Heart of Madness-Seal",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEC-To the Forbidden Peaks-Level",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEP-Black Market",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEP-Mechanic's Wrench",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEP-Nkosi Mabati",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEP-Prophesiae Profana",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEP-Replenish Two",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "EOTEP-The Red Clock",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "FHVP-Stall for Time",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PAR-Directive Due Diligence",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PAR-Directive Leave No Doubt",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PAR-Directive Red Tape",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PAR-Directive Seek the Truth",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PTCC-Courage",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PTCC-Crashing Floods",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PTCC-Puppet of Hastur",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PTCC-The King's Edict",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PTCP-Lola Hayes",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "PTCP-Minh Thi Phan",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "SS-Fortune and Folly-Dimensional Duplicator",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "SS-Fortune and Folly-Patrol",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TCUC-Diabolic Voices",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TCUC-Evil Past",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TCUC-Mysteries of the Lodge",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TCUC-Priestess of the Coven",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TCUC-Reanimated Dead",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TCUC-The Secret Name",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TFAC-A Tear in Time",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TFAC-Between Worlds",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TFAC-Hand of the Brotherhood",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TFAC-The Winged Serpent",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TFAP-Kerosene",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TFAP-Slip Away",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TICP-Geas",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TICP-Replenish Two",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKC-Alien Frontier",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKC-City of Remnants",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKC-Figures in the Dark",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKC-Golem",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKC-In Plain Sight",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKC-The Shade Reaper",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Astral Mirror",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-At a Crossroads",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Carson Sinclair",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Disguise",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Empirical Hypothesis",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Guidance",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Hunter's Armor",
+    "description": "Overwrites soak values to 4 instead of 2 on customization. I find it hard to \"unsee\" the printed 2 when actually I have more than that. It also has variations that modifies slot icons and traits, but those aren't as important as the soak."
+  },
+  {
+    "hash": "TSKP-Hyperphysical Shotcaster",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Living Ink",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Making Preparations",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Pocket Multi Tool",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Press Pass",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Runic Axe",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Strings of Curses",
+    "description": "(No Description)"
+  },
+  {
+    "hash": "TSKP-Summoned Servitor",
+    "description": "Overwrites text box of Summoned Servitor when using Armored Carapce or Dominance customization."
+  }
+]

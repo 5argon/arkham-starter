@@ -23,11 +23,20 @@ const setToName: { [key: string]: string } = {
 	PAR: 'Parallel Investigator',
 }
 
+interface ResultSet {
+	setCode: string
+	setName: string
+	items: ResultItem[]
+	itemCount: number
+	printedQuantity: number
+}
+
 interface ResultItem {
 	setCode: string
 	setName: string
 	hash: string
 	name: string
+	description: string
 	members: ResultItemMember[]
 }
 
@@ -107,6 +116,7 @@ for await (const entry of walk('static/image/custom/utility-mini-card/full', {
 				setName: setName,
 				hash: hash,
 				name: title,
+				description: '(No Description)',
 				members: [],
 			}
 			items = items.set(hash, resultItem)
@@ -138,6 +148,51 @@ for await (const entry of walk('static/image/custom/utility-mini-card/full', {
 	}
 }
 
+// Load previous util-mini-hash-to-description.json first to merge and then write back.
+let previousHashToDescriptionArray: HashToDescription[] = []
+try {
+	const previousHashToDescriptionJson = await Deno.readTextFile(
+		'src/lib/data/util-mini-hash-to-description.json',
+	)
+	previousHashToDescriptionArray = JSON.parse(previousHashToDescriptionJson)
+} catch {
+	// OK if file doesn't exist.
+}
+
+for (const previousHashToDescription of previousHashToDescriptionArray) {
+	if (
+		hashToDescription.has(previousHashToDescription.hash) &&
+		previousHashToDescription.description !== ''
+	) {
+		hashToDescription.set(previousHashToDescription.hash, previousHashToDescription)
+	}
+}
+
+const hashToDescriptionArray: HashToDescription[] = Array.from(hashToDescription.values())
+hashToDescriptionArray.sort((a, b) => {
+	if (a.hash < b.hash) {
+		return -1
+	}
+	if (a.hash > b.hash) {
+		return 1
+	}
+	return 0
+})
+
+const hashToDescriptionJson = JSON.stringify(hashToDescriptionArray, undefined, 2)
+await Deno.writeTextFile('src/lib/data/util-mini-hash-to-description.json', hashToDescriptionJson)
+console.log(`Wrote ${hashToDescriptionArray.length} items to util-mini-hash-to-description.json`)
+
+// Merge description into items.
+items.forEach((item) => {
+	if (hashToDescription.has(item.hash)) {
+		const htd = hashToDescription.get(item.hash)
+		if (htd !== undefined) {
+			item.description = htd.description
+		}
+	}
+})
+
 const resultItemArray = Array.from(items.values())
 resultItemArray.forEach((resultItem) => {
 	resultItem.members.sort((a, b) => {
@@ -167,48 +222,27 @@ resultItemArray.sort((a, b) => {
 	return 0
 })
 
-// Write util-mini-db.json
-const resultItemArrayJson = JSON.stringify(resultItemArray, undefined, 2)
-await Deno.writeTextFile(
-	'static/image/custom/utility-mini-card/util-mini-db.json',
-	resultItemArrayJson,
-)
-console.log(`Wrote ${resultItemArray.length} items to util-mini-db.json`)
-
-// Load previous util-mini-hash-to-description.json first to merge and then write back.
-let previousHashToDescriptionArray: HashToDescription[] = []
-try {
-	const previousHashToDescriptionJson = await Deno.readTextFile(
-		'static/image/custom/utility-mini-card/util-mini-hash-to-description.json',
-	)
-	previousHashToDescriptionArray = JSON.parse(previousHashToDescriptionJson)
-} catch {
-	// OK if file doesn't exist.
-}
-
-for (const previousHashToDescription of previousHashToDescriptionArray) {
-	if (
-		hashToDescription.has(previousHashToDescription.hash) &&
-		previousHashToDescription.description !== ''
-	) {
-		hashToDescription.set(previousHashToDescription.hash, previousHashToDescription)
+const resultSet = new Map<string, ResultSet>()
+resultItemArray.forEach((resultItem) => {
+	let resultSetItem = resultSet.get(resultItem.setCode)
+	if (resultSetItem === undefined) {
+		resultSetItem = {
+			setCode: resultItem.setCode,
+			setName: resultItem.setName,
+			items: [],
+			itemCount: 0,
+			printedQuantity: 0,
+		}
+		resultSet.set(resultItem.setCode, resultSetItem)
 	}
-}
-
-const hashToDescriptionArray: HashToDescription[] = Array.from(hashToDescription.values())
-hashToDescriptionArray.sort((a, b) => {
-	if (a.hash < b.hash) {
-		return -1
+	resultSetItem.itemCount += 1
+	resultSetItem.items.push(resultItem)
+	for (const member of resultItem.members) {
+		resultSetItem.printedQuantity += member.quantity
 	}
-	if (a.hash > b.hash) {
-		return 1
-	}
-	return 0
 })
 
-const hashToDescriptionJson = JSON.stringify(hashToDescriptionArray, undefined, 2)
-await Deno.writeTextFile(
-	'static/image/custom/utility-mini-card/util-mini-hash-to-description.json',
-	hashToDescriptionJson,
-)
-console.log(`Wrote ${hashToDescriptionArray.length} items to util-mini-hash-to-description.json`)
+// Write util-mini-db.json
+const resultItemArrayJson = JSON.stringify(Array.from(resultSet.values()), undefined, 2)
+await Deno.writeTextFile('src/lib/data/util-mini-db.json', resultItemArrayJson)
+console.log(`Wrote ${resultItemArray.length} items to util-mini-db.json`)
