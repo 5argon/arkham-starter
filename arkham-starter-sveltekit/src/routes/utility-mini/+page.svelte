@@ -4,10 +4,10 @@
 </script>
 
 <svelte:head>
-	<title>arkham-starter.com | Transient State Mini-Card</title>
+	<title>arkham-starter.com | Utility Mini-Card</title>
 </svelte:head>
 
-<PageTitle title={'Transient State Mini-Card'} />
+<PageTitle title={'Utility Mini-Card'} />
 
 <p>
 	This game generally did great job utilizing everything in the box to represent states on the
@@ -47,8 +47,8 @@
 </p>
 
 <p>
-	I call such invisible states "Transient State". These "Transient State Mini-Cards" materialize
-	those states on your table, like digital games that could shows status icons of everything with no
+	I call such invisible states "Transient State". These "Utility Mini-Cards" materialize those
+	states on your table, like digital games that could shows status icons of everything with no
 	limits since they can make pixels do whatever they want. The table gets a bit busier and you need
 	more storage for them, but I'd rather have lighter mental load and smoother gameplay. (Especially
 	not to make misplays that makes the game easier for the investigators!).

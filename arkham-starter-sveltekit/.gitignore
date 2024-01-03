@@ -12,5 +12,8 @@ node_modules
 /static/image/card
 /static/image/divider
 /static/image/custom/utility-mini-card/full
+/static/image/custom/utility-mini-card/mpc
+/static/image/custom/utility-mini-card/drive
+/static/image/custom/utility-mini-card/display
 .yarn
 /.firebase

@@ -1,4 +1,7 @@
 import { walk } from 'https://deno.land/std@0.210.0/fs/mod.ts'
+import { emptyDir, ensureDir } from 'https://deno.land/std/fs/mod.ts'
+import { Image } from 'https://deno.land/x/imagescript/mod.ts'
+import { resize } from 'https://deno.land/x/deno_image/mod.ts'
 
 const setToName: { [key: string]: string } = {
 	DWLC: 'The Dunwich Legacy (Campaign Expansion)',
@@ -246,3 +249,48 @@ resultItemArray.forEach((resultItem) => {
 const resultItemArrayJson = JSON.stringify(Array.from(resultSet.values()), undefined, 2)
 await Deno.writeTextFile('src/lib/data/util-mini-db.json', resultItemArrayJson)
 console.log(`Wrote ${resultItemArray.length} items to util-mini-db.json`)
+
+await emptyDir('static/image/custom/utility-mini-card/display')
+await emptyDir('static/image/custom/utility-mini-card/mpc')
+await emptyDir('static/image/custom/utility-mini-card/drive')
+
+// Crop images and write to display folder.
+const promises: Promise<void>[] = []
+for (const resultItem of resultItemArray) {
+	for (const member of resultItem.members) {
+		promises.push(processSingleCard(resultItem, member, false))
+		promises.push(processSingleCard(resultItem, member, true))
+	}
+}
+await Promise.all(promises)
+console.log('Processed all images.')
+
+async function processSingleCard(
+	item: ResultItem,
+	member: ResultItemMember,
+	back: boolean,
+): Promise<void> {
+	const name = back ? member.backName : member.frontName
+	const fullPath = `static/image/custom/utility-mini-card/full/${name}`
+	const displayPath = `static/image/custom/utility-mini-card/display/${name}`
+	const image = await Image.decode(await Deno.readFile(fullPath))
+	const cropped = image.clone().crop(156, 134, 816, 555)
+
+	// MPC and Drive folder has subfolders by their set.
+	const folderName = item.setName
+	await ensureDir(`static/image/custom/utility-mini-card/mpc/${folderName}`)
+	await ensureDir(`static/image/custom/utility-mini-card/drive/${folderName}`)
+	await Deno.writeFile(
+		`static/image/custom/utility-mini-card/drive/${folderName}/${name}`,
+		await image.encode(),
+	)
+	// Vertical with : Front = Top on right, Back = Top on left
+	const mpcFlipped = cropped.clone().rotate(back ? 90 : -90)
+	await Deno.writeFile(
+		`static/image/custom/utility-mini-card/mpc/${folderName}/${name}`,
+		await mpcFlipped.encode(),
+	)
+
+	const resized = await resize(await cropped.encode(), { width: 256 })
+	await Deno.writeFile(displayPath, resized)
+}
