@@ -27,6 +27,7 @@ const setToName: { [key: string]: string } = {
 }
 
 interface ResultSet {
+	index: number
 	setCode: string
 	setName: string
 	items: ResultItem[]
@@ -43,11 +44,6 @@ interface ResultItem {
 	members: ResultItemMember[]
 }
 
-interface HashToDescription {
-	hash: string
-	description: string
-}
-
 interface ResultItemMember {
 	variation: number
 	quantity: number
@@ -55,10 +51,15 @@ interface ResultItemMember {
 	backName: string
 }
 
+interface HashToDescription {
+	hash: string
+	description: string
+}
+
 let items = new Map<string, ResultItem>()
 const hashToDescription = new Map<string, HashToDescription>()
 
-for await (const entry of walk('static/image/custom/utility-mini-card/full', {
+for await (const entry of walk('deno/utility-mini-card/full', {
 	includeDirs: false,
 })) {
 	// Naming format : SET-NAME-NAME-ETC-1-x2-A.png
@@ -229,7 +230,15 @@ const resultSet = new Map<string, ResultSet>()
 resultItemArray.forEach((resultItem) => {
 	let resultSetItem = resultSet.get(resultItem.setCode)
 	if (resultSetItem === undefined) {
+		let setIndex = 1
+		Object.entries(setToName).forEach(([setCode, setName], i) => {
+			if (setCode == resultItem.setCode) {
+				setIndex = i
+			}
+		})
+
 		resultSetItem = {
+			index: setIndex,
 			setCode: resultItem.setCode,
 			setName: resultItem.setName,
 			items: [],
@@ -246,13 +255,23 @@ resultItemArray.forEach((resultItem) => {
 })
 
 // Write util-mini-db.json
-const resultItemArrayJson = JSON.stringify(Array.from(resultSet.values()), undefined, 2)
+const resultSetArray = Array.from(resultSet.values())
+resultSetArray.sort((a, b) => {
+	if (a.index < b.index) {
+		return -1
+	}
+	if (a.index > b.index) {
+		return 1
+	}
+	return 0
+})
+const resultItemArrayJson = JSON.stringify(resultSetArray, undefined, 2)
 await Deno.writeTextFile('src/lib/data/util-mini-db.json', resultItemArrayJson)
 console.log(`Wrote ${resultItemArray.length} items to util-mini-db.json`)
 
-await emptyDir('static/image/custom/utility-mini-card/display')
-await emptyDir('static/image/custom/utility-mini-card/mpc')
-await emptyDir('static/image/custom/utility-mini-card/drive')
+await emptyDir('deno/utility-mini-card/drive')
+await emptyDir('deno/utility-mini-card/mpc')
+await emptyDir('static/image/custom/utility-mini-card')
 
 // Crop images and write to display folder.
 const promises: Promise<void>[] = []
@@ -271,26 +290,24 @@ async function processSingleCard(
 	back: boolean,
 ): Promise<void> {
 	const name = back ? member.backName : member.frontName
-	const fullPath = `static/image/custom/utility-mini-card/full/${name}`
-	const displayPath = `static/image/custom/utility-mini-card/display/${name}`
+	const fullPath = `deno/utility-mini-card/full/${name}`
+	const displayPath = `static/image/custom/utility-mini-card/${name}`
 	const image = await Image.decode(await Deno.readFile(fullPath))
 	const cropped = image.clone().crop(156, 134, 816, 555)
+	const croppedForDisplay = image.clone().crop(190, 170, 743, 485)
 
 	// MPC and Drive folder has subfolders by their set.
 	const folderName = item.setName
-	await ensureDir(`static/image/custom/utility-mini-card/mpc/${folderName}`)
-	await ensureDir(`static/image/custom/utility-mini-card/drive/${folderName}`)
-	await Deno.writeFile(
-		`static/image/custom/utility-mini-card/drive/${folderName}/${name}`,
-		await image.encode(),
-	)
+	await ensureDir(`deno/utility-mini-card/mpc/${folderName}`)
+	await ensureDir(`deno/utility-mini-card/drive/${folderName}`)
+	await Deno.writeFile(`deno/utility-mini-card/drive/${folderName}/${name}`, await image.encode())
 	// Vertical with : Front = Top on right, Back = Top on left
 	const mpcFlipped = cropped.clone().rotate(back ? 90 : -90)
 	await Deno.writeFile(
-		`static/image/custom/utility-mini-card/mpc/${folderName}/${name}`,
+		`deno/utility-mini-card/mpc/${folderName}/${name}`,
 		await mpcFlipped.encode(),
 	)
 
-	const resized = await resize(await cropped.encode(), { width: 256 })
+	const resized = await resize(await croppedForDisplay.encode(), { width: 256 })
 	await Deno.writeFile(displayPath, resized)
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+	import UtilityTableOfContents from './UtilityTableOfContents.svelte'
 </script>
 
 <svelte:head>
@@ -19,56 +20,17 @@
 </p>
 
 <p>
-	Players do also fill in some lacking area like location connectors and action counters on their
-	investigator dashboard. Or even try to bling their game to use different tokens when the game
-	asked for you to reuse core set tokens as something else. This also has benefit of improving
-	clarity, preventing the same kind of tokens with different meaning mixing up on busy table. Ever
-	knocked ammo on your gun to your actual resource pool?
+	But players do also fill in some lacking area like location connectors and action counters on
+	their investigator dashboard. Or even try to bling their game to use different tokens when the
+	game asked for you to reuse core set tokens as something else. These are that kind of thing in
+	mini-card format. When we could print whatever we want on paper, it gets quite to-the-point what
+	it supposed to help compared to using abstract thing like a colored wooden cube.
 </p>
 
 <p>
-	But... this is a game that is not afraid to push the limits. Many times, the effect that designer
-	wants is just "there", without any physical representation. For example, treachery that cause the
-	player to lose action (this turn or in their next turn), or a single stat buff with defined expiry
-	moment like Encyclopedia (2).
-</p>
-
-<p>
-	Sometimes they are simple to play along, but in bigger player count Mythos Phase might be really
-	long, and a single Agenda or Act advancement causes tons of story to unfold... by the time you get
-	to Investigation Phase, can you still remember that you are supposed to have one or two less
-	action, cannot move from your current location, or if which enemy has boosted stats?
-</p>
-
-<p>
-	You maybe thinking of leaving the card on the table as a reminder and only discard when the effect
-	is irrelevant. But doing so can cause more problems to cards that expecting something in the
-	treachery discard pile, even in some specific order.
-</p>
-
-<p>
-	I call such invisible states "Transient State". These "Utility Mini-Cards" materialize those
-	states on your table, like digital games that could shows status icons of everything with no
-	limits since they can make pixels do whatever they want. The table gets a bit busier and you need
-	more storage for them, but I'd rather have lighter mental load and smoother gameplay. (Especially
-	not to make misplays that makes the game easier for the investigators!).
-</p>
-
-<p>
-	<b>These are subjective</b>. Sometimes they are not even representing transient states and just
-	emphasize some text you can already see but I made mistakes of not seeing them before. On the
-	other hand, some are transient states but I had no problem playing with them so I didn't make any
-	card for them. (e.g. Fieldwork, Narrow Escape, Fight or Flight.) Choose just what you need help.
-</p>
-
-<p>
-	The project is on-going, I can't remember all the misplay points in campaigns I haven't played for
-	a while. I'll gradually add more as I replay campaigns and player cards.
-</p>
-
-<p>
-	See this Google Drive link for everything, and read the below section for details what are they
-	supposed to do and how many copies I think you need.
+	See this Google Drive link for download, and read the below section for how to use them. <b
+		>Warning: Campaign Expansion mini-card could spoil the campaign!</b
+	>
 </p>
 
 <ul>
@@ -79,8 +41,22 @@
 			rel="noreferrer">Google Drive Link</a
 		>
 	</li>
+	<ul>
+		<li>
+			Inside folders : Horizontal mini-card graphics with bleed, and with further white area
+			containing cut lines to cut the bleeds out.
+		</li>
+		<li>
+			_mpc.zip : Still with bleed, but without the white area and cut lines, rotated to vertical
+			orientation differently depending on sides. These should be compatible to print on mini-card
+			size with MPC.
+		</li>
+	</ul>
 </ul>
 
-<ListDivider label="Details" />
+<ListDivider label="Table of Contents" />
 
-Coming soon!
+These preview images has lowered resolution for display. Download from Google Drive link above to
+make your mini-cards.
+
+<UtilityTableOfContents />

@@ -9,6 +9,7 @@ node_modules
 .vercel
 .output
 
+/deno/utility-mini-card
 /static/image/card
 /static/image/divider
 /static/image/custom/utility-mini-card/full
