@@ -786,17 +786,6 @@
   },
   {
     "items": [
-      "01_By the Book.png",
-      "02_Read or Die.png",
-      "03_All or Nothing.png",
-      "04_Bad Blood.png",
-      "05_Red Tide Rising.png",
-      "06_Laid to Rest.png"
-    ],
-    "folder": "Challenge Scenario x6"
-  },
-  {
-    "items": [
       "01_016-029 (Guardian).png",
       "02_030-043 (Seeker).png",
       "03_044-057 (Rogue).png",
@@ -828,6 +817,18 @@
       "04_Plan in Shambles.png"
     ],
     "folder": "Standalone - Fortune and Folly x4"
+  },
+  {
+    "items": [
+      "01_By the Book.png",
+      "02_Read or Die.png",
+      "03_All or Nothing.png",
+      "04_Bad Blood.png",
+      "05_Red Tide Rising.png",
+      "06_Laid to Rest.png",
+      "07_Relics of the Past.png"
+    ],
+    "folder": "Challenge Scenario x7"
   },
   {
     "items": [

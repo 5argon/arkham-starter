@@ -127,7 +127,7 @@ export const dividerData: DividerToc = [
 			{ name: 'Standalone - Machinations Through Time', count: 4, description: '' },
 			{ name: 'Standalone - Fortune and Folly', count: 4, description: '' },
 			{ name: 'Standalone - Barkham Horror', count: 2, description: '' },
-			{ name: 'Challenge Scenario', count: 6, description: '' },
+			{ name: 'Challenge Scenario', count: 7, description: '' },
 		],
 	},
 ]
