@@ -33,23 +33,23 @@
 	correctness of them.
 </p>
 <ul>
-	<li><a href="./campaign/notz">Night of the Zealot</a></li>
-	<li><a href="./campaign/dwl">The Dunwich Legacy</a></li>
-	<li><a href="./campaign/ptc">The Path to Carcosa</a></li>
-	<li><a href="./campaign/tfa">The Forgotten Age</a></li>
-	<li><a href="./campaign/tcu">*The Circle Undone</a></li>
-	<li><a href="./campaign/tde">*The Dream-Eaters</a></li>
-	<li><a href="./campaign/tic">*The Innsmouth Conspiracy</a></li>
-	<li><a href="./campaign/eote">Edge of the Earth</a></li>
-	<li><a href="./campaign/tsk">The Scarlet Keys</a></li>
+	<li><a href="campaign/notz">Night of the Zealot</a></li>
+	<li><a href="campaign/dwl">The Dunwich Legacy</a></li>
+	<li><a href="campaign/ptc">The Path to Carcosa</a></li>
+	<li><a href="campaign/tfa">The Forgotten Age</a></li>
+	<li><a href="campaign/tcu">*The Circle Undone</a></li>
+	<li><a href="campaign/tde">*The Dream-Eaters</a></li>
+	<li><a href="campaign/tic">*The Innsmouth Conspiracy</a></li>
+	<li><a href="campaign/eote">Edge of the Earth</a></li>
+	<li><a href="campaign/tsk">The Scarlet Keys</a></li>
 </ul>
 <ul>
-	<li><a href="./campaign/rtnotz">*Return to the Night of the Zealot</a></li>
-	<li><a href="./campaign/rtdwl">Return to the Dunwich Legacy</a></li>
-	<li><a href="./campaign/rtptc">*Return to the Path to Carcosa</a></li>
-	<li><a href="./campaign/rttfa">*Return to the Forgotten Age</a></li>
-	<li><a href="./campaign/rttcu">*Return to the Circle Undone</a></li>
+	<li><a href="campaign/rtnotz">*Return to the Night of the Zealot</a></li>
+	<li><a href="campaign/rtdwl">Return to the Dunwich Legacy</a></li>
+	<li><a href="campaign/rtptc">*Return to the Path to Carcosa</a></li>
+	<li><a href="campaign/rttfa">*Return to the Forgotten Age</a></li>
+	<li><a href="campaign/rttcu">*Return to the Circle Undone</a></li>
 </ul>
 <ul>
-	<li><a href="./campaign/overall">Overall</a></li>
+	<li><a href="campaign/overall">Overall</a></li>
 </ul>

@@ -41,6 +41,11 @@ export const iceAndDeathPart1Scenario: Scenario = {
 			gameComponents: [GameComponent.TokenFrost],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{ encounterSet: creaturesInTheIce, what: 'Set this encounter set aside, out of play.' },
+		],
+	},
 }
 
 export const iceAndDeathPart2Scenario: Scenario = {
