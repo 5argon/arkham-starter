@@ -28,6 +28,7 @@ export const iceAndDeathPart1Scenario: Scenario = {
 	index: 2,
 	name: 'Ice and Death, Part I',
 	shortName: 'I (Pt. I)',
+	diagram: 'EOTE_1',
 	setups: [
 		{
 			shuffles: [
@@ -38,11 +39,14 @@ export const iceAndDeathPart1Scenario: Scenario = {
 				silenceAndMystery,
 			],
 			remaining: [theCrash, creaturesInTheIce],
-			gameComponents: [GameComponent.TokenFrost],
 		},
 	],
 	commonSetup: {
 		notes: [
+			{
+				encounterSet: iceAndDeath,
+				what: 'Set each Skittering Nonsense enemy aside, out of play. (3 cards)',
+			},
 			{ encounterSet: creaturesInTheIce, what: 'Set this encounter set aside, out of play.' },
 		],
 	},
@@ -52,6 +56,7 @@ export const iceAndDeathPart2Scenario: Scenario = {
 	index: 3,
 	name: 'Ice and Death, Part II',
 	shortName: 'I (Pt. II)',
+	diagram: 'EOTE_2',
 	setups: [
 		{
 			shuffles: [
@@ -63,19 +68,22 @@ export const iceAndDeathPart2Scenario: Scenario = {
 				silenceAndMystery,
 			],
 			remaining: [lostInTheNight],
-			gameComponents: [GameComponent.TokenFrost],
 		},
 	],
+	commonSetup: {
+		gameComponents: [GameComponent.TokenFrost],
+	},
 }
 
 export const iceAndDeathPart3Scenario: Scenario = {
 	index: 4,
 	name: 'Ice and Death, Part III',
 	shortName: 'I (Pt. III)',
+	diagram: 'EOTE_3',
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: iceAndDeath, overwriteCount: 7 },
+				{ encounterSet: iceAndDeath, overwriteCount: 4 },
 				{ encounterSet: seepingNightmares, overwriteCount: 2 },
 				ancientEvils,
 				{ encounterSet: creaturesInTheIce, overwriteCount: 2 },
@@ -83,15 +91,28 @@ export const iceAndDeathPart3Scenario: Scenario = {
 				hazardsOfAntarctica,
 				silenceAndMystery,
 			],
-			gameComponents: [GameComponent.TokenFrost],
 		},
 	],
+	commonSetup: {
+		gameComponents: [GameComponent.TokenFrost],
+		notes: [
+			{
+				encounterSet: iceAndDeath,
+				what: '3 Eidolon enemies from this set are under Seeping Nightmares.',
+			},
+			{
+				encounterSet: creaturesInTheIce,
+				what: '5 Eidolon enemies from this set are under Seeping Nightmares.',
+			},
+		],
+	},
 }
 
 export const fatalMirageScenario: Scenario = {
 	index: 5,
 	name: 'Fatal Mirage',
 	shortName: '???',
+	diagram: 'EOTE_4',
 	setups: [
 		{
 			shuffles: [
@@ -103,7 +124,6 @@ export const fatalMirageScenario: Scenario = {
 				namelessHorrors,
 				silenceAndMystery,
 			],
-			gameComponents: [GameComponent.TokenFrost],
 		},
 	],
 }
@@ -112,6 +132,7 @@ export const toTheForbiddenPeaksScenario: Scenario = {
 	index: 6,
 	name: 'To the Forbidden Peaks',
 	shortName: 'II',
+	diagram: 'EOTE_5',
 	setups: [
 		{
 			shuffles: [
@@ -128,8 +149,9 @@ export const toTheForbiddenPeaksScenario: Scenario = {
 
 export const cityOfTheElderThings1Scenario: Scenario = {
 	index: 7,
-	name: 'City of the Elder Things (v.I)',
-	shortName: 'III (v.I)',
+	name: 'City of the Elder Things (v. I)',
+	shortName: 'III (v. I)',
+	diagram: 'EOTE_6',
 	setups: [
 		{
 			shuffles: [
@@ -139,69 +161,67 @@ export const cityOfTheElderThings1Scenario: Scenario = {
 				miasma,
 				namelessHorrors,
 				penguins,
-				shoggoths,
-			],
-			gameComponents: [
-				GameComponent.Token0,
-				GameComponent.Token0,
-				GameComponent.TokenM1,
-				GameComponent.TokenM1,
-				GameComponent.TokenM2,
-				GameComponent.TokenM2,
-				GameComponent.TokenSkull,
-				GameComponent.TokenSkull,
-				GameComponent.TokenCultist,
-				GameComponent.TokenCultist,
-				GameComponent.TokenTablet,
-				GameComponent.TokenTablet,
-				GameComponent.TokenElderThing,
-				GameComponent.TokenElderThing,
-				GameComponent.TokenElderThing,
+				{ encounterSet: shoggoths, overwriteCount: 0 },
 			],
 		},
 	],
+	commonSetup: {
+		gameComponents: [GameComponent.TokenElderThing],
+		notes: [
+			{
+				encounterSet: cityOfTheElderThings,
+				what: 'Remove all three copies of the Benign Elder Thing enemy from the game.',
+			},
+			{
+				encounterSet: cityOfTheElderThings,
+				what: 'Set the Terror of the Stars enemy aside, out of play.',
+			},
+			{
+				encounterSet: shoggoths,
+				what: 'Set aside the Shoggoths encounter set.',
+			},
+		],
+	},
 }
 
 export const cityOfTheElderThings2Scenario: Scenario = {
 	index: 8,
-	name: 'City of the Elder Things (v.II)',
-	shortName: 'III (v.II)',
+	name: 'City of the Elder Things (v. II)',
+	shortName: 'III (v. II)',
+	diagram: 'EOTE_6',
 	setups: [
 		{
 			shuffles: [
 				{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
 				chillingCold,
-				creaturesInTheIce,
+				{ encounterSet: creaturesInTheIce, overwriteCount: 0 },
 				elderThings,
 				namelessHorrors,
 				penguins,
 				silenceAndMystery,
 			],
-			gameComponents: [
-				GameComponent.Token0,
-				GameComponent.Token0,
-				GameComponent.TokenM1,
-				GameComponent.TokenM1,
-				GameComponent.TokenM2,
-				GameComponent.TokenM2,
-				GameComponent.TokenSkull,
-				GameComponent.TokenSkull,
-				GameComponent.TokenCultist,
-				GameComponent.TokenCultist,
-				GameComponent.TokenTablet,
-				GameComponent.TokenTablet,
-				GameComponent.TokenElderThing,
-				GameComponent.TokenElderThing,
-				GameComponent.TokenElderThing,
-			],
 		},
 	],
+	commonSetup: {
+		gameComponents: [GameComponent.TokenElderThing],
+		notes: [
+			{
+				encounterSet: cityOfTheElderThings,
+				what: 'Remove the Terror of the Stars enemy and all three copies of the Benign Elder Thing enemy from the game.',
+			},
+			{
+				encounterSet: creaturesInTheIce,
+				what: 'Set aside the Creatures in the Ice encounter set.',
+			},
+		],
+	},
 }
 
 export const cityOfTheElderThings3Scenario: Scenario = {
 	index: 9,
-	name: 'City of the Elder Things (v.III)',
-	shortName: 'III (v.III)',
+	name: 'City of the Elder Things (v. III)',
+	shortName: 'III (v. III)',
+	diagram: 'EOTE_6',
 	setups: [
 		{
 			shuffles: [
@@ -211,32 +231,29 @@ export const cityOfTheElderThings3Scenario: Scenario = {
 				creaturesInTheIce,
 				penguins,
 				miasma,
-				shoggoths,
-			],
-			gameComponents: [
-				GameComponent.Token0,
-				GameComponent.Token0,
-				GameComponent.TokenM1,
-				GameComponent.TokenM1,
-				GameComponent.TokenM2,
-				GameComponent.TokenM2,
-				GameComponent.TokenSkull,
-				GameComponent.TokenSkull,
-				GameComponent.TokenCultist,
-				GameComponent.TokenCultist,
-				GameComponent.TokenTablet,
-				GameComponent.TokenTablet,
-				GameComponent.TokenElderThing,
-				GameComponent.TokenElderThing,
+				{ encounterSet: shoggoths, overwriteCount: 0 },
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: cityOfTheElderThings,
+				what: 'Remove the Terror of the Stars enemy and all three copies of the Reawakened Elder Thing enemy from the game.',
+			},
+			{
+				encounterSet: shoggoths,
+				what: 'Set aside the Shoggoths encounter set.',
+			},
+		],
+	},
 }
 
 export const theHeartOfMadness1Scenario: Scenario = {
 	index: 10,
 	name: 'The Heart of Madness, Part I',
 	shortName: 'IV (Pt. I)',
+	diagram: 'EOTE_7',
 	setups: [
 		{
 			shuffles: [
@@ -249,13 +266,6 @@ export const theHeartOfMadness1Scenario: Scenario = {
 				penguins,
 				shoggoths,
 			],
-			gameComponents: [
-				GameComponent.Seal1,
-				GameComponent.Seal2,
-				GameComponent.Seal3,
-				GameComponent.Seal4,
-				GameComponent.Seal5,
-			],
 		},
 	],
 }
@@ -264,6 +274,7 @@ export const theHeartOfMadness2Scenario: Scenario = {
 	index: 11,
 	name: 'The Heart of Madness, Part II',
 	shortName: 'IV (Pt. II)',
+	diagram: 'EOTE_7',
 	setups: [
 		{
 			shuffles: [
@@ -277,13 +288,14 @@ export const theHeartOfMadness2Scenario: Scenario = {
 				namelessHorrors,
 				penguins,
 			],
-			gameComponents: [
-				GameComponent.Seal1,
-				GameComponent.Seal2,
-				GameComponent.Seal3,
-				GameComponent.Seal4,
-				GameComponent.Seal5,
-			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: strikingFear,
+				what: 'When gathering the Striking Fear encounter set, only gather 2x Dissonant Voices and 2x Frozen in Fear (do not gather 3x Rotting Remains).',
+			},
+		],
+	},
 }

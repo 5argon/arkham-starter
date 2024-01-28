@@ -53,7 +53,7 @@ export function gameComponentToString(gcs: GameComponent): string {
 		case GameComponent.TokenElderSign:
 			return 'Elder Sign'
 		case GameComponent.TokenFrost:
-			return 'Frost'
+			return 'Frost Token'
 		default:
 			return 'Unknown Token'
 	}

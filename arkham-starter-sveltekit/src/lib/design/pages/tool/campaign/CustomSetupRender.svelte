@@ -16,13 +16,22 @@
 	{#if setup.customRemove !== undefined}
 		<li>Take out {setup.customRemove?.count} cards. ({setup.customRemove.why})</li>
 	{/if}
-	{#if setup.additionalWeakness !== undefined || setup.gameComponentsPerDifficulty !== undefined}
+	{#if setup.additionalWeakness !== undefined || setup.gameComponents !== undefined || setup.gameComponentsPerDifficulty !== undefined}
 		<li>Add on setup :</li>
 	{/if}
 	{#if setup.additionalWeakness !== undefined}
 		<ul>
 			<li>Basic Weakness : {setup.additionalWeakness.map((x) => x.trait).join(', ')}</li>
 		</ul>
+	{/if}
+	{#if setup.gameComponents !== undefined}
+		<table>
+			<tr>
+				<td class="min-diff">All Difficulties : </td><td /><td>
+					{gameComponentsToString(setup.gameComponents)}
+				</td>
+			</tr>
+		</table>
 	{/if}
 	{#if setup.gameComponentsPerDifficulty !== undefined}
 		<table>

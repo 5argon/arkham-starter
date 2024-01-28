@@ -215,7 +215,7 @@
 				{incomplete}
 			/>
 		</div>
-		<div slot="tab3">Diagrams (Contains Spoiler)</div>
+		<div slot="tab3">Setup Reference Cards (Contains Spoiler)</div>
 		<div slot="content3">
 			<EncounterDiagramsTab
 				{campaign}

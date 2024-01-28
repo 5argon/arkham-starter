@@ -40,7 +40,7 @@ import {
 
 export const riddlesAndRainScenario: Scenario = {
 	name: 'Riddles and Rain',
-	diagram: 'TSK_1_B.png',
+	diagram: 'TSK_1',
 	index: 1,
 	shortName: '5-A',
 	setups: [
@@ -66,7 +66,7 @@ export const riddlesAndRainScenario: Scenario = {
 
 export const deadHeatScenario: Scenario = {
 	name: 'Dead Heat',
-	diagram: 'TSK_2_A.png',
+	diagram: 'TSK_2',
 	index: 2,
 	shortName: '11-B',
 	setups: [
@@ -92,7 +92,7 @@ export const deadHeatScenario: Scenario = {
 
 export const sanguineShadowsScenario: Scenario = {
 	name: 'Sanguine Shadows',
-	diagram: 'TSK_3_B.png',
+	diagram: 'TSK_3',
 	index: 3,
 	shortName: '16-D',
 	setups: [
@@ -116,7 +116,7 @@ export const sanguineShadowsScenario: Scenario = {
 export const dealingsInTheDarkScenario: Scenario = {
 	name: 'Dealings in the Dark',
 	index: 4,
-	diagram: 'TSK_4_B.png',
+	diagram: 'TSK_4',
 	shortName: '21-F',
 	setups: [
 		{
@@ -151,7 +151,7 @@ export const dealingsInTheDarkScenario: Scenario = {
 export const dancingMad1Scenario: Scenario = {
 	name: 'Dancing Mad (v. I)',
 	index: 5,
-	diagram: 'TSK_5_A.png',
+	diagram: 'TSK_5',
 	shortName: '28-I (v. I)',
 	setups: [
 		{
@@ -176,7 +176,7 @@ export const dancingMad1Scenario: Scenario = {
 export const dancingMad2Scenario: Scenario = {
 	name: 'Dancing Mad (v. II)',
 	index: 6,
-	diagram: 'TSK_5_A.png',
+	diagram: 'TSK_5',
 	shortName: '28-I (v.II)',
 	setups: [
 		{
@@ -210,7 +210,7 @@ export const dancingMad2Scenario: Scenario = {
 export const onThinIceScenario: Scenario = {
 	name: 'On Thin Ice',
 	index: 7,
-	diagram: 'TSK_6_B.png',
+	diagram: 'TSK_6',
 	shortName: '33-K',
 	setups: [
 		{
@@ -238,7 +238,7 @@ export const onThinIceScenario: Scenario = {
 export const dogsOfWar1Scenario: Scenario = {
 	name: 'Dogs of War (v. I)',
 	index: 8,
-	diagram: 'TSK_7_B.png',
+	diagram: 'TSK_7',
 	shortName: '38-N (v. I)',
 	setups: [
 		{
@@ -256,7 +256,7 @@ export const dogsOfWar1Scenario: Scenario = {
 export const dogsOfWar2Scenario: Scenario = {
 	name: 'Dogs of War (v. II)',
 	index: 9,
-	diagram: 'TSK_7_B.png',
+	diagram: 'TSK_7',
 	shortName: '38-N (v. II)',
 	setups: [
 		{
@@ -285,7 +285,7 @@ export const dogsOfWar2Scenario: Scenario = {
 export const dogsOfWar3Scenario: Scenario = {
 	name: 'Dogs of War (v. III)',
 	index: 10,
-	diagram: 'TSK_7_B.png',
+	diagram: 'TSK_7',
 	shortName: '38-N (v. III)',
 	setups: [
 		{
@@ -311,7 +311,7 @@ export const dogsOfWar3Scenario: Scenario = {
 export const shadesOfSufferingScenario: Scenario = {
 	name: 'Shades of Suffering',
 	index: 11,
-	diagram: 'TSK_8_B.png',
+	diagram: 'TSK_8',
 	shortName: '46-Q',
 	setups: [
 		{
@@ -337,7 +337,7 @@ export const shadesOfSufferingScenario: Scenario = {
 export const withoutATraceScenario: Scenario = {
 	name: 'Without a Trace',
 	index: 12,
-	diagram: 'TSK_9_A.png',
+	diagram: 'TSK_9',
 	shortName: '56-Y',
 	setups: [
 		{
