@@ -12,6 +12,7 @@ export enum CardPack {
 	TheInnsmouthConspiracy,
 	EdgeOfTheEarth,
 	TheScarletKeys,
+	TheFeastOfHemlockVale,
 
 	ReturnToTheNightOfTheZealot,
 	ReturnToTheDunwichLegacy,
@@ -26,6 +27,8 @@ export enum CardPack {
 	WinifredHabbamock,
 	JacquelineFine,
 	StellaClark,
+
+	TheBlobThatAteEverythingElse,
 
 	Unknown,
 	RandomBasicWeakness,

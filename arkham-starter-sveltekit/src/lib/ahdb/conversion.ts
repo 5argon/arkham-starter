@@ -25,6 +25,11 @@ export function iconToNameConversion(c: CardPack): string {
 			return 'Edge of the Earth Investigator Expansion'
 		case CardPack.TheScarletKeys:
 			return 'The Scarlet Keys Investigator Expansion'
+		case CardPack.TheFeastOfHemlockVale:
+			return 'The Feast of Hemlock Vale Investigator Expansion'
+
+		case CardPack.TheBlobThatAteEverythingElse:
+			return 'The Blob That Ate Everything ELSE!'
 
 		case CardPack.ReturnToTheNightOfTheZealot:
 			return 'Return To the Night of the Zealot'
@@ -116,6 +121,9 @@ export function packCodeToIconConversion(p: string): CardPack {
 		case 'btb':
 		case 'rtr':
 		case 'otr':
+		case 'ltr':
+		case 'ptr':
+		case 'rop':
 			return CardPack.ParallelInvestigator
 		case 'books':
 		case 'hoth':

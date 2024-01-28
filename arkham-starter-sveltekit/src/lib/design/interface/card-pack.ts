@@ -66,6 +66,13 @@ export function getPackStaticUrl(pack: CardPackIcon, color: CardPackIconColor): 
 		case CardPackIcon.TheScarletKeys:
 			fileName = 'tsk'
 			break
+		case CardPackIcon.TheFeastOfHemlockVale:
+			fileName = 'fhv'
+			break
+
+		case CardPackIcon.TheBlobThatAteEverythingElse:
+			fileName = 'blbe'
+			break
 
 		case CardPackIcon.ReturnToTheNightOfTheZealot:
 			fileName = 'rtnotz'

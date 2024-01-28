@@ -54,6 +54,10 @@
 			packLink = 'https://www.fantasyflightgames.com/en/news/2022/6/30/scarlet-keys/'
 			break
 		}
+		case CardPackIcon.TheFeastOfHemlockVale: {
+			packLink = 'https://www.fantasyflightgames.com/en/news/2023/8/4/a-feast-of-hemlock/'
+			break
+		}
 		case CardPackIcon.NathanielCho:
 		case CardPackIcon.HarveyWalters:
 		case CardPackIcon.WinifredHabbamock:
