@@ -6,6 +6,9 @@
   "author": "Sirawat Pitaksarit <pyasry@gmail.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "pull": "deno run --allow-read --allow-write --allow-net pull.ts"
+  },
   "workspaces": [
     "arkham-starter-sveltekit",
     "functions-firestore"
