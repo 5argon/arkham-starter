@@ -45,36 +45,6 @@ export function iconToNameConversion(c: CardPack): string {
 			return 'Return To the Dream-Eaters'
 		case CardPack.ReturnToTheInnsmouthConspiracy:
 			return 'Return To the Innsmouth Conspiracy'
-		default:
-			return iconToNewNameConversion(c) ?? ''
-	}
-}
-
-export function iconToNewNameConversion(c: CardPack): string | null {
-	switch (c) {
-		case CardPack.Unknown:
-			return '(Unknown Set)'
-		case CardPack.RandomBasicWeakness:
-			return 'Random Basic Weakness'
-		case CardPack.CoreSet:
-			break
-		case CardPack.RevisedCoreSet:
-			break
-		case CardPack.ParallelInvestigator:
-			return 'Parallel Investigator'
-		case CardPack.Novella:
-			return 'Novella'
-
-		case CardPack.NathanielCho:
-			break
-		case CardPack.HarveyWalters:
-			break
-		case CardPack.WinifredHabbamock:
-			break
-		case CardPack.JacquelineFine:
-			break
-		case CardPack.StellaClark:
-			break
 
 		case CardPack.TheDunwichLegacy:
 			return 'The Dunwich Legacy Investigator Expansion'
@@ -89,22 +59,19 @@ export function iconToNewNameConversion(c: CardPack): string | null {
 		case CardPack.TheInnsmouthConspiracy:
 			return 'The Innsmouth Conspiracy Investigator Expansion'
 
-		case CardPack.ReturnToTheNightOfTheZealot:
-			break
-		case CardPack.ReturnToTheDunwichLegacy:
-			break
-		case CardPack.ReturnToThePathToCarcosa:
-			break
-		case CardPack.ReturnToTheCircleUndone:
-			break
-		case CardPack.ReturnToTheForgottenAge:
-			break
-		case CardPack.ReturnToTheDreamEaters:
-			break
-		case CardPack.ReturnToTheInnsmouthConspiracy:
-			break
+		case CardPack.Unknown:
+			return '(Unknown Set)'
+		case CardPack.RandomBasicWeakness:
+			return 'Random Basic Weakness'
+
+		case CardPack.ParallelInvestigator:
+			return 'Parallel Investigator'
+		case CardPack.Novella:
+			return 'Novella'
+
+		default:
+			return '(Unknown Set)'
 	}
-	return null
 }
 
 export function packCodeToIconConversion(p: string): CardPack {
@@ -199,6 +166,8 @@ export function packCodeToIconConversion(p: string): CardPack {
 			return CardPack.EdgeOfTheEarth
 		case 'tskp':
 			return CardPack.TheScarletKeys
+		case 'fhvp':
+			return CardPack.TheFeastOfHemlockVale
 
 		case 'rtnotz':
 			return CardPack.ReturnToTheNightOfTheZealot

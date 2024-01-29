@@ -1,6 +1,6 @@
 import {
 	classConversion,
-	iconToNewNameConversion,
+	iconToNameConversion,
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
 import { CardPackIcon } from '$lib/design/interface/card-pack'
@@ -28,7 +28,7 @@ export class PopupDatabase {
 				packCode: raw.packCodes[x.pc],
 				packIcon: icon,
 				packName: raw.packNames[x.pn],
-				packNameTransformed: iconToNewNameConversion(icon),
+				packNameTransformed: iconToNameConversion(icon),
 				positionString: x.ps.toString(),
 				xpString: x.xp?.toString() ?? '',
 				xpStringAfterTaboo: x.xpat.toString(),

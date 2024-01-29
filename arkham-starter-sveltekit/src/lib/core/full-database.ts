@@ -1,6 +1,6 @@
 import {
 	classConversion,
-	iconToNewNameConversion,
+	iconToNameConversion,
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
 import type { AhdbTaboo } from '$lib/ahdb/taboo'
@@ -48,7 +48,7 @@ export class FullDatabase {
 				class2: x.faction2_code !== undefined ? classConversion(x.faction2_code) : x.faction2_code,
 				class3: x.faction3_code !== undefined ? classConversion(x.faction3_code) : x.faction3_code,
 				packIcon: icon,
-				packNameTransformed: iconToNewNameConversion(icon),
+				packNameTransformed: iconToNameConversion(icon),
 				original: x,
 			}
 			if (taboo) {
