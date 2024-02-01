@@ -3,7 +3,7 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
-	import { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
@@ -91,7 +91,15 @@
 
 <PageTitle title={pageTitle} {helpMd} />
 
+<a href="/explore">Back to Explore Home</a>
+
 <ExploreMenu />
+
+<ListDivider label="External Links" />
+
+<p>
+	<b>Tips : </b> If you are organizing your collection, the card is clickable as a checklist.
+</p>
 
 <div class="tab">
 	<LimitedTab
@@ -146,6 +154,7 @@
 <CardTableDoubleDisplay
 	{toggleMap}
 	singleRight
+	columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 	entries={getByPackFromFullDatabaseWeakness(fdb, packs)}
 	groupings={[]}
 	sortings={[Sorting.Number]}
@@ -166,6 +175,7 @@
 
 <CardTableDoubleDisplay
 	{toggleMap}
+	columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 	singleRight
 	entries={getByPackFromFullDatabase(fdb, packs)}
 	{groupings}

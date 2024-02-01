@@ -87,6 +87,7 @@
 		<InvestigatorFrontBack {popupDatabase} {fullDatabase} deck={deckInput} />
 		{#if deckInput.published}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<div
 				class="ahdb-button"
 				on:click={() => {

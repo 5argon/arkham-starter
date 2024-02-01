@@ -1,0 +1,7 @@
+{
+  "name": "@5argon/arkhamdb-pulls",
+  "version": "0.0.1",
+  "scripts": {
+    "pull": "deno run --allow-read --allow-write --allow-net pull.ts"
+  }
+}

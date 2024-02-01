@@ -2,45 +2,66 @@
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import ExploreMenu from './ExploreMenu.svelte'
 	import helpMd from '$lib/md/explore-ie.md?raw'
+	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 </script>
 
 <PageTitle title={'Explore Investigator Expansions'} {helpMd} />
 
-<ExploreMenu />
+<p>
+	In the new two boxes format "Campaign Expansion" + "Investigator Expansion", now it is possible to
+	get either side depending on your interest. This Explore page is designed for this purpose : If
+	you look at the player cards (Investigator Expansion) and you are not hyped, you can get just the
+	Campaign Expansion then take investigators and player cards you already own to a new adventure.
+</p>
 
 <p>
-	Other than the menu, this page exists to host the explainer image below. You are free to hotlink
-	to this image. It is such a commonly confused topic for newcomers. So, what exactly is this
-	madness?
+	I also collect some links and articles inside each expansion to help you decide your purchase. If
+	you are a content creator and I'm missing your content, message me and I'll add it.
 </p>
+
+<ExploreMenu />
+
+<ListDivider label="Repackaged Format vs. Old Format FAQ" />
+
 <img src="/image/documentation/explore/expansion.png" alt="New repackaged format explainer" />
 
 <p>
-	Previously, FFG releases new campaign in 1 + 6 bits as highlighted in green squares. The first one
-	being a box labelled as the campaign name. Perhaps you thought it is an entirety start-to-finish
-	of a new adventure, but actually it is just 2 scenarios out of 8. The end of the first box left
-	you hanging, waiting for scenario 3 and beyond.
+	<b>In the old days :</b> When you purchase an "Expansion" / "Deluxe Expansion", you will get 2 out
+	of 8 scenarios. This box also provide Campaign's common encounter sets for use in 1st and 2nd scenario,
+	and they are also planned to be used in 3rd ~ 8th scenario, but you don't have the actual 3rd ~ 8th
+	scenarios yet. You also get some player cards and some investigators.
 </p>
+
 <p>
-	Then each month, 1 scenario each time + a bit more player cards to use would came out as blister
-	packs successively. In this sense you are subscribed to the drip-feed adventure and look forward
-	to the next episode, and they hope it became a part of your lifestyle, so they dubbed this
-	"living" card game. (LCG)
+	After you reach the end of 2nd scenario, you purchase the "Mythos Pack" in sequence to continue
+	the story and also get some more player cards (but no investigators). In this old model, the
+	"living" in Living Card Game meant the players are always subscribed to this on-going, episodic
+	adventure and continues one step forward every month or so.
 </p>
+
 <p>
-	Though that sounds fun in theory to go to shop to get the blister packs each month, it is a pain
-	in many ways and sometimes go against how the game works (smell like mainly a marketing reason,
-	which now start to backfire when new player comes in and trying to get the campaign is not the
-	latest release one, it is only "living" when it is the latest one.) so they change the dimension
-	of selling the expansion in blue rectangles now.
+	It is impossible to get just the scenarios in the old format, you must also get some player cards
+	as you go.
 </p>
+
 <p>
-	You should get the new format, but the box can sometimes confuse you, thanks to the artwork of old
-	2-scenario box happened to be the same as the new Campaign Expansion one. I would say this more
-	convenient new release format stops being worthy of a special "LCG" labelling and should be called
-	just a regular game expansion like other boardgame expansions, but they are still rolling with
-	this LCG wording since it was with the game from start. (so it maybe safe to not exactly know what
-	is an LCG from now, just "expansions".)
+	<b>Nowadays :</b> A "Campaign Expansion" (be careful as this box use the same artwork as the old format
+	"Expansion" / "Deluxe Expansion", but the box is significantly bigger and sturdier) provides 1st~8th
+	scenarios and Campaign's common encounter sets completely and you are ready to go all the way to the
+	epilogue provided that you owns the core set. There is no investigator and player cards in this box,
+	other than a bit of story asset that you could earn into your player deck along the story.
+</p>
+
+<p>
+	Purchase an "Investigator Expansion" to get the investigators and player cards that were
+	previously scattered throughout all the "Mythos Pack" in one go. This box uses a new artwork
+	(photos of investigators scattered on the table), so should be less likely to get confused.
+</p>
+
+<p>
+	Compared to old format which provides frequent update every month in exchange of intially
+	incomplete expansion, we now get an expansion update roughly once per year but is immediately
+	complete.
 </p>
 
 <style>

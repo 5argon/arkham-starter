@@ -119,6 +119,7 @@ export function manualEdit(p: AhdbCard[]) {
     c.linked_to_code = "09119b"
     addCust(c, p, "09119")
   })
+  // End Customizable
 
   // Parallel Pete
   manualEditOne(p, "90046", (c) => {
@@ -154,6 +155,8 @@ export function manualEdit(p: AhdbCard[]) {
     c.double_sided = true
     c.backimagesrc = "/bundles/cards/89005b.png"
   })
+
+  // All FHV cards
 }
 
 /**
@@ -176,3 +179,12 @@ function manualEditOne(p: AhdbCard[], c: string, edit: (c: AhdbCard) => void) {
   }
   throw new Error("Not found for manual edit " + c)
 }
+
+// function synthesize(
+//   p: AhdbCard[],
+//   c: string,
+//   name: string,
+//   level: number,
+//   subname?: string,
+//   otherSide?: string,
+// ) {}

@@ -28,26 +28,26 @@
 		return [tg[i]]
 	}
 
-	function getInvestigator(en: DecklistEntry): string | undefined {
+	function getInvestigator(en: DecklistEntry): string | null {
 		if (en.labels !== undefined && en.labels.length >= 1) {
 			const firstLabel = en.labels[0]
-			return firstLabel.cardId
+			return firstLabel.cardId ?? null
 		}
-		return undefined
+		return null
 	}
 
-	function getLabels(en: DecklistEntry): string[] | undefined {
+	function getLabels(en: DecklistEntry): string[] | null {
 		const labels = en.labels
 		if (labels !== undefined) {
 			return labels.filter((x) => x.text !== undefined).map((x) => x.text ?? '')
 		}
-		return undefined
+		return null
 	}
 </script>
 
 <div class="card-scan-flex">
 	{#each linear as en}
-		{#each new Array(en.amount) as _, i}
+		{#each Array(en.amount) as _, i}
 			<CardScan
 				{small}
 				cardId={en.cardId}
@@ -64,7 +64,7 @@
 							if (onClickToggle) {
 								onClickToggle(en.id, i, en.amount, t)
 							}
-					  }}
+						}}
 			/>
 		{/each}
 	{/each}

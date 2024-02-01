@@ -58,6 +58,7 @@
 
 {#if !exist}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		class="outer no-image"
 		class:toggle-div={onToggleChanged}
@@ -81,6 +82,7 @@
 {:else}
 	{#if !linkedOnly}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<span
 			class="outer"
 			class:toggle-div={onToggleChanged}
@@ -117,6 +119,7 @@
 	{#if !unlink || linkedOnly}
 		{#if card.original.double_sided && card.original.backimagesrc !== undefined && amount === 1}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<span
 				class="outer"
 				class:toggle-div={onToggleChanged}
@@ -139,6 +142,7 @@
 		{/if}
 		{#if card.original.linked_to_code !== undefined && amount === 1}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<span
 				class="outer"
 				class:toggle-div={onToggleChanged}

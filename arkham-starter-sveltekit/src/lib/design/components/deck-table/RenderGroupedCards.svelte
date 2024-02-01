@@ -47,6 +47,7 @@
 		{totalLevels}
 	/>
 {/if}
+
 {#each groupedCards.entries as en, index}
 	{#if isEntry(en)}
 		<tr>
@@ -61,7 +62,7 @@
 									// Clicking on cell either toggles or untoggles all copies.
 									onClickToggle(en.id, copy, t)
 								}
-						  }}
+							}}
 					toggled={getCellToggled(toggleMap, en)}
 					cardId={en.cardId}
 					{popupDatabase}
@@ -77,19 +78,19 @@
 			{/each}
 		</tr>
 	{:else}
-		<!-- theOnlyGroup in effect for only the topmost level. This is surely deeper level grouping. -->
 		<svelte:self
+			{taboo}
 			level={level + 1}
+			{totalLevels}
+			theOnlyGroup={false}
 			groupedCards={en}
 			previousGroupedCards={[...previousGroupedCards, groupedCards]}
-			{toggleMap}
-			{totalLevels}
 			{popupDatabase}
 			{columns}
-			{taboo}
-			{hideAmount}
+			{toggleMap}
 			{onClickToggle}
-			theOnlyGroup={false}
+			{hideAmount}
+			{customizableMetas}
 		/>
 	{/if}
 {/each}

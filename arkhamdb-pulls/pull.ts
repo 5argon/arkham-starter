@@ -81,7 +81,7 @@ const traitMap = makeMap(uniqueTrait)
 const popupDatabaseItems: PopupDatabaseItem[] = []
 // Hidden card is kept, it is up to front end to not display them.
 const playerCards = allCards.filter((x) => {
-  return x.type_code !== "story" && x.faction_code !== "mythos"
+  return x.faction_code !== "mythos"
 })
 manualEdit(playerCards)
 

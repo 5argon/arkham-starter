@@ -11,6 +11,10 @@
     {
       "name": "[arkham-profile.com] Database",
       "path": "../functions-firestore"
+    },
+    {
+      "name": "[arkham-profile.com] SvelteKit",
+      "path": "../arkham-profile-sveltekit"
     }
   ],
   "settings": {
