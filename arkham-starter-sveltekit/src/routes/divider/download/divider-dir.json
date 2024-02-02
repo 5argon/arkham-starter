@@ -259,6 +259,17 @@
   },
   {
     "items": [
+      "01_019-039 (Guardian).png",
+      "02_040-061 (Seeker).png",
+      "03_062-083 (Rogue).png",
+      "04_084-107 (Mystic).png",
+      "05_108-127 (Survivor).png",
+      "06_128-134 (Neutral).png"
+    ],
+    "folder": "CNR - The Feast of Hemlock Vale x6"
+  },
+  {
+    "items": [
       "01_016-036 (The Dunwich Legacy).png",
       "02_105-117 (The Miskatonic Museum).png",
       "03_147-158 (The Essex County Express).png",
@@ -501,6 +512,37 @@
   },
   {
     "items": [
+      "01_The First Day.png",
+      "02_The Second Day.png",
+      "03_The Final Day.png",
+      "04_Agents of the Colour.png",
+      "05_Fate of the Vale.png",
+      "06_Heirlooms.png",
+      "07_Horrors in the Rock.png",
+      "08_Hemlock House.png",
+      "09_Residents.png",
+      "10_The Longest Night.png",
+      "11_The Silent Heath.png",
+      "12_The Twisted Hollow.png",
+      "13_Transfiguration.png",
+      "14_Day of Rest.png",
+      "15_Day of Rain.png",
+      "16_Day of the Feast.png",
+      "17_Blight.png",
+      "18_Fire!.png",
+      "19_Myconids.png",
+      "20_Mutations.png",
+      "21_Refractions.png",
+      "22_The Forest.png",
+      "23_The Lost Sister.png",
+      "24_The Thing in the Depths.png",
+      "25_The Vale.png",
+      "26_Written in Rock.png"
+    ],
+    "folder": "Campaign - The Feast of Hemlock Vale x26"
+  },
+  {
+    "items": [
       "01_Guardian No Text.png",
       "02_Guardian.png",
       "03_Multi-Class No Text.png",
@@ -676,6 +718,17 @@
       "08_Mi-Go Incursion II.png"
     ],
     "folder": "Standalone - The Blob That Ate Everything x8"
+  },
+  {
+    "items": [
+      "01_Guardian 40.png",
+      "02_Seeker 39.png",
+      "03_Rogue 41.png",
+      "04_Mystic 40.png",
+      "05_Survivor 39.png",
+      "06_Neutral 11.png"
+    ],
+    "folder": "CCQ - The Feast of Hemlock Vale x6"
   },
   {
     "items": [
