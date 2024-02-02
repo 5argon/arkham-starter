@@ -52,6 +52,7 @@ export const dividerData: DividerToc = [
 			{ name: 'CCQ - The Dream-Eaters', count: 6, description: '' },
 			{ name: 'CCQ - Edge of the Earth', count: 11, description: '' },
 			{ name: 'CCQ - The Scarlet Keys', count: 6, description: '' },
+			{ name: 'CCQ - The Feast of Hemlock Vale', count: 6, description: '' },
 			{ name: 'CCQ - Return To', count: 5, description: '' },
 		],
 		link: 'something',
@@ -71,6 +72,7 @@ export const dividerData: DividerToc = [
 			{ name: 'CNR - The Innsmouth Conspiracy', count: 7, description: '' },
 			{ name: 'CNR - Edge of the Earth', count: 8, description: '' },
 			{ name: 'CNR - The Scarlet Keys', count: 6, description: '' },
+			{ name: 'CNR - The Feast of Hemlock Vale', count: 6, description: '' },
 			{ name: 'CNR - Return To', count: 5, description: '' },
 		],
 		link: 'something',
@@ -89,6 +91,7 @@ export const dividerData: DividerToc = [
 			{ name: 'Campaign - The Innsmouth Conspiracy', count: 18, description: '' },
 			{ name: 'Campaign - Edge of the Earth', count: 24, description: '' },
 			{ name: 'Campaign - The Scarlet Keys', count: 26, description: '' },
+			{ name: 'Campaign - The Feast of Hemlock Vale', count: 26, description: '' },
 		],
 	},
 	{
