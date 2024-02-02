@@ -9,10 +9,7 @@
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import { packToFile } from '$lib/design/components/expansion/pack-to-file'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import { CardPackIconColor, getPackStaticUrl } from '$lib/design/interface/card-pack'
 	import type { ExploreInput } from '$lib/explore/explore-input'
-	import helpMd from '$lib/md/explore-ie.md?raw'
 	import CardTableDoubleDisplay from './CardTableDoubleDisplay.svelte'
 	import ExploreMenu from './ExploreMenu.svelte'
 
@@ -20,6 +17,8 @@
 	export let pdb: PopupDatabase
 	export let pageTitle: string
 	export let exploreInput: ExploreInput
+
+	$: packBanner = packToFile(exploreInput.packs[0])
 
 	let toggleMap: { [cardId: string]: boolean[] } = {}
 
@@ -96,11 +95,13 @@
 
 <a href="/explore">Back to Explore Home</a>
 
-<img
-	class="pack-banner"
-	src={'/image/expansion/investigator/' + packToFile(exploreInput.packs[0]) + '.png'}
-	alt="pack banner"
-/>
+{#if packBanner !== null}
+	<img
+		class="pack-banner"
+		src={'/image/expansion/investigator/' + packBanner + '.png'}
+		alt="pack banner"
+	/>
+{/if}
 
 <h1><center>{iconToNameConversion(exploreInput.packs[0])}</center></h1>
 

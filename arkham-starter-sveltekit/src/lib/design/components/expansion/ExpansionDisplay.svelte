@@ -11,10 +11,18 @@
 	export let subText: string | undefined = undefined
 	export let link: string | undefined = undefined
 
-	$: file = packToFile(set)
+	let backgroundImageString: string = ''
+	$: {
+		const file = packToFile(set)
+		if (file) {
+			backgroundImageString = `background-image: url(/image/expansion/investigator/${file}.png);`
+		} else {
+			backgroundImageString = ''
+		}
+	}
 </script>
 
-<div class="frame" style="background-image: url(/image/expansion/investigator/{file}.png);">
+<div class="frame" style={backgroundImageString}>
 	<a href={link}>
 		<div class="inner-frame">
 			<div class="flex-icon-text">

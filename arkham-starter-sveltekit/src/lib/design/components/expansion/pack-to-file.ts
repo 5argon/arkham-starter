@@ -1,6 +1,6 @@
 import { CardPackIcon } from '$lib/design/interface/card-pack'
 
-export function packToFile(pack: CardPackIcon): string {
+export function packToFile(pack: CardPackIcon): string | null {
 	switch (pack) {
 		case CardPackIcon.CoreSet:
 			return 'core'
@@ -34,17 +34,7 @@ export function packToFile(pack: CardPackIcon): string {
 			return 'jac'
 		case CardPackIcon.StellaClark:
 			return 'ste'
-		case CardPackIcon.ParallelInvestigator:
-			return 'par'
-		case CardPackIcon.ReturnToTheDunwichLegacy:
-			return 'rtdwl'
-		case CardPackIcon.ReturnToThePathToCarcosa:
-			return 'rtptc'
-		case CardPackIcon.ReturnToTheForgottenAge:
-			return 'rttfa'
-		case CardPackIcon.ReturnToTheCircleUndone:
-			return 'rttcu'
 		default:
-			return ''
+			return null
 	}
 }
