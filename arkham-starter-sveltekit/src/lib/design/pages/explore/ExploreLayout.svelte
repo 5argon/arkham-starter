@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { iconToNameConversion } from '$lib/ahdb/conversion'
 	import type { CardPack } from '$lib/core/card-pack'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
@@ -6,8 +7,10 @@
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
+	import { packToFile } from '$lib/design/components/expansion/pack-to-file'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+	import { CardPackIconColor, getPackStaticUrl } from '$lib/design/interface/card-pack'
 	import type { ExploreInput } from '$lib/explore/explore-input'
 	import helpMd from '$lib/md/explore-ie.md?raw'
 	import CardTableDoubleDisplay from './CardTableDoubleDisplay.svelte'
@@ -91,13 +94,19 @@
 	}
 </script>
 
-<PageTitle title={pageTitle} {helpMd} />
-
 <a href="/explore">Back to Explore Home</a>
+
+<img
+	class="pack-banner"
+	src={'/image/expansion/investigator/' + packToFile(exploreInput.packs[0]) + '.png'}
+	alt="pack banner"
+/>
+
+<h1><center>{iconToNameConversion(exploreInput.packs[0])}</center></h1>
 
 <ExploreMenu />
 
-<ListDivider label="External Links" />
+<!-- <ListDivider label="External Links" /> -->
 
 <p>
 	<b>Tips : </b> If you are organizing your collection, the card is clickable as a checklist.
@@ -194,6 +203,11 @@
 />
 
 <style>
+	.pack-banner {
+		max-width: 400px;
+		margin: 0 auto;
+	}
+
 	.tab {
 		margin-top: 8px;
 	}

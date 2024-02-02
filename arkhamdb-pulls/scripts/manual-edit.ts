@@ -121,6 +121,32 @@ export function manualEdit(p: AhdbCard[]) {
   })
   // End Customizable
 
+  // Un-hidden some parallel investigators
+  // Daisy
+  manualEditOne(p, "90001", (c) => {
+    c.hidden = undefined
+  })
+  // Skids
+  manualEditOne(p, "90008", (c) => {
+    c.hidden = undefined
+  })
+  // Agnes
+  manualEditOne(p, "90017", (c) => {
+    c.hidden = undefined
+  })
+  // Roland
+  manualEditOne(p, "90024", (c) => {
+    c.hidden = undefined
+  })
+  // Pete
+  manualEditOne(p, "90046", (c) => {
+    c.hidden = undefined
+  })
+  // Jim
+  manualEditOne(p, "90049", (c) => {
+    c.hidden = undefined
+  })
+
   // Parallel Pete
   manualEditOne(p, "90046", (c) => {
     c.double_sided = true

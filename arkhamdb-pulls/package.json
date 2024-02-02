@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "pull": "deno run --allow-read --allow-write --allow-net pull.ts",
+    "download": "deno run --allow-read --allow-write --allow-net download.ts",
     "deletepng": "deno run --allow-read --allow-write --allow-net deletepng.ts"
   }
 }

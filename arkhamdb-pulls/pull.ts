@@ -205,25 +205,3 @@ const w3 = Deno.writeTextFile(
 )
 await Promise.all([w1, w2, w3])
 console.log("Finished writing popup database and player database.")
-
-if (Deno.args.findIndex((x) => x === "-i") === -1) {
-  console.log("Downloading all player card images... (TAKES TIME!)")
-  await downloadImages(playerCards)
-  console.log("Downloaded all player card images.")
-} else {
-  console.log("Skipped image downloads.")
-}
-
-const pi = path.join(pullsDirectory, pullsImages)
-const truePath = path.join(pi, pullsImagesTrue)
-const validImages: string[] = []
-for await (const dir of Deno.readDir(truePath)) {
-  if (dir.isFile) {
-    validImages.push(path.basename(dir.name, ".png"))
-  }
-}
-
-await Deno.writeTextFile(
-  path.join(pullsDirectory, pullsJson, pullsUtilsValid),
-  JSON.stringify(validImages),
-)

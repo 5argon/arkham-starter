@@ -165,8 +165,8 @@ async function processSingleCard(
   }
   const w = image.width
   const h = image.height
-  let squareTarget: CropTarget
-  let stripTarget: CropTarget
+  let squareTarget: CropTarget | undefined
+  let stripTarget: CropTarget | undefined
   switch (card.type_code) {
     case "investigator":
       squareTarget = {
@@ -267,49 +267,53 @@ async function processSingleCard(
       }
       break
     default:
-      return
+      break
   }
-  const square = image
-    .clone()
-    .crop(
-      squareTarget.x * w,
-      squareTarget.y * h,
-      squareTarget.w * w,
-      squareTarget.h * h,
+  if (squareTarget !== undefined && stripTarget !== undefined) {
+    const square = image
+      .clone()
+      .crop(
+        squareTarget.x * w,
+        squareTarget.y * h,
+        squareTarget.w * w,
+        squareTarget.h * h,
+      )
+    const strip = image
+      .clone()
+      .crop(
+        stripTarget.x * w,
+        stripTarget.y * h,
+        stripTarget.w * w,
+        stripTarget.h * h,
+      )
+    const squareSmall = image
+      .clone()
+      .crop(
+        squareTarget.x * w,
+        squareTarget.y * h,
+        squareTarget.w * w,
+        squareTarget.h * h,
+      )
+    const p1 = path.join(squarePath, card.code + ".png")
+    const p2 = path.join(stripPath, card.code + ".png")
+    const p3 = path.join(squareSmallPath, card.code + ".png")
+    const w1 = Deno.writeFile(
+      p1,
+      await resize(await square.encode(), { width: 128, height: 128 }),
     )
-  const strip = image
-    .clone()
-    .crop(
-      stripTarget.x * w,
-      stripTarget.y * h,
-      stripTarget.w * w,
-      stripTarget.h * h,
+    const w2 = Deno.writeFile(
+      p2,
+      await resize(await strip.encode(), { width: 96, height: 32 }),
     )
-  const squareSmall = image
-    .clone()
-    .crop(
-      squareTarget.x * w,
-      squareTarget.y * h,
-      squareTarget.w * w,
-      squareTarget.h * h,
+    const w3 = Deno.writeFile(
+      p3,
+      await resize(await squareSmall.encode(), { width: 32, height: 32 }),
     )
-  const p1 = path.join(squarePath, card.code + ".png")
-  const p2 = path.join(stripPath, card.code + ".png")
-  const p3 = path.join(squareSmallPath, card.code + ".png")
+    await Promise.all([w1, w2, w3])
+  }
+
   const p4 = path.join(fullSmallPath, card.code + ".png")
   const p5 = path.join(fullPath, card.code + ".png")
-  const w1 = Deno.writeFile(
-    p1,
-    await resize(await square.encode(), { width: 128, height: 128 }),
-  )
-  const w2 = Deno.writeFile(
-    p2,
-    await resize(await strip.encode(), { width: 96, height: 32 }),
-  )
-  const w3 = Deno.writeFile(
-    p3,
-    await resize(await squareSmall.encode(), { width: 32, height: 32 }),
-  )
   const fullEncode = await image.encode()
   const w4 = Deno.writeFile(
     p4,
@@ -323,7 +327,7 @@ async function processSingleCard(
     resizedFull = await resize(fullEncode, { aspectRatio: true, height: 640 })
   }
   const w5 = Deno.writeFile(p5, resizedFull)
-  await Promise.all([w1, w2, w3, w4, w5])
+  await Promise.all([w4, w5])
 
   if (backCode !== null) {
     const pBack = path.join(truePath, backCode + ".png")

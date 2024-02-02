@@ -11,7 +11,7 @@
 </svelte:head>
 
 <ExploreLayout
-	pageTitle="Explore: Parallel Investigators"
+	pageTitle="Explore: Parallel Investigator"
 	pdb={data.pdb}
 	fdb={data.fdb}
 	exploreInput={{
