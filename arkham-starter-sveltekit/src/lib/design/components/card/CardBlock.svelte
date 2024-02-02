@@ -25,6 +25,8 @@
 	export let restriction: boolean = false
 	export let weakness: boolean = false
 	export let customizable: boolean = false
+	export let permanent: boolean = false
+	export let bonded: boolean = false
 	export let checkBoxes: number = 0
 	export let checkedBoxes: number = 0
 	export let dragDataPrefix: string = ''
@@ -138,6 +140,8 @@
 			{weakness}
 			{restriction}
 			{customizable}
+			{permanent}
+			{bonded}
 			{checkBoxes}
 			{checkedBoxes}
 			color={true}

@@ -31,6 +31,8 @@
 	export let restriction: boolean = false
 	export let weakness: boolean = false
 	export let customizable: boolean = false
+	export let permanent: boolean = false
+	export let bonded: boolean = false
 </script>
 
 <CardBlock
@@ -50,6 +52,8 @@
 	{restriction}
 	{weakness}
 	{customizable}
+	{permanent}
+	{bonded}
 	disableHoverEffects
 	dragDataPrefix={'-1,staging,'}
 	leftButtons={collapse
@@ -62,7 +66,7 @@
 						onClickDelete()
 					},
 				},
-		  ]}
+			]}
 	rightButtons={singleMode
 		? [
 				{
@@ -72,7 +76,7 @@
 						onClickLeft()
 					},
 				},
-		  ]
+			]
 		: [
 				{
 					label: 'Add to left side',
@@ -88,5 +92,5 @@
 						onClickRight()
 					},
 				},
-		  ]}
+			]}
 />

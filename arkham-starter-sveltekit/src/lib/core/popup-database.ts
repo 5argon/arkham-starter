@@ -245,6 +245,16 @@ export interface PopupDatabaseItemRaw {
 	 * Spoiler was on in arkhamdb
 	 */
 	sp?: boolean
+
+	/**
+	 * Has any bonded cards.
+	 */
+	bd?: boolean
+
+	/**
+	 * Is a Permanent card.
+	 */
+	pe?: boolean
 }
 
 export async function fetchPopupDatabase(): LazyPopupDatabase {

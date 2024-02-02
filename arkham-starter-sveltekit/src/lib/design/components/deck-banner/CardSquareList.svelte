@@ -11,7 +11,7 @@
 	let previewCardsReal: PopupDatabaseItem[] = []
 	$: {
 		previewCardsReal = []
-		for (let i = 0; i < previewCards.length && i <= maxCards ; i += 1) {
+		for (let i = 0; i < previewCards.length && i <= maxCards; i += 1) {
 			const card = popupDb.getById(previewCards[i])
 			if (card !== null) {
 				previewCardsReal.push(card)
@@ -33,6 +33,10 @@
 				xp={pc.original.xp}
 				packIcon={pc.packIcon}
 				packNumber={pc.original.ps}
+				investigator={pc.original.ir}
+				bonded={pc.original.bd ?? false}
+				permanent={pc.original.pe ?? false}
+				customizable={pc.original.cus !== undefined}
 			/>
 		</span>
 	{/each}

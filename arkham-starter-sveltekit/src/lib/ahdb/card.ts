@@ -47,9 +47,12 @@ export interface AhdbCard {
 	real_slot?: string
 	traits?: string
 	real_traits?: string
-	restrictions?: null | {
-		investigator: { [k: string]: string }
-	}
+	restrictions?:
+		| null
+		| string
+		| {
+				investigator: { [k: string]: string }
+		  }
 	flavor?: string
 	illustrator: string
 	is_unique: boolean
@@ -75,6 +78,7 @@ export interface AhdbCard {
 	spoiler?: number
 	deck_options?: AhdbDeckOption[]
 	tags?: string
+	bonded_cards?: { count: number; code: string }[]
 }
 
 export interface AhdbDeckOption {

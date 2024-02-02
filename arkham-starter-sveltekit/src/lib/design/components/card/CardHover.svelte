@@ -17,6 +17,10 @@
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
+	export let investigator: boolean = false
+	export let customizable: boolean = false
+	export let permanent: boolean = false
+	export let bonded: boolean = false
 </script>
 
 <HoverFrame>
@@ -37,5 +41,9 @@
 		{class3}
 		{packIcon}
 		{packNumber}
+		{investigator}
+		{customizable}
+		{permanent}
+		{bonded}
 	/>
 </HoverFrame>

@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>arkham-starter.com | Tool | Card List</title>
+	<title>arkham-starter.com | Tool | Colorful Card Lister</title>
 </svelte:head>
 
-<UpgradeLayout pageTitle="Card List" helpMd={help} singleMode={true} />
+<UpgradeLayout pageTitle="Colorful Card Lister" helpMd={help} singleMode={true} />

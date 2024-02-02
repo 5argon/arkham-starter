@@ -14,7 +14,7 @@
 	export let cardId: string | null = null
 	// export let imageBase64: string | null = null
 	const validArray: string[] = valid
-	$: exist = validArray.find((element) => element === cardId + '.png')
+	$: exist = validArray.find((element) => element === cardId)
 
 	let showClasses: boolean
 	$: showClasses =
@@ -38,7 +38,7 @@
 		<img
 			draggable={false}
 			class="image-in-strip"
-			src={'/image/card/strip/' + cardId + '.png'}
+			src={'/image/card/strip/' + cardId + '.webp'}
 			alt={''}
 		/>
 		{#if xp !== null}

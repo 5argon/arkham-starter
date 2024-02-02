@@ -210,14 +210,22 @@ export const blackStarsRiseScenario: Scenario = {
 				{ encounterSet: inhabitantsOfCarcosa, overwriteCount: 2 },
 				theStranger,
 			],
-			gameComponentsPerDifficulty: {
-				easy: [GameComponent.TokenM3],
-				standard: [GameComponent.TokenM5],
-				hard: [GameComponent.TokenM6],
-				expert: [GameComponent.TokenM7],
-			},
 		},
 	],
+	commonSetup: {
+		gameComponentsPerDifficulty: {
+			easy: [GameComponent.TokenM3],
+			standard: [GameComponent.TokenM5],
+			hard: [GameComponent.TokenM6],
+			expert: [GameComponent.TokenM7],
+		},
+		additionalWeakness: [
+			{ trait: 'Madness' },
+			{ trait: 'Pact' },
+			{ trait: 'Cultist' },
+			{ trait: 'Detective' },
+		],
+	},
 }
 
 export const dimCarcosaScenario: Scenario = {
@@ -368,6 +376,20 @@ export const returnToBlackStarsRiseScenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		gameComponentsPerDifficulty: {
+			easy: [GameComponent.TokenM3],
+			standard: [GameComponent.TokenM5],
+			hard: [GameComponent.TokenM6],
+			expert: [GameComponent.TokenM7],
+		},
+		additionalWeakness: [
+			{ trait: 'Madness' },
+			{ trait: 'Pact' },
+			{ trait: 'Cultist' },
+			{ trait: 'Detective' },
+		],
+	},
 }
 
 export const returnToDimCarcosaScenario: Scenario = {

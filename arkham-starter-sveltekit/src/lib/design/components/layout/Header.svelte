@@ -11,8 +11,9 @@
 		<!-- svelte-ignore a11y-missing-attribute -->
 		<img class="intellect" src="/image/icon/stat/intellect.png" />
 		<div class="text">arkham-starter.com</div>
-		<div><TopBarButton text="Browse Starter Decks" link="/" /></div>
-		<div><TopBarButton text="Resources and Tools" link="/resource" /></div>
+		<div><TopBarButton text="Home" link="/" /></div>
+		<!-- <div><TopBarButton text="Browse Starter Decks" link="/" /></div> -->
+		<!-- <div><TopBarButton text="Resources and Tools" link="/resource" /></div> -->
 	</div>
 	<div class="right">
 		<!-- <div class="text">Current Team</div>

@@ -52,72 +52,72 @@ export function manualEdit(p: AhdbCard[]) {
   // Customizable
   manualEditOne(p, "09021", (c) => {
     c.linked_to_code = "09021b"
-    addCust(c, p, "09021")
+    addCustLink(c, p, "09021")
   })
   manualEditOne(p, "09022", (c) => {
     c.linked_to_code = "09022b"
-    addCust(c, p, "09022")
+    addCustLink(c, p, "09022")
   })
   manualEditOne(p, "09023", (c) => {
     c.linked_to_code = "09023b"
-    addCust(c, p, "09023")
+    addCustLink(c, p, "09023")
   })
 
   manualEditOne(p, "09040", (c) => {
     c.linked_to_code = "09040b"
-    addCust(c, p, "09040")
+    addCustLink(c, p, "09040")
   })
   manualEditOne(p, "09041", (c) => {
     c.linked_to_code = "09041b"
-    addCust(c, p, "09041")
+    addCustLink(c, p, "09041")
   })
   manualEditOne(p, "09042", (c) => {
     c.linked_to_code = "09042b"
-    addCust(c, p, "09042")
+    addCustLink(c, p, "09042")
   })
 
   manualEditOne(p, "09059", (c) => {
     c.linked_to_code = "09059b"
-    addCust(c, p, "09059")
+    addCustLink(c, p, "09059")
   })
   manualEditOne(p, "09060", (c) => {
     c.linked_to_code = "09060b"
-    addCust(c, p, "09060")
+    addCustLink(c, p, "09060")
   })
   manualEditOne(p, "09061", (c) => {
     c.linked_to_code = "09061b"
-    addCust(c, p, "09061")
+    addCustLink(c, p, "09061")
   })
 
   manualEditOne(p, "09079", (c) => {
     c.linked_to_code = "09079b"
-    addCust(c, p, "09079")
+    addCustLink(c, p, "09079")
   })
   manualEditOne(p, "09080", (c) => {
     c.linked_to_code = "09080b"
-    addCust(c, p, "09080")
+    addCustLink(c, p, "09080")
   })
   manualEditOne(p, "09081", (c) => {
     c.linked_to_code = "09081b"
-    addCust(c, p, "09081")
+    addCustLink(c, p, "09081")
   })
 
   manualEditOne(p, "09099", (c) => {
     c.linked_to_code = "09099b"
-    addCust(c, p, "09099")
+    addCustLink(c, p, "09099")
   })
   manualEditOne(p, "09100", (c) => {
     c.linked_to_code = "09100b"
-    addCust(c, p, "09100")
+    addCustLink(c, p, "09100")
   })
   manualEditOne(p, "09101", (c) => {
     c.linked_to_code = "09101b"
-    addCust(c, p, "09101")
+    addCustLink(c, p, "09101")
   })
 
   manualEditOne(p, "09119", (c) => {
     c.linked_to_code = "09119b"
-    addCust(c, p, "09119")
+    addCustLink(c, p, "09119")
   })
   // End Customizable
 
@@ -160,9 +160,9 @@ export function manualEdit(p: AhdbCard[]) {
 }
 
 /**
- * Adds customizable sheet graphic as a new back of customizable card.
+ * Adds customizable sheet graphic as a linked card of customizable card.
  */
-function addCust(card: AhdbCard, p: AhdbCard[], c: string) {
+function addCustLink(card: AhdbCard, p: AhdbCard[], c: string) {
   const n: Partial<AhdbCard> = {
     code: c + "b",
     position: card.position,

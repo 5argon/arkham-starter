@@ -20,7 +20,7 @@ export function cardClassToName(c: CardClass): string {
 		case CardClass.Survivor:
 			return 'Survivor'
 		case CardClass.Neutral:
-			return 'Survivor'
+			return 'Neutral'
 		default:
 			return ''
 	}

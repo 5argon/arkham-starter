@@ -42,7 +42,9 @@
 		const inPack = fdb.queryPack(ps)
 		const investigator = inPack.filter((x) => {
 			const r =
-				(x.original.type_code === 'investigator' || typeof x.original.restrictions === 'object') &&
+				(x.original.type_code === 'investigator' ||
+					typeof x.original.restrictions === 'string' ||
+					typeof x.original.restrictions === 'object') &&
 				x.original.spoiler === undefined
 			return r
 		})

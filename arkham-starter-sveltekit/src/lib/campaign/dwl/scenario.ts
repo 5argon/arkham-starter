@@ -82,7 +82,10 @@ export const theHouseAlwaysWinsScenario: Scenario = {
 		},
 	],
 	commonSetup: {
-		gameComponents: [GameComponent.TokenElderThing],
+		notes: [
+			{ encounterSet: hideousAbominations, what: 'Set this encounter set aside, out of play.' },
+			{ encounterSet: strikingFear, what: 'Set this encounter set aside, out of play.' },
+		],
 	},
 }
 
@@ -103,9 +106,6 @@ export const theMiskatonicMuseumScenario: Scenario = {
 			],
 		},
 	],
-	commonSetup: {
-		gameComponents: [GameComponent.TokenTablet],
-	},
 }
 
 export const theEssexCountyExpressScenario: Scenario = {
@@ -335,7 +335,6 @@ export const returnToTheMiskatonicMuseumScenario: Scenario = {
 				creepingCold,
 				secretDoors,
 			],
-			gameComponents: [GameComponent.TokenTablet],
 		},
 	],
 }

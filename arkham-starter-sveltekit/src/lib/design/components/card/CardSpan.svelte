@@ -36,6 +36,8 @@
 	export let weakness: boolean = false
 	export let investigator: boolean = false
 	export let customizable: boolean = false
+	export let permanent: boolean = false
+	export let bonded: boolean = false
 	export let checkBoxes: number = 0
 	export let checkedBoxes: number = 0
 	export let forceSmall: boolean = false
@@ -93,19 +95,19 @@
 				class:card-name-long={forceSmall || effectiveText.length >= 25}
 				class={colorClass + ' ' + 'card-name'}>{effectiveText}</span
 			>{#if subText !== null}<span class={colorClass + ' ' + 'card-subname'}>{subText}</span>{/if}
-			{#if weakness || rbw}<span title="Weakness" class={'pips ' + textIconFontClass}
-					>{textIconToFontCharacter(TextIcon.Weakness)}</span
+			{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}{#if weakness || rbw}<span
+					title="Weakness"
+					class={'pips ' + textIconFontClass}>{textIconToFontCharacter(TextIcon.Weakness)}</span
 				>{/if}{#if restriction}<FaIcon
 					path={allIcons.investigatorRestriction}
 				/>{/if}{#if investigator}<FaIcon
 					path={allIcons.investigator}
-				/>{/if}{#if customizable}<FaIcon path={allIcons.customizable} />{/if}
-			{#if xp !== null && xp > 0}<span class="pips">{pips}</span>{/if}
+				/>{/if}{#if customizable}<FaIcon path={allIcons.customizable} />{/if}{#if permanent}<FaIcon
+					path={allIcons.permanent}
+				/>{/if}{#if bonded}<FaIcon path={allIcons.bonded} />{/if}
 			{#if xpTaboo !== null && xpTaboo !== 0}
 				<span class="pips taboo-pips">{tabooPips}</span>
-			{/if}{#if exceptional}<span title="Exceptional" class={'pips ' + textIconFontClass}
-					>{textIconToFontCharacter(TextIcon.TokenElderSign)}</span
-				>{/if}
+			{/if}{#if exceptional}<FaIcon path={allIcons.exceptional} />{/if}
 			{#if !(packNumber !== null && isUnknownCardNumber(packNumber)) && (packIcon !== null || packNumber !== null)}
 				<span class="pips pack-span"
 					>({#if packIcon !== null && packIcon !== CardPackIcon.Unknown}<img

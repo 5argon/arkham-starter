@@ -1,5 +1,6 @@
 import { isRandomBasicWeakness } from '$lib/ahdb/card'
 import { classConversion } from '$lib/ahdb/conversion'
+import { cardClassToName } from '$lib/core/card-class'
 import { CardPack } from '$lib/core/card-pack'
 import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
 import { isEntry, type DecklistEntry, type GroupedCards } from '../decklist-entry'
@@ -178,7 +179,7 @@ function groupCardsOneGroup(
 		case Grouping.Slot: {
 			const st: { [k: string]: { entries: DecklistEntry[]; slotName: string } } = {}
 			cs.forEach((x) => {
-				const slot = x.card.original.real_slot
+				const slot = x.card.original.slot
 				let sn = noSlotString
 				if (x.card.original.type_code !== 'asset') {
 					sn = nonAssetString
@@ -223,7 +224,9 @@ function groupCardsOneGroup(
 					st[sn] = { entries: [], className: '' }
 				}
 				st[sn].entries.push(x.dle)
-				st[sn].className = isMulti ? 'Multi-class' : x.card.original.faction_name
+				st[sn].className = isMulti
+					? 'Multi-class'
+					: cardClassToName(classConversion(x.card.original.faction_code))
 			})
 			const sorted = Object.entries(st)
 				.sort(([k], [k2]) => {

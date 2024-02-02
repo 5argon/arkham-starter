@@ -14,15 +14,16 @@
 
 <ul class="custom-remove">
 	{#if setup.customRemove !== undefined}
-		<li>Take out {setup.customRemove?.count} cards. ({setup.customRemove.why})</li>
+		<li>Then take out {setup.customRemove?.count} cards. ({setup.customRemove.why})</li>
 	{/if}
 	{#if setup.additionalWeakness !== undefined || setup.gameComponents !== undefined || setup.gameComponentsPerDifficulty !== undefined}
 		<li>Add on setup :</li>
 	{/if}
 	{#if setup.additionalWeakness !== undefined}
-		<ul>
-			<li>Basic Weakness : {setup.additionalWeakness.map((x) => x.trait).join(', ')}</li>
-		</ul>
+		<li class="level-two">
+			Basic Weakness :
+			{setup.additionalWeakness.map((x) => x.trait).join(', ')}
+		</li>
 	{/if}
 	{#if setup.gameComponents !== undefined}
 		<table>
@@ -111,6 +112,10 @@
 </ul>
 
 <style>
+	.level-two {
+		padding-left: 16px;
+	}
+
 	.min-diff {
 		min-width: 60px;
 		padding-left: 16px;

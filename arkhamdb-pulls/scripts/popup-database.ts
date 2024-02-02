@@ -4,164 +4,174 @@
  * taboo pre-applied.
  */
 export interface PopupDatabase {
-  packNames: { [k: number]: string };
-  packCodes: { [k: number]: string };
-  classNames: { [k: number]: string };
-  traits: { [k: number]: string };
-  items: PopupDatabaseItem[];
+  packNames: { [k: number]: string }
+  packCodes: { [k: number]: string }
+  classNames: { [k: number]: string }
+  traits: { [k: number]: string }
+  items: PopupDatabaseItem[]
 }
 
 export interface PopupDatabaseItem {
   /**
    * Card string ID like in ArkhamDB, such as "01006".
    */
-  id: string;
+  id: string
 
   /**
    * Card name.
    */
-  n: string;
+  n: string
 
   /**
    * Card subname, such as "The Fed" of "Roland Banks".
    */
-  sn?: string;
+  sn?: string
 
   /**
    * If `true`, it means there are other cards with the same name
    * and requires showing subname explicitly to not be confused.
    * Such as various instances of "Strange Solution".
    */
-  esn: boolean;
+  esn: boolean
 
   /**
    * Pack code.
    * Use number to map with the real string in outer maps.
    */
-  pc: number;
+  pc: number
 
   /**
    * Pack name
    * Use number to map with the real string in outer maps.
    */
-  pn: number;
+  pn: number
 
   /**
    * Position. The number of cards on the bottom right corner.
    */
-  ps: number;
+  ps: number
 
   /**
    * Class string from ArkhamDB, such as "survivor". (all lowercase)
    */
-  c1: number;
+  c1: number
 
   /**
    * Class string from ArkhamDB, such as "survivor". (all lowercase)
    */
-  c2?: number;
+  c2?: number
 
   /**
    * Class string from ArkhamDB, such as "survivor". (all lowercase)
    */
-  c3?: number;
+  c3?: number
 
   /**
    * XP pips
    */
-  xp?: number;
+  xp?: number
 
   /**
    * XP added (chained) from taboo. Can be negative in the case of unchain.
    */
-  xpat: number;
+  xpat: number
 
   /**
    * Exceptional status.
    */
-  ex: boolean;
+  ex: boolean
 
   /**
    * Exceptional status after latest taboo applied.
    */
-  ext: boolean;
+  ext: boolean
 
   /**
    * Investigator restriction.
    * Essentially `true` when it is an investigator signature card / weakness.
    */
-  ir: boolean;
+  ir: boolean
 
   /**
    * This is an investigator card.
    */
-  inv: boolean;
+  inv: boolean
 
   /**
    * Weakness.
    */
-  wk: boolean;
+  wk: boolean
 
   /**
    * Cost.
    */
-  cs?: number;
+  cs?: number
 
   /**
    * Intellect icons.
    */
-  sit?: number;
+  sit?: number
 
   /**
    * Combat icons.
    */
-  scm?: number;
+  scm?: number
 
   /**
    * Wild icons.
    */
-  swl?: number;
+  swl?: number
 
   /**
    * Agility icons.
    */
-  sag?: number;
+  sag?: number
 
   /**
    * Willpower icons.
    */
-  swi?: number;
+  swi?: number
 
   /**
    * Traits.
    * Use number to map with the real string in outer maps.
    */
-  tra: number[];
+  tra: number[]
 
   /**
    * Customizable choices.
    */
-  cus?: CustomizableStruct[];
+  cus?: CustomizableStruct[]
 
   /**
    * Quantity
    */
-  q: number;
+  q: number
 
   /**
    * Spoiler was on in arkhamdb
    */
-  sp?: boolean;
+  sp?: boolean
+
+  /**
+   * Has any bonded cards.
+   */
+  bd?: boolean
+
+  /**
+   * Is a Permanent card.
+   */
+  pe?: boolean
 }
 
 export interface CustomizableStruct {
   /**
    * XP checkboxes
    */
-  xp: number;
+  xp: number
 
   /**
    * Customizable name
    */
-  n: string;
+  n: string
 }

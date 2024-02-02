@@ -44,7 +44,7 @@
 	}
 
 	const validArray: string[] = valid
-	$: exist = validArray.find((element) => element === cardId + '.png')
+	$: exist = validArray.find((element) => element === cardId)
 
 	function backCodeExtract(s: string): string {
 		var filename = s.match(/([\w\d_-]*)\.?[^\\\/]*$/i)
@@ -109,7 +109,7 @@
 				{height}
 				class:normal-radius={!small}
 				class:small-radius={small}
-				src={`/image/card/${srcPath}/` + cardId + '.png'}
+				src={`/image/card/${srcPath}/` + cardId + '.webp'}
 				alt={card.original.name}
 				loading="lazy"
 				draggable="false"
@@ -133,7 +133,7 @@
 					class:normal-radius={!small}
 					class:small-radius={small}
 					class={'alt-card'}
-					src={'/image/card/full/' + backCodeExtract(card.original.backimagesrc) + '.png'}
+					src={'/image/card/full/' + backCodeExtract(card.original.backimagesrc) + '.webp'}
 					alt={card.original.name}
 					loading="lazy"
 					draggable="false"
@@ -156,7 +156,7 @@
 					class:normal-radius={!small}
 					class:small-radius={small}
 					class={'alt-card'}
-					src={'/image/card/full/' + card.original.linked_to_code + '.png'}
+					src={'/image/card/full/' + card.original.linked_to_code + '.webp'}
 					alt={card.original.name}
 					loading="lazy"
 					draggable="false"

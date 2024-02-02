@@ -10,7 +10,7 @@ export const allIcons = {
 	delete: ic('trash-regular'),
 	unlock: ic('lock-open-regular'),
 	collapse: ic('arrows-to-line-regular'),
-	investigatorRestriction: ic('star-christmas-solid'),
+	investigatorRestriction: ic('user-lock-solid'),
 	noticeInfo: ic('circle-info-solid'),
 	noticeSuccess: ic('circle-check-solid'),
 	noticeError: ic('circle-exclamation-solid'),
@@ -20,9 +20,12 @@ export const allIcons = {
 	minus: ic('minus-solid'),
 	grip: ic('grip-dots-vertical-regular'),
 	customizable: ic('wrench-solid'),
+	bonded: ic('link-solid'),
+	exceptional: ic('star-regular'),
+	permanent: ic('brick-wall'),
 	checkBox: ic('square-regular'),
 	checkBoxChecked: ic('square-check-regular'),
-	investigator: ic('person-solid'),
+	investigator: ic('user-solid'),
 	expand: ic('arrow-up-right-and-arrow-down-left-from-center-regular'),
 }
 

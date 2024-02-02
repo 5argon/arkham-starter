@@ -168,6 +168,8 @@ nested inside this div. -->
 						restriction={leftCard.original.ir}
 						weakness={leftCard.original.wk}
 						customizable={leftCard.original.cus !== undefined}
+						permanent={leftCard.original.pe ?? false}
+						bonded={leftCard.original.bd ?? false}
 						xp={leftCard.original.xp}
 						xpTaboo={useTaboo ? leftCard.original.xpat : null}
 						onClickDelete={rowActionEvents.onDeleteLeft}
@@ -240,6 +242,8 @@ nested inside this div. -->
 							restriction={rightCard.original.ir}
 							weakness={rightCard.original.wk}
 							customizable={rightCard.original.cus !== undefined}
+							permanent={rightCard.original.pe ?? false}
+							bonded={rightCard.original.bd ?? false}
 							checkedBoxes={row.custom ? customizationBoxes : 0}
 							xp={rightCard.original.xp}
 							xpTaboo={useTaboo ? rightCard.original.xpat : null}
@@ -287,8 +291,8 @@ nested inside this div. -->
 					editingLevel={viewMode
 						? EditingLevel.JustText
 						: row.xpUnlock
-						? EditingLevel.Editable
-						: EditingLevel.GreyedOut}
+							? EditingLevel.Editable
+							: EditingLevel.GreyedOut}
 					onEndEdit={rowEditEvents.onXpChanged}
 					suffixText="XP"
 				/>
@@ -350,7 +354,9 @@ nested inside this div. -->
 	}
 
 	.bold-arrow {
-		text-shadow: 1px 0px 0px #ffffff, 2px 0px 0px #ff0000;
+		text-shadow:
+			1px 0px 0px #ffffff,
+			2px 0px 0px #ff0000;
 		font-weight: bold;
 	}
 </style>

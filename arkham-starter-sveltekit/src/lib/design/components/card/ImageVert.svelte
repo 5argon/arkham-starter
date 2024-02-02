@@ -17,6 +17,10 @@
 	export let packIcon: CardPackIcon | null = null
 	// Used in the popup.
 	export let packNumber: number | null = null
+	export let investigator: boolean = false
+	export let customizable: boolean = false
+	export let permanent: boolean = false
+	export let bonded: boolean = false
 
 	let showClasses: boolean
 	$: showClasses =
@@ -48,7 +52,20 @@
 {#if show}
 	{#if hovering}
 		<div class="card-hover">
-			<CardHover {cardId} {class1} {class2} {class3} text={name} {xp} {packIcon} {packNumber} />
+			<CardHover
+				{cardId}
+				{class1}
+				{class2}
+				{class3}
+				text={name}
+				{xp}
+				{packIcon}
+				{packNumber}
+				{investigator}
+				{customizable}
+				{permanent}
+				{bonded}
+			/>
 		</div>
 	{/if}
 	<span
@@ -60,7 +77,7 @@
 		<img
 			draggable={false}
 			class="image-in-strip"
-			src={'/image/card/square/' + cardId + '.png'}
+			src={'/image/card/square/' + cardId + '.webp'}
 			alt={''}
 		/>
 		{#if xp !== null}

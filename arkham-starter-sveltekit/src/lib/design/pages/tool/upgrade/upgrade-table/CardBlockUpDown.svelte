@@ -29,6 +29,8 @@
 	export let restriction: boolean = false
 	export let weakness: boolean = false
 	export let customizable: boolean = false
+	export let permanent: boolean = false
+	export let bonded: boolean = false
 	export let checkedBoxes: number = 0
 	export let index: number
 	export let right: boolean
@@ -80,6 +82,8 @@
 		{onDropSwap}
 		{disableHoverEffects}
 		customizable={checkedBoxes > 0 ? false : customizable}
+		{permanent}
+		{bonded}
 		{checkedBoxes}
 		dragDataPrefix={index + ',' + (right ? 'right' : 'left') + ','}
 		leftButtons={[]}

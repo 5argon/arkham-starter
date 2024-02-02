@@ -112,6 +112,8 @@
 		xp={custXp > 0 ? custXp : card.original.xp}
 		xpTaboo={taboo ? card.original.xpat : null}
 		customizable={card.original.cus !== undefined}
+		permanent={card.original.pe ?? false}
+		bonded={card.original.bd ?? false}
 	/>
 	{#if card.original.cus !== undefined}
 		{#each realCust as rc}

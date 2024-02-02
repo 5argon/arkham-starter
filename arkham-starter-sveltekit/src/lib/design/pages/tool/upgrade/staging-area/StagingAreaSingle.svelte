@@ -72,6 +72,8 @@
 					restriction={c.original.ir}
 					weakness={c.original.wk}
 					customizable={c.original.cus !== undefined}
+					permanent={c.original.pe ?? false}
+					bonded={c.original.bd ?? false}
 					xp={c.original.xp}
 					xpTaboo={globalSettings.taboo ? c.original.xpat : null}
 					onClickLeft={() => {
