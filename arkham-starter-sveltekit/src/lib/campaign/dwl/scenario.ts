@@ -161,7 +161,11 @@ export const bloodOnTheAltarScenario: Scenario = {
 		},
 	],
 	commonSetup: {
-		customRemove: { count: 3, why: 'Attach under locations.' },
+		notes: [
+			{
+				what: 'Take out 3 encounter cards to attach under locations.',
+			},
+		],
 		specialGather: [
 			{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
 			{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
@@ -233,6 +237,12 @@ export const whereDoomAwaitsScenario: Scenario = {
 				sorcery,
 				{ encounterSet: hideousAbominations, overwriteCount: 2 },
 			],
+			notes: [
+				{
+					encounterSet: hideousAbominations,
+					what: 'One Conglomeration of Spheres at Ascending Path, the rest of this set in the encounter deck.',
+				},
+			],
 		},
 	],
 	commonSetup: {
@@ -282,6 +292,12 @@ export const returnToExtracurricularActivityScenario: Scenario = {
 				secretDoors,
 				yogSothothsEmissaries,
 			],
+			notes: [
+				{
+					encounterSet: returnToExtracurricularActivity,
+					what: 'Both copies of Enthralled Security Guard in the encounter deck.',
+				},
+			],
 		},
 		{
 			name: 'As 2nd Scenario',
@@ -295,6 +311,12 @@ export const returnToExtracurricularActivityScenario: Scenario = {
 				resurgentEvils,
 				secretDoors,
 				yogSothothsEmissaries,
+			],
+			notes: [
+				{
+					encounterSet: returnToExtracurricularActivity,
+					what: 'One Enthralled Security Guard is at the Administration Building, one in the encounter deck.',
+				},
 			],
 		},
 	],
@@ -317,6 +339,12 @@ export const returnToTheHouseAlwaysWinsScenario: Scenario = {
 			remaining: [hideousAbominations, erraticFear],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{ encounterSet: hideousAbominations, what: 'Set this encounter set aside, out of play.' },
+			{ encounterSet: erraticFear, what: 'Set this encounter set aside, out of play.' },
+		],
+	},
 }
 
 export const returnToTheMiskatonicMuseumScenario: Scenario = {
@@ -381,6 +409,12 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 				resurgentEvils,
 			],
 			remaining: [returnToBloodOnTheAltar],
+			notes: [
+				{
+					encounterSet: returnToBloodOnTheAltar,
+					what: 'Both copies of Hired Gun are set aside.',
+				},
+			],
 		},
 		{
 			shuffles: [
@@ -392,14 +426,20 @@ export const returnToBloodOnTheAltarScenario: Scenario = {
 				resurgentEvils,
 				naomisCrew,
 			],
-			remaining: [naomisCrew],
+			notes: [
+				{
+					encounterSet: returnToBloodOnTheAltar,
+					what: 'One Hired Gun at a location not connected to Village Commons, the other copy in the encounter deck.',
+				},
+			],
 		},
 	],
 	commonSetup: {
-		customRemove: {
-			count: 3,
-			why: "Attach under locations, non-Naomi's Crew.",
-		},
+		notes: [
+			{
+				what: "Take out 3 non-Naomi's Crew encounter cards to attach under locations.",
+			},
+		],
 		specialGather: [
 			{ encounterSet: armitagesFate, overwriteCount: 1, what: ['Dr. Henry Armitage'] },
 			{ encounterSet: theHouseAlwaysWins, overwriteCount: 1, what: ['Dr. Francis Morgan'] },
@@ -473,6 +513,12 @@ export const returnToWhereDoomAwaitsScenario: Scenario = {
 				erraticFear,
 				resurgentEvils,
 				{ encounterSet: hideousAbominations, overwriteCount: 2 },
+			],
+			notes: [
+				{
+					encounterSet: hideousAbominations,
+					what: 'One Conglomeration of Spheres at Ascending Path, the rest of this set in the encounter deck.',
+				},
 			],
 		},
 	],

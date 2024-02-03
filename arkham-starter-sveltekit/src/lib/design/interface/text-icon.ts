@@ -6,53 +6,52 @@ export const textIconFontClass = 'arkham-icon-font'
 export function textIconToFontCharacter(ti: TextIcon): string {
 	switch (ti) {
 		case TextIcon.StatWillpower:
-			return 'A'
+			return 'p'
 		case TextIcon.StatCombat:
-			return 'D'
+			return 'c'
 		case TextIcon.StatIntellect:
-			return 'F'
+			return 'b'
 		case TextIcon.StatAgility:
-			return 'S'
+			return 'a'
 		case TextIcon.StatWild:
-			return 'G'
+			return '?'
 
 		case TextIcon.ClassGuardian:
-			return 'Q'
+			return 'f'
 		case TextIcon.ClassSeeker:
-			return 'E'
+			return 'h'
 		case TextIcon.ClassRogue:
-			return 'T'
+			return 'd'
 		case TextIcon.ClassMystic:
-			return 'W'
+			return 'g'
 		case TextIcon.ClassSurvivor:
-			return 'R'
+			return 'e'
 
 		case TextIcon.TokenSkull:
-			return 'N'
+			return 'k'
 		case TextIcon.TokenCultist:
-			return 'B'
+			return 'l'
 		case TextIcon.TokenTablet:
-			return 'V'
+			return 'q'
 		case TextIcon.TokenElderThing:
-			return 'C'
+			return 'n'
 		case TextIcon.TokenElderSign:
-			return 'X'
+			return 'o'
 		case TextIcon.TokenAutoFail:
-			return 'Z'
+			return 'm'
+		case TextIcon.TokenFrost:
+			return 'x'
 
 		case TextIcon.ActionTrigger:
-			return 'I'
+			return 'i'
 		case TextIcon.ActionFast:
-			return 'U'
+			return 'j'
 		case TextIcon.ActionReaction:
-			return 'Y'
+			return '!'
 
 		case TextIcon.Unique:
-			return 'K'
+			return 's'
 		case TextIcon.PerInvestigator:
-			return 'H'
-		case TextIcon.Weakness:
-			return 'J'
+			return ''
 	}
-	return ''
 }

@@ -37,19 +37,6 @@ Each one has pixels that could fill 94 x 69 mm at 600 DPI. That is +5 mm each si
 
 Horizontal space is critical to enlarge the icons as much as possible, so scenario's name has been replaced with numbers.
 
-### Encounter Set Sorting
-
-Check "Advanced Features" to see this settings. Throughout the interface, encounter sets are first grouped by scenario-exclusive (blue), return to (green), core set (red), and campaign sets (black). This grouping cannot be changed, but you can change the sorting inside each group :
-
-- **Alphabetical** : Sort the sets everywhere from the name (A to Z). This is the default sorting.
-- **Frequency** : Sets that are re-used more times throughout the campaign are grouped to the left. Sets that are only used a few times are grouped to the right. If you also order your dividers according to this, it may optimize the distance traveled between dividers when you are setting up the game.
-
-This is an example of flexibility of having the presentation generated from data. In Google Sheet, it would be difficult to make a matrix that viewer can re-sort like this.
-
-### Short Scenario Name
-
-Check "Advanced Features" to see this settings. Affects Matrix Tab only. Replace the scenario name with numbers so it takes less horizontal space for smaller phones.
-
 ## Matrix Tab
 
 This emulates the classic Google Sheet layout invented by the community. An overview matrix like this has sparseness that let you see the whole picture. However, when reading only a scenario you are interested in, maybe using Scenarios Tab is more to-the-point.

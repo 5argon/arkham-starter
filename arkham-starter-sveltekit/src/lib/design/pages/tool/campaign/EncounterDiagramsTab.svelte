@@ -54,12 +54,12 @@
 	<div class="flex-diagram">
 		<img
 			class="diagram"
-			src={'/image/custom/diagram/' + selectedScenario.diagram + '_A.png'}
+			src={'/image/custom/diagram/' + selectedScenario.diagram + '_A.webp'}
 			alt="Setup Diagram (Front)"
 		/>
 		<img
 			class="diagram"
-			src={'/image/custom/diagram/' + selectedScenario.diagram + '_B.png'}
+			src={'/image/custom/diagram/' + selectedScenario.diagram + '_B.webp'}
 			alt="Setup Diagram (Back)"
 		/>
 	</div>

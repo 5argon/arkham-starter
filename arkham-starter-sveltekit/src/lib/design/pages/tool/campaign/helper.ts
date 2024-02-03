@@ -1,4 +1,5 @@
 import { GameComponent, type EncounterSet } from '$lib/core/campaign'
+import { TextIcon } from '$lib/core/text-icon'
 
 export function makeSetCountText(encounter: EncounterSet): string {
 	return `(${encounter.count})`
@@ -56,5 +57,22 @@ export function gameComponentToString(gcs: GameComponent): string {
 			return 'Frost Token'
 		default:
 			return 'Unknown Token'
+	}
+}
+
+export function gameComponentToTextIcon(gcs: GameComponent): TextIcon | null {
+	switch (gcs) {
+		case GameComponent.TokenSkull:
+			return TextIcon.TokenSkull
+		case GameComponent.TokenCultist:
+			return TextIcon.TokenCultist
+		case GameComponent.TokenTablet:
+			return TextIcon.TokenTablet
+		case GameComponent.TokenElderThing:
+			return TextIcon.TokenElderThing
+		case GameComponent.TokenFrost:
+			return TextIcon.TokenFrost
+		default:
+			return null
 	}
 }

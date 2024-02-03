@@ -103,54 +103,20 @@
 
 <div class="settings-item">
 	<Checkbox
-		label={'Show Name'}
-		checked={showName}
-		onCheckChanged={(c) => {
-			showName = c
-		}}
-	/>
-	<Checkbox
 		label={'Show Set Count'}
 		checked={showSetCount}
 		onCheckChanged={(c) => {
 			showSetCount = c
 		}}
 	/>
-</div>
-<div class="settings-item">
 	<Checkbox
-		label={'Advanced Features'}
-		checked={advanced}
+		label={'Show Name'}
+		checked={showName}
 		onCheckChanged={(c) => {
-			advanced = c
+			showName = c
 		}}
 	/>
 </div>
-{#if advanced}
-	<div class="settings-item">
-		<span>Difficulty</span>
-		<select name="difficulties" value={difficulty} on:change={(e) => onDifficultyChangeHandler(e)}>
-			<option value={Difficulty.Easy}>Easy</option>
-			<option value={Difficulty.Standard}>Standard</option>
-			<option value={Difficulty.Hard}>Hard</option>
-			<option value={Difficulty.Expert}>Expert</option>
-		</select>
-	</div>
-	<div class="settings-item">
-		<span>Encounter Set Sorting</span>
-		<select name="sortings" value={sorting} on:change={(e) => onSortingChangeHandler(e)}>
-			<option value={EncounterSetSorting.Alphabetical}>Alphabetical</option>
-			<option value={EncounterSetSorting.Frequency}>Frequency</option>
-		</select>
-	</div>
-	<Checkbox
-		label={'Short Scenario Name'}
-		checked={shortScenarioName}
-		onCheckChanged={(c) => {
-			shortScenarioName = c
-		}}
-	/>
-{/if}
 
 <ListDivider label="Stats" />
 

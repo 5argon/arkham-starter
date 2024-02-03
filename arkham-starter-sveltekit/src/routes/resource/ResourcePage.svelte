@@ -48,7 +48,7 @@
 <ResourceItem
 	url="/tool/gather"
 	title="Deck Gather"
-	description="A tool for the collection owner to pick cards for everyone in a single iteration when starting the campaign, instead of going over the collection as many times as player count. Input arkhamdb.com decks of everyone, it then combines everyone's cards so you can sort them all according to how your collection is ordered."
+	description="A tool for the collection owner to pick cards for everyone in a single iteration when starting the campaign, instead of going over the collection as many times as player count. Input arkhamdb.com decks of everyone, it then combines everyone's cards so you can sort them all according to how your collection is ordered. It can also show card overlaps between all decks, including the Side Deck, so you don't step on each other's starting deck as well as cards planned be added along the campaign."
 	image="gather.webp"
 />
 <ResourceItem
@@ -69,7 +69,7 @@
 <ResourceItem
 	url="/divider"
 	title="The 3mm Divider"
-	description="Minimal-style dividers that are only 3mm wider than the cards. It has many unique quirks such as supporting both orientation in one design, and available in multiple languages."
+	description="Minimal-style dividers that are only 3mm wider than the cards. It has many unique quirks such as fitting in the new campaign box, supporting both orientations in one design, sleevable, and available in multiple languages."
 	image="divider.webp"
 />
 <ResourceItem

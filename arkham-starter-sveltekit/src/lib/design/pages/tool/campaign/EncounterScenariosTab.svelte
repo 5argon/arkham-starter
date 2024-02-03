@@ -4,8 +4,6 @@
 		isEncounterSetWithModification,
 		type Campaign,
 		type EncounterSetItem,
-		EncounterSetFlag,
-		type CustomRemove,
 	} from '$lib/core/campaign'
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
 	import {
@@ -32,7 +30,7 @@
 	$: selectedScenario = scenarios[selectedScenarioIndex]
 	$: selectedScenarioEncounters = mergeEncounters(selectedScenario)
 
-	function computeCount(esis: EncounterSetItem[], customRemove: CustomRemove | undefined): number {
+	function computeCount(esis: EncounterSetItem[]): number {
 		const count = esis.reduce<number>((p, c) => {
 			if (!isEncounterSetWithModification(c)) {
 				return p + c.count
@@ -44,7 +42,7 @@
 				return p + c.encounterSet.count
 			}
 		}, 0)
-		return count - (customRemove?.count ?? 0)
+		return count
 	}
 
 	$: multipleSetups = selectedScenario.setups.length > 1
@@ -80,22 +78,14 @@
 {#if !incomplete}
 	<ListDivider
 		label={'Starting Encounter Deck' +
-			(!multipleSetups
-				? ` : ${computeCount(
-						selectedScenario.setups[0].shuffles,
-						selectedScenario.commonSetup?.customRemove,
-				  )} Cards`
-				: '')}
+			(!multipleSetups ? ` : ${computeCount(selectedScenario.setups[0].shuffles)} Cards` : '')}
 	/>
 	{#each selectedScenario.setups as setup, i}
 		{#if multipleSetups}
 			<ListDivider
 				label={(setup.name ? `${setup.name} Variant` : 'Variant ' + (i + 1)) +
 					' : ' +
-					`${computeCount(
-						setup.shuffles,
-						setup.customRemove ?? selectedScenario.commonSetup?.customRemove ?? undefined,
-					)} Cards`}
+					`${computeCount(setup.shuffles)} Cards`}
 				level={ListDividerLevel.Two}
 			/>
 		{/if}
@@ -106,7 +96,7 @@
 			{sorting}
 			{frequencies}
 		/>
-		<CustomSetupRender {setup} {showName} {showSetCount} />
+		<CustomSetupRender {setup} {showName} {showSetCount} notCommon={true} />
 	{/each}
 	{#if selectedScenario.commonSetup !== undefined}
 		<CustomSetupRender setup={selectedScenario.commonSetup} {showName} {showSetCount} />

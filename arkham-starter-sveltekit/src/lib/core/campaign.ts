@@ -45,7 +45,6 @@ export interface ScenarioSetupSub {
 	notes?: ScenarioNote[]
 	specialGather?: EncounterSetItem[]
 	additionalWeakness?: AdditionalWeakness[]
-	customRemove?: CustomRemove
 	gameComponents?: GameComponent[]
 	gameComponentsPerDifficulty?: PerDifficultySettings<GameComponent[]>
 }
@@ -57,11 +56,6 @@ export interface ScenarioNote {
 
 export interface AdditionalWeakness {
 	trait: string
-}
-
-export interface CustomRemove {
-	count: number
-	why: string
 }
 
 export type EncounterSetItem = EncounterSet | EncounterSetWithModification

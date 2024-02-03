@@ -33,7 +33,7 @@ a:hover, a:active {
 
 @font-face {
 	font-family: 'Ahlcg';
-	src: url('/font/Ahlcg.ttf') format('truetype');
+	src: url('/font/arkham-icons.otf') format('truetype');
 	font-weight: normal;
 }
 

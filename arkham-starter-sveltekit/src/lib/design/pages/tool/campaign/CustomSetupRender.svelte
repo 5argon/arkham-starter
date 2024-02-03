@@ -4,24 +4,30 @@
 		isEncounterSetWithModification,
 		type ScenarioSetupSub,
 	} from '$lib/core/campaign'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import { allIcons } from '$lib/design/icons/all-icons'
+	import {
+		TextIcon,
+		textIconFontClass,
+		textIconToFontCharacter,
+	} from '$lib/design/interface/text-icon'
 	import EncounterIconWithLabel from './EncounterIconWithLabel.svelte'
-	import { gameComponentsToString } from './helper'
+	import GameComponentDisplay from './GameComponentDisplay.svelte'
+	import { gameComponentsToString, gameComponentToString, gameComponentToTextIcon } from './helper'
 
 	export let setup: ScenarioSetupSub
 	export let showName: boolean = false
 	export let showSetCount: boolean = false
+	export let notCommon: boolean = false
 </script>
 
-<ul class="custom-remove">
-	{#if setup.customRemove !== undefined}
-		<li>Then take out {setup.customRemove?.count} cards. ({setup.customRemove.why})</li>
-	{/if}
+<ul class="custom">
 	{#if setup.additionalWeakness !== undefined || setup.gameComponents !== undefined || setup.gameComponentsPerDifficulty !== undefined}
 		<li>Add on setup :</li>
 	{/if}
 	{#if setup.additionalWeakness !== undefined}
 		<li class="level-two">
-			Basic Weakness :
+			<FaIcon path={allIcons.weakness} />Basic Weakness :
 			{setup.additionalWeakness.map((x) => x.trait).join(', ')}
 		</li>
 	{/if}
@@ -29,7 +35,9 @@
 		<table>
 			<tr>
 				<td class="min-diff">All Difficulties : </td><td /><td>
-					{gameComponentsToString(setup.gameComponents)}
+					{#each setup.gameComponents as gc}
+						<GameComponentDisplay gameComponent={gc} />
+					{/each}
 				</td>
 			</tr>
 		</table>
@@ -63,9 +71,9 @@
 		</table>
 	{/if}
 	{#if setup.notes !== undefined}
-		<li>Notes :</li>
+		{#if !notCommon}<li>Notes :</li>{/if}
 		{#each setup.notes as n}
-			<div class="note-pad">
+			<div class={notCommon ? 'note-pad-variant' : 'note-pad'}>
 				{#if n.encounterSet !== undefined}
 					<EncounterIconWithLabel
 						iconPath={n.encounterSet.icon}
@@ -112,22 +120,26 @@
 </ul>
 
 <style>
-	.level-two {
-		padding-left: 16px;
-	}
-
 	.min-diff {
 		min-width: 60px;
 		padding-left: 16px;
 	}
 
-	.custom-remove {
+	.prefix-icon {
+		margin-right: 4px;
+	}
+
+	.custom {
 		color: grey;
 		font-size: small;
 	}
 
 	.note-pad {
 		padding: 8px 0px;
+	}
+
+	.note-pad-variant {
+		padding-left: 16px;
 	}
 
 	.sub-text {
@@ -138,5 +150,14 @@
 	ul {
 		list-style: none;
 		padding-inline-start: 0px;
+	}
+
+	li {
+		margin-top: 8px;
+	}
+
+	.level-two {
+		padding-left: 16px;
+		margin-top: 0px;
 	}
 </style>

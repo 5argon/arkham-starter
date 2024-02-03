@@ -18,11 +18,12 @@ export enum TextIcon {
 	TokenElderSign,
 	TokenAutoFail,
 
+	TokenFrost,
+
 	ActionTrigger,
 	ActionFast,
 	ActionReaction,
 
 	Unique,
 	PerInvestigator,
-	Weakness,
 }
