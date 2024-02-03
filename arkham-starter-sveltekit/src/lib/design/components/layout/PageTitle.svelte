@@ -13,7 +13,9 @@
 </script>
 
 <div>
-	<h1 class="inline-block"><a href="/">arkham-starter.com</a> {subTitle === "" ? "" : "| " + subTitle} | {title}</h1>
+	<h1 class="inline-block">
+		{title}
+	</h1>
 	{#if helpMd !== null}
 		<Modal
 			onClose={() => {
