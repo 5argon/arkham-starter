@@ -18,16 +18,25 @@
 <style>
 	.frame {
 		display: flex;
+		flex-direction: column;
 		border: 1px solid #ccc;
 		padding: 0px 16px;
 		margin: 8px 0px;
 	}
 
+	@media (min-width: 768px) {
+		.frame {
+			flex-direction: row;
+		}
+	}
+
 	img {
 		max-width: 250px;
+		margin: 0 auto;
 	}
 
 	.text {
+		flex: 1;
 		margin: 0px 16px;
 	}
 </style>
