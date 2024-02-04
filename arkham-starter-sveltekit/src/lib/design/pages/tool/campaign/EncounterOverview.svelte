@@ -1,14 +1,8 @@
 <script lang="ts">
-	import {
-		EncounterSetFlag,
-		EncounterSetSorting,
-		type Campaign,
-		type EncounterSet,
-	} from '$lib/core/campaign'
-	import { Difficulty } from '$lib/core/difficulty'
-	import Button from '$lib/design/components/basic/Button.svelte'
+	import { EncounterSetFlag, EncounterSetSorting, type Campaign } from '$lib/core/campaign'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+	import { packToFile } from '$lib/design/components/expansion/pack-to-file'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import {
 		findCoreEncounters,
@@ -21,16 +15,12 @@
 	import EncounterIconFlex from './EncounterIconFlex.svelte'
 	import EncounterMatrixTab from './EncounterMatrixTab.svelte'
 	import EncounterScenariosTab from './EncounterScenariosTab.svelte'
-	import EncounterTransitionsTab from './EncounterTransitionsTab.svelte'
 	export let campaign: Campaign
 	export let incomplete: boolean = false
 	let scenarioTabIndex: number = 0
-	let transitionTabIndex: number = 0
 	let showName: boolean = false
 	let showSetCount: boolean = true
 	let shortScenarioName: boolean = false
-	let advanced: boolean = false
-	let difficulty: Difficulty = Difficulty.Standard
 	let activeTab: number = 0
 	let sorting: EncounterSetSorting = EncounterSetSorting.Alphabetical
 	$: scenarios = findUniqueScenarios(campaign)
@@ -58,16 +48,19 @@
 		return prev + cur.count
 	}, 0)
 
-	function onDifficultyChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
-		difficulty = parseInt(e.currentTarget.value)
-	}
-
 	function onSortingChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
 		sorting = parseInt(e.currentTarget.value)
 	}
+	$: packBanner = campaign.investigatorExpansion ? packToFile(campaign.investigatorExpansion) : null
 </script>
 
 <a href="/campaign">Back to Campaign List</a>
+<div class="top-flex">
+	{#if packBanner !== null}
+		<img src={'/image/expansion/campaign/' + packBanner + '.webp'} alt={campaign.name} />
+	{/if}
+	<h1>{campaign.name}</h1>
+</div>
 {#if incomplete}
 	<p>
 		<strong>** INCOMPLETE **</strong> I only buy repackaged campaigns and have not played this campaign
@@ -85,17 +78,6 @@
 		<a href="https://github.com/5argon/arkham-starter" target="_blank" rel="noreferrer"
 			>Github page</a
 		> to find out how. Thank you!
-	</p>
-{/if}
-
-{#if campaign.setupReferenceGraphic !== undefined}
-	<ListDivider label="Download Setup Reference Cards" />
-	<a target="_blank" rel="noreferrer" href={campaign.setupReferenceGraphic}
-		>Click Here (Google Drive)</a
-	>
-
-	<p>
-		Note : The setup reference cards contains information that <b>may spoil the scenario.</b>
 	</p>
 {/if}
 
@@ -189,5 +171,15 @@
 
 	.settings-item {
 		margin: 2px 0px;
+	}
+
+	.top-flex {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.top-flex img {
+		max-width: 400px;
 	}
 </style>

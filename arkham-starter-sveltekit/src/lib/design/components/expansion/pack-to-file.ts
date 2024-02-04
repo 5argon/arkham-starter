@@ -34,6 +34,14 @@ export function packToFile(pack: CardPackIcon): string | null {
 			return 'jac'
 		case CardPackIcon.StellaClark:
 			return 'ste'
+		case CardPackIcon.ReturnToTheDunwichLegacy:
+			return 'rtdwl'
+		case CardPackIcon.ReturnToThePathToCarcosa:
+			return 'rtptc'
+		case CardPackIcon.ReturnToTheForgottenAge:
+			return 'rttfa'
+		case CardPackIcon.ReturnToTheCircleUndone:
+			return 'rttcu'
 		default:
 			return null
 	}

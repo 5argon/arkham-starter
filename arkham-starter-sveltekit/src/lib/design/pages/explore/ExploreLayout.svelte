@@ -98,7 +98,7 @@
 {#if packBanner !== null}
 	<img
 		class="pack-banner"
-		src={'/image/expansion/investigator/' + packBanner + '.png'}
+		src={'/image/expansion/investigator/' + packBanner + '.webp'}
 		alt="pack banner"
 	/>
 {/if}

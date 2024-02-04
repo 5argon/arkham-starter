@@ -1,8 +1,10 @@
 import { GameComponent, type Campaign } from '$lib/core/campaign'
+import { CardPack } from '$lib/core/card-pack'
 import { transitions, transitionsReturnTo } from './transition'
 
 export const thePathToCarcosaCampaign: Campaign = {
 	name: 'The Path to Carcosa',
+	investigatorExpansion: CardPack.ThePathToCarcosa,
 	scenarioTransitions: transitions,
 	startingChaosBag: {
 		easy: [
@@ -80,6 +82,7 @@ export const thePathToCarcosaCampaign: Campaign = {
 
 export const returnToThePathToCarcosaCampaign: Campaign = {
 	name: 'Return to the Path to Carcosa',
+	investigatorExpansion: CardPack.ReturnToThePathToCarcosa,
 	scenarioTransitions: transitionsReturnTo,
 	commonEncounterSets: [],
 	startingChaosBag: {

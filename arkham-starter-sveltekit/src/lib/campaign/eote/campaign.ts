@@ -1,9 +1,11 @@
 import { GameComponent, type Campaign } from '$lib/core/campaign'
+import { CardPack } from '$lib/core/card-pack'
 import { expeditionTeam, memorialsOfTheLost, tekelili } from './encounter'
 import { transitions } from './transition'
 
 export const edgeOfTheEarthCampaign: Campaign = {
 	name: 'Edge of the Earth',
+	investigatorExpansion: CardPack.EdgeOfTheEarth,
 	setupReferenceGraphic:
 		'https://drive.google.com/drive/folders/1QhOJKCkikhDpM1c2oLjyzC4celG0umam?usp=share_link',
 	scenarioTransitions: transitions,

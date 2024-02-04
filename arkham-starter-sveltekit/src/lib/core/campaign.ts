@@ -1,3 +1,5 @@
+import type { CardPack } from './card-pack'
+
 export interface EncounterSet {
 	name: string
 	icon: string
@@ -23,6 +25,7 @@ export interface Campaign {
 	startingChaosBag?: PerDifficultySettings<GameComponent[]>
 	basicWeaknessTraits?: string[]
 	setupReferenceGraphic?: string
+	investigatorExpansion?: CardPack
 }
 
 export interface Scenario {

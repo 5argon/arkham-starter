@@ -23,7 +23,6 @@
 	import EncounterIcon from '$lib/design/pages/tool/campaign/EncounterIcon.svelte'
 	import EncounterIconTableHeader from '$lib/design/pages/tool/campaign/EncounterIconTableHeader.svelte'
 	import { makeSetCountText } from '$lib/design/pages/tool/campaign/helper'
-	import help from '$lib/md/campaign-reference.md?raw'
 
 	const showName = true
 	const ac = allCampaigns
@@ -51,8 +50,6 @@
 		})
 	}
 </script>
-
-<PageTitle title={'Campaign Reference: Overall'} helpMd={help} />
 
 <t>
 	This is a page that summarizes encounter sets usage for all campaigns of Arkham Horror: The Card

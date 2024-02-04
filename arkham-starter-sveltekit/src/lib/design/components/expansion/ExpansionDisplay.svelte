@@ -16,7 +16,7 @@
 	$: {
 		const file = packToFile(set)
 		if (file) {
-			backgroundImageString = `background-image: url(/image/expansion/investigator/${file}.png);`
+			backgroundImageString = `background-image: url(/image/expansion/${campaign ? 'campaign' : 'investigator'}/${file}.webp);`
 		} else {
 			backgroundImageString = ''
 		}

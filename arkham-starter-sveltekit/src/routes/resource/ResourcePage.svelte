@@ -39,7 +39,7 @@
 <ResourceItem
 	url="/tool/list"
 	title="Colorful Card Lister"
-	description="Simple tool to export a list of cards that are part of your arkhamdb.com deck to help writing the deck description. The exported text is decorated with more colorful HTML than the default blue text you get from typing # while writing in arkhamdb.com."
+	description="Exports a list of cards that are part of your arkhamdb.com deck to paste in the deck description to continue writing about them. The exported text is decorated with more colorful HTML than the default blue text you get from typing # while writing in arkhamdb.com, utilizing arkhamdb.com's own stylesheet."
 	image="colorful.webp"
 />
 
