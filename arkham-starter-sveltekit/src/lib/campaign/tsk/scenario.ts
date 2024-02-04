@@ -59,7 +59,10 @@ export const riddlesAndRainScenario: Scenario = {
 	],
 	commonSetup: {
 		notes: [
-			{ what: 'Concealed Mini-Cards (4) : The Red-Gloved Man, Coterie Agents (A, B, and C).' },
+			{
+				topic: 'Concealed Mini-Cards (4)',
+				what: 'The Red-Gloved Man, Coterie Agents (A, B, and C).',
+			},
 		],
 	},
 }
@@ -109,7 +112,12 @@ export const sanguineShadowsScenario: Scenario = {
 		},
 	],
 	commonSetup: {
-		notes: [{ what: 'Concealed Mini-Cards (2) : La Chica Roja and Apportioned Ka.' }],
+		notes: [
+			{
+				topic: 'Concealed Mini-Cards (2)',
+				what: 'La Chica Roja and Apportioned Ka.',
+			},
+		],
 	},
 }
 
@@ -135,7 +143,8 @@ export const dealingsInTheDarkScenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Concealed Mini-Cards (8) : 3x Acolyte (any), Wizard of the Order, Sinister Aspirants (A, B and C), and Emissary from Yuggoth.',
+				topic: 'Concealed Mini-Cards (8)',
+				what: '3x Acolyte (any), Wizard of the Order, Sinister Aspirants (A, B and C), and Emissary from Yuggoth.',
 			},
 			{
 				what: 'The starting encounter deck count is reduced equal to amount of players, since each investigator draws a Cultist enemy at the start.',
@@ -167,7 +176,8 @@ export const dancingMad1Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Concealed Mini-Cards (8) : Desiderio Delgado Álvarez, Coterie Agents (A, B and C), Coterie Assassins (A and B), and Coterie Enforcers (A and B).',
+				topic: 'Concealed Mini-Cards (8)',
+				what: 'Desiderio Delgado Álvarez, Coterie Agents (A, B and C), Coterie Assassins (A and B), and Coterie Enforcers (A and B).',
 			},
 		],
 	},
@@ -193,7 +203,8 @@ export const dancingMad2Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Concealed Mini-Cards (8) : Desiderio Delgado Álvarez, Coterie Agents (A, B and C), Coterie Assassins (A and B), and Coterie Enforcers (A and B).',
+				topic: 'Concealed Mini-Cards (8)',
+				what: 'Desiderio Delgado Álvarez, Coterie Agents (A, B and C), Coterie Assassins (A and B), and Coterie Enforcers (A and B).',
 			},
 			{
 				encounterSet: agentsOfTheOutside,
@@ -229,7 +240,8 @@ export const onThinIceScenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: "Concealed Mini-Cards (9) : Emissary from Yuggoth, and Coterie Agents (A, B and C). Also gather the Void Chimera's mini-card and the four special Void Chimera decoys.",
+				topic: 'Concealed Mini-Cards (9)',
+				what: "Emissary from Yuggoth, and Coterie Agents (A, B and C). Also gather the Void Chimera's mini-card and the four special Void Chimera decoys.",
 			},
 		],
 	},
@@ -272,7 +284,8 @@ export const dogsOfWar2Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Concealed Mini-Cards (4) : Coterie Assassins (A and B) and Coterie Enforcers (A and B).',
+				topic: 'Concealed Mini-Cards (4)',
+				what: 'Coterie Assassins (A and B) and Coterie Enforcers (A and B).',
 			},
 			{
 				encounterSet: cleanupCrew,
@@ -302,7 +315,8 @@ export const dogsOfWar3Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Concealed Mini-Cards (4) : Coterie Assassins (A and B) and Coterie Enforcers (A and B).',
+				topic: 'Concealed Mini-Cards (4)',
+				what: 'Coterie Assassins (A and B) and Coterie Enforcers (A and B).',
 			},
 		],
 	},
@@ -328,7 +342,8 @@ export const shadesOfSufferingScenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Concealed Mini-Card (1) : Tzu San Niang.',
+				topic: 'Concealed Mini-Card',
+				what: 'Tzu San Niang.',
 			},
 		],
 	},
@@ -353,7 +368,10 @@ export const withoutATraceScenario: Scenario = {
 	],
 	commonSetup: {
 		notes: [
-			{ what: 'Concealed Mini-Cards (3) : City of Remnants (L, M and R).' },
+			{
+				topic: 'Concealed Mini-Cards (3)',
+				what: 'City of Remnants (L, M and R).',
+			},
 			{ encounterSet: outsiders, what: 'The Apocalyptic Presage enemy is set aside, out of play.' },
 		],
 	},
@@ -386,7 +404,8 @@ export const congressOfTheKeys1Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Concealed Mini-Cards (5) : City of Remnants (L, M, and R), Mimetic Nemesis, and The Red-Gloved Man.',
+				topic: 'Concealed Mini-Cards (5)',
+				what: 'City of Remnants (L, M, and R), Mimetic Nemesis, and The Red-Gloved Man.',
 			},
 			{
 				encounterSet: spreadingCorruption,
@@ -499,7 +518,10 @@ export const congressOfTheKeys2Scenario: Scenario = {
 	],
 	commonSetup: {
 		notes: [
-			{ what: 'Concealed Mini-Cards (4) : City of Remnants (L, M, and R) and Mimetic Nemesis.' },
+			{
+				topic: 'Concealed Mini-Cards (4)',
+				what: 'City of Remnants (L, M, and R) and Mimetic Nemesis.',
+			},
 			{
 				encounterSet: redCoterie,
 				what: 'For each Coterie enemy gathered, check if they are the bearer of any key(s) and also gather those keys.',
@@ -608,7 +630,8 @@ export const congressOfTheKeys3Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Concealed Mini-Cards (5) : City of Remnants (L, M, and R), Mimetic Nemesis, and The Red-Gloved Man.',
+				topic: 'Concealed Mini-Cards (5)',
+				what: 'City of Remnants (L, M, and R), Mimetic Nemesis, and The Red-Gloved Man.',
 			},
 			{
 				encounterSet: redCoterie,

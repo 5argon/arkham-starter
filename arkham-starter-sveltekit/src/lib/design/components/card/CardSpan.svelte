@@ -6,11 +6,6 @@
 		CardPackIcon,
 	} from '$lib/design/interface/card-pack'
 	import ClassIcon from '../inline/ClassIcon.svelte'
-	import {
-		TextIcon,
-		textIconToFontCharacter,
-		textIconFontClass,
-	} from '$lib/design/interface/text-icon'
 	import { makePips } from '$lib/design/interface/string-util'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
@@ -98,15 +93,15 @@
 			{#if xp !== null && xp > 0}<span class="pips">{pips}</span
 				>{/if}{#if xpTaboo !== null && xpTaboo !== 0}
 				<span class="pips taboo-pips">{tabooPips}</span>
-			{/if}{#if exceptional}<FaIcon path={allIcons.exceptional} />{/if}{#if weakness || rbw}<FaIcon
-					path={allIcons.anyWeakness}
-				/>{/if}{#if restriction}<FaIcon
+			{/if}{#if weakness || rbw}<FaIcon path={allIcons.anyWeakness} />{/if}{#if restriction}<FaIcon
 					path={allIcons.investigatorRestriction}
 				/>{/if}{#if investigator}<FaIcon
 					path={allIcons.investigator}
 				/>{/if}{#if customizable}<FaIcon path={allIcons.customizable} />{/if}{#if permanent}<FaIcon
 					path={allIcons.permanent}
-				/>{/if}{#if bonded}<FaIcon path={allIcons.bonded} />{/if}
+				/>{/if}{#if exceptional}<FaIcon path={allIcons.exceptional} />{/if}{#if bonded}<FaIcon
+					path={allIcons.bonded}
+				/>{/if}
 			{#if !(packNumber !== null && isUnknownCardNumber(packNumber)) && (packIcon !== null || packNumber !== null)}
 				<span class="pips pack-span"
 					>({#if packIcon !== null && packIcon !== CardPackIcon.Unknown}<img

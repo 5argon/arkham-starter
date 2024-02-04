@@ -52,6 +52,7 @@ export interface ScenarioSetupSub {
 export interface ScenarioNote {
 	encounterSet?: EncounterSet
 	what: string
+	topic?: string
 }
 
 export interface AdditionalWeakness {

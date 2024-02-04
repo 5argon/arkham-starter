@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { packCodeToIconConversion } from '$lib/ahdb/conversion'
 	import {
 		CardPackIcon,
 		CardPackIconColor,
+		getCampaignStaticUrl,
 		getPackStaticUrl,
 	} from '$lib/design/interface/card-pack'
 	import { packToFile } from './pack-to-file'
@@ -10,6 +10,7 @@
 	export let text: string
 	export let subText: string | undefined = undefined
 	export let link: string | undefined = undefined
+	export let campaign: boolean = false
 
 	let backgroundImageString: string = ''
 	$: {
@@ -26,13 +27,13 @@
 	<a href={link}>
 		<div class="inner-frame">
 			<div class="flex-icon-text">
-				<div>
-					<img
-						class="pack-icon"
-						alt="pack icon"
-						src={getPackStaticUrl(set, CardPackIconColor.White)}
-					/>
-				</div>
+				<img
+					class="pack-icon"
+					alt="pack icon"
+					src={campaign
+						? getCampaignStaticUrl(set, CardPackIconColor.White)
+						: getPackStaticUrl(set, CardPackIconColor.White)}
+				/>
 				<div>
 					<div class="text">{text}</div>
 					{#if subText}
@@ -72,7 +73,7 @@
 	.pack-icon {
 		max-width: 20px;
 		max-height: 20px;
-		padding-right: 12px;
+		padding: 4px 12px 4px 0px;
 	}
 
 	.text {

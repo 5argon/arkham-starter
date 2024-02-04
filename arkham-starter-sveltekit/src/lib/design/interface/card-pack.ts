@@ -94,3 +94,24 @@ export function getPackStaticUrl(pack: CardPackIcon, color: CardPackIconColor): 
 	}
 	return `${withColor}/${fileName}.png`
 }
+
+export function getCampaignStaticUrl(pack: CardPackIcon, color: CardPackIconColor): string {
+	const withColor =
+		imageIconPackPath +
+		(color === CardPackIconColor.White ? imageIconPackPathWhite : imageIconPackPathBlack)
+	let fileName: string
+	switch (pack) {
+		case CardPackIcon.EdgeOfTheEarth:
+			fileName = 'eotec'
+			break
+		case CardPackIcon.TheScarletKeys:
+			fileName = 'tskc'
+			break
+		case CardPackIcon.TheFeastOfHemlockVale:
+			fileName = 'fhvc'
+			break
+		default:
+			return getPackStaticUrl(pack, color)
+	}
+	return `${withColor}/${fileName}.png`
+}

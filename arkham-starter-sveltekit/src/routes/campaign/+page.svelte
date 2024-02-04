@@ -1,12 +1,80 @@
 <script lang="ts">
+	import ExpansionDisplay from '$lib/design/components/expansion/ExpansionDisplay.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+	import { CardPackIcon } from '$lib/design/interface/card-pack'
 	import help from '$lib/md/campaign-reference.md?raw'
+	const campaignExpansion = 'Campaign Expansion'
 </script>
 
 <PageTitle title={'Campaign Reference'} helpMd={help} />
+<div class="flex">
+	<ExpansionDisplay
+		set={CardPackIcon.RevisedCoreSet}
+		text="Revised Core Set"
+		link="/campaign/rcore"
+		campaign
+	/>
+	<ExpansionDisplay
+		set={CardPackIcon.TheDunwichLegacy}
+		text="The Dunwich Legacy"
+		subText={campaignExpansion}
+		link="/campaign/dwl"
+		campaign
+	/>
+	<ExpansionDisplay
+		set={CardPackIcon.ThePathToCarcosa}
+		text="The Path to Carcosa"
+		subText={campaignExpansion}
+		link="/campaign/ptc"
+	/>
+	<ExpansionDisplay
+		set={CardPackIcon.TheForgottenAge}
+		text="The Forgotten Age"
+		subText={campaignExpansion}
+		link="/campaign/tfa"
+	/>
+	<ExpansionDisplay
+		set={CardPackIcon.TheCircleUndone}
+		text="The Circle Undone*"
+		subText={campaignExpansion}
+		link="/campaign/tcu"
+	/>
+	<ExpansionDisplay
+		set={CardPackIcon.TheDreamEaters}
+		text="The Dream-Eaters*"
+		subText={campaignExpansion}
+		link="/campaign/tde"
+	/>
+	<ExpansionDisplay
+		set={CardPackIcon.TheInnsmouthConspiracy}
+		text="The Innsmouth Conspiracy*"
+		subText={campaignExpansion}
+		link="/campaign/tic"
+	/>
+	<ExpansionDisplay
+		set={CardPackIcon.EdgeOfTheEarth}
+		text="Edge of the Earth"
+		subText={campaignExpansion}
+		link="/campaign/eote"
+	/>
+	<ExpansionDisplay
+		set={CardPackIcon.TheScarletKeys}
+		text="The Scarlet Keys"
+		subText={campaignExpansion}
+		link="/campaign/tsk"
+	/>
+	<ExpansionDisplay
+		set={CardPackIcon.TheFeastOfHemlockVale}
+		text="The Feast of Hemlock Vale*"
+		subText={campaignExpansion}
+		link="/campaign/fhv"
+	/>
+</div>
+
+<p>* = Either I have not played the campaign or is still not confident in correctness.</p>
 
 <h2>Spoiler Info</h2>
-<p>When you entered one of the campaign pages below, you will see :</p>
+<p>When you entered one of the campaign pages, you will see :</p>
 <ul>
 	<li>All scenario names.</li>
 	<li>All encounter set icon graphics.</li>
@@ -21,35 +89,17 @@
 		such as added Basic Weakness or Chaos Bag changes during Intro or Setup. (Light spoiler)
 	</li>
 	<li>
-		In "Diagrams" tab contains a sanity check image that helps reminding you of scenario's details.
-		Don't use it unless you already know the scenario inside out. (Heavy spoiler)
+		In "Setup Reference Cards" tab contains a sanity check image that helps reminding you of
+		scenario's details. Don't use it unless you already know the scenario inside out. (Heavy
+		spoiler)
 	</li>
 </ul>
 
-<h2>Campaigns</h2>
-<p>
-	* = These are campaigns I have not played or has incomplete details. The information in these
-	pages are made by directly copying community-made encounter set table and I can't check
-	correctness of them.
-</p>
-<ul>
-	<li><a href="campaign/notz">Night of the Zealot</a></li>
-	<li><a href="campaign/dwl">The Dunwich Legacy</a></li>
-	<li><a href="campaign/ptc">The Path to Carcosa</a></li>
-	<li><a href="campaign/tfa">The Forgotten Age</a></li>
-	<li><a href="campaign/tcu">*The Circle Undone</a></li>
-	<li><a href="campaign/tde">*The Dream-Eaters</a></li>
-	<li><a href="campaign/tic">*The Innsmouth Conspiracy</a></li>
-	<li><a href="campaign/eote">Edge of the Earth</a></li>
-	<li><a href="campaign/tsk">The Scarlet Keys</a></li>
-</ul>
-<ul>
-	<li><a href="campaign/rtnotz">*Return to the Night of the Zealot</a></li>
-	<li><a href="campaign/rtdwl">Return to the Dunwich Legacy</a></li>
-	<li><a href="campaign/rtptc">*Return to the Path to Carcosa</a></li>
-	<li><a href="campaign/rttfa">*Return to the Forgotten Age</a></li>
-	<li><a href="campaign/rttcu">*Return to the Circle Undone</a></li>
-</ul>
-<ul>
-	<li><a href="campaign/overall">Overall</a></li>
-</ul>
+<style>
+	.flex {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: 8px 0px;
+	}
+</style>

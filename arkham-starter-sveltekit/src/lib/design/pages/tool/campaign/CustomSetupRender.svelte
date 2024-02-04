@@ -27,8 +27,10 @@
 	{/if}
 	{#if setup.additionalWeakness !== undefined}
 		<li class="level-two">
-			<FaIcon path={allIcons.weakness} />Basic Weakness :
-			{setup.additionalWeakness.map((x) => x.trait).join(', ')}
+			<span class="topic"
+				><span class="icon-shift"><FaIcon path={allIcons.weakness} /></span>Basic Weakness</span
+			>
+			<span>{setup.additionalWeakness.map((x) => x.trait).join(', ')}</span>
 		</li>
 	{/if}
 	{#if setup.gameComponents !== undefined}
@@ -86,7 +88,8 @@
 						disableHover
 					/>
 				{:else}
-					<div class="sub-text">{n.what}</div>
+					{#if n.topic !== undefined}<span class="topic">{n.topic}</span>{/if}
+					<span class="sub-text">{n.what}</span>
 				{/if}
 			</div>
 		{/each}
@@ -125,10 +128,6 @@
 		padding-left: 16px;
 	}
 
-	.prefix-icon {
-		margin-right: 4px;
-	}
-
 	.custom {
 		color: grey;
 		font-size: small;
@@ -147,13 +146,27 @@
 		font-size: 0.8rem;
 	}
 
+	.icon-shift {
+		padding-top: 2px;
+		filter: contrast(0.2);
+	}
+
+	.topic {
+		display: inline-flex;
+		align-items: center;
+		border: 1px solid rgba(0, 0, 0, 0.143);
+		border-radius: 4px 0px 0px 4px;
+		padding: 0px 6px;
+		font-size: 0.8rem;
+	}
+
 	ul {
 		list-style: none;
 		padding-inline-start: 0px;
 	}
 
 	li {
-		margin-top: 8px;
+		margin: 4px 0px;
 	}
 
 	.level-two {

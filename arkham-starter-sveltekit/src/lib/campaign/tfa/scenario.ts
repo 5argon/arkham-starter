@@ -72,7 +72,8 @@ export const theUntamedWildsScenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Exploration deck count : 10 cards. (5x Treacheries, 5x Locations)',
+				topic: 'Exploration Deck',
+				what: '10 cards. (5x Treacheries, 5x Locations)',
 			},
 			{
 				encounterSet: rainforest,
@@ -117,7 +118,8 @@ export const theDoomOfEztliScenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Exploration deck count : 10 cards. (5x Treacheries, 5x Locations)',
+				topic: 'Exploration Deck',
+				what: '10 cards. (5x Treacheries, 5x Locations)',
 			},
 			{
 				encounterSet: deadlyTraps,
@@ -195,7 +197,8 @@ export const theBoundaryBeyondScenario: Scenario = {
 		specialGather: [{ encounterSet: theDoomOfEztli, what: ['Harbinger of Valusia'] }],
 		notes: [
 			{
-				what: 'Exploration deck count : 16 cards. (4x Treacheries, 12x Locations)',
+				topic: 'Exploration Deck',
+				what: '16 cards. (4x Treacheries, 12x Locations)',
 			},
 			{
 				what: 'You might need a Madness or Injury random basic weakness.',
@@ -232,7 +235,8 @@ export const heartOfTheEldersPart1Scenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Exploration deck count : 10~11 cards. (4x Treacheries, 6~7x Locations : 6x Jungle + Possible 1x Ruins)',
+				topic: 'Exploration Deck',
+				what: '10~11 cards. (4x Treacheries, 6~7x Locations : 6x Jungle + Possible 1x Ruins)',
 			},
 			{
 				encounterSet: heartOfTheElders,
@@ -276,7 +280,8 @@ export const heartOfTheEldersPart2Scenario: Scenario = {
 		specialGather: [{ encounterSet: theDoomOfEztli, what: ['Harbinger of Valusia'] }],
 		notes: [
 			{
-				what: 'Exploration deck count : 9 cards. (4x Treacheries, 5x Locations)',
+				topic: 'Exploration Deck',
+				what: '9 cards. (4x Treacheries, 5x Locations)',
 			},
 			{
 				encounterSet: heartOfTheElders,
@@ -393,7 +398,8 @@ export const shatteredAeonsScenario: Scenario = {
 	commonSetup: {
 		notes: [
 			{
-				what: 'Exploration deck count : 6 cards. (3x Treacheries, 3x Locations)',
+				topic: 'Exploration Deck',
+				what: '6 cards. (3x Treacheries, 3x Locations)',
 			},
 			{
 				encounterSet: shatteredAeons,

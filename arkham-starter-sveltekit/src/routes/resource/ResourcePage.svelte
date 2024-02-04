@@ -12,7 +12,7 @@
 />
 <ResourceItem
 	url="/campaign"
-	title="Campaign Reference"
+	title="Campaign Expansion Setup References"
 	description="Speed up the setup of any scenario with the encounter set overview matrix, and various useful reminders to reduce setup mistakes."
 	image="campaign.webp"
 />

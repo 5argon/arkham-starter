@@ -118,19 +118,7 @@
 	/>
 </div>
 
-<ListDivider label="Stats" />
-
-{#if campaignCount > 0}
-	<div>Amount of campaign-specific encounter cards : {campaignCount} Cards</div>
-{/if}
-{#if coreCount > 0}
-	<div>Amount of core encounter cards : {coreCount} Cards</div>
-{/if}
-{#if returnToCount > 0}
-	<div>Amount of return-to encounter cards : {returnToCount} Cards</div>
-{/if}
-
-<ListDivider label="Core Encounter Sets" />
+<ListDivider label="Required Core Encounter Sets" />
 <EncounterIconFlex
 	encounterSets={coreEncounters}
 	{showName}
