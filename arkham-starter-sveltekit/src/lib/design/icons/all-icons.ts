@@ -29,6 +29,7 @@ export const allIcons = {
 	expand: ic('arrow-up-right-and-arrow-down-left-from-center-regular'),
 	weakness: ic('weakness'),
 	anyWeakness: ic('virus-solid'),
+	experience: ic('arrow-up-right-dots-solid'),
 }
 
 function ic(s: string): string {

@@ -25,6 +25,8 @@
 	import type { PackInfoSpanItem } from '../inline/PackInfoSpan.svelte'
 	import PackInfoSpan from '../inline/PackInfoSpan.svelte'
 	import SkillIcon from '../inline/SkillIcon.svelte'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import { allIcons } from '$lib/design/icons/all-icons'
 
 	export let authorName: string | null = null
 	export let authorUrl: string | null = null
@@ -49,6 +51,10 @@
 	export let deckDistributions: DeckDistribution | null = null
 	export let xpDistributions: XpDistributionData[] | null = null
 	export let link: string | null = null
+	export let xpCosted: number | null = null
+	export let xp: number | null = null
+	export let xpSpent: number | null = null
+	export let xpAdjustment: number | null = null
 
 	// $: {
 	// 	if (xpDistributions !== null) {
@@ -213,6 +219,14 @@
 				{/if}
 			</div>
 			<DeckBadge packs={packsSorted} /> -->
+			<span class="xp"
+				><FaIcon path={allIcons.experience} /><span>Deck Experience : {xpCosted} XP</span></span
+			>
+			{#if xp !== null && xpSpent !== null && xpAdjustment !== null && xp > 0}
+				<span class="xp">
+					| {xp - xpSpent}/{xp} ({xpAdjustment})
+				</span>
+			{/if}
 			<PackInfoSpan items={packs} />
 			<!-- {:else} -->
 			{#if deckDistributions !== null}
@@ -422,5 +436,10 @@
 		padding: 4px 8px;
 		border: 1px solid rgba(0, 0, 0, 0.159);
 		border-radius: 4px;
+	}
+
+	.xp {
+		font-size: small;
+		font-weight: bold;
 	}
 </style>

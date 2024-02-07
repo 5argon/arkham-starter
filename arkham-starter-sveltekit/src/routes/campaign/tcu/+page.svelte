@@ -5,4 +5,4 @@
 	import EncounterOverview from '$lib/design/pages/tool/campaign/EncounterOverview.svelte'
 </script>
 
-<EncounterOverview campaign={theCircleUndoneCampaign} incomplete />
+<EncounterOverview incomplete campaign={theCircleUndoneCampaign} />

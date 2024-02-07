@@ -19,7 +19,6 @@ export function protoStringRestore(s: string): RestoreResult {
 	try {
 		pt = UpgradeExportProto.fromBinary(base64ToBinary(s))
 	} catch (e) {
-		console.log(e)
 		return {
 			exportOptions: {},
 			importDeckUrl: '',

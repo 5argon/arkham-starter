@@ -155,7 +155,7 @@ export const cityOfTheElderThings1Scenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
+				{ encounterSet: cityOfTheElderThings, overwriteCount: 9 },
 				lockedDoors,
 				elderThings,
 				miasma,
@@ -170,11 +170,11 @@ export const cityOfTheElderThings1Scenario: Scenario = {
 		notes: [
 			{
 				encounterSet: cityOfTheElderThings,
-				what: 'Remove all three copies of the Benign Elder Thing enemy from the game.',
+				what: 'Set the Terror of the Stars enemy aside, out of play.',
 			},
 			{
 				encounterSet: cityOfTheElderThings,
-				what: 'Set the Terror of the Stars enemy aside, out of play.',
+				what: 'Remove all 3 copies of the Benign Elder Thing enemy from the game.',
 			},
 			{
 				encounterSet: shoggoths,
@@ -192,7 +192,7 @@ export const cityOfTheElderThings2Scenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
+				{ encounterSet: cityOfTheElderThings, overwriteCount: 9 },
 				chillingCold,
 				{ encounterSet: creaturesInTheIce, overwriteCount: 0 },
 				elderThings,
@@ -207,7 +207,11 @@ export const cityOfTheElderThings2Scenario: Scenario = {
 		notes: [
 			{
 				encounterSet: cityOfTheElderThings,
-				what: 'Remove the Terror of the Stars enemy and all three copies of the Benign Elder Thing enemy from the game.',
+				what: 'Remove the Terror of the Stars enemy from the game.',
+			},
+			{
+				encounterSet: cityOfTheElderThings,
+				what: 'Remove all 3 copies of the Benign Elder Thing enemy from the game.',
 			},
 			{
 				encounterSet: creaturesInTheIce,
@@ -225,7 +229,7 @@ export const cityOfTheElderThings3Scenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: cityOfTheElderThings, overwriteCount: 6 },
+				{ encounterSet: cityOfTheElderThings, overwriteCount: 9 },
 				chillingCold,
 				lockedDoors,
 				creaturesInTheIce,
@@ -239,7 +243,11 @@ export const cityOfTheElderThings3Scenario: Scenario = {
 		notes: [
 			{
 				encounterSet: cityOfTheElderThings,
-				what: 'Remove the Terror of the Stars enemy and all three copies of the Reawakened Elder Thing enemy from the game.',
+				what: 'Remove the Terror of the Stars enemy from the game.',
+			},
+			{
+				encounterSet: cityOfTheElderThings,
+				what: 'Remove all 3 copies of the Reawakened Elder Thing enemy from the game.',
 			},
 			{
 				encounterSet: shoggoths,

@@ -9,6 +9,7 @@
 	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import { CommitIcon } from '$lib/core/commit-icon'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
+	import { processCustomizable } from '$lib/deck/customizable'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import CardSpan from '../card/CardSpan.svelte'
@@ -29,61 +30,7 @@
 	$: {
 		card = popupDatabase.getByIdThrowNull(cardId)
 	}
-	let custXp: number
-	let realCust: NewCust[] = []
-	$: {
-		const matchedCustomizables = customizableMetas
-			.filter((x) => {
-				return x.card === cardId
-			})
-			.sort((a, b) => a.index - b.index)
-		const newRealCust: NewCust[] = []
-
-		matchedCustomizables.forEach((x) => {
-			if (card.original.cus && card.original.cus.length > x.index) {
-				const c = card.original.cus[x.index]
-				const zeroMax = c.xp === 0
-				if (zeroMax || x.checked > 0) {
-					newRealCust.push({
-						text: processText(c.n),
-						checkedBoxes: x.checked,
-						uncheckedBoxes: c.xp - x.checked,
-						detail: processDetail(x.detail),
-					})
-				}
-			}
-		})
-
-		const totalChecked = matchedCustomizables.reduce((a, b) => a + b.checked, 0)
-		custXp = Math.ceil(totalChecked / 2)
-		realCust = newRealCust
-	}
-
-	function processText(d: string): string {
-		const tryGetCard = popupDatabase.getById(d)
-		const regex = /\[\[(.*?)\]\]/g
-		const result = d.replace(regex, '$1').replace('_____', '')
-		return result
-	}
-
-	function processDetail(d: string): string {
-		const tryGetCard = popupDatabase.getById(d)
-		if (tryGetCard !== null) {
-			return tryGetCard.original.n
-		} else if (d.includes('^')) {
-			const split = d.split('^')
-			return split
-				.map<string>((x) => {
-					const tryGetCard = popupDatabase.getById(x)
-					if (tryGetCard !== null) {
-						return tryGetCard.original.n
-					}
-					return x
-				})
-				.join(', ')
-		}
-		return d
-	}
+	$: processedCust = processCustomizable(card.original.id, customizableMetas, popupDatabase)
 
 	let cardName: string
 	$: {
@@ -92,6 +39,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class:toggle-div={onToggleChanged} class:toggle-div-on={toggled} on:click={handler}>
 	<CardSpan
 		{cardId}
@@ -109,14 +57,14 @@
 		subText={card.original.esn ? card.original.sn : null}
 		weakness={card.original.wk}
 		investigator={card.original.inv}
-		xp={custXp > 0 ? custXp : card.original.xp}
+		xp={processedCust.xp > 0 ? processedCust.xp : card.original.xp}
 		xpTaboo={taboo ? card.original.xpat : null}
 		customizable={card.original.cus !== undefined}
 		permanent={card.original.pe ?? false}
 		bonded={card.original.bd ?? false}
 	/>
 	{#if card.original.cus !== undefined}
-		{#each realCust as rc}
+		{#each processedCust.options as rc}
 			<div class="cust">
 				<FaIcon path={allIcons.rightSingle} />
 				<CardSpan

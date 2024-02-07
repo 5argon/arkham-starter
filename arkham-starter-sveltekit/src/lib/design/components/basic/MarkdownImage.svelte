@@ -10,7 +10,6 @@
 		regex.lastIndex = 0
 		const result = regex.exec(raw)
 		if (result !== null && result.length > 1) {
-			console.log(result)
 			const u = result[1]
 			const subStart = u.indexOf('/image/documentation/')
 			url = u.substring(subStart)

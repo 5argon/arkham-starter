@@ -255,6 +255,11 @@ export interface PopupDatabaseItemRaw {
 	 * Is a Permanent card.
 	 */
 	pe?: boolean
+
+	/*
+	 * Is a Myraid card.
+	 */
+	myr?: boolean
 }
 
 export async function fetchPopupDatabase(): LazyPopupDatabase {

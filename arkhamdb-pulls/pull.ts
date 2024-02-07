@@ -178,6 +178,7 @@ playerCards.forEach((x) => {
     sp: x.spoiler !== undefined ? true : undefined,
     bd: x.bonded_to !== undefined ? true : undefined,
     pe: x.permanent ? true : undefined,
+    myr: x.myriad ? true : undefined,
   })
 })
 

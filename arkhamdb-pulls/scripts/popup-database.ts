@@ -162,6 +162,11 @@ export interface PopupDatabaseItem {
    * Is a Permanent card.
    */
   pe?: boolean
+
+  /*
+   * Is a Myraid card.
+   */
+  myr?: boolean
 }
 
 export interface CustomizableStruct {

@@ -59,16 +59,31 @@ export const disappearanceAtTheTwilightEstateScenario: Scenario = {
 		{
 			shuffles: [
 				{ encounterSet: disappearanceAtTheTwilightEstate, overwriteCount: 0 },
-				{ encounterSet: atDeathsDoorstep, overwriteCount: 7 },
+				{ encounterSet: atDeathsDoorstep, overwriteCount: 0 },
 				chillingCold,
 				inexorableFate,
 				realmOfDeath,
 				spectralPredators,
-				theWatcher,
+				{ encounterSet: theWatcher, overwriteCount: 2 },
 				trappedSpirits,
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				what: 'The starting encounter deck is reduced by setup instructions on the back of investigator cards.',
+			},
+			{
+				encounterSet: atDeathsDoorstep,
+				what: 'Only gather 7 Spectral locations.',
+			},
+			{
+				encounterSet: theWatcher,
+				what: 'Put The Spectral Watcher into play in the Entry Hall.',
+			},
+		],
+	},
 }
 
 export const theWitchingHourScenario: Scenario = {
@@ -77,18 +92,26 @@ export const theWitchingHourScenario: Scenario = {
 	shortName: 'I',
 	setups: [
 		{
-			shuffles: [
-				{ encounterSet: theWitchingHour, overwriteCount: 0 },
-				ancientEvils,
-				strikingFear,
-				{ encounterSet: theDevourerBelow, overwriteCount: 6 },
-				anettesCoven,
-				cityOfSins,
-				witchcraft,
-			],
-			remaining: [agentsOfShubNiggurath, agentsOfAzathoth],
+			shuffles: [ancientEvils, strikingFear, anettesCoven, cityOfSins, witchcraft],
+			remaining: [theWitchingHour, agentsOfShubNiggurath, agentsOfAzathoth, theDevourerBelow],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: theDevourerBelow,
+				what: 'Only gather 6 Arkham Woods locations.',
+			},
+			{
+				encounterSet: agentsOfAzathoth,
+				what: 'Set the Agents of Azathoth encounter set aside, out of play.',
+			},
+			{
+				encounterSet: agentsOfShubNiggurath,
+				what: 'Set the Agents of Shub-Niggurath encounter set aside, out of play.',
+			},
+		],
+	},
 }
 
 export const atDeathsDoorstepScenario: Scenario = {
@@ -108,6 +131,18 @@ export const atDeathsDoorstepScenario: Scenario = {
 			remaining: [realmOfDeath, theWatcher],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: realmOfDeath,
+				what: 'Set the Realm of Death encounter set aside, out of play.',
+			},
+			{
+				encounterSet: theWatcher,
+				what: 'Set The Watcher encounter set aside, out of play.',
+			},
+		],
+	},
 }
 
 export const theSecretNameScenario: Scenario = {

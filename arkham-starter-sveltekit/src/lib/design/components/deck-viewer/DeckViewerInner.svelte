@@ -81,7 +81,7 @@
 
 <div class="head-flex">
 	<div class="head-flex-banner">
-		<DeckBannerHigher {popupDatabase} deck={deckInput} {ahst} viewerPage />
+		<DeckBannerHigher {popupDatabase} deck={deckInput} {ahst} viewerPage {customizableMetas} />
 	</div>
 	<div class="head-flex-inv">
 		<InvestigatorFrontBack {popupDatabase} {fullDatabase} deck={deckInput} />
@@ -201,6 +201,7 @@
 		showList
 		showScans
 		small
+		{customizableMetas}
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons, ExtraColumn.Label]}
 		showLabelOnScans
 	/>

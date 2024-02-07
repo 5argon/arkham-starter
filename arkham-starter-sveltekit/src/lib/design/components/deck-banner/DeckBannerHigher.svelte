@@ -6,11 +6,13 @@
 		forwardDeckToRcore,
 		type ArkhamStarterDeckData,
 		type GetDeckCardIdReturns,
+		type CustomizableMeta,
 	} from '$lib/ahdb/public-api/high-level'
 	import { CardPack } from '$lib/core/card-pack'
 	import { CommitIcon } from '$lib/core/commit-icon'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import { addPackCount, countPacks } from '$lib/deck/deck-count'
+	import { calculateCardsXp } from '$lib/deck/deck-xp'
 	import { getRepresentativeCards } from '$lib/deck/get-representative-cards'
 	import { CardPackIcon } from '$lib/design/interface/card-pack'
 	import type {
@@ -26,12 +28,15 @@
 	export let deck: GetDeckCardIdReturns
 	export let ahst: ArkhamStarterDeckData | null = null
 	export let viewerPage: boolean = false
+	export let customizableMetas: CustomizableMeta[] = []
 	let packInfoSpanItems: PackInfoSpanItem[]
 	const rcoreDeck = forwardDeckToRcore(deck)
+	const mainDeckXp = calculateCardsXp(rcoreDeck.cards1, popupDatabase, true, customizableMetas)
 	const representativeCards = getRepresentativeCards(
 		rcoreDeck.cards1.map((x) => x.cardId),
 		rcoreDeck.cards2.map((x) => x.cardId).filter((x) => !ahst?.extraCards.includes(x) ?? true),
 		popupDatabase,
+		customizableMetas,
 	)
 	const a = countPacks(
 		rcoreDeck.cards1,
@@ -154,6 +159,10 @@
 	packs={packInfoSpanItems}
 	deckName={ahst?.rename ?? deck.deck}
 	investigatorCode={deck.investigatorCode}
+	xpCosted={mainDeckXp}
+	xp={deck.xp}
+	xpSpent={deck.xpSpent}
+	xpAdjustment={deck.xpAdjustment}
 	previewCards={representativeCards}
 	parallelFront={parFront}
 	parallelBack={parBack}

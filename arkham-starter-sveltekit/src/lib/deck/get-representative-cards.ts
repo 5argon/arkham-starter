@@ -1,4 +1,5 @@
 import { isRandomBasicWeakness } from '$lib/ahdb/card'
+import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 import type { PopupDatabase } from '$lib/core/popup-database'
 
 interface Sorter {
@@ -9,6 +10,7 @@ export function getRepresentativeCards(
 	mainDeck: string[],
 	sideDeck: string[],
 	pdb: PopupDatabase,
+	customizableMetas: CustomizableMeta[],
 ): string[] {
 	let sorters: Sorter[] = []
 	mainDeck.forEach((x) => {

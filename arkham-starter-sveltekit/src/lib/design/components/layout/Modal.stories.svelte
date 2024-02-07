@@ -8,7 +8,6 @@
 <Story name="Test">
 	<Modal
 		onClose={() => {
-			console.log("OK")
 			showing = false
 		}}
 		show={showing}
