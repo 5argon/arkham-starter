@@ -21,7 +21,7 @@ See photos of variety of organizations in action in the [Divider Gallery Page](.
 
 Unlike other existing dividers, they have unusual traits gained from the divider size of 93mm x 68mm. To help visualize this size, the size of standard size card is 89mm x 64mm, which gets +1 mm to 90mm x 65mm when fitted with perfect sleeves. (+0.5mm for each side.)
 
-So that left **only 3 mm difference for text space**, and became the name of this project. Why should we go small though? 
+So that left **only 3 mm difference for text space**, and became the name of this project. Why should we go small though?
 
 ## Wide range of compatible storages
 
@@ -72,6 +72,8 @@ All encounter icons were obtained from combined effort in [this thread](https://
 - Spanish (Contributed by : [@colococolo](https://boardgamegeek.com/user/colococolo), [@Fran77](https://boardgamegeek.com/user/Fran77))
 - French (Contributed by : [@retsnimel](https://boardgamegeek.com/user/retsnimel))
 - Portuguese (Contributed by : [@vinimsouza](https://boardgamegeek.com/user/vinimsouza), [@benq10r](https://boardgamegeek.com/user/benq10r))
+- Polish (Contributed by : ? (please let me know))
+- Czech (Contributed by : [@yorrkee](https://boardgamegeek.com/user/yorrkee))
 
 If translation is missing, file is still rendered but text area will be empty.
 

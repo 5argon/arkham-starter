@@ -20,14 +20,18 @@
 					<img
 						alt="front"
 						class="mini-front"
-						src={'image/custom/utility-mini-card/' + member.frontName}
+						src={'image/custom/utility-mini-card/' +
+							member.frontName.replace(/\.[^/.]+$/, '') +
+							'.webp'}
 					/>
 				</span>
 				<span>
 					<img
 						alt="back"
 						class="mini-back"
-						src={'image/custom/utility-mini-card/' + member.backName}
+						src={'image/custom/utility-mini-card/' +
+							member.backName.replace(/\.[^/.]+$/, '') +
+							'.webp'}
 					/>
 				</span>
 			</span>

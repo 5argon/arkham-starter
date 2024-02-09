@@ -370,6 +370,36 @@
       {
         "setCode": "TCUC",
         "setName": "The Circle Undone (Campaign Expansion)",
+        "hash": "TCUC-Abandoned Chapel",
+        "name": "Abandoned Chapel",
+        "description": "Reminders to subtract skill values. Note that this effect could stack. (e.g. Mythos Phase gets you one, then start of Investigation Phase you somehow get it again, then you fail investigation and get it again, etc.) The backside has -2 for poor soul who got wombo combo-ed by the haunt. I recommends 2 copies so you could share the pain or add them up to make -3 or -4.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 2,
+            "frontName": "TCUC-Abandoned Chapel-x2-A.png",
+            "backName": "TCUC-Abandoned Chapel-x2-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "TCUC",
+        "setName": "The Circle Undone (Campaign Expansion)",
+        "hash": "TCUC-Brown Jenkin",
+        "name": "Brown Jenkin",
+        "description": "3 copies because this card is handy to place near/on the Creature enemy that someone is fighting to remind them this effect coming from somewhere else in the map. The back side is greyed out so you could flip it when you exhaust to remove the buff temporarily.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 3,
+            "frontName": "TCUC-Brown Jenkin-x3-A.png",
+            "backName": "TCUC-Brown Jenkin-x3-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "TCUC",
+        "setName": "The Circle Undone (Campaign Expansion)",
         "hash": "TCUC-Diabolic Voices",
         "name": "Diabolic Voices",
         "description": "Keep track of Diabolic Voices in the discard pile by placing this card near it, so when you get the next one you don't have to sift through the discard pile and count them. You can print just 2, take the mini-cards away on 0 or 3 count.",
@@ -387,13 +417,49 @@
         "setName": "The Circle Undone (Campaign Expansion)",
         "hash": "TCUC-Evil Past",
         "name": "Evil Past",
-        "description": "If a scenario uses City of Sins encounter set, place this card near the encounter deck as a reminder to scan the play field whenever the encounter deck became empty.",
+        "description": "If a scenario uses City of Sins encounter set, place this card near the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. Note that in The Wages of Sin both decks could trigger the empty criteria, so place it near both discard piles.",
         "members": [
           {
             "variation": 1,
             "quantity": 1,
             "frontName": "TCUC-Evil Past-A.png",
             "backName": "TCUC-Evil Past-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "TCUC",
+        "setName": "The Circle Undone (Campaign Expansion)",
+        "hash": "TCUC-Extradimensional Visions",
+        "name": "Extradimensional Visions",
+        "description": "The treachery asks you to count the amount of treachery discard pile on Revelation, so the idea is maintaining stacks of 10/20 cards each time you reach that number along the way instead of counting from scratch every time. This mini-card's purpose is to mark a completed stack of size 10/20/30. (You can also make 2 stacks of 10 cards each since there are 2 copies.)",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "TCUC-Extradimensional Visions-1-A.png",
+            "backName": "TCUC-Extradimensional Visions-1-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 1,
+            "frontName": "TCUC-Extradimensional Visions-2-A.png",
+            "backName": "TCUC-Extradimensional Visions-2-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "TCUC",
+        "setName": "The Circle Undone (Campaign Expansion)",
+        "hash": "TCUC-Heretics' Graves",
+        "name": "Heretics' Graves",
+        "description": "This debuff effect lasts all the way to the end of your NEXT turn if you get it inside your turn. Therefore it has a backside without 'next' wording for you to flip to once you finally begin the turn that will get rid of the debuff.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 2,
+            "frontName": "TCUC-Heretics' Graves-x2-A.png",
+            "backName": "TCUC-Heretics' Graves-x2-B.png"
           }
         ]
       },
@@ -422,8 +488,20 @@
           {
             "variation": 1,
             "quantity": 1,
-            "frontName": "TCUC-Priestess of the Coven-A.png",
-            "backName": "TCUC-Priestess of the Coven-B.png"
+            "frontName": "TCUC-Priestess of the Coven-1-A.png",
+            "backName": "TCUC-Priestess of the Coven-1-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 1,
+            "frontName": "TCUC-Priestess of the Coven-2-A.png",
+            "backName": "TCUC-Priestess of the Coven-2-B.png"
+          },
+          {
+            "variation": 3,
+            "quantity": 1,
+            "frontName": "TCUC-Priestess of the Coven-3-A.png",
+            "backName": "TCUC-Priestess of the Coven-3-B.png"
           }
         ]
       },
@@ -462,10 +540,49 @@
             "backName": "TCUC-The Secret Name-2-B.png"
           }
         ]
+      },
+      {
+        "setCode": "TCUC",
+        "setName": "The Circle Undone (Campaign Expansion)",
+        "hash": "TCUC-The Spectral Watcher",
+        "name": "The Spectral Watcher",
+        "description": "Show off your hardwork of defeating it by pasting this card on it. Take the card out instead of ready it.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "TCUC-The Spectral Watcher-A.png",
+            "backName": "TCUC-The Spectral Watcher-B.png"
+          }
+        ]
       }
     ],
-    "itemCount": 6,
-    "printedQuantity": 10
+    "itemCount": 11,
+    "printedQuantity": 22
+  },
+  {
+    "index": 8,
+    "setCode": "TDEP",
+    "setName": "The Dream-Eaters (Investigator Expansion)",
+    "items": [
+      {
+        "setCode": "TDEP",
+        "setName": "The Dream-Eaters (Investigator Expansion)",
+        "hash": "TDEP-Ethereal Form",
+        "name": "Ethereal Form",
+        "description": "'You are ethereal' indicator.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "TDEP-Ethereal Form-A.png",
+            "backName": "TDEP-Ethereal Form-B.png"
+          }
+        ]
+      }
+    ],
+    "itemCount": 1,
+    "printedQuantity": 1
   },
   {
     "index": 11,
@@ -492,25 +609,10 @@
             "backName": "TICP-Geas-2-B.png"
           }
         ]
-      },
-      {
-        "setCode": "TICP",
-        "setName": "The Innsmouth Conspiracy (Investigator Expansion)",
-        "hash": "TICP-Replenish Two",
-        "name": "Replenish Two",
-        "description": "Resources-on-a-card for Lv. 4 Talent so it is not possible to spill these onto nearby things and easy to replenish. When boosting a test, you can place this card on the commit pile. (Use 2 resources side for +2 boost, use 1 resource side for +1 boost.) When representing 0 remaining resource, you can tuck this card under the Talent.",
-        "members": [
-          {
-            "variation": 1,
-            "quantity": 2,
-            "frontName": "TICP-Replenish Two-x2-A.png",
-            "backName": "TICP-Replenish Two-x2-B.png"
-          }
-        ]
       }
     ],
-    "itemCount": 2,
-    "printedQuantity": 4
+    "itemCount": 1,
+    "printedQuantity": 2
   },
   {
     "index": 12,
@@ -592,21 +694,6 @@
       {
         "setCode": "EOTEP",
         "setName": "Edge of the Earth (Investigator Expansion)",
-        "hash": "EOTEP-Replenish Two",
-        "name": "Replenish Two",
-        "description": "Resources-on-a-card for Lv. 3 triple classes Talent so it is not possible to spill these onto nearby things and easy to replenish. When boosting a test, you can place this card on the commit pile. (Use 2 resources side for +2 boost, use 1 resource side for +1 boost.) When representing 0 remaining resource, you can tuck this card under the Talent.",
-        "members": [
-          {
-            "variation": 1,
-            "quantity": 2,
-            "frontName": "EOTEP-Replenish Two-x2-A.png",
-            "backName": "EOTEP-Replenish Two-x2-B.png"
-          }
-        ]
-      },
-      {
-        "setCode": "EOTEP",
-        "setName": "Edge of the Earth (Investigator Expansion)",
         "hash": "EOTEP-The Red Clock",
         "name": "The Red Clock",
         "description": "The +3 boost for your next tests persists indefinitely even across rounds, if you are planning to not immediately using the boost this card might help seeing that state. The backside supports +4 on the Lv. 5 version. (It is also possible to stack the boost, which you could print 2 of this card but I think it is too unlikely.)",
@@ -620,14 +707,47 @@
         ]
       }
     ],
-    "itemCount": 6,
-    "printedQuantity": 9
+    "itemCount": 5,
+    "printedQuantity": 7
   },
   {
     "index": 13,
     "setCode": "EOTEC",
     "setName": "Edge of the Earth (Campaign Expansion)",
     "items": [
+      {
+        "setCode": "EOTEC",
+        "setName": "Edge of the Earth (Campaign Expansion)",
+        "hash": "EOTEC-City of the Elder Things",
+        "name": "City of the Elder Things",
+        "description": "Slide these cards to indicate the key assembling locations. The back side allows it poking from the right side of the card instead.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "EOTEC-City of the Elder Things-1-A.png",
+            "backName": "EOTEC-City of the Elder Things-1-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 1,
+            "frontName": "EOTEC-City of the Elder Things-2-A.png",
+            "backName": "EOTEC-City of the Elder Things-2-B.png"
+          },
+          {
+            "variation": 3,
+            "quantity": 1,
+            "frontName": "EOTEC-City of the Elder Things-3-A.png",
+            "backName": "EOTEC-City of the Elder Things-3-B.png"
+          },
+          {
+            "variation": 4,
+            "quantity": 1,
+            "frontName": "EOTEC-City of the Elder Things-4-A.png",
+            "backName": "EOTEC-City of the Elder Things-4-B.png"
+          }
+        ]
+      },
       {
         "setCode": "EOTEC",
         "setName": "Edge of the Earth (Campaign Expansion)",
@@ -763,6 +883,36 @@
       {
         "setCode": "EOTEC",
         "setName": "Edge of the Earth (Campaign Expansion)",
+        "hash": "EOTEC-Nightmarish Vapors",
+        "name": "Nightmarish Vapors",
+        "description": "For when someone choose the -2 action Peril option.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 2,
+            "frontName": "EOTEC-Nightmarish Vapors-x2-A.png",
+            "backName": "EOTEC-Nightmarish Vapors-x2-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "EOTEC",
+        "setName": "Edge of the Earth (Campaign Expansion)",
+        "hash": "EOTEC-Rise of the Elder Things",
+        "name": "Rise of the Elder Things",
+        "description": "The effect temporarily buffs the enemy engaging without at the moment you draw the treachery. Paste this to those enemies. Note that the effect persists until the end of round even if you then disengages from them.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 2,
+            "frontName": "EOTEC-Rise of the Elder Things-x2-A.png",
+            "backName": "EOTEC-Rise of the Elder Things-x2-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "EOTEC",
+        "setName": "Edge of the Earth (Campaign Expansion)",
         "hash": "EOTEC-Roald Ellsworth",
         "name": "Roald Ellsworth",
         "description": "Put it on a treachery that got disabled by Roald. The effect only lasts til the end of turn, you might not really need this one to remember the blanking, but I made it for completeness anyway. The backside just have different set icon just in case you use Resolute version and want a matching one.",
@@ -879,55 +1029,10 @@
             "backName": "EOTEC-The Nameless Madness-x15-B.png"
           }
         ]
-      },
-      {
-        "setCode": "EOTEC",
-        "setName": "Edge of the Earth (Campaign Expansion)",
-        "hash": "EOTEC-To the Forbidden Peaks-Level",
-        "name": "To the Forbidden Peaks-Level",
-        "description": "I'm not doubting your ability to count numbers, but with small table or odd orientation you might not be able to arrange a proper mountain like the guide says. Level markers allow you to clump up locations differently where they might lose a bit of sense of height. Slide the card under the location with bottom edge visible. Use the backside if you want the number to poke out of right edge of the card instead.",
-        "members": [
-          {
-            "variation": 1,
-            "quantity": 1,
-            "frontName": "EOTEC-To the Forbidden Peaks-Level-1-A.png",
-            "backName": "EOTEC-To the Forbidden Peaks-Level-1-B.png"
-          },
-          {
-            "variation": 2,
-            "quantity": 1,
-            "frontName": "EOTEC-To the Forbidden Peaks-Level-2-A.png",
-            "backName": "EOTEC-To the Forbidden Peaks-Level-2-B.png"
-          },
-          {
-            "variation": 3,
-            "quantity": 1,
-            "frontName": "EOTEC-To the Forbidden Peaks-Level-3-A.png",
-            "backName": "EOTEC-To the Forbidden Peaks-Level-3-B.png"
-          },
-          {
-            "variation": 4,
-            "quantity": 1,
-            "frontName": "EOTEC-To the Forbidden Peaks-Level-4-A.png",
-            "backName": "EOTEC-To the Forbidden Peaks-Level-4-B.png"
-          },
-          {
-            "variation": 5,
-            "quantity": 1,
-            "frontName": "EOTEC-To the Forbidden Peaks-Level-5-A.png",
-            "backName": "EOTEC-To the Forbidden Peaks-Level-5-B.png"
-          },
-          {
-            "variation": 6,
-            "quantity": 1,
-            "frontName": "EOTEC-To the Forbidden Peaks-Level-6-A.png",
-            "backName": "EOTEC-To the Forbidden Peaks-Level-6-B.png"
-          }
-        ]
       }
     ],
-    "itemCount": 9,
-    "printedQuantity": 52
+    "itemCount": 11,
+    "printedQuantity": 54
   },
   {
     "index": 14,
@@ -1021,6 +1126,33 @@
             "quantity": 1,
             "frontName": "TSKP-Disguise-A.png",
             "backName": "TSKP-Disguise-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "TSKP",
+        "setName": "The Scarlet Keys (Investigator Expansion)",
+        "hash": "TSKP-Embezzled Treasure",
+        "name": "Embezzled Treasure",
+        "description": "Remembers extra resources that the player would get when you gathered up to play the next time. The cards should be thrown into that investigator's deck. (If they would start the next scenario with +4 resources, then put the 1 resource card and 3 resource card together near that deck.)",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "TSKP-Embezzled Treasure-1-A.png",
+            "backName": "TSKP-Embezzled Treasure-1-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 1,
+            "frontName": "TSKP-Embezzled Treasure-2-A.png",
+            "backName": "TSKP-Embezzled Treasure-2-B.png"
+          },
+          {
+            "variation": 3,
+            "quantity": 1,
+            "frontName": "TSKP-Embezzled Treasure-3-A.png",
+            "backName": "TSKP-Embezzled Treasure-3-B.png"
           }
         ]
       },
@@ -1197,7 +1329,7 @@
         "setName": "The Scarlet Keys (Investigator Expansion)",
         "hash": "TSKP-Runic Axe",
         "name": "Runic Axe",
-        "description": "I've had a Scriptweaver user who spent 3 minutes declaring verbally and count in their head what effects are going to happen, what minus is going to damage the enemy, what minus is going to get him clue(s) on Elders, how many damages, how many clues, ...Then when he pulls the chaos token, they do everything over again! (And sometimes wondering if they forgot replenishing a charge or not.) These cards can be \"committed\" when you attack to represent the inscriptions that you choose to activate with your charges so it gets easier to tally the boosts and extra effects, both before and after token pulling. Ancient Power user can use the back side to represent up to 2x stacking boosts of each inscription.",
+        "description": "I've had a Scriptweaver user who spent 3 minutes declaring verbally and count in their head what effects are going to happen, what minus is going to damage the enemy, what minus is going to get him clue(s) on Elders, how many damages, how many clues, ...Then when they pull the chaos token, they count everything over again! (And sometimes wondering if they forgot replenishing a charge or not.) These cards can be \"committed\" when you attack to represent the inscriptions that you choose to activate with your charges so it gets easier to tally the boosts and extra effects, both before and after token pulling. Ancient Power user can use the back side to represent up to 2x stacking boosts of each inscription.",
         "members": [
           {
             "variation": 1,
@@ -1274,8 +1406,8 @@
         ]
       }
     ],
-    "itemCount": 15,
-    "printedQuantity": 34
+    "itemCount": 16,
+    "printedQuantity": 37
   },
   {
     "index": 15,
@@ -1378,21 +1510,111 @@
         "members": [
           {
             "variation": 1,
-            "quantity": 3,
-            "frontName": "TSKC-The Shade Reaper-x3-A.png",
-            "backName": "TSKC-The Shade Reaper-x3-B.png"
+            "quantity": 2,
+            "frontName": "TSKC-The Shade Reaper-x2-A.png",
+            "backName": "TSKC-The Shade Reaper-x2-B.png"
           }
         ]
       }
     ],
     "itemCount": 6,
-    "printedQuantity": 19
+    "printedQuantity": 18
   },
   {
     "index": 16,
     "setCode": "FHVP",
     "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
     "items": [
+      {
+        "setCode": "FHVP",
+        "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
+        "hash": "FHVP-Bide Your Time",
+        "name": "Bide Your Time",
+        "description": "Remember to claim your 2 actions the next round. The backside has different wording, you could flip it when 'your next turn' finally comes.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVP-Bide Your Time-A.png",
+            "backName": "FHVP-Bide Your Time-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVP",
+        "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
+        "hash": "FHVP-Blackmail File",
+        "name": "Blackmail File",
+        "description": "This card adds temporary aloof to the pasted enemy.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVP-Blackmail File-A.png",
+            "backName": "FHVP-Blackmail File-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVP",
+        "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
+        "hash": "FHVP-Confound",
+        "name": "Confound",
+        "description": "Long evade indicator. Remove from the enemy at the Upkeep when it is going to ready. The backside is generic and can be use with other long evade effect.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVP-Confound-A.png",
+            "backName": "FHVP-Confound-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVP",
+        "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
+        "hash": "FHVP-Eyes of Valusia",
+        "name": "Eyes of Valusia",
+        "description": "Debuff indicator so other investigators that gangs up on it after you remember to account for it.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVP-Eyes of Valusia-A.png",
+            "backName": "FHVP-Eyes of Valusia-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVP",
+        "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
+        "hash": "FHVP-I'll Pay You Back!",
+        "name": "I'll Pay You Back!",
+        "description": "A legally binding debt document. Front side has a wording that make sense if you give the mini-card to someone you borrowed the resource from, so you give the workload of reminding you to pay back to that investigator. Back side works inversely by keeping it on you.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVP-I'll Pay You Back!-A.png",
+            "backName": "FHVP-I'll Pay You Back!-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVP",
+        "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
+        "hash": "FHVP-Ofuda",
+        "name": "Ofuda",
+        "description": "Temporary keyword removal indicator. As a bonus it looks like the Ofuda is really on the enemy's forehead!",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVP-Ofuda-A.png",
+            "backName": "FHVP-Ofuda-B.png"
+          }
+        ]
+      },
       {
         "setCode": "FHVP",
         "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
@@ -1409,8 +1631,8 @@
         ]
       }
     ],
-    "itemCount": 1,
-    "printedQuantity": 1
+    "itemCount": 7,
+    "printedQuantity": 7
   },
   {
     "index": 18,

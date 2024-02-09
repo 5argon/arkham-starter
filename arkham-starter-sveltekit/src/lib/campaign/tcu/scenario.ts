@@ -152,7 +152,7 @@ export const theSecretNameScenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: theSecretName, overwriteCount: 0 },
+				{ encounterSet: theSecretName, overwriteCount: 10 },
 				rats,
 				cityOfSins,
 				inexorableFate,
@@ -161,6 +161,14 @@ export const theSecretNameScenario: Scenario = {
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: theSecretName,
+				what: '10 cards from this set in the starting encounter deck are : Meddlesome Familiar (3x), Extradimensional Visions (2x), Pulled by the Stars (2x), Disquieting Dreams (2x), Brown Jenkin.',
+			},
+		],
+	},
 }
 
 export const theWagesOfSinScenario: Scenario = {
@@ -170,17 +178,42 @@ export const theWagesOfSinScenario: Scenario = {
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: theWagesOfSin, overwriteCount: 0 },
+				{ encounterSet: theWagesOfSin, overwriteCount: 8 },
 				anettesCoven,
 				cityOfSins,
-				inexorableFate,
-				realmOfDeath,
-				trappedSpirits,
 				witchcraft,
 			],
-			remaining: [theWatcher],
+			remaining: [theWatcher, inexorableFate, realmOfDeath, trappedSpirits],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				topic: 'Spectral Encounter Deck',
+				what: '20 Cards',
+			},
+			{
+				encounterSet: theWagesOfSin,
+				what: '6 cards (Malevolent Spirit x2, Burdens of the Past x2, and Bane of the Living x2) in the spectral encounter deck.',
+			},
+			{
+				encounterSet: inexorableFate,
+				what: 'The entire Inexorable Fate set (6 cards) in the spectral encounter deck.',
+			},
+			{
+				encounterSet: realmOfDeath,
+				what: 'The entire Realm of Death set (4 cards) in the spectral encounter deck.',
+			},
+			{
+				encounterSet: trappedSpirits,
+				what: 'The entire Trapped Spirits set (4 cards) in the spectral encounter deck.',
+			},
+			{
+				encounterSet: theWatcher,
+				what: 'Set The Watcher encounter set aside, out of play.',
+			},
+		],
+	},
 }
 
 export const forTheGreaterGoodScenario: Scenario = {

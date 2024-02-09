@@ -16,6 +16,10 @@
 		"description": "Due to thin encounter deck it is possible to get multiple of these in one Mythos Phase. Take this card to act/agenda area so players who have had a drink remembers to deduct actions."
 	},
 	{
+		"hash": "EOTEC-City of the Elder Things",
+		"description": "Slide these cards to indicate the key assembling locations. The back side allows it poking from the right side of the card instead."
+	},
+	{
 		"hash": "EOTEC-Ice and Death Randomizer",
 		"description": "These are used to play a custom variant of Ice and Death (Part I) where you randomize which location you get in their same tier (same clue entry cost), and ignore location connection symbols. You can use them to randomly pick the original location card into play. (You now know what it is even before spending clue to enter, like the original Ice and Death.) You can also place the unknown side on the map for the players to walk into, so they don't know what they'd get until they spend clues and move in. The original Ice and Death locations didn't come with unknown backside so you can't do this with just those cards. You need to save the map you got to play Part II and Part III, though. Maybe just take a photo of it. Make sure to completely randomize all remaining locations if you ended Part I without revealing all of them. In regular Ice and Death, these cards can be used to remember (maybe store with the player's deck) Revealed Locations in your campaign log without writing in the log."
 	},
@@ -30,6 +34,14 @@
 	{
 		"hash": "EOTEC-Mist Pylon",
 		"description": "Make it looks more like enemy card template when rule says to treat it as if it is an enemy. When it collapses, you can take this card along with the damage counter to victory display so it is more obvious that other standing pylons still have this mini card on them. It also has a handy reminder which seal it corresponds to, and the backside that enlarge the game-wide benefit text for you if you managed to put a seal on it. (Sorry if this visual is a bit too over-the-top for you, but I forgot to apply the benefits too many times I need it to really kick my eyes amidst the sea of blue cards.)"
+	},
+	{
+		"hash": "EOTEC-Nightmarish Vapors",
+		"description": "For when someone choose the -2 action Peril option."
+	},
+	{
+		"hash": "EOTEC-Rise of the Elder Things",
+		"description": "The effect temporarily buffs the enemy engaging without at the moment you draw the treachery. Paste this to those enemies. Note that the effect persists until the end of round even if you then disengages from them."
 	},
 	{
 		"hash": "EOTEC-Roald Ellsworth",
@@ -48,10 +60,6 @@
 		"description": "I've had some fiddliness and visibility problem playing this scenario before. Printing whopping 15x of these gives you : 1. Horizontal mini-cards which save space and also might stands out more together with other blue enemies. 2. You can flip it to the backside when exhausting it instead of turning it sideways, which cause it to become black and white with red frame, making it more obvious where you could move without taking AoO in all the mess. Text is tiny and are there just for quick reference, you can instead read them more easily on the real card."
 	},
 	{
-		"hash": "EOTEC-To the Forbidden Peaks-Level",
-		"description": "I'm not doubting your ability to count numbers, but with small table or odd orientation you might not be able to arrange a proper mountain like the guide says. Level markers allow you to clump up locations differently where they might lose a bit of sense of height. Slide the card under the location with bottom edge visible. Use the backside if you want the number to poke out of right edge of the card instead."
-	},
-	{
 		"hash": "EOTEP-Black Market",
 		"description": "You can place this card on the market pile to remind about returning cards on the next investigation phase. Sometimes the table even forgot that this pile is a market pile they can use freely, so a label like this sometimes help."
 	},
@@ -68,12 +76,32 @@
 		"description": "Show where your locus is. Can tuck under the location to save space."
 	},
 	{
-		"hash": "EOTEP-Replenish Two",
-		"description": "Resources-on-a-card for Lv. 3 triple classes Talent so it is not possible to spill these onto nearby things and easy to replenish. When boosting a test, you can place this card on the commit pile. (Use 2 resources side for +2 boost, use 1 resource side for +1 boost.) When representing 0 remaining resource, you can tuck this card under the Talent."
-	},
-	{
 		"hash": "EOTEP-The Red Clock",
 		"description": "The +3 boost for your next tests persists indefinitely even across rounds, if you are planning to not immediately using the boost this card might help seeing that state. The backside supports +4 on the Lv. 5 version. (It is also possible to stack the boost, which you could print 2 of this card but I think it is too unlikely.)"
+	},
+	{
+		"hash": "FHVP-Bide Your Time",
+		"description": "Remember to claim your 2 actions the next round. The backside has different wording, you could flip it when 'your next turn' finally comes."
+	},
+	{
+		"hash": "FHVP-Blackmail File",
+		"description": "This card adds temporary aloof to the pasted enemy."
+	},
+	{
+		"hash": "FHVP-Confound",
+		"description": "Long evade indicator. Remove from the enemy at the Upkeep when it is going to ready. The backside is generic and can be use with other long evade effect."
+	},
+	{
+		"hash": "FHVP-Eyes of Valusia",
+		"description": "Debuff indicator so other investigators that gangs up on it after you remember to account for it."
+	},
+	{
+		"hash": "FHVP-I'll Pay You Back!",
+		"description": "A legally binding debt document. Front side has a wording that make sense if you give the mini-card to someone you borrowed the resource from, so you give the workload of reminding you to pay back to that investigator. Back side works inversely by keeping it on you."
+	},
+	{
+		"hash": "FHVP-Ofuda",
+		"description": "Temporary keyword removal indicator. As a bonus it looks like the Ofuda is really on the enemy's forehead!"
 	},
 	{
 		"hash": "FHVP-Stall for Time",
@@ -116,12 +144,28 @@
 		"description": "Patrol in this scenario is cool but resolving it each Enemy Phase almost felt like it should have been a task for computer program. Make it more obvious which way they are going by sliding this card under the enemy. Enemies here walk in circle, and arrows surrounding this mini-card matches that. Depending on which part of the ring enemy is standing right now, you show a matching arrow on the mini-card. There should be only 1 arrow poking out from under the enemy card at all times. Recommended amount of 6 is still less than theoretical limit, but I think it is enough."
 	},
 	{
+		"hash": "TCUC-Abandoned Chapel",
+		"description": "Reminders to subtract skill values. Note that this effect could stack. (e.g. Mythos Phase gets you one, then start of Investigation Phase you somehow get it again, then you fail investigation and get it again, etc.) The backside has -2 for poor soul who got wombo combo-ed by the haunt. I recommends 2 copies so you could share the pain or add them up to make -3 or -4."
+	},
+	{
+		"hash": "TCUC-Brown Jenkin",
+		"description": "3 copies because this card is handy to place near/on the Creature enemy that someone is fighting to remind them this effect coming from somewhere else in the map. The back side is greyed out so you could flip it when you exhaust to remove the buff temporarily."
+	},
+	{
 		"hash": "TCUC-Diabolic Voices",
 		"description": "Keep track of Diabolic Voices in the discard pile by placing this card near it, so when you get the next one you don't have to sift through the discard pile and count them. You can print just 2, take the mini-cards away on 0 or 3 count."
 	},
 	{
 		"hash": "TCUC-Evil Past",
-		"description": "If a scenario uses City of Sins encounter set, place this card near the encounter deck as a reminder to scan the play field whenever the encounter deck became empty."
+		"description": "If a scenario uses City of Sins encounter set, place this card near the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. Note that in The Wages of Sin both decks could trigger the empty criteria, so place it near both discard piles."
+	},
+	{
+		"hash": "TCUC-Extradimensional Visions",
+		"description": "The treachery asks you to count the amount of treachery discard pile on Revelation, so the idea is maintaining stacks of 10/20 cards each time you reach that number along the way instead of counting from scratch every time. This mini-card's purpose is to mark a completed stack of size 10/20/30. (You can also make 2 stacks of 10 cards each since there are 2 copies.)"
+	},
+	{
+		"hash": "TCUC-Heretics' Graves",
+		"description": "This debuff effect lasts all the way to the end of your NEXT turn if you get it inside your turn. Therefore it has a backside without 'next' wording for you to flip to once you finally begin the turn that will get rid of the debuff."
 	},
 	{
 		"hash": "TCUC-Mysteries of the Lodge",
@@ -138,6 +182,14 @@
 	{
 		"hash": "TCUC-The Secret Name",
 		"description": "This text is printed on the Agenda card, but this scenario is so stamina draining that I ended up making mistakes towards the end of it. I'd rather have these enlarged text somewhere near the hoard of enemies I'm trying to kill to easier take them into my turn planning. Agenda card might also be hard to see for fighter players sitting further away, while you can always move this mini-card around."
+	},
+	{
+		"hash": "TCUC-The Spectral Watcher",
+		"description": "Show off your hardwork of defeating it by pasting this card on it. Take the card out instead of ready it."
+	},
+	{
+		"hash": "TDEP-Ethereal Form",
+		"description": "'You are ethereal' indicator."
 	},
 	{
 		"hash": "TFAC-A Tear in Time",
@@ -166,10 +218,6 @@
 	{
 		"hash": "TICP-Geas",
 		"description": "Show your chosen promise."
-	},
-	{
-		"hash": "TICP-Replenish Two",
-		"description": "Resources-on-a-card for Lv. 4 Talent so it is not possible to spill these onto nearby things and easy to replenish. When boosting a test, you can place this card on the commit pile. (Use 2 resources side for +2 boost, use 1 resource side for +1 boost.) When representing 0 remaining resource, you can tuck this card under the Talent."
 	},
 	{
 		"hash": "TSKC-Alien Frontier",
@@ -210,6 +258,10 @@
 	{
 		"hash": "TSKP-Disguise",
 		"description": "Long evade indicator. Remove from the enemy at the Upkeep when it is going to ready. The backside is generic and can be use with other long evade effect."
+	},
+	{
+		"hash": "TSKP-Embezzled Treasure",
+		"description": "Remembers extra resources that the player would get when you gathered up to play the next time. The cards should be thrown into that investigator's deck when you clean up the game. (e.g. If they would start the next scenario with +4 resources, then give them a 1 resource card and a 3 resource card.)"
 	},
 	{
 		"hash": "TSKP-Empirical Hypothesis",

@@ -27,7 +27,7 @@
 <ResourceItem
 	url="/tool/upgrade"
 	title="Upgrade Planner"
-	description="Visualize steps to progress your deck along the campaign and automatically calculates XP to get there. The importer makes your public arkhamdb.com deck cards all available for planning including the Side Deck. You can either view your finished plan by a sharing URL in this site, or export it to paste in Description section of your deck in arkhamdb.com. The exporter also supports a format optimized to view inside ArkhamCards app."
+	description="Visualize steps to progress your deck along the campaign and automatically calculates XP to get there. The importer makes your public arkhamdb.com deck cards all available for planning including the Side Deck. You can either view your finished plan by a sharing URL leading to this site, or export texts to paste in Description section of your deck in arkhamdb.com. The exporter also supports a format optimized to view inside ArkhamCards app."
 	image="upgrade.webp"
 />
 <ResourceItem

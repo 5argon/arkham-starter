@@ -36,8 +36,9 @@
 
 <p>
 	If you are a content creator, I'd be happy if you can make use of them to talk about these cards
-	in your social channel. They are WEBP with rounded transparent corners baked in, should work great
-	on blogs with dark background. Let's get hyped for the Campaign Expansion!
+	in your social channel. They are WEBP (extremely fast to load despite their resolution) with
+	rounded transparent corners baked in, should work great on blogs with dark background. Let's get
+	hyped for the Campaign Expansion!
 </p>
 
 <p>(Avoid hotlinking to these images as the URL will change when things finalizes.)</p>

@@ -8,6 +8,7 @@
 
 <p>
 	This site ultimately aims to get you <i>start</i> playing Arkham Horror: The Card Game with less friction.
+	That includes the performance of this site itself. It's designed to be very fast to load.
 </p>
 
 <p>
