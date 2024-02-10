@@ -3,6 +3,7 @@
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import ExploreLayout from '$lib/design/pages/explore/ExploreLayout.svelte'
 	import type { PageData } from './$types'
+	import links from '$lib/explore/external-links/ptc.json'
 	export let data: PageData
 </script>
 
@@ -18,5 +19,6 @@
 		groupings: [Grouping.Class],
 		sortings: [Sorting.Number],
 		packs: [CardPack.ThePathToCarcosa],
+		links: links,
 	}}
 />

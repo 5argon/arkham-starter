@@ -5,11 +5,13 @@
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
+	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import { packToFile } from '$lib/design/components/expansion/pack-to-file'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import type { ExploreInput } from '$lib/explore/explore-input'
+	import ExploreLinks from '$lib/explore/ExploreLinks.svelte'
 	import CardTableDoubleDisplay from './CardTableDoubleDisplay.svelte'
 	import ExploreMenu from './ExploreMenu.svelte'
 
@@ -29,6 +31,7 @@
 
 	let showList: boolean = true
 	let showScans: boolean = true
+	let showingLinks: boolean = false
 
 	function onGroupingsChanged(g: Grouping[]) {
 		groupings = g
@@ -105,103 +108,124 @@
 
 <h1><center>{iconToNameConversion(exploreInput.packs[0])}</center></h1>
 
-<ExploreMenu />
+{#if !showingLinks}
+	<ExploreMenu />
+{/if}
 
 <!-- <ListDivider label="External Links" /> -->
 
-<p>
-	<b>Tips : </b> If you are organizing your collection, the card is clickable as a checklist.
-</p>
-
-<div class="tab">
-	<LimitedTab
-		onChangeActive={(i) => {
-			switch (i) {
-				case 0: {
-					showList = true
-					showScans = true
-					break
-				}
-				case 1: {
-					showList = true
-					showScans = false
-					break
-				}
-				case 2: {
-					showList = false
-					showScans = true
-					break
-				}
-			}
+{#if exploreInput.links !== undefined}
+	<Button
+		label={showingLinks
+			? 'Back to Gallery'
+			: `Show ${exploreInput.links.length} External Content Links`}
+		center
+		big
+		onClick={() => {
+			showingLinks = !showingLinks
 		}}
-	>
-		<div slot="tab1">List and Scans</div>
-		<div slot="content1" />
-		<div slot="tab2">List Only</div>
-		<div slot="content2" />
-		<div slot="tab3">Scans Only</div>
-		<div slot="content3" />
-	</LimitedTab>
-</div>
-<ListDivider label="Investigators" />
-<CardTableDoubleDisplay
-	{toggleMap}
-	singleRight
-	entries={getByPackFromFullDatabaseInvestigator(fdb, packs)}
-	groupings={[]}
-	sortings={[Sorting.Number]}
-	taboo={true}
-	fullDatabase={fdb}
-	popupDatabase={pdb}
-	onClickToggle={(id, newToggles) => {
-		toggleMap[id] = newToggles
-		toggleMap = { ...toggleMap }
-	}}
-	{showList}
-	{showScans}
-/>
+	/>
+{/if}
 
-<ListDivider label="Basic Weakness" />
+{#if showingLinks && exploreInput.links !== undefined}
+	<ExploreLinks popupDatabase={pdb} fullDatabase={fdb} links={exploreInput.links} />
+{/if}
 
-<CardTableDoubleDisplay
-	{toggleMap}
-	singleRight
-	columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
-	entries={getByPackFromFullDatabaseWeakness(fdb, packs)}
-	groupings={[]}
-	sortings={[Sorting.Number]}
-	taboo={true}
-	fullDatabase={fdb}
-	popupDatabase={pdb}
-	onClickToggle={(id, newToggles) => {
-		toggleMap[id] = newToggles
-		toggleMap = { ...toggleMap }
-	}}
-	{showList}
-	{showScans}
-/>
+{#if !showingLinks}
+	<p>
+		<b>Tips : </b> If you are organizing your collection, the card is clickable as a checklist.
+	</p>
 
-<ListDivider label="The Rest of Player Cards" />
+	<div class="tab">
+		<LimitedTab
+			onChangeActive={(i) => {
+				switch (i) {
+					case 0: {
+						showList = true
+						showScans = true
+						break
+					}
+					case 1: {
+						showList = true
+						showScans = false
+						break
+					}
+					case 2: {
+						showList = false
+						showScans = true
+						break
+					}
+				}
+			}}
+		>
+			<div slot="tab1">List and Scans</div>
+			<div slot="content1" />
+			<div slot="tab2">List Only</div>
+			<div slot="content2" />
+			<div slot="tab3">Scans Only</div>
+			<div slot="content3" />
+		</LimitedTab>
+	</div>
+	<ListDivider label="Investigators" />
+	<CardTableDoubleDisplay
+		{toggleMap}
+		singleRight
+		entries={getByPackFromFullDatabaseInvestigator(fdb, packs)}
+		groupings={[]}
+		sortings={[Sorting.Number]}
+		taboo={true}
+		fullDatabase={fdb}
+		popupDatabase={pdb}
+		onClickToggle={(id, newToggles) => {
+			toggleMap[id] = newToggles
+			toggleMap = { ...toggleMap }
+		}}
+		{showList}
+		{showScans}
+	/>
 
-<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
+	<ListDivider label="Basic Weakness" />
 
-<CardTableDoubleDisplay
-	{toggleMap}
-	columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
-	singleRight
-	entries={getByPackFromFullDatabase(fdb, packs)}
-	{groupings}
-	{sortings}
-	taboo={true}
-	fullDatabase={fdb}
-	popupDatabase={pdb}
-	onClickToggle={(id, newToggles) => {
-		toggleMap[id] = newToggles
-		toggleMap = { ...toggleMap }
-	}}
-	{showList}
-	{showScans}
-/>
+	<CardTableDoubleDisplay
+		{toggleMap}
+		singleRight
+		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		entries={getByPackFromFullDatabaseWeakness(fdb, packs)}
+		groupings={[]}
+		sortings={[Sorting.Number]}
+		taboo={true}
+		fullDatabase={fdb}
+		popupDatabase={pdb}
+		onClickToggle={(id, newToggles) => {
+			toggleMap[id] = newToggles
+			toggleMap = { ...toggleMap }
+		}}
+		{showList}
+		{showScans}
+	/>
+
+	<ListDivider label="The Rest of Player Cards" />
+
+	<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
+
+	<CardTableDoubleDisplay
+		{toggleMap}
+		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		singleRight
+		entries={getByPackFromFullDatabase(fdb, packs)}
+		{groupings}
+		{sortings}
+		taboo={true}
+		fullDatabase={fdb}
+		popupDatabase={pdb}
+		onClickToggle={(id, newToggles) => {
+			toggleMap[id] = newToggles
+			toggleMap = { ...toggleMap }
+		}}
+		{showList}
+		{showScans}
+	/>
+{/if}
 
 <style>
 	.pack-banner {

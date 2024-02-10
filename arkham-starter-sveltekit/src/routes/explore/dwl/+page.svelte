@@ -2,6 +2,7 @@
 	import { CardPack } from '$lib/core/card-pack'
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import ExploreLayout from '$lib/design/pages/explore/ExploreLayout.svelte'
+	import links from '$lib/explore/external-links/dwl.json'
 	import type { PageData } from './$types'
 	export let data: PageData
 </script>
@@ -18,5 +19,6 @@
 		groupings: [Grouping.Class],
 		sortings: [Sorting.Number],
 		packs: [CardPack.TheDunwichLegacy],
+		links: links,
 	}}
 />

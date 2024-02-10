@@ -15,8 +15,8 @@
 </p>
 
 <p>
-	I also collect some links and articles inside each expansion to help you decide your purchase. If
-	you are a content creator and I'm missing your content, message me and I'll add it.
+	I also have collected some links and articles inside each expansion to help you decide your
+	purchase.
 </p>
 
 <ExploreMenu />

@@ -12,4 +12,6 @@ export interface ExploreLink {
 	site: string
 	name: string
 	url: string
+	date?: string
+	cards?: string[]
 }

@@ -157,7 +157,7 @@
 	},
 	{
 		"hash": "TCUC-Evil Past",
-		"description": "If a scenario uses City of Sins encounter set, place this card near the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. Note that in The Wages of Sin both decks could trigger the empty criteria, so place it near both discard piles."
+		"description": "If a scenario uses City of Sins encounter set, put this card on the bottom of the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. Note that in The Wages of Sin both decks could trigger the empty criteria."
 	},
 	{
 		"hash": "TCUC-Extradimensional Visions",
@@ -173,7 +173,7 @@
 	},
 	{
 		"hash": "TCUC-Priestess of the Coven",
-		"description": "If a scenario uses Anette's Coven encounter set, place this card near the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. The other 2 cards are for keeping track of the discarded Witch buff. The +3 card also has a greyed out backside to flip to when the encounter discard pile finally resets."
+		"description": "If a scenario uses Anette's Coven encounter set, put this card on the bottom of the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. The other 2 cards are for keeping track of the discarded Witch buff. The +3 card also has a greyed out backside to flip to when the encounter discard pile finally resets."
 	},
 	{
 		"hash": "TCUC-Reanimated Dead",
