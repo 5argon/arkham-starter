@@ -216,5 +216,24 @@
 			"10108",
 			"10123"
 		]
+	},
+	{
+		"site": "Rite of Seeking",
+		"url": "https://riteofseeking.com/2023/08/04/ffg-announces-new-expansion-with-more-cards-for-minh-thi-phan/",
+		"name": "FFG Announces New Expansion with More Cards for Minh Thi Phan",
+		"date": "2023-08-04"
+	},
+	{
+		"site": "Rite of Seeking",
+		"url": "https://riteofseeking.com/2023/08/06/is-that-a-clue-on-your-chemistry-set-or-are-you-just-happy-to-see-me/",
+		"name": "Is That A Clue On Your Chemistry Set Or Are You Just Happy To See Me?",
+		"date": "2023-08-06",
+		"cards": ["10004", "10044", "10005", "10006", "10007", "10008"]
+	},
+	{
+		"site": "Ancient Evils",
+		"url": "https://derbk.com/ancientevils/top-10-most-game-changing-cards-from-the-feast-of-hemlock-vale/",
+		"name": "Top 10: Most game-changing cards from The Feast of Hemlock Vale",
+		"date": "2024-02-05"
 	}
 ]
