@@ -105,5 +105,33 @@
 		"url": "https://derbk.com/ancientevils/hot-takes-the-investigators-of-the-scarlet-keys/",
 		"name": "Hot Takes: The Investigators of The Scarlet Keys",
 		"date": "2022-09-30"
+	},
+	{
+		"site": "Ancient Evils",
+		"url": "https://derbk.com/ancientevils/scarlet-keys-customizables-1/",
+		"name": "Scarlet Keys: Customizables #1",
+		"date": "2022-08-01",
+		"cards": ["09021", "09080", "09059", "09040"]
+	},
+	{
+		"site": "Ancient Evils",
+		"url": "https://derbk.com/ancientevils/scarlet-keys-customizables-2/",
+		"name": "Scarlet Keys: Customizables #2",
+		"date": "2022-08-02",
+		"cards": ["09099", "09022", "09081", "09042"]
+	},
+	{
+		"site": "Ancient Evils",
+		"url": "https://derbk.com/ancientevils/scarlet-keys-customizables-3/",
+		"name": "Scarlet Keys: Customizables #3",
+		"date": "2022-09-26",
+		"cards": ["09041", "09101", "09060", "09119"]
+	},
+	{
+		"site": "Ancient Evils",
+		"url": "https://derbk.com/ancientevils/scarlet-keys-customizables-4/",
+		"name": "Scarlet Keys: Customizables #4",
+		"date": "2022-09-30",
+		"cards": ["09079", "09100", "09061", "09023"]
 	}
 ]
