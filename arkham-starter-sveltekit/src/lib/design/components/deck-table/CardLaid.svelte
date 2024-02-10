@@ -9,10 +9,11 @@
 	export let entries: DecklistEntry[]
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
-	export let small: boolean
 	export let toggleMap: { [cardId: string]: boolean[] }
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
+	export let small: boolean = false
+	export let big: boolean = false
 	export let showLabel: boolean = false
 	export let showOwner: boolean = false
 	export let onClickToggle:
@@ -50,6 +51,7 @@
 		{#each Array(en.amount) as _, i}
 			<CardScan
 				{small}
+				{big}
 				cardId={en.cardId}
 				amount={1}
 				unlink={i !== en.amount - 1}

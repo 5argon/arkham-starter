@@ -17,10 +17,18 @@
 	image="campaign.webp"
 />
 <ResourceItem
-	url="/tool/query"
-	title="Query"
+	url="/card"
+	title="Player Card"
+	description="Search and take a look at the image of any player card. Multi Mode let you lay down multiple cards
+	side by side in any order, like on a physical table. This tool is fast and can handle fuzzy
+	search!"
+	image="card.webp"
+/>
+<ResourceItem
+	url="/tool/who"
+	title="Who Can Use"
 	description="Specify as many cards as you like that you want to play with in the same deck. It returns which investigators could use all of them."
-	image="query.webp"
+	image="who.webp"
 />
 
 <h2>Tools For arkhamdb.com</h2>

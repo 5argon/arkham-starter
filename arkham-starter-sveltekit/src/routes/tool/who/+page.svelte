@@ -7,6 +7,7 @@
 	import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn } from '$lib/deck-table/grouping'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+	import CardLaid from '$lib/design/components/deck-table/CardLaid.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 	import CardForm from '$lib/design/components/form/CardForm.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
@@ -16,6 +17,17 @@
 	let selected: string[] = []
 	let investigatorResult: DecklistEntry[] = []
 	let error: boolean
+	let showingEntries: DecklistEntry[] = []
+	$: {
+		showingEntries = selected.map((x) => {
+			return {
+				amount: 1,
+				cardId: x,
+				id: x,
+				labels: [],
+			}
+		})
+	}
 	function query(t: string[]) {
 		if (t.length === 0) {
 			investigatorResult = []
@@ -47,10 +59,10 @@
 </script>
 
 <svelte:head>
-	<title>arkham-starter.com | Tool | Query</title>
+	<title>arkham-starter.com | Tool | Who Can Use</title>
 </svelte:head>
 
-<PageTitle title="Query" />
+<PageTitle title="Who Can Use" />
 
 <p>
 	Query eligible investigators that could run combo cards you are interested in <b>together</b> in their
@@ -83,6 +95,15 @@
 			pdbi.original.wk !== true
 		)
 	}}
+/>
+
+<CardLaid
+	entries={showingEntries}
+	groupings={[]}
+	sortings={[]}
+	toggleMap={{}}
+	fullDatabase={data.fdb}
+	popupDatabase={data.pdb}
 />
 
 {#if investigatorResult.length > 0}

@@ -6,7 +6,6 @@
 	import CardSpan from '../card/CardSpan.svelte'
 	import ColumnLabel from './ColumnLabel.svelte'
 	export let cardId: string
-	export let small: boolean
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
 	export let toggled: boolean | boolean[]
@@ -17,7 +16,10 @@
 	export let linkedOnly: boolean = false
 	export let investigatorStrip: string | null = null
 	export let labels: string[] | null = null
-	const sizeMultiplier = small ? 0.5 : 1
+	export let small: boolean = false
+	export let big: boolean = false
+
+	$: sizeMultiplier = small ? 0.5 : big ? 1.5 : 1
 	const fixedWidth = 215
 	const fixedHeight = 300
 	$: card = fullDatabase.getCard(cardId)

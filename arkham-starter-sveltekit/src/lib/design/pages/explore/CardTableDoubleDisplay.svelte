@@ -30,6 +30,7 @@
 	export let showList: boolean
 	export let showScans: boolean
 	export let small: boolean = false
+	export let big: boolean = false
 	export let customizableMetas: CustomizableMeta[] = []
 </script>
 
