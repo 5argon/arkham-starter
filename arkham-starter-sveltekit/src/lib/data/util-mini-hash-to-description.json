@@ -41,7 +41,7 @@
 	},
 	{
 		"hash": "EOTEC-Rise of the Elder Things",
-		"description": "The effect temporarily buffs the enemy engaging without at the moment you draw the treachery. Paste this to those enemies. Note that the effect persists until the end of round even if you then disengages from them."
+		"description": "The effect temporarily buffs the enemy engaging with you at the moment you draw the treachery. Paste this to all those enemies. Note that the effect persists until the end of round even if you then disengages from them."
 	},
 	{
 		"hash": "EOTEC-Roald Ellsworth",
@@ -153,7 +153,7 @@
 	},
 	{
 		"hash": "TCUC-Diabolic Voices",
-		"description": "Keep track of Diabolic Voices in the discard pile by placing this card near it, so when you get the next one you don't have to sift through the discard pile and count them. You can print just 2, take the mini-cards away on 0 or 3 count."
+		"description": "Keep track of Diabolic Voices in the discard pile by placing this card near it, so when you get the next one you don't have to sift through the discard pile and count them. Only one mini-card is required, just hide it away on 0 or 3 count."
 	},
 	{
 		"hash": "TCUC-Evil Past",

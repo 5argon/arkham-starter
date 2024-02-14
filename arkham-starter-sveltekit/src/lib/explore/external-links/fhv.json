@@ -38,6 +38,12 @@
 	},
 	{
 		"site": "PlayingBoardGames",
+		"url": "https://www.youtube.com/watch?v=LKHITvZUGcc",
+		"name": "I check out ALL the ROGUE Player Cards from THE FEAST OF HEMLOCK VALE | Arkham Horror",
+		"date": "2024-02-11"
+	},
+	{
+		"site": "PlayingBoardGames",
 		"url": "https://www.youtube.com/watch?v=Co7Y-FgyZvI",
 		"name": "We have some The Feast of Hemlock Vale spoilers for all of you! (ARKHAM HORROR: THE CARD GAME)",
 		"date": "2023-12-12",
@@ -75,7 +81,7 @@
 		"cards": ["10117", "10126"]
 	},
 	{
-		"site": "Quick Lerner",
+		"site": "Quick Learner",
 		"url": "https://www.youtube.com/watch?v=kZVYzHHK6p0",
 		"name": "A Preview of A Card From Hemlock Vale! (Arkham Horror Card Preview)",
 		"cards": ["10023", "10049"]

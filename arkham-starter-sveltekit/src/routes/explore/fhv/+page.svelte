@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { iconToNameConversion } from '$lib/ahdb/conversion'
 	import { CardClass } from '$lib/core/card-class'
+	import { CardPack } from '$lib/core/card-pack'
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+	import { packToFile } from '$lib/design/components/expansion/pack-to-file'
 	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import ExploreMenu from '$lib/design/pages/explore/ExploreMenu.svelte'
@@ -24,7 +27,13 @@
 	<title>arkham-starter.com | Explore</title>
 </svelte:head>
 
-<PageTitle title={'Explore: The Feast of Hemlock Vale Investigator Expansion'} />
+<img
+	class="pack-banner"
+	src={'/image/expansion/investigator/' + packToFile(CardPack.TheFeastOfHemlockVale) + '.webp'}
+	alt="pack banner"
+/>
+
+<h1><center>{iconToNameConversion(CardPack.TheFeastOfHemlockVale)}</center></h1>
 
 {#if !showingLinks}
 	<ExploreMenu />
@@ -381,5 +390,10 @@
 
 	.spacing {
 		margin-top: 30px;
+	}
+
+	.pack-banner {
+		max-width: 400px;
+		margin: 0 auto;
 	}
 </style>

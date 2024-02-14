@@ -34,7 +34,7 @@
 <PageTitle title="Player Card" />
 
 <p>
-	Search and take a look at the image of any player card. Multi Mode let you lay down multiple cards
+	Search and take a look at the image of any player card as long as you know the name. Multi Mode let you lay down multiple cards
 	side by side in any order, like on a physical table. This tool is fast and can handle fuzzy
 	search!
 </p>
