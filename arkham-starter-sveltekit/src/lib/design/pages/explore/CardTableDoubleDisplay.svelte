@@ -63,6 +63,7 @@
 				{groupings}
 				{sortings}
 				{popupDatabase}
+				{big}
 				entries={singleRight ? singleEntries : entries}
 				showLabel={showLabelOnScans}
 				{fullDatabase}

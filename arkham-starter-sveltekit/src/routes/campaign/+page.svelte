@@ -36,7 +36,7 @@
 	/>
 	<ExpansionDisplay
 		set={CardPackIcon.TheCircleUndone}
-		text="The Circle Undone*"
+		text="The Circle Undone"
 		subText={campaignExpansion}
 		link="/campaign/tcu"
 		campaign

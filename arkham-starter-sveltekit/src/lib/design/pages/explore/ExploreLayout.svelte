@@ -146,13 +146,13 @@
 						break
 					}
 					case 1: {
-						showList = true
-						showScans = false
+						showList = false
+						showScans = true
 						break
 					}
 					case 2: {
-						showList = false
-						showScans = true
+						showList = true
+						showScans = false
 						break
 					}
 				}
@@ -160,9 +160,9 @@
 		>
 			<div slot="tab1">List and Scans</div>
 			<div slot="content1" />
-			<div slot="tab2">List Only</div>
+			<div slot="tab2">Scans Only</div>
 			<div slot="content2" />
-			<div slot="tab3">Scans Only</div>
+			<div slot="tab3">List Only</div>
 			<div slot="content3" />
 		</LimitedTab>
 	</div>
@@ -170,6 +170,7 @@
 	<CardTableDoubleDisplay
 		{toggleMap}
 		singleRight
+		big={!showList && showScans}
 		entries={getByPackFromFullDatabaseInvestigator(fdb, packs)}
 		groupings={[]}
 		sortings={[Sorting.Number]}
@@ -188,6 +189,7 @@
 
 	<CardTableDoubleDisplay
 		{toggleMap}
+		big={!showList && showScans}
 		singleRight
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 		entries={getByPackFromFullDatabaseWeakness(fdb, packs)}
@@ -210,6 +212,7 @@
 
 	<CardTableDoubleDisplay
 		{toggleMap}
+		big={!showList && showScans}
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 		singleRight
 		entries={getByPackFromFullDatabase(fdb, packs)}

@@ -19,7 +19,7 @@
 	export let small: boolean = false
 	export let big: boolean = false
 
-	$: sizeMultiplier = small ? 0.5 : big ? 1.5 : 1
+	$: sizeMultiplier = small ? 0.5 : big ? 1.22 : 1
 	const fixedWidth = 215
 	const fixedHeight = 300
 	$: card = fullDatabase.getCard(cardId)

@@ -54,6 +54,7 @@ import {
 export const disappearanceAtTheTwilightEstateScenario: Scenario = {
 	index: 1,
 	name: 'Disappearance at the Twilight Estate',
+	diagram:'TCU_1',
 	shortName: 'P',
 	setups: [
 		{
@@ -89,6 +90,7 @@ export const disappearanceAtTheTwilightEstateScenario: Scenario = {
 export const theWitchingHourScenario: Scenario = {
 	index: 2,
 	name: 'The Witching Hour',
+	diagram:'TCU_2',
 	shortName: 'I',
 	setups: [
 		{
@@ -117,6 +119,7 @@ export const theWitchingHourScenario: Scenario = {
 export const atDeathsDoorstepScenario: Scenario = {
 	index: 3,
 	name: "At Death's Doorstep",
+	diagram:'TCU_3',
 	shortName: 'II',
 	setups: [
 		{
@@ -148,6 +151,7 @@ export const atDeathsDoorstepScenario: Scenario = {
 export const theSecretNameScenario: Scenario = {
 	index: 4,
 	name: 'The Secret Name',
+	diagram:'TCU_4',
 	shortName: 'III',
 	setups: [
 		{
@@ -165,7 +169,7 @@ export const theSecretNameScenario: Scenario = {
 		notes: [
 			{
 				encounterSet: theSecretName,
-				what: '10 cards from this set in the starting encounter deck are : Meddlesome Familiar (3x), Extradimensional Visions (2x), Pulled by the Stars (2x), Disquieting Dreams (2x), Brown Jenkin.',
+				what: 'In the starting encounter deck : Meddlesome Familiar (3x), Extradimensional Visions (2x), Pulled by the Stars (2x), Disquieting Dreams (2x), Brown Jenkin. (10 cards)',
 			},
 		],
 	},
@@ -174,6 +178,7 @@ export const theSecretNameScenario: Scenario = {
 export const theWagesOfSinScenario: Scenario = {
 	index: 5,
 	name: 'The Wages of Sin',
+	diagram:'TCU_5',
 	shortName: 'IV',
 	setups: [
 		{
@@ -194,19 +199,19 @@ export const theWagesOfSinScenario: Scenario = {
 			},
 			{
 				encounterSet: theWagesOfSin,
-				what: '6 cards (Malevolent Spirit x2, Burdens of the Past x2, and Bane of the Living x2) in the spectral encounter deck.',
+				what: 'In the spectral encounter deck : Malevolent Spirit x2, Burdens of the Past x2, and Bane of the Living x2. (6 cards)',
 			},
 			{
 				encounterSet: inexorableFate,
-				what: 'The entire Inexorable Fate set (6 cards) in the spectral encounter deck.',
+				what: 'The entire Inexorable Fate set in the spectral encounter deck. (6 cards)',
 			},
 			{
 				encounterSet: realmOfDeath,
-				what: 'The entire Realm of Death set (4 cards) in the spectral encounter deck.',
+				what: 'The entire Realm of Death set in the spectral encounter deck. (4 cards)',
 			},
 			{
 				encounterSet: trappedSpirits,
-				what: 'The entire Trapped Spirits set (4 cards) in the spectral encounter deck.',
+				what: 'The entire Trapped Spirits set in the spectral encounter deck. (4 cards)',
 			},
 			{
 				encounterSet: theWatcher,
@@ -219,16 +224,45 @@ export const theWagesOfSinScenario: Scenario = {
 export const forTheGreaterGoodScenario: Scenario = {
 	index: 6,
 	name: 'For the Greater Good',
+	diagram:'TCU_6',
 	shortName: 'V',
 	setups: [
 		{
+			name: '"The investigators are members of the Lodge"',
 			shuffles: [
-				{ encounterSet: forTheGreaterGood, overwriteCount: 0 },
+				{ encounterSet: forTheGreaterGood, overwriteCount: 11 },
+				ancientEvils,
+				{ encounterSet: darkCult, overwriteCount: 2 },
+				lockedDoors,
+				cityOfSins,
+				silverTwilightLodge,
+			],
+			notes: [
+				{
+					encounterSet: forTheGreaterGood,
+					what: 'Remove 3 cards from the game : Knight of the Inner Circle (2x), Cell Keeper (1x).',
+				},
+				{
+					encounterSet: darkCult,
+					what: 'Remove 4 cards from the game : Acolyte (3x), Wizard of the Order (1x).',
+				},
+			],
+		},
+		{
+			name: 'Other',
+			shuffles: [
+				{ encounterSet: forTheGreaterGood, overwriteCount: 7 },
 				ancientEvils,
 				darkCult,
 				lockedDoors,
 				cityOfSins,
 				silverTwilightLodge,
+			],
+			notes: [
+				{
+					encounterSet: forTheGreaterGood,
+					what: 'Remove 7 cards from the game : Lodge Neophyte (3x), Keeper of Secrets (1x), Knight of the Outer Void (2x), Lodge Jailor (1x).',
+				},
 			],
 		},
 	],
@@ -237,11 +271,12 @@ export const forTheGreaterGoodScenario: Scenario = {
 export const unionAndDisillusionScenario: Scenario = {
 	index: 7,
 	name: 'Union and Disillusion',
+	diagram:'TCU_7',
 	shortName: 'VI',
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: unionAndDisillusion, overwriteCount: 0 },
+				{ encounterSet: unionAndDisillusion, overwriteCount: 14 },
 				ancientEvils,
 				chillingCold,
 				inexorableFate,
@@ -251,61 +286,114 @@ export const unionAndDisillusionScenario: Scenario = {
 			remaining: [anettesCoven, silverTwilightLodge, theWatcher],
 		},
 	],
+	commonSetup: {
+		specialGather: [
+			{
+				encounterSet: theWitchingHour,
+				what: ['Anette Mason'],
+			},
+			{
+				encounterSet: atDeathsDoorstep,
+				what: ['Josef Meiger'],
+			},
+		],
+		notes: [
+			{
+				encounterSet: anettesCoven,
+				what: 'Set the Anette’s Coven encounter set aside, out of play.',
+			},
+			{
+				encounterSet: silverTwilightLodge,
+				what: 'Set the Silver Twilight Lodge encounter set aside, out of play.',
+			},
+			{
+				encounterSet: theWatcher,
+				what: 'Set The Watcher encounter set aside, out of play.',
+			},
+			{
+				what: 'For each heretic that was unleashed unto Arkham, place 1 doom on agenda 1a.',
+			},
+		],
+	},
 }
 
-export const inTheClutchesOfChaos1Scenario: Scenario = {
+export const inTheClutchesOfChaosScenario: Scenario = {
 	index: 8,
-	name: 'In the Clutches of Chaos (v.I)',
-	shortName: 'VII (v.I)',
+	name: 'In the Clutches of Chaos',
+	diagram:'TCU_8',
+	shortName: 'VII',
 	setups: [
 		{
+			name: '"Anette Mason is possessed by evil"',
 			shuffles: [
-				{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
-				{ encounterSet: musicOfTheDamned, overwriteCount: 0 },
+				{ encounterSet: inTheClutchesOfChaos, overwriteCount: 8 },
+				{ encounterSet: musicOfTheDamned, overwriteCount: 4 },
 				nightgaunts,
-				agentsOfAzathoth,
+				{ encounterSet: agentsOfAzathoth, overwriteCount: 3 },
 				anettesCoven,
 				cityOfSins,
 				witchcraft,
 			],
 		},
-	],
-}
-
-export const inTheClutchesOfChaos2Scenario: Scenario = {
-	index: 9,
-	name: 'In the Clutches of Chaos (v.II)',
-	shortName: 'VII (v.II)',
-	setups: [
 		{
+			name: '"Carl Sanford possesses the secrets of the universe"',
 			shuffles: [
-				{ encounterSet: inTheClutchesOfChaos, overwriteCount: 0 },
-				{ encounterSet: secretsOfTheUniverse, overwriteCount: 0 },
+				{ encounterSet: inTheClutchesOfChaos, overwriteCount: 8 },
+				{ encounterSet: secretsOfTheUniverse, overwriteCount: 4 },
 				nightgaunts,
-				agentsOfAzathoth,
+				{ encounterSet: agentsOfAzathoth, overwriteCount: 3 },
+				silverTwilightLodge,
 				strikingFear,
 				{ encounterSet: theMidnightMasks, overwriteCount: 5 },
-				silverTwilightLodge,
+			],
+			notes: [
+				{
+					encounterSet: theMidnightMasks,
+					what: 'Only gather the 5 treachery cards (2x False Lead and 3x Hunting Shadow).',
+				},
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: agentsOfAzathoth,
+				what: 'Set the Piper of Azathoth enemy aside, out of play.',
+			},
+			{
+				what: 'Gather Silver Twilight Lodge and Hangman’s Hill from the other variant for breach randomization.',
+			},
+		],
+	},
 }
 
 export const beforeTheBlackThroneScenario: Scenario = {
 	index: 10,
 	name: 'Before the Black Throne',
+	diagram:'TCU_9',
 	shortName: 'VIII',
 	setups: [
 		{
 			shuffles: [
-				{ encounterSet: beforeTheBlackThrone, overwriteCount: 0 },
+				{ encounterSet: beforeTheBlackThrone, overwriteCount: 12 },
 				ancientEvils,
 				darkCult,
-				agentsOfAzathoth,
+				{ encounterSet: agentsOfAzathoth, overwriteCount: 3 },
 				inexorableFate,
 			],
 		},
 	],
+	commonSetup: {
+		notes: [
+			{
+				encounterSet: agentsOfAzathoth,
+				what: 'Set the Piper of Azathoth enemy aside, out of play.',
+			},
+			{
+				what: "Don't forget potential chaos bag changes in the prior Interlude IV.",
+			},
+		],
+	},
 }
 
 export const returnToDisappearanceAtTheTwilightEstateScenario: Scenario = {

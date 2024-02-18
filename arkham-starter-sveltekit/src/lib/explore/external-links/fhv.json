@@ -44,6 +44,18 @@
 	},
 	{
 		"site": "PlayingBoardGames",
+		"url": "https://www.youtube.com/watch?v=NY8pBtMBvd8",
+		"name": "I check out ALL the MYSTIC Player Cards from THE FEAST OF HEMLOCK VALE | Arkham Horror",
+		"date": "2024-02-17"
+	},
+	{
+		"site": "PlayingBoardGames",
+		"url": "https://www.youtube.com/watch?v=59tbz4uupHY",
+		"name": "I check out ALL the SURVIVOR & NEUTRAL Player Cards from THE FEAST OF HEMLOCK VALE | Arkham Horror",
+		"date": "2024-02-18"
+	},
+	{
+		"site": "PlayingBoardGames",
 		"url": "https://www.youtube.com/watch?v=Co7Y-FgyZvI",
 		"name": "We have some The Feast of Hemlock Vale spoilers for all of you! (ARKHAM HORROR: THE CARD GAME)",
 		"date": "2023-12-12",
@@ -241,5 +253,30 @@
 		"url": "https://derbk.com/ancientevils/top-10-most-game-changing-cards-from-the-feast-of-hemlock-vale/",
 		"name": "Top 10: Most game-changing cards from The Feast of Hemlock Vale",
 		"date": "2024-02-05"
+	},
+	{
+		"site": "Quick Learner",
+		"url": "https://www.youtube.com/watch?v=UOQ5LQ1ajIo",
+		"name": "UNBOXING The Feast of Hemlock Vale Investigator Cards!",
+		"date": "2024-02-17"
+	},
+	{
+		"site": "Quick Learner",
+		"url": "https://www.youtube.com/watch?v=N11P0-9ayRY",
+		"name": "Quick Thoughts about ALL of the Hemlock Vale Cards!",
+		"date": "2024-02-12"
+	},
+	{
+		"site": "Quick Learner",
+		"url": "https://www.youtube.com/watch?v=ZjUwCp9ioBQ",
+		"name": "Five Hemlock Vale Cards I'm Excited About! (Arkham Horror Discussion)",
+		"date": "2024-01-29",
+		"cards": ["10019", "10050", "10078", "10097", "10123"]
+	},
+	{
+		"site": "Arkham Chronicle",
+		"url": "https://www.youtube.com/watch?v=xeMQ8If_6d0",
+		"name": "The Feast of Hemlock Vale NEW Investigators Preview - Arkham Horror The Card Game",
+		"date": "2024-02-16"
 	}
 ]

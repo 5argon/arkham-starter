@@ -1,17 +1,10 @@
 import type { ScenarioTransition } from '$lib/core/campaign'
 import {
-	disappearanceAtTheTwilightEstate,
-	forTheGreaterGood,
-	theSecretName,
-	theWagesOfSin,
-} from './encounter'
-import {
 	atDeathsDoorstepScenario,
 	beforeTheBlackThroneScenario,
 	disappearanceAtTheTwilightEstateScenario,
 	forTheGreaterGoodScenario,
-	inTheClutchesOfChaos1Scenario,
-	inTheClutchesOfChaos2Scenario,
+	inTheClutchesOfChaosScenario,
 	returnToAtDeathsDoorstepScenario,
 	returnToBeforeTheBlackThroneScenario,
 	returnToDisappearanceAtTheTwilightEstateScenario,
@@ -37,11 +30,8 @@ export const transitions: ScenarioTransition[] = [
 	{ from: theWagesOfSinScenario, to: forTheGreaterGoodScenario },
 	{ from: forTheGreaterGoodScenario, to: unionAndDisillusionScenario },
 
-	{ from: unionAndDisillusionScenario, to: inTheClutchesOfChaos1Scenario },
-	{ from: unionAndDisillusionScenario, to: inTheClutchesOfChaos2Scenario },
-
-	{ from: inTheClutchesOfChaos1Scenario, to: beforeTheBlackThroneScenario },
-	{ from: inTheClutchesOfChaos2Scenario, to: beforeTheBlackThroneScenario },
+	{ from: unionAndDisillusionScenario, to: inTheClutchesOfChaosScenario },
+	{ from: inTheClutchesOfChaosScenario, to: beforeTheBlackThroneScenario },
 ]
 
 export const transitionsReturnTo: ScenarioTransition[] = [
