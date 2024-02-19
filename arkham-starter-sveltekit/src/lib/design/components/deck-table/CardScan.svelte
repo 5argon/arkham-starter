@@ -222,6 +222,7 @@
 
 	.label-outer {
 		display: flex;
+		align-items: center;
 		position: absolute;
 		margin-bottom: 8px;
 		padding: 1px 4px;

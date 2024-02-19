@@ -31,6 +31,7 @@
 		fw: boolean,
 		showMain: boolean,
 		showSide: boolean,
+		pdb: PopupDatabase,
 	) {
 		let colorHex: string
 		if (fixedColor) {
@@ -63,6 +64,29 @@
 		} else {
 			colorHex = cardClassToBackgroundClass(faction)
 		}
+
+		function makeBondedEntries(caa: CardAndAmount[]): DecklistEntry[] {
+			const de: DecklistEntry[] = []
+			caa.forEach((x) => {
+				const card = pdb.getByIdThrowNull(x.cardId)
+				if (card.original.bdt !== undefined) {
+					card.original.bdt.forEach((y) => {
+						const bdtCard = pdb.getByIdThrowNull(y.c)
+						de.push({
+							amount: y.q ?? 1, // ?? 1 fixes null count mistakes from DB.
+							cardId: y.c,
+							id: 'Bonded' + y.c,
+							labels: [
+								{ color: colorHex, cardId: g.investigatorCode },
+								{ color: colorHex, text: 'Bonded' },
+							],
+						})
+					})
+				}
+			})
+			return de
+		}
+
 		if (showMain) {
 			for (let i = 0; i < g.cards1.length; i++) {
 				const c1 = fw ? coreToRcore(g.cards1[i].cardId) : g.cards1[i].cardId
@@ -74,6 +98,7 @@
 					labels: [{ color: colorHex, cardId: g.investigatorCode }],
 				})
 			}
+			ents.push(...makeBondedEntries(g.cards1))
 		}
 		if (showSide) {
 			for (let i = 0; i < g.cards2.length; i++) {
@@ -89,6 +114,7 @@
 					],
 				})
 			}
+			ents.push(...makeBondedEntries(g.cards2))
 		}
 	}
 </script>
@@ -338,6 +364,7 @@
 				forwardRcore,
 				showMainDeck,
 				showSideDeck,
+				pdb,
 			)
 		}
 		if (p2rr) {
@@ -350,6 +377,7 @@
 				forwardRcore,
 				showMainDeck,
 				showSideDeck,
+				pdb,
 			)
 		}
 		if (p3rr) {
@@ -362,6 +390,7 @@
 				forwardRcore,
 				showMainDeck,
 				showSideDeck,
+				pdb,
 			)
 		}
 		if (p4rr) {
@@ -374,6 +403,7 @@
 				forwardRcore,
 				showMainDeck,
 				showSideDeck,
+				pdb,
 			)
 		}
 		if (p5rr) {
@@ -386,6 +416,7 @@
 				forwardRcore,
 				showMainDeck,
 				showSideDeck,
+				pdb,
 			)
 		}
 		if (p6rr) {
@@ -398,6 +429,7 @@
 				forwardRcore,
 				showMainDeck,
 				showSideDeck,
+				pdb,
 			)
 		}
 		if (p7rr) {
@@ -410,6 +442,7 @@
 				forwardRcore,
 				showMainDeck,
 				showSideDeck,
+				pdb,
 			)
 		}
 		if (p8rr) {
@@ -422,6 +455,7 @@
 				forwardRcore,
 				showMainDeck,
 				showSideDeck,
+				pdb,
 			)
 		}
 		const checkResult = checkOverlaps(entries, (c) => fdb.getCard(c).original.quantity)

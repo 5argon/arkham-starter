@@ -32,20 +32,18 @@
 		<CardSpan cardId={label.cardId} showImageStrip class1={cardClass} />
 	{/if}
 	{#if label.text !== undefined}
-		<span class={'label' + labelColorClass} style={labelStyle}>{label.text}</span>
+		<span class={'labelz' + labelColorClass} style={labelStyle}>{label.text}</span>
 	{/if}
 </div>
 
 <style>
-	.outer-div {
-	}
-
-	.label {
+	.labelz {
 		font-size: x-small;
 		padding: 1px 4px;
 		border-radius: 2px;
 		white-space: nowrap;
-		margin: 0px 2px;
+		margin: 1px 4px;
+		display: flex;
 	}
 
 	.skill-flex {

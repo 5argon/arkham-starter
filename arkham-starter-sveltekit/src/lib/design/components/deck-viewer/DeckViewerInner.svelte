@@ -4,6 +4,7 @@
 		forwardDeckToRcore,
 		type CustomizableMeta,
 		type ArkhamStarterDeckData,
+		type CardAndAmount,
 	} from '$lib/ahdb/public-api/high-level'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
@@ -25,10 +26,18 @@
 	let entries: DecklistEntry[] = []
 	let sideEntries: DecklistEntry[] = []
 	let extraEntries: DecklistEntry[] = []
+	let bondedEntries: DecklistEntry[] = []
+	let sideBondedEntries: DecklistEntry[] = []
 
 	let allEntries: DecklistEntry[] = []
 	$: {
-		allEntries = [...entries, ...sideEntries, ...extraEntries]
+		allEntries = [
+			...entries,
+			...sideEntries,
+			...extraEntries,
+			...bondedEntries,
+			...sideBondedEntries,
+		]
 	}
 
 	let groupings: Grouping[] = [Grouping.Type]
@@ -36,6 +45,8 @@
 	let toggleMap: { [cardId: string]: boolean[] } = {}
 	let sideToggleMap: { [cardId: string]: boolean[] } = {}
 	let extraToggleMap: { [cardId: string]: boolean[] } = {}
+	let bondedToggleMap: { [cardId: string]: boolean[] } = {}
+	let sideBondedToggleMap: { [cardId: string]: boolean[] } = {}
 	let allToggleMap: { [cardId: string]: boolean[] } = {}
 	let coalesce: boolean = false
 
@@ -58,6 +69,26 @@
 			}
 		})
 
+		function makeBondedEntries(caa: CardAndAmount[]): DecklistEntry[] {
+			const de: DecklistEntry[] = []
+			caa.forEach((x) => {
+				const card = popupDatabase.getByIdThrowNull(x.cardId)
+				if (card.original.bdt !== undefined) {
+					card.original.bdt.forEach((y) => {
+						const bdtCard = popupDatabase.getByIdThrowNull(y.c)
+						de.push({
+							amount: y.q ?? 1, // ?? 1 fixes null count mistakes from DB.
+							cardId: y.c,
+							id: 'Bonded' + y.c,
+							labels: [{ color: '#EEEEEE', text: 'Bonded' }],
+						})
+					})
+				}
+			})
+			return de
+		}
+		bondedEntries = makeBondedEntries(rcoreDeck.cards1)
+
 		const side = rcoreDeck.cards2.map<DecklistEntry>((x) => {
 			return {
 				amount: x.amount,
@@ -68,6 +99,7 @@
 				],
 			}
 		})
+		sideBondedEntries = makeBondedEntries(rcoreDeck.cards2)
 
 		sideEntries = side.filter((x) => {
 			return !ahst?.extraCards.includes(x.cardId) ?? true
@@ -133,6 +165,29 @@
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 	/>
 
+	{#if bondedEntries.length > 0}
+		<ListDivider
+			label={'Bonded ( ' + bondedEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
+		/>
+		<CardTableDoubleDisplay
+			toggleMap={bondedToggleMap}
+			entries={bondedEntries}
+			{groupings}
+			{sortings}
+			onClickToggle={(id, newToggles) => {
+				bondedToggleMap[id] = newToggles
+				bondedToggleMap = { ...bondedToggleMap }
+			}}
+			taboo={true}
+			{fullDatabase}
+			{popupDatabase}
+			showList
+			showScans
+			small
+			columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		/>
+	{/if}
+
 	{#if sideEntries.length > 0}
 		<ListDivider
 			label={'Side Deck ( ' + sideEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
@@ -145,6 +200,31 @@
 			onClickToggle={(id, newToggles) => {
 				sideToggleMap[id] = newToggles
 				sideToggleMap = { ...sideToggleMap }
+			}}
+			taboo={true}
+			{fullDatabase}
+			{popupDatabase}
+			showList
+			showScans
+			small
+			columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		/>
+	{/if}
+
+	{#if sideBondedEntries.length > 0}
+		<ListDivider
+			label={'Side Deck : Bonded ( ' +
+				sideBondedEntries.reduce((a, b) => a + b.amount, 0) +
+				' Cards )'}
+		/>
+		<CardTableDoubleDisplay
+			toggleMap={sideBondedToggleMap}
+			entries={sideBondedEntries}
+			{groupings}
+			{sortings}
+			onClickToggle={(id, newToggles) => {
+				sideBondedToggleMap[id] = newToggles
+				sideBondedToggleMap = { ...sideBondedToggleMap }
 			}}
 			taboo={true}
 			{fullDatabase}
@@ -181,11 +261,7 @@
 {/if}
 
 {#if coalesce}
-	<ListDivider
-		label={'Deck, Side Deck, Optional ( ' +
-			allEntries.reduce((a, b) => a + b.amount, 0) +
-			' Cards )'}
-	/>
+	<ListDivider label={'Combined ( ' + allEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'} />
 	<CardTableDoubleDisplay
 		toggleMap={allToggleMap}
 		entries={allEntries}

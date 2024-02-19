@@ -32,7 +32,7 @@
 	}
 </script>
 
-<span class="skill-flex">
+<span class="col-cell-flex">
 	{#if column === ExtraColumn.Label && labels !== undefined}
 		{#each labels as label}
 			<ColumnLabel {popupDatabase} {label} />
@@ -63,7 +63,8 @@
 </span>
 
 <style>
-	.skill-flex {
+	.col-cell-flex {
 		display: flex;
+		align-items: center;
 	}
 </style>
