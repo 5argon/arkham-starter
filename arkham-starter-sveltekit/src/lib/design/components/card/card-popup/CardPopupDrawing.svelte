@@ -57,7 +57,10 @@
 									exceptional={c.original.ex}
 									restriction={c.original.ir}
 									investigator={c.original.inv}
-									color
+									color={true}
+									permanent={c.original.pe}
+									bonded={c.original.bd}
+									myraid={c.original.myr}
 								/>
 							</div>
 						</div>

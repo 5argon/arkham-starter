@@ -78,6 +78,7 @@ export interface AhdbCard {
 	spoiler?: number
 	deck_options?: AhdbDeckOption[]
 	tags?: string
+	bonded_to?: null | string
 	bonded_cards?: { count: number; code: string }[]
 }
 

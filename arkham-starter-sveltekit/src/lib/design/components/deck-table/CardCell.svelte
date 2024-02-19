@@ -62,6 +62,7 @@
 		customizable={card.original.cus !== undefined}
 		permanent={card.original.pe ?? false}
 		bonded={card.original.bd ?? false}
+		myraid={card.original.myr ?? false}
 	/>
 	{#if card.original.cus !== undefined}
 		{#each processedCust.options as rc}

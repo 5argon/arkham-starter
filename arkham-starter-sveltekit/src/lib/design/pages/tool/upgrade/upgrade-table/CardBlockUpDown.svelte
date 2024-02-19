@@ -31,6 +31,7 @@
 	export let customizable: boolean = false
 	export let permanent: boolean = false
 	export let bonded: boolean = false
+	export let myraid: boolean = false
 	export let checkedBoxes: number = 0
 	export let index: number
 	export let right: boolean
@@ -84,6 +85,7 @@
 		customizable={checkedBoxes > 0 ? false : customizable}
 		{permanent}
 		{bonded}
+		{myraid}
 		{checkedBoxes}
 		dragDataPrefix={index + ',' + (right ? 'right' : 'left') + ','}
 		leftButtons={[]}

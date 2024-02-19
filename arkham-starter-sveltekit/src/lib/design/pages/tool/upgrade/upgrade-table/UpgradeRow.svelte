@@ -147,6 +147,9 @@ nested inside this div. -->
 						exceptional={useTaboo ? leftCard.original.ext : leftCard.original.ex}
 						restriction={leftCard.original.ir}
 						weakness={leftCard.original.wk}
+						permanent={leftCard.original.pe}
+						bonded={leftCard.original.bd}
+						myraid={leftCard.original.myr}
 						customizable={leftCard.original.cus !== undefined}
 						xp={leftCard.original.xp}
 						xpTaboo={useTaboo ? leftCard.original.xpat : null}
@@ -168,8 +171,8 @@ nested inside this div. -->
 						restriction={leftCard.original.ir}
 						weakness={leftCard.original.wk}
 						customizable={leftCard.original.cus !== undefined}
-						permanent={leftCard.original.pe ?? false}
 						bonded={leftCard.original.bd ?? false}
+						myraid={leftCard.original.myr ?? false}
 						xp={leftCard.original.xp}
 						xpTaboo={useTaboo ? leftCard.original.xpat : null}
 						onClickDelete={rowActionEvents.onDeleteLeft}
@@ -221,6 +224,9 @@ nested inside this div. -->
 							restriction={rightCard.original.ir}
 							weakness={rightCard.original.wk}
 							customizable={rightCard.original.cus !== undefined}
+							permanent={rightCard.original.pe ?? false}
+							bonded={rightCard.original.bd ?? false}
+							myraid={rightCard.original.myr ?? false}
 							checkedBoxes={row.custom ? customizationBoxes : 0}
 							xp={rightCard.original.xp}
 							xpTaboo={useTaboo ? rightCard.original.xpat : null}

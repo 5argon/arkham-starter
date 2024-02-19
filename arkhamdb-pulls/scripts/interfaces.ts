@@ -42,6 +42,7 @@ export interface TabooItem {
 
 export interface AhdbCard {
   bonded_to?: null | string
+  bonded_cards?: { count: number; code: string }[]
   pack_code: string
   pack_name: string
   type_code: string

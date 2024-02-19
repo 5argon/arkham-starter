@@ -21,6 +21,7 @@
 	export let customizable: boolean = false
 	export let permanent: boolean = false
 	export let bonded: boolean = false
+	export let myraid: boolean = false
 </script>
 
 <HoverFrame>
@@ -45,5 +46,6 @@
 		{customizable}
 		{permanent}
 		{bonded}
+		{myraid}
 	/>
 </HoverFrame>

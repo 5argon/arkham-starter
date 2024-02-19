@@ -219,9 +219,11 @@
 				{/if}
 			</div>
 			<DeckBadge packs={packsSorted} /> -->
-			<span class="xp"
-				><FaIcon path={allIcons.experience} /><span>Deck Experience : {xpCosted} XP</span></span
-			>
+			{#if xpCosted !== null && xpCosted > 0}
+				<span class="xp"
+					><FaIcon path={allIcons.experience} /><span>Deck Experience : {xpCosted} XP</span></span
+				>
+			{/if}
 			{#if xp !== null && xpSpent !== null && xpAdjustment !== null && xp > 0}
 				<span class="xp">
 					| {xp - xpSpent}/{xp} ({xpAdjustment})

@@ -247,9 +247,14 @@ export interface PopupDatabaseItemRaw {
 	sp?: boolean
 
 	/**
-	 * Has any bonded cards.
+	 * Whether the card has Bonded keyword.
 	 */
 	bd?: boolean
+
+	/**
+	 * This card can call for these Bonded cards.
+	 */
+	bdt?: { c: string; q: number }[]
 
 	/**
 	 * Is a Permanent card.

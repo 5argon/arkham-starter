@@ -30,6 +30,7 @@ export const allIcons = {
 	weakness: ic('weakness'),
 	anyWeakness: ic('virus-solid'),
 	experience: ic('arrow-up-right-dots-solid'),
+	myraid: ic('layer-group-solid'),
 }
 
 function ic(s: string): string {

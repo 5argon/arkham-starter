@@ -173,6 +173,13 @@ playerCards.forEach((x) => {
     q: x.quantity,
     sp: x.spoiler !== undefined ? true : undefined,
     bd: x.bonded_to !== undefined ? true : undefined,
+    bdt:
+      x.bonded_cards?.map((x) => {
+        return {
+          c: x.code,
+          q: x.count,
+        }
+      }) ?? undefined,
     pe: x.permanent ? true : undefined,
     myr: x.myriad ? true : undefined,
   })

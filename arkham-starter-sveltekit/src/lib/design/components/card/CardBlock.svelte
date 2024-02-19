@@ -27,6 +27,7 @@
 	export let customizable: boolean = false
 	export let permanent: boolean = false
 	export let bonded: boolean = false
+	export let myraid: boolean = false
 	export let checkBoxes: number = 0
 	export let checkedBoxes: number = 0
 	export let dragDataPrefix: string = ''
@@ -112,6 +113,7 @@
 	{#each leftButtons as b}
 		<CardBlockButton label={b.label} iconPath={b.iconPath} onClick={b.onClick} />
 	{/each}
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		on:dragleave={dragLeaveHandler}
 		on:dragenter={dragEnterHandler}
@@ -142,6 +144,7 @@
 			{customizable}
 			{permanent}
 			{bonded}
+			{myraid}
 			{checkBoxes}
 			{checkedBoxes}
 			color={true}
