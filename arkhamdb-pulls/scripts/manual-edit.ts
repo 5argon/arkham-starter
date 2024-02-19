@@ -135,11 +135,6 @@ export function manualEdit(p: AhdbCard[]) {
     c.backimagesrc = "/bundles/cards/90062b.png"
   })
 
-  // Suzi
-  manualEditOne(p, "89001", (c) => {
-    c.double_sided = true
-    c.backimagesrc = "/bundles/cards/89001b.png"
-  })
   // Reality Acid Table
   manualEditOne(p, "89005", (c) => {
     c.double_sided = true
