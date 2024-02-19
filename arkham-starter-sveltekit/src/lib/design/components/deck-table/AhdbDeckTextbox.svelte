@@ -51,6 +51,11 @@
 	}
 </script>
 
+<p>
+	You can also simply change 'arkhamdb' to 'arkham-starter' on the URL of any public arkhamdb.com
+	deck as a shortcut to use this tool to view it.
+</p>
+
 <TextBox
 	enableNotice
 	placeholderText={'Deck ID (prefix p: if published) or Deck URL.'}

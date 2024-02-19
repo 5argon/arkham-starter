@@ -145,6 +145,7 @@
 	import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import CardTableDoubleDisplay from '../../explore/CardTableDoubleDisplay.svelte'
+	import { goto } from '$app/navigation'
 
 	export let pdb: PopupDatabase
 	export let fdb: FullDatabase
@@ -337,6 +338,7 @@
 		if (su.length > 0) {
 			sharingUrl += '?' + su.join('&')
 		}
+		goto('/tool/gather' + '?' + su.join('&'))
 
 		pulling = false
 	}
