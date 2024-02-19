@@ -1,7 +1,4 @@
-import { publicAllCards, publicTaboos } from "./scripts/public-api.ts"
-import { AhdbCard, AhdbTaboo, extractTraits } from "./scripts/interfaces.ts"
-import { emptyDir } from "./mod.ts"
-import { PopupDatabase, PopupDatabaseItem } from "./scripts/popup-database.ts"
+import { AhdbCard } from "./scripts/interfaces.ts"
 import { path } from "./mod.ts"
 import {
   pullsDirectory,

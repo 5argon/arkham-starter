@@ -16,8 +16,8 @@
 	pdb={data.pdb}
 	fdb={data.fdb}
 	exploreInput={{
-		groupings: [Grouping.Class],
-		sortings: [Sorting.Number],
+		groupings: [],
+		sortings: [Sorting.IEBox],
 		packs: [CardPack.TheDreamEaters],
 		links: links,
 	}}

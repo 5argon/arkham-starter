@@ -34,9 +34,9 @@
 <PageTitle title="Player Card" />
 
 <p>
-	Search and take a look at the image of any player card as long as you know the name. Multi Mode let you lay down multiple cards
-	side by side in any order, like on a physical table. This tool is fast and can handle fuzzy
-	search!
+	Search and take a look at the image of any player card as long as you know the name. Multi Mode
+	let you lay down multiple cards side by side in any order, like on a physical table. This tool is
+	fast and can handle fuzzy search!
 </p>
 
 <p>
@@ -88,7 +88,7 @@
 	title={'Search Result'}
 	placeholder={"Search by card's name"}
 	filter={(pdbi) => {
-		return pdbi.original.sp !== true
+		return pdbi.original.sp !== true && pdbi.original.hd !== true
 	}}
 />
 

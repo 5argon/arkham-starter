@@ -266,6 +266,20 @@ async function processSingleCard(
         h: 148.7 / 842,
       }
       break
+    case "upgrade":
+      squareTarget = {
+        x: 169.5 / 425,
+        y: 12 / 600,
+        w: 86 / 425,
+        h: 86 / 600,
+      }
+      stripTarget = {
+        x: 166 / 425,
+        y: 568.5 / 600,
+        w: 93 / 425,
+        h: 31 / 600,
+      }
+      break
     default:
       break
   }

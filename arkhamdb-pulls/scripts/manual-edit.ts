@@ -1,9 +1,6 @@
 import { AhdbCard } from "./interfaces.ts"
 
 export function manualEdit(p: AhdbCard[]) {
-  manualEditOne(p, "09112", (c) => {
-    c.quantity = 2
-  })
   manualEditOne(p, "09113", (c) => {
     c.quantity = 2
   })
@@ -21,32 +18,6 @@ export function manualEdit(p: AhdbCard[]) {
   })
   manualEditOne(p, "01513", (c) => {
     c.subtype_code = "weakness"
-  })
-
-  // TSK Investigator backside
-  manualEditOne(p, "09001", (c) => {
-    c.double_sided = true
-    c.backimagesrc = "/bundles/cards/09001b.png"
-  })
-  manualEditOne(p, "09004", (c) => {
-    c.double_sided = true
-    c.backimagesrc = "/bundles/cards/09004b.png"
-  })
-  manualEditOne(p, "09008", (c) => {
-    c.double_sided = true
-    c.backimagesrc = "/bundles/cards/09008b.png"
-  })
-  manualEditOne(p, "09011", (c) => {
-    c.double_sided = true
-    c.backimagesrc = "/bundles/cards/09011b.png"
-  })
-  manualEditOne(p, "09015", (c) => {
-    c.double_sided = true
-    c.backimagesrc = "/bundles/cards/09015b.png"
-  })
-  manualEditOne(p, "09018", (c) => {
-    c.double_sided = true
-    c.backimagesrc = "/bundles/cards/09018b.png"
   })
 
   // Customizable
@@ -121,6 +92,12 @@ export function manualEdit(p: AhdbCard[]) {
   })
   // End Customizable
 
+  // Un-hidden resolute Hank, add link to backside entry.
+  manualEditOne(p, "10016a", (c) => {
+    c.hidden = undefined
+    c.linked_to_code = "10016b"
+  })
+
   // Un-hidden some parallel investigators
   // Daisy
   manualEditOne(p, "90001", (c) => {
@@ -141,31 +118,18 @@ export function manualEdit(p: AhdbCard[]) {
   // Pete
   manualEditOne(p, "90046", (c) => {
     c.hidden = undefined
+    c.backimagesrc = "/bundles/cards/90046b.png"
   })
   // Jim
   manualEditOne(p, "90049", (c) => {
     c.hidden = undefined
-  })
-
-  // Parallel Pete
-  manualEditOne(p, "90046", (c) => {
-    c.double_sided = true
-    c.backimagesrc = "/bundles/cards/90046b.png"
-  })
-
-  // Parallel Jim
-  manualEditOne(p, "90049", (c) => {
-    c.double_sided = true
     c.backimagesrc = "/bundles/cards/90049b.png"
   })
-
-  // Parallel Zoey
+  // Zoey
   manualEditOne(p, "90059", (c) => {
-    c.double_sided = true
     c.backimagesrc = "/bundles/cards/90059b.png"
   })
-
-  // Parallel Monterey
+  // Monterey
   manualEditOne(p, "90062", (c) => {
     c.double_sided = true
     c.backimagesrc = "/bundles/cards/90062b.png"
@@ -182,7 +146,6 @@ export function manualEdit(p: AhdbCard[]) {
     c.backimagesrc = "/bundles/cards/89005b.png"
   })
 
-  // All FHV cards
 }
 
 /**
@@ -191,7 +154,12 @@ export function manualEdit(p: AhdbCard[]) {
 function addCustLink(card: AhdbCard, p: AhdbCard[], c: string) {
   const n: Partial<AhdbCard> = {
     code: c + "b",
-    position: card.position,
+    name: card.name + " Upgrade Sheet",
+    position: 124,
+    type_code: "upgrade",
+    pack_code: "tskp",
+    faction_code: "neutral",
+    quantity: 3,
     hidden: true,
   }
   p.push(n as AhdbCard)

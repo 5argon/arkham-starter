@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fetchPopupDatabase, PopupDatabase } from '$lib/core/popup-database'
+	import { fetchPopupDatabaseStatic, PopupDatabase } from '$lib/core/popup-database'
 
 	import BigRightSider from '$lib/design/components/layout/BigRightSider.svelte'
 
@@ -50,7 +50,7 @@
 
 	$: viewMode = importProto !== null
 
-	let popupDatabase = fetchPopupDatabase()
+	let popupDatabase = fetchPopupDatabaseStatic()
 
 	let importText: string = ''
 	let globalSettings: GlobalSettings

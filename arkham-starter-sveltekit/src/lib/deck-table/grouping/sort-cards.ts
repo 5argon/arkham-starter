@@ -37,6 +37,8 @@ export function sortingToName(s: Sorting): string {
 			return 'Name'
 		case Sorting.Level:
 			return 'Level'
+		case Sorting.IEBox:
+			return 'Like Investigator Expansion'
 		default:
 			return 'Unknown'
 	}
@@ -77,6 +79,12 @@ function vs(a: WithCard, b: WithCard, s: Sorting): number {
 					? customizable
 					: b.card.original.xp ?? undefinedXp
 			return aXp - bXp
+		}
+		case Sorting.IEBox: {
+			return (
+				classesScore(a.card.class1, a.card.class2, a.card.class3) -
+				classesScore(b.card.class1, b.card.class2, b.card.class3)
+			)
 		}
 		default: {
 			return 0

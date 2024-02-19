@@ -55,12 +55,13 @@
 									packIcon={c.packIcon}
 									weakness={c.original.wk}
 									exceptional={c.original.ex}
-									restriction={c.original.ir}
-									investigator={c.original.inv}
+									restriction={c.original.ir ?? false}
+									investigator={c.original.inv ?? false}
+									customizable={c.original.cus !== undefined}
 									color={true}
-									permanent={c.original.pe}
-									bonded={c.original.bd}
-									myraid={c.original.myr}
+									permanent={c.original.pe ?? false}
+									bonded={c.original.bd ?? false}
+									myriad={c.original.myr ?? false}
 								/>
 							</div>
 						</div>

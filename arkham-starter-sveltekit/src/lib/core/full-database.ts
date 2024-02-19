@@ -4,10 +4,11 @@ import {
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
 import type { AhdbTaboo } from '$lib/ahdb/taboo'
-import tb from '../data/taboo.json'
 import { CardClass } from '$lib/design/interface/card-class'
 import { CardPackIcon } from '$lib/design/interface/card-pack'
 import type { CardPack } from './card-pack'
+import fdbJson from '$lib/data/playerdb.json'
+import tb from '$lib/data/taboo.json'
 import { type AhdbCard, isRandomBasicWeakness } from '$lib/ahdb/card'
 import type { LoadEvent } from '@sveltejs/kit'
 export type LazyFullDatabase = Promise<FullDatabase>
@@ -178,7 +179,7 @@ export class FullDatabase {
 	}
 }
 
-export async function fetchLatestTaboo(): Promise<AhdbTaboo | null> {
+async function fetchLatestTaboo(): Promise<AhdbTaboo | null> {
 	// const taboo = await fetch('/db/taboo.json')
 	// const t = (await taboo.json()) as AhdbTaboo[]
 	const t = tb as AhdbTaboo[]
@@ -196,18 +197,9 @@ export async function fetchLatestTaboo(): Promise<AhdbTaboo | null> {
 	return null
 }
 
-export async function fetchFullDatabase(): LazyFullDatabase {
-	const res = await fetch('/db/playerdb.json')
-	const p = (await res.json()) as AhdbCard[]
+export async function fetchFullDatabaseStatic(): LazyFullDatabase {
 	const tb = await fetchLatestTaboo()
-	return new FullDatabase(p, tb)
-}
-0
-export async function fetchFullDatabaseV2(f: LoadEvent['fetch']): LazyFullDatabase {
-	const res = await f('/db/playerdb.json')
-	const p = (await res.json()) as AhdbCard[]
-	const tb = await fetchLatestTaboo()
-	return new FullDatabase(p, tb)
+	return new FullDatabase(fdbJson, tb)
 }
 
 export function shouldShowSubname(fdbi: FullDatabaseItem, fdb: FullDatabase): boolean {

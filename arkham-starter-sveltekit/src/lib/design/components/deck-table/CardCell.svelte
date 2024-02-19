@@ -51,18 +51,18 @@
 		color={true}
 		packIcon={card.packIcon}
 		packNumber={card.original.ps}
-		restriction={card.original.ir}
+		restriction={card.original.ir ?? false}
 		showImageStrip
 		text={cardName}
 		subText={card.original.esn ? card.original.sn : null}
 		weakness={card.original.wk}
-		investigator={card.original.inv}
+		investigator={card.original.inv ?? false}
 		xp={processedCust.xp > 0 ? processedCust.xp : card.original.xp}
 		xpTaboo={taboo ? card.original.xpat : null}
 		customizable={card.original.cus !== undefined}
 		permanent={card.original.pe ?? false}
 		bonded={card.original.bd ?? false}
-		myraid={card.original.myr ?? false}
+		myriad={card.original.myr ?? false}
 	/>
 	{#if card.original.cus !== undefined}
 		{#each processedCust.options as rc}

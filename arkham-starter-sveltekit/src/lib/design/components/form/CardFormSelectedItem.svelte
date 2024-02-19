@@ -25,12 +25,14 @@
 		color={true}
 		packIcon={card.packIcon}
 		packNumber={card.original.ps}
-		restriction={card.original.ir}
+		restriction={card.original.ir ?? false}
 		showImageStrip
 		text={card.original.n}
 		subText={card.original.esn ? card.original.sn : null}
-		weakness={card.original.wk}
-		investigator={card.original.inv}
+		weakness={card.original.wk ?? false}
+		investigator={card.original.inv ?? false}
+		bonded={card.original.bd ?? false}
+		myriad={card.original.myr ?? false}
 		xp={card.original.xp}
 		xpTaboo={card.original.xpat}
 		customizable={card.original.cus !== undefined}

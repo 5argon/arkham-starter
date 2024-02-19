@@ -1,5 +1,5 @@
-import { FullDatabase, fetchFullDatabaseV2 } from '$lib/core/full-database'
-import { PopupDatabase, fetchPopupDatabaseV2 } from '$lib/core/popup-database'
+import { FullDatabase, fetchFullDatabaseStatic } from '$lib/core/full-database'
+import { PopupDatabase, fetchPopupDatabaseStatic } from '$lib/core/popup-database'
 import type { PageLoad } from './$types'
 import decksJson from '$lib/data/decks.json'
 import { ahdbToOurs } from '$lib/ahdb/public-api/high-level'
@@ -21,8 +21,8 @@ export const load: PageLoad<Ret> = async (pl) => {
 		}
 	})
 
-	const fdb = await fetchFullDatabaseV2(pl.fetch)
-	const pdb = await fetchPopupDatabaseV2(pl.fetch)
+	const fdb = await fetchFullDatabaseStatic()
+	const pdb = await fetchPopupDatabaseStatic()
 	return {
 		deckEntries: ours,
 		pdb: pdb,

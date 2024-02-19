@@ -145,11 +145,11 @@ nested inside this div. -->
 						class2={leftCard.class2 ?? null}
 						class3={leftCard.class3 ?? null}
 						exceptional={useTaboo ? leftCard.original.ext : leftCard.original.ex}
-						restriction={leftCard.original.ir}
-						weakness={leftCard.original.wk}
-						permanent={leftCard.original.pe}
-						bonded={leftCard.original.bd}
-						myraid={leftCard.original.myr}
+						restriction={leftCard.original.ir ?? false}
+						weakness={leftCard.original.wk ?? false}
+						permanent={leftCard.original.pe ?? false}
+						bonded={leftCard.original.bd ?? false}
+						myriad={leftCard.original.myr ?? false}
 						customizable={leftCard.original.cus !== undefined}
 						xp={leftCard.original.xp}
 						xpTaboo={useTaboo ? leftCard.original.xpat : null}
@@ -168,8 +168,8 @@ nested inside this div. -->
 						class2={leftCard.class2 ?? null}
 						class3={leftCard.class3 ?? null}
 						exceptional={useTaboo ? leftCard.original.ext : leftCard.original.ex}
-						restriction={leftCard.original.ir}
-						weakness={leftCard.original.wk}
+						restriction={leftCard.original.ir ?? false}
+						weakness={leftCard.original.wk ?? false}
 						customizable={leftCard.original.cus !== undefined}
 						bonded={leftCard.original.bd ?? false}
 						myraid={leftCard.original.myr ?? false}
@@ -221,12 +221,12 @@ nested inside this div. -->
 							class2={rightCard.class2 ?? null}
 							class3={rightCard.class3 ?? null}
 							exceptional={useTaboo ? rightCard.original.ext : rightCard.original.ex}
-							restriction={rightCard.original.ir}
-							weakness={rightCard.original.wk}
+							restriction={rightCard.original.ir ?? false}
+							weakness={rightCard.original.wk ?? false}
 							customizable={rightCard.original.cus !== undefined}
 							permanent={rightCard.original.pe ?? false}
 							bonded={rightCard.original.bd ?? false}
-							myraid={rightCard.original.myr ?? false}
+							myriad={rightCard.original.myr ?? false}
 							checkedBoxes={row.custom ? customizationBoxes : 0}
 							xp={rightCard.original.xp}
 							xpTaboo={useTaboo ? rightCard.original.xpat : null}
@@ -245,8 +245,8 @@ nested inside this div. -->
 							class2={rightCard.class2 ?? null}
 							class3={rightCard.class3 ?? null}
 							exceptional={useTaboo ? rightCard.original.ext : rightCard.original.ex}
-							restriction={rightCard.original.ir}
-							weakness={rightCard.original.wk}
+							restriction={rightCard.original.ir ?? false}
+							weakness={rightCard.original.wk ?? false}
 							customizable={rightCard.original.cus !== undefined}
 							permanent={rightCard.original.pe ?? false}
 							bonded={rightCard.original.bd ?? false}

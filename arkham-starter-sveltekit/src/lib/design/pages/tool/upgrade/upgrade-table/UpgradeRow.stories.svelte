@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fetchPopupDatabase } from '$lib/core/popup-database'
+	import { fetchPopupDatabaseStatic } from '$lib/core/popup-database'
 
 	import Story from '$lib/design/story/story.svelte'
 	import {
@@ -11,7 +11,7 @@
 	let test: number = 0
 	const er = createEmptyRowActionEvents()
 	const ee = createEmptyRowEditEvents()
-	const pdbp = fetchPopupDatabase()
+	const pdbp = fetchPopupDatabaseStatic()
 </script>
 
 {#await pdbp then pdb}

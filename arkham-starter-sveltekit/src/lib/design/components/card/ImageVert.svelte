@@ -21,6 +21,7 @@
 	export let customizable: boolean = false
 	export let permanent: boolean = false
 	export let bonded: boolean = false
+	export let myriad: boolean = false
 
 	let showClasses: boolean
 	$: showClasses =
@@ -65,6 +66,7 @@
 				{customizable}
 				{permanent}
 				{bonded}
+				{myriad}
 			/>
 		</div>
 	{/if}

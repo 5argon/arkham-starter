@@ -89,10 +89,11 @@
 	placeholder={"Search by card's name"}
 	filter={(pdbi) => {
 		return (
-			pdbi.original.inv === false &&
-			pdbi.original.ir === false &&
+			pdbi.original.inv !== true &&
+			pdbi.original.ir !== true &&
 			pdbi.original.sp !== true &&
-			pdbi.original.wk !== true
+			pdbi.original.wk !== true &&
+			pdbi.original.hd !== true
 		)
 	}}
 />

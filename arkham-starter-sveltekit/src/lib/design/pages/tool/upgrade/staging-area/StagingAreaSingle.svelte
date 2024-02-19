@@ -69,8 +69,8 @@
 					class2={c.class2 ?? null}
 					class3={c.class3 ?? null}
 					exceptional={globalSettings.taboo ? c.original.ext : c.original.ex}
-					restriction={c.original.ir}
-					weakness={c.original.wk}
+					restriction={c.original.ir ?? false}
+					weakness={c.original.wk ?? false}
 					customizable={c.original.cus !== undefined}
 					permanent={c.original.pe ?? false}
 					bonded={c.original.bd ?? false}

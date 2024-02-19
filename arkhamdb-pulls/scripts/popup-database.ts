@@ -89,18 +89,35 @@ export interface PopupDatabaseItem {
   /**
    * Investigator restriction.
    * Essentially `true` when it is an investigator signature card / weakness.
+   * It is also `true` when it is Bonded to an another `ir` card, even if that card is
+   * techically not IR.
    */
-  ir: boolean
+  ir?: boolean
 
   /**
    * This is an investigator card.
    */
-  inv: boolean
+  inv?: boolean
 
   /**
    * Weakness.
    */
-  wk: boolean
+  wk?: boolean
+
+  /**
+   * Basic Weakness.
+   */
+  bwk?: boolean
+
+  /**
+   * If defined, it is linked to this card ID.
+   */
+  lnk?: string
+
+  /**
+   * If defined, card is double-sided and this is the image name of the back side.
+   */
+  dbl?: string
 
   /**
    * Cost.
@@ -152,6 +169,11 @@ export interface PopupDatabaseItem {
    * Spoiler was on in arkhamdb
    */
   sp?: boolean
+
+  /**
+   * Hidden was on in arkhamdb
+   */
+  hd?: boolean
 
   /**
    * Whether the card has Bonded keyword.

@@ -5,7 +5,7 @@
 
 	export let popupDatabase: PopupDatabase
 	export let fuzzySearch: string = ''
-	export let cardFilter: (pdbi: PopupDatabaseItem) => boolean = () => {
+	export let cardFilter: (pdbi: PopupDatabaseItem) => boolean = (i) => {
 		return true
 	}
 

@@ -224,9 +224,13 @@ function groupCardsOneGroup(
 					st[sn] = { entries: [], className: '' }
 				}
 				st[sn].entries.push(x.dle)
-				st[sn].className = isMulti
-					? 'Multi-class'
-					: cardClassToName(classConversion(x.card.original.faction_code))
+				let className: string
+				if (isMulti) {
+					className = 'Multi-class'
+				} else {
+					className = cardClassToName(classConversion(x.card.original.faction_code))
+				}
+				st[sn].className = className
 			})
 			const sorted = Object.entries(st)
 				.sort(([k], [k2]) => {

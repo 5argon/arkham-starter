@@ -100,6 +100,7 @@ manualEdit(playerCards)
 const sameNameDifferentSubname: {
   [name: string]: { code: string; subname: string }[]
 } = {}
+const bondedToInvestigatorRestriction = new Set<string>()
 
 playerCards.forEach((x) => {
   if (x.subname === undefined) {
@@ -110,6 +111,14 @@ playerCards.forEach((x) => {
     sameNameDifferentSubname[name] = []
   }
   sameNameDifferentSubname[name].push({ code: x.code, subname: x.subname })
+
+  const technicallyIr = x.restrictions !== undefined && x.restrictions !== null
+  if (technicallyIr) {
+    // Make all its bonded cards IR too, because they are technically not.
+    x.bonded_cards?.forEach((y) => {
+      bondedToInvestigatorRestriction.add(y.code)
+    })
+  }
 })
 
 const needExplicitSubnameCodes = new Set<string>()
@@ -133,6 +142,9 @@ playerCards.forEach((x) => {
       return traitMap.toNum[x]
     })
   }
+  const technicallyIr = x.restrictions !== undefined && x.restrictions !== null
+  const effectiveIr =
+    technicallyIr || bondedToInvestigatorRestriction.has(x.code)
   popupDatabaseItems.push({
     id: x.code,
     n: x.name,
@@ -163,15 +175,25 @@ playerCards.forEach((x) => {
       x.faction3_code !== undefined
         ? classNameMap.toNum[x.faction3_code]
         : undefined,
-    ir: x.restrictions !== undefined && x.restrictions !== null,
+    ir: effectiveIr,
     wk:
       x.subtype_code !== undefined &&
-      (x.subtype_code === "weakness" || x.subtype_code === "basicweakness"),
-    inv: x.type_code !== undefined && x.type_code === "investigator",
+      (x.subtype_code === "weakness" || x.subtype_code === "basicweakness")
+        ? true
+        : undefined,
+    bwk:
+      x.subtype_code !== undefined && x.subtype_code === "basicweakness"
+        ? true
+        : undefined,
+    inv:
+      x.type_code !== undefined && x.type_code === "investigator"
+        ? true
+        : undefined,
     cs: x.cost,
     cus: extractCustomizable(x),
     q: x.quantity,
     sp: x.spoiler !== undefined ? true : undefined,
+    hd: x.hidden !== undefined ? true : undefined,
     bd: x.bonded_to !== undefined ? true : undefined,
     bdt:
       x.bonded_cards?.map((x) => {
@@ -182,6 +204,11 @@ playerCards.forEach((x) => {
       }) ?? undefined,
     pe: x.permanent ? true : undefined,
     myr: x.myriad ? true : undefined,
+    lnk: x.linked_to_code,
+    dbl:
+      x.double_sided && x.backimagesrc
+        ? path.basename(x.backimagesrc)
+        : undefined,
   })
 })
 

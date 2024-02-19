@@ -4,17 +4,23 @@ import {
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
 import { CardPackIcon } from '$lib/design/interface/card-pack'
-import type { LoadEvent } from '@sveltejs/kit'
 import type { CardClass } from './card-class'
 import { isRandomBasicWeakness } from '$lib/ahdb/card'
+import pdbJson from '$lib/data/popupdb.json'
 import Fuse from 'fuse.js'
+import type { CardPack } from './card-pack'
 export type LazyPopupDatabase = Promise<PopupDatabase>
 
 export class PopupDatabase {
 	private cards: PopupDatabaseItem[]
 	private fuse: Fuse<PopupDatabaseItem>
 	private map: { [k: string]: PopupDatabaseItem }
+	private byPack: { [k: string]: PopupDatabaseItem[] }
+	private allInvestigators: PopupDatabaseItem[]
+
 	constructor(raw: PopupDatabaseRaw) {
+		this.byPack = {}
+		this.allInvestigators = []
 		this.cards = raw.items.map<PopupDatabaseItem>((x) => {
 			let icon = packCodeToIconConversion(raw.packCodes[x.pc])
 			if (isRandomBasicWeakness(x.id)) {
@@ -39,6 +45,13 @@ export class PopupDatabase {
 		const makeMap: { [k: string]: PopupDatabaseItem } = {}
 		this.cards.forEach((x) => {
 			makeMap[x.original.id] = x
+			if (!(x.packIcon in this.byPack)) {
+				this.byPack[x.packIcon] = []
+			}
+			this.byPack[x.packIcon].push(x)
+			if (x.original.inv) {
+				this.allInvestigators.push(x)
+			}
 		})
 		this.map = makeMap
 		this.fuse = new Fuse<PopupDatabaseItem>(this.cards, {
@@ -63,6 +76,15 @@ export class PopupDatabase {
 	fuzzySearch(s: string): PopupDatabaseItem[] {
 		const result = this.fuse.search('="' + s + '"')
 		return result.map((x) => x.item)
+	}
+
+	public queryPack(packs: CardPack[]): PopupDatabaseItem[] {
+		return packs.flatMap<PopupDatabaseItem>((x) => {
+			if (x in this.byPack) {
+				return this.byPack[x]
+			}
+			throw new Error('Pack not found ' + x)
+		})
 	}
 }
 
@@ -172,18 +194,35 @@ export interface PopupDatabaseItemRaw {
 	/**
 	 * Investigator restriction.
 	 * Essentially `true` when it is an investigator signature card / weakness.
+	 * It is also `true` when it is Bonded to an another `ir` card, even if that card is
+	 * techically not IR.
 	 */
-	ir: boolean
+	ir?: boolean
 
 	/**
 	 * This is an investigator card.
 	 */
-	inv: boolean
+	inv?: boolean
 
 	/**
 	 * Weakness.
 	 */
-	wk: boolean
+	wk?: boolean
+
+	/**
+	 * Basic Weakness.
+	 */
+	bwk?: boolean
+
+	/**
+	 * If defined, it is linked to this card ID.
+	 */
+	lnk?: string
+
+	/**
+	 * If defined, card is double-sided and this is the image name of the back side.
+	 */
+	dbl?: string
 
 	/**
 	 * Cost.
@@ -247,6 +286,11 @@ export interface PopupDatabaseItemRaw {
 	sp?: boolean
 
 	/**
+	 * Hidden was on in arkhamdb
+	 */
+	hd?: boolean
+
+	/**
 	 * Whether the card has Bonded keyword.
 	 */
 	bd?: boolean
@@ -267,14 +311,6 @@ export interface PopupDatabaseItemRaw {
 	myr?: boolean
 }
 
-export async function fetchPopupDatabase(): LazyPopupDatabase {
-	const res = await fetch('/db/popupdb.json')
-	const p = (await res.json()) as PopupDatabaseRaw
-	return new PopupDatabase(p)
-}
-
-export async function fetchPopupDatabaseV2(f: LoadEvent['fetch']): LazyPopupDatabase {
-	const res = await f('/db/popupdb.json')
-	const p = (await res.json()) as PopupDatabaseRaw
-	return new PopupDatabase(p)
+export async function fetchPopupDatabaseStatic(): LazyPopupDatabase {
+	return new PopupDatabase(pdbJson)
 }

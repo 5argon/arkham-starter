@@ -33,7 +33,7 @@
 	export let customizable: boolean = false
 	export let permanent: boolean = false
 	export let bonded: boolean = false
-	export let myraid: boolean = false
+	export let myriad: boolean = false
 	export let checkBoxes: number = 0
 	export let checkedBoxes: number = 0
 	export let forceSmall: boolean = false
@@ -102,7 +102,7 @@
 					path={allIcons.permanent}
 				/>{/if}{#if exceptional}<FaIcon path={allIcons.exceptional} />{/if}{#if bonded}<FaIcon
 					path={allIcons.bonded}
-				/>{/if}{#if myraid}<FaIcon path={allIcons.myraid} />{/if}
+				/>{/if}{#if myriad}<FaIcon path={allIcons.myraid} />{/if}
 			{#if !(packNumber !== null && isUnknownCardNumber(packNumber)) && (packIcon !== null || packNumber !== null)}
 				<span class="pips pack-span"
 					>({#if packIcon !== null && packIcon !== CardPackIcon.Unknown}<img

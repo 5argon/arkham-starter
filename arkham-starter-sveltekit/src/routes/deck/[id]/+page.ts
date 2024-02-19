@@ -3,8 +3,8 @@ import {
 	type ArkhamStarterDeckData,
 	type GetDeckCardIdReturns,
 } from '$lib/ahdb/public-api/high-level'
-import { FullDatabase, fetchFullDatabaseV2 } from '$lib/core/full-database'
-import { PopupDatabase, fetchPopupDatabaseV2 } from '$lib/core/popup-database'
+import { FullDatabase, fetchFullDatabaseStatic } from '$lib/core/full-database'
+import { PopupDatabase, fetchPopupDatabaseStatic } from '$lib/core/popup-database'
 import type { EntryGenerator, PageLoad } from './$types'
 import decksJson from '$lib/data/decks.json'
 import { decodeSideExtras, type DeckEntryBeforeProcess } from '$lib/deck/deck'
@@ -23,8 +23,8 @@ export const load: PageLoad<Ret> = async (pl) => {
 	if (deck === undefined) {
 		throw new Error('Unexpected error: deck not found.')
 	}
-	const fdb = await fetchFullDatabaseV2(pl.fetch)
-	const pdb = await fetchPopupDatabaseV2(pl.fetch)
+	const fdb = await fetchFullDatabaseStatic()
+	const pdb = await fetchPopupDatabaseStatic()
 	return {
 		pdb: pdb,
 		fdb: fdb,

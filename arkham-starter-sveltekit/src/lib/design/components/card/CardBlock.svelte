@@ -144,7 +144,7 @@
 			{customizable}
 			{permanent}
 			{bonded}
-			{myraid}
+			myriad={myraid}
 			{checkBoxes}
 			{checkedBoxes}
 			color={true}

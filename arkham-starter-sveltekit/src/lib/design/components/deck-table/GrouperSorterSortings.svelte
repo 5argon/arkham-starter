@@ -36,6 +36,7 @@
 			<option value={Sorting.Type}>{sortingToName(Sorting.Type)}</option>
 			<option value={Sorting.Name}>{sortingToName(Sorting.Name)}</option>
 			<option value={Sorting.Level}>{sortingToName(Sorting.Level)}</option>
+			<option value={Sorting.IEBox}>{sortingToName(Sorting.IEBox)}</option>
 		</select>
 	</span>
 	{#if i < sortings.length - 1}

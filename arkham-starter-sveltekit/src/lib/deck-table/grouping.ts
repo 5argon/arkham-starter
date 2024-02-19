@@ -16,6 +16,7 @@ export enum Sorting {
 	Type = 4,
 	Name = 5,
 	Level = 6,
+	IEBox = 7,
 }
 
 export enum ExtraColumn {

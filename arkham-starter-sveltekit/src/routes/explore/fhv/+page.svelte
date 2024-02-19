@@ -16,7 +16,7 @@
 	pdb={data.pdb}
 	fdb={data.fdb}
 	exploreInput={{
-		groupings: [Grouping.Class],
+		groupings: [],
 		sortings: [Sorting.Number],
 		packs: [CardPack.TheFeastOfHemlockVale],
 		links: links,

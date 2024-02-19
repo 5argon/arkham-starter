@@ -16,7 +16,11 @@
 </script>
 
 <script lang="ts">
-	import { fetchFullDatabase, FullDatabase, type FullDatabaseItem } from '$lib/core/full-database'
+	import {
+		fetchFullDatabaseStatic,
+		FullDatabase,
+		type FullDatabaseItem,
+	} from '$lib/core/full-database'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import {
 		CampaignSwitchProto,
@@ -41,9 +45,8 @@
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import { coreToRcore } from '$lib/ahdb/conversion'
-	import { CampaignDatabase, fetchCampaignDatabase } from '$lib/core/campaign-database'
 	import { goToGather } from '$lib/deck/go-to-gather'
-	import { fetchPopupDatabase, type PopupDatabase } from '$lib/core/popup-database'
+	import { fetchPopupDatabaseStatic, type PopupDatabase } from '$lib/core/popup-database'
 
 	export let protoString: string | null = null
 	let sharingUrl = ''
@@ -82,8 +85,8 @@
 	let transferEntries: DecklistEntry[] = []
 
 	let fixedLabelColor = false
-	let fdbPromise = fetchFullDatabase()
-	let pdbDatabase = fetchPopupDatabase()
+	let fdbPromise = fetchFullDatabaseStatic()
+	let pdbDatabase = fetchPopupDatabaseStatic()
 	let bothPromises: Promise<BothDatabase> = Promise.all([fdbPromise, pdbDatabase]).then((x) => {
 		return {
 			fdb: x[0],

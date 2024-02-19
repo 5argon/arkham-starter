@@ -40,57 +40,63 @@
 		sortings = s
 	}
 
-	function getByPackFromFullDatabaseInvestigator(
-		fdb: FullDatabase,
-		ps: CardPack[],
-	): DecklistEntry[] {
-		const inPack = fdb.queryPack(ps)
-		const investigator = inPack.filter((x) => {
-			const r =
-				(x.original.type_code === 'investigator' ||
-					typeof x.original.restrictions === 'string' ||
-					typeof x.original.restrictions === 'object') &&
-				x.original.spoiler === undefined
-			return r
-		})
+	function getByPackFromPdbInvestigator(pdb: PopupDatabase, ps: CardPack[]): DecklistEntry[] {
+		const inPack = pdb.queryPack(ps)
+		const investigator = inPack
+			.filter((x) => {
+				return (x.original.sp === undefined || x.original.sp === false) && !x.original.hd
+			})
+			.filter((x) => {
+				return x.original.inv || x.original.ir
+			})
 		return investigator.map<DecklistEntry>((x) => {
 			return {
-				amount: x.original.quantity,
-				cardId: x.original.code,
-				id: x.original.code,
-			}
-		})
-	}
-	function getByPackFromFullDatabase(fdb: FullDatabase, ps: CardPack[]): DecklistEntry[] {
-		const inPack = fdb.queryPack(ps)
-		const notInvestigator = inPack.filter((x) => {
-			const r =
-				x.original.type_code !== 'investigator' &&
-				typeof x.original.restrictions !== 'object' &&
-				x.original.subtype_code !== 'basicweakness' &&
-				x.original.spoiler === undefined
-			return r
-		})
-		return notInvestigator.map<DecklistEntry>((x) => {
-			return {
-				amount: x.original.quantity,
-				cardId: x.original.code,
-				id: x.original.code,
+				amount: x.original.q,
+				cardId: x.original.id,
+				id: x.original.id,
 			}
 		})
 	}
 
-	function getByPackFromFullDatabaseWeakness(fdb: FullDatabase, ps: CardPack[]): DecklistEntry[] {
-		const inPack = fdb.queryPack(ps)
-		const weakness = inPack.filter((x) => {
-			const r = x.original.subtype_code === 'basicweakness'
-			return r
+	function getByPackFromPdb(pdb: PopupDatabase, ps: CardPack[]): DecklistEntry[] {
+		const inPack = pdb.queryPack(ps)
+		const notInvestigator = inPack
+			.filter((x) => {
+				return (x.original.sp === undefined || x.original.sp === false) && !x.original.hd
+			})
+			.filter((x) => {
+				// Allow bonded weakness that is not for investigator here.
+				return (
+					!x.original.inv && !x.original.ir && (!x.original.wk || (x.original.wk && x.original.bd))
+				)
+			})
+		return notInvestigator.map<DecklistEntry>((x) => {
+			return {
+				amount: x.original.q,
+				cardId: x.original.id,
+				id: x.original.id,
+			}
 		})
+	}
+
+	function getByPackFromPdbWeakness(pdb: PopupDatabase, ps: CardPack[]): DecklistEntry[] {
+		const inPack = pdb.queryPack(ps)
+		const weakness = inPack
+			.filter((x) => {
+				return (
+					(x.original.sp === undefined || x.original.sp === false) &&
+					!x.original.hd &&
+					!x.original.bd
+				)
+			})
+			.filter((x) => {
+				return !x.original.inv && !x.original.ir && x.original.wk
+			})
 		return weakness.map<DecklistEntry>((x) => {
 			return {
-				amount: x.original.quantity,
-				cardId: x.original.code,
-				id: x.original.code,
+				amount: x.original.q,
+				cardId: x.original.id,
+				id: x.original.id,
 			}
 		})
 	}
@@ -171,7 +177,7 @@
 		{toggleMap}
 		singleRight
 		big={!showList && showScans}
-		entries={getByPackFromFullDatabaseInvestigator(fdb, packs)}
+		entries={getByPackFromPdbInvestigator(pdb, packs)}
 		groupings={[]}
 		sortings={[Sorting.Number]}
 		taboo={true}
@@ -185,14 +191,14 @@
 		{showScans}
 	/>
 
-	<ListDivider label="Basic Weakness" />
+	<ListDivider label="Weakness" />
 
 	<CardTableDoubleDisplay
 		{toggleMap}
 		big={!showList && showScans}
 		singleRight
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
-		entries={getByPackFromFullDatabaseWeakness(fdb, packs)}
+		entries={getByPackFromPdbWeakness(pdb, packs)}
 		groupings={[]}
 		sortings={[Sorting.Number]}
 		taboo={true}
@@ -215,7 +221,7 @@
 		big={!showList && showScans}
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 		singleRight
-		entries={getByPackFromFullDatabase(fdb, packs)}
+		entries={getByPackFromPdb(pdb, packs)}
 		{groupings}
 		{sortings}
 		taboo={true}

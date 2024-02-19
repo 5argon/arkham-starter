@@ -1,5 +1,5 @@
-import { FullDatabase, fetchFullDatabaseV2 } from '$lib/core/full-database'
-import { PopupDatabase, fetchPopupDatabaseV2 } from '$lib/core/popup-database'
+import { FullDatabase, fetchFullDatabaseStatic } from '$lib/core/full-database'
+import { PopupDatabase, fetchPopupDatabaseStatic } from '$lib/core/popup-database'
 import type { PageLoad } from './$types'
 
 interface Ret {
@@ -7,9 +7,9 @@ interface Ret {
 	pdb: PopupDatabase
 }
 
-export const load: PageLoad<Ret> = async (pl) => {
-	const fdb = await fetchFullDatabaseV2(pl.fetch)
-	const pdb = await fetchPopupDatabaseV2(pl.fetch)
+export const load: PageLoad<Ret> = async () => {
+	const fdb = await fetchFullDatabaseStatic()
+	const pdb = await fetchPopupDatabaseStatic()
 	return {
 		pdb: pdb,
 		fdb: fdb,
