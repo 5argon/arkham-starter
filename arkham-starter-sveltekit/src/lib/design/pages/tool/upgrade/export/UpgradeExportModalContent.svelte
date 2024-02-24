@@ -103,6 +103,17 @@
 			return n
 		}}
 	/>
+	<Checkbox
+		checked={exportOptions.cardOptions?.classIcons ?? false}
+		label="Class Icon"
+		onCheckChanged={(c) => {
+			const n = { ...exportOptions }
+			if (exportOptions.cardOptions !== undefined) {
+				exportOptions.cardOptions.classIcons = c
+			}
+			return n
+		}}
+	/>
 	<RadioGroup
 		onValueChanged={(v) => {
 			const nu = { ...upgradeExportOptions }

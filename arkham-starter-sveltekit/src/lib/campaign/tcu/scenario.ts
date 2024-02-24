@@ -54,7 +54,7 @@ import {
 export const disappearanceAtTheTwilightEstateScenario: Scenario = {
 	index: 1,
 	name: 'Disappearance at the Twilight Estate',
-	diagram:'TCU_1',
+	diagram: 'TCU_1',
 	shortName: 'P',
 	setups: [
 		{
@@ -90,7 +90,7 @@ export const disappearanceAtTheTwilightEstateScenario: Scenario = {
 export const theWitchingHourScenario: Scenario = {
 	index: 2,
 	name: 'The Witching Hour',
-	diagram:'TCU_2',
+	diagram: 'TCU_2',
 	shortName: 'I',
 	setups: [
 		{
@@ -119,7 +119,7 @@ export const theWitchingHourScenario: Scenario = {
 export const atDeathsDoorstepScenario: Scenario = {
 	index: 3,
 	name: "At Death's Doorstep",
-	diagram:'TCU_3',
+	diagram: 'TCU_3',
 	shortName: 'II',
 	setups: [
 		{
@@ -151,7 +151,7 @@ export const atDeathsDoorstepScenario: Scenario = {
 export const theSecretNameScenario: Scenario = {
 	index: 4,
 	name: 'The Secret Name',
-	diagram:'TCU_4',
+	diagram: 'TCU_4',
 	shortName: 'III',
 	setups: [
 		{
@@ -178,7 +178,7 @@ export const theSecretNameScenario: Scenario = {
 export const theWagesOfSinScenario: Scenario = {
 	index: 5,
 	name: 'The Wages of Sin',
-	diagram:'TCU_5',
+	diagram: 'TCU_5',
 	shortName: 'IV',
 	setups: [
 		{
@@ -224,7 +224,7 @@ export const theWagesOfSinScenario: Scenario = {
 export const forTheGreaterGoodScenario: Scenario = {
 	index: 6,
 	name: 'For the Greater Good',
-	diagram:'TCU_6',
+	diagram: 'TCU_6',
 	shortName: 'V',
 	setups: [
 		{
@@ -240,7 +240,7 @@ export const forTheGreaterGoodScenario: Scenario = {
 			notes: [
 				{
 					encounterSet: forTheGreaterGood,
-					what: 'Remove 3 cards from the game : Knight of the Inner Circle (2x), Cell Keeper (1x).',
+					what: 'Remove 3 cards from the game : Cell Keeper (1x), Knight of the Inner Circle (2x).',
 				},
 				{
 					encounterSet: darkCult,
@@ -251,17 +251,21 @@ export const forTheGreaterGoodScenario: Scenario = {
 		{
 			name: 'Other',
 			shuffles: [
-				{ encounterSet: forTheGreaterGood, overwriteCount: 7 },
+				{ encounterSet: forTheGreaterGood, overwriteCount: 11 },
 				ancientEvils,
 				darkCult,
 				lockedDoors,
 				cityOfSins,
-				silverTwilightLodge,
+				{ encounterSet: silverTwilightLodge, overwriteCount: 2 },
 			],
 			notes: [
 				{
 					encounterSet: forTheGreaterGood,
-					what: 'Remove 7 cards from the game : Lodge Neophyte (3x), Keeper of Secrets (1x), Knight of the Outer Void (2x), Lodge Jailor (1x).',
+					what: 'Remove 3 cards from the game : Lodge Jailor (1x), Knight of the Outer Void (2x).',
+				},
+				{
+					encounterSet: silverTwilightLodge,
+					what: 'Remove 4 cards from the game : Lodge Neophyte (3x), Keeper of Secrets (1x).',
 				},
 			],
 		},
@@ -271,7 +275,7 @@ export const forTheGreaterGoodScenario: Scenario = {
 export const unionAndDisillusionScenario: Scenario = {
 	index: 7,
 	name: 'Union and Disillusion',
-	diagram:'TCU_7',
+	diagram: 'TCU_7',
 	shortName: 'VI',
 	setups: [
 		{
@@ -320,7 +324,7 @@ export const unionAndDisillusionScenario: Scenario = {
 export const inTheClutchesOfChaosScenario: Scenario = {
 	index: 8,
 	name: 'In the Clutches of Chaos',
-	diagram:'TCU_8',
+	diagram: 'TCU_8',
 	shortName: 'VII',
 	setups: [
 		{
@@ -370,7 +374,7 @@ export const inTheClutchesOfChaosScenario: Scenario = {
 export const beforeTheBlackThroneScenario: Scenario = {
 	index: 10,
 	name: 'Before the Black Throne',
-	diagram:'TCU_9',
+	diagram: 'TCU_9',
 	shortName: 'VIII',
 	setups: [
 		{
