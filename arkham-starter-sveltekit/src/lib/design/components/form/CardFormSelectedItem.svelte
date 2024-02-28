@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
@@ -8,7 +9,7 @@
 	export let onRemove: () => void
 </script>
 
-<div>
+<div in:fly={{ x: -20, duration: 100 }}>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span

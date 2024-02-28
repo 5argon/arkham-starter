@@ -22,7 +22,7 @@
 	title={label}
 	on:click={onClick}
 >
-	<slot>{label}</slot>
+	<span class:greyout={disabled}><slot>{label}</slot></span>
 	{#if labelAfterSlot}
 		{label}
 	{/if}
@@ -54,5 +54,9 @@
 		width: calc(100% - 4px);
 		margin: 2px 2px;
 		padding: 2px 4px;
+	}
+
+	.greyout {
+		opacity: 0.2;
 	}
 </style>

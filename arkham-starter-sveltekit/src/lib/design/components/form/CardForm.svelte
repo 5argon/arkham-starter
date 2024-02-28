@@ -39,27 +39,30 @@
 	/>
 {/if}
 
-<TextBox
-	{currentText}
-	placeholderText={placeholder}
-	onChange={(t) => {
-		currentText = t
-		showingPopup = true
-		selectedRow = 0
-	}}
-	onEndEdit={() => {
-		showingPopup = false
-		currentText = ''
-		selectedRow = 0
-	}}
-	onSubmit={() => {
-		showingPopup = false
-		currentText = ''
-		selectedRow = 0
-	}}
-/>
+<div class="padding">
+	<TextBox
+		label="Search Player Card"
+		{currentText}
+		placeholderText={placeholder}
+		onChange={(t) => {
+			currentText = t
+			showingPopup = true
+			selectedRow = 0
+		}}
+		onEndEdit={() => {
+			showingPopup = false
+			currentText = ''
+			selectedRow = 0
+		}}
+		onSubmit={() => {
+			showingPopup = false
+			currentText = ''
+			selectedRow = 0
+		}}
+	/>
+</div>
 
-{#each selected as s, i}
+{#each selected as s, i (s)}
 	<CardFormSelectedItem
 		card={popupDatabase.getByIdThrowNull(s)}
 		onRemove={() => {
@@ -69,3 +72,9 @@
 		}}
 	/>
 {/each}
+
+<style>
+	.padding {
+		padding-bottom: 4px;
+	}
+</style>

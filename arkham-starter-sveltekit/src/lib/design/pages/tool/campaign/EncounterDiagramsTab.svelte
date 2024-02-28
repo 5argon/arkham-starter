@@ -3,8 +3,10 @@
 		isEncounterSetWithModification,
 		type Campaign,
 		type EncounterSetItem,
-		type CustomRemove,
 	} from '$lib/core/campaign'
+	import Button from '$lib/design/components/basic/Button.svelte'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import { allIcons } from '$lib/design/icons/all-icons'
 	import { findUniqueScenarios, makeLongScenarioName } from './campaign-analyze'
 	export let campaign: Campaign
 	export let dropdownIndex: number = 0
@@ -15,33 +17,32 @@
 	$: scenarios = findUniqueScenarios(campaign)
 	$: selectedScenario = scenarios[selectedScenarioIndex]
 
-	function computeCount(esis: EncounterSetItem[], customRemove: CustomRemove | undefined): number {
-		const count = esis.reduce<number>((p, c) => {
-			if (!isEncounterSetWithModification(c)) {
-				return p + c.count
-			} else {
-				const overwriteCount = c.overwriteCount
-				if (overwriteCount !== undefined) {
-					return p + overwriteCount
-				}
-				return p + c.encounterSet.count
-			}
-		}, 0)
-		return count - (customRemove?.count ?? 0)
-	}
-
 	function onChangeHandler(e: Event & { currentTarget: HTMLSelectElement }) {
 		onDropdownIndexChanged(parseInt(e.currentTarget.value))
 	}
 </script>
 
 <div class="dropdown">
+	<Button
+		label="Previous Scenario"
+		disabled={selectedScenarioIndex === 0}
+		onClick={() => {
+			onDropdownIndexChanged(selectedScenarioIndex - 1)
+		}}><FaIcon path={allIcons.arrowLeftBordered} /></Button
+	>
 	<span>Scenario</span>
 	<select name="scenarios" value={selectedScenarioIndex} on:change={(e) => onChangeHandler(e)}>
 		{#each scenarios as s, i}
 			<option value={i}>{makeLongScenarioName(s)}</option>
 		{/each}
 	</select>
+	<Button
+		label="Next Scenario"
+		disabled={selectedScenarioIndex === scenarios.length - 1}
+		onClick={() => {
+			onDropdownIndexChanged(selectedScenarioIndex + 1)
+		}}><FaIcon path={allIcons.arrowRightBordered} /></Button
+	>
 </div>
 
 {#if selectedScenario.diagram !== undefined}

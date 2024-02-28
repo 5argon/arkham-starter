@@ -15,7 +15,14 @@
 		"site": "Ancient Evils",
 		"url": "https://derbk.com/ancientevils/masking-up-for-hemlock-vale/",
 		"name": "Masking up for Hemlock Vale",
-		"date": "2024-12-01",
+		"date": "2024-01-12",
+		"cards": ["10023", "10043", "10067", "10084", "10111"]
+	},
+	{
+		"site": "Quick Learner",
+		"url": "https://www.youtube.com/watch?v=vFEyqZVObYM",
+		"name": "The Masks of Hemlock Vale (Arkham Horror Game Discussion)",
+		"date": "2024-02-25",
 		"cards": ["10023", "10043", "10067", "10084", "10111"]
 	},
 	{
@@ -278,5 +285,53 @@
 		"url": "https://www.youtube.com/watch?v=xeMQ8If_6d0",
 		"name": "The Feast of Hemlock Vale NEW Investigators Preview - Arkham Horror The Card Game",
 		"date": "2024-02-16"
+	},
+	{
+		"site": "PlayingBoardGames",
+		"url": "https://www.youtube.com/watch?v=dAL2uGQYKX4",
+		"name": "The 5 Feast of Hemlock Vale Cards I'm Most Excited For (Arkham Horror: The Card Game)",
+		"date": "2024-02-22",
+		"cards": ["10084", "10033", "10104", "10123", "10098"]
+	},
+	{
+		"site": "Strength in Numbers",
+		"url": "https://strengthinnumbersarkham.wordpress.com/2024/02/20/an-introduction-to-kate-winthrop/",
+		"name": "An Introduction to Kate Winthrop",
+		"date": "2024-02-20",
+		"cards": ["10004"]
+	},
+	{
+		"site": "Ancient Evils",
+		"url": "https://derbk.com/ancientevils/tools-gold-a-wilson-richards-primer/",
+		"name": "Tool’s Gold – A Wilson Richards Primer",
+		"date": "2024-02-20",
+		"cards": ["10001"]
+	},
+	{
+		"site": "Quick Learner",
+		"url": "https://www.youtube.com/watch?v=sDVzZ_TZ-i4",
+		"name": "Alessandra's Parley Party! (Arkham Horror LCG Deck Tech)",
+		"date": "2024-02-20",
+		"cards": ["10009"]
+	},
+	{
+		"site": "PlayingBoardGames",
+		"url": "https://www.youtube.com/watch?v=Tfkskzdg03Q",
+		"name": "Tank Samson Deck Guide (Arkham Horror: The Card Game)",
+		"date": "2024-02-20",
+		"cards": ["10015"]
+	},
+	{
+		"site": "Valentin1331",
+		"url": "https://arkhamdb.com/decklist/view/47001",
+		"name": "Kōhaku, Fifty Shades of Blurse|FHV Intro|Deck Guide",
+		"date": "2024-02-20",
+		"cards": ["10012"]
+	},
+	{
+		"site": "Arkham Chronicle",
+		"url": "https://www.youtube.com/watch?v=YeckshMOCDA",
+		"name": "The Feast of Hemlock Vale Investigator Expansion EXPLAINED in less than 2 minutes! Arkham Horror LCG",
+		"date": "2024-02-27"
 	}
 ]

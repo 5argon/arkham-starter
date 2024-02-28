@@ -5,7 +5,10 @@
 		type Campaign,
 		type EncounterSetItem,
 	} from '$lib/core/campaign'
+	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
+	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import {
 		findFrequencies,
 		findUniqueScenarios,
@@ -53,12 +56,26 @@
 </script>
 
 <div class="dropdown">
+	<Button
+		label="Previous Scenario"
+		disabled={selectedScenarioIndex === 0}
+		onClick={() => {
+			onDropdownIndexChanged(selectedScenarioIndex - 1)
+		}}><FaIcon path={allIcons.arrowLeftBordered} /></Button
+	>
 	<span>Scenario</span>
 	<select name="scenarios" value={selectedScenarioIndex} on:change={(e) => onChangeHandler(e)}>
 		{#each scenarios as s, i}
 			<option value={i}>{makeLongScenarioName(s)}</option>
 		{/each}
 	</select>
+	<Button
+		label="Next Scenario"
+		disabled={selectedScenarioIndex === scenarios.length - 1}
+		onClick={() => {
+			onDropdownIndexChanged(selectedScenarioIndex + 1)
+		}}><FaIcon path={allIcons.arrowRightBordered} /></Button
+	>
 </div>
 
 <h3 class="scenario-name">
