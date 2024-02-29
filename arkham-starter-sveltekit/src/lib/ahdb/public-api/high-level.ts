@@ -165,9 +165,103 @@ export interface DecodedMeta {
 	factionSelected?: CardClass
 	optionSelected?: string
 	deckSizeSelected?: number
+	extraDeck?: string[]
 	faction1?: CardClass
 	faction2?: CardClass
 }
+
+interface RawMeta extends CustMeta {
+	alternate_front?: string
+	alternate_back?: string
+
+	/**
+	 * Parallel Back Wendy Adams
+	 */
+	option_selected?: 'blessed' | 'cursed' | 'both'
+
+	/**
+	 * Mandy Thompson
+	 */
+	deck_size_selected?: 30 | 40 | 50
+
+	/**
+	 * For anyone with one faction choice.
+	 */
+	faction_selected?: 'guardian' | 'seeker' | 'rogue' | 'mystic' | 'survivor'
+
+	/**
+	 * Charlie Kane
+	 */
+	faction_1?: 'guardian' | 'seeker' | 'rogue' | 'mystic' | 'survivor'
+
+	/**
+	 * Charlie Kane
+	 */
+	faction_2?: 'guardian' | 'seeker' | 'rogue' | 'mystic' | 'survivor'
+
+	/**
+	 * Parallel Back Jim Culver
+	 */
+	extra_deck?: ExtraDeckString
+}
+
+export interface CustMeta {
+	/** Hunter's Armor */
+	cus_09021?: CustMetaString
+	/** Runic Axe */
+	cus_09022?: CustMetaString
+	/** Custom Modifications */
+	cus_09023?: CustMetaString
+
+	/** Alchemical Distillation */
+	cus_09040?: CustMetaString
+	/** Empirical Hypothesis */
+	cus_09041?: CustMetaString
+	/** The Raven Quill */
+	cus_09042?: CustMetaString
+
+	/** Damning Testimony */
+	cus_09059?: CustMetaString
+	/** Friends in Low Places */
+	cus_09060?: CustMetaString
+	/** Honed Instinct */
+	cus_09061?: CustMetaString
+
+	/** Living Ink */
+	cus_09079?: CustMetaString
+	/** Summoned Servitor */
+	cus_09080?: CustMetaString
+	/** Power Word */
+	cus_09081?: CustMetaString
+
+	/** Pocket Multi Tool */
+	cus_09099?: CustMetaString
+	/** Makeshift Trap */
+	cus_09100?: CustMetaString
+	/** Grizzled */
+	cus_09101?: CustMetaString
+
+	/** Hyperphysical Shotcaster */
+	cus_09119?: CustMetaString
+}
+
+/**
+ * Format: X,X,X,...
+ * Each X: index|checked_boxes OR index|checked_boxes|details
+ *
+ * Each details :
+ * - Card's ID
+ * - Trait string
+ * - willpower | intellect | combat | agility (Living Ink)
+ * - Multiple of above, separated by ^
+ */
+type CustMetaString = string
+
+/**
+ * Format: X,X,X,...
+ * Each X: Card's ID.
+ */
+type ExtraDeckString = string
 
 export interface CustomizableMeta {
 	card: string
@@ -180,30 +274,33 @@ function metaDecode(meta: string): DecodedMeta {
 	if (meta === '') {
 		return {}
 	}
-	const json = JSON.parse(meta)
+	const json = JSON.parse(meta) as RawMeta
 	const dm: DecodedMeta = {
 		customizableMetas: [],
 	}
-	if ('alternate_front' in json && json.alternate_front !== '') {
+	if (json.alternate_front && json.alternate_front !== '') {
 		dm.alternateFront = json.alternate_front
 	}
-	if ('alternate_back' in json && json.alternate_back !== '') {
+	if (json.alternate_back && json.alternate_back !== '') {
 		dm.alternateBack = json.alternate_back
 	}
-	if ('faction_selected' in json) {
+	if (json.faction_selected) {
 		dm.factionSelected = classCodeToCardClass(json.faction_selected)
 	}
-	if ('faction_1' in json) {
+	if (json.faction_1) {
 		dm.faction1 = classCodeToCardClass(json.faction_1)
 	}
-	if ('faction_2' in json) {
+	if (json.faction_2) {
 		dm.faction2 = classCodeToCardClass(json.faction_2)
 	}
-	if ('option_selected' in json) {
+	if (json.option_selected) {
 		dm.optionSelected = json.option_selected
 	}
-	if ('deck_size_selected' in json) {
+	if (json.deck_size_selected) {
 		dm.deckSizeSelected = json.deck_size_selected
+	}
+	if (json.extra_deck) {
+		dm.extraDeck = json.extra_deck.split(',')
 	}
 	const customizableMetas: CustomizableMeta[] = []
 	Object.entries(json).forEach(([key, value]) => {

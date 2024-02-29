@@ -62,7 +62,7 @@
 	/>
 </div>
 
-{#each selected as s, i (s)}
+{#each selected as s, i}
 	<CardFormSelectedItem
 		card={popupDatabase.getByIdThrowNull(s)}
 		onRemove={() => {

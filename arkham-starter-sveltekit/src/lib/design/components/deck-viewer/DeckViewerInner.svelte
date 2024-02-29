@@ -16,6 +16,7 @@
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import InvestigatorFrontBack from '../card/InvestigatorFrontBack.svelte'
 	import Checkbox from '../basic/Checkbox.svelte'
+	import { getExtraName } from '$lib/deck/deck'
 
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
@@ -25,6 +26,7 @@
 	let rcoreDeck: GetDeckCardIdReturns
 	let entries: DecklistEntry[] = []
 	let sideEntries: DecklistEntry[] = []
+	let optionalEntries: DecklistEntry[] = []
 	let extraEntries: DecklistEntry[] = []
 	let bondedEntries: DecklistEntry[] = []
 	let sideBondedEntries: DecklistEntry[] = []
@@ -34,6 +36,7 @@
 		allEntries = [
 			...entries,
 			...sideEntries,
+			...optionalEntries,
 			...extraEntries,
 			...bondedEntries,
 			...sideBondedEntries,
@@ -44,6 +47,7 @@
 	let sortings: Sorting[] = [Sorting.Class, Sorting.Set]
 	let toggleMap: { [cardId: string]: boolean[] } = {}
 	let sideToggleMap: { [cardId: string]: boolean[] } = {}
+	let optionalToggleMap: { [cardId: string]: boolean[] } = {}
 	let extraToggleMap: { [cardId: string]: boolean[] } = {}
 	let bondedToggleMap: { [cardId: string]: boolean[] } = {}
 	let sideBondedToggleMap: { [cardId: string]: boolean[] } = {}
@@ -51,6 +55,9 @@
 	let coalesce: boolean = false
 
 	let customizableMetas: CustomizableMeta[] = []
+
+	$: extraNameInvestigator = deckInput.decodedMeta.alternateBack ?? deckInput.investigatorCode
+	$: extraName = getExtraName(extraNameInvestigator)
 	function onGroupingsChanged(g: Grouping[]) {
 		groupings = g
 	}
@@ -89,6 +96,7 @@
 		}
 		bondedEntries = makeBondedEntries(rcoreDeck.cards1)
 
+		// Side is both ArkhamDB's side deck and Arkham Starter's optional cards.
 		const side = rcoreDeck.cards2.map<DecklistEntry>((x) => {
 			return {
 				amount: x.amount,
@@ -104,9 +112,21 @@
 		sideEntries = side.filter((x) => {
 			return !ahst?.extraCards.includes(x.cardId) ?? true
 		})
-		extraEntries = side.filter((x) => {
+		optionalEntries = side.filter((x) => {
 			return ahst?.extraCards.includes(x.cardId) ?? false
 		})
+		const extraNameInvestigator = deckInput.decodedMeta.alternateBack ?? deckInput.investigatorCode
+		const extraName = getExtraName(extraNameInvestigator)
+		extraEntries =
+			deckInput.decodedMeta.extraDeck?.map<DecklistEntry>((x) => {
+				const gator = deckInput.decodedMeta.alternateBack ?? deckInput.investigatorCode
+				return {
+					amount: 1,
+					cardId: x,
+					id: 'Extra' + x,
+					labels: [{ color: '#EEEEEE', text: extraName }],
+				}
+			}) ?? []
 		customizableMetas = rcoreDeck.decodedMeta.customizableMetas ?? []
 	}
 </script>
@@ -188,6 +208,29 @@
 		/>
 	{/if}
 
+	{#if extraEntries.length > 0}
+		<ListDivider
+			label={extraName + ' Deck ( ' + extraEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
+		/>
+		<CardTableDoubleDisplay
+			toggleMap={extraToggleMap}
+			entries={extraEntries}
+			{groupings}
+			{sortings}
+			onClickToggle={(id, newToggles) => {
+				extraToggleMap[id] = newToggles
+				extraToggleMap = { ...extraToggleMap }
+			}}
+			taboo={true}
+			{fullDatabase}
+			{popupDatabase}
+			showList
+			showScans
+			small
+			columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		/>
+	{/if}
+
 	{#if sideEntries.length > 0}
 		<ListDivider
 			label={'Side Deck ( ' + sideEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
@@ -236,18 +279,18 @@
 		/>
 	{/if}
 
-	{#if extraEntries.length > 0}
+	{#if optionalEntries.length > 0}
 		<ListDivider
-			label={'Optional ( ' + extraEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
+			label={'Optional ( ' + optionalEntries.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
 		/>
 		<CardTableDoubleDisplay
-			toggleMap={extraToggleMap}
-			entries={extraEntries}
+			toggleMap={optionalToggleMap}
+			entries={optionalEntries}
 			{groupings}
 			{sortings}
 			onClickToggle={(id, newToggles) => {
-				extraToggleMap[id] = newToggles
-				extraToggleMap = { ...extraToggleMap }
+				optionalToggleMap[id] = newToggles
+				optionalToggleMap = { ...optionalToggleMap }
 			}}
 			taboo={true}
 			{fullDatabase}

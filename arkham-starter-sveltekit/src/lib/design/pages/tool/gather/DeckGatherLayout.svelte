@@ -99,6 +99,22 @@
 				})
 			}
 			ents.push(...makeBondedEntries(g.cards1))
+			if (g.decodedMeta.extraDeck) {
+				ents.push(
+					...g.decodedMeta.extraDeck.map<DecklistEntry>((x) => {
+						const gator = g.decodedMeta.alternateBack ?? g.investigatorCode
+						return {
+							amount: 1,
+							cardId: x,
+							id: 'Extra' + x,
+							labels: [
+								{ color: colorHex, cardId: g.investigatorCode },
+								{ color: colorHex, text: getExtraName(gator) },
+							],
+						}
+					}),
+				)
+			}
 		}
 		if (showSide) {
 			for (let i = 0; i < g.cards2.length; i++) {
@@ -146,6 +162,7 @@
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import CardTableDoubleDisplay from '../../explore/CardTableDoubleDisplay.svelte'
 	import { goto } from '$app/navigation'
+	import { getExtraName } from '$lib/deck/deck'
 
 	export let pdb: PopupDatabase
 	export let fdb: FullDatabase

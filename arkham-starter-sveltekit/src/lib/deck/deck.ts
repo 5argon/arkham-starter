@@ -44,3 +44,14 @@ export async function processRawDeck(r: RawDeck): Promise<DeckEntry | null> {
 		modifiedDeckName: deck.deck.replace(new RegExp(r.renameRegex), ''),
 	}
 }
+
+export function getExtraName(investigator: string): string {
+	switch (investigator) {
+		case '90049': {
+			return 'Spirit'
+		}
+		default: {
+			return 'Extra'
+		}
+	}
+}
