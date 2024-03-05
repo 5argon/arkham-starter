@@ -12,17 +12,22 @@
 	let sortedGeneral: ExploreLink[] = []
 	let sortedCards: ExploreLink[] = []
 	$: {
+		const siteToScore = new Map<string, number>()
+		links.forEach((x) => {
+			siteToScore.set(x.site, 0)
+		})
+		// Give random scores for each creator except official one.
+		siteToScore.forEach((_, site) => {
+			if (site === 'Fantasy Flight Games') {
+				siteToScore.set(site, -1)
+			} else {
+				siteToScore.set(site, Math.random())
+			}
+		})
+
 		const sortedAll = links.sort((a, b) => {
-			// Official stuff wins
-			const ffg = 'Fantasy Flight Games'
-			if (a.site === ffg) {
-				return -1
-			}
-			if (b.site === ffg) {
-				return 1
-			}
-			const localeCompare = a.site.localeCompare(b.site)
-			if (localeCompare !== 0) return localeCompare
+			const scoreCompare = (siteToScore.get(a.site) ?? 0) - (siteToScore.get(b.site) ?? 0)
+			if (scoreCompare !== 0) return scoreCompare
 			if (a.date === undefined) return 1
 			if (b.date === undefined) return -1
 			if (a.date !== undefined && b.date !== undefined) {

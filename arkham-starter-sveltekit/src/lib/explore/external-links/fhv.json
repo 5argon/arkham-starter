@@ -124,6 +124,12 @@
 		"cards": ["10029", "10104"]
 	},
 	{
+		"site": "Bradley Galbraith",
+		"url": "https://www.youtube.com/watch?v=F_RwmWG5ky0",
+		"name": "Arkham Horror: Feast of Hemlock Vale Preview Season & Card Discussion",
+		"date": "2023-11-08"
+	},
+	{
 		"site": "Optimal Play",
 		"url": "https://www.youtube.com/watch?v=rtsaoqcFg8o",
 		"name": "Birthday party becomes SURPRISE party for Stephen with an Arkham LCG Hemlock Vale card reveal!",
@@ -339,5 +345,12 @@
 		"url": "https://www.youtube.com/watch?v=GGNMwTqWQTg",
 		"name": "Let's Talk Hemlock Vale! | The Feast of Hemlock Vale Card Review",
 		"date": "2024-02-25"
+	},
+	{
+		"site": "Quick Learner",
+		"url": "https://www.youtube.com/watch?v=JYQP3MCMvAA",
+		"name": "Wilson Richards Deck Retrospective (Arkham Horror LCG Discussion)",
+		"date": "2024-02-27",
+		"cards": ["10001"]
 	}
 ]
