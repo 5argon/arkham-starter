@@ -363,6 +363,20 @@
 		"site": "Ancient Evils",
 		"url": "https://derbk.com/ancientevils/return-to-tools-gold-a-wilson-richards-primer/",
 		"name": "Return To Tool’s Gold – A Wilson Richards Primer",
+		"date": "2024-03-05",
+		"cards": ["10001"]
+	},
+	{
+		"site": "PlayingBoardGames",
+		"url": "https://www.youtube.com/watch?v=yer8s1f13Nc",
+		"name": "NEW PLAYER DECK FOR WILSON RICHARDS | Arkham Horror: The Card Game",
+		"date": "2024-03-02",
+		"cards": ["10001"]
+	},
+	{
+		"site": "PlayingBoardGames",
+		"url": "https://www.youtube.com/watch?v=HB3Ae3qk0qw",
+		"name": "Eric Chats About Even More The Feast of Hemlock Vale Player Cards! | ARKHAM HORROR: THE CARD GAME",
 		"date": "2024-03-05"
 	}
 ]
