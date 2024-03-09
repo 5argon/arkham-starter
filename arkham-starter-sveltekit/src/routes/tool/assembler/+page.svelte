@@ -2,10 +2,10 @@
 	import { browser } from '$app/environment'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
-
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import PartyAssemblerLayout from '$lib/design/pages/tool/assembler/PartyAssemblerLayout.svelte'
 	import helpMd from '$lib/md/assembler.md?raw'
+
 	import type { PageData } from './$types'
 
 	export let data: PageData

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
-
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import DeckGatherLayout from '$lib/design/pages/tool/gather/DeckGatherLayout.svelte'
 	import helpMd from '$lib/md/gather.md?raw'
+
 	import type { PageData } from './$types'
 
 	export let data: PageData

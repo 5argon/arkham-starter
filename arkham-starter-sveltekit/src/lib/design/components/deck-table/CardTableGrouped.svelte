@@ -5,6 +5,7 @@
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import { groupCards } from '$lib/deck-table/grouping/group-cards'
+
 	import CardTable from './CardTable.svelte'
 
 	export let entries: DecklistEntry[]

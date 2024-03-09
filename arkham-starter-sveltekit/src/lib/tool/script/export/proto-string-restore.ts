@@ -1,10 +1,11 @@
 import type { ExportOptions } from '$lib/proto/generated/export_options'
 import {
+	type UpgradeExportOptions,
 	UpgradeExportOptions_UpgradeExportStyle,
 	UpgradeExportProto,
-	type UpgradeExportOptions,
 } from '$lib/proto/generated/upgrade_export'
 import type { Row } from '$lib/tool/upgrade/interface'
+
 import { base64ToBinary } from './options'
 
 export interface RestoreResult {

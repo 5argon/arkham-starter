@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition'
+
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+
 	import CardSpan from '../card/CardSpan.svelte'
 
 	export let card: PopupDatabaseItem

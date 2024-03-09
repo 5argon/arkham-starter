@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
+	import { browser } from '$app/environment'
+	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import CardForm from '$lib/design/components/form/CardForm.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import { browser } from '$app/environment'
+
 	import type { PageData } from './$types'
-	import Button from '$lib/design/components/basic/Button.svelte'
 	export let data: PageData
 	let selected: string | null = null
 	let startingWidth = 630 / 2

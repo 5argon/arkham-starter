@@ -1,14 +1,15 @@
 <script lang="ts">
 	import {
-		EncounterSetSorting,
-		isEncounterSetWithModification,
 		type Campaign,
 		type EncounterSetItem,
+		EncounterSetSorting,
+		isEncounterSetWithModification,
 	} from '$lib/core/campaign'
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+
 	import {
 		findFrequencies,
 		findUniqueScenarios,

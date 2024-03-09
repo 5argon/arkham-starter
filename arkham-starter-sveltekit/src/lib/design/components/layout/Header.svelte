@@ -1,6 +1,7 @@
 <script>
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+
 	import Button from '../basic/Button.svelte'
 	import TeamSlot from './top-bar/TeamSlot.svelte'
 	import TopBarButton from './top-bar/TopBarButton.svelte'

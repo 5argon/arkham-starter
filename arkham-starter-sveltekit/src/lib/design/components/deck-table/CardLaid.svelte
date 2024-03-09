@@ -4,6 +4,7 @@
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import { flattenGroupedCards, groupCards } from '$lib/deck-table/grouping/group-cards'
+
 	import CardScan from './CardScan.svelte'
 
 	export let entries: DecklistEntry[]

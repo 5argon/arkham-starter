@@ -1,5 +1,6 @@
 <script>
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+
 	import ResourcePage from './ResourcePage.svelte'
 </script>
 

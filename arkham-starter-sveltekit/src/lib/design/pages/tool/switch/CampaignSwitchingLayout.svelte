@@ -16,37 +16,37 @@
 </script>
 
 <script lang="ts">
+	import { coreToRcore } from '$lib/ahdb/conversion'
+	import {
+		type CardAndAmount,
+		extractDeckFromUrl,
+		type GetDeckCardIdReturns,
+		getDeckCardIds,
+	} from '$lib/ahdb/public-api/high-level'
+	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
 	import {
 		fetchFullDatabaseStatic,
 		FullDatabase,
 		type FullDatabaseItem,
 	} from '$lib/core/full-database'
+	import { fetchPopupDatabaseStatic, type PopupDatabase } from '$lib/core/popup-database'
+	import { goToGather } from '$lib/deck/go-to-gather'
+	import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
+	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
+	import Button from '$lib/design/components/basic/Button.svelte'
+	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+	import TextBox from '$lib/design/components/basic/TextBox.svelte'
+	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
+	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
+	import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
+	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import {
 		CampaignSwitchProto,
 		CampaignSwitchProto_InputDeck,
 	} from '$lib/proto/generated/campaign_switch'
-	import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
-	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
-	import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
-	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
-	import Button from '$lib/design/components/basic/Button.svelte'
-	import {
-		extractDeckFromUrl,
-		getDeckCardIds,
-		type CardAndAmount,
-		type GetDeckCardIdReturns,
-	} from '$lib/ahdb/public-api/high-level'
 	import { intersect } from '$lib/tool/overlap/overlap-helpers'
-	import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
-	import TextBox from '$lib/design/components/basic/TextBox.svelte'
-	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
-	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
-	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
-	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
-	import { coreToRcore } from '$lib/ahdb/conversion'
-	import { goToGather } from '$lib/deck/go-to-gather'
-	import { fetchPopupDatabaseStatic, type PopupDatabase } from '$lib/core/popup-database'
+	import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
 
 	export let protoString: string | null = null
 	let sharingUrl = ''

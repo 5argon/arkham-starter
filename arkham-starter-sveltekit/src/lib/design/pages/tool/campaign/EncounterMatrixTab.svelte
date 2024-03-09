@@ -1,10 +1,11 @@
 <script lang="ts">
 	import {
+		type Campaign,
 		EncounterSetFlag,
 		EncounterSetSorting,
-		type Campaign,
 		type Scenario,
 	} from '$lib/core/campaign'
+
 	import {
 		findFrequencies,
 		findUniqueEncounters,

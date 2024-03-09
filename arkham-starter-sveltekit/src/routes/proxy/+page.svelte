@@ -1,7 +1,6 @@
 <script lang="ts">
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import helpMd from '$lib/md/proxy.md?raw'
 </script>
 

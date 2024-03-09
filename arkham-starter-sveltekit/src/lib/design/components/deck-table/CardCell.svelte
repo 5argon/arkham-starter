@@ -10,8 +10,9 @@
 	import { CommitIcon } from '$lib/core/commit-icon'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import { processCustomizable } from '$lib/deck/customizable'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+
 	import CardSpan from '../card/CardSpan.svelte'
 	import SkillIcon from '../inline/SkillIcon.svelte'
 

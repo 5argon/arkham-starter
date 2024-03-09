@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { CardPack } from '$lib/core/card-pack'
-	import { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import { Sorting } from '$lib/deck-table/grouping'
 	import ExploreLayout from '$lib/design/pages/explore/ExploreLayout.svelte'
 	import links from '$lib/explore/external-links/fhv.json'
+
 	import type { PageData } from './$types'
 	export let data: PageData
 </script>

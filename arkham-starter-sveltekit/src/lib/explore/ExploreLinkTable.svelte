@@ -3,6 +3,7 @@
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import CardLaid from '$lib/design/components/deck-table/CardLaid.svelte'
+
 	import type { ExploreLink } from './explore-input'
 
 	export let links: ExploreLink[]

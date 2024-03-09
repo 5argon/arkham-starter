@@ -1,5 +1,6 @@
 <script lang="ts">
 	import DeckViewerBuiltIn from '$lib/design/components/deck-viewer/DeckViewerBuiltIn.svelte'
+
 	import type { PageData } from './$types'
 	export let data: PageData
 </script>

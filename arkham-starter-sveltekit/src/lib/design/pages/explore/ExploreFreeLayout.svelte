@@ -1,8 +1,9 @@
 <script>
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import ExploreMenu from './ExploreMenu.svelte'
-	import helpMd from '$lib/md/explore-ie.md?raw'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+	import helpMd from '$lib/md/explore-ie.md?raw'
+
+	import ExploreMenu from './ExploreMenu.svelte'
 </script>
 
 <PageTitle title={'Explore Investigator Expansions'} {helpMd} />

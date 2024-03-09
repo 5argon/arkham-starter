@@ -23,7 +23,7 @@
 </script>
 
 <script lang="ts">
-	import { isEntry, type GroupedCards } from '$lib/deck-table/decklist-entry'
+	import { type GroupedCards,isEntry } from '$lib/deck-table/decklist-entry'
 	export let group: GroupedCards
 	export let level: number
 	var count: number = 0

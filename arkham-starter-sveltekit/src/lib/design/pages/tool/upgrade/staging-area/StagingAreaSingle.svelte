@@ -1,12 +1,14 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition'
+
+	import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import ListDivider, { ListDividerLevel } from '$lib/design/components/basic/ListDivider.svelte'
 	import TextBox, { EditingLevel, NoticeLevel } from '$lib/design/components/basic/TextBox.svelte'
 	import UnknownCardBlock from '$lib/design/components/card/UnknownCardBlock.svelte'
-	import CardBlockLeftRight from './CardBlockLeftRight.svelte'
-	import { fly } from 'svelte/transition'
 	import type { GlobalSettings } from '$lib/proto/generated/global_settings'
-	import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
+
+	import CardBlockLeftRight from './CardBlockLeftRight.svelte'
 
 	export let singleMode: boolean = false
 	export let globalSettings: GlobalSettings

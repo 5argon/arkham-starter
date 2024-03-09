@@ -1,5 +1,6 @@
-import { FullDatabase, fetchFullDatabaseStatic } from '$lib/core/full-database'
-import { PopupDatabase, fetchPopupDatabaseStatic } from '$lib/core/popup-database'
+import { fetchFullDatabaseStatic, FullDatabase } from '$lib/core/full-database'
+import { fetchPopupDatabaseStatic, PopupDatabase } from '$lib/core/popup-database'
+
 import type { PageLoad } from './$types'
 interface Ret {
 	fdb: FullDatabase

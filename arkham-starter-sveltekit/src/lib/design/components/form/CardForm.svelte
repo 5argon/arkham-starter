@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
+
 	import TextBox from '../basic/TextBox.svelte'
 	import CardPopupControl from '../card/card-popup/CardPopupControl.svelte'
 	import CardFormSelectedItem from './CardFormSelectedItem.svelte'

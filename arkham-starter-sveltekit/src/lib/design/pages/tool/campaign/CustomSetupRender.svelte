@@ -4,13 +4,14 @@
 		isEncounterSetWithModification,
 		type ScenarioSetupSub,
 	} from '$lib/core/campaign'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import {
 		TextIcon,
 		textIconFontClass,
 		textIconToFontCharacter,
 	} from '$lib/design/interface/text-icon'
+
 	import EncounterIconWithLabel from './EncounterIconWithLabel.svelte'
 	import GameComponentDisplay from './GameComponentDisplay.svelte'
 	import { gameComponentsToString, gameComponentToString, gameComponentToTextIcon } from './helper'

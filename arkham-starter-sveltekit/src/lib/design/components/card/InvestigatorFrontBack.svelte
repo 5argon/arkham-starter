@@ -3,11 +3,11 @@
 
 <script lang="ts">
 	import { rcoreToCore } from '$lib/ahdb/conversion'
-
-	import { forwardDeckToRcore, type GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+import { forwardDeckToRcore, type GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import { CardPackIcon } from '$lib/design/interface/card-pack'
+
 	import ParallelInfo from '../deck-banner/ParallelInfo.svelte'
 	import CardScan from '../deck-table/CardScan.svelte'
 	import CardSpan from './CardSpan.svelte'

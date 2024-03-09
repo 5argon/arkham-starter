@@ -1,4 +1,5 @@
 import type { CardClass } from '$lib/core/card-class'
+
 import type { DecklistEntry } from '../decklist-entry'
 import { Sorting } from '../grouping'
 import type { WithCard } from './group-cards'

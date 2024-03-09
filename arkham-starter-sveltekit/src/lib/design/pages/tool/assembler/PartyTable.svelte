@@ -4,6 +4,7 @@
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import type { Party } from '$lib/tool/overlap/overlap-helpers'
+
 	import PartyRender from './PartyRender.svelte'
 
 	export let parties: Party[]

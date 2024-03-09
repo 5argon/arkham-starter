@@ -1,8 +1,9 @@
 <script lang="ts">
 	import utilityMiniCardJsonImport from '$lib/data/util-mini-db.json'
+
+	import type { ResultSet } from './result'
 	import UtilityResultItem from './UtilityResultItem.svelte'
 	import UtilityResultSet from './UtilityResultSet.svelte'
-	import type { ResultSet } from './result'
 
 	export let resultSet: ResultSet
 	export let expanded: boolean

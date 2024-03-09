@@ -1,17 +1,18 @@
 <script lang="ts">
-	import type { Party } from '$lib/tool/overlap/overlap-helpers'
-	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
-	import PartyDeckEntry from '../../../components/card/PartyDeckEntry.svelte'
+	import type { GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
+	import { addPackCount, countPacks, type PackCount } from '$lib/deck/deck-count'
+	import { goToGather } from '$lib/deck/go-to-gather'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import Button from '$lib/design/components/basic/Button.svelte'
+	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 	import PackInfoSpan, {
 		type PackInfoSpanItem,
 	} from '$lib/design/components/inline/PackInfoSpan.svelte'
-	import { addPackCount, countPacks, type PackCount } from '$lib/deck/deck-count'
-	import { goToGather } from '$lib/deck/go-to-gather'
-	import type { GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
-	import type { PopupDatabase } from '$lib/core/popup-database'
+	import type { Party } from '$lib/tool/overlap/overlap-helpers'
+
+	import PartyDeckEntry from '../../../components/card/PartyDeckEntry.svelte'
 
 	export let party: Party
 	export let fullDatabase: FullDatabase

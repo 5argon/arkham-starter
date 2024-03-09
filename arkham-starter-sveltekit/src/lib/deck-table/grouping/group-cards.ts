@@ -3,7 +3,8 @@ import { classConversion } from '$lib/ahdb/conversion'
 import { cardClassToName } from '$lib/core/card-class'
 import { CardPack } from '$lib/core/card-pack'
 import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
-import { isEntry, type DecklistEntry, type GroupedCards } from '../decklist-entry'
+
+import { type DecklistEntry, type GroupedCards, isEntry } from '../decklist-entry'
 import { Grouping, Sorting } from '../grouping'
 import {
 	classesScore,

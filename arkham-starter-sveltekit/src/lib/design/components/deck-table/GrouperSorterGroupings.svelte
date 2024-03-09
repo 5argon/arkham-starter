@@ -2,6 +2,7 @@
 	import { Grouping } from '$lib/deck-table/grouping'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+
 	import Button from '../basic/Button.svelte'
 
 	export let groupings: Grouping[]

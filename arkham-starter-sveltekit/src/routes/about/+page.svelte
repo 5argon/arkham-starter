@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SvelteMarkdown from 'svelte-markdown'
+
 	import mdText from '$lib/md/about.md?raw'
 </script>
 

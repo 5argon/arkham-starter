@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SvelteMarkdown from 'svelte-markdown'
+
 	import footerMd from '$lib/md/footer.md?raw'
 </script>
 

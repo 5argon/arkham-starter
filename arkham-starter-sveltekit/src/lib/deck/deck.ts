@@ -1,5 +1,6 @@
 import type { AhdbDeck } from '$lib/ahdb/deck'
-import { getDeckCardIds, type GetDeckCardIdReturns } from '../ahdb/public-api/high-level'
+
+import { type GetDeckCardIdReturns, getDeckCardIds } from '../ahdb/public-api/high-level'
 
 export interface RawDeck {
 	user: string

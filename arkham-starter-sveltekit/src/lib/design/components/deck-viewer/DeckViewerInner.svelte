@@ -1,22 +1,23 @@
 <script lang="ts">
 	import {
-		type GetDeckCardIdReturns,
-		forwardDeckToRcore,
-		type CustomizableMeta,
 		type ArkhamStarterDeckData,
 		type CardAndAmount,
+		type CustomizableMeta,
+		forwardDeckToRcore,
+		type GetDeckCardIdReturns,
 	} from '$lib/ahdb/public-api/high-level'
-	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
-	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
-	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
-	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-	import CardTableDoubleDisplay from '$lib/design/pages/explore/CardTableDoubleDisplay.svelte'
-	import DeckBannerHigher from '$lib/design/components/deck-banner/DeckBannerHigher.svelte'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
-	import InvestigatorFrontBack from '../card/InvestigatorFrontBack.svelte'
-	import Checkbox from '../basic/Checkbox.svelte'
 	import { getExtraName } from '$lib/deck/deck'
+	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
+	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
+	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+	import DeckBannerHigher from '$lib/design/components/deck-banner/DeckBannerHigher.svelte'
+	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
+	import CardTableDoubleDisplay from '$lib/design/pages/explore/CardTableDoubleDisplay.svelte'
+
+	import Checkbox from '../basic/Checkbox.svelte'
+	import InvestigatorFrontBack from '../card/InvestigatorFrontBack.svelte'
 
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase

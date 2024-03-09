@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ExploreFreeLayout from '$lib/design/pages/explore/ExploreFreeLayout.svelte'
+
 	import type { ExploreData } from './+page'
 	export let data: ExploreData
 	$: q = data.q

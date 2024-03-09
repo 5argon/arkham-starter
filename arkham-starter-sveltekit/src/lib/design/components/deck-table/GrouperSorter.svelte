@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
+
 	import FramedTextSpan from '../inline/FramedTextSpan.svelte'
 	import GrouperSorterGroupings from './GrouperSorterGroupings.svelte'
 	import GrouperSorterSortings from './GrouperSorterSortings.svelte'

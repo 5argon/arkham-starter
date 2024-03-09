@@ -1,7 +1,8 @@
 <script lang="ts">
 	import SvelteMarkdown from 'svelte-markdown'
-	import mdText from '$lib/md/submission.md?raw'
+
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+	import mdText from '$lib/md/submission.md?raw'
 </script>
 
 <svelte:head>

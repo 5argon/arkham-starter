@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { CardClass } from '$lib/core/card-class'
 	import { makePips } from '$lib/design/interface/string-util'
+
 	import ClassIcon from '../inline/ClassIcon.svelte'
 	export let cardClass: CardClass | null
 	export let level: number

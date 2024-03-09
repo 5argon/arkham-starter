@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { allIcons } from '$lib/design/icons/all-icons'
-
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+import FaIcon from '$lib/design/icons/FaIcon.svelte'
 
 	export let text: string | null = null
 </script>

@@ -12,6 +12,7 @@
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import type { ExploreInput } from '$lib/explore/explore-input'
 	import ExploreLinks from '$lib/explore/ExploreLinks.svelte'
+
 	import CardTableDoubleDisplay from './CardTableDoubleDisplay.svelte'
 	import ExploreMenu from './ExploreMenu.svelte'
 

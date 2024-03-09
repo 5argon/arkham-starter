@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	import HorizontalRadio from '$lib/design/components/layout/HorizontalRadio.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+
 	import jsonDir from './divider-dir.json'
 
 	interface Language {
@@ -17,6 +18,7 @@
 <script lang="ts">
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+
 	import { dividerData } from './divider-data'
 
 	let selectedLanguageIndex = 0

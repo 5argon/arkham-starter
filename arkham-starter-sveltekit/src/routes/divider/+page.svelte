@@ -1,8 +1,9 @@
 <script lang="ts">
+	import SvelteMarkdown from 'svelte-markdown'
+
 	import MarkdownImage from '$lib/design/components/basic/MarkdownImage.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import helpMd from '$lib/md/divider.md?raw'
-	import SvelteMarkdown from 'svelte-markdown'
 </script>
 
 <svelte:head>

@@ -1,5 +1,6 @@
-import { browser } from '$app/environment'
 import type { Load } from '@sveltejs/kit'
+
+import { browser } from '$app/environment'
 
 export const load: Load<ExploreParam, ExploreInputData, ExploreParentData, ExploreData> = () => {
 	let q = ''

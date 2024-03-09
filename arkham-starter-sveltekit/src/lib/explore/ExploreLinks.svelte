@@ -2,8 +2,9 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
-	import ExploreLinkTable from './ExploreLinkTable.svelte'
+
 	import type { ExploreLink } from './explore-input'
+	import ExploreLinkTable from './ExploreLinkTable.svelte'
 
 	export let links: ExploreLink[]
 	export let popupDatabase: PopupDatabase

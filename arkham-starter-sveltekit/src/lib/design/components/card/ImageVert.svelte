@@ -4,6 +4,7 @@
 	import { classToBorderColorCss } from '$lib/design/interface/card-class'
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
 	import { makePips } from '$lib/design/interface/string-util'
+
 	import CardHover from './CardHover.svelte'
 
 	export let name: string | null = null

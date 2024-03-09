@@ -5,6 +5,7 @@
 		getCampaignStaticUrl,
 		getPackStaticUrl,
 	} from '$lib/design/interface/card-pack'
+
 	import { packToFile } from './pack-to-file'
 	export let set: CardPackIcon
 	export let text: string

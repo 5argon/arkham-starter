@@ -2,6 +2,7 @@
 	import { CardPack } from '$lib/core/card-pack'
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import ExploreLayout from '$lib/design/pages/explore/ExploreLayout.svelte'
+
 	import type { PageData } from './$types'
 	export let data: PageData
 </script>

@@ -1,5 +1,5 @@
-import { wrapPips, wrapSmall } from '$lib/tool/script/export/ahdb-syntax'
 import { GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
+import { wrapPips, wrapSmall } from '$lib/tool/script/export/ahdb-syntax'
 
 export function makePipsStyle(
 	p: number,

@@ -3,6 +3,7 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import valid from '$lib/data/valid.json'
+
 	import CardSpan from '../card/CardSpan.svelte'
 	import ColumnLabel from './ColumnLabel.svelte'
 	export let cardId: string

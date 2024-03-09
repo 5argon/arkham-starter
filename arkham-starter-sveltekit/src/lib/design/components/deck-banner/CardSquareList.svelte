@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
+
 	import ImageVert from '../card/ImageVert.svelte'
 
 	export let previewCards: string[]

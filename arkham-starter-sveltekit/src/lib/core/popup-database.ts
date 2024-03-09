@@ -1,13 +1,15 @@
+import Fuse from 'fuse.js'
+
+import { isRandomBasicWeakness } from '$lib/ahdb/card'
 import {
 	classConversion,
 	iconToNameConversion,
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
-import { CardPackIcon } from '$lib/design/interface/card-pack'
-import type { CardClass } from './card-class'
-import { isRandomBasicWeakness } from '$lib/ahdb/card'
 import pdbJson from '$lib/data/popupdb.json'
-import Fuse from 'fuse.js'
+import { CardPackIcon } from '$lib/design/interface/card-pack'
+
+import type { CardClass } from './card-class'
 import type { CardPack } from './card-pack'
 export type LazyPopupDatabase = Promise<PopupDatabase>
 

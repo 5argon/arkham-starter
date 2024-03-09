@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { EncounterSetFlag, type EncounterSet } from '$lib/core/campaign'
+	import { type EncounterSet,EncounterSetFlag } from '$lib/core/campaign'
+
 	import EncounterIcon from './EncounterIcon.svelte'
 	import { makeSetCountText } from './helper'
 

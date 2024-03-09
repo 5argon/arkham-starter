@@ -1,9 +1,9 @@
 import {
+	type Campaign,
+	type EncounterSet,
 	EncounterSetFlag,
 	EncounterSetSorting,
 	isEncounterSetWithModification,
-	type Campaign,
-	type EncounterSet,
 	type Scenario,
 } from '$lib/core/campaign'
 
@@ -24,7 +24,7 @@ export function findUniqueScenarios(c: Campaign): Scenario[] {
 }
 
 export function findUniqueEncounters(c: Campaign): EncounterSet[] {
-	const encounterSets = c.scenarios.flatMap(x=>mergeEncounters(x))
+	const encounterSets = c.scenarios.flatMap((x) => mergeEncounters(x))
 	const unique = new Set<EncounterSet>()
 	encounterSets.forEach((x) => {
 		unique.add(x)

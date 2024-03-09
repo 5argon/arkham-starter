@@ -1,7 +1,8 @@
 <script lang="ts">
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+
 	import Button from './Button.svelte'
 	export let label: string
 	export let value: number

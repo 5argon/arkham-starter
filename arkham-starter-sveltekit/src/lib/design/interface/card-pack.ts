@@ -1,4 +1,5 @@
 import { CardPack as CardPackIcon } from '$lib/core/card-pack'
+
 import { imageIconPackPath, imageIconPackPathBlack, imageIconPackPathWhite } from './path'
 export { CardPackIcon }
 

@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { allIcons } from '$lib/design/icons/all-icons'
-
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import SvelteMarkdown from 'svelte-markdown'
+
+	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+
 	import MarkdownImage from '../basic/MarkdownImage.svelte'
 	import Modal from './Modal.svelte'
 

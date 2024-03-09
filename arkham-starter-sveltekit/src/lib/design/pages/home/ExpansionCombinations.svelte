@@ -1,13 +1,13 @@
 <script lang="ts">
 	import type { CardPack } from '$lib/core/card-pack'
 	import type { PopupDatabase } from '$lib/core/popup-database'
-	import { decodeSideExtras, type DeckEntry } from '$lib/deck/deck'
+	import { type DeckEntry,decodeSideExtras } from '$lib/deck/deck'
 	import { countPacksHigher } from '$lib/deck/deck-count'
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import PackInfoSpan from '$lib/design/components/inline/PackInfoSpan.svelte'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 
 	export let popupDatabase: PopupDatabase
 	export let deckEntries: DeckEntry[]

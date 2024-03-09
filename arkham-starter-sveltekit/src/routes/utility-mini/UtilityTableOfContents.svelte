@@ -1,7 +1,8 @@
 <script lang="ts">
 	import utilityMiniCardJsonImport from '$lib/data/util-mini-db.json'
-	import UtilityResultSet from './UtilityResultSet.svelte'
+
 	import type { ResultSet } from './result'
+	import UtilityResultSet from './UtilityResultSet.svelte'
 	const utilityMiniCardJson: ResultSet[] = utilityMiniCardJsonImport as ResultSet[]
 	let openedIndex = -1
 </script>

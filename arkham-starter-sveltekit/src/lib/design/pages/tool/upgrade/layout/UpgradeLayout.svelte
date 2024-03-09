@@ -1,44 +1,43 @@
 <script lang="ts">
+	import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
 	import { fetchPopupDatabaseStatic, PopupDatabase } from '$lib/core/popup-database'
-
+	import SpinnerSpan from '$lib/design/components/basic/SpinnerSpan.svelte'
+	import CardForm from '$lib/design/components/form/CardForm.svelte'
 	import BigRightSider from '$lib/design/components/layout/BigRightSider.svelte'
-
-	import StagingArea from '../staging-area/StagingArea.svelte'
-	import UpgradeTable from '../upgrade-table/UpgradeTable.svelte'
-	import type { ToolbarEvents } from '$lib/tool/upgrade/upgrade-table/table-events'
+	import Modal from '$lib/design/components/layout/Modal.svelte'
+	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+	import ViewModeBanner from '$lib/design/components/layout/ViewModeBanner.svelte'
+	import { CardInfo_CommitOptions_CommitIcon } from '$lib/proto/generated/card_info'
+	import type { ExportOptions } from '$lib/proto/generated/export_options'
+	import { GlobalSettings, GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
+	import {
+		type UpgradeExportOptions,
+		UpgradeExportOptions_SimpleListOptions_BlockStyle,
+		UpgradeExportOptions_UpgradeExportStyle,
+	} from '$lib/proto/generated/upgrade_export'
+	import type { ExportCard, UpgradeExportRow } from '$lib/tool/script/export/export-tools-center'
+	import { protoStringRestore } from '$lib/tool/script/export/proto-string-restore'
+	import { placeholderCard, type Row } from '$lib/tool/upgrade/interface'
 	import type {
 		TableRowActionEvents,
 		TableRowEditEvents,
 	} from '$lib/tool/upgrade/upgrade-table/row-events'
 	import {
+		addCardToList,
+		createRow,
+		customizationCycle,
 		oneSideMoveDown,
 		oneSideMoveUp,
 		rowMoveDown,
-		rowMoveUp,
-		createRow,
-		addCardToList,
 		rowMoveFromTo,
-		customizationCycle,
+		rowMoveUp,
 	} from '$lib/tool/upgrade/upgrade-table/row-operations'
-	import SpinnerSpan from '$lib/design/components/basic/SpinnerSpan.svelte'
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import { placeholderCard, type Row } from '$lib/tool/upgrade/interface'
-	import Modal from '$lib/design/components/layout/Modal.svelte'
+	import type { ToolbarEvents } from '$lib/tool/upgrade/upgrade-table/table-events'
+	import { type CalculatedXp,calculateXps } from '$lib/tool/upgrade/upgrade-table/xp-calculate'
+
 	import UpgradeExportModalContent from '../export/UpgradeExportModalContent.svelte'
-	import { calculateXps, type CalculatedXp } from '$lib/tool/upgrade/upgrade-table/xp-calculate'
-	import {
-		UpgradeExportOptions_SimpleListOptions_BlockStyle,
-		UpgradeExportOptions_UpgradeExportStyle,
-		type UpgradeExportOptions,
-	} from '$lib/proto/generated/upgrade_export'
-	import { GlobalSettings, GlobalSettings_PipStyle } from '$lib/proto/generated/global_settings'
-	import type { ExportOptions } from '$lib/proto/generated/export_options'
-	import { CardInfo_CommitOptions_CommitIcon } from '$lib/proto/generated/card_info'
-	import type { ExportCard, UpgradeExportRow } from '$lib/tool/script/export/export-tools-center'
-	import { protoStringRestore } from '$lib/tool/script/export/proto-string-restore'
-	import type { CardAndAmount } from '$lib/ahdb/public-api/high-level'
-	import ViewModeBanner from '$lib/design/components/layout/ViewModeBanner.svelte'
-	import CardForm from '$lib/design/components/form/CardForm.svelte'
+	import StagingArea from '../staging-area/StagingArea.svelte'
+	import UpgradeTable from '../upgrade-table/UpgradeTable.svelte'
 
 	/**
 	 * Make a new page with this as true so it is just a list instead of upgrade planner.

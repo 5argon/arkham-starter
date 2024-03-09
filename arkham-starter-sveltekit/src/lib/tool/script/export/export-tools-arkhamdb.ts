@@ -1,15 +1,16 @@
 import { CardClass } from '$lib/core/card-class'
 import type { ExportOptions } from '$lib/proto/generated/export_options'
+import type { UpgradeExportOptions } from '$lib/proto/generated/upgrade_export'
+
 import { wrapColor, wrapSmall } from './ahdb-syntax'
-import { mdCardAndInfo } from './md-card'
-import { makeSimpleList } from './simple-list'
 import {
 	makeUpgradePlannerUrl,
-	upgradeExportToProtoString,
 	type UpgradeExport,
 	type UpgradeExportRow,
+	upgradeExportToProtoString,
 } from './export-tools-center'
-import type { UpgradeExportOptions } from '$lib/proto/generated/upgrade_export'
+import { mdCardAndInfo } from './md-card'
+import { makeSimpleList } from './simple-list'
 
 export function upgradeExportArkhamDb(
 	uex: UpgradeExport,

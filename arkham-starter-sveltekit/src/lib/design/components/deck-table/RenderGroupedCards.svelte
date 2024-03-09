@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase } from '$lib/core/popup-database'
-
-	import { isEntry, type GroupedCards, type DecklistEntry } from '$lib/deck-table/decklist-entry'
+import { type DecklistEntry,type GroupedCards, isEntry } from '$lib/deck-table/decklist-entry'
 	import type { ExtraColumn } from '$lib/deck-table/grouping'
+
 	import CardCell from './CardCell.svelte'
 	import CardGroup from './CardGroup.svelte'
 	import ColumnCell from './ColumnCell.svelte'

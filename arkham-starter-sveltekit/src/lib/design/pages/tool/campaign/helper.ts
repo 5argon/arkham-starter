@@ -1,4 +1,4 @@
-import { GameComponent, type EncounterSet } from '$lib/core/campaign'
+import { type EncounterSet, GameComponent } from '$lib/core/campaign'
 import { TextIcon } from '$lib/core/text-icon'
 
 export function makeSetCountText(encounter: EncounterSet): string {

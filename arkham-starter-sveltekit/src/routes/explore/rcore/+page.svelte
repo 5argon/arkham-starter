@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { CardPack } from '$lib/core/card-pack'
-	import { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import { Sorting } from '$lib/deck-table/grouping'
 	import ExploreLayout from '$lib/design/pages/explore/ExploreLayout.svelte'
-	import type { PageData } from './$types'
 	import links from '$lib/explore/external-links/rcore.json'
+
+	import type { PageData } from './$types'
 	export let data: PageData
 </script>
 

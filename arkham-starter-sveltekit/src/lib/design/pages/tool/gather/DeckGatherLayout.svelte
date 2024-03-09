@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
-	import { isRandomBasicWeakness } from '$lib/ahdb/card'
 	import { browser } from '$app/environment'
-
+	import { isRandomBasicWeakness } from '$lib/ahdb/card'
 	import { coreToRcore } from '$lib/ahdb/conversion'
 
 	interface Player {
@@ -136,17 +135,20 @@
 </script>
 
 <script lang="ts">
+	import { goto } from '$app/navigation'
 	import {
-		extractDeckFromUrl,
-		getDeckCardIds,
 		type CardAndAmount,
+		extractDeckFromUrl,
 		type ExtractResult,
 		type GetDeckCardIdReturns,
+		getDeckCardIds,
 	} from '$lib/ahdb/public-api/high-level'
 	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
+	import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
+	import { getExtraName } from '$lib/deck/deck'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
-
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
@@ -158,11 +160,8 @@
 	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
 	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import { checkOverlaps } from '$lib/tool/overlap/overlap-helpers'
-	import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
-	import type { PopupDatabase } from '$lib/core/popup-database'
+
 	import CardTableDoubleDisplay from '../../explore/CardTableDoubleDisplay.svelte'
-	import { goto } from '$app/navigation'
-	import { getExtraName } from '$lib/deck/deck'
 
 	export let pdb: PopupDatabase
 	export let fdb: FullDatabase

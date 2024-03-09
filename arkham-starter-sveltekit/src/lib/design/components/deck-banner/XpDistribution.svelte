@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { CardClass } from '$lib/core/card-class'
+
 	import XpDistributionEach from './XpDistributionEach.svelte'
 	export let topic: CardClass | string | null = null
 	export let level1: number | null = null

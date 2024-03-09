@@ -1,5 +1,6 @@
 import type { PopupDatabase } from '$lib/core/popup-database'
 import type { GlobalSettings } from '$lib/proto/generated/global_settings'
+
 import { placeholderCard, type Row } from '../interface'
 
 export interface CalculatedXp {

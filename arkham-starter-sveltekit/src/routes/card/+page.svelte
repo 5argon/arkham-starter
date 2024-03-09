@@ -1,10 +1,11 @@
 <script lang="ts">
-	import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
+	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import CardLaid from '$lib/design/components/deck-table/CardLaid.svelte'
 	import CardForm from '$lib/design/components/form/CardForm.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+
 	import type { PageData } from './$types'
 	export let data: PageData
 	let singleModeCard: string | undefined = undefined

@@ -1,10 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-
-	var showSpoilerFirst = false
-	var showSpoiler = false
 </script>
 
 <svelte:head>

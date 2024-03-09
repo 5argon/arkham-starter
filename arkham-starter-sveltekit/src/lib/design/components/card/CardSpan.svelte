@@ -1,17 +1,18 @@
 <script lang="ts">
+	import { isRandomBasicWeakness, isUnknownCardNumber } from '$lib/ahdb/card'
+	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { CardClass, classToFontColorCss } from '$lib/design/interface/card-class'
 	import {
+		CardPackIcon,
 		CardPackIconColor,
 		getPackStaticUrl,
-		CardPackIcon,
 	} from '$lib/design/interface/card-pack'
-	import ClassIcon from '../inline/ClassIcon.svelte'
 	import { makePips } from '$lib/design/interface/string-util'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
-	import { allIcons } from '$lib/design/icons/all-icons'
-	import { isRandomBasicWeakness, isUnknownCardNumber } from '$lib/ahdb/card'
-	import ImageStrip from './ImageStrip.svelte'
+
+	import ClassIcon from '../inline/ClassIcon.svelte'
 	import CustomizableCheckBoxes from './CustomizableCheckBoxes.svelte'
+	import ImageStrip from './ImageStrip.svelte'
 
 	export let cardId: string
 	export let showImageStrip: boolean = false

@@ -1,12 +1,13 @@
 <script lang="ts">
+	import type { EncounterSet, EncounterSetItem } from '$lib/core/campaign'
 	import {
 		EncounterSetFlag,
 		EncounterSetSorting,
 		getEncounterInsideItem,
 		isEncounterSetWithModification,
 	} from '$lib/core/campaign'
-	import type { EncounterSet, EncounterSetItem } from '$lib/core/campaign'
-	import { sortEncountersScore, type EncounterSetFrequencies } from './campaign-analyze'
+
+	import { type EncounterSetFrequencies,sortEncountersScore } from './campaign-analyze'
 	import EncounterIconWithLabel from './EncounterIconWithLabel.svelte'
 	import { makeSetCountText } from './helper'
 

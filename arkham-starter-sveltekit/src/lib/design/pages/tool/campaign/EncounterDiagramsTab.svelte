@@ -1,12 +1,13 @@
 <script lang="ts">
 	import {
-		isEncounterSetWithModification,
 		type Campaign,
 		type EncounterSetItem,
+		isEncounterSetWithModification,
 	} from '$lib/core/campaign'
 	import Button from '$lib/design/components/basic/Button.svelte'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+
 	import { findUniqueScenarios, makeLongScenarioName } from './campaign-analyze'
 	export let campaign: Campaign
 	export let dropdownIndex: number = 0

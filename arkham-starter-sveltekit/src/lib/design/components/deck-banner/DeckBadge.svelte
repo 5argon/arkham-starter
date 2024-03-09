@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { iconToNameConversion } from '$lib/ahdb/conversion'
-
-	import {
+import {
+		type CardPackIcon,
 		CardPackIconColor,
 		getPackStaticUrl,
-		type CardPackIcon,
 	} from '$lib/design/interface/card-pack'
+
 	import HoverFrame from '../inline/HoverFrame.svelte'
 	import { createPackRequirementText } from './pack-requirement-text'
 

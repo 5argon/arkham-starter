@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { CardClass } from '$lib/core/card-class'
 	import type { CardPackIcon } from '$lib/design/interface/card-pack'
+
 	import HoverFrame from '../inline/HoverFrame.svelte'
 	import CardSpan from './CardSpan.svelte'
 

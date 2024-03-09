@@ -1,8 +1,9 @@
 <script lang="ts">
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+	import type { ArkhamStarterDeckData, GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
-	import type { ArkhamStarterDeckData, GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+
 	import DeckViewerInner from './DeckViewerInner.svelte'
 
 	export let fullDatabase: FullDatabase

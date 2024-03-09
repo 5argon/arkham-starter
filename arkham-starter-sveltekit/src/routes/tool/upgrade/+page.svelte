@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
-
-	import UpgradeLayout from '$lib/design/pages/tool/upgrade/layout/UpgradeLayout.svelte'
+import UpgradeLayout from '$lib/design/pages/tool/upgrade/layout/UpgradeLayout.svelte'
 	import help from '$lib/md/upgrade.md?raw'
 
 	let importProto: string | null = null

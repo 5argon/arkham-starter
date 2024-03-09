@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { PopupDatabase } from '$lib/core/popup-database'
-
-	import Button from '$lib/design/components/basic/Button.svelte'
+import Button from '$lib/design/components/basic/Button.svelte'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import type { GlobalSettings } from '$lib/proto/generated/global_settings'
 	import type { ToolbarEvents } from '$lib/tool/upgrade/upgrade-table/table-events'

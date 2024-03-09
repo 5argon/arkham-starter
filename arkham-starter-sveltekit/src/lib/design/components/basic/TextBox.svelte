@@ -13,8 +13,7 @@
 
 <script lang="ts">
 	import { allIcons } from '$lib/design/icons/all-icons'
-
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { topCssTextError, topCssTextSuccess } from '$lib/design/interface/top-css-class'
 
 	import Button from './Button.svelte'

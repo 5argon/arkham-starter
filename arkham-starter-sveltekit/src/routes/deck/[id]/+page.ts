@@ -3,11 +3,12 @@ import {
 	type ArkhamStarterDeckData,
 	type GetDeckCardIdReturns,
 } from '$lib/ahdb/public-api/high-level'
-import { FullDatabase, fetchFullDatabaseStatic } from '$lib/core/full-database'
-import { PopupDatabase, fetchPopupDatabaseStatic } from '$lib/core/popup-database'
-import type { EntryGenerator, PageLoad } from './$types'
+import { fetchFullDatabaseStatic, FullDatabase } from '$lib/core/full-database'
+import { fetchPopupDatabaseStatic, PopupDatabase } from '$lib/core/popup-database'
 import decksJson from '$lib/data/decks.json'
-import { decodeSideExtras, type DeckEntryBeforeProcess } from '$lib/deck/deck'
+import { type DeckEntryBeforeProcess, decodeSideExtras } from '$lib/deck/deck'
+
+import type { EntryGenerator, PageLoad } from './$types'
 
 interface Ret {
 	fdb: FullDatabase

@@ -1,4 +1,5 @@
-import type { Scenario, EncounterSet } from '$lib/core/campaign'
+import type { EncounterSet, Scenario } from '$lib/core/campaign'
+
 import { mergeEncounters } from './campaign-analyze'
 
 export interface MatrixRow {

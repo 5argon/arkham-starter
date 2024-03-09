@@ -3,10 +3,9 @@
 
 <script lang="ts">
 	import type { CardClass } from '$lib/design/interface/card-class'
+import type { CardPackIcon } from '$lib/design/interface/card-pack'
 
-	import type { CardPackIcon } from '$lib/design/interface/card-pack'
 	import CardBlockButton, { type CardBlockButtonProp } from './CardBlockButton.svelte'
-
 	import CardSpan from './CardSpan.svelte'
 
 	export let cardId: string

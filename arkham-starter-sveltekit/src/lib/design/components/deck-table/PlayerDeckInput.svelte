@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
-	import Button from '../basic/Button.svelte'
 
+	import Button from '../basic/Button.svelte'
 	import TextBox, { EditingLevel, NoticeLevel } from '../basic/TextBox.svelte'
 	import PartyDeckEntry from '../card/PartyDeckEntry.svelte'
 

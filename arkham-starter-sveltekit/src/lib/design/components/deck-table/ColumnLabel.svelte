@@ -2,6 +2,7 @@
 	import { CardClass } from '$lib/core/card-class'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistLabel } from '$lib/deck-table/decklist-entry'
+
 	import CardSpan from '../card/CardSpan.svelte'
 
 	export let label: DecklistLabel

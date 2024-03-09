@@ -21,40 +21,41 @@
 </script>
 
 <script lang="ts">
+	import { browser } from '$app/environment'
 	import {
 		extractDeckFromUrl,
 		forwardDeckToOldCore,
 		forwardDeckToRcore,
-		getDeckCardIds,
 		type GetDeckCardIdReturns,
+		getDeckCardIds,
 	} from '$lib/ahdb/public-api/high-level'
+	import type { FullDatabase } from '$lib/core/full-database'
+	import type { PopupDatabase } from '$lib/core/popup-database'
+	import { goToGather } from '$lib/deck/go-to-gather'
+	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import Button from '$lib/design/components/basic/Button.svelte'
+	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import TextBox from '$lib/design/components/basic/TextBox.svelte'
-	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
+	import PartyDeckEntry from '$lib/design/components/card/PartyDeckEntry.svelte'
+	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
+	import FramedTextSpan from '$lib/design/components/inline/FramedTextSpan.svelte'
 	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
+	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
+	import ViewModeBanner from '$lib/design/components/layout/ViewModeBanner.svelte'
+	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import {
 		TeamAssemblerProto,
 		TeamAssemblerProto_InputDeck,
 	} from '$lib/proto/generated/team_assembler'
 	import { exhaustiveCheckOverlaps, type Party } from '$lib/tool/overlap/overlap-helpers'
-	import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
-	import PartyTable from './PartyTable.svelte'
-	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
-	import { Grouping, Sorting } from '$lib/deck-table/grouping'
-	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
-	import FramedTextSpan from '$lib/design/components/inline/FramedTextSpan.svelte'
-	import PartyDeckEntry from '$lib/design/components/card/PartyDeckEntry.svelte'
-	import { browser } from '$app/environment'
 	import { getClassIconAhdb } from '$lib/tool/script/export/ahdb-syntax'
 	import { getClassIconEmoji } from '$lib/tool/script/export/emoji'
-	import ViewModeBanner from '$lib/design/components/layout/ViewModeBanner.svelte'
+	import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
+
+	import PartyTable from './PartyTable.svelte'
 	import PartyTeamMemberItem from './PartyTeamMemberItem.svelte'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
-	import { allIcons } from '$lib/design/icons/all-icons'
-	import { goToGather } from '$lib/deck/go-to-gather'
-	import type { PopupDatabase } from '$lib/core/popup-database'
-	import type { FullDatabase } from '$lib/core/full-database'
 
 	export let protoString: string | null = null
 	export let pdb: PopupDatabase

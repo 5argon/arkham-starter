@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { isOldCore } from '$lib/ahdb/conversion'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
+
 	import CardPopupDrawing from './CardPopupDrawing.svelte'
 
 	export let popupDatabase: PopupDatabase

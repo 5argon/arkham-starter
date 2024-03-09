@@ -7,6 +7,7 @@
 
 <script lang="ts">
 	import { CardPackIcon } from '$lib/design/interface/card-pack'
+
 	import PackIconWithHover from '../card/PackIconWithHover.svelte'
 	export let items: PackInfoSpanItem[]
 	$: filteredItems = items.filter(

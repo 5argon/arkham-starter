@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { CardClass } from '$lib/core/card-class'
+	import valid from '$lib/data/valid.json'
 	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
 	import { classToBorderColorCss, classToFontColorCss } from '$lib/design/interface/card-class'
 	import { makePips } from '$lib/design/interface/string-util'
-	import valid from '$lib/data/valid.json'
 
 	export let name: string | null = null
 	export let showImageStrip: boolean

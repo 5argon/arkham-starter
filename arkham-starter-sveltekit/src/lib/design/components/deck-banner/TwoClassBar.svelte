@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
+
 	import ClassIcon from '../inline/ClassIcon.svelte'
 
 	export let class1: CardClass

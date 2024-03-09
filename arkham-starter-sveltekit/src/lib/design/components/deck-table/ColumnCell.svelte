@@ -3,6 +3,7 @@
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistLabel } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn } from '$lib/deck-table/grouping'
+
 	import CostCircle from '../inline/CostCircle.svelte'
 	import SkillIcon from '../inline/SkillIcon.svelte'
 	import ColumnLabel from './ColumnLabel.svelte'

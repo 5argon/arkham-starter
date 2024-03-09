@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
-
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import CampaignSwitchingLayout from '$lib/design/pages/tool/switch/CampaignSwitchingLayout.svelte'
 	import helpMd from '$lib/md/switch.md?raw'
 

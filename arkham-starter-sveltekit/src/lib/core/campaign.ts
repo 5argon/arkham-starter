@@ -20,7 +20,7 @@ export enum EncounterSetFlag {
 
 export interface Campaign {
 	name: string
-	scenarios:Scenario[]
+	scenarios: Scenario[]
 	commonEncounterSets?: EncounterSet[]
 	startingChaosBag?: PerDifficultySettings<GameComponent[]>
 	setupReferenceGraphic?: string

@@ -1,7 +1,6 @@
 <script lang="ts">
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	export let charged: boolean
 	export let spending: boolean
 </script>

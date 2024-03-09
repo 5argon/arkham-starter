@@ -1,16 +1,16 @@
+import { type AhdbCard, isRandomBasicWeakness } from '$lib/ahdb/card'
 import {
 	classConversion,
 	iconToNameConversion,
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
 import type { AhdbTaboo } from '$lib/ahdb/taboo'
-import { CardClass } from '$lib/design/interface/card-class'
-import { CardPackIcon } from '$lib/design/interface/card-pack'
-import type { CardPack } from './card-pack'
 import fdbJson from '$lib/data/playerdb.json'
 import tb from '$lib/data/taboo.json'
-import { type AhdbCard, isRandomBasicWeakness } from '$lib/ahdb/card'
-import type { LoadEvent } from '@sveltejs/kit'
+import { CardClass } from '$lib/design/interface/card-class'
+import { CardPackIcon } from '$lib/design/interface/card-pack'
+
+import type { CardPack } from './card-pack'
 export type LazyFullDatabase = Promise<FullDatabase>
 
 export interface FullDatabaseItem {

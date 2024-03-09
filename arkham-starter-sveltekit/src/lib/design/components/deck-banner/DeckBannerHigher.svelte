@@ -3,10 +3,10 @@
 
 <script lang="ts">
 	import {
-		forwardDeckToRcore,
 		type ArkhamStarterDeckData,
-		type GetDeckCardIdReturns,
 		type CustomizableMeta,
+		forwardDeckToRcore,
+		type GetDeckCardIdReturns,
 	} from '$lib/ahdb/public-api/high-level'
 	import { CardPack } from '$lib/core/card-pack'
 	import { CommitIcon } from '$lib/core/commit-icon'
@@ -21,8 +21,8 @@
 		ChosenSkills,
 		ChosenTraits,
 	} from '$lib/design/interface/deck-banner'
-	import type { PackInfoSpanItem } from '../inline/PackInfoSpan.svelte'
 
+	import type { PackInfoSpanItem } from '../inline/PackInfoSpan.svelte'
 	import DeckBanner from './DeckBanner.svelte'
 	export let popupDatabase: PopupDatabase
 	export let deck: GetDeckCardIdReturns

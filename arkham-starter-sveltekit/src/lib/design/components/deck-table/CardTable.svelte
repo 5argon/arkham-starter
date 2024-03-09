@@ -2,7 +2,8 @@
 	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { GroupedCards } from '$lib/deck-table/decklist-entry'
-	import { extraColumnToHeader, type ExtraColumn } from '$lib/deck-table/grouping'
+	import { type ExtraColumn,extraColumnToHeader } from '$lib/deck-table/grouping'
+
 	import RenderGroupedCards from './RenderGroupedCards.svelte'
 
 	export let groupedCards: GroupedCards[]

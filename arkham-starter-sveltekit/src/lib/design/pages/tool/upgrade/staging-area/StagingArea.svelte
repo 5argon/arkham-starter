@@ -1,15 +1,17 @@
 <script lang="ts">
-	import type { PopupDatabase } from '$lib/core/popup-database'
-	import TextBox, { EditingLevel, NoticeLevel } from '$lib/design/components/basic/TextBox.svelte'
-	import StagingAreaSingle from './StagingAreaSingle.svelte'
+	import { onMount } from 'svelte'
+
 	import {
+		type CardAndAmount,
 		extractDeckFromUrl,
 		getDeckCardIds,
-		type CardAndAmount,
 	} from '$lib/ahdb/public-api/high-level'
-	import { onMount } from 'svelte'
+	import type { PopupDatabase } from '$lib/core/popup-database'
+	import TextBox, { EditingLevel, NoticeLevel } from '$lib/design/components/basic/TextBox.svelte'
 	import type { GlobalSettings } from '$lib/proto/generated/global_settings'
+
 	import CardBlockPlaceholder from './CardBlockPlaceholder.svelte'
+	import StagingAreaSingle from './StagingAreaSingle.svelte'
 
 	export let onImportDeck: (
 		cards1: CardAndAmount[],

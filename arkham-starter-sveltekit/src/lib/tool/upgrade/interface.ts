@@ -12,5 +12,4 @@ export interface Row {
 	customizationChoice: number
 }
 
-
-export const placeholderCard = "p"
+export const placeholderCard = 'p'

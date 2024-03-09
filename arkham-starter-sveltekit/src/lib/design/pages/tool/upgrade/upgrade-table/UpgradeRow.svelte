@@ -6,10 +6,9 @@
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import { EditingLevel } from '$lib/design/components/basic/TextBox.svelte'
 	import CardSpan from '$lib/design/components/card/CardSpan.svelte'
-
-	import { placeholderCard, type Row } from '$lib/tool/upgrade/interface'
-
+import { placeholderCard, type Row } from '$lib/tool/upgrade/interface'
 	import type { RowActionEvents, RowEditEvents } from '$lib/tool/upgrade/upgrade-table/row-events'
+
 	import CardBlockUpDown from './CardBlockUpDown.svelte'
 	import EditableNumberCell from './EditableNumberCell.svelte'
 	import EditableSmallCell from './EditableSmallCell.svelte'

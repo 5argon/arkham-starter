@@ -8,10 +8,10 @@
 <script lang="ts">
 	import { allCampaigns } from '$lib/campaign/all-campaign'
 	import {
-		EncounterSetFlag,
-		EncounterSetSorting,
 		type Campaign,
 		type EncounterSet,
+		EncounterSetFlag,
+		EncounterSetSorting,
 	} from '$lib/core/campaign'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
@@ -132,15 +132,6 @@
 		width: 28px;
 		height: 28px;
 		vertical-align: middle;
-	}
-
-	.specific-sets {
-		width: unset;
-	}
-
-	.no-specific-sets {
-		width: unset;
-		height: unset;
 	}
 
 	.block-wrap {

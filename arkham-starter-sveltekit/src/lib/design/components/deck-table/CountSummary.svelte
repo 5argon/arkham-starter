@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { coreToRcore } from '$lib/ahdb/conversion'
-
-	import type { FullDatabase } from '$lib/core/full-database'
+import type { FullDatabase } from '$lib/core/full-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import { groupCards } from '$lib/deck-table/grouping/group-cards'
+
 	import CountSummaryRender from './CountSummaryRender.svelte'
 
 	export let entries: DecklistEntry[]

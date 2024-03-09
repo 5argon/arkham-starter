@@ -12,11 +12,11 @@
 	import CardForm from '$lib/design/components/form/CardForm.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import { whoCanUse } from '$lib/tool/query/who-can-use'
+
 	import type { PageData } from './$types'
 	export let data: PageData
 	let selected: string[] = []
 	let investigatorResult: DecklistEntry[] = []
-	let error: boolean
 	let showingEntries: DecklistEntry[] = []
 	$: {
 		showingEntries = selected.map((x) => {

@@ -8,6 +8,7 @@
 
 <script lang="ts">
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+
 	import Button from '../basic/Button.svelte'
 	export let label: string
 	export let iconPath: string

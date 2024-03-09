@@ -1,9 +1,9 @@
 <script lang="ts">
 	import DragHandle from '$lib/design/components/basic/DragHandle.svelte'
-
-	// import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
+// import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import CardBlockButton from '$lib/design/components/card/CardBlockButton.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
+
 	import RowActionUpDown from './RowActionUpDown.svelte'
 
 	// export let divider: boolean

@@ -1,19 +1,20 @@
 <script lang="ts">
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import { page } from '$app/stores'
-	import { goto } from '$app/navigation'
 	import { browser } from '$app/environment'
+	import { goto } from '$app/navigation'
+	import { page } from '$app/stores'
 	import {
-		getDeckCardIds,
-		type GetDeckCardIdReturns,
 		type CustomizableMeta,
 		type ExtractResult,
+		type GetDeckCardIdReturns,
+		getDeckCardIds,
 	} from '$lib/ahdb/public-api/high-level'
-	import { Grouping, Sorting } from '$lib/deck-table/grouping'
-	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
-	import helpMd from '$lib/md/deck-viewer.md?raw'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
+	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
+	import { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
+	import helpMd from '$lib/md/deck-viewer.md?raw'
+
 	import AhdbDeckTextbox from '../deck-table/AhdbDeckTextbox.svelte'
 	import DeckViewerInner from './DeckViewerInner.svelte'
 

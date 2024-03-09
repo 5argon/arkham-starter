@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { flip } from 'svelte/animate'
+
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { GlobalSettings } from '$lib/proto/generated/global_settings'
-
 	import type { Row } from '$lib/tool/upgrade/interface'
 	import type {
 		TableRowActionEvents,
@@ -9,7 +10,7 @@
 	} from '$lib/tool/upgrade/upgrade-table/row-events'
 	import type { ToolbarEvents } from '$lib/tool/upgrade/upgrade-table/table-events'
 	import { calculateXps } from '$lib/tool/upgrade/upgrade-table/xp-calculate'
-	import { flip } from 'svelte/animate'
+
 	import RowDropTarget from './RowDropTarget.svelte'
 	import UpgradeRow from './UpgradeRow.svelte'
 	import UpgradeToolbar from './UpgradeToolbar.svelte'

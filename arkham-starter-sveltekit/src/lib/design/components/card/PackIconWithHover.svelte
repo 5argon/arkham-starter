@@ -5,6 +5,7 @@
 		CardPackIconColor,
 		getPackStaticUrl,
 	} from '$lib/design/interface/card-pack'
+
 	import PackIconHover from './PackIconHover.svelte'
 
 	export let pack: CardPackIcon

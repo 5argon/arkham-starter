@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
+
 	import HoverFrame from '../../inline/HoverFrame.svelte'
 	import CardSpan from '../CardSpan.svelte'
 	export let cards: PopupDatabaseItem[]
