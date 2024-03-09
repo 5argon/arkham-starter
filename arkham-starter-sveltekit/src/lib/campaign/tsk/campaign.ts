@@ -1,6 +1,3 @@
-import type { Campaign } from '$lib/core/campaign'
-import { CardPack } from '$lib/core/card-pack'
-import { globetrotting, redCoterie } from './encounter'
 import {
 	congressOfTheKeys1Scenario,
 	congressOfTheKeys2Scenario,
@@ -14,13 +11,19 @@ import {
 	dogsOfWar3Scenario,
 	onThinIceScenario,
 	riddlesAndRainScenario,
-	sanguineShadowsScenario, shadesOfSufferingScenario, withoutATraceScenario
+	sanguineShadowsScenario,
+	shadesOfSufferingScenario,
+	withoutATraceScenario,
 } from '$lib/campaign/tsk/scenario'
+import type { Campaign } from '$lib/core/campaign'
+import { CardPack } from '$lib/core/card-pack'
+
+import { globetrotting, redCoterie } from './encounter'
 
 export const theScarletKeysCampaign: Campaign = {
 	name: 'The Scarlet Keys',
 	investigatorExpansion: CardPack.TheScarletKeys,
-	scenarios:[
+	scenarios: [
 		congressOfTheKeys1Scenario,
 		congressOfTheKeys2Scenario,
 		congressOfTheKeys3Scenario,

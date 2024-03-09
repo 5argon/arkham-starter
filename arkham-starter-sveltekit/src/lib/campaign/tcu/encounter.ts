@@ -1,4 +1,4 @@
-import { EncounterSetFlag, type EncounterSet } from '$lib/core/campaign'
+import { type EncounterSet, EncounterSetFlag } from '$lib/core/campaign'
 
 const folder = 'The Circle Undone/'
 const scenario = 'Scenarios/'

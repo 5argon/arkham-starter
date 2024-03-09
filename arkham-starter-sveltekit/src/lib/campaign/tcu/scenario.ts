@@ -1,4 +1,5 @@
 import type { Scenario } from '$lib/core/campaign'
+
 import {
 	agentsOfShubNiggurath,
 	ancientEvils,

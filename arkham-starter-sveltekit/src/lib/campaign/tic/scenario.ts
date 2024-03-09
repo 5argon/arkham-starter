@@ -1,4 +1,5 @@
 import type { Scenario } from '$lib/core/campaign'
+
 import {
 	agentsOfCthulhu,
 	ancientEvils,
@@ -11,24 +12,24 @@ import {
 	theMidnightMasks,
 } from '../notz/encounter'
 import {
-	thePitOfDespair,
-	theVanishingOfElinaHarper,
-	inTooDeep,
-	devilReef,
-	horrorInHighGear,
+	agentsOfDagon,
+	agentsOfHydra,
 	aLightInTheFog,
-	theLairOfDagon,
-	intoTheMaelstrom,
 	creaturesOfTheDeep,
+	devilReef,
 	floodedCaverns,
+	fogOverInnsmouth,
+	horrorInHighGear,
+	inTooDeep,
+	intoTheMaelstrom,
+	malfunction,
 	risingTide,
 	shatteredMemories,
-	agentsOfDagon,
-	fogOverInnsmouth,
-	theLocals,
 	syzygy,
-	agentsOfHydra,
-	malfunction,
+	theLairOfDagon,
+	theLocals,
+	thePitOfDespair,
+	theVanishingOfElinaHarper,
 } from './encounter'
 
 export const thePitOfDespairScenario: Scenario = {

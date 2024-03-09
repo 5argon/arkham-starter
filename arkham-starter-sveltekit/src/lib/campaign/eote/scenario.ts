@@ -1,4 +1,5 @@
 import { GameComponent, type Scenario } from '$lib/core/campaign'
+
 import { ancientEvils, chillingCold, lockedDoors, strikingFear } from '../notz/encounter'
 import {
 	agentsOfTheUnknown,

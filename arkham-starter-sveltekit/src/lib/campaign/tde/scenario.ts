@@ -1,4 +1,5 @@
 import type { Scenario } from '$lib/core/campaign'
+
 import {
 	ancientEvils,
 	chillingCold,
@@ -10,26 +11,26 @@ import {
 	strikingFear,
 } from '../notz/encounter'
 import {
-	beyondTheGatesOfSleep,
-	wakingNightmare,
-	theSearchForKadath,
-	aThousandShapesOfHorror,
-	darkSideOfTheMoon,
-	pointOfNoReturn,
-	terrorOfTheVale,
-	descentIntoThePitch,
-	whereTheGodsDwell,
-	weaverOfTheCosmos,
-	agentsOfNyarlathotep,
-	dreamersCurse,
-	dreamlands,
-	zoogs,
 	agentsOfAtlachNacha,
-	mergingRealities,
-	spiders,
-	whispersOfHypnos,
+	agentsOfNyarlathotep,
+	aThousandShapesOfHorror,
+	beyondTheGatesOfSleep,
 	corsairs,
 	creaturesOfTheUnderworld,
+	darkSideOfTheMoon,
+	descentIntoThePitch,
+	dreamersCurse,
+	dreamlands,
+	mergingRealities,
+	pointOfNoReturn,
+	spiders,
+	terrorOfTheVale,
+	theSearchForKadath,
+	wakingNightmare,
+	weaverOfTheCosmos,
+	whereTheGodsDwell,
+	whispersOfHypnos,
+	zoogs,
 } from './encounter'
 
 export const beyondTheGatesOfSleepScenario: Scenario = {

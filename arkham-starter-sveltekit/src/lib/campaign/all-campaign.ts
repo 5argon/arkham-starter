@@ -1,11 +1,12 @@
 import type { Campaign } from '$lib/core/campaign'
-import { nightOfTheZealotCampaign, returnToTheNightOfTheZealotCampaign } from './notz/campaign'
+
 import { returnToTheDunwichLegacyCampaign, theDunwichLegacyCampaign } from './dwl/campaign'
 import { edgeOfTheEarthCampaign } from './eote/campaign'
+import { nightOfTheZealotCampaign, returnToTheNightOfTheZealotCampaign } from './notz/campaign'
 import { returnToThePathToCarcosaCampaign, thePathToCarcosaCampaign } from './ptc/campaign'
-import { returnToTheForgottenAgeCampaign, theForgottenAgeCampaign } from './tfa/campaign'
 import { returnToTheCircleUndoneCampaign, theCircleUndoneCampaign } from './tcu/campaign'
 import { theDreamEatersCampaign } from './tde/campaign'
+import { returnToTheForgottenAgeCampaign, theForgottenAgeCampaign } from './tfa/campaign'
 import { theInnsmouthConspiracyCampaign } from './tic/campaign'
 import { theScarletKeysCampaign } from './tsk/campaign'
 

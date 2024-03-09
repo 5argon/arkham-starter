@@ -1,4 +1,5 @@
 import { GameComponent, type Scenario } from '$lib/core/campaign'
+
 import {
 	agentsOfHastur,
 	ancientEvils,

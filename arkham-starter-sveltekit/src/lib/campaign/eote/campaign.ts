@@ -1,6 +1,3 @@
-import { GameComponent, type Campaign } from '$lib/core/campaign'
-import { CardPack } from '$lib/core/card-pack'
-import { expeditionTeam, memorialsOfTheLost, tekelili } from './encounter'
 import {
 	cityOfTheElderThings1Scenario,
 	cityOfTheElderThings2Scenario,
@@ -8,15 +5,22 @@ import {
 	fatalMirageScenario,
 	iceAndDeathPart1Scenario,
 	iceAndDeathPart2Scenario,
-	iceAndDeathPart3Scenario, theHeartOfMadness1Scenario, theHeartOfMadness2Scenario, toTheForbiddenPeaksScenario
+	iceAndDeathPart3Scenario,
+	theHeartOfMadness1Scenario,
+	theHeartOfMadness2Scenario,
+	toTheForbiddenPeaksScenario,
 } from '$lib/campaign/eote/scenario'
+import { type Campaign, GameComponent } from '$lib/core/campaign'
+import { CardPack } from '$lib/core/card-pack'
+
+import { expeditionTeam, memorialsOfTheLost, tekelili } from './encounter'
 
 export const edgeOfTheEarthCampaign: Campaign = {
 	name: 'Edge of the Earth',
 	investigatorExpansion: CardPack.EdgeOfTheEarth,
 	setupReferenceGraphic:
 		'https://drive.google.com/drive/folders/1QhOJKCkikhDpM1c2oLjyzC4celG0umam?usp=share_link',
-	scenarios:[
+	scenarios: [
 		cityOfTheElderThings1Scenario,
 		cityOfTheElderThings2Scenario,
 		cityOfTheElderThings3Scenario,

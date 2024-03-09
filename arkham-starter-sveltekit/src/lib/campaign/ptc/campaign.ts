@@ -1,5 +1,3 @@
-import { GameComponent, type Campaign } from '$lib/core/campaign'
-import { CardPack } from '$lib/core/card-pack'
 import {
 	aPhantomOfTruthScenario,
 	blackStarsRiseScenario,
@@ -12,16 +10,19 @@ import {
 	returnToDimCarcosaScenario,
 	returnToEchoesOfThePastScenario,
 	returnToTheLastKingScenario,
-	returnToThePallidMaskScenario, returnToTheUnspeakableOathScenario,
+	returnToThePallidMaskScenario,
+	returnToTheUnspeakableOathScenario,
 	theLastKingScenario,
 	thePallidMaskScenario,
-	theUnspeakableOathScenario
+	theUnspeakableOathScenario,
 } from '$lib/campaign/ptc/scenario'
+import { type Campaign, GameComponent } from '$lib/core/campaign'
+import { CardPack } from '$lib/core/card-pack'
 
 export const thePathToCarcosaCampaign: Campaign = {
 	name: 'The Path to Carcosa',
 	investigatorExpansion: CardPack.ThePathToCarcosa,
-	scenarios:[
+	scenarios: [
 		aPhantomOfTruthScenario,
 		blackStarsRiseScenario,
 		curtainCallScenario,
@@ -108,7 +109,7 @@ export const thePathToCarcosaCampaign: Campaign = {
 export const returnToThePathToCarcosaCampaign: Campaign = {
 	name: 'Return to the Path to Carcosa',
 	investigatorExpansion: CardPack.ReturnToThePathToCarcosa,
-	scenarios:[
+	scenarios: [
 		returnToAPhantomOfTruthScenario,
 		returnToBlackStarsRiseScenario,
 		returnToCurtainCallScenario,

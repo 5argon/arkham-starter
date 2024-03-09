@@ -1,5 +1,3 @@
-import type { Campaign } from '$lib/core/campaign'
-import { CardPack } from '$lib/core/card-pack'
 import {
 	heartOfTheEldersPart1Scenario,
 	heartOfTheEldersPart2Scenario,
@@ -20,11 +18,13 @@ import {
 	theUntamedWildsScenario,
 	threadsOfFateScenario,
 } from '$lib/campaign/tfa/scenario'
+import type { Campaign } from '$lib/core/campaign'
+import { CardPack } from '$lib/core/card-pack'
 
 export const theForgottenAgeCampaign: Campaign = {
 	name: 'The Forgotten Age',
 	investigatorExpansion: CardPack.TheForgottenAge,
-	scenarios:[
+	scenarios: [
 		heartOfTheEldersPart1Scenario,
 		heartOfTheEldersPart2Scenario,
 		shatteredAeonsScenario,
@@ -48,7 +48,7 @@ export const theForgottenAgeCampaign: Campaign = {
 export const returnToTheForgottenAgeCampaign: Campaign = {
 	name: 'Return to the Forgotten Age',
 	investigatorExpansion: CardPack.ReturnToTheForgottenAge,
-	scenarios:[
+	scenarios: [
 		returnToHeartOfTheEldersPart1Scenario,
 		returnToHeartOfTheEldersPart2Scenario,
 		returnToShatteredAeonsScenario,

@@ -1,5 +1,6 @@
-import { GameComponent, type Campaign } from '$lib/core/campaign'
+import { type Campaign, GameComponent } from '$lib/core/campaign'
 import { CardPack } from '$lib/core/card-pack'
+
 import { armitagesFate } from './encounter'
 import {
 	bloodOnTheAltarScenario,
@@ -116,7 +117,7 @@ export const returnToTheDunwichLegacyCampaign: Campaign = {
 	investigatorExpansion: CardPack.ReturnToTheDunwichLegacy,
 	setupReferenceGraphic:
 		'https://drive.google.com/drive/folders/1r3Cn1tj23-CKKSGxTpypeat5rKzg6Zn0?usp=share_link',
-	scenarios:[
+	scenarios: [
 		returnToBloodOnTheAltarScenario,
 		returnToExtracurricularActivityScenario,
 		returnToLostInTimeAndSpaceScenario,
