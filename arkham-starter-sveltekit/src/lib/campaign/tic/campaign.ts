@@ -1,11 +1,29 @@
 import type { Campaign } from '$lib/core/campaign'
 import { CardPack } from '$lib/core/card-pack'
-import { transitions } from './transition'
+import {
+	aLightInTheFogScenario,
+	devilReefScenario,
+	horrorInHighGearScenario,
+	inTooDeepScenario,
+	intoTheMaelstromScenario,
+	theLairOfDagonScenario,
+	thePitOfDespairScenario,
+	theVanishingOfElinaHarperScenario
+} from '$lib/campaign/tic/scenario'
 
 export const theInnsmouthConspiracyCampaign: Campaign = {
 	name: 'The Innsmouth Conspiracy',
 	investigatorExpansion: CardPack.TheInnsmouthConspiracy,
-	scenarioTransitions: transitions,
+	scenarios:[
+		aLightInTheFogScenario,
+		devilReefScenario,
+		horrorInHighGearScenario,
+		inTooDeepScenario,
+		intoTheMaelstromScenario,
+		theLairOfDagonScenario,
+		thePitOfDespairScenario,
+		theVanishingOfElinaHarperScenario,
+	],
 	commonEncounterSets: [],
 	startingChaosBag: {
 		easy: [],

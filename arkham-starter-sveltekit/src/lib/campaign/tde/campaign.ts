@@ -1,11 +1,29 @@
 import type { Campaign } from '$lib/core/campaign'
 import { CardPack } from '$lib/core/card-pack'
-import { transitions } from './transition'
+import {
+	aThousandShapesOfHorrorScenario,
+	beyondTheGatesOfSleepScenario,
+	darkSideOfTheMoonScenario,
+	pointOfNoReturnScenario,
+	theSearchForKadathScenario,
+	wakingNightmareScenario,
+	weaverOfTheCosmosScenario,
+	whereTheGodsDwellScenario,
+} from '$lib/campaign/tde/scenario'
 
 export const theDreamEatersCampaign: Campaign = {
 	name: 'The Dream-Eaters',
 	investigatorExpansion: CardPack.TheDreamEaters,
-	scenarioTransitions: transitions,
+	scenarios:[
+		aThousandShapesOfHorrorScenario,
+		beyondTheGatesOfSleepScenario,
+		darkSideOfTheMoonScenario,
+		pointOfNoReturnScenario,
+		theSearchForKadathScenario,
+		wakingNightmareScenario,
+		weaverOfTheCosmosScenario,
+		whereTheGodsDwellScenario,
+	],
 	commonEncounterSets: [],
 	startingChaosBag: {
 		easy: [],

@@ -5,7 +5,6 @@ import {
 	type Campaign,
 	type EncounterSet,
 	type Scenario,
-	type ScenarioTransition,
 } from '$lib/core/campaign'
 
 export function findCoreEncounters(c: Campaign): EncounterSet[] {
@@ -15,18 +14,8 @@ export function findCoreEncounters(c: Campaign): EncounterSet[] {
 }
 
 export function findUniqueScenarios(c: Campaign): Scenario[] {
-	const t = c.scenarioTransitions.flatMap<Scenario>((x) => {
-		const s: Scenario[] = []
-		if (x.from !== null) {
-			s.push(x.from)
-		}
-		if (x.to !== null) {
-			s.push(x.to)
-		}
-		return s
-	})
 	const unique = new Set<Scenario>()
-	t.forEach((x) => {
+	c.scenarios.forEach((x) => {
 		unique.add(x)
 	})
 	return Array.from(unique).sort((a, b) => {
@@ -35,22 +24,9 @@ export function findUniqueScenarios(c: Campaign): Scenario[] {
 }
 
 export function findUniqueEncounters(c: Campaign): EncounterSet[] {
-	const t = c.scenarioTransitions.flatMap<EncounterSet>((x) => {
-		const result: EncounterSet[] = []
-		if (x.from !== null) {
-			mergeEncounters(x.from).forEach((y) => {
-				result.push(y)
-			})
-		}
-		if (x.to !== null) {
-			mergeEncounters(x.to).forEach((y) => {
-				result.push(y)
-			})
-		}
-		return result
-	})
+	const encounterSets = c.scenarios.flatMap(x=>mergeEncounters(x))
 	const unique = new Set<EncounterSet>()
-	t.forEach((x) => {
+	encounterSets.forEach((x) => {
 		unique.add(x)
 	})
 	return Array.from(unique)
@@ -148,49 +124,4 @@ export function sortEncountersScore(
 
 export function makeLongScenarioName(s: Scenario): string {
 	return s.shortName !== undefined ? `(${s.shortName}) ${s.name}` : s.name
-}
-
-export function filterPossibleTransitions(
-	allTransitions: ScenarioTransition[],
-	currentScenario: Scenario,
-): ScenarioTransition[] {
-	return allTransitions.filter((x) => x.from === currentScenario)
-}
-
-export function makeTransitionInfo(
-	from: Scenario | null,
-	to: Scenario,
-	foresight: Scenario | null,
-): TransitionInfo {
-	const fromEncounters = mergeEncounters(from)
-	const toEncounters = mergeEncounters(to)
-	const keep = fromEncounters.filter((x) => toEncounters.includes(x))
-	const add = toEncounters.filter((x) => !keep.includes(x))
-	let remove = fromEncounters.filter((x) => !keep.includes(x))
-	let addToForesight: EncounterSet[] = []
-	let removeToForesight: EncounterSet[] = []
-	if (foresight !== null) {
-		const nextNextEncounters = mergeEncounters(foresight)
-		const nextNextDiffKeep = nextNextEncounters.filter((x) => !keep.includes(x))
-		const nextNextDiffAdd = nextNextDiffKeep.filter((x) => !add.includes(x))
-		removeToForesight = nextNextDiffAdd.filter((x) => remove.includes(x))
-		remove = remove.filter((x) => !removeToForesight.includes(x))
-		addToForesight = nextNextDiffAdd.filter((x) => !removeToForesight.includes(x))
-	}
-	const res: TransitionInfo = {
-		add: add,
-		remove: remove,
-		keep: keep,
-		addToForesight: addToForesight,
-		removeToForesight: removeToForesight,
-	}
-	return res
-}
-
-export function findForesightChoices(c: Campaign, t: ScenarioTransition): Scenario[] {
-	const nextNextTransitions = c.scenarioTransitions.filter((x) => x.from === t.to)
-	const allForesights = nextNextTransitions.map((x) => x.to)
-	const dedupe = new Set<Scenario>()
-	allForesights.forEach((x) => dedupe.add(x))
-	return Array.from(dedupe)
 }

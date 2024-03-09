@@ -1,16 +1,41 @@
 import { GameComponent, type Campaign } from '$lib/core/campaign'
 import { CardPack } from '$lib/core/card-pack'
 import { armitagesFate } from './encounter'
-import { returnToTransitions, transitions } from './transition'
+import {
+	bloodOnTheAltarScenario,
+	extracurricularActivityScenario,
+	lostInTimeAndSpaceScenario,
+	returnToBloodOnTheAltarScenario,
+	returnToExtracurricularActivityScenario,
+	returnToLostInTimeAndSpaceScenario,
+	returnToTheEssexCountyExpressScenario,
+	returnToTheHouseAlwaysWinsScenario,
+	returnToTheMiskatonicMuseumScenario,
+	returnToUndimensionedAndUnseenScenario,
+	returnToWhereDoomAwaitsScenario,
+	theEssexCountyExpressScenario,
+	theHouseAlwaysWinsScenario,
+	theMiskatonicMuseumScenario,
+	undimensionedAndUnseenScenario,
+	whereDoomAwaitsScenario,
+} from './scenario'
 
 export const theDunwichLegacyCampaign: Campaign = {
 	name: 'The Dunwich Legacy',
 	investigatorExpansion: CardPack.TheDunwichLegacy,
 	setupReferenceGraphic:
 		'https://drive.google.com/drive/folders/11w8AtIlhDIhuxCdKdz1YKAxDCut4s5hz?usp=share_link',
-	scenarioTransitions: transitions,
+	scenarios: [
+		bloodOnTheAltarScenario,
+		extracurricularActivityScenario,
+		lostInTimeAndSpaceScenario,
+		theEssexCountyExpressScenario,
+		theHouseAlwaysWinsScenario,
+		theMiskatonicMuseumScenario,
+		undimensionedAndUnseenScenario,
+		whereDoomAwaitsScenario,
+	],
 	commonEncounterSets: [armitagesFate],
-	basicWeaknessTraits: ['Madness', 'Injury', 'Pact'],
 	startingChaosBag: {
 		easy: [
 			GameComponent.TokenP1,
@@ -91,9 +116,17 @@ export const returnToTheDunwichLegacyCampaign: Campaign = {
 	investigatorExpansion: CardPack.ReturnToTheDunwichLegacy,
 	setupReferenceGraphic:
 		'https://drive.google.com/drive/folders/1r3Cn1tj23-CKKSGxTpypeat5rKzg6Zn0?usp=share_link',
-	scenarioTransitions: returnToTransitions,
+	scenarios:[
+		returnToBloodOnTheAltarScenario,
+		returnToExtracurricularActivityScenario,
+		returnToLostInTimeAndSpaceScenario,
+		returnToTheEssexCountyExpressScenario,
+		returnToTheHouseAlwaysWinsScenario,
+		returnToTheMiskatonicMuseumScenario,
+		returnToUndimensionedAndUnseenScenario,
+		returnToWhereDoomAwaitsScenario,
+	],
 	commonEncounterSets: [armitagesFate],
-	basicWeaknessTraits: ['Madness', 'Injury', 'Pact'],
 	startingChaosBag: {
 		easy: [
 			GameComponent.TokenP1,

@@ -1,11 +1,36 @@
 import { GameComponent, type Campaign } from '$lib/core/campaign'
 import { CardPack } from '$lib/core/card-pack'
-import { transitions, transitionsReturnTo } from './transition'
+import {
+	aPhantomOfTruthScenario,
+	blackStarsRiseScenario,
+	curtainCallScenario,
+	dimCarcosaScenario,
+	echoesOfThePastScenario,
+	returnToAPhantomOfTruthScenario,
+	returnToBlackStarsRiseScenario,
+	returnToCurtainCallScenario,
+	returnToDimCarcosaScenario,
+	returnToEchoesOfThePastScenario,
+	returnToTheLastKingScenario,
+	returnToThePallidMaskScenario, returnToTheUnspeakableOathScenario,
+	theLastKingScenario,
+	thePallidMaskScenario,
+	theUnspeakableOathScenario
+} from '$lib/campaign/ptc/scenario'
 
 export const thePathToCarcosaCampaign: Campaign = {
 	name: 'The Path to Carcosa',
 	investigatorExpansion: CardPack.ThePathToCarcosa,
-	scenarioTransitions: transitions,
+	scenarios:[
+		aPhantomOfTruthScenario,
+		blackStarsRiseScenario,
+		curtainCallScenario,
+		dimCarcosaScenario,
+		echoesOfThePastScenario,
+		theLastKingScenario,
+		thePallidMaskScenario,
+		theUnspeakableOathScenario,
+	],
 	startingChaosBag: {
 		easy: [
 			GameComponent.TokenP1,
@@ -83,7 +108,16 @@ export const thePathToCarcosaCampaign: Campaign = {
 export const returnToThePathToCarcosaCampaign: Campaign = {
 	name: 'Return to the Path to Carcosa',
 	investigatorExpansion: CardPack.ReturnToThePathToCarcosa,
-	scenarioTransitions: transitionsReturnTo,
+	scenarios:[
+		returnToAPhantomOfTruthScenario,
+		returnToBlackStarsRiseScenario,
+		returnToCurtainCallScenario,
+		returnToDimCarcosaScenario,
+		returnToEchoesOfThePastScenario,
+		returnToTheLastKingScenario,
+		returnToThePallidMaskScenario,
+		returnToTheUnspeakableOathScenario,
+	],
 	commonEncounterSets: [],
 	startingChaosBag: {
 		easy: [],

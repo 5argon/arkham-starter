@@ -20,10 +20,9 @@ export enum EncounterSetFlag {
 
 export interface Campaign {
 	name: string
-	scenarioTransitions: ScenarioTransition[]
+	scenarios:Scenario[]
 	commonEncounterSets?: EncounterSet[]
 	startingChaosBag?: PerDifficultySettings<GameComponent[]>
-	basicWeaknessTraits?: string[]
 	setupReferenceGraphic?: string
 	investigatorExpansion?: CardPack
 }

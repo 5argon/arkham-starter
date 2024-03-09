@@ -1,11 +1,40 @@
 import type { Campaign } from '$lib/core/campaign'
 import { CardPack } from '$lib/core/card-pack'
-import { transitions, transitionsReturnTo } from './transition'
+import {
+	heartOfTheEldersPart1Scenario,
+	heartOfTheEldersPart2Scenario,
+	returnToHeartOfTheEldersPart1Scenario,
+	returnToHeartOfTheEldersPart2Scenario,
+	returnToShatteredAeonsScenario,
+	returnToTheBoundaryBeyondScenario,
+	returnToTheCityOfArchivesScenario,
+	returnToTheDepthsOfYothScenario,
+	returnToTheDoomOfEztliScenario,
+	returnToTheUntamedWildsScenario,
+	returnToThreadsOfFateScenario,
+	shatteredAeonsScenario,
+	theBoundaryBeyondScenario,
+	theCityOfArchivesScenario,
+	theDepthsOfYothScenario,
+	theDoomOfEztliScenario,
+	theUntamedWildsScenario,
+	threadsOfFateScenario,
+} from '$lib/campaign/tfa/scenario'
 
 export const theForgottenAgeCampaign: Campaign = {
 	name: 'The Forgotten Age',
 	investigatorExpansion: CardPack.TheForgottenAge,
-	scenarioTransitions: transitions,
+	scenarios:[
+		heartOfTheEldersPart1Scenario,
+		heartOfTheEldersPart2Scenario,
+		shatteredAeonsScenario,
+		theBoundaryBeyondScenario,
+		theCityOfArchivesScenario,
+		theDepthsOfYothScenario,
+		theDoomOfEztliScenario,
+		theUntamedWildsScenario,
+		threadsOfFateScenario,
+	],
 	setupReferenceGraphic:
 		'https://drive.google.com/drive/folders/1WnmIqXn7kXsWaw4Z2-1x6BRqWunsArFC?usp=share_link',
 	startingChaosBag: {
@@ -19,7 +48,17 @@ export const theForgottenAgeCampaign: Campaign = {
 export const returnToTheForgottenAgeCampaign: Campaign = {
 	name: 'Return to the Forgotten Age',
 	investigatorExpansion: CardPack.ReturnToTheForgottenAge,
-	scenarioTransitions: transitionsReturnTo,
+	scenarios:[
+		returnToHeartOfTheEldersPart1Scenario,
+		returnToHeartOfTheEldersPart2Scenario,
+		returnToShatteredAeonsScenario,
+		returnToTheBoundaryBeyondScenario,
+		returnToTheCityOfArchivesScenario,
+		returnToTheDepthsOfYothScenario,
+		returnToTheDoomOfEztliScenario,
+		returnToTheUntamedWildsScenario,
+		returnToThreadsOfFateScenario,
+	],
 	startingChaosBag: {
 		easy: [],
 		standard: [],
