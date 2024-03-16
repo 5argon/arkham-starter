@@ -402,7 +402,7 @@
         "setName": "The Circle Undone (Campaign Expansion)",
         "hash": "TCUC-Diabolic Voices",
         "name": "Diabolic Voices",
-        "description": "Keep track of Diabolic Voices in the discard pile by placing this card near it, so when you get the next one you don't have to sift through the discard pile and count them. You can print just 2, take the mini-cards away on 0 or 3 count.",
+        "description": "Keep track of Diabolic Voices in the discard pile by placing this card near it, so when you get the next one you don't have to sift through the discard pile and count them. Only one mini-card is required, just hide it away on 0 or 3 count.",
         "members": [
           {
             "variation": 1,
@@ -417,7 +417,7 @@
         "setName": "The Circle Undone (Campaign Expansion)",
         "hash": "TCUC-Evil Past",
         "name": "Evil Past",
-        "description": "If a scenario uses City of Sins encounter set, place this card near the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. Note that in The Wages of Sin both decks could trigger the empty criteria, so place it near both discard piles.",
+        "description": "If a scenario uses City of Sins encounter set, put this card on the bottom of the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. Note that in The Wages of Sin both decks could trigger the empty criteria.",
         "members": [
           {
             "variation": 1,
@@ -481,9 +481,30 @@
       {
         "setCode": "TCUC",
         "setName": "The Circle Undone (Campaign Expansion)",
+        "hash": "TCUC-Nahab",
+        "name": "Nahab",
+        "description": "Nahab's stat has Agenda scaling from 2 different sources (the Agenda card, and her card text) going in the same rate. Therefore 2 mini cards can essentially print computed stats for 4 different agenda. This scenario is mind taxing enough I don't want to do any more math...",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "TCUC-Nahab-1-A.png",
+            "backName": "TCUC-Nahab-1-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 1,
+            "frontName": "TCUC-Nahab-2-A.png",
+            "backName": "TCUC-Nahab-2-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "TCUC",
+        "setName": "The Circle Undone (Campaign Expansion)",
         "hash": "TCUC-Priestess of the Coven",
         "name": "Priestess of the Coven",
-        "description": "If a scenario uses Anette's Coven encounter set, place this card near the encounter deck as a reminder to scan the play field whenever the encounter deck became empty.",
+        "description": "If a scenario uses Anette's Coven encounter set, put this card on the bottom of the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. The other 2 cards are for keeping track of the discarded Witch buff. The +3 card also has a greyed out backside to flip to when the encounter discard pile finally resets.",
         "members": [
           {
             "variation": 1,
@@ -557,8 +578,8 @@
         ]
       }
     ],
-    "itemCount": 11,
-    "printedQuantity": 22
+    "itemCount": 12,
+    "printedQuantity": 24
   },
   {
     "index": 8,
@@ -900,7 +921,7 @@
         "setName": "Edge of the Earth (Campaign Expansion)",
         "hash": "EOTEC-Rise of the Elder Things",
         "name": "Rise of the Elder Things",
-        "description": "The effect temporarily buffs the enemy engaging without at the moment you draw the treachery. Paste this to those enemies. Note that the effect persists until the end of round even if you then disengages from them.",
+        "description": "The effect temporarily buffs the enemy engaging with you at the moment you draw the treachery. Paste this to all those enemies. Note that the effect persists until the end of round even if you then disengages from them.",
         "members": [
           {
             "variation": 1,
@@ -1134,7 +1155,7 @@
         "setName": "The Scarlet Keys (Investigator Expansion)",
         "hash": "TSKP-Embezzled Treasure",
         "name": "Embezzled Treasure",
-        "description": "Remembers extra resources that the player would get when you gathered up to play the next time. The cards should be thrown into that investigator's deck. (If they would start the next scenario with +4 resources, then put the 1 resource card and 3 resource card together near that deck.)",
+        "description": "Remembers extra resources that the player would get when you gathered up to play the next time. The cards should be thrown into that investigator's deck when you clean up the game. (e.g. If they would start the next scenario with +4 resources, then give them a 1 resource card and a 3 resource card.)",
         "members": [
           {
             "variation": 1,
@@ -1575,7 +1596,7 @@
         "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
         "hash": "FHVP-Eyes of Valusia",
         "name": "Eyes of Valusia",
-        "description": "Debuff indicator so other investigators that gangs up on it after you remember to account for it.",
+        "description": "Debuff indicator so other investigators that gangs up on it after you remember to account for it. The backside shows +2 for when the effect is stacked.",
         "members": [
           {
             "variation": 1,
@@ -1588,9 +1609,24 @@
       {
         "setCode": "FHVP",
         "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
+        "hash": "FHVP-Flux Stabilizer",
+        "name": "Flux Stabilizer",
+        "description": "Sometimes you need to move clues way ahead of the test. You can flip these cards to colored side to help you remember those stacking +2 boosts until the test. Flip all of them back after entering a new phase. It is also helpful to pile them up together with committed cards to tally together, flip them back after the test ends. I think 3 copies of this is enough.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 3,
+            "frontName": "FHVP-Flux Stabilizer-x3-A.png",
+            "backName": "FHVP-Flux Stabilizer-x3-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVP",
+        "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
         "hash": "FHVP-I'll Pay You Back!",
         "name": "I'll Pay You Back!",
-        "description": "A legally binding debt document. Front side has a wording that make sense if you give the mini-card to someone you borrowed the resource from, so you give the workload of reminding you to pay back to that investigator. Back side works inversely by keeping it on you.",
+        "description": "This mini card works like a legally binding debt document that you can give to the player you borrowed resource from, which might be useful when the round is long. Backside has a wording which works the other way around.",
         "members": [
           {
             "variation": 1,
@@ -1605,7 +1641,7 @@
         "setName": "The Feast of Hemlock Vale (Investigator Expansion)",
         "hash": "FHVP-Ofuda",
         "name": "Ofuda",
-        "description": "Temporary keyword removal indicator. As a bonus it looks like the Ofuda is really on the enemy's forehead!",
+        "description": "Temporary keyword removal indicator. Since Ofuda is replenish 1 charge, you can also use this card as a charge while no enemy gets the debuff yet by flipping to backside for 0 charge. (It has a greyed out graphic, like it ran out of magical power at the moment.) As a bonus it looks like the Ofuda is really on the enemy's forehead!",
         "members": [
           {
             "variation": 1,
@@ -1631,8 +1667,161 @@
         ]
       }
     ],
-    "itemCount": 7,
-    "printedQuantity": 7
+    "itemCount": 8,
+    "printedQuantity": 10
+  },
+  {
+    "index": 17,
+    "setCode": "FHVC",
+    "setName": "The Feast of Hemlock Vale (Campaign Expansion)",
+    "items": [
+      {
+        "setCode": "FHVC",
+        "setName": "The Feast of Hemlock Vale (Campaign Expansion)",
+        "hash": "FHVC-Chroma Blight",
+        "name": "Chroma Blight",
+        "description": "Place this mini card near the player's deck with 6 resources on it so they don't forget to add brilliance (by moving them from this mini-card to the actual treachery card) when they draw cards for any reason.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 2,
+            "frontName": "FHVC-Chroma Blight-x2-A.png",
+            "backName": "FHVC-Chroma Blight-x2-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVC",
+        "setName": "The Feast of Hemlock Vale (Campaign Expansion)",
+        "hash": "FHVC-Cochleal Stag",
+        "name": "Cochleal Stag",
+        "description": "Give this card to the first one in player order ending their turn at or near this enemy's location to not forget the effect when Mythos Phase comes. Pass it to the next player after the test if there are more to apply the effect.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVC-Cochleal Stag-A.png",
+            "backName": "FHVC-Cochleal Stag-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVC",
+        "setName": "The Feast of Hemlock Vale (Campaign Expansion)",
+        "hash": "FHVC-Decoy Util",
+        "name": "Decoy Util",
+        "description": "Decoy side is used to mark decoy's lingering effect on the enemy. Note that this is slightly different from those 'long evade' effects from player cards (can't ready for any reason, not just in Upkeep Phase), so having them spelled out might allow you to make some witty plays? I gave you 3 copies of these, and so I put different miscellaneous utilities on the back side of each copy : There are copy of location effect text you could put closer to the player's threat area fighting at that location so they don't forget it. There is also a card you could slide under the bear if you are not used to its ignore list yet.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVC-Decoy Util-1-A.png",
+            "backName": "FHVC-Decoy Util-1-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 1,
+            "frontName": "FHVC-Decoy Util-2-A.png",
+            "backName": "FHVC-Decoy Util-2-B.png"
+          },
+          {
+            "variation": 3,
+            "quantity": 1,
+            "frontName": "FHVC-Decoy Util-3-A.png",
+            "backName": "FHVC-Decoy Util-3-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVC",
+        "setName": "The Feast of Hemlock Vale (Campaign Expansion)",
+        "hash": "FHVC-Desiccation",
+        "name": "Desiccation",
+        "description": "For big table with awkward angle some players might not notice Desiccation next to the agenda deck. This is a proxy of the card you could place somewhere closer to them, plus you can flip it to greyed out side when it is not active instead of putting it away, so you are more accustomed to check if it is active or not.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVC-Desiccation-A.png",
+            "backName": "FHVC-Desiccation-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVC",
+        "setName": "The Feast of Hemlock Vale (Campaign Expansion)",
+        "hash": "FHVC-Downpour",
+        "name": "Downpour",
+        "description": "Remember how many actions you choose (or forced) to lose.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 2,
+            "frontName": "FHVC-Downpour-x2-A.png",
+            "backName": "FHVC-Downpour-x2-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVC",
+        "setName": "The Feast of Hemlock Vale (Campaign Expansion)",
+        "hash": "FHVC-Empty Space",
+        "name": "Empty Space",
+        "description": "You can use these mini cards instead of real empty space so the grid looks neater and easier to see the columns. Mini card size also help distinguishing it from location card.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 5,
+            "frontName": "FHVC-Empty Space-x5-A.png",
+            "backName": "FHVC-Empty Space-x5-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVC",
+        "setName": "The Feast of Hemlock Vale (Campaign Expansion)",
+        "hash": "FHVC-Hemlock House",
+        "name": "Hemlock House",
+        "description": "I forgot resolving the predation test several times (or sometimes inversely forgot if I resolved it already or not) so this is a boolean card that both reminds you and you could flip after you have resolved it. It is helpful to place it near the encounter deck, especially if your deck layout has encounter deck further from the agenda card.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "FHVC-Hemlock House-A.png",
+            "backName": "FHVC-Hemlock House-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "FHVC",
+        "setName": "The Feast of Hemlock Vale (Campaign Expansion)",
+        "hash": "FHVC-The Longest Night",
+        "name": "The Longest Night",
+        "description": "Cards you can slide under the enemy to make some of their text box ability more 'visual' and readable from further away / awkward angles. Due to the layout of this scenario, I have provided all kind of orientation variants you can use to poke the card out from any side of the enemy card.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 3,
+            "frontName": "FHVC-The Longest Night-1-x3-A.png",
+            "backName": "FHVC-The Longest Night-1-x3-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 3,
+            "frontName": "FHVC-The Longest Night-2-x3-A.png",
+            "backName": "FHVC-The Longest Night-2-x3-B.png"
+          },
+          {
+            "variation": 3,
+            "quantity": 3,
+            "frontName": "FHVC-The Longest Night-3-x3-A.png",
+            "backName": "FHVC-The Longest Night-3-x3-B.png"
+          }
+        ]
+      }
+    ],
+    "itemCount": 8,
+    "printedQuantity": 24
   },
   {
     "index": 18,

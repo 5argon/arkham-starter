@@ -1,38 +1,11 @@
-<script lang="ts" context="module">
-		import { coreToRcore } from '$lib/ahdb/conversion'
-	import { CardClass, cardClassToBackgroundClass, cardClassToName } from '$lib/core/card-class'
-	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
-		import { allIcons } from '$lib/design/icons/all-icons'
-		import FaIcon from '$lib/design/icons/FaIcon.svelte'
-	import { classToBorderColorCss } from '$lib/design/interface/card-class'
-		import type {
-			ChosenCards,
-			ChosenClasses,
-			ChosenNumber,
-			ChosenSkills,
-			ChosenTraits,
-			DeckDistribution,
-			XpDistributionData,
-		} from '$lib/design/interface/deck-banner'
-	
-	import ClassIcon from '../inline/ClassIcon.svelte'
-		import type { PackInfoSpanItem } from '../inline/PackInfoSpan.svelte'
-		import PackInfoSpan from '../inline/PackInfoSpan.svelte'
-		import SkillIcon from '../inline/SkillIcon.svelte'
-		import CardSquareList from './CardSquareList.svelte'
-		import ChosenCardRender from './ChosenCardRender.svelte'
-		import DeckInsightItem from './DeckInsightItem.svelte'
-		import ParallelInfo from './ParallelInfo.svelte'
-		import TwoClassBar from './TwoClassBar.svelte'
-		import XpDistribution from './XpDistribution.svelte<script lang="ts" context="module">
-	import { CardClass, cardClassToBackgroundClass, cardClassToName } from '$lib/core/card-class'
-	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
-	import { classToBorderColorCss } from '$lib/design/interface/card-class'
-	import ClassIcon from '../inline/ClassIcon.svelte'
-</script>
-
 <script lang="ts">
-	import ParallelInfo from './ParallelInfo.svelte'
+	import { coreToRcore } from '$lib/ahdb/conversion'
+	import { cardClassToBackgroundClass, cardClassToName } from '$lib/core/card-class'
+	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
+	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
+	import { allIcons } from '$lib/design/icons/all-icons'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import { CardClass, classToBorderColorCss } from '$lib/design/interface/card-class'
 	import type {
 		ChosenCards,
 		ChosenClasses,
@@ -42,17 +15,16 @@
 		DeckDistribution,
 		XpDistributionData,
 	} from '$lib/design/interface/deck-banner'
-	import XpDistribution from './XpDistribution.svelte'
-	import DeckInsightItem from './DeckInsightItem.svelte'
-	import TwoClassBar from './TwoClassBar.svelte'
-	import ChosenCardRender from './ChosenCardRender.svelte'
-	import CardSquareList from './CardSquareList.svelte'
-	import { coreToRcore } from '$lib/ahdb/conversion'
+
 	import type { PackInfoSpanItem } from '../inline/PackInfoSpan.svelte'
 	import PackInfoSpan from '../inline/PackInfoSpan.svelte'
 	import SkillIcon from '../inline/SkillIcon.svelte'
-	import FaIcon from '$lib/design/icons/FaIcon.svelte'
-	import { allIcons } from '$lib/design/icons/all-icons'
+	import CardSquareList from './CardSquareList.svelte'
+	import ChosenCardRender from './ChosenCardRender.svelte'
+	import DeckInsightItem from './DeckInsightItem.svelte'
+	import ParallelInfo from './ParallelInfo.svelte'
+	import TwoClassBar from './TwoClassBar.svelte'
+	import XpDistribution from './XpDistribution.svelte'
 
 	export let authorName: string | null = null
 	export let authorUrl: string | null = null
