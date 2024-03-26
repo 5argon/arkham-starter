@@ -82,133 +82,26 @@
 	<a href="/divider">Back to the main divider page</a>
 </p>
 
-<ListDivider label="Select Language" />
+<p>
+	I'm moving the hosting of dividers to Google Drive. There you could batch download the whole
+	folder easier with the right click menu. You can also switch from list view to thumbnail view.
+</p>
 
-<HorizontalRadio
-	selectedIndex={selectedLanguageIndex}
-	onSelectedIndexChanged={(i) => {
-		selectedLanguageIndex = i
+<Button
+	label="Go to Google Drive"
+	big
+	onClick={() => {
+		window.open(
+			'https://drive.google.com/drive/folders/1WdXXcRYv4CfTCN_XUb29eX-e84oXxazp?usp=share_link',
+			'_blank',
+		)
 	}}
-	items={languages.map((x) => ({ text: x.text }))}
 />
 
-<ListDivider label="Select Divider" />
+<ListDivider label="Available Languages" />
 
-<div class="dd-frame">
-	{#if !inner}
-		<table>
-			{#each dividerData as dd, outerIndex}
-				<tr>
-					<td>
-						<Button
-							label="Go Inside"
-							onClick={() => {
-								selectedOuterIndex = outerIndex
-								inner = true
-							}}
-						/>
-					</td>
-					<td>
-						<div class="dd-title">{dd.groupName}</div>
-					</td>
-					<td>
-						<div class="dd-description">{dd.description}</div>
-					</td>
-				</tr>
-			{/each}
-		</table>
-	{:else if !innerMost}
-		<Button
-			label="Go Back"
-			onClick={() => {
-				inner = false
-			}}
-		/>
-		<h1>{selectedOuter.groupName}</h1>
-		<p>{selectedOuter.description}</p>
-		<table>
-			<thead>
-				<td />
-				<td><span>Set Name</span></td>
-				<td><span>Divider Count</span></td>
-				<td><span>Preview</span></td>
-			</thead>
-			{#each selectedOuter.items as dd, innerIndex}
-				<tr>
-					<td>
-						<Button
-							label={'Download ' + selectedLanguage.text}
-							onClick={() => {
-								innerMost = true
-								selectedInnerIndex = innerIndex
-							}}
-						/>
-					</td>
-					<td>
-						{dd.name}
-					</td>
-					<td>
-						{dd.count}
-					</td>
-					<td>
-						<div class="preview-box">
-							<img
-								alt={'Preview'}
-								class="preview"
-								src={getPreviewUrl(selectedLanguage.code, dd.name, dd.count, 0)}
-							/>
-						</div>
-					</td>
-				</tr>
-			{/each}
-		</table>
-	{:else}
-		<div>
-			<Button
-				label="Go Back"
-				onClick={() => {
-					innerMost = false
-				}}
-			/>
-		</div>
-		<h1>{selectedOuter.groupName}</h1>
-		<p>{selectedOuter.description}</p>
-		<h2>{selectedInner.name}</h2>
-		<div>
-			Right click and Save Image As, or drag them out of browser to your computer. They are all full
-			size image, just being displayed smaller in the browser.
-		</div>
-
-		<div class="flex-final-outer">
-			{#each finalDisplays as fd}
-				<img alt={'divider'} class="flex-final-inner final-display" src={fd} />
-			{/each}
-		</div>
-	{/if}
-</div>
-
-<style>
-	td {
-		padding: 0px 8px;
-	}
-
-	.preview-box {
-		width: 500px;
-		height: 20px;
-		overflow: hidden;
-	}
-
-	.preview {
-		width: 500px;
-	}
-
-	.flex-final-outer {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	.flex-final-inner {
-		width: 400px;
-		padding: 8px;
-	}
-</style>
+<ul>
+	{#each languages as l}
+		<li>{l.text} (Folder: {l.code})</li>
+	{/each}
+</ul>
