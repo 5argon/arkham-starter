@@ -166,7 +166,7 @@ export const theBoundaryBeyondScenario: Scenario = {
 		{
 			name: 'Cultist',
 			shuffles: [
-				{ encounterSet: theBoundaryBeyond, overwriteCount: 3 },
+				{ encounterSet: theBoundaryBeyond, overwriteCount: 7 },
 				{ encounterSet: poison, overwriteCount: 2 },
 				{ encounterSet: temporalFlux, overwriteCount: 3 },
 				pnakoticBrotherhood,
@@ -176,7 +176,7 @@ export const theBoundaryBeyondScenario: Scenario = {
 		{
 			name: 'Tablet',
 			shuffles: [
-				{ encounterSet: theBoundaryBeyond, overwriteCount: 3 },
+				{ encounterSet: theBoundaryBeyond, overwriteCount: 7 },
 				{ encounterSet: poison, overwriteCount: 2 },
 				{ encounterSet: temporalFlux, overwriteCount: 3 },
 				yigsVenom,
@@ -186,7 +186,7 @@ export const theBoundaryBeyondScenario: Scenario = {
 		{
 			name: 'Neutral',
 			shuffles: [
-				{ encounterSet: theBoundaryBeyond, overwriteCount: 3 },
+				{ encounterSet: theBoundaryBeyond, overwriteCount: 7 },
 				{ encounterSet: poison, overwriteCount: 2 },
 				{ encounterSet: temporalFlux, overwriteCount: 3 },
 				pnakoticBrotherhood,
@@ -226,7 +226,7 @@ export const heartOfTheEldersPart1Scenario: Scenario = {
 			shuffles: [
 				{ encounterSet: heartOfTheElders, overwriteCount: 5 },
 				{ encounterSet: pillarsOfJudgement, overwriteCount: 6 },
-				{ encounterSet: expedition, overwriteCount: 2 },
+				{ encounterSet: expedition, overwriteCount: 3 },
 				{ encounterSet: rainforest, overwriteCount: 4 },
 				{ encounterSet: poison, overwriteCount: 2 },
 				serpents,
@@ -237,7 +237,7 @@ export const heartOfTheEldersPart1Scenario: Scenario = {
 		notes: [
 			{
 				topic: 'Exploration Deck',
-				what: '10~11 cards. (4x Treacheries, 6~7x Locations : 6x Jungle + Possible 1x Ruins)',
+				what: '10~11 cards. (4x Treacheries, 6~7x Locations : 6x Jungle + 1x Ruins if no Map)',
 			},
 			{
 				encounterSet: heartOfTheElders,
@@ -249,11 +249,19 @@ export const heartOfTheEldersPart1Scenario: Scenario = {
 			},
 			{
 				encounterSet: pillarsOfJudgement,
-				what: '1x Time-Wracked Woods (Jungle) and 1x Ants! are in the exploration deck. Stone Altar (Ruins) is randomized with 2 other Ruins in the Rainforest set.',
+				what: '1x Time-Wracked Woods (Jungle) and 1x Ants! are in the exploration deck.',
 			},
 			{
 				encounterSet: rainforest,
-				what: 'Overgrown Ruins (Ruins) and Temple of the Fang (Ruins) are randomized with Stone Altar (Ruins) in the Pillars of Judgment set. 5 remaining Jungle locations are all in the exploration deck.',
+				what: '5x Jungle locations are all in the exploration deck.',
+			},
+			{
+				encounterSet: pillarsOfJudgement,
+				what: 'Stone Altar (Ruins) is a part of 3 Ruins randomization, 2 other Ruins in the Rainforest set.',
+			},
+			{
+				encounterSet: rainforest,
+				what: 'Overgrown Ruins (Ruins) and Temple of the Fang (Ruins) are part of 3 Ruins randomization with Stone Altar (Ruins) in the Pillars of Judgment set.',
 			},
 		],
 	},
