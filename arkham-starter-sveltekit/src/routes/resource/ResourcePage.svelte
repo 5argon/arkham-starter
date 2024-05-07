@@ -2,6 +2,13 @@
 	import ResourceItem from './ResourceItem.svelte'
 </script>
 
+<ResourceItem
+	url="/starter-decks"
+	title="Starter Decks"
+	description="Welcome to Arkham Horror LCG! These are decks designed to use the fewest purchases possible ready to go with a complete play guide, so you can find many options no matter how small your collection is or which product you purchased first."
+	image="starter.webp"
+/>
+
 <h2>Reference Materials</h2>
 
 <ResourceItem

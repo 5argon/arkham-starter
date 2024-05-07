@@ -28,10 +28,11 @@
 	export let deck: GetDeckCardIdReturns
 	export let ahst: ArkhamStarterDeckData | null = null
 	export let viewerPage: boolean = false
+	export let taboo: boolean = true
 	export let customizableMetas: CustomizableMeta[] = []
 	let packInfoSpanItems: PackInfoSpanItem[]
 	const rcoreDeck = forwardDeckToRcore(deck)
-	const mainDeckXp = calculateCardsXp(rcoreDeck.cards1, popupDatabase, true, customizableMetas)
+	const mainDeckXp = calculateCardsXp(rcoreDeck.cards1, popupDatabase, taboo, customizableMetas)
 	const representativeCards = getRepresentativeCards(
 		rcoreDeck.cards1.map((x) => x.cardId),
 		rcoreDeck.cards2.map((x) => x.cardId).filter((x) => !ahst?.extraCards.includes(x) ?? true),
@@ -156,6 +157,7 @@
 <DeckBanner
 	popupDb={popupDatabase}
 	link={!viewerPage ? './deck/' + deck.id : deck.link}
+	openInNewTab={!viewerPage}
 	packs={packInfoSpanItems}
 	deckName={ahst?.rename ?? deck.deck}
 	investigatorCode={deck.investigatorCode}

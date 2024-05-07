@@ -38,6 +38,7 @@
 	export let packs: PackInfoSpanItem[]
 	export let popupDb: PopupDatabase
 	export let compact: boolean = false
+	export let openInNewTab: boolean = false
 
 	export let previewCards: string[]
 
@@ -115,6 +116,7 @@
 			class:deck-name-with-link={link !== null}
 			class:deck-name-without-link={link === null}
 			class="deck-name"
+			target={openInNewTab ? '_blank' : '_self'}
 		>
 			<span>{deckName}</span>
 		</a>
@@ -292,7 +294,7 @@
 	}
 
 	.first-block {
-		flex-basis: 340px;
+		flex-basis: 300px;
 		flex-grow: 1;
 		display: flex;
 		align-items: center;
@@ -324,10 +326,6 @@
 		flex-direction: column;
 		justify-content: space-between;
 		padding-left: 8px;
-	}
-
-	.investigator-name {
-		font-size: large;
 	}
 
 	.author {

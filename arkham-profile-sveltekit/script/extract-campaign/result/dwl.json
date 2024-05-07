@@ -1,0 +1,243 @@
+{
+  "setupEffects": [],
+  "scenarioEffects": [
+    {
+      "simpleEffects": [
+        {
+          "type": "campaign_log",
+          "section": "campaign_notes",
+          "id": "henry_armitage_kidnapped",
+          "text": "Dr. Henry Armitage was kidnapped."
+        },
+        {
+          "type": "earn_xp",
+          "investigator": "all",
+          "bonus": 2
+        },
+        {
+          "type": "campaign_log",
+          "section": "campaign_notes",
+          "id": "henry_armitage_rescued",
+          "text": "the investigators rescued Dr. Henry Armitage."
+        },
+        {
+          "type": "add_card",
+          "investigator": "choice",
+          "card": "02040"
+        }
+      ],
+      "inputEffects": [],
+      "id": "armitages_fate",
+      "name": "Armitage's Fate",
+      "fullName": "Interlude I: Armitage's Fate"
+    },
+    {
+      "simpleEffects": [],
+      "inputEffects": [],
+      "id": "blood_on_the_altar",
+      "name": "Blood on the Altar",
+      "fullName": "Scenario IV: Blood on the Altar"
+    },
+    {
+      "simpleEffects": [],
+      "inputEffects": [],
+      "id": "dwl_prologue",
+      "name": "Prologue",
+      "fullName": "Prologue"
+    },
+    {
+      "simpleEffects": [],
+      "inputEffects": [],
+      "id": "dwl_epilogue",
+      "name": "Epilogue",
+      "fullName": "Epilogue"
+    },
+    {
+      "simpleEffects": [
+        {
+          "type": "add_chaos_token",
+          "tokens": [
+            "-2"
+          ]
+        },
+        {
+          "type": "add_chaos_token",
+          "tokens": [
+            "-3"
+          ]
+        },
+        {
+          "type": "add_chaos_token",
+          "tokens": [
+            "-4"
+          ]
+        },
+        {
+          "type": "add_chaos_token",
+          "tokens": [
+            "-5"
+          ]
+        }
+      ],
+      "inputEffects": [],
+      "id": "essex_county_express",
+      "name": "The Essex County Express",
+      "fullName": "Scenario III: The Essex County Express"
+    },
+    {
+      "simpleEffects": [],
+      "inputEffects": [],
+      "id": "extracurricular_activity",
+      "name": "Extracurricular Activity",
+      "fullName": "Scenario I–A: Extracurricular Activity"
+    },
+    {
+      "simpleEffects": [],
+      "inputEffects": [],
+      "id": "lost_in_time_and_space",
+      "name": "Lost in Time and Space",
+      "fullName": "Scenario VII: Lost in Time and Space"
+    },
+    {
+      "simpleEffects": [
+        {
+          "type": "campaign_log",
+          "section": "campaign_notes",
+          "id": "henry_armitage_survived",
+          "text": "Dr. Henry Armitage survived The Dunwich Legacy."
+        },
+        {
+          "type": "add_card",
+          "investigator": "choice",
+          "card": "02040"
+        },
+        {
+          "type": "add_card",
+          "investigator": "choice",
+          "card": "02219"
+        },
+        {
+          "type": "campaign_log",
+          "section": "campaign_notes",
+          "id": "warren_rice_survived",
+          "text": "Professor Warren Rice survived The Dunwich Legacy."
+        },
+        {
+          "type": "add_card",
+          "investigator": "choice",
+          "card": "02061"
+        },
+        {
+          "type": "add_card",
+          "investigator": "choice",
+          "card": "02219"
+        },
+        {
+          "type": "campaign_log",
+          "section": "campaign_notes",
+          "id": "francis_morgan_survived",
+          "text": "Dr. Francis Morgan survived The Dunwich Legacy."
+        },
+        {
+          "type": "add_card",
+          "investigator": "choice",
+          "card": "02080"
+        },
+        {
+          "type": "add_card",
+          "investigator": "choice",
+          "card": "02219"
+        },
+        {
+          "type": "campaign_log",
+          "section": "campaign_notes",
+          "id": "zebulon_whateley_survived",
+          "text": "Zebulon Whateley survived The Dunwich Legacy."
+        },
+        {
+          "type": "add_card",
+          "investigator": "choice",
+          "card": "02217"
+        },
+        {
+          "type": "campaign_log",
+          "section": "campaign_notes",
+          "id": "earl_sawyer_survived",
+          "text": "Earl Sawyer survived The Dunwich Legacy."
+        },
+        {
+          "type": "add_card",
+          "investigator": "choice",
+          "card": "02218"
+        }
+      ],
+      "inputEffects": [],
+      "id": "dwl_interlude2",
+      "name": "The Survivors",
+      "fullName": "Interlude II: The Survivors"
+    },
+    {
+      "simpleEffects": [],
+      "inputEffects": [],
+      "id": "the_house_always_wins",
+      "name": "The House Always Wins",
+      "fullName": "Scenario I–B: The House Always Wins"
+    },
+    {
+      "simpleEffects": [],
+      "inputEffects": [],
+      "id": "the_miskatonic_museum",
+      "name": "The Miskatonic Museum",
+      "fullName": "Scenario II: The Miskatonic Museum"
+    },
+    {
+      "simpleEffects": [
+        {
+          "type": "add_weakness",
+          "investigator": "all",
+          "weakness_traits": [
+            "Madness",
+            "Injury",
+            "Pact"
+          ]
+        }
+      ],
+      "inputEffects": [],
+      "id": "undimensioned_and_unseen",
+      "name": "Undimensioned and Unseen",
+      "fullName": "Scenario V: Undimensioned and Unseen"
+    },
+    {
+      "simpleEffects": [
+        {
+          "type": "add_chaos_token",
+          "tokens": [
+            "-3"
+          ]
+        },
+        {
+          "type": "add_chaos_token",
+          "tokens": [
+            "-5"
+          ]
+        },
+        {
+          "type": "add_chaos_token",
+          "tokens": [
+            "-6"
+          ]
+        },
+        {
+          "type": "add_chaos_token",
+          "tokens": [
+            "-7"
+          ]
+        }
+      ],
+      "inputEffects": [],
+      "id": "where_doom_awaits",
+      "name": "Where Doom Awaits",
+      "fullName": "Scenario VI: Where Doom Awaits"
+    }
+  ]
+}

@@ -24,7 +24,7 @@ export function decodeSideExtras(s: string): string[] {
 
 export interface DeckEntry {
 	modifiedDeckName: string
-	deck: GetDeckCardIdReturns
+	deck: AhdbDeck
 	raw: RawDeck
 }
 

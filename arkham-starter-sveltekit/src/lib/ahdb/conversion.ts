@@ -91,6 +91,7 @@ export function packCodeToIconConversion(p: string): CardPack {
 		case 'ltr':
 		case 'ptr':
 		case 'rop':
+		case 'hfa':
 			return CardPack.ParallelInvestigator
 		case 'books':
 		case 'hoth':

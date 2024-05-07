@@ -31,6 +31,8 @@ export const allIcons = {
 	anyWeakness: ic('virus-solid'),
 	experience: ic('arrow-up-right-dots-solid'),
 	myraid: ic('layer-group-solid'),
+	foldoutRight: ic('caret-right-solid'),
+	foldoutDown: ic('caret-down-solid'),
 }
 
 function ic(s: string): string {

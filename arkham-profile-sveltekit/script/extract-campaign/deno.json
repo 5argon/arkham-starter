@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "extract" : "deno run --allow-read --allow-write extract-campaign.ts"
+  }
+}

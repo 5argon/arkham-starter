@@ -31,7 +31,7 @@
 <div class="packs">
 	{#each packsSorted as p}
 		<div class="one-pack">
-			<PackIconWithHover pack={p.pack} count={p.count} />
+			<PackIconWithHover pack={p.pack} count={p.count ?? null} />
 		</div>
 	{/each}
 </div>
@@ -41,7 +41,6 @@
 		display: flex;
 		align-items: center;
 		justify-items: center;
-		width: 30px;
 		border-radius: 2px;
 	}
 </style>
