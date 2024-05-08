@@ -72,7 +72,7 @@ export function upgradeExportSubdivided(
 				return upgradeExportRow(x, upgradeExportOptions, exportOptions)
 			}
 		})
-	const link = `<span class="small">[${upgradeExportOptions.showLinkText}](${makeUpgradePlannerUrl(
+	const link = `\n<span class="small">[${upgradeExportOptions.showLinkText}](${makeUpgradePlannerUrl(
 		upgradeExportToProtoString(uex),
 	)})</span>`
 	const all: string[] = [
@@ -109,7 +109,7 @@ function upgradeExportRow(
 const nbsp = '　'
 
 const openComment = '[//]: # (==================== TABLE START ====================)'
-const closeComment = '[//]: # (===================== TABLE END =====================)'
+const closeComment = '\n[//]: # (===================== TABLE END =====================)'
 const comment = '[//]: # (=====================================================)'
 const mdColumns = '|:-:|:--|:-:|:--|--:|--:|'
 const emptyRow = '|　|  |  |  |  |  |'

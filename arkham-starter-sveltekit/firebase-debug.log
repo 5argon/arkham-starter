@@ -1,0 +1,22 @@
+[debug] [2024-05-08T11:48:11.820Z] ----------------------------------------------------------------------
+[debug] [2024-05-08T11:48:11.821Z] Command:       /opt/homebrew/Cellar/node/21.5.0/bin/node /opt/homebrew/bin/firebase deploy -c ../firebase.json
+[debug] [2024-05-08T11:48:11.821Z] CLI Version:   12.5.2
+[debug] [2024-05-08T11:48:11.821Z] Platform:      darwin
+[debug] [2024-05-08T11:48:11.822Z] Node Version:  v21.5.0
+[debug] [2024-05-08T11:48:11.822Z] Time:          Wed May 08 2024 18:48:11 GMT+0700 (Indochina Time)
+[debug] [2024-05-08T11:48:11.822Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-05-08T11:48:11.852Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-05-08T11:48:11.852Z] > authorizing via signed-in user (5argon@exceed7.com)
+[debug] [2024-05-08T11:48:11.852Z] [iam] checking project arkham-starter for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-05-08T11:48:11.852Z] > refreshing access token with scopes: []
+[debug] [2024-05-08T11:48:11.853Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-05-08T11:48:11.853Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-05-08T11:48:12.074Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-05-08T11:48:12.074Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-05-08T11:48:12.089Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/arkham-starter:testIamPermissions [none]
+[debug] [2024-05-08T11:48:12.089Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/arkham-starter:testIamPermissions x-goog-quota-user=projects/arkham-starter
+[debug] [2024-05-08T11:48:12.089Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/arkham-starter:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-05-08T11:48:13.295Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/arkham-starter:testIamPermissions 200
+[debug] [2024-05-08T11:48:13.296Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/arkham-starter:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-05-08T11:48:13.296Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/arkham-starter [none]
