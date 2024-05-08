@@ -1,8 +1,6 @@
 export enum CardPack {
 	CoreSet,
 	RevisedCoreSet,
-	ParallelInvestigator,
-	Novella,
 
 	TheDunwichLegacy,
 	ThePathToCarcosa,
@@ -29,6 +27,9 @@ export enum CardPack {
 	StellaClark,
 
 	TheBlobThatAteEverythingElse,
+
+	ParallelInvestigator,
+	Novella,
 
 	Unknown,
 	RandomBasicWeakness,

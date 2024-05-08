@@ -29,7 +29,7 @@
 </script>
 
 <div class="packs">
-	{#each packsSorted as p}
+	{#each packsSorted as p (p.pack)}
 		<div class="one-pack">
 			<PackIconWithHover pack={p.pack} count={p.count ?? null} />
 		</div>

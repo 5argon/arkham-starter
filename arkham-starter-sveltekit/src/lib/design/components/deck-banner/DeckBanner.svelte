@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { coreToRcore } from '$lib/ahdb/conversion'
 	import { cardClassToBackgroundClass, cardClassToName } from '$lib/core/card-class'
+	import { CommitIcon } from '$lib/core/commit-icon'
 	import type { PopupDatabase, PopupDatabaseItem } from '$lib/core/popup-database'
 	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
@@ -67,6 +68,10 @@
 	let investigatorName: string
 	let investigatorSubtitle: string
 	let investigatorClass: CardClass
+	let investigatorWillpower: number
+	let investigatorCombat: number
+	let investigatorIntellect: number
+	let investigatorAgility: number
 	$: investigatorCodeRCore =
 		!parallelFront && !parallelBack ? coreToRcore(investigatorCode) : investigatorCode
 	$: {
@@ -75,6 +80,10 @@
 			investigatorName = card.original.n
 			investigatorSubtitle = card.original.sn ?? ''
 			investigatorClass = card.class1
+			investigatorWillpower = card.original.swi ?? 0
+			investigatorCombat = card.original.scm ?? 0
+			investigatorIntellect = card.original.sit ?? 0
+			investigatorAgility = card.original.sag ?? 0
 		}
 	}
 
@@ -157,6 +166,40 @@
 							<ParallelInfo front={parallelFront} back={parallelBack} {investigatorCode} />
 						</div>
 					{/if}
+					<div class="skill-icons">
+						<span class="skill-icon-one">
+							<span
+								class="skill-value"
+								class:skill-value-low={investigatorWillpower <= 2}
+								class:skill-value-high={investigatorWillpower >= 4}>{investigatorWillpower}</span
+							>
+							<SkillIcon greyOut={investigatorWillpower <= 2} icon={CommitIcon.Willpower} />
+						</span>
+						<span class="skill-icon-one">
+							<span
+								class="skill-value"
+								class:skill-value-low={investigatorIntellect <= 2}
+								class:skill-value-high={investigatorIntellect >= 4}>{investigatorIntellect}</span
+							>
+							<SkillIcon greyOut={investigatorIntellect <= 2} icon={CommitIcon.Intellect} />
+						</span>
+						<span class="skill-icon-one">
+							<span
+								class="skill-value"
+								class:skill-value-low={investigatorCombat <= 2}
+								class:skill-value-high={investigatorCombat >= 4}>{investigatorCombat}</span
+							>
+							<SkillIcon greyOut={investigatorCombat <= 2} icon={CommitIcon.Combat} />
+						</span>
+						<span class="skill-icon-one">
+							<span
+								class="skill-value"
+								class:skill-value-low={investigatorAgility <= 2}
+								class:skill-value-high={investigatorAgility >= 4}>{investigatorAgility}</span
+							>
+							<SkillIcon greyOut={investigatorAgility <= 2} icon={CommitIcon.Agility} />
+						</span>
+					</div>
 					{#if authorName}
 						<div class="author">
 							<div>
@@ -438,6 +481,20 @@
 
 	.xp {
 		font-size: small;
+		font-weight: bold;
+	}
+
+	.skill-icon-one {
+		margin-right: 2px;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.skill-value-low {
+		color: grey;
+	}
+
+	.skill-value-high {
 		font-weight: bold;
 	}
 </style>

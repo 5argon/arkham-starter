@@ -2,6 +2,7 @@
 	import { CommitIcon } from '$lib/core/commit-icon'
 	import { imageIconSkillPath } from '$lib/design/interface/path'
 	export let icon: CommitIcon
+	export let greyOut: boolean = false
 	let imagePath: string
 	let iconAlt: string
 	$: {
@@ -36,7 +37,13 @@
 </script>
 
 <div class="outer-square">
-	<img draggable={false} class="class-icon" src={imagePath} alt={iconAlt} />
+	<img
+		class:grey-out={greyOut}
+		draggable={false}
+		class="class-icon"
+		src={imagePath}
+		alt={iconAlt}
+	/>
 </div>
 
 <style>
@@ -51,5 +58,10 @@
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
+	}
+
+	.grey-out {
+		opacity: 0.3;
+		filter: saturate(0);
 	}
 </style>

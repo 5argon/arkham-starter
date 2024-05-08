@@ -16,7 +16,10 @@
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import { CardClass } from '$lib/core/card-class'
 
-	export let enabledExpansions: CardPack[] = [CardPack.RevisedCoreSet]
+	export let enabledExpansions: CardPack[] = [
+		CardPack.RevisedCoreSet,
+		CardPack.ParallelInvestigator,
+	]
 	export let collectionFoldOut = true
 	export let filtersFoldOut = true
 	export let guardian = true
@@ -52,6 +55,25 @@
 		const bPacks = getDeckPack(b)
 		const aCount = aPacks.filter((pack) => enabledExpansions.includes(pack)).length
 		const bCount = bPacks.filter((pack) => enabledExpansions.includes(pack)).length
+		if (aCount === bCount) {
+			const aInvestigator = data.pdb.getByIdThrowNull(a.deck.investigator_code)
+			const bInvestigator = data.pdb.getByIdThrowNull(b.deck.investigator_code)
+			const aPack: number = aInvestigator.packIcon
+			const bPack: number = bInvestigator.packIcon
+			if (aPack < bPack) {
+				return -1
+			}
+			if (aPack > bPack) {
+				return 1
+			}
+			if (aInvestigator.original.ps < bInvestigator.original.ps) {
+				return -1
+			}
+			if (aInvestigator.original.ps > bInvestigator.original.ps) {
+				return 1
+			}
+			return 0
+		}
 		return bCount - aCount
 	}
 	$: deckEntriesFiltered = deckEntries.filter(filterDeckEntry).sort(sortDeckEntry)
@@ -60,7 +82,9 @@
 
 	let packInfoSpanItem: PackInfoSpanItem[]
 	$: {
-		packInfoSpanItem = enabledExpansions.map<PackInfoSpanItem>((pack) => ({ pack }))
+		packInfoSpanItem = enabledExpansions
+			.filter((pack) => pack !== CardPack.ParallelInvestigator)
+			.map<PackInfoSpanItem>((pack) => ({ pack }))
 	}
 </script>
 
@@ -69,6 +93,8 @@
 </svelte:head>
 
 <PageTitle title={'Starter Decks'} />
+
+<p></p>
 
 <Foldout
 	title="Collection"
@@ -86,6 +112,9 @@
 		<ExpansionSpread
 			{enabledExpansions}
 			onClick={(pack) => {
+				if (pack === CardPack.RevisedCoreSet || pack === CardPack.ParallelInvestigator) {
+					return
+				}
 				enabledExpansions = enabledExpansions.includes(pack)
 					? enabledExpansions.filter((p) => p !== pack)
 					: [...enabledExpansions, pack]

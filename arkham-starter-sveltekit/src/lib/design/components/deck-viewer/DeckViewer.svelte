@@ -80,7 +80,7 @@
 	<title>arkham-starter.com | Deck Viewer</title>
 </svelte:head>
 
-<PageTitle title={'Alternate arkhamdb Deck Viewer'} {helpMd} />
+<PageTitle title={'arkhamdb Deck Viewer'} {helpMd} />
 
 {#if loading}
 	Loading
