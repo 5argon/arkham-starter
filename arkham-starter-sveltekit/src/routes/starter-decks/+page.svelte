@@ -15,6 +15,10 @@
 	import DeckBannerHigher from '$lib/design/components/deck-banner/DeckBannerHigher.svelte'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import { CardClass } from '$lib/core/card-class'
+	import SkillIcon from '$lib/design/components/inline/SkillIcon.svelte'
+	import { CommitIcon } from '$lib/core/commit-icon'
+	import InlineTopic from '$lib/design/components/basic/InlineTopic.svelte'
+	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
 
 	export let enabledExpansions: CardPack[] = [
 		CardPack.RevisedCoreSet,
@@ -27,6 +31,10 @@
 	export let rogue = true
 	export let mystic = true
 	export let survivor = true
+	export let highWillpower = false
+	export let highIntellect = false
+	export let highCombat = false
+	export let highAgility = false
 	export let data: PageData
 
 	let deckEntries: DeckEntry[] = decks
@@ -47,8 +55,19 @@
 			(mystic && investigator.class1 === CardClass.Mystic) ||
 			(survivor && investigator.class1 === CardClass.Survivor)
 		const packs = getDeckPack(deckEntry)
+		const highWillpowerCheck = highWillpower ? (investigator.original.swi ?? 0) >= 4 : true
+		const highIntellectCheck = highIntellect ? (investigator.original.sit ?? 0) >= 4 : true
+		const highCombatCheck = highCombat ? (investigator.original.scm ?? 0) >= 4 : true
+		const highAgilityCheck = highAgility ? (investigator.original.sag ?? 0) >= 4 : true
 		const failFilter = packs.find((pack) => !enabledExpansions.includes(pack))
-		return !failFilter && classIncluded
+		return (
+			!failFilter &&
+			classIncluded &&
+			highWillpowerCheck &&
+			highIntellectCheck &&
+			highCombatCheck &&
+			highAgilityCheck
+		)
 	}
 	$: sortDeckEntry = (a: DeckEntry, b: DeckEntry) => {
 		const aPacks = getDeckPack(a)
@@ -133,42 +152,104 @@
 		filtersFoldOut = !filtersFoldOut
 	}}
 >
-	<ListDivider label={'Investigator Class'} />
-	<Checkbox
-		label="Guardian"
-		checked={guardian}
-		onCheckChanged={() => {
-			guardian = !guardian
-		}}
-	/>
-	<Checkbox
-		label="Seeker"
-		checked={seeker}
-		onCheckChanged={() => {
-			seeker = !seeker
-		}}
-	/>
-	<Checkbox
-		label="Rogue"
-		checked={rogue}
-		onCheckChanged={() => {
-			rogue = !rogue
-		}}
-	/>
-	<Checkbox
-		label="Mystic"
-		checked={mystic}
-		onCheckChanged={() => {
-			mystic = !mystic
-		}}
-	/>
-	<Checkbox
-		label="Survivor"
-		checked={survivor}
-		onCheckChanged={() => {
-			survivor = !survivor
-		}}
-	/>
+	<InlineTopic label="Investigator Class">
+		<Checkbox
+			label="Guardian"
+			checked={guardian}
+			onCheckChanged={() => {
+				guardian = !guardian
+			}}
+		>
+			<ClassIcon cardClass={CardClass.Guardian} />
+			Guardian
+		</Checkbox>
+		<Checkbox
+			label="Seeker"
+			checked={seeker}
+			onCheckChanged={() => {
+				seeker = !seeker
+			}}
+		>
+			<ClassIcon cardClass={CardClass.Seeker} />
+			Seeker
+		</Checkbox>
+		<Checkbox
+			label="Rogue"
+			checked={rogue}
+			onCheckChanged={() => {
+				rogue = !rogue
+			}}
+		>
+			<ClassIcon cardClass={CardClass.Rogue} />
+			Rogue
+		</Checkbox>
+		<Checkbox
+			label="Mystic"
+			checked={mystic}
+			onCheckChanged={() => {
+				mystic = !mystic
+			}}
+		>
+			<ClassIcon cardClass={CardClass.Mystic} />
+			Mystic
+		</Checkbox>
+		<Checkbox
+			label="Survivor"
+			checked={survivor}
+			onCheckChanged={() => {
+				survivor = !survivor
+			}}
+		>
+			<ClassIcon cardClass={CardClass.Survivor} />
+			Survivor
+		</Checkbox>
+	</InlineTopic>
+
+	<InlineTopic label="Base Skill Value">
+		<Checkbox
+			label="High Willpower"
+			checked={highWillpower}
+			onCheckChanged={() => {
+				highWillpower = !highWillpower
+			}}
+		>
+			<span>High</span>
+			<SkillIcon icon={CommitIcon.Willpower} />
+		</Checkbox>
+
+		<Checkbox
+			label="High Intellect"
+			checked={highIntellect}
+			onCheckChanged={() => {
+				highIntellect = !highIntellect
+			}}
+		>
+			<span>High</span>
+			<SkillIcon icon={CommitIcon.Intellect} />
+		</Checkbox>
+
+		<Checkbox
+			label="High Combat"
+			checked={highCombat}
+			onCheckChanged={() => {
+				highCombat = !highCombat
+			}}
+		>
+			<span>High</span>
+			<SkillIcon icon={CommitIcon.Combat} />
+		</Checkbox>
+
+		<Checkbox
+			label="High Agility"
+			checked={highAgility}
+			onCheckChanged={() => {
+				highAgility = !highAgility
+			}}
+		>
+			<span>High</span>
+			<SkillIcon icon={CommitIcon.Agility} />
+		</Checkbox>
+	</InlineTopic>
 </Foldout>
 
 <ListDivider

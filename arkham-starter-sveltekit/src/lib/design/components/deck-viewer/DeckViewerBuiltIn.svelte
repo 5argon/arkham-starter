@@ -16,6 +16,6 @@
 	<title>arkham-starter.com | Deck Viewer</title>
 </svelte:head>
 
-<PageTitle title={'Deck Viewer'} />
+<PageTitle title={'Starter Deck Viewer'} />
 
 <DeckViewerInner {fullDatabase} {popupDatabase} deckInput={deck} {ahst} />
