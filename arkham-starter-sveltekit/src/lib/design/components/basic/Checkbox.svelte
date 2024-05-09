@@ -23,19 +23,24 @@
 </span> -->
 
 <span>
-	<label>
-		<input
-			type="checkbox"
-			class={iconImagePath !== null ? 'hidden-for-icon' : ''}
-			style={beforeCss}
-			{checked}
-			on:change={handler}
-		/><slot
-			>{#if iconImagePath !== null}<FaIcon path={iconImagePath} />{:else if label !== null}<span
-					class="label-span">{label}</span
-				>{/if}</slot
-		>
-	</label>
+	<span class="slot-span">
+		<label>
+			<input
+				type="checkbox"
+				class={iconImagePath !== null ? 'hidden-for-icon' : ''}
+				style={beforeCss}
+				{checked}
+				on:change={handler}
+			/>
+			<span class="slot-span">
+				<slot
+					>{#if iconImagePath !== null}<FaIcon path={iconImagePath} />{:else if label !== null}<span
+							class="label-span">{label}</span
+						>{/if}</slot
+				>
+			</span>
+		</label>
+	</span>
 </span>
 
 <style>
@@ -44,6 +49,31 @@
 	}
 
 	label {
-		padding: 0px 4px;
+		padding: 2px 4px;
+		margin: 2px 4px;
+		border-width: 1px;
+		border-style: solid;
+		border-radius: 2px;
+		display: inline-flex;
+		justify-content: center;
+		border-color: rgba(0, 0, 0, 0.1);
+	}
+
+	label:hover {
+		border-color: rgba(0, 0, 0, 0.3);
+	}
+
+	label:active {
+		border-color: rgba(0, 0, 0, 0.5);
+	}
+
+	input {
+		margin-right: 8px;
+	}
+
+	.slot-span {
+		display: inline-flex;
+		justify-content: center;
+		user-select: none;
 	}
 </style>

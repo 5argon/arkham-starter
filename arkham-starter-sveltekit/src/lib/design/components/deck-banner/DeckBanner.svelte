@@ -359,7 +359,7 @@
 	}
 
 	.investigator-subtitle {
-		font-size: small;
+		font-size: x-small;
 		color: grey;
 		white-space: nowrap;
 	}

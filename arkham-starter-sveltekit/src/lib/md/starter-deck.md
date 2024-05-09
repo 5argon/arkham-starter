@@ -1,29 +1,46 @@
-# What is a "Starter Deck"?
+# Starter Deck
 
-In collectible card game, "preconstructed deck" / "starter deck" is a whole deck with clear theme you can **buy** in one unit and be ready to play with others. So you don't have to open many booster packs when you first get into the game and since they are randomized, you may not even get staple cards to create a functional deck.
+These decks are curated from arkhamdb.com. Since majority of decks in that site are made by power users with access to every cards in the game, it is very common for a highly-rated deck there to touch only 1~4 cards in an entire Investigator Expansion to get the deck to do its best thing in any mulligan combination. Though that would perform well, in beginner's perspective it might appear as wasteful to buy such an expensive product for only a few cards, and the cost of building those decks appears insane.
 
-In Arkham Horror : The Card Game, FFG also did similar idea : "Investigator Starter Deck". All these decks are single color and ready to play, comes with a unique investigator and some cards you can't find anywhere else. Other than this, you are expected to build decks from a collection of cards you own.
+Those who don't want to deckbuild and just want to go on an adventure might be led to think unless they buy more, they can't follow any deck. The ultimate objective of this page is to say that's not true!
 
-This game doesn't have booster packs, you get a fixed amount of all the cards in one Investigator Expansion to build all kind of decks. This site wants to turn the **first few** Investigator Expansion new players bought into many viable "starter deck" that they can easily assemble and get into the game to temporarily bypass deckbuilding aspect, as if they bought a starter deck in collectible card game.
+Unlike arkhamdb, this site's decklist design has "expansion used" icon array displaying upfront so beginners can immediately see that the deck is cheap and buildable even before going into it. Each icon is one unit of purchase, so all the decks here will look immediately friendly for their low amount of icons. If using this display for decks in arkhamdb (you can try it by viewing a popular deck in arkhamdb, then modify URL from `arkhamdb.com` to `arkham-starter.com`), each deck can easily hit 8+ icons.
 
-## Most important : Maximum of 3 expansions
+Each deck has a backlink to it to read the deck guide. There you can like the deck to show appreciation and can comment to talk with the author.
 
-The appeal of collectible card game starter deck is one small unit of purchase with many synergistic cards jam-packed. This game however doesn't hand out cards like candies, the most granular unit of player card purchase is a much bigger **Investigator Expansion** (MSRP 45$). Revised Core Set is already MSRP 60$, and a Campaign Expansion is MSRP 70$. One each, and the game starts "for real" at MSRP 175$. From beginner's perspective, they better have many options from this amount of investment.
+## Submit your starter decks
 
-The more expansions a deck touches, the more "deck cost" adds up in a chunk of 45$, making it less appealing for beginners. You can easily see many highly rated decks in arkhamdb.com costing (virtually) 200$ and more, since they uses all the best tiny bit from each Investigator Expansion.
-  
-I want many decks to show up as buildable in this site as soon as a player purchases 1 or 2 Investigator Expansion, **no matter what that expansion is**. Therefore this restriction is the most important identity of this site. Search tool is upfront and geared for **expansion-based search**. Decks that managed to use **fewer expansions** will get better exposure because the search hits them more often.
+Are you a **starter deck author** looking to help out future AHLCG beginners? Such is the objective of this site! If your deck aligns with criterias below, direct message me on the contacts below with a URL to your **published** deck and I'll work on adding it to the site. Many combination of purchases are still missing at this point (e.g. Core + Dunwich + Carcosa which is quite a common sequence of purchase.) so this site could always use your help.
 
-I also want to prove that one absolutely do not have to buy Dunwich Investigator Expansion first. This common opinion "Dunwich is a staple!" leads to new player having to buy 2 Investigator Expansions successively to even begin getting into the game (Dunwich + something), in addition to a Campaign Expansion box since Night of the Zealot is not the real deal (this one I agree), and then they may not even like the game in the end with this 200$+ chunk of investment. I hope many decks in this site that does not have Dunwich icon stuck on them can open up many more options so **any** first Investigator Expansion works for newcomers.
+## What is a Starter Deck?
 
-The investigator card used in the deck also counted as coming from that entire Investigator Expansion in the quota. So deckbuilders are encouraged to make use of all the cards that comes with that investigator as much as possible to not bump up the cost of the deck.
-  
-If a deck uses **Investigator Starter Deck**, that also count as 1 expansion (though virtual cost added is cheaper, at MSRP 17$).
+This site defined a "Starter Deck" as :
 
-**Parallel Investigator** cards are free to print-and-play and therefore are all usable without restriction. Anything not costing more into this already expensive game is encouraged.
+- **New distribution format** : First, it means each player having one copy of Revised Core Set. You should not ever assume player having only 1x Machete or 1x Deduction again. Such deck will be underpowered for modern new players buying Revised Core Set. Second, it means Investigator Expansion. If the player has Zoey Samaras, they also has Prepared for the Worst (that was originally given in one of the Mythos Pack.) 
 
-## Party assembler tool
+  Finally, player always have the Revised-additional cards such as Lockpicks and Charisma. Make sure you are not unintentionally use the one from Investigator Expansion. For example, when making a deck not intended to require Dunwich Legacy but wants to use Charisma or Relic Hunter, in arkhamdb you need to unselect the entire The Dunwich Legacy checkboxes so it uses Revised Core Set's Charisma and Relic Hunter instead. Make sure it doesn't say "The Essex County Express" when you hover on them. Same for Lockpicks, arkhamdb seems to prioritize The Path to Carcosa ones rather than Revised Core Set.
 
-This game is often played up to 3-4 players using a single set of collection. This is tied to the cost, and therefore beginner friendliness of the game.
+- **No more than 3 additional purchases** : In new release format, Investigator Expansion and Investigator Starter Deck counts as 1 unit of purchase. This site wants to show that the options expanded by a lot when player clicks on even one additional expansions. Since Parallel Investigator are all free to print and play, they are always available for use without taking this quota.
+- **0 XP Deck with Side Deck as upgrades** : Beginners can't easily work backwards from full XP deck to 0 XP deck to start playing like intermediate players. Rather we would like them able to gather all the cards listed and being able to just sit and play for an entire campaign without touching the collection box again. They can still make choices of upgrade decisions from cards in the Side Deck. You are not required to eventually purchase everything in the Side Deck.
+- **For Standard difficulty** : Though it is generally advised that newcomers to play on Easy, all the deck in this site should be Standard compatible. If they decided to play on Easy anyway then the deck will be even performing better than expected. It means that the investigator is able to use their dominant stats to win tests on Standard difficulty after setting up appropriately. (e.g. Someone with 3 stat wouldn't able to do much on Standard without boosts or commits, but would be able to in Easy.)
+- **Has a deck guide** : Put this guide in the Description section. It is a good idea to explain how to play at various XP point this deck would journey through. Upgrade guide, what to look for in mulligans, and so on. If you are feeling generous, how to play the investigator here and there would help. (e.g. In Wendy deck, it'd be helpful to remind readers about her token redraw ability at various point in the guide.)
 
-Therefore I think it is a good function of this site to allow players to **build a team** from many starter decks and show if they are not using the same cards.
+## New Metadata
+
+These decks can use special fields that arkhamdb doesn't support.
+
+- **Excerpt** : You are able to add about 250 characters text-only short description that would get shown in the listing, instead of requiring user to take a look inside.
+- **Optional/suggested cards** : You can flag some cards in Side Deck as optional. Those cards will be separated to a new section below Side Deck to show that they are not strictly needed to progress the deck but would be nice to have. They will not contribute towards the 3 purchases quota. For example, you can have "Double, Double" as an optional card in Sefina deck while preventing The Circle Undone Investigator Expansion to appear as a requirement since you are only suggesting this 1 card from an entire box.
+- **Series** : If you are making a deck as a series, you can specify series' name of your deck. Multiple decks of the same series could get linked to each other, improving discoverability. (In the future.)
+- **Modified name** : You can use different name than what you use in arkhamdb. arkhamdb has no organization so people often put series name in the deck's title. For example, my decks in arkhamdb always have "2 Packs Deck Guide :" prefix that I would like to remove here since the fact that it uses 2 packs are obvious in the UI.
+
+<!-- - **Tag** : You can tag your deck what it is dealing with. In the future user can look for a missing role to fill their team with the filter. Each tag supports a short explanation (~100 characters) why it is able to fill that role, and a flag whether it is the deck's main role (can do with high success rate, has acceleration) or off-role (can do sometimes, can't do alone).
+
+### Available Tags
+
+- **Fight** : Use Fight action to deal damage to enemies.
+- **Evade** : Use Evade action to exhaust enemies.
+- **Investigate** : Can pick up clues from location consistently.
+- **Treachery** : Deal with various kind of treacheries. (Commit, cancel, ignore, discard.)
+- **Heal** : Can remove damage / horror counters from investigators.
+- **Support** : Has something not related to treachery and healing that affects other investigator. For example Minh and Carson would always have a Teamplay role from their ability. Teamwork, Encyclopedia, Stand Together, Extra Ammunition, etc. all also works targeting other investigators. -->

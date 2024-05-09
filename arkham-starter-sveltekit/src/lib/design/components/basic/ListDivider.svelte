@@ -7,7 +7,7 @@
 
 <script lang="ts">
 	import { allIcons } from '$lib/design/icons/all-icons'
-import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 
 	export let label: string
 	export let level: ListDividerLevel = ListDividerLevel.One
@@ -26,7 +26,7 @@ import FaIcon from '$lib/design/icons/FaIcon.svelte'
 </div>
 
 <style>
-	.outer{
+	.outer {
 		margin: 8px 0px;
 	}
 	.label-level-one {

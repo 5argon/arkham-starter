@@ -19,6 +19,7 @@
 	import { CommitIcon } from '$lib/core/commit-icon'
 	import InlineTopic from '$lib/design/components/basic/InlineTopic.svelte'
 	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
+	import helpMd from '$lib/md/starter-deck.md?raw'
 
 	export let enabledExpansions: CardPack[] = [
 		CardPack.RevisedCoreSet,
@@ -31,10 +32,13 @@
 	export let rogue = true
 	export let mystic = true
 	export let survivor = true
+	export let neutral = true
 	export let highWillpower = false
 	export let highIntellect = false
 	export let highCombat = false
 	export let highAgility = false
+	export let fullCollection = false
+	export let exactMatch = false
 	export let data: PageData
 
 	let deckEntries: DeckEntry[] = decks
@@ -53,13 +57,30 @@
 			(seeker && investigator.class1 === CardClass.Seeker) ||
 			(rogue && investigator.class1 === CardClass.Rogue) ||
 			(mystic && investigator.class1 === CardClass.Mystic) ||
-			(survivor && investigator.class1 === CardClass.Survivor)
+			(survivor && investigator.class1 === CardClass.Survivor) ||
+			(neutral && investigator.class1 === CardClass.Neutral)
 		const packs = getDeckPack(deckEntry)
 		const highWillpowerCheck = highWillpower ? (investigator.original.swi ?? 0) >= 4 : true
 		const highIntellectCheck = highIntellect ? (investigator.original.sit ?? 0) >= 4 : true
 		const highCombatCheck = highCombat ? (investigator.original.scm ?? 0) >= 4 : true
 		const highAgilityCheck = highAgility ? (investigator.original.sag ?? 0) >= 4 : true
-		const failFilter = packs.find((pack) => !enabledExpansions.includes(pack))
+		let failFilter: boolean
+		if (fullCollection) {
+			failFilter = false
+		} else if (exactMatch) {
+			const fail1 = enabledExpansions.find((enabledExpansion) => {
+				if (enabledExpansion === CardPack.ParallelInvestigator) {
+					return false
+				}
+				return !packs.includes(enabledExpansion)
+			})
+				? true
+				: false
+			const fail2 = packs.find((pack) => !enabledExpansions.includes(pack)) ? true : false
+			failFilter = fail1 || fail2
+		} else {
+			failFilter = packs.find((pack) => !enabledExpansions.includes(pack)) ? true : false
+		}
 		return (
 			!failFilter &&
 			classIncluded &&
@@ -111,9 +132,7 @@
 	<title>arkham-starter.com | Starter Decks</title>
 </svelte:head>
 
-<PageTitle title={'Starter Decks'} />
-
-<p></p>
+<PageTitle title={'Starter Decks'} {helpMd} />
 
 <Foldout
 	title="Collection"
@@ -152,6 +171,28 @@
 		filtersFoldOut = !filtersFoldOut
 	}}
 >
+	<InlineTopic label="Collection">
+		<Checkbox
+			label="Full Collection"
+			checked={fullCollection}
+			onCheckChanged={() => {
+				fullCollection = !fullCollection
+				if (fullCollection) {
+					exactMatch = false
+				}
+			}}
+		/>
+		<Checkbox
+			label="Exact Match"
+			checked={exactMatch}
+			onCheckChanged={() => {
+				exactMatch = !exactMatch
+				if (exactMatch) {
+					fullCollection = false
+				}
+			}}
+		/>
+	</InlineTopic>
 	<InlineTopic label="Investigator Class">
 		<Checkbox
 			label="Guardian"
@@ -202,6 +243,15 @@
 		>
 			<ClassIcon cardClass={CardClass.Survivor} />
 			Survivor
+		</Checkbox>
+		<Checkbox
+			label="Neutral"
+			checked={neutral}
+			onCheckChanged={() => {
+				neutral = !neutral
+			}}
+		>
+			Neutral
 		</Checkbox>
 	</InlineTopic>
 
