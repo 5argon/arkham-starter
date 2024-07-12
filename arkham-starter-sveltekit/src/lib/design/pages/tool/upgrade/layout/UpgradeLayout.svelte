@@ -78,6 +78,7 @@
 			const noZeroCus = ca.original.cus?.filter((x) => x.xp > 0) ?? undefined
 			return {
 				cardName: ca.original.n,
+				expansionName: ca.packNameTransformed,
 				class1: ca.class1,
 				class2: ca.class2 ?? null,
 				class3: ca.class3 ?? null,

@@ -98,7 +98,7 @@ export interface PopupDatabaseItem {
 	traits: string[]
 	positionString: string
 	packName: string
-	packNameTransformed: string | null
+	packNameTransformed: string
 	packCode: string
 	xpString: string
 	xpStringAfterTaboo: string

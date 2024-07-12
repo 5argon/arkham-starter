@@ -66,5 +66,13 @@ function mdJustcard(card: ExportCard, opt: ExportOptions, ignoreSmall: boolean):
 		opt.cardOptions?.classIcons ?? true
 			? prefixClassIcons(cardName, card.class1, card.class2, card.class3)
 			: cardName
+	const expansionNameWithoutInvestigatorExpansion = card.expansionName.replace(
+		' Investigator Expansion',
+		'',
+	)
+	cardName =
+		opt.cardOptions?.expansion ?? false
+			? `${cardName} <span class="small">(${expansionNameWithoutInvestigatorExpansion})</span>`
+			: cardName
 	return cardName
 }

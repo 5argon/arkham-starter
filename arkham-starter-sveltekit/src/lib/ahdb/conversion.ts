@@ -32,19 +32,19 @@ export function iconToNameConversion(c: CardPack): string {
 			return 'The Blob That Ate Everything ELSE!'
 
 		case CardPack.ReturnToTheNightOfTheZealot:
-			return 'Return To the Night of the Zealot'
+			return 'Return to the Night of the Zealot'
 		case CardPack.ReturnToTheDunwichLegacy:
-			return 'Return To the Dunwich Legacy'
+			return 'Return to the Dunwich Legacy'
 		case CardPack.ReturnToThePathToCarcosa:
-			return 'Return To the Path to Carcosa'
+			return 'Return to the Path to Carcosa'
 		case CardPack.ReturnToTheCircleUndone:
-			return 'Return To the Circle Undone'
+			return 'Return to the Circle Undone'
 		case CardPack.ReturnToTheForgottenAge:
-			return 'Return To the Forgotten Age'
+			return 'Return to the Forgotten Age'
 		case CardPack.ReturnToTheDreamEaters:
-			return 'Return To the Dream-Eaters'
+			return 'Return to the Dream-Eaters'
 		case CardPack.ReturnToTheInnsmouthConspiracy:
-			return 'Return To the Innsmouth Conspiracy'
+			return 'Return to the Innsmouth Conspiracy'
 
 		case CardPack.TheDunwichLegacy:
 			return 'The Dunwich Legacy Investigator Expansion'

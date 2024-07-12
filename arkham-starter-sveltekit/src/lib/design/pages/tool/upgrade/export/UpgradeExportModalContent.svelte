@@ -112,6 +112,17 @@
 			return n
 		}}
 	/>
+	<Checkbox
+		checked={exportOptions.cardOptions?.expansion ?? false}
+		label="Expansion Name"
+		onCheckChanged={(c) => {
+			const n = { ...exportOptions }
+			if (exportOptions.cardOptions !== undefined) {
+				exportOptions.cardOptions.expansion = c
+			}
+			return n
+		}}
+	/>
 	<RadioGroup
 		onValueChanged={(v) => {
 			const nu = { ...upgradeExportOptions }

@@ -74,6 +74,7 @@ export function makeUpgradePlannerUrl(proto: string): string {
 export interface ExportCard {
 	cardName: string
 	id: string
+	expansionName: string
 	class1: CardClass
 	class2: CardClass | null
 	class3: CardClass | null

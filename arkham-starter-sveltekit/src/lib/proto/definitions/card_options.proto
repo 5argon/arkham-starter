@@ -6,4 +6,5 @@ message CardOptions {
 	bool link = 4;
 	bool taboo_icon = 5;
 	bool exceptional_icon = 6;
+	bool expansion = 7;
 }
