@@ -3,7 +3,7 @@ import type { AhdbDeck, AhdbRealPublished } from '../deck'
 import type { AhdbPack } from '../pack'
 import type { AhdbTaboo, AhdbTabooProcessing, TabooItem } from '../taboo'
 import {
-	arkhamBuildShareUrl,
+	arkhamBuildShareApiUrl,
 	publicApiCard,
 	publicApiCards,
 	publicApiDeck,
@@ -35,7 +35,7 @@ export async function publicAllCards(): Promise<AhdbCard[]> {
 }
 
 export async function fetchArkhamBuildDeck(deckId  :string) : Promise<AhdbDeck | null> {
-	const publicDeck = joinPath(...arkhamBuildShareUrl, deckId)
+	const publicDeck = joinPath(...arkhamBuildShareApiUrl, deckId)
 	try {
 		const ret2 = await fetchWithRetries(publicDeck)
 		const s2 = (await ret2.json()) as AhdbDeck

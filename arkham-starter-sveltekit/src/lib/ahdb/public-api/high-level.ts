@@ -11,6 +11,14 @@ export interface ExtractResult {
 }
 
 export function extractDeckFromUrl(url: string): ExtractResult {
+  // Format: https://arkham.build/share/3CEq396JgzuYvyb
+  {
+    const urlRegex = new RegExp(/arkham\.build\/share\/([^\/]*)/gm)
+    const matchResult = urlRegex.exec(url)
+    if (matchResult !== null) {
+      return { deck: matchResult[1], published: false }
+    }
+  }
   {
     const urlRegex = new RegExp(/decklist\/view\/([^\/]*)/gm)
     const matchResult = urlRegex.exec(url)
