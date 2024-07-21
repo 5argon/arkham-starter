@@ -3,6 +3,7 @@ import type { AhdbDeck, AhdbRealPublished } from '../deck'
 import type { AhdbPack } from '../pack'
 import type { AhdbTaboo, AhdbTabooProcessing, TabooItem } from '../taboo'
 import {
+	arkhamBuildShareUrl,
 	publicApiCard,
 	publicApiCards,
 	publicApiDeck,
@@ -33,7 +34,18 @@ export async function publicAllCards(): Promise<AhdbCard[]> {
 	return c
 }
 
-export async function publicDeckPublished(deckNumber: string): Promise<AhdbDeck | null> {
+export async function fetchArkhamBuildDeck(deckId  :string) : Promise<AhdbDeck | null> {
+	const publicDeck = joinPath(...arkhamBuildShareUrl, deckId)
+	try {
+		const ret2 = await fetchWithRetries(publicDeck)
+		const s2 = (await ret2.json()) as AhdbDeck
+		return s2
+	} catch {
+		return null
+	}
+}
+
+export async function fetchPublishedArkhamDbDeck(deckNumber: string): Promise<AhdbDeck | null> {
 	const publicDecklist = joinPath(...publicApiDecklist, deckNumber)
 	try {
 		const ret = await fetchWithRetries(publicDecklist)
@@ -63,7 +75,7 @@ export async function realDeckPublished(deckNumber: string): Promise<AhdbRealPub
 	}
 }
 
-export async function publicDeckPersonal(deckNumber: string): Promise<AhdbDeck | null> {
+export async function fetchPublicArkhamDbDeck(deckNumber: string): Promise<AhdbDeck | null> {
 	const publicDeck = joinPath(...publicApiDeck, deckNumber)
 	try {
 		const ret2 = await fetchWithRetries(publicDeck)

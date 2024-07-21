@@ -1,4 +1,4 @@
-import { CardList, AhdbDeck } from "../interfaces.ts";
+import { CardList, AhdbDeck } from "../interfaces";
 
 export function gatherUniqueCardIds(decks: AhdbDeck[]): string[] {
   const set = new Set<string>();
