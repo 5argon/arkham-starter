@@ -1,3 +1,8 @@
+<!-- @component
+Here's some documentation for this component.
+It will show up on hover.
+-->
+
 <script lang="ts">
 	import FaIcon from '$lib/icons/FaIcon.svelte'
 	export let checked: boolean

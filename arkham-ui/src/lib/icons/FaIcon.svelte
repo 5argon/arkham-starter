@@ -1,3 +1,4 @@
+<!--Component comment-->
 <script lang="ts">
 	export let path: string
 	export let spin: boolean = false

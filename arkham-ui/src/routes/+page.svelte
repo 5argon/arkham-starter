@@ -1,9 +1,12 @@
-<script>
-  import Checkbox from '$lib/Checkbox.svelte'
-  import { allIcons } from '$lib/index.ts'
+<script lang='ts'>
+  import { Checkbox, FaIcon, allIcons } from '$lib'
 </script>
-
 
 <h1>Checkbox</h1>
 
-<Checkbox iconImagePath={allIcons.arrowUp} checked={false}>Hello</Checkbox>
+<Checkbox checked={false}>
+  <svelte:fragment>
+    <FaIcon path={allIcons.arrowUp} />
+    <span>Hello</span>
+  </svelte:fragment>
+</Checkbox>
