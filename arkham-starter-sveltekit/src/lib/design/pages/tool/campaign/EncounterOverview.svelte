@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { LimitedTab } from '@5argon/arkham-ui'
+
 	import { type Campaign,EncounterSetFlag, EncounterSetSorting } from '$lib/core/campaign'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import { packToFile } from '$lib/design/components/expansion/pack-to-file'
-	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 
 	import {
 		findCoreEncounters,

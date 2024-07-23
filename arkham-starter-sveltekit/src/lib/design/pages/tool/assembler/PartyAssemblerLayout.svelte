@@ -21,6 +21,8 @@
 </script>
 
 <script lang="ts">
+	import { LimitedTab } from '@5argon/arkham-ui'
+
 	import { browser } from '$app/environment'
 	import {
 		extractDeckFromUrl,
@@ -41,7 +43,6 @@
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import FramedTextSpan from '$lib/design/components/inline/FramedTextSpan.svelte'
 	import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
-	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import ViewModeBanner from '$lib/design/components/layout/ViewModeBanner.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'

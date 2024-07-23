@@ -16,6 +16,8 @@
 </script>
 
 <script lang="ts">
+	import { LimitedTab } from '@5argon/arkham-ui'
+
 	import { coreToRcore } from '$lib/ahdb/conversion'
 	import {
 		type CardAndAmount,
@@ -40,7 +42,6 @@
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
-	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import {
 		CampaignSwitchProto,
 		CampaignSwitchProto_InputDeck,

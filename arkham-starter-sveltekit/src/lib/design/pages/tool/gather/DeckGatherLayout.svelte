@@ -161,6 +161,8 @@
 </script>
 
 <script lang='ts'>
+  import { LimitedTab } from '@5argon/arkham-ui'
+
   import { goto } from '$app/navigation'
   import {
     type CardAndAmount,
@@ -184,7 +186,6 @@
   import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
   import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
   import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
-  import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
   import { checkOverlaps } from '$lib/tool/overlap/overlap-helpers'
 
   import CardTableDoubleDisplay from '../../explore/CardTableDoubleDisplay.svelte'

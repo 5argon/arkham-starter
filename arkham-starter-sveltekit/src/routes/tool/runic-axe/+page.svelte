@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { LimitedTab } from '@5argon/arkham-ui'
+
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
 	import IntegerBox from '$lib/design/components/basic/IntegerBox.svelte'
-	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'

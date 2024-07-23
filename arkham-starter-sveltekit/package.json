@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "vite dev",
+    "build-ui": "yarn workspace @5argon/arkham-ui build",
     "story": "deno run --allow-read --allow-write https://deno.land/x/sveltekit_stories_watcher@0.0.2/mod.ts ./src/lib/design ./src/routes/storybook",
     "build": "vite build",
     "deploy": "vite build && firebase deploy -c ../firebase.json",

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { LimitedTab } from '@5argon/arkham-ui'
+
 	import { iconToNameConversion } from '$lib/ahdb/conversion'
 	import type { CardPack } from '$lib/core/card-pack'
 	import type { FullDatabase } from '$lib/core/full-database'
@@ -9,7 +11,6 @@
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import { packToFile } from '$lib/design/components/expansion/pack-to-file'
-	import LimitedTab from '$lib/design/components/layout/LimitedTab.svelte'
 	import type { ExploreInput } from '$lib/explore/explore-input'
 	import ExploreLinks from '$lib/explore/ExploreLinks.svelte'
 
