@@ -105,16 +105,16 @@
       return {
         amount: x.amount,
         cardId: x.cardId,
-        id: 'BondedMain' + x.cardId,
-        labels: [{ color: '#EEEEEE', text: 'Bonded' }],
+        id: 'MainLinked' + x.cardId,
+        labels: [{ color: '#EEEEEE', text: 'Linked' }],
       }
     })
     bondedEntriesSide = bonded.bondedToSide.map<DecklistEntry>((x) => {
       return {
         amount: x.amount,
         cardId: x.cardId,
-        id: 'BondedSide' + x.cardId,
-        labels: [{ color: '#EEEEEE', text: 'Side-BD' }],
+        id: 'SideLinked' + x.cardId,
+        labels: [{ color: '#EEEEEE', text: 'Side-LK' }],
       }
     })
 
@@ -189,7 +189,7 @@
 
   {#if bondedEntriesMain.length > 0}
     <ListDivider
-      label={'Bonded ( ' + bondedEntriesMain.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
+      label={'Linked ( ' + bondedEntriesMain.reduce((a, b) => a + b.amount, 0) + ' Cards )'}
     />
     <CardTableDoubleDisplay
       toggleMap={bondedToggleMap}
@@ -258,7 +258,7 @@
 
   {#if bondedEntriesSide.length > 0}
     <ListDivider
-      label={'Side Deck : Bonded ( ' +
+      label={'Side Deck : Linked ( ' +
       bondedEntriesSide.reduce((a, b) => a + b.amount, 0) +
 				' Cards )'}
     />

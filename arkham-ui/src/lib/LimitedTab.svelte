@@ -26,66 +26,68 @@ conditionally not render the tab.
   }
 </script>
 
-{#if $$slots.tab1 && $$slots.content1 && !hide1}
-  <button type='button'
-          class:inactive={active !== 0}
-          on:click={() => {
+<div>
+  {#if $$slots.tab1 && $$slots.content1 && !hide1}
+    <button type='button'
+            class:inactive={active !== 0}
+            on:click={() => {
 				handler(0)
 			}}
-  >
-    <slot name='tab1' />
-  </button>
-{/if}
-{#if $$slots.tab2 && $$slots.content2 && !hide2}
-  <button type='button'
-          class:inactive={active !== 1}
-          on:click={() => {
+    >
+      <slot name='tab1' />
+    </button>
+  {/if}
+  {#if $$slots.tab2 && $$slots.content2 && !hide2}
+    <button type='button'
+            class:inactive={active !== 1}
+            on:click={() => {
 				handler(1)
 			}}
-  >
-    <slot name='tab2' />
-  </button>
-{/if}
-{#if $$slots.tab3 && $$slots.content3 && !hide3}
-  <button type='button'
-          class:inactive={active !== 2}
-          on:click={() => {
+    >
+      <slot name='tab2' />
+    </button>
+  {/if}
+  {#if $$slots.tab3 && $$slots.content3 && !hide3}
+    <button type='button'
+            class:inactive={active !== 2}
+            on:click={() => {
 				handler(2)
 			}}
-  >
-    <slot name='tab3' />
-  </button>
-{/if}
-{#if $$slots.tab4 && $$slots.content4 && !hide4}
-  <button type='button'
-          class:inactive={active !== 3}
-          on:click={() => {
+    >
+      <slot name='tab3' />
+    </button>
+  {/if}
+  {#if $$slots.tab4 && $$slots.content4 && !hide4}
+    <button type='button'
+            class:inactive={active !== 3}
+            on:click={() => {
 				handler(3)
 			}}
-  >
-    <slot name='tab4' />
-  </button>
-{/if}
-{#if $$slots.tab5 && $$slots.content5 && !hide5}
-  <button type='button'
-          class:inactive={active !== 4}
-          on:click={() => {
+    >
+      <slot name='tab4' />
+    </button>
+  {/if}
+  {#if $$slots.tab5 && $$slots.content5 && !hide5}
+    <button type='button'
+            class:inactive={active !== 4}
+            on:click={() => {
 				handler(4)
 			}}
-  >
-    <slot name='tab5' />
-  </button>
-{/if}
-{#if $$slots.tab6 && $$slots.content6 && !hide6}
-  <button type='button'
-          class:inactive={active !== 5}
-          on:click={() => {
+    >
+      <slot name='tab5' />
+    </button>
+  {/if}
+  {#if $$slots.tab6 && $$slots.content6 && !hide6}
+    <button type='button'
+            class:inactive={active !== 5}
+            on:click={() => {
 				handler(5)
 			}}
-  >
-    <slot name='tab6' />
-  </button>
-{/if}
+    >
+      <slot name='tab6' />
+    </button>
+  {/if}
+</div>
 
 <div class='content'>
   {#if active === 0 && $$slots.content1}
@@ -111,6 +113,7 @@ conditionally not render the tab.
 <style>
     button {
         margin: 0 1px;
+        display: inline-block;
         list-style: none;
         cursor: pointer;
         user-select: none;

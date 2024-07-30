@@ -107,10 +107,10 @@
         return {
           amount: x.amount,
           cardId: x.cardId,
-          id: 'BondedMain' + x.cardId,
+          id: 'MainLinked' + x.cardId,
           labels: [
             { color: colorHex, cardId: g.investigatorCode },
-            { color: colorHex, text: 'Bonded' },
+            { color: colorHex, text: 'Linked' },
           ],
         }
       }))
@@ -149,10 +149,10 @@
         return {
           amount: x.amount,
           cardId: x.cardId,
-          id: 'BondedSide' + x.cardId,
+          id: 'SideLinked' + x.cardId,
           labels: [
             { color: colorHex, cardId: g.investigatorCode },
-            { color: colorHex, text: 'Side-BD' },
+            { color: colorHex, text: 'Side-LK' },
           ],
         }
       }))

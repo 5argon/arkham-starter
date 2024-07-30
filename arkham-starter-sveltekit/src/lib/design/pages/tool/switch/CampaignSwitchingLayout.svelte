@@ -48,6 +48,7 @@
 	} from '$lib/proto/generated/campaign_switch'
 	import { intersect } from '$lib/tool/overlap/overlap-helpers'
 	import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
+	import { makeBondedDecklistEntries } from '$lib/core/bonded'
 
 	export let protoString: string | null = null
 	let sharingUrl = ''
@@ -278,36 +279,50 @@
 		}
 		const activeSideResult = await activeSide
 		const inactiveSideResult = await inactiveSide
-		function doSide(sr: (GetDeckCardIdReturns | null)[]) {
+		function doSide(sr: (GetDeckCardIdReturns | null)[], rightSide: boolean) {
 			const activeAll = sr.flatMap<DecklistEntry>((x) => {
 				if (x !== null) {
+					const bondedEntries = makeBondedDecklistEntries(bdb.pdb, x.cards1, x.cards2)
 					const allProcessed = [
-						...sideProcess(x.cards1, '', x.investigatorCode),
-						...sideProcess(x.cards2, '-S', x.investigatorCode),
+						...sideProcess(x.cards1, '', x.investigatorCode, rightSide),
+						...sideProcess(x.cards2, 'Side', x.investigatorCode, rightSide),
+						...sideProcess(bondedEntries.bondedToMain, 'Linked', x.investigatorCode, rightSide),
+						...sideProcess(bondedEntries.bondedToSide, 'Side-LK', x.investigatorCode, rightSide),
 					]
 					return allProcessed
 				}
 				return []
 			})
 			return activeAll
-			function sideProcess(sr: CardAndAmount[], t: string, invCode: string) {
+			function sideProcess(
+				sr: CardAndAmount[],
+				additionalLabel: string,
+				invCode: string,
+				right: boolean,
+			) {
 				return sr.map<DecklistEntry>((x) => {
 					const fdb = bdb.fdb
 					const effectiveId = forwardRcore ? coreToRcore(x.cardId) : x.cardId
 					const cd = fdb.getCard(effectiveId)
 					const inv = fdb.getCard(invCode)
-					const shortName = fdb.getShortName(inv)
 					const c = cd.class1
+					const labels: DecklistLabel[] = [
+						{
+							cardId: inv.original.code,
+							color: cardClassToBackgroundClass(inv.class1),
+						},
+					]
+					if (additionalLabel !== '') {
+						labels.push({
+							text: additionalLabel,
+							color: cardClassToBackgroundClass(inv.class1),
+						})
+					}
 					return {
 						amount: x.amount,
 						cardId: effectiveId,
-						id: shortName + effectiveId + t,
-						labels: [
-							{
-								text: shortName + t,
-								color: cardClassToBackgroundClass(inv.class1),
-							},
-						],
+						id: inv.original.code + effectiveId + additionalLabel,
+						labels: labels,
 					}
 				})
 			}
@@ -338,36 +353,26 @@
 		inactiveCampaignDecks[2] = getPon(inactiveCampaignDecks[2], inactiveSideResult[2])
 		inactiveCampaignDecks[3] = getPon(inactiveCampaignDecks[3], inactiveSideResult[3])
 
-		const activeEntries = doSide(activeSideResult)
-		const inactiveEntries = doSide(inactiveSideResult)
+		const activeEntries = doSide(activeSideResult, false)
+		const inactiveEntries = doSide(inactiveSideResult, true)
 		const intersectionResult = intersect(activeEntries, inactiveEntries)
 		transferEntries = intersectionResult.intersects.map<DecklistEntry>((x) => {
-			let leftFirstLabel: DecklistLabel | undefined
-			let rightFirstLabel: DecklistLabel | undefined
-			if (x.left.labels !== undefined && x.left.labels.length > 0) {
-				leftFirstLabel = x.left.labels[0]
+			const mergedLabels: DecklistLabel[] = []
+			if (x.left.labels !== undefined) {
+				mergedLabels.push(...x.left.labels)
 			}
-			if (x.right.labels !== undefined && x.right.labels.length > 0) {
-				rightFirstLabel = x.right.labels[0]
+			mergedLabels.push({
+				text: '→',
+				color: '',
+			})
+			if (x.right.labels !== undefined) {
+				mergedLabels.push(...x.right.labels)
 			}
 			const de: DecklistEntry = {
 				amount: x.left.amount,
 				cardId: x.left.cardId,
 				id: x.left.id + x.right.id,
-				labels: [
-					{
-						text: leftFirstLabel?.text ?? '',
-						color: leftFirstLabel?.color ?? '',
-					},
-					{
-						text: '→',
-						color: '',
-					},
-					{
-						text: rightFirstLabel?.text ?? '',
-						color: rightFirstLabel?.color ?? '',
-					},
-				],
+				labels: mergedLabels,
 			}
 			return de
 		})
@@ -384,6 +389,13 @@
 {#await bothPromises}
 	Loading...
 {:then bdb}
+	<p>
+		This tool shows intersection of cards (and also non-intersecting cards) between two campaigns.
+		One campaign can contain up to 4 decks. It helps you move just the intersecting cards back and
+		forth when you have multiple on-going campaigns instead of disassembling everything back to
+		collection. Deck progresses while you play, so make sure the decks are their latest upgraded
+		version.
+	</p>
 	<Checkbox
 		label="Forward to Revised Core Set"
 		checked={forwardRcore}
@@ -478,7 +490,7 @@
 			Bookmark this URL so you can come to switch your campaign back later, using the Swap button.
 		</p>
 
-		<ListDivider label="Transfer (Intersection)" />
+		<ListDivider label="Intersection" />
 		<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
 		<CardTableGrouped
