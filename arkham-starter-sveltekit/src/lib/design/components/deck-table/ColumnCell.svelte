@@ -40,7 +40,7 @@
 		{/each}
 	{/if}
 
-	{#if column === ExtraColumn.Icons}
+	{#if column === ExtraColumn.Icons && !card.original.inv}
 		{#each { length: willpower } as _, i}
 			<SkillIcon icon={CommitIcon.Willpower} />
 		{/each}

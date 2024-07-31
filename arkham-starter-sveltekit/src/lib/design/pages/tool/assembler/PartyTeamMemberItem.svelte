@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+	import type { FetchDeckResult } from '$lib/ahdb/public-api/high-level'
 	import { CardClass } from '$lib/core/card-class'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import PartyDeckEntry from '$lib/design/components/card/PartyDeckEntry.svelte'
 	import TeamMemberItem from '$lib/design/components/layout/TeamMemberItem.svelte'
 
 	export let player: number
-	export let deck: GetDeckCardIdReturns | null
+	export let deck: FetchDeckResult | null
 	export let fullDatabase: FullDatabase
 	let cardClass: CardClass = CardClass.Neutral
 	$: {

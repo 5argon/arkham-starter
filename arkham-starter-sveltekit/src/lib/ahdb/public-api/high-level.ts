@@ -3,60 +3,68 @@ import { type CardClass, classCodeToCardClass } from '$lib/core/card-class'
 import { coreToRcore, rcoreToCore } from '../conversion'
 import type { AhdbDeck, CardList } from '../deck'
 import { fetchArkhamBuildDeck, fetchPublicArkhamDbDeck, fetchPublishedArkhamDbDeck } from './call'
-import { realUrlDeck, realUrlDecklist } from './constants'
+import { arkhamBuildShareRealUrl, arkhamStarterDeckUrl, realUrlDeck, realUrlDecklist } from './constants'
 
 export interface ExtractResult {
   deck: string
-  published: boolean
+  source: DeckSource
 }
 
-export function extractDeckFromUrl(url: string): ExtractResult {
+/**
+ * Handles either URL string or plain string of deck ID of any source.
+ * It tries to predict the right source.
+ */
+export function extractDeck(inputString: string): ExtractResult {
   // Format: https://arkham.build/share/3CEq396JgzuYvyb
   {
-    const urlRegex = new RegExp(/arkham\.build\/share\/([^\/]*)/gm)
-    const matchResult = urlRegex.exec(url)
+    const urlRegex = new RegExp(/arkham\.build\/share\/([^/]*)/gm)
+    const matchResult = urlRegex.exec(inputString)
     if (matchResult !== null) {
-      return { deck: matchResult[1], published: false }
+      return { deck: matchResult[1], source: DeckSource.ArkhamBuildShared }
     }
   }
   {
-    const urlRegex = new RegExp(/decklist\/view\/([^\/]*)/gm)
-    const matchResult = urlRegex.exec(url)
+    const urlRegex = new RegExp(/decklist\/view\/([^/]*)/gm)
+    const matchResult = urlRegex.exec(inputString)
     if (matchResult !== null) {
-      return { deck: matchResult[1], published: true }
+      return { deck: matchResult[1], source: DeckSource.ArkhamDbPublished }
     }
   }
   {
-    const urlRegex = new RegExp(/decklist\/edit\/([^\/]*)/gm)
-    const matchResult = urlRegex.exec(url)
+    const urlRegex = new RegExp(/decklist\/edit\/([^/]*)/gm)
+    const matchResult = urlRegex.exec(inputString)
     if (matchResult !== null) {
-      return { deck: matchResult[1], published: true }
+      return { deck: matchResult[1], source: DeckSource.ArkhamDbPublished }
     }
   }
   {
-    const urlRegex = new RegExp(/deck\/view\/([^\/]*)/gm)
-    const matchResult = urlRegex.exec(url)
+    const urlRegex = new RegExp(/deck\/view\/([^/]*)/gm)
+    const matchResult = urlRegex.exec(inputString)
     if (matchResult !== null) {
-      return { deck: matchResult[1], published: false }
+      return { deck: matchResult[1], source: DeckSource.ArkhamDbPublic }
     }
   }
   {
-    const urlRegex = new RegExp(/edit\/([^\/]*)/gm)
-    const matchResult = urlRegex.exec(url)
+    const urlRegex = new RegExp(/edit\/([^/]*)/gm)
+    const matchResult = urlRegex.exec(inputString)
     if (matchResult !== null) {
-      return { deck: matchResult[1], published: false }
+      return { deck: matchResult[1], source: DeckSource.ArkhamDbPublic }
     }
   }
   {
     const pRegex = new RegExp(/p:(\d+)$/gm)
-    const matchResult = pRegex.exec(url)
+    const matchResult = pRegex.exec(inputString)
     if (matchResult !== null) {
-      return { deck: matchResult[1], published: true }
+      return { deck: matchResult[1], source: DeckSource.ArkhamDbPublished }
     }
   }
 
-  // If no match, assume the input is already deck code, hopefully.
-  return { deck: url, published: false }
+  if (isArkhamBuildDeckId(inputString)) {
+    return { deck: inputString, source: DeckSource.ArkhamBuildShared }
+  } else if (isLikelyArkhamDbPublicDeck(inputString)) {
+    return { deck: inputString, source: DeckSource.ArkhamDbPublic }
+  }
+  return { deck: inputString, source: DeckSource.ArkhamDbPublished }
 }
 
 export interface ArkhamStarterDeckData {
@@ -69,9 +77,9 @@ export interface ArkhamStarterDeckData {
   extraCards: string[]
 }
 
-export interface GetDeckCardIdReturns {
+export interface FetchDeckResult {
   id: string
-  published: boolean
+  source: DeckSource
   /**
    * No way to know user in unpublished deck, it will be `null`.
    */
@@ -97,7 +105,7 @@ export interface CardAndAmount {
   amount: number
 }
 
-export function forwardDeckToRcore(d: GetDeckCardIdReturns): GetDeckCardIdReturns {
+export function forwardDeckToRcore(d: FetchDeckResult): FetchDeckResult {
   function fw(cards: CardAndAmount[]): CardAndAmount[] {
     return cards.map<CardAndAmount>((x) => {
       return { cardId: coreToRcore(x.cardId), amount: x.amount }
@@ -113,7 +121,7 @@ export function forwardDeckToRcore(d: GetDeckCardIdReturns): GetDeckCardIdReturn
   }
 }
 
-export function forwardDeckToOldCore(d: GetDeckCardIdReturns): GetDeckCardIdReturns {
+export function forwardDeckToOldCore(d: FetchDeckResult): FetchDeckResult {
   function fw(cards: CardAndAmount[]): CardAndAmount[] {
     return cards.map<CardAndAmount>((x) => {
       return { cardId: rcoreToCore(x.cardId), amount: x.amount }
@@ -128,31 +136,70 @@ export function forwardDeckToOldCore(d: GetDeckCardIdReturns): GetDeckCardIdRetu
   }
 }
 
-function isArkhamBuildDeck(deck: string): boolean {
-  return deck.length === 15
+function isArkhamBuildDeckId(deckId: string): boolean {
+  return deckId.length === 15
 }
 
-export async function getDeckCardIds(
+/**
+ * Guess that it is a public (non-published) deck if the string is a number of over 1 million.
+ */
+function isLikelyArkhamDbPublicDeck(deckId: string): boolean {
+  return parseInt(deckId) > 1000000
+}
+
+export enum DeckSource {
+  ArkhamDbPublic,
+  ArkhamDbPublished,
+  ArkhamBuildShared,
+  ArkhamStarter
+}
+
+export async function fetchDeckFromId(
   deckId: string,
-  published: boolean,
-): Promise<GetDeckCardIdReturns | null> {
-  if (isArkhamBuildDeck(deckId)) {
-    const fetchedDeck = await fetchArkhamBuildDeck(deckId)
-    if (fetchedDeck === null) {
-      return null
+  source: DeckSource,
+): Promise<FetchDeckResult | null> {
+  let fetchedDeck: AhdbDeck | null = null
+  switch (source) {
+    case DeckSource.ArkhamBuildShared: {
+      fetchedDeck = await fetchArkhamBuildDeck(deckId)
+      break
     }
-    return ahdbToOurs(fetchedDeck, published)
+    case DeckSource.ArkhamDbPublic: {
+      fetchedDeck = await fetchPublicArkhamDbDeck(deckId)
+      break
+    }
+    case DeckSource.ArkhamDbPublished: {
+      fetchedDeck = await fetchPublishedArkhamDbDeck(deckId)
+      break
+    }
+    default:
+      throw new Error('Invalid source')
   }
-  const fetchedDeck = published ? await fetchPublishedArkhamDbDeck(deckId) : await fetchPublicArkhamDbDeck(deckId)
   if (fetchedDeck === null) {
     return null
   }
-  return ahdbToOurs(fetchedDeck, published)
+  return ahdbToOurs(fetchedDeck, source)
 }
 
-export function ahdbToOurs(d: AhdbDeck, published: boolean): GetDeckCardIdReturns {
+export function ahdbToOurs(d: AhdbDeck, source: DeckSource): FetchDeckResult {
   const userId: number | null = d.user_id
-  const link = published ? [...realUrlDecklist, d.id].join('/') : [...realUrlDeck, d.id].join('/')
+  let link: string
+  switch (source) {
+    case DeckSource.ArkhamDbPublic:
+      link = [...realUrlDeck, d.id].join('/')
+      break
+    case DeckSource.ArkhamDbPublished:
+      link = [...realUrlDecklist, d.id].join('/')
+      break
+    case DeckSource.ArkhamBuildShared:
+      link = [...arkhamBuildShareRealUrl, d.id].join('/')
+      break
+    case DeckSource.ArkhamStarter:
+      link = [...arkhamStarterDeckUrl, d.id].join('/')
+      break
+    default:
+      throw new Error('Invalid source')
+  }
 
   function cardListToArray(cl: CardList): CardAndAmount[] {
     if (cl === null) {
@@ -165,7 +212,7 @@ export function ahdbToOurs(d: AhdbDeck, published: boolean): GetDeckCardIdReturn
 
   return {
     id: d.id.toString(),
-    published: published,
+    source: source,
     userId: userId,
     link: link,
     deck: d.name,

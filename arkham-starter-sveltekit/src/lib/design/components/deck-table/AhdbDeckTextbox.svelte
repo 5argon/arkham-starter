@@ -1,10 +1,9 @@
 <script lang="ts">
 	import {
-		type CardAndAmount,
-		extractDeckFromUrl,
+		extractDeck,
 		type ExtractResult,
-		type GetDeckCardIdReturns,
-		getDeckCardIds,
+		fetchDeckFromId,
+		type FetchDeckResult,
 	} from '$lib/ahdb/public-api/high-level'
 
 	import TextBox, { EditingLevel, NoticeLevel } from '../basic/TextBox.svelte'
@@ -22,7 +21,7 @@
 	export let onExtractDeck: (ex: ExtractResult) => void = () => {
 		// do nothing
 	}
-	export let onImportDeck: (gd: GetDeckCardIdReturns) => void = () => {
+	export let onImportDeck: (gd: FetchDeckResult) => void = () => {
 		// do nothing
 	}
 
@@ -32,12 +31,12 @@
 			return
 		}
 		loading = true
-		const extractResult = extractDeckFromUrl(n)
+		const extractResult = extractDeck(n)
 		onExtractDeck(extractResult)
 		if (noImport) {
 			loading = false
 		} else {
-			const cards = await getDeckCardIds(extractResult.deck, extractResult.published)
+			const cards = await fetchDeckFromId(extractResult.deck, extractResult.source)
 			loading = false
 			if (cards === null) {
 				noticeLevel = NoticeLevel.Error

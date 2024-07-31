@@ -104,6 +104,7 @@
 
 		.list-flex {
 			margin: 0 auto;
+			flex-basis: unset;
 		}
 	}
 </style>

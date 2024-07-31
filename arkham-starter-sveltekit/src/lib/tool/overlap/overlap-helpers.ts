@@ -1,16 +1,16 @@
 import { isRandomBasicWeakness } from '$lib/ahdb/card'
-import type { CardAndAmount, GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+import { type CardAndAmount, DeckSource, type FetchDeckResult } from '$lib/ahdb/public-api/high-level'
 import { cardClassToBackgroundClass } from '$lib/core/card-class'
 import type { FullDatabase } from '$lib/core/full-database'
 import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
 
 export interface Party {
-	decks: GetDeckCardIdReturns[]
+	decks: FetchDeckResult[]
 	overlaps: DecklistEntry[]
 	overlapCount: number
 }
 
-export function exhaustiveCheckOverlaps(decks: GetDeckCardIdReturns[], fdb: FullDatabase): Party[] {
+export function exhaustiveCheckOverlaps(decks: FetchDeckResult[], fdb: FullDatabase): Party[] {
 	const indexes = decks.reduce<number[]>((prev, _, curIndex) => {
 		return [...prev, curIndex]
 	}, [])
@@ -22,8 +22,8 @@ export function exhaustiveCheckOverlaps(decks: GetDeckCardIdReturns[], fdb: Full
 	return toCheck.map((x) => check(x, decks, fdb))
 }
 
-function check(c: number[], allDecks: GetDeckCardIdReturns[], fdb: FullDatabase): Party {
-	const decks = c.map<GetDeckCardIdReturns>((v) => {
+function check(c: number[], allDecks: FetchDeckResult[], fdb: FullDatabase): Party {
+	const decks = c.map<FetchDeckResult>((v) => {
 		return allDecks[v]
 	})
 	const dump = decks.flatMap<DecklistEntry>((x, i) => {
@@ -39,7 +39,7 @@ function check(c: number[], allDecks: GetDeckCardIdReturns[], fdb: FullDatabase)
 				return {
 					cardId: y.cardId,
 					amount: y.amount,
-					id: x.published ? 'p:' : '' + x.id + suffix,
+					id: x.source === DeckSource.ArkhamDbPublished ? 'p:' : '' + x.id + suffix,
 					labels: [{ text: investigatorName + suffix, color: colorHex }],
 				}
 			})

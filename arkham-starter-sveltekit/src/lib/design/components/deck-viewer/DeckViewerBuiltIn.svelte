@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ArkhamStarterDeckData, GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+	import type { ArkhamStarterDeckData, FetchDeckResult } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
@@ -8,7 +8,7 @@
 
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
-	export let deck: GetDeckCardIdReturns
+	export let deck: FetchDeckResult
 	export let ahst: ArkhamStarterDeckData
 </script>
 
@@ -16,6 +16,6 @@
 	<title>arkham-starter.com | Deck Viewer</title>
 </svelte:head>
 
-<PageTitle title={'Starter Deck Viewer'} />
+<PageTitle title={'Starter Deck'} />
 
 <DeckViewerInner {fullDatabase} {popupDatabase} deckInput={deck} {ahst} />

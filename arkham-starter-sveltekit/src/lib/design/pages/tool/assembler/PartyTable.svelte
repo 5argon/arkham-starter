@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+	import type { FetchDeckResult } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
@@ -12,7 +12,7 @@
 	export let popupDatabase: PopupDatabase
 	export let groupings: Grouping[]
 	export let sortings: Sorting[]
-	export let onCopyMarkdown: (d: GetDeckCardIdReturns[]) => void
+	export let onCopyMarkdown: (d: FetchDeckResult[]) => void
 </script>
 
 <table>

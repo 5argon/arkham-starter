@@ -1,10 +1,10 @@
-import type { CardAndAmount, GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+import type { CardAndAmount, FetchDeckResult } from '$lib/ahdb/public-api/high-level'
 import { CardPack, cardPackToRevised } from '$lib/core/card-pack'
 
 export type PackCount = { [pack: number]: number }
 
 export function countPacksHigher(
-	rcoreDeck: GetDeckCardIdReturns,
+	rcoreDeck: FetchDeckResult,
 	extraCards: string[],
 	getPack: (c: string) => CardPack,
 ): PackCount {

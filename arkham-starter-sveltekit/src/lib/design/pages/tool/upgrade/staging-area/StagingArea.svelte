@@ -3,8 +3,8 @@
 
 	import {
 		type CardAndAmount,
-		extractDeckFromUrl,
-		getDeckCardIds,
+		extractDeck,
+		fetchDeckFromId,
 	} from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import TextBox, { EditingLevel, NoticeLevel } from '$lib/design/components/basic/TextBox.svelte'
@@ -57,8 +57,8 @@
 			return
 		}
 		gettingCards = true
-		const extractResult = extractDeckFromUrl(n)
-		const cards = await getDeckCardIds(extractResult.deck, extractResult.published)
+		const extractResult = extractDeck(n)
+		const cards = await fetchDeckFromId(extractResult.deck, extractResult.source)
 		gettingCards = false
 		if (cards === null) {
 			noticeLevel = NoticeLevel.Error

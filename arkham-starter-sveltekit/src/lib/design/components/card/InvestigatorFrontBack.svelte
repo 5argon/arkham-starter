@@ -3,7 +3,7 @@
 
 <script lang="ts">
 	import { rcoreToCore } from '$lib/ahdb/conversion'
-import { forwardDeckToRcore, type GetDeckCardIdReturns } from '$lib/ahdb/public-api/high-level'
+import { forwardDeckToRcore, type FetchDeckResult } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import { CardPackIcon } from '$lib/design/interface/card-pack'
@@ -13,7 +13,7 @@ import { forwardDeckToRcore, type GetDeckCardIdReturns } from '$lib/ahdb/public-
 	import CardSpan from './CardSpan.svelte'
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
-	export let deck: GetDeckCardIdReturns
+	export let deck: FetchDeckResult
 	$: rcoreDeck = forwardDeckToRcore(deck)
 	$: frontCode = rcoreDeck.decodedMeta.alternateFront ?? rcoreDeck.investigatorCode
 	$: backCode = rcoreDeck.decodedMeta.alternateBack ?? rcoreDeck.investigatorCode

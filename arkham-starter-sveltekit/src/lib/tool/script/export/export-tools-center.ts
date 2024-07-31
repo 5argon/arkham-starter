@@ -1,4 +1,4 @@
-import { extractDeckFromUrl } from '$lib/ahdb/public-api/high-level'
+import { extractDeck } from '$lib/ahdb/public-api/high-level'
 import type { CardClass } from '$lib/core/card-class'
 import type { ExportOptions } from '$lib/proto/generated/export_options'
 import {
@@ -58,10 +58,10 @@ function makeUpgradeCode(uex: UpgradeExport): string {
 	if (uex.upgradeExportOptions.simpleList) {
 		return ''
 	}
-	const extract = extractDeckFromUrl(uex.importDeckUrl)
+	const extract = extractDeck(uex.importDeckUrl)
 	const uexd: UpgradeExport = {
 		...uex,
-		importDeckUrl: (extract.published ? 'p:' : '') + extract.deck,
+		importDeckUrl: (extract.source ? 'p:' : '') + extract.deck,
 	}
 	const proto = upgradeExportToProtoString(uexd)
 	return `[//]: # (${makeUpgradePlannerUrl(proto)})`

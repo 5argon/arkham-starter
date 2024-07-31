@@ -1,5 +1,8 @@
 export interface AhdbDeck {
-	id: number
+	/**
+	 * arkham.build uses string ID.
+	 */
+	id: number | string
 	name: string
 	date_creation: string
 	date_update: string

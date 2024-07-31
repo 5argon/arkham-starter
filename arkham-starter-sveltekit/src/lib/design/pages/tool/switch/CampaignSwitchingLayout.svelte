@@ -1,574 +1,609 @@
-<script lang="ts" context="module">
-	interface Player {
-		deckUrl: string
-		deck: string
-		nextDeck: string | undefined
-		previousDeck: string | undefined
-		published: boolean
-		error: boolean
-		investigator: FullDatabaseItem | null
-	}
-	interface BothDatabase {
-		fdb: FullDatabase
-		pdb: PopupDatabase
-	}
-	type PlayerOrNull = Player | null
+<script lang='ts' context='module'>
+  import { DeckSource, type FetchDeckResult } from '$lib/ahdb/public-api/high-level'
+  import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
+  import type { PopupDatabase } from '$lib/core/popup-database'
+
+  interface Player {
+    deckUrl: string
+    deck: string
+    fetchResult: FetchDeckResult | undefined
+    nextDeck: string | undefined
+    previousDeck: string | undefined
+    source: DeckSource
+    error: boolean
+    investigator: FullDatabaseItem | null
+  }
+
+  interface BothDatabase {
+    fdb: FullDatabase
+    pdb: PopupDatabase
+  }
+
+  type PlayerOrNull = Player | null
 </script>
 
-<script lang="ts">
-	import { LimitedTab } from '@5argon/arkham-ui'
+<script lang='ts'>
+  import { LimitedTab } from '@5argon/arkham-ui'
 
-	import { coreToRcore } from '$lib/ahdb/conversion'
-	import {
-		type CardAndAmount,
-		extractDeckFromUrl,
-		type GetDeckCardIdReturns,
-		getDeckCardIds,
-	} from '$lib/ahdb/public-api/high-level'
-	import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
-	import {
-		fetchFullDatabaseStatic,
-		FullDatabase,
-		type FullDatabaseItem,
-	} from '$lib/core/full-database'
-	import { fetchPopupDatabaseStatic, type PopupDatabase } from '$lib/core/popup-database'
-	import { goToGather } from '$lib/deck/go-to-gather'
-	import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
-	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
-	import Button from '$lib/design/components/basic/Button.svelte'
-	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
-	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
-	import TextBox from '$lib/design/components/basic/TextBox.svelte'
-	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
-	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
-	import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
-	import {
-		CampaignSwitchProto,
-		CampaignSwitchProto_InputDeck,
-	} from '$lib/proto/generated/campaign_switch'
-	import { intersect } from '$lib/tool/overlap/overlap-helpers'
-	import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
-	import { makeBondedDecklistEntries } from '$lib/core/bonded'
+  import { coreToRcore } from '$lib/ahdb/conversion'
+  import {
+    type CardAndAmount,
+    extractDeck,
+    fetchDeckFromId,
+  } from '$lib/ahdb/public-api/high-level'
+  import { makeBondedDecklistEntries } from '$lib/core/bonded'
+  import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
+  import {
+    fetchFullDatabaseStatic,
+  } from '$lib/core/full-database'
+  import { fetchPopupDatabaseStatic } from '$lib/core/popup-database'
+  import { goToGather } from '$lib/deck/go-to-gather'
+  import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
+  import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
+  import Button from '$lib/design/components/basic/Button.svelte'
+  import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
+  import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+  import TextBox from '$lib/design/components/basic/TextBox.svelte'
+  import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
+  import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
+  import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
+  import {
+    CampaignSwitchProto,
+    CampaignSwitchProto_InputDeck,
+  } from '$lib/proto/generated/campaign_switch'
+  import { intersect } from '$lib/tool/overlap/overlap-helpers'
+  import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
 
-	export let protoString: string | null = null
-	let sharingUrl = ''
-	let pulling = false
-	let pulledOnce = false
-	let remainingTabIndex = 1
-	let forwardRcore: boolean = true
+  export let protoString: string | null = null
+  let sharingUrl = ''
+  let pulling = false
+  let pulledOnce = false
+  let remainingTabIndex = 1
+  let forwardRcore: boolean = true
 
-	let toggleMapTransfer: { [cardId: string]: boolean[] } = {}
-	let toggleMapRemainingActive: { [cardId: string]: boolean[] } = {}
-	let toggleMapRemainingInactive: { [cardId: string]: boolean[] } = {}
+  let toggleMapTransfer: { [cardId: string]: boolean[] } = {}
+  let toggleMapRemainingActive: { [cardId: string]: boolean[] } = {}
+  let toggleMapRemainingInactive: { [cardId: string]: boolean[] } = {}
 
-	let groupings: Grouping[] = []
-	let sortings: Sorting[] = []
-	function onGroupingsChanged(g: Grouping[]) {
-		groupings = g
-	}
-	function onSortingsChanged(s: Sorting[]) {
-		sortings = s
-	}
+  let groupings: Grouping[] = []
+  let sortings: Sorting[] = []
 
-	let groupings2: Grouping[] = [Grouping.Set]
-	let sortings2: Sorting[] = [Sorting.Number]
-	function onGroupingsChanged2(g: Grouping[]) {
-		groupings2 = g
-	}
-	function onSortingsChanged2(s: Sorting[]) {
-		sortings2 = s
-	}
+  function onGroupingsChanged(g: Grouping[]) {
+    groupings = g
+  }
 
-	let activeCampaignDecks: PlayerOrNull[] = new Array<PlayerOrNull>(4).fill(null)
-	let inactiveCampaignDecks: PlayerOrNull[] = new Array<PlayerOrNull>(4).fill(null)
+  function onSortingsChanged(s: Sorting[]) {
+    sortings = s
+  }
 
-	let remainingActiveEntries: DecklistEntry[] = []
-	let remainingInactiveEntries: DecklistEntry[] = []
-	let transferEntries: DecklistEntry[] = []
+  let groupings2: Grouping[] = [Grouping.Set]
+  let sortings2: Sorting[] = [Sorting.Number]
 
-	let fixedLabelColor = false
-	let fdbPromise = fetchFullDatabaseStatic()
-	let pdbDatabase = fetchPopupDatabaseStatic()
-	let bothPromises: Promise<BothDatabase> = Promise.all([fdbPromise, pdbDatabase]).then((x) => {
-		return {
-			fdb: x[0],
-			pdb: x[1],
-		}
-	})
-	startingProtoProcessing()
-	async function startingProtoProcessing() {
-		if (protoString !== null) {
-			try {
-				function makePon(input: CampaignSwitchProto_InputDeck | undefined): PlayerOrNull {
-					if (input === undefined) {
-						return {
-							deck: '',
-							deckUrl: '',
-							nextDeck: undefined,
-							previousDeck: undefined,
-							error: false,
-							investigator: null,
-							published: false,
-						}
-					}
-					return {
-						deck: '',
-						deckUrl: (input.published ? 'p:' : '') + input.id,
-						nextDeck: undefined,
-						previousDeck: undefined,
-						error: false,
-						investigator: null,
-						published: input.published,
-					}
-				}
+  function onGroupingsChanged2(g: Grouping[]) {
+    groupings2 = g
+  }
 
-				const tap = CampaignSwitchProto.fromBinary(base64ToBinary(protoString))
-				if (tap.campaigns.length > 0) {
-					const activeCampaign = tap.campaigns[0]
-					activeCampaignDecks[0] = makePon(activeCampaign.deck1)
-					activeCampaignDecks[1] = makePon(activeCampaign.deck2)
-					activeCampaignDecks[2] = makePon(activeCampaign.deck3)
-					activeCampaignDecks[3] = makePon(activeCampaign.deck4)
-					activeCampaignDecks = [...activeCampaignDecks]
-				}
-				if (tap.campaigns.length > 1) {
-					const inactiveCampaign = tap.campaigns[1]
-					inactiveCampaignDecks[0] = makePon(inactiveCampaign.deck1)
-					inactiveCampaignDecks[1] = makePon(inactiveCampaign.deck2)
-					inactiveCampaignDecks[2] = makePon(inactiveCampaign.deck3)
-					inactiveCampaignDecks[3] = makePon(inactiveCampaign.deck4)
-					inactiveCampaignDecks = [...inactiveCampaignDecks]
-				}
-				changeSharingUrl()
-				const bdb = await bothPromises
-				process(bdb)
-			} catch {}
-		}
-	}
+  function onSortingsChanged2(s: Sorting[]) {
+    sortings2 = s
+  }
 
-	function changeSharingUrl() {
-		function toProtoInputDeck(pon: PlayerOrNull): CampaignSwitchProto_InputDeck | undefined {
-			if (pon !== null) {
-				const extract = extractDeckFromUrl(pon.deckUrl)
-				return {
-					id: extract.deck,
-					published: extract.published,
-				}
-			}
-			return undefined
-		}
-		const newProto: CampaignSwitchProto = {
-			campaigns: [
-				{
-					name: '',
-					deck1: toProtoInputDeck(activeCampaignDecks[0]),
-					deck2: toProtoInputDeck(activeCampaignDecks[1]),
-					deck3: toProtoInputDeck(activeCampaignDecks[2]),
-					deck4: toProtoInputDeck(activeCampaignDecks[3]),
-				},
-				{
-					name: '',
-					deck1: toProtoInputDeck(inactiveCampaignDecks[0]),
-					deck2: toProtoInputDeck(inactiveCampaignDecks[1]),
-					deck3: toProtoInputDeck(inactiveCampaignDecks[2]),
-					deck4: toProtoInputDeck(inactiveCampaignDecks[3]),
-				},
-			],
-		}
-		const binary = CampaignSwitchProto.toBinary(newProto)
-		const urlString = binaryToUrlString(binary)
-		const url = 'https://arkham-starter.com/tool/switch?i=' + urlString
-		sharingUrl = url
-	}
+  let activeCampaignDecks: PlayerOrNull[] = new Array<PlayerOrNull>(4).fill(null)
+  let inactiveCampaignDecks: PlayerOrNull[] = new Array<PlayerOrNull>(4).fill(null)
 
-	function onDeckChanged(d: PlayerOrNull, s: string, i: number, inactiveCampaign: boolean) {
-		const extracted = extractDeckFromUrl(s)
-		let neww: PlayerOrNull = null
-		if (d !== null) {
-			neww = { ...d, deckUrl: s, published: extracted.published }
-		} else {
-			neww = {
-				deck: '',
-				nextDeck: undefined,
-				previousDeck: undefined,
-				error: false,
-				investigator: null,
-				published: extracted.published,
-				deckUrl: s,
-			}
-		}
-		if (inactiveCampaign) {
-			inactiveCampaignDecks[i] = neww
-			inactiveCampaignDecks = [...inactiveCampaignDecks]
-		} else {
-			activeCampaignDecks[i] = neww
-			activeCampaignDecks = [...activeCampaignDecks]
-		}
-	}
+  let remainingActiveEntries: DecklistEntry[] = []
+  let remainingInactiveEntries: DecklistEntry[] = []
+  let transferEntries: DecklistEntry[] = []
 
-	function openInGather(inactiveCampaign: boolean) {
-		const aaa = inactiveCampaign ? inactiveCampaignDecks : activeCampaignDecks
-		goToGather(
-			aaa.map((x) => {
-				const url = x?.deckUrl ?? ''
-				const extracted = extractDeckFromUrl(url)
-				return {
-					id: extracted.deck,
-					published: extracted.published,
-				}
-			}),
-		)
-	}
+  let fixedLabelColor = false
+  let fdbPromise = fetchFullDatabaseStatic()
+  let pdbDatabase = fetchPopupDatabaseStatic()
+  let bothPromises: Promise<BothDatabase> = Promise.all([fdbPromise, pdbDatabase]).then((x) => {
+    return {
+      fdb: x[0],
+      pdb: x[1],
+    }
+  })
+  startingProtoProcessing()
 
-	function swap(bdb: BothDatabase) {
-		swapOne(0)
-		swapOne(1)
-		swapOne(2)
-		swapOne(3)
-		function swapOne(i: number) {
-			const temp = activeCampaignDecks[i]
-			activeCampaignDecks[i] = inactiveCampaignDecks[i]
-			inactiveCampaignDecks[i] = temp
-		}
-		activeCampaignDecks = [...activeCampaignDecks]
-		inactiveCampaignDecks = [...inactiveCampaignDecks]
-		process(bdb)
-	}
+  async function startingProtoProcessing() {
+    if (protoString !== null) {
+      try {
+        function makePon(input: CampaignSwitchProto_InputDeck | undefined): PlayerOrNull {
+          if (input === undefined) {
+            return {
+              deck: '',
+              deckUrl: '',
+              fetchResult: undefined,
+              nextDeck: undefined,
+              previousDeck: undefined,
+              error: false,
+              investigator: null,
+              source: DeckSource.ArkhamDbPublic,
+            }
+          }
+          return {
+            deck: '',
+            deckUrl: (input.published ? 'p:' : '') + input.id,
+            fetchResult: undefined,
+            nextDeck: undefined,
+            previousDeck: undefined,
+            error: false,
+            investigator: null,
+            source: input.published ? DeckSource.ArkhamDbPublished : DeckSource.ArkhamDbPublic,
+          }
+        }
 
-	async function process(bdb: BothDatabase) {
-		pulling = true
-		function tempDis(pon: PlayerOrNull): PlayerOrNull {
-			if (pon === null) {
-				return null
-			}
-			return {
-				...pon,
-				investigator: null,
-				nextDeck: undefined,
-				previousDeck: undefined,
-				error: false,
-			}
-		}
-		activeCampaignDecks[0] = tempDis(activeCampaignDecks[0])
-		activeCampaignDecks[1] = tempDis(activeCampaignDecks[1])
-		activeCampaignDecks[2] = tempDis(activeCampaignDecks[2])
-		activeCampaignDecks[3] = tempDis(activeCampaignDecks[3])
-		inactiveCampaignDecks[0] = tempDis(inactiveCampaignDecks[0])
-		inactiveCampaignDecks[1] = tempDis(inactiveCampaignDecks[1])
-		inactiveCampaignDecks[2] = tempDis(inactiveCampaignDecks[2])
-		inactiveCampaignDecks[3] = tempDis(inactiveCampaignDecks[3])
-		const activeSide = oneSide(activeCampaignDecks)
-		const inactiveSide = oneSide(inactiveCampaignDecks)
-		changeSharingUrl()
-		async function oneSide(decks: PlayerOrNull[]) {
-			const extracted = decks.map((x) => {
-				if (x !== null) {
-					return extractDeckFromUrl(x?.deckUrl)
-				} else {
-					return null
-				}
-			})
-			const awaitables = extracted.map<Promise<GetDeckCardIdReturns | null>>((x) => {
-				if (x !== null && x.deck !== '') {
-					return getDeckCardIds(x.deck, x.published)
-				}
-				return Promise.resolve(null)
-			})
-			const awaited = await Promise.all(awaitables)
-			return awaited
-		}
-		const activeSideResult = await activeSide
-		const inactiveSideResult = await inactiveSide
-		function doSide(sr: (GetDeckCardIdReturns | null)[], rightSide: boolean) {
-			const activeAll = sr.flatMap<DecklistEntry>((x) => {
-				if (x !== null) {
-					const bondedEntries = makeBondedDecklistEntries(bdb.pdb, x.cards1, x.cards2)
-					const allProcessed = [
-						...sideProcess(x.cards1, '', x.investigatorCode, rightSide),
-						...sideProcess(x.cards2, 'Side', x.investigatorCode, rightSide),
-						...sideProcess(bondedEntries.bondedToMain, 'Linked', x.investigatorCode, rightSide),
-						...sideProcess(bondedEntries.bondedToSide, 'Side-LK', x.investigatorCode, rightSide),
-					]
-					return allProcessed
-				}
-				return []
-			})
-			return activeAll
-			function sideProcess(
-				sr: CardAndAmount[],
-				additionalLabel: string,
-				invCode: string,
-				right: boolean,
-			) {
-				return sr.map<DecklistEntry>((x) => {
-					const fdb = bdb.fdb
-					const effectiveId = forwardRcore ? coreToRcore(x.cardId) : x.cardId
-					const cd = fdb.getCard(effectiveId)
-					const inv = fdb.getCard(invCode)
-					const c = cd.class1
-					const labels: DecklistLabel[] = [
-						{
-							cardId: inv.original.code,
-							color: cardClassToBackgroundClass(inv.class1),
-						},
-					]
-					if (additionalLabel !== '') {
-						labels.push({
-							text: additionalLabel,
-							color: cardClassToBackgroundClass(inv.class1),
-						})
-					}
-					return {
-						amount: x.amount,
-						cardId: effectiveId,
-						id: inv.original.code + effectiveId + additionalLabel,
-						labels: labels,
-					}
-				})
-			}
-		}
+        const tap = CampaignSwitchProto.fromBinary(base64ToBinary(protoString))
+        if (tap.campaigns.length > 0) {
+          const activeCampaign = tap.campaigns[0]
+          activeCampaignDecks[0] = makePon(activeCampaign.deck1)
+          activeCampaignDecks[1] = makePon(activeCampaign.deck2)
+          activeCampaignDecks[2] = makePon(activeCampaign.deck3)
+          activeCampaignDecks[3] = makePon(activeCampaign.deck4)
+          activeCampaignDecks = [...activeCampaignDecks]
+        }
+        if (tap.campaigns.length > 1) {
+          const inactiveCampaign = tap.campaigns[1]
+          inactiveCampaignDecks[0] = makePon(inactiveCampaign.deck1)
+          inactiveCampaignDecks[1] = makePon(inactiveCampaign.deck2)
+          inactiveCampaignDecks[2] = makePon(inactiveCampaign.deck3)
+          inactiveCampaignDecks[3] = makePon(inactiveCampaign.deck4)
+          inactiveCampaignDecks = [...inactiveCampaignDecks]
+        }
+        changeSharingUrl()
+        const bdb = await bothPromises
+        process(bdb)
+      } catch {
+      }
+    }
+  }
 
-		function getPon(prev: PlayerOrNull, aaa: GetDeckCardIdReturns | null): PlayerOrNull {
-			if (aaa === null) {
-				return null
-			}
-			const inv = bdb.fdb.getCard(aaa.investigatorCode)
-			return {
-				deck: aaa.deck,
-				investigator: inv,
-				nextDeck: aaa.nextDeck?.toString(),
-				previousDeck: aaa.previousDeck?.toString(),
-				error: false,
-				published: aaa.published,
-				deckUrl: aaa.link,
-			}
-		}
+  function changeSharingUrl() {
+    function toProtoInputDeck(pon: PlayerOrNull): CampaignSwitchProto_InputDeck | undefined {
+      if (pon !== null) {
+        const extract = extractDeck(pon.deckUrl)
+        return {
+          id: extract.deck,
+          published: extract.source === DeckSource.ArkhamDbPublished,
+        }
+      }
+      return undefined
+    }
 
-		activeCampaignDecks[0] = getPon(activeCampaignDecks[0], activeSideResult[0])
-		activeCampaignDecks[1] = getPon(activeCampaignDecks[1], activeSideResult[1])
-		activeCampaignDecks[2] = getPon(activeCampaignDecks[2], activeSideResult[2])
-		activeCampaignDecks[3] = getPon(activeCampaignDecks[3], activeSideResult[3])
-		inactiveCampaignDecks[0] = getPon(inactiveCampaignDecks[0], inactiveSideResult[0])
-		inactiveCampaignDecks[1] = getPon(inactiveCampaignDecks[1], inactiveSideResult[1])
-		inactiveCampaignDecks[2] = getPon(inactiveCampaignDecks[2], inactiveSideResult[2])
-		inactiveCampaignDecks[3] = getPon(inactiveCampaignDecks[3], inactiveSideResult[3])
+    const newProto: CampaignSwitchProto = {
+      campaigns: [
+        {
+          name: '',
+          deck1: toProtoInputDeck(activeCampaignDecks[0]),
+          deck2: toProtoInputDeck(activeCampaignDecks[1]),
+          deck3: toProtoInputDeck(activeCampaignDecks[2]),
+          deck4: toProtoInputDeck(activeCampaignDecks[3]),
+        },
+        {
+          name: '',
+          deck1: toProtoInputDeck(inactiveCampaignDecks[0]),
+          deck2: toProtoInputDeck(inactiveCampaignDecks[1]),
+          deck3: toProtoInputDeck(inactiveCampaignDecks[2]),
+          deck4: toProtoInputDeck(inactiveCampaignDecks[3]),
+        },
+      ],
+    }
+    const binary = CampaignSwitchProto.toBinary(newProto)
+    const urlString = binaryToUrlString(binary)
+    const url = 'https://arkham-starter.com/tool/switch?i=' + urlString
+    sharingUrl = url
+  }
 
-		const activeEntries = doSide(activeSideResult, false)
-		const inactiveEntries = doSide(inactiveSideResult, true)
-		const intersectionResult = intersect(activeEntries, inactiveEntries)
-		transferEntries = intersectionResult.intersects.map<DecklistEntry>((x) => {
-			const mergedLabels: DecklistLabel[] = []
-			if (x.left.labels !== undefined) {
-				mergedLabels.push(...x.left.labels)
-			}
-			mergedLabels.push({
-				text: '→',
-				color: '',
-			})
-			if (x.right.labels !== undefined) {
-				mergedLabels.push(...x.right.labels)
-			}
-			const de: DecklistEntry = {
-				amount: x.left.amount,
-				cardId: x.left.cardId,
-				id: x.left.id + x.right.id,
-				labels: mergedLabels,
-			}
-			return de
-		})
-		remainingActiveEntries = intersectionResult.remainsLeft
-		remainingInactiveEntries = intersectionResult.remainsRight
-		pulledOnce = true
-		pulling = false
-		toggleMapRemainingActive = {}
-		toggleMapRemainingInactive = {}
-		toggleMapTransfer = {}
-	}
+  function onDeckChanged(d: PlayerOrNull, s: string, i: number, inactiveCampaign: boolean) {
+    const extracted = extractDeck(s)
+    let neww: PlayerOrNull = null
+    if (d !== null) {
+      neww = { ...d, deckUrl: s, source: extracted.source }
+    } else {
+      neww = {
+        deck: '',
+        fetchResult: undefined,
+        nextDeck: undefined,
+        previousDeck: undefined,
+        error: false,
+        investigator: null,
+        source: extracted.source,
+        deckUrl: s,
+      }
+    }
+    if (inactiveCampaign) {
+      inactiveCampaignDecks[i] = neww
+      inactiveCampaignDecks = [...inactiveCampaignDecks]
+    } else {
+      activeCampaignDecks[i] = neww
+      activeCampaignDecks = [...activeCampaignDecks]
+    }
+  }
+
+  function openInGather(inactiveCampaign: boolean) {
+    const aaa = inactiveCampaign ? inactiveCampaignDecks : activeCampaignDecks
+    goToGather(
+      aaa.map((x) => {
+        const url = x?.deckUrl ?? ''
+        const extracted = extractDeck(url)
+        return {
+          id: extracted.deck,
+          source: extracted.source,
+        }
+      }),
+    )
+  }
+
+  function swap(bdb: BothDatabase) {
+    swapOne(0)
+    swapOne(1)
+    swapOne(2)
+    swapOne(3)
+
+    function swapOne(i: number) {
+      const temp = activeCampaignDecks[i]
+      activeCampaignDecks[i] = inactiveCampaignDecks[i]
+      inactiveCampaignDecks[i] = temp
+    }
+
+    activeCampaignDecks = [...activeCampaignDecks]
+    inactiveCampaignDecks = [...inactiveCampaignDecks]
+    process(bdb)
+  }
+
+  async function process(bdb: BothDatabase) {
+    pulling = true
+
+    function tempDis(pon: PlayerOrNull): PlayerOrNull {
+      if (pon === null) {
+        return null
+      }
+      return {
+        ...pon,
+        fetchResult: undefined,
+        investigator: null,
+        nextDeck: undefined,
+        previousDeck: undefined,
+        error: false,
+      }
+    }
+
+    activeCampaignDecks[0] = tempDis(activeCampaignDecks[0])
+    activeCampaignDecks[1] = tempDis(activeCampaignDecks[1])
+    activeCampaignDecks[2] = tempDis(activeCampaignDecks[2])
+    activeCampaignDecks[3] = tempDis(activeCampaignDecks[3])
+    inactiveCampaignDecks[0] = tempDis(inactiveCampaignDecks[0])
+    inactiveCampaignDecks[1] = tempDis(inactiveCampaignDecks[1])
+    inactiveCampaignDecks[2] = tempDis(inactiveCampaignDecks[2])
+    inactiveCampaignDecks[3] = tempDis(inactiveCampaignDecks[3])
+    const activeSide = oneSide(activeCampaignDecks)
+    const inactiveSide = oneSide(inactiveCampaignDecks)
+    changeSharingUrl()
+
+    async function oneSide(decks: PlayerOrNull[]) {
+      const extracted = decks.map((x) => {
+        if (x !== null) {
+          return extractDeck(x?.deckUrl)
+        } else {
+          return null
+        }
+      })
+      const awaitables = extracted.map<Promise<FetchDeckResult | null>>((x) => {
+        if (x !== null && x.deck !== '') {
+          return fetchDeckFromId(x.deck, x.source)
+        }
+        return Promise.resolve(null)
+      })
+      const awaited = await Promise.all(awaitables)
+      return awaited
+    }
+
+    const activeSideResult = await activeSide
+    const inactiveSideResult = await inactiveSide
+
+    function doSide(sr: (FetchDeckResult | null)[], rightSide: boolean) {
+      const activeAll = sr.flatMap<DecklistEntry>((x) => {
+        if (x !== null) {
+          const bondedEntries = makeBondedDecklistEntries(bdb.pdb, x.investigatorCode, x.cards1, x.cards2)
+          const allProcessed = [
+            ...sideProcess(x.cards1, '', x.investigatorCode, rightSide),
+            ...sideProcess(x.cards2, 'Side', x.investigatorCode, rightSide),
+            ...sideProcess(bondedEntries.bondedToMain, 'Linked', x.investigatorCode, rightSide),
+            ...sideProcess(bondedEntries.bondedToSide, 'Side-LK', x.investigatorCode, rightSide),
+          ]
+          return allProcessed
+        }
+        return []
+      })
+      return activeAll
+
+      function sideProcess(
+        sr: CardAndAmount[],
+        additionalLabel: string,
+        invCode: string,
+        right: boolean,
+      ) {
+        return sr.map<DecklistEntry>((x) => {
+          const fdb = bdb.fdb
+          const effectiveId = forwardRcore ? coreToRcore(x.cardId) : x.cardId
+          const cd = fdb.getCard(effectiveId)
+          const inv = fdb.getCard(invCode)
+          const c = cd.class1
+          const labels: DecklistLabel[] = [
+            {
+              cardId: inv.original.code,
+              color: cardClassToBackgroundClass(inv.class1),
+            },
+          ]
+          if (additionalLabel !== '') {
+            labels.push({
+              text: additionalLabel,
+              color: cardClassToBackgroundClass(inv.class1),
+            })
+          }
+          return {
+            amount: x.amount,
+            cardId: effectiveId,
+            id: inv.original.code + effectiveId + additionalLabel,
+            labels: labels,
+          }
+        })
+      }
+    }
+
+    function getPon(prev: PlayerOrNull, aaa: FetchDeckResult | null): PlayerOrNull {
+      if (aaa === null) {
+        return null
+      }
+      const inv = bdb.fdb.getCard(aaa.investigatorCode)
+      return {
+        deck: aaa.deck,
+        fetchResult: aaa,
+        investigator: inv,
+        nextDeck: aaa.nextDeck?.toString(),
+        previousDeck: aaa.previousDeck?.toString(),
+        error: false,
+        source: aaa.source,
+        deckUrl: aaa.link,
+      }
+    }
+
+    activeCampaignDecks[0] = getPon(activeCampaignDecks[0], activeSideResult[0])
+    activeCampaignDecks[1] = getPon(activeCampaignDecks[1], activeSideResult[1])
+    activeCampaignDecks[2] = getPon(activeCampaignDecks[2], activeSideResult[2])
+    activeCampaignDecks[3] = getPon(activeCampaignDecks[3], activeSideResult[3])
+    inactiveCampaignDecks[0] = getPon(inactiveCampaignDecks[0], inactiveSideResult[0])
+    inactiveCampaignDecks[1] = getPon(inactiveCampaignDecks[1], inactiveSideResult[1])
+    inactiveCampaignDecks[2] = getPon(inactiveCampaignDecks[2], inactiveSideResult[2])
+    inactiveCampaignDecks[3] = getPon(inactiveCampaignDecks[3], inactiveSideResult[3])
+
+    const activeEntries = doSide(activeSideResult, false)
+    const inactiveEntries = doSide(inactiveSideResult, true)
+    const intersectionResult = intersect(activeEntries, inactiveEntries)
+    transferEntries = intersectionResult.intersects.map<DecklistEntry>((x) => {
+      const mergedLabels: DecklistLabel[] = []
+      if (x.left.labels !== undefined) {
+        mergedLabels.push(...x.left.labels)
+      }
+      mergedLabels.push({
+        text: '→',
+        color: '',
+      })
+      if (x.right.labels !== undefined) {
+        mergedLabels.push(...x.right.labels)
+      }
+      const de: DecklistEntry = {
+        amount: x.left.amount,
+        cardId: x.left.cardId,
+        id: x.left.id + x.right.id,
+        labels: mergedLabels,
+      }
+      return de
+    })
+    remainingActiveEntries = intersectionResult.remainsLeft
+    remainingInactiveEntries = intersectionResult.remainsRight
+    pulledOnce = true
+    pulling = false
+    toggleMapRemainingActive = {}
+    toggleMapRemainingInactive = {}
+    toggleMapTransfer = {}
+  }
 </script>
 
 {#await bothPromises}
-	Loading...
+  Loading...
 {:then bdb}
-	<p>
-		This tool shows intersection of cards (and also non-intersecting cards) between two campaigns.
-		One campaign can contain up to 4 decks. It helps you move just the intersecting cards back and
-		forth when you have multiple on-going campaigns instead of disassembling everything back to
-		collection. Deck progresses while you play, so make sure the decks are their latest upgraded
-		version.
-	</p>
-	<Checkbox
-		label="Forward to Revised Core Set"
-		checked={forwardRcore}
-		onCheckChanged={() => {
+  <p>
+    This tool shows intersection of cards (and also non-intersecting cards) between two campaigns.
+    One campaign can contain up to 4 decks. It helps you move just the intersecting cards back and
+    forth when you have multiple on-going campaigns instead of disassembling everything back to
+    collection. Deck progresses while you play, so make sure the decks are their latest upgraded
+    version.
+  </p>
+  <Checkbox
+    label='Forward to Revised Core Set'
+    checked={forwardRcore}
+    onCheckChanged={() => {
 			forwardRcore = !forwardRcore
 			process(bdb)
 		}}
-	/>
-	<div class="flex-wrap">
-		<div class="flex-item">
-			<ListDivider label="Active Campaign" />
-			{#each activeCampaignDecks as d, i}
-				<PlayerDeckInput
-					player={i}
-					cardClass={d?.investigator?.class1 ?? CardClass.Neutral}
-					{fixedLabelColor}
-					deckInput={d?.deckUrl ?? ''}
-					investigatorCode={d?.investigator?.original.code ?? undefined}
-					actualDeckUrl={d?.deckUrl ?? undefined}
-					pullError={d?.error ?? false}
-					{pulling}
-					pulledDeckName={d?.deck ?? null}
-					onDeckUrlChanged={(s) => {
+  />
+  <div class='flex-wrap'>
+    <div class='flex-item'>
+      <ListDivider label='Active Campaign' />
+      {#each activeCampaignDecks as d, i}
+        <PlayerDeckInput
+          player={i}
+          popupDatabase={bdb.pdb}
+          fetchResult={d?.fetchResult ?? undefined}
+          cardClass={d?.investigator?.class1 ?? CardClass.Neutral}
+          {fixedLabelColor}
+          deckInput={d?.deckUrl ?? ''}
+          investigatorCode={d?.investigator?.original.code ?? undefined}
+          actualDeckUrl={d?.deckUrl ?? undefined}
+          pullError={d?.error ?? false}
+          {pulling}
+          pulledDeckName={d?.deck ?? null}
+          onDeckUrlChanged={(s) => {
 						onDeckChanged(d, s, i, false)
 					}}
-					nextDeck={d?.nextDeck}
-					previousDeck={d?.previousDeck}
-					onNextDeck={(dn) => {
+          nextDeck={d?.nextDeck}
+          previousDeck={d?.previousDeck}
+          onNextDeck={(dn) => {
 						if (d !== null) {
 							activeCampaignDecks[i] = { ...d, deckUrl: dn }
 							process(bdb)
 						}
 					}}
-					onPreviousDeck={(dn) => {
+          onPreviousDeck={(dn) => {
 						if (d !== null) {
 							activeCampaignDecks[i] = { ...d, deckUrl: dn }
 							process(bdb)
 						}
 					}}
-				/>
-			{/each}
-			<Button onClick={() => openInGather(false)} block label="Go to Deck Gather" center />
-		</div>
-		<div class="flex-item">
-			<ListDivider label="Switch to this Inactive Campaign" />
-			{#each inactiveCampaignDecks as d, i}
-				<PlayerDeckInput
-					player={i}
-					cardClass={d?.investigator?.class1 ?? CardClass.Neutral}
-					{fixedLabelColor}
-					deckInput={d?.deckUrl ?? ''}
-					investigatorCode={d?.investigator?.original.code ?? undefined}
-					actualDeckUrl={d?.deckUrl ?? undefined}
-					pullError={d?.error ?? false}
-					{pulling}
-					pulledDeckName={d?.deck ?? null}
-					onDeckUrlChanged={(s) => {
+        />
+      {/each}
+      <Button onClick={() => openInGather(false)} block label='Gather This Campaign' center />
+    </div>
+    <div class='flex-item'>
+      <ListDivider label='Switch to this Inactive Campaign' />
+      {#each inactiveCampaignDecks as d, i}
+        <PlayerDeckInput
+          player={i}
+          popupDatabase={bdb.pdb}
+          fetchResult={d?.fetchResult ?? undefined}
+          cardClass={d?.investigator?.class1 ?? CardClass.Neutral}
+          {fixedLabelColor}
+          deckInput={d?.deckUrl ?? ''}
+          investigatorCode={d?.investigator?.original.code ?? undefined}
+          actualDeckUrl={d?.deckUrl ?? undefined}
+          pullError={d?.error ?? false}
+          {pulling}
+          pulledDeckName={d?.deck ?? null}
+          onDeckUrlChanged={(s) => {
 						onDeckChanged(d, s, i, true)
 					}}
-					nextDeck={d?.nextDeck}
-					previousDeck={d?.previousDeck}
-					onNextDeck={(dn) => {
+          nextDeck={d?.nextDeck}
+          previousDeck={d?.previousDeck}
+          onNextDeck={(dn) => {
 						if (d !== null) {
 							inactiveCampaignDecks[i] = { ...d, deckUrl: dn }
 							process(bdb)
 						}
 					}}
-					onPreviousDeck={(dn) => {
+          onPreviousDeck={(dn) => {
 						if (d !== null) {
 							inactiveCampaignDecks[i] = { ...d, deckUrl: dn }
 							process(bdb)
 						}
 					}}
-				/>
-			{/each}
-			<Button onClick={() => openInGather(true)} block label="Go to Deck Gather" center />
-		</div>
-	</div>
-	<Button onClick={() => swap(bdb)} block label="Swap" big center disabled={pulling} />
-	<Button
-		onClick={() => process(bdb)}
-		block
-		label={pulling ? 'Processing...' : 'Process'}
-		disabled={pulling}
-		big
-		center
-	/>
-	{#if !pulling && pulledOnce}
-		<ListDivider label="Sharing URL" />
-		<TextBox currentText={sharingUrl} />
-		<p>
-			Bookmark this URL so you can come to switch your campaign back later, using the Swap button.
-		</p>
+        />
+      {/each}
+      <Button onClick={() => openInGather(true)} block label='Gather This Campaign' center />
+    </div>
+  </div>
+  <Button onClick={() => swap(bdb)} block label='Swap' big center disabled={pulling} />
+  <Button
+    onClick={() => process(bdb)}
+    block
+    label={pulling ? 'Processing...' : 'Process'}
+    disabled={pulling}
+    big
+    center
+  />
+  {#if !pulling && pulledOnce}
+    <ListDivider label='Sharing URL' />
+    <TextBox currentText={sharingUrl} />
+    <p>
+      Bookmark this URL so you can come to switch your campaign back later, using the Swap button.
+    </p>
 
-		<ListDivider label="Intersection" />
-		<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
+    <ListDivider label='Intersection' />
+    <GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
-		<CardTableGrouped
-			toggleMap={toggleMapTransfer}
-			entries={transferEntries}
-			{groupings}
-			{sortings}
-			onClickToggle={(id, copy, t) => {
+    <CardTableGrouped
+      toggleMap={toggleMapTransfer}
+      entries={transferEntries}
+      {groupings}
+      {sortings}
+      onClickToggle={(id, copy, t) => {
 				toggleMapTransfer[id] = new Array(copy).fill(t)
 				toggleMapTransfer = { ...toggleMapTransfer }
 			}}
-			taboo={true}
-			fullDatabase={bdb.fdb}
-			popupDatabase={bdb.pdb}
-			columns={[ExtraColumn.Label]}
-			centered
-		/>
+      taboo={true}
+      fullDatabase={bdb.fdb}
+      popupDatabase={bdb.pdb}
+      columns={[ExtraColumn.Label]}
+      centered
+    />
 
-		<ListDivider label="Gather From Collection" />
-		<GrouperSorter
-			groupings={groupings2}
-			sortings={sortings2}
-			onGroupingsChanged={onGroupingsChanged2}
-			onSortingsChanged={onSortingsChanged2}
-		/>
-		<LimitedTab
-			active={remainingTabIndex}
-			onChangeActive={(x) => {
+    <ListDivider label='Gather From Collection' />
+    <GrouperSorter
+      groupings={groupings2}
+      sortings={sortings2}
+      onGroupingsChanged={onGroupingsChanged2}
+      onSortingsChanged={onSortingsChanged2}
+    />
+    <LimitedTab
+      active={remainingTabIndex}
+      onChangeActive={(x) => {
 				remainingTabIndex = x
 			}}
-		>
-			<div slot="tab1">Active Campaign</div>
-			<div slot="content1">
-				<CardTableGrouped
-					toggleMap={toggleMapRemainingActive}
-					entries={remainingActiveEntries}
-					groupings={groupings2}
-					sortings={sortings2}
-					onClickToggle={(id, copy, t) => {
+    >
+      <div slot='tab1'>Active Campaign</div>
+      <div slot='content1'>
+        <CardTableGrouped
+          toggleMap={toggleMapRemainingActive}
+          entries={remainingActiveEntries}
+          groupings={groupings2}
+          sortings={sortings2}
+          onClickToggle={(id, copy, t) => {
 						toggleMapRemainingActive[id] = new Array(copy).fill(t)
 						toggleMapRemainingActive = { ...toggleMapRemainingActive }
 					}}
-					taboo={true}
-					fullDatabase={bdb.fdb}
-					popupDatabase={bdb.pdb}
-					columns={[ExtraColumn.Label]}
-					centered
-				/>
-			</div>
-			<div slot="tab2">Inactive Campaign</div>
-			<div slot="content2">
-				<CardTableGrouped
-					toggleMap={toggleMapRemainingInactive}
-					entries={remainingInactiveEntries}
-					groupings={groupings2}
-					sortings={sortings2}
-					onClickToggle={(id, copy, t) => {
+          taboo={true}
+          fullDatabase={bdb.fdb}
+          popupDatabase={bdb.pdb}
+          columns={[ExtraColumn.Label]}
+          centered
+        />
+      </div>
+      <div slot='tab2'>Inactive Campaign</div>
+      <div slot='content2'>
+        <CardTableGrouped
+          toggleMap={toggleMapRemainingInactive}
+          entries={remainingInactiveEntries}
+          groupings={groupings2}
+          sortings={sortings2}
+          onClickToggle={(id, copy, t) => {
 						toggleMapRemainingInactive[id] = new Array(copy).fill(t)
 						toggleMapRemainingInactive = { ...toggleMapRemainingInactive }
 					}}
-					taboo={true}
-					fullDatabase={bdb.fdb}
-					popupDatabase={bdb.pdb}
-					columns={[ExtraColumn.Label]}
-					centered
-				/>
-			</div>
-		</LimitedTab>
-	{/if}
+          taboo={true}
+          fullDatabase={bdb.fdb}
+          popupDatabase={bdb.pdb}
+          columns={[ExtraColumn.Label]}
+          centered
+        />
+      </div>
+    </LimitedTab>
+  {/if}
 {/await}
 
 <style>
-	.flex-wrap {
-		display: flex;
-	}
+    .flex-wrap {
+        display: flex;
+    }
 
-	.flex-item {
-		flex: 1;
-		padding: 0px 8px;
-	}
+    @media screen and (max-width: 800px) {
+        .flex-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .flex-item {
+        flex: 1;
+        padding: 0px 8px;
+    }
 </style>

@@ -1,25 +1,24 @@
 <script lang="ts">
+	import { ahdbToOurs, DeckSource } from '$lib/ahdb/public-api/high-level'
+	import { CardClass } from '$lib/core/card-class'
 	import { CardPack } from '$lib/core/card-pack'
-	import Foldout from '$lib/design/components/basic/Foldout.svelte'
-	import ExpansionSpread from '$lib/design/components/expansion/ExpansionSpread.svelte'
+	import { CommitIcon } from '$lib/core/commit-icon'
 	import decks from '$lib/data/decks.json'
-	import PackInfoSpan, {
-		type PackInfoSpanItem,
-	} from '$lib/design/components/inline/PackInfoSpan.svelte'
-	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import { decodeSideExtras, type DeckEntry } from '$lib/deck/deck'
+	import { type DeckEntry, decodeSideExtras } from '$lib/deck/deck'
 	import { countPacksHigher } from '$lib/deck/deck-count'
-	import type { PageData } from './$types'
-	import { ahdbToOurs } from '$lib/ahdb/public-api/high-level'
+	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
+	import Foldout from '$lib/design/components/basic/Foldout.svelte'
+	import InlineTopic from '$lib/design/components/basic/InlineTopic.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import DeckBannerHigher from '$lib/design/components/deck-banner/DeckBannerHigher.svelte'
-	import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
-	import { CardClass } from '$lib/core/card-class'
-	import SkillIcon from '$lib/design/components/inline/SkillIcon.svelte'
-	import { CommitIcon } from '$lib/core/commit-icon'
-	import InlineTopic from '$lib/design/components/basic/InlineTopic.svelte'
+	import ExpansionSpread from '$lib/design/components/expansion/ExpansionSpread.svelte'
 	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
+	import PackInfoSpan, { type PackInfoSpanItem } from '$lib/design/components/inline/PackInfoSpan.svelte'
+	import SkillIcon from '$lib/design/components/inline/SkillIcon.svelte'
+	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
 	import helpMd from '$lib/md/starter-deck.md?raw'
+
+	import type { PageData } from './$types'
 
 	export let enabledExpansions: CardPack[] = [
 		CardPack.RevisedCoreSet,
@@ -43,7 +42,7 @@
 
 	let deckEntries: DeckEntry[] = decks
 	const getDeckPack = (deck: DeckEntry) => {
-		const ourDeck = ahdbToOurs(deck.deck, true)
+		const ourDeck = ahdbToOurs(deck.deck, DeckSource.ArkhamStarter)
 		const packsMap = countPacksHigher(ourDeck, decodeSideExtras(deck.raw.sideExtras), (c) => {
 			return data.pdb.getByIdThrowNull(c).packIcon
 		})
@@ -312,7 +311,8 @@
 			<DeckBannerHigher
 				popupDatabase={data.pdb}
 				taboo={false}
-				deck={ahdbToOurs(d.deck, true)}
+				deck={ahdbToOurs(d.deck, DeckSource.ArkhamStarter)}
+				linkToInternalViewer
 				ahst={{
 					rename: d.modifiedDeckName,
 					excerpt: d.raw.excerpt,

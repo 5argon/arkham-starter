@@ -13,8 +13,4 @@ export const realUrlDeck = [baseUrl, 'deck', 'view']
 export const arkhamBuildShareApiUrl = ['https://api.arkham.build/v1/public', 'share']
 export const arkhamBuildShareRealUrl = ['https://arkham.build', 'share']
 
-export enum DeckSource {
-  ArkhamDbPublic,
-  ArkhamDbPublished,
-  ArkhamBuild,
-}
+export const arkhamStarterDeckUrl = ['https://arkham-starter.com/deck']

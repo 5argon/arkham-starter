@@ -47,8 +47,8 @@
 />
 <ResourceItem
 	url="/deck/view"
-	title="Alternate Deck Viewer"
-	description="View any public arkhamdb.com deck in more beginner-friendly, more graphical style. You can also simply change 'arkhamdb' to 'arkham-starter' on the URL of any public arkhamdb.com deck as a shortcut to use this tool to view it."
+	title="Deck Viewer"
+	description="View decks hosted on neighborhood sites (arkhamdb.com, arkham.build) in arkham-starter's UI."
 	image="viewer.webp"
 />
 <ResourceItem

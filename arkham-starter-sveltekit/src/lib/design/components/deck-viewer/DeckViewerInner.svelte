@@ -1,12 +1,12 @@
 <script lang='ts'>
+  import { realUrlDecklist } from '$lib/ahdb/public-api/constants'
   import {
     type ArkhamStarterDeckData,
-    type CardAndAmount,
-    type CustomizableMeta,
+    type CustomizableMeta, DeckSource,
+    type FetchDeckResult,
     forwardDeckToRcore,
-    type GetDeckCardIdReturns,
   } from '$lib/ahdb/public-api/high-level'
-  import { type BondedEntries, makeBondedDecklistEntries } from '$lib/core/bonded'
+  import { makeBondedDecklistEntries } from '$lib/core/bonded'
   import type { FullDatabase } from '$lib/core/full-database'
   import type { PopupDatabase } from '$lib/core/popup-database'
   import { getExtraName } from '$lib/deck/deck'
@@ -22,10 +22,10 @@
 
   export let fullDatabase: FullDatabase
   export let popupDatabase: PopupDatabase
-  export let deckInput: GetDeckCardIdReturns
+  export let deckInput: FetchDeckResult
   export let ahst: ArkhamStarterDeckData | null = null
 
-  let rcoreDeck: GetDeckCardIdReturns
+  let rcoreDeck: FetchDeckResult
   let entries: DecklistEntry[] = []
   let sideEntries: DecklistEntry[] = []
   let optionalEntries: DecklistEntry[] = []
@@ -71,7 +71,7 @@
 
   deckProcess(deckInput)
 
-  function deckProcess(d: GetDeckCardIdReturns) {
+  function deckProcess(d: FetchDeckResult) {
     rcoreDeck = forwardDeckToRcore(d)
     entries = rcoreDeck.cards1.map<DecklistEntry>((x) => {
       return {
@@ -100,7 +100,7 @@
       return ahst?.extraCards.includes(x.cardId) ?? false
     })
 
-    const bonded = makeBondedDecklistEntries(popupDatabase, rcoreDeck.cards1, rcoreDeck.cards2)
+    const bonded = makeBondedDecklistEntries(popupDatabase, rcoreDeck.investigatorCode, rcoreDeck.cards1, rcoreDeck.cards2)
     bondedEntriesMain = bonded.bondedToMain.map<DecklistEntry>((x) => {
       return {
         amount: x.amount,
@@ -135,17 +135,18 @@
 
 <div class='head-flex'>
   <div class='head-flex-banner'>
-    <DeckBannerHigher {popupDatabase} deck={deckInput} {ahst} viewerPage {customizableMetas} />
+    <DeckBannerHigher linkToInternalViewer={false} showSource {popupDatabase} deck={deckInput} {ahst}
+                      {customizableMetas} />
   </div>
   <div class='head-flex-inv'>
     <InvestigatorFrontBack {popupDatabase} {fullDatabase} deck={deckInput} />
-    {#if deckInput.published}
+    {#if deckInput.source === DeckSource.ArkhamStarter || deckInput.source === DeckSource.ArkhamDbPublished}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <div
         class='ahdb-button'
         on:click={() => {
-					window.open('https://arkhamdb.com/decklist/view/' + deckInput.id)
+					window.open([...realUrlDecklist, deckInput.id].join('/'))
 				}}
       >
         <div class='ahdb-button-read'>Read full deck guide or leave comment at arkhamdb.com</div>

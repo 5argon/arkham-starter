@@ -90,7 +90,7 @@
     // 	return de
     // }
 
-    const bonded = makeBondedDecklistEntries(pdb, g.cards1, g.cards2)
+    const bonded = makeBondedDecklistEntries(pdb,g.investigatorCode, g.cards1, g.cards2)
 
     if (showMain) {
       for (let i = 0; i < g.cards1.length; i++) {
@@ -166,10 +166,10 @@
   import { goto } from '$app/navigation'
   import {
     type CardAndAmount,
-    extractDeckFromUrl,
+    extractDeck,
     type ExtractResult,
-    type GetDeckCardIdReturns,
-    getDeckCardIds,
+    fetchDeckFromId,
+    type FetchDeckResult,
   } from '$lib/ahdb/public-api/high-level'
   import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
   import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
@@ -218,14 +218,14 @@
   let p6: Player = newDeck(startingP6)
   let p7: Player = newDeck(startingP7)
   let p8: Player = newDeck(startingP8)
-  let p1r: GetDeckCardIdReturns | null = null
-  let p2r: GetDeckCardIdReturns | null = null
-  let p3r: GetDeckCardIdReturns | null = null
-  let p4r: GetDeckCardIdReturns | null = null
-  let p5r: GetDeckCardIdReturns | null = null
-  let p6r: GetDeckCardIdReturns | null = null
-  let p7r: GetDeckCardIdReturns | null = null
-  let p8r: GetDeckCardIdReturns | null = null
+  let p1r: FetchDeckResult | null = null
+  let p2r: FetchDeckResult | null = null
+  let p3r: FetchDeckResult | null = null
+  let p4r: FetchDeckResult | null = null
+  let p5r: FetchDeckResult | null = null
+  let p6r: FetchDeckResult | null = null
+  let p7r: FetchDeckResult | null = null
+  let p8r: FetchDeckResult | null = null
   let pulling: boolean = false
   let eightMode: boolean =
     startingP5 !== '' || startingP6 !== '' || startingP7 !== '' || startingP8 !== ''
@@ -251,20 +251,20 @@
     p6r = null
     p7r = null
     p8r = null
-    const p1x = extractDeckFromUrl(p1.deckUrl)
-    const p2x = extractDeckFromUrl(p2.deckUrl)
-    const p3x = extractDeckFromUrl(p3.deckUrl)
-    const p4x = extractDeckFromUrl(p4.deckUrl)
-    const p5x = extractDeckFromUrl(p5.deckUrl)
-    const p6x = extractDeckFromUrl(p6.deckUrl)
-    const p7x = extractDeckFromUrl(p7.deckUrl)
-    const p8x = extractDeckFromUrl(p8.deckUrl)
+    const p1x = extractDeck(p1.deckUrl)
+    const p2x = extractDeck(p2.deckUrl)
+    const p3x = extractDeck(p3.deckUrl)
+    const p4x = extractDeck(p4.deckUrl)
+    const p5x = extractDeck(p5.deckUrl)
+    const p6x = extractDeck(p6.deckUrl)
+    const p7x = extractDeck(p7.deckUrl)
+    const p8x = extractDeck(p8.deckUrl)
 
-    async function getDeck(p: Player, x: ExtractResult): Promise<GetDeckCardIdReturns | null> {
+    async function getDeck(p: Player, x: ExtractResult): Promise<FetchDeckResult | null> {
       if (x.deck === '') {
         return null
       }
-      const cards = await getDeckCardIds(x.deck, x.published)
+      const cards = await fetchDeckFromId(x.deck, x.source)
       return cards
     }
 
@@ -359,28 +359,28 @@
     reactFill(p1r, p2r, p3r, p4r, p5r, p6r, p7r, p8r)
     const su: string[] = []
     if (p1r) {
-      su.push('p1=' + (p1x.published ? 'p-' : '') + p1x.deck)
+      su.push('p1=' + (p1x.source ? 'p-' : '') + p1x.deck)
     }
     if (p2r) {
-      su.push('p2=' + (p2x.published ? 'p-' : '') + p2x.deck)
+      su.push('p2=' + (p2x.source ? 'p-' : '') + p2x.deck)
     }
     if (p3r) {
-      su.push('p3=' + (p3x.published ? 'p-' : '') + p3x.deck)
+      su.push('p3=' + (p3x.source ? 'p-' : '') + p3x.deck)
     }
     if (p4r) {
-      su.push('p4=' + (p4x.published ? 'p-' : '') + p4x.deck)
+      su.push('p4=' + (p4x.source ? 'p-' : '') + p4x.deck)
     }
     if (p5r) {
-      su.push('p5=' + (p5x.published ? 'p-' : '') + p5x.deck)
+      su.push('p5=' + (p5x.source ? 'p-' : '') + p5x.deck)
     }
     if (p6r) {
-      su.push('p6=' + (p6x.published ? 'p-' : '') + p6x.deck)
+      su.push('p6=' + (p6x.source ? 'p-' : '') + p6x.deck)
     }
     if (p7r) {
-      su.push('p7=' + (p7x.published ? 'p-' : '') + p7x.deck)
+      su.push('p7=' + (p7x.source ? 'p-' : '') + p7x.deck)
     }
     if (p8r) {
-      su.push('p8=' + (p8x.published ? 'p-' : '') + p8x.deck)
+      su.push('p8=' + (p8x.source ? 'p-' : '') + p8x.deck)
     }
     if (su.length > 0) {
       sharingUrl += '?' + su.join('&')
@@ -391,14 +391,14 @@
   }
 
   async function reactFill(
-    p1rr: GetDeckCardIdReturns | null,
-    p2rr: GetDeckCardIdReturns | null,
-    p3rr: GetDeckCardIdReturns | null,
-    p4rr: GetDeckCardIdReturns | null,
-    p5rr: GetDeckCardIdReturns | null,
-    p6rr: GetDeckCardIdReturns | null,
-    p7rr: GetDeckCardIdReturns | null,
-    p8rr: GetDeckCardIdReturns | null,
+    p1rr: FetchDeckResult | null,
+    p2rr: FetchDeckResult | null,
+    p3rr: FetchDeckResult | null,
+    p4rr: FetchDeckResult | null,
+    p5rr: FetchDeckResult | null,
+    p6rr: FetchDeckResult | null,
+    p7rr: FetchDeckResult | null,
+    p8rr: FetchDeckResult | null,
   ) {
     entries = []
     toggleMap = {}
