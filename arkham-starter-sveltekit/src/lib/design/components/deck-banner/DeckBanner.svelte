@@ -57,6 +57,7 @@
   export let xp: number | null = null
   export let xpSpent: number | null = null
   export let xpAdjustment: number | null = null
+  export let onNextDeck: (() => void) | null = null
 
   // $: {
   // 	if (xpDistributions !== null) {
@@ -67,7 +68,7 @@
   // 	}
   // }
   let deckSourceString: string
-  $:{
+  $: {
     if (deckSource === null) {
       deckSourceString = ''
     } else {
@@ -136,6 +137,11 @@
 
 <div class={'frame ' + borderColorClass}>
   <div class={'head ' + backgroundColorClass}>
+    {#if onNextDeck !== null}
+		<span class='next-deck' on:click={onNextDeck()}>
+			<FaIcon path={allIcons.arrowUp} />
+		</span>
+    {/if}
     <a
       href={link}
       class:deck-name-with-link={link !== null}
@@ -147,10 +153,7 @@
       <span>{deckName}</span>
     </a>
     {#if deckSource !== null && deckSource !== DeckSource.ArkhamStarter}
-      <a
-        href={link}
-        target={openInNewTab ? '_blank' : '_self'}
-      >
+      <a href={link} target={openInNewTab ? '_blank' : '_self'}>
         <span class='deck-source'>{deckSourceString}</span>
       </a>
     {/if}
@@ -242,17 +245,17 @@
           {#if chosenTraits !== null}
             <DeckInsightItem title={chosenTraits.title} cardClass={investigatorClass}>
               {#each chosenTraits.traits as t}
-							<span class={'trait-label ' + backgroundColorClass}>
-								{t}
-							</span>
+								<span class={'trait-label ' + backgroundColorClass}>
+									{t}
+								</span>
               {/each}
             </DeckInsightItem>
           {/if}
           {#if chosenNumber !== null}
             <DeckInsightItem title={chosenNumber.title} cardClass={investigatorClass}>
-						<span class={'trait-label ' + backgroundColorClass}>
-							{chosenNumber.number}
-						</span>
+							<span class={'trait-label ' + backgroundColorClass}>
+								{chosenNumber.number}
+							</span>
             </DeckInsightItem>
           {/if}
           {#if chosenClasses !== null}
@@ -260,8 +263,8 @@
               {#each chosenClasses.classes as t}
                 <ClassIcon cardClass={t} />
                 <span class='class-label'>
-								{cardClassToName(t)}
-							</span>
+									{cardClassToName(t)}
+								</span>
               {/each}
             </DeckInsightItem>
           {/if}
@@ -288,16 +291,19 @@
       </div>
       <DeckBadge packs={packsSorted} /> -->
       {#if xpCosted !== null && xpCosted > 0}
-      <span class='xp-flex'>
-          <span class='xp'><FaIcon path={allIcons.experience} />
-            {#if !compact}Experience: {/if}
-            {xpCosted} XP</span>
-        {#if xp !== null && xpSpent !== null && xp - xpSpent > 0}
-				<span class='xp-save'>
-					( Left: {xp - xpSpent} )
+				<span class='xp-flex'>
+					<span class='xp'
+          ><FaIcon path={allIcons.experience} />
+            {#if !compact}Experience:
+						{/if}
+            {xpCosted} XP</span
+          >
+          {#if xp !== null && xpSpent !== null && xp - xpSpent > 0}
+						<span class='xp-save'>
+							( Left: {xp - xpSpent} )
+						</span>
+					{/if}
 				</span>
-      {/if}
-      </span>
       {/if}
       <PackInfoSpan items={packs} />
       <!-- {:else} -->
@@ -448,6 +454,25 @@
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
+    }
+
+    .next-deck {
+        display: flex;
+        background-color: white;
+        margin-left: 8px;
+        padding: 2px;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        user-select: none;
+    }
+
+    .next-deck:hover {
+        cursor: pointer;
+        border-color: gray;
+    }
+
+    .next-deck:active {
+        border-color: black;
     }
 
     .deck-name {

@@ -3,14 +3,13 @@
   import { coreToRcore } from '$lib/ahdb/conversion'
   import type { FetchDeckResult } from '$lib/ahdb/public-api/high-level'
   import { makeBondedDecklistEntries } from '$lib/core/bonded'
+  import { cardClassToBackgroundClass } from '$lib/core/card-class'
+  import { getExtraName } from '$lib/deck/deck'
 
   interface Player {
     deckUrl: string
     deck: string
     error: boolean
-    mainCount: number
-    sideCount: number
-    investigator: FullDatabaseItem | null
   }
 
   function newDeck(startingUrl: string): Player {
@@ -18,78 +17,20 @@
       deck: '',
       deckUrl: startingUrl,
       error: false,
-      mainCount: 0,
-      sideCount: 0,
-      investigator: null,
     }
   }
 
   function fillIn(
     g: FetchDeckResult,
     player: number,
-    fixedColor: boolean,
-    faction: CardClass,
     ents: DecklistEntry[],
     fw: boolean,
     showMain: boolean,
     showSide: boolean,
     pdb: PopupDatabase,
   ) {
-    let colorHex: string
-    if (fixedColor) {
-      colorHex = 'player-0-bg'
-      switch (player) {
-        case 0:
-          colorHex = 'player-1-bg'
-          break
-        case 1:
-          colorHex = 'player-2-bg'
-          break
-        case 2:
-          colorHex = 'player-3-bg'
-          break
-        case 3:
-          colorHex = 'player-4-bg'
-          break
-        case 4:
-          colorHex = 'player-1-bg'
-          break
-        case 5:
-          colorHex = 'player-2-bg'
-          break
-        case 6:
-          colorHex = 'player-3-bg'
-          break
-        case 7:
-          colorHex = 'player-4-bg'
-          break
-      }
-    } else {
-      colorHex = cardClassToBackgroundClass(faction)
-    }
-
-    // function makeBondedEntries(caa: CardAndAmount[]): DecklistEntry[] {
-    // 	const de: DecklistEntry[] = []
-    // 	caa.forEach((x) => {
-    // 		const card = pdb.getByIdThrowNull(x.cardId)
-    // 		if (card.original.bdt !== undefined) {
-    // 			card.original.bdt.forEach((y) => {
-    // 				const bdtCard = pdb.getByIdThrowNull(y.c)
-    // 				de.push({
-    // 					amount: y.q ?? 1, // ?? 1 fixes null count mistakes from DB.
-    // 					cardId: y.c,
-    // 					id: 'Bonded' + y.c,
-    // 					labels: [
-    // 						{ color: colorHex, cardId: g.investigatorCode },
-    // 						{ color: colorHex, text: 'Bonded' },
-    // 					],
-    // 				})
-    // 			})
-    // 		}
-    // 	})
-    // 	return de
-    // }
-
+    const invCard = pdb.getByIdThrowNull(g.investigatorCode)
+    let colorHex: string = cardClassToBackgroundClass(invCard.class1)
     const bonded = makeBondedDecklistEntries(pdb, g.investigatorCode, g.cards1, g.cards2)
 
     if (showMain) {
@@ -103,17 +44,19 @@
           labels: [{ color: colorHex, cardId: g.investigatorCode }],
         })
       }
-      ents.push(...bonded.bondedToMain.map<DecklistEntry>(x => {
-        return {
-          amount: x.amount,
-          cardId: x.cardId,
-          id: 'MainLinked' + x.cardId,
-          labels: [
-            { color: colorHex, cardId: g.investigatorCode },
-            { color: colorHex, text: 'Linked' },
-          ],
-        }
-      }))
+      ents.push(
+        ...bonded.bondedToMain.map<DecklistEntry>((x) => {
+          return {
+            amount: x.amount,
+            cardId: x.cardId,
+            id: 'MainLinked' + x.cardId,
+            labels: [
+              { color: colorHex, cardId: g.investigatorCode },
+              { color: colorHex, text: 'Linked' },
+            ],
+          }
+        }),
+      )
       if (g.decodedMeta.extraDeck) {
         ents.push(
           ...g.decodedMeta.extraDeck.map<DecklistEntry>((x) => {
@@ -145,17 +88,19 @@
           ],
         })
       }
-      ents.push(...bonded.bondedToSide.map<DecklistEntry>(x => {
-        return {
-          amount: x.amount,
-          cardId: x.cardId,
-          id: 'SideLinked' + x.cardId,
-          labels: [
-            { color: colorHex, cardId: g.investigatorCode },
-            { color: colorHex, text: 'Side-LK' },
-          ],
-        }
-      }))
+      ents.push(
+        ...bonded.bondedToSide.map<DecklistEntry>((x) => {
+          return {
+            amount: x.amount,
+            cardId: x.cardId,
+            id: 'SideLinked' + x.cardId,
+            labels: [
+              { color: colorHex, cardId: g.investigatorCode },
+              { color: colorHex, text: 'Side-LK' },
+            ],
+          }
+        }),
+      )
     }
   }
 </script>
@@ -169,12 +114,10 @@
     extractDeck,
     type ExtractResult,
     fetchDeckFromId,
-    type FetchDeckResult,
   } from '$lib/ahdb/public-api/high-level'
-  import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
-  import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
+  import { CardClass } from '$lib/core/card-class'
+  import type { FullDatabase } from '$lib/core/full-database'
   import type { PopupDatabase } from '$lib/core/popup-database'
-  import { getExtraName } from '$lib/deck/deck'
   import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
   import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
   import Button from '$lib/design/components/basic/Button.svelte'
@@ -285,75 +228,45 @@
     p7r = await p7p
     p8r = await p8p
 
-    function sum(a: CardAndAmount[]): number {
-      return a.reduce((p, c) => {
-        return p + c.amount
-      }, 0)
-    }
-
     p1 = {
       ...p1,
       deck: p1r ? p1r.deck : '',
       error: !p1r && p1.deckUrl !== '' ? true : false,
-      mainCount: p1r ? sum(p1r.cards1) : 0,
-      sideCount: p1r ? sum(p1r.cards2) : 0,
-      investigator: p1r ? fdb.getCard(p1r.investigatorCode) : null,
     }
     p2 = {
       ...p2,
       deck: p2r ? p2r.deck : '',
       error: !p2r && p2.deckUrl !== '' ? true : false,
-      mainCount: p2r ? sum(p2r.cards1) : 0,
-      sideCount: p2r ? sum(p2r.cards2) : 0,
-      investigator: p2r ? fdb.getCard(p2r.investigatorCode) : null,
     }
     p3 = {
       ...p3,
       deck: p3r ? p3r.deck : '',
       error: !p3r && p3.deckUrl !== '' ? true : false,
-      mainCount: p3r ? sum(p3r.cards1) : 0,
-      sideCount: p3r ? sum(p3r.cards2) : 0,
-      investigator: p3r ? fdb.getCard(p3r.investigatorCode) : null,
     }
     p4 = {
       ...p4,
       deck: p4r ? p4r.deck : '',
       error: !p4r && p4.deckUrl !== '' ? true : false,
-      mainCount: p4r ? sum(p4r.cards1) : 0,
-      sideCount: p4r ? sum(p4r.cards2) : 0,
-      investigator: p4r ? fdb.getCard(p4r.investigatorCode) : null,
     }
     p5 = {
       ...p5,
       deck: p5r ? p5r.deck : '',
       error: !p5r && p5.deckUrl !== '' ? true : false,
-      mainCount: p5r ? sum(p5r.cards1) : 0,
-      sideCount: p5r ? sum(p5r.cards2) : 0,
-      investigator: p5r ? fdb.getCard(p5r.investigatorCode) : null,
     }
     p6 = {
       ...p6,
       deck: p6r ? p6r.deck : '',
       error: !p6r && p6.deckUrl !== '' ? true : false,
-      mainCount: p6r ? sum(p6r.cards1) : 0,
-      sideCount: p6r ? sum(p6r.cards2) : 0,
-      investigator: p6r ? fdb.getCard(p6r.investigatorCode) : null,
     }
     p7 = {
       ...p7,
       deck: p7r ? p7r.deck : '',
       error: !p7r && p7.deckUrl !== '' ? true : false,
-      mainCount: p7r ? sum(p7r.cards1) : 0,
-      sideCount: p7r ? sum(p7r.cards2) : 0,
-      investigator: p7r ? fdb.getCard(p7r.investigatorCode) : null,
     }
     p8 = {
       ...p8,
       deck: p8r ? p8r.deck : '',
       error: !p8r && p8.deckUrl !== '' ? true : false,
-      mainCount: p8r ? sum(p8r.cards1) : 0,
-      sideCount: p8r ? sum(p8r.cards2) : 0,
-      investigator: p8r ? fdb.getCard(p8r.investigatorCode) : null,
     }
     sharingUrl = 'https://arkham-starter.com/tool/gather'
     reactFill(p1r, p2r, p3r, p4r, p5r, p6r, p7r, p8r)
@@ -385,8 +298,7 @@
     if (su.length > 0) {
       sharingUrl += '?' + su.join('&')
     }
-    goto('/tool/gather' + '?' + su.join('&'))
-
+    goto('/tool/gather' + '?' + su.join('&'), { replaceState: true })
     pulling = false
   }
 
@@ -404,108 +316,28 @@
     toggleMap = {}
     overlappingEntries = []
     if (p1rr) {
-      fillIn(
-        p1rr,
-        0,
-        fixedLabelColor,
-        p1.investigator?.class1 ?? CardClass.Neutral,
-        entries,
-        forwardRcore,
-        showMainDeck,
-        showSideDeck,
-        pdb,
-      )
+      fillIn(p1rr, 0, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p2rr) {
-      fillIn(
-        p2rr,
-        1,
-        fixedLabelColor,
-        p2.investigator?.class1 ?? CardClass.Neutral,
-        entries,
-        forwardRcore,
-        showMainDeck,
-        showSideDeck,
-        pdb,
-      )
+      fillIn(p2rr, 1, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p3rr) {
-      fillIn(
-        p3rr,
-        2,
-        fixedLabelColor,
-        p3.investigator?.class1 ?? CardClass.Neutral,
-        entries,
-        forwardRcore,
-        showMainDeck,
-        showSideDeck,
-        pdb,
-      )
+      fillIn(p3rr, 2, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p4rr) {
-      fillIn(
-        p4rr,
-        3,
-        fixedLabelColor,
-        p4.investigator?.class1 ?? CardClass.Neutral,
-        entries,
-        forwardRcore,
-        showMainDeck,
-        showSideDeck,
-        pdb,
-      )
+      fillIn(p4rr, 3, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p5rr) {
-      fillIn(
-        p5rr,
-        4,
-        fixedLabelColor,
-        p5.investigator?.class1 ?? CardClass.Neutral,
-        entries,
-        forwardRcore,
-        showMainDeck,
-        showSideDeck,
-        pdb,
-      )
+      fillIn(p5rr, 4, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p6rr) {
-      fillIn(
-        p6rr,
-        5,
-        fixedLabelColor,
-        p6.investigator?.class1 ?? CardClass.Neutral,
-        entries,
-        forwardRcore,
-        showMainDeck,
-        showSideDeck,
-        pdb,
-      )
+      fillIn(p6rr, 5, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p7rr) {
-      fillIn(
-        p7rr,
-        6,
-        fixedLabelColor,
-        p7.investigator?.class1 ?? CardClass.Neutral,
-        entries,
-        forwardRcore,
-        showMainDeck,
-        showSideDeck,
-        pdb,
-      )
+      fillIn(p7rr, 6, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p8rr) {
-      fillIn(
-        p8rr,
-        7,
-        fixedLabelColor,
-        p8.investigator?.class1 ?? CardClass.Neutral,
-        entries,
-        forwardRcore,
-        showMainDeck,
-        showSideDeck,
-        pdb,
-      )
+      fillIn(p8rr, 7, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     const checkResult = checkOverlaps(entries, (c) => fdb.getCard(c).original.quantity)
     overlappingEntries.push(...checkResult.overlapReports)
@@ -523,6 +355,9 @@
 
   function onSortingsChanged(s: Sorting[]) {
     sortings = s
+  }
+
+  async function fastForwardAll() {
   }
 </script>
 
@@ -591,72 +426,60 @@
   player={0}
   popupDatabase={pdb}
   fetchResult={p1r ?? undefined}
-  cardClass={p1.investigator?.class1 ?? CardClass.Neutral}
-  {fixedLabelColor}
   deckInput={p1.deckUrl}
-  investigatorCode={p1r?.investigatorCode}
-  actualDeckUrl={p1r?.link}
   pullError={p1.error}
-  mainCount={p1.mainCount}
-  sideCount={p1.sideCount}
   {pulling}
   pulledDeckName={p1.deck}
   onDeckUrlChanged={(s) => {
 		p1 = { ...p1, deckUrl: s }
+	}}
+  onNextDeck={() => {
+		fastForwardAll()
 	}}
 />
 <PlayerDeckInput
   player={1}
   popupDatabase={pdb}
   fetchResult={p2r ?? undefined}
-  cardClass={p2.investigator?.class1 ?? CardClass.Neutral}
-  {fixedLabelColor}
   deckInput={p2.deckUrl}
-  investigatorCode={p2r?.investigatorCode}
-  actualDeckUrl={p2r?.link}
   pullError={p2.error}
-  mainCount={p2.mainCount}
-  sideCount={p2.sideCount}
   {pulling}
   pulledDeckName={p2.deck}
   onDeckUrlChanged={(s) => {
 		p2 = { ...p2, deckUrl: s }
+	}}
+  onNextDeck={() => {
+		fastForwardAll()
 	}}
 />
 <PlayerDeckInput
   player={2}
   popupDatabase={pdb}
   fetchResult={p3r ?? undefined}
-  cardClass={p3.investigator?.class1 ?? CardClass.Neutral}
-  {fixedLabelColor}
   deckInput={p3.deckUrl}
-  investigatorCode={p3r?.investigatorCode}
-  actualDeckUrl={p3r?.link}
   pullError={p3.error}
-  mainCount={p3.mainCount}
-  sideCount={p3.sideCount}
   {pulling}
   pulledDeckName={p3.deck}
   onDeckUrlChanged={(s) => {
 		p3 = { ...p3, deckUrl: s }
+	}}
+  onNextDeck={() => {
+		fastForwardAll()
 	}}
 />
 <PlayerDeckInput
   player={3}
   popupDatabase={pdb}
   fetchResult={p4r ?? undefined}
-  cardClass={p4.investigator?.class1 ?? CardClass.Neutral}
-  {fixedLabelColor}
   deckInput={p4.deckUrl}
-  investigatorCode={p4r?.investigatorCode}
-  actualDeckUrl={p4r?.link}
   pullError={p4.error}
-  mainCount={p4.mainCount}
-  sideCount={p4.sideCount}
   {pulling}
   pulledDeckName={p4.deck}
   onDeckUrlChanged={(s) => {
 		p4 = { ...p4, deckUrl: s }
+	}}
+  onNextDeck={() => {
+		fastForwardAll()
 	}}
 />
 {#if eightMode}
@@ -664,72 +487,60 @@
     player={4}
     popupDatabase={pdb}
     fetchResult={p5r ?? undefined}
-    cardClass={p5.investigator?.class1 ?? CardClass.Neutral}
-    {fixedLabelColor}
     deckInput={p5.deckUrl}
-    investigatorCode={p5r?.investigatorCode}
-    actualDeckUrl={p5r?.link}
     pullError={p5.error}
-    mainCount={p5.mainCount}
-    sideCount={p5.sideCount}
     {pulling}
     pulledDeckName={p5.deck}
     onDeckUrlChanged={(s) => {
 			p5 = { ...p5, deckUrl: s }
+		}}
+    onNextDeck={() => {
+			fastForwardAll()
 		}}
   />
   <PlayerDeckInput
     player={5}
     popupDatabase={pdb}
     fetchResult={p6r ?? undefined}
-    cardClass={p6.investigator?.class1 ?? CardClass.Neutral}
-    {fixedLabelColor}
     deckInput={p6.deckUrl}
-    investigatorCode={p6r?.investigatorCode}
-    actualDeckUrl={p6r?.link}
     pullError={p6.error}
-    mainCount={p6.mainCount}
-    sideCount={p6.sideCount}
     {pulling}
     pulledDeckName={p6.deck}
     onDeckUrlChanged={(s) => {
 			p6 = { ...p6, deckUrl: s }
+		}}
+    onNextDeck={() => {
+			fastForwardAll()
 		}}
   />
   <PlayerDeckInput
     player={6}
     popupDatabase={pdb}
     fetchResult={p7r ?? undefined}
-    cardClass={p7.investigator?.class1 ?? CardClass.Neutral}
-    {fixedLabelColor}
     deckInput={p7.deckUrl}
-    investigatorCode={p7r?.investigatorCode}
-    actualDeckUrl={p7r?.link}
     pullError={p7.error}
-    mainCount={p7.mainCount}
-    sideCount={p7.sideCount}
     {pulling}
     pulledDeckName={p7.deck}
     onDeckUrlChanged={(s) => {
 			p7 = { ...p7, deckUrl: s }
+		}}
+    onNextDeck={() => {
+			fastForwardAll()
 		}}
   />
   <PlayerDeckInput
     player={7}
     popupDatabase={pdb}
     fetchResult={p8r ?? undefined}
-    cardClass={p8.investigator?.class1 ?? CardClass.Neutral}
-    {fixedLabelColor}
     deckInput={p8.deckUrl}
-    investigatorCode={p8r?.investigatorCode}
-    actualDeckUrl={p8r?.link}
     pullError={p8.error}
-    mainCount={p8.mainCount}
-    sideCount={p8.sideCount}
     {pulling}
     pulledDeckName={p8.deck}
     onDeckUrlChanged={(s) => {
 			p8 = { ...p8, deckUrl: s }
+		}}
+    onNextDeck={() => {
+			fastForwardAll()
 		}}
   />
 {/if}
@@ -763,10 +574,7 @@
       </div>
       <div slot='tab2'>
         <span class='deck-overlaps-tab-text'>Deck Overlaps</span>
-        <NotificationNumber
-          count={overlappingCount}
-          attention
-        />
+        <NotificationNumber count={overlappingCount} attention />
       </div>
       <div slot='content2'>
         {#if overlapping}

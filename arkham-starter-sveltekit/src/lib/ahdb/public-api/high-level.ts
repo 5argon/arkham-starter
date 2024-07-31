@@ -90,8 +90,8 @@ export interface FetchDeckResult {
   cards1: CardAndAmount[]
   cards2: CardAndAmount[]
   cards3: CardAndAmount[]
-  nextDeck: number | null
-  previousDeck: number | null
+  nextDeck: number | string | null
+  previousDeck: number | string | null
 
   xp: number
   xpSpent: number
@@ -152,6 +152,20 @@ export enum DeckSource {
   ArkhamDbPublished,
   ArkhamBuildShared,
   ArkhamStarter
+}
+
+export async function fetchUntilLatest(current: FetchDeckResult): Promise<FetchDeckResult> {
+  let currentDeck = current
+  let loopCount = 0
+  while (currentDeck.nextDeck !== null) {
+    const nextDeck = await fetchDeckFromId(currentDeck.nextDeck.toString(), currentDeck.source)
+    loopCount = loopCount + 1
+    if (nextDeck === null || loopCount > 12) {
+      break
+    }
+    currentDeck = nextDeck
+  }
+  return currentDeck
 }
 
 export async function fetchDeckFromId(

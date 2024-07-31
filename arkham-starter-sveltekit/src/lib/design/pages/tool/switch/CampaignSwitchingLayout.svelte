@@ -1,43 +1,14 @@
 <script lang='ts' context='module'>
   import { DeckSource, type FetchDeckResult } from '$lib/ahdb/public-api/high-level'
-  import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
-  import type { PopupDatabase } from '$lib/core/popup-database'
-
-  interface Player {
-    deckUrl: string
-    deck: string
-    fetchResult: FetchDeckResult | undefined
-    nextDeck: string | undefined
-    previousDeck: string | undefined
-    source: DeckSource
-    error: boolean
-    investigator: FullDatabaseItem | null
-  }
-
-  interface BothDatabase {
-    fdb: FullDatabase
-    pdb: PopupDatabase
-  }
-
-  type PlayerOrNull = Player | null
 </script>
 
 <script lang='ts'>
   import { LimitedTab } from '@5argon/arkham-ui'
 
-  import { coreToRcore } from '$lib/ahdb/conversion'
-  import {
-    type CardAndAmount,
-    extractDeck,
-    fetchDeckFromId,
-  } from '$lib/ahdb/public-api/high-level'
-  import { makeBondedDecklistEntries } from '$lib/core/bonded'
-  import { CardClass, cardClassToBackgroundClass } from '$lib/core/card-class'
-  import {
-    fetchFullDatabaseStatic,
-  } from '$lib/core/full-database'
+  import { extractDeck, fetchUntilLatest } from '$lib/ahdb/public-api/high-level'
+  import { fetchFullDatabaseStatic } from '$lib/core/full-database'
   import { fetchPopupDatabaseStatic } from '$lib/core/popup-database'
-  import { type GoToGatherInputArgs,openGatherInNewTab } from '$lib/deck/open-gather-in-new-tab'
+  import { type GoToGatherInputArgs, openGatherInNewTab } from '$lib/deck/open-gather-in-new-tab'
   import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
   import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
   import Button from '$lib/design/components/basic/Button.svelte'
@@ -48,10 +19,17 @@
   import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
   import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
   import {
+    type BothDatabase,
+    doSide,
+    getPon, oneSide,
+    type PlayerOrNull,
+    tempDis,
+  } from '$lib/design/pages/tool/switch/switch-logic'
+  import {
     CampaignSwitchProto,
     CampaignSwitchProto_InputDeck,
   } from '$lib/proto/generated/campaign_switch'
-  import { intersect } from '$lib/tool/overlap/overlap-helpers'
+  import { intersect, type IntersectionResult } from '$lib/tool/overlap/overlap-helpers'
   import { base64ToBinary, binaryToUrlString } from '$lib/tool/script/export/options'
 
   export let protoString: string | null = null
@@ -94,7 +72,6 @@
   let remainingInactiveEntries: DecklistEntry[] = []
   let transferEntries: DecklistEntry[] = []
 
-  let fixedLabelColor = false
   let fdbPromise = fetchFullDatabaseStatic()
   let pdbDatabase = fetchPopupDatabaseStatic()
   let bothPromises: Promise<BothDatabase> = Promise.all([fdbPromise, pdbDatabase]).then((x) => {
@@ -257,20 +234,6 @@
   async function process(bdb: BothDatabase) {
     pulling = true
 
-    function tempDis(pon: PlayerOrNull): PlayerOrNull {
-      if (pon === null) {
-        return null
-      }
-      return {
-        ...pon,
-        fetchResult: undefined,
-        investigator: null,
-        nextDeck: undefined,
-        previousDeck: undefined,
-        error: false,
-      }
-    }
-
     activeCampaignDecks[0] = tempDis(activeCampaignDecks[0])
     activeCampaignDecks[1] = tempDis(activeCampaignDecks[1])
     activeCampaignDecks[2] = tempDis(activeCampaignDecks[2])
@@ -283,107 +246,33 @@
     const inactiveSide = oneSide(inactiveCampaignDecks)
     changeSharingUrl()
 
-    async function oneSide(decks: PlayerOrNull[]) {
-      const extracted = decks.map((x) => {
-        if (x !== null) {
-          return extractDeck(x?.deckUrl)
-        } else {
-          return null
-        }
-      })
-      const awaitables = extracted.map<Promise<FetchDeckResult | null>>((x) => {
-        if (x !== null && x.deck !== '') {
-          return fetchDeckFromId(x.deck, x.source)
-        }
-        return Promise.resolve(null)
-      })
-      const awaited = await Promise.all(awaitables)
-      return awaited
-    }
-
     const activeSideResult = await activeSide
     const inactiveSideResult = await inactiveSide
 
-    function doSide(sr: (FetchDeckResult | null)[], rightSide: boolean) {
-      const activeAll = sr.flatMap<DecklistEntry>((x) => {
-        if (x !== null) {
-          const bondedEntries = makeBondedDecklistEntries(bdb.pdb, x.investigatorCode, x.cards1, x.cards2)
-          const allProcessed = [
-            ...sideProcess(x.cards1, '', x.investigatorCode, rightSide),
-            ...sideProcess(x.cards2, 'Side', x.investigatorCode, rightSide),
-            ...sideProcess(bondedEntries.bondedToMain, 'Linked', x.investigatorCode, rightSide),
-            ...sideProcess(bondedEntries.bondedToSide, 'Side-LK', x.investigatorCode, rightSide),
-          ]
-          return allProcessed
-        }
-        return []
-      })
-      return activeAll
+    activeCampaignDecks[0] = getPon(bdb, activeSideResult[0])
+    activeCampaignDecks[1] = getPon(bdb, activeSideResult[1])
+    activeCampaignDecks[2] = getPon(bdb, activeSideResult[2])
+    activeCampaignDecks[3] = getPon(bdb, activeSideResult[3])
+    inactiveCampaignDecks[0] = getPon(bdb, inactiveSideResult[0])
+    inactiveCampaignDecks[1] = getPon(bdb, inactiveSideResult[1])
+    inactiveCampaignDecks[2] = getPon(bdb, inactiveSideResult[2])
+    inactiveCampaignDecks[3] = getPon(bdb, inactiveSideResult[3])
 
-      function sideProcess(
-        sr: CardAndAmount[],
-        additionalLabel: string,
-        invCode: string,
-        right: boolean,
-      ) {
-        return sr.map<DecklistEntry>((x) => {
-          const fdb = bdb.fdb
-          const effectiveId = forwardRcore ? coreToRcore(x.cardId) : x.cardId
-          const cd = fdb.getCard(effectiveId)
-          const inv = fdb.getCard(invCode)
-          const c = cd.class1
-          const labels: DecklistLabel[] = [
-            {
-              cardId: inv.original.code,
-              color: cardClassToBackgroundClass(inv.class1),
-            },
-          ]
-          if (additionalLabel !== '') {
-            labels.push({
-              text: additionalLabel,
-              color: cardClassToBackgroundClass(inv.class1),
-            })
-          }
-          return {
-            amount: x.amount,
-            cardId: effectiveId,
-            id: inv.original.code + effectiveId + additionalLabel,
-            labels: labels,
-          }
-        })
-      }
-    }
-
-    function getPon(prev: PlayerOrNull, aaa: FetchDeckResult | null): PlayerOrNull {
-      if (aaa === null) {
-        return null
-      }
-      const inv = bdb.fdb.getCard(aaa.investigatorCode)
-      return {
-        deck: aaa.deck,
-        fetchResult: aaa,
-        investigator: inv,
-        nextDeck: aaa.nextDeck?.toString(),
-        previousDeck: aaa.previousDeck?.toString(),
-        error: false,
-        source: aaa.source,
-        deckUrl: aaa.link,
-      }
-    }
-
-    activeCampaignDecks[0] = getPon(activeCampaignDecks[0], activeSideResult[0])
-    activeCampaignDecks[1] = getPon(activeCampaignDecks[1], activeSideResult[1])
-    activeCampaignDecks[2] = getPon(activeCampaignDecks[2], activeSideResult[2])
-    activeCampaignDecks[3] = getPon(activeCampaignDecks[3], activeSideResult[3])
-    inactiveCampaignDecks[0] = getPon(inactiveCampaignDecks[0], inactiveSideResult[0])
-    inactiveCampaignDecks[1] = getPon(inactiveCampaignDecks[1], inactiveSideResult[1])
-    inactiveCampaignDecks[2] = getPon(inactiveCampaignDecks[2], inactiveSideResult[2])
-    inactiveCampaignDecks[3] = getPon(inactiveCampaignDecks[3], inactiveSideResult[3])
-
-    const activeEntries = doSide(activeSideResult, false)
-    const inactiveEntries = doSide(inactiveSideResult, true)
+    const activeEntries = doSide(bdb, forwardRcore, activeSideResult, false)
+    const inactiveEntries = doSide(bdb, forwardRcore, inactiveSideResult, true)
     const intersectionResult = intersect(activeEntries, inactiveEntries)
-    transferEntries = intersectionResult.intersects.map<DecklistEntry>((x) => {
+    transferEntries = makeTransferEntries(intersectionResult)
+    remainingActiveEntries = intersectionResult.remainsLeft
+    remainingInactiveEntries = intersectionResult.remainsRight
+    pulledOnce = true
+    pulling = false
+    toggleMapRemainingActive = {}
+    toggleMapRemainingInactive = {}
+    toggleMapTransfer = {}
+  }
+
+  function makeTransferEntries(intersectionResult: IntersectionResult): DecklistEntry[] {
+    return intersectionResult.intersects.map<DecklistEntry>((x) => {
       const mergedLabels: DecklistLabel[] = []
       if (x.left.labels !== undefined) {
         mergedLabels.push(...x.left.labels)
@@ -403,6 +292,54 @@
       }
       return de
     })
+  }
+
+  async function performFastForwardAll(bdb: BothDatabase) {
+
+    function one(pon: PlayerOrNull): Promise<FetchDeckResult | null> {
+      if (pon !== null && pon.fetchResult !== undefined) {
+        return fetchUntilLatest(pon.fetchResult)
+      }
+      return Promise.resolve(null)
+    }
+
+    const promises: Promise<FetchDeckResult | null>[] = [
+      one(activeCampaignDecks[0]),
+      one(activeCampaignDecks[1]),
+      one(activeCampaignDecks[2]),
+      one(activeCampaignDecks[3]),
+      one(inactiveCampaignDecks[0]),
+      one(inactiveCampaignDecks[1]),
+      one(inactiveCampaignDecks[2]),
+      one(inactiveCampaignDecks[3]),
+    ]
+
+    activeCampaignDecks[0] = tempDis(activeCampaignDecks[0])
+    activeCampaignDecks[1] = tempDis(activeCampaignDecks[1])
+    activeCampaignDecks[2] = tempDis(activeCampaignDecks[2])
+    activeCampaignDecks[3] = tempDis(activeCampaignDecks[3])
+    inactiveCampaignDecks[0] = tempDis(inactiveCampaignDecks[0])
+    inactiveCampaignDecks[1] = tempDis(inactiveCampaignDecks[1])
+    inactiveCampaignDecks[2] = tempDis(inactiveCampaignDecks[2])
+    inactiveCampaignDecks[3] = tempDis(inactiveCampaignDecks[3])
+    pulling = true
+
+    const results = await Promise.all(promises)
+
+    activeCampaignDecks[0] = getPon(bdb, results[0])
+    activeCampaignDecks[1] = getPon(bdb, results[1])
+    activeCampaignDecks[2] = getPon(bdb, results[2])
+    activeCampaignDecks[3] = getPon(bdb, results[3])
+    inactiveCampaignDecks[0] = getPon(bdb, results[4])
+    inactiveCampaignDecks[1] = getPon(bdb, results[5])
+    inactiveCampaignDecks[2] = getPon(bdb, results[6])
+    inactiveCampaignDecks[3] = getPon(bdb, results[7])
+    changeSharingUrl()
+
+    const activeEntries = doSide(bdb, forwardRcore, results.slice(0, 4), false)
+    const inactiveEntries = doSide(bdb, forwardRcore, results.slice(4, 8), true)
+    const intersectionResult = intersect(activeEntries, inactiveEntries)
+    transferEntries = makeTransferEntries(intersectionResult)
     remainingActiveEntries = intersectionResult.remainsLeft
     remainingInactiveEntries = intersectionResult.remainsRight
     pulledOnce = true
@@ -439,30 +376,15 @@
           player={i}
           popupDatabase={bdb.pdb}
           fetchResult={d?.fetchResult ?? undefined}
-          cardClass={d?.investigator?.class1 ?? CardClass.Neutral}
-          {fixedLabelColor}
           deckInput={d?.deckUrl ?? ''}
-          investigatorCode={d?.investigator?.original.code ?? undefined}
-          actualDeckUrl={d?.deckUrl ?? undefined}
           pullError={d?.error ?? false}
           {pulling}
           pulledDeckName={d?.deck ?? null}
           onDeckUrlChanged={(s) => {
 						onDeckChanged(d, s, i, false)
 					}}
-          nextDeck={d?.nextDeck}
-          previousDeck={d?.previousDeck}
-          onNextDeck={(dn) => {
-						if (d !== null) {
-							activeCampaignDecks[i] = { ...d, deckUrl: dn }
-							process(bdb)
-						}
-					}}
-          onPreviousDeck={(dn) => {
-						if (d !== null) {
-							activeCampaignDecks[i] = { ...d, deckUrl: dn }
-							process(bdb)
-						}
+          onNextDeck={() => {
+						performFastForwardAll(bdb)
 					}}
         />
       {/each}
@@ -475,30 +397,15 @@
           player={i}
           popupDatabase={bdb.pdb}
           fetchResult={d?.fetchResult ?? undefined}
-          cardClass={d?.investigator?.class1 ?? CardClass.Neutral}
-          {fixedLabelColor}
           deckInput={d?.deckUrl ?? ''}
-          investigatorCode={d?.investigator?.original.code ?? undefined}
-          actualDeckUrl={d?.deckUrl ?? undefined}
           pullError={d?.error ?? false}
           {pulling}
           pulledDeckName={d?.deck ?? null}
           onDeckUrlChanged={(s) => {
 						onDeckChanged(d, s, i, true)
 					}}
-          nextDeck={d?.nextDeck}
-          previousDeck={d?.previousDeck}
-          onNextDeck={(dn) => {
-						if (d !== null) {
-							inactiveCampaignDecks[i] = { ...d, deckUrl: dn }
-							process(bdb)
-						}
-					}}
-          onPreviousDeck={(dn) => {
-						if (d !== null) {
-							inactiveCampaignDecks[i] = { ...d, deckUrl: dn }
-							process(bdb)
-						}
+          onNextDeck={() => {
+						performFastForwardAll(bdb)
 					}}
         />
       {/each}

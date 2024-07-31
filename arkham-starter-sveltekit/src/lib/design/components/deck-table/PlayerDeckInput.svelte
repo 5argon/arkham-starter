@@ -4,35 +4,19 @@
   import type { PopupDatabase } from '$lib/core/popup-database'
   import DeckBannerHigher from '$lib/design/components/deck-banner/DeckBannerHigher.svelte'
 
-  import Button from '../basic/Button.svelte'
   import TextBox, { EditingLevel, NoticeLevel } from '../basic/TextBox.svelte'
 
   export let popupDatabase: PopupDatabase
-  export let fixedLabelColor: boolean
   export let fetchResult: FetchDeckResult | undefined
-  export let cardClass: CardClass
-  export let investigatorCode: string | undefined
   export let player: number
   export let deckInput: string
-  export let actualDeckUrl: string | undefined
   export let onDeckUrlChanged: (s: string) => void = () => {
     // do nothing
   }
-  export let nextDeck: string | undefined = undefined
-  export let previousDeck: string | undefined = undefined
-  export let onNextDeck: (s: string) => void = () => {
-    // do nothing
-  }
-  export let onPreviousDeck: (s: string) => void = () => {
-    // do nothing
-  }
+  export let onNextDeck: (() => void) | null = null
   export let pulling: boolean
   export let pulledDeckName: string | null
   export let pullError: boolean
-  export let mainCount: number = 0
-  export let sideCount: number = 0
-
-  $: nextPrevAvailable = nextDeck !== undefined || previousDeck !== undefined
 
   let noticeText: string | null = null
   let noticeLevel: NoticeLevel = NoticeLevel.Normal
@@ -51,9 +35,7 @@
     } else {
       if (pulledDeckName && !pullError) {
         noticeText =
-          'Download successful.' +
-          (mainCount > 0 ? ` [Deck Count: ${mainCount} Cards] ` : '') +
-          (sideCount > 0 ? ` [Side Deck Count: ${sideCount} Cards] ` : '')
+          'Download successful.'
         noticeLevel = NoticeLevel.Success
         spinning = false
       } else if (pullError) {
@@ -67,12 +49,17 @@
       }
     }
   }
-  $: playerClass = 'player-' + ((player % 4) + 1) + '-bg'
-  $: classClass = cardClassToBackgroundClass(cardClass)
+  let classClass: string = cardClassToBackgroundClass(CardClass.Neutral)
+  $: {
+    if (fetchResult !== undefined) {
+      const investigatorCard = popupDatabase.getByIdThrowNull(fetchResult.investigatorCode)
+      classClass = cardClassToBackgroundClass(investigatorCard.class1)
+    }
+  }
 </script>
 
 <div class='outer-flex'>
-  <div class={'inner-flex player ' + (fixedLabelColor ? playerClass : classClass)}>
+  <div class={'inner-flex player ' + (classClass)}>
     P{player + 1}
   </div>
   <div class='inner-flex deck'>
@@ -86,28 +73,19 @@
       {noticeLevel}
       {noticeText}
     />
-    {#if nextPrevAvailable}
-      <Button
-        label='Prev'
-        disabled={previousDeck === undefined}
-        onClick={() => {
-					if (previousDeck !== undefined) {
-						onPreviousDeck(previousDeck)
-					}
-				}}
-      />
-      <Button
-        label='Next'
-        disabled={nextDeck === undefined}
-        onClick={() => {
-					if (nextDeck !== undefined) {
-						onNextDeck(nextDeck)
-					}
-				}}
-      />
-    {/if}
+    <!--{#if fetchResult && fetchResult.nextDeck !== null}-->
+    <!--  <Button-->
+    <!--    label='To Latest'-->
+    <!--    onClick={() => {-->
+    <!--      if( fetchResult && fetchResult.nextDeck !== null){-->
+    <!--        onNextDeck(fetchResult.nextDeck)-->
+    <!--      }-->
+    <!--		}}-->
+    <!--  />-->
+    <!--{/if}-->
     {#if fetchResult !== undefined}
-      <DeckBannerHigher linkToInternalViewer popupDatabase={popupDatabase} deck={fetchResult} compact />
+      <DeckBannerHigher linkToInternalViewer popupDatabase={popupDatabase} deck={fetchResult} compact
+                        onNextDeck={onNextDeck} />
     {/if}
   </div>
 </div>
