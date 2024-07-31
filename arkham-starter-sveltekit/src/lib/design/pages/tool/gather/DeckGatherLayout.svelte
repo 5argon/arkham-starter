@@ -1,7 +1,7 @@
 <script context='module' lang='ts'>
   import { browser } from '$app/environment'
-  import { isRandomBasicWeakness } from '$lib/ahdb/card'
   import { coreToRcore } from '$lib/ahdb/conversion'
+  import type { FetchDeckResult } from '$lib/ahdb/public-api/high-level'
   import { makeBondedDecklistEntries } from '$lib/core/bonded'
 
   interface Player {
@@ -25,7 +25,7 @@
   }
 
   function fillIn(
-    g: GetDeckCardIdReturns,
+    g: FetchDeckResult,
     player: number,
     fixedColor: boolean,
     faction: CardClass,
@@ -90,7 +90,7 @@
     // 	return de
     // }
 
-    const bonded = makeBondedDecklistEntries(pdb,g.investigatorCode, g.cards1, g.cards2)
+    const bonded = makeBondedDecklistEntries(pdb, g.investigatorCode, g.cards1, g.cards2)
 
     if (showMain) {
       for (let i = 0; i < g.cards1.length; i++) {
@@ -589,6 +589,8 @@
 
 <PlayerDeckInput
   player={0}
+  popupDatabase={pdb}
+  fetchResult={p1r ?? undefined}
   cardClass={p1.investigator?.class1 ?? CardClass.Neutral}
   {fixedLabelColor}
   deckInput={p1.deckUrl}
@@ -605,6 +607,8 @@
 />
 <PlayerDeckInput
   player={1}
+  popupDatabase={pdb}
+  fetchResult={p2r ?? undefined}
   cardClass={p2.investigator?.class1 ?? CardClass.Neutral}
   {fixedLabelColor}
   deckInput={p2.deckUrl}
@@ -621,6 +625,8 @@
 />
 <PlayerDeckInput
   player={2}
+  popupDatabase={pdb}
+  fetchResult={p3r ?? undefined}
   cardClass={p3.investigator?.class1 ?? CardClass.Neutral}
   {fixedLabelColor}
   deckInput={p3.deckUrl}
@@ -637,6 +643,8 @@
 />
 <PlayerDeckInput
   player={3}
+  popupDatabase={pdb}
+  fetchResult={p4r ?? undefined}
   cardClass={p4.investigator?.class1 ?? CardClass.Neutral}
   {fixedLabelColor}
   deckInput={p4.deckUrl}
@@ -654,6 +662,8 @@
 {#if eightMode}
   <PlayerDeckInput
     player={4}
+    popupDatabase={pdb}
+    fetchResult={p5r ?? undefined}
     cardClass={p5.investigator?.class1 ?? CardClass.Neutral}
     {fixedLabelColor}
     deckInput={p5.deckUrl}
@@ -670,6 +680,8 @@
   />
   <PlayerDeckInput
     player={5}
+    popupDatabase={pdb}
+    fetchResult={p6r ?? undefined}
     cardClass={p6.investigator?.class1 ?? CardClass.Neutral}
     {fixedLabelColor}
     deckInput={p6.deckUrl}
@@ -686,6 +698,8 @@
   />
   <PlayerDeckInput
     player={6}
+    popupDatabase={pdb}
+    fetchResult={p7r ?? undefined}
     cardClass={p7.investigator?.class1 ?? CardClass.Neutral}
     {fixedLabelColor}
     deckInput={p7.deckUrl}
@@ -702,6 +716,8 @@
   />
   <PlayerDeckInput
     player={7}
+    popupDatabase={pdb}
+    fetchResult={p8r ?? undefined}
     cardClass={p8.investigator?.class1 ?? CardClass.Neutral}
     {fixedLabelColor}
     deckInput={p8.deckUrl}

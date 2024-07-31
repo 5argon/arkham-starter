@@ -37,7 +37,7 @@
     fetchFullDatabaseStatic,
   } from '$lib/core/full-database'
   import { fetchPopupDatabaseStatic } from '$lib/core/popup-database'
-  import { goToGather } from '$lib/deck/go-to-gather'
+  import { type GoToGatherInputArgs,openGatherInNewTab } from '$lib/deck/open-gather-in-new-tab'
   import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
   import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
   import Button from '$lib/design/components/basic/Button.svelte'
@@ -221,17 +221,20 @@
   }
 
   function openInGather(inactiveCampaign: boolean) {
-    const aaa = inactiveCampaign ? inactiveCampaignDecks : activeCampaignDecks
-    goToGather(
-      aaa.map((x) => {
-        const url = x?.deckUrl ?? ''
+    const campaignDecks = inactiveCampaign ? inactiveCampaignDecks : activeCampaignDecks
+    const inputArgs: GoToGatherInputArgs[] = []
+    for (let i = 0; i < campaignDecks.length; i++) {
+      const d = campaignDecks[i]
+      if (d !== null) {
+        const url = d.deckUrl
         const extracted = extractDeck(url)
-        return {
+        inputArgs.push({
           id: extracted.deck,
           source: extracted.source,
-        }
-      }),
-    )
+        })
+      }
+    }
+    openGatherInNewTab(inputArgs)
   }
 
   function swap(bdb: BothDatabase) {

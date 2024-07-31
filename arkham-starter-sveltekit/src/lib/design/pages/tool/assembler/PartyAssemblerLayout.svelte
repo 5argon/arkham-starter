@@ -34,7 +34,7 @@
   } from '$lib/ahdb/public-api/high-level'
   import type { FullDatabase } from '$lib/core/full-database'
   import type { PopupDatabase } from '$lib/core/popup-database'
-  import { goToGather } from '$lib/deck/go-to-gather'
+  import { openGatherInNewTab } from '$lib/deck/open-gather-in-new-tab'
   import { Grouping, Sorting } from '$lib/deck-table/grouping'
   import Button from '$lib/design/components/basic/Button.svelte'
   import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
@@ -496,7 +496,7 @@
           label='Gather Cards'
           disabled={currentTeamAll.length === 0}
           onClick={() => {
-						goToGather(currentTeamAll)
+						openGatherInNewTab(currentTeamAll)
 					}}
         />
 			</span>

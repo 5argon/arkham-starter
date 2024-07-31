@@ -3,7 +3,7 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import { addPackCount, countPacks, type PackCount } from '$lib/deck/deck-count'
-	import { goToGather } from '$lib/deck/go-to-gather'
+	import { openGatherInNewTab } from '$lib/deck/open-gather-in-new-tab'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import Button from '$lib/design/components/basic/Button.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
@@ -67,7 +67,7 @@
 						block
 						label="Gather Cards"
 						onClick={() => {
-							goToGather(party.decks)
+							openGatherInNewTab(party.decks)
 						}}
 					/>
 					<Button
