@@ -1,15 +1,15 @@
-import { CardPackIcon } from '$lib/design/interface/card-pack'
+import { CardPack } from '$lib/design/interface/card-pack'
 
-export function createPackRequirementText(icons: CardPackIcon[]): string {
+export function createPackRequirementText(icons: CardPack[]): string {
 	let useStarter = false
-	const nonStarter: CardPackIcon[] = []
+	const nonStarter: CardPack[] = []
 	icons.forEach((x) => {
 		if (
-			x === CardPackIcon.NathanielCho ||
-			x === CardPackIcon.HarveyWalters ||
-			x === CardPackIcon.WinifredHabbamock ||
-			x === CardPackIcon.JacquelineFine ||
-			x === CardPackIcon.StellaClark
+			x === CardPack.NathanielCho ||
+			x === CardPack.HarveyWalters ||
+			x === CardPack.WinifredHabbamock ||
+			x === CardPack.JacquelineFine ||
+			x === CardPack.StellaClark
 		) {
 			useStarter = true
 		} else {

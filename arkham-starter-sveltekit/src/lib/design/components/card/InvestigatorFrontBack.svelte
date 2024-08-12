@@ -3,10 +3,10 @@
 
 <script lang="ts">
 	import { rcoreToCore } from '$lib/ahdb/conversion'
-import { forwardDeckToRcore, type FetchDeckResult } from '$lib/ahdb/public-api/high-level'
+import { type FetchDeckResult,forwardDeckToRcore } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
-	import { CardPackIcon } from '$lib/design/interface/card-pack'
+	import { CardPack } from '$lib/design/interface/card-pack'
 
 	import ParallelInfo from '../deck-banner/ParallelInfo.svelte'
 	import CardScan from '../deck-table/CardScan.svelte'
@@ -46,8 +46,8 @@ import { forwardDeckToRcore, type FetchDeckResult } from '$lib/ahdb/public-api/h
 	</div>
 	<ParallelInfo
 		investigatorCode={frontCode}
-		front={frontCard.packIcon === CardPackIcon.ParallelInvestigator}
-		back={backCard.packIcon === CardPackIcon.ParallelInvestigator}
+		front={frontCard.packIcon === CardPack.ParallelInvestigator}
+		back={backCard.packIcon === CardPack.ParallelInvestigator}
 	/>
 	<div class="parallel">
 		<CardSpan

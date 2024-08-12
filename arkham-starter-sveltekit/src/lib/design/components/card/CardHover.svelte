@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CardClass } from '$lib/core/card-class'
-	import type { CardPackIcon } from '$lib/design/interface/card-pack'
+	import type { CardPack } from '$lib/design/interface/card-pack'
 
 	import HoverFrame from '../inline/HoverFrame.svelte'
 	import CardSpan from './CardSpan.svelte'
@@ -14,7 +14,7 @@
 	export let xp: number | null = null
 	export let xpTaboo: number | null = null
 	export let exceptional: boolean = false
-	export let packIcon: CardPackIcon | null = null
+	export let packIcon: CardPack | null = null
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false

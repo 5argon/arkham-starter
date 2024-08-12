@@ -8,13 +8,12 @@ import type { AhdbTaboo } from '$lib/ahdb/taboo'
 import fdbJson from '$lib/data/playerdb.json'
 import tb from '$lib/data/taboo.json'
 import { CardClass } from '$lib/design/interface/card-class'
-import { CardPackIcon } from '$lib/design/interface/card-pack'
 
-import type { CardPack } from './card-pack'
+import { CardPack } from './card-pack'
 export type LazyFullDatabase = Promise<FullDatabase>
 
 export interface FullDatabaseItem {
-	packIcon: CardPackIcon
+	packIcon: CardPack
 	class1: CardClass
 	class2?: CardClass
 	class3?: CardClass
@@ -42,7 +41,7 @@ export class FullDatabase {
 		const mapped = cards.map<FullDatabaseItem>((x) => {
 			let icon = packCodeToIconConversion(x.pack_code)
 			if (isRandomBasicWeakness(x.code)) {
-				icon = CardPackIcon.RandomBasicWeakness
+				icon = CardPack.RandomBasicWeakness
 			}
 			const fdi: FullDatabaseItem = {
 				class1: classConversion(x.faction_code),
@@ -138,7 +137,7 @@ export class FullDatabase {
 	private createUnknownCard(id: string): FullDatabaseItem {
 		return {
 			class1: CardClass.Neutral,
-			packIcon: CardPackIcon.Unknown,
+			packIcon: CardPack.Unknown,
 			packNameTransformed: null,
 			original: {
 				code: id,

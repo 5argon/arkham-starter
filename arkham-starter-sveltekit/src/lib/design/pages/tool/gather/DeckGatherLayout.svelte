@@ -1,121 +1,10 @@
-<script context='module' lang='ts'>
-  import { browser } from '$app/environment'
-  import { coreToRcore } from '$lib/ahdb/conversion'
-  import type { FetchDeckResult } from '$lib/ahdb/public-api/high-level'
-  import { makeBondedDecklistEntries } from '$lib/core/bonded'
-  import { cardClassToBackgroundClass } from '$lib/core/card-class'
-  import { getExtraName } from '$lib/deck/deck'
-
-  interface Player {
-    deckUrl: string
-    deck: string
-    error: boolean
-  }
-
-  function newDeck(startingUrl: string): Player {
-    return {
-      deck: '',
-      deckUrl: startingUrl,
-      error: false,
-    }
-  }
-
-  function fillIn(
-    g: FetchDeckResult,
-    player: number,
-    ents: DecklistEntry[],
-    fw: boolean,
-    showMain: boolean,
-    showSide: boolean,
-    pdb: PopupDatabase,
-  ) {
-    const invCard = pdb.getByIdThrowNull(g.investigatorCode)
-    let colorHex: string = cardClassToBackgroundClass(invCard.class1)
-    const bonded = makeBondedDecklistEntries(pdb, g.investigatorCode, g.cards1, g.cards2)
-
-    if (showMain) {
-      for (let i = 0; i < g.cards1.length; i++) {
-        const c1 = fw ? coreToRcore(g.cards1[i].cardId) : g.cards1[i].cardId
-        const a1 = g.cards1[i].amount
-        ents.push({
-          id: 'd' + player + c1,
-          amount: a1,
-          cardId: c1,
-          labels: [{ color: colorHex, cardId: g.investigatorCode }],
-        })
-      }
-      ents.push(
-        ...bonded.bondedToMain.map<DecklistEntry>((x) => {
-          return {
-            amount: x.amount,
-            cardId: x.cardId,
-            id: 'MainLinked' + x.cardId,
-            labels: [
-              { color: colorHex, cardId: g.investigatorCode },
-              { color: colorHex, text: 'Linked' },
-            ],
-          }
-        }),
-      )
-      if (g.decodedMeta.extraDeck) {
-        ents.push(
-          ...g.decodedMeta.extraDeck.map<DecklistEntry>((x) => {
-            const gator = g.decodedMeta.alternateBack ?? g.investigatorCode
-            return {
-              amount: 1,
-              cardId: x,
-              id: 'Extra' + x,
-              labels: [
-                { color: colorHex, cardId: g.investigatorCode },
-                { color: colorHex, text: getExtraName(gator) },
-              ],
-            }
-          }),
-        )
-      }
-    }
-    if (showSide) {
-      for (let i = 0; i < g.cards2.length; i++) {
-        const c2 = fw ? coreToRcore(g.cards2[i].cardId) : g.cards2[i].cardId
-        const a2 = g.cards2[i].amount
-        ents.push({
-          id: 's' + player + c2,
-          amount: a2,
-          cardId: c2,
-          labels: [
-            { color: colorHex, cardId: g.investigatorCode },
-            { text: 'Side', color: colorHex },
-          ],
-        })
-      }
-      ents.push(
-        ...bonded.bondedToSide.map<DecklistEntry>((x) => {
-          return {
-            amount: x.amount,
-            cardId: x.cardId,
-            id: 'SideLinked' + x.cardId,
-            labels: [
-              { color: colorHex, cardId: g.investigatorCode },
-              { color: colorHex, text: 'Side-LK' },
-            ],
-          }
-        }),
-      )
-    }
-  }
-</script>
-
 <script lang='ts'>
   import { LimitedTab } from '@5argon/arkham-ui'
 
+  import { browser } from '$app/environment'
   import { goto } from '$app/navigation'
-  import {
-    type CardAndAmount,
-    extractDeck,
-    type ExtractResult,
-    fetchDeckFromId,
-  } from '$lib/ahdb/public-api/high-level'
-  import { CardClass } from '$lib/core/card-class'
+  import type { FetchDeckResult } from '$lib/ahdb/public-api/high-level'
+  import { extractDeck, type ExtractResult, fetchDeckFromId } from '$lib/ahdb/public-api/high-level'
   import type { FullDatabase } from '$lib/core/full-database'
   import type { PopupDatabase } from '$lib/core/popup-database'
   import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
@@ -123,12 +12,14 @@
   import Button from '$lib/design/components/basic/Button.svelte'
   import Checkbox from '$lib/design/components/basic/Checkbox.svelte'
   import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
+  import PageShortDescription from '$lib/design/components/basic/PageShortDescription.svelte'
   import TextBox from '$lib/design/components/basic/TextBox.svelte'
   import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
   import CountSummary from '$lib/design/components/deck-table/CountSummary.svelte'
   import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
   import PlayerDeckInput from '$lib/design/components/deck-table/PlayerDeckInput.svelte'
   import NotificationNumber from '$lib/design/components/inline/NotificationNumber.svelte'
+  import { newDeck, type Player, pushInCentralEntry } from '$lib/design/pages/tool/gather/gather-logic'
   import { checkOverlaps } from '$lib/tool/overlap/overlap-helpers'
 
   import CardTableDoubleDisplay from '../../explore/CardTableDoubleDisplay.svelte'
@@ -144,11 +35,9 @@
   export let startingP6: string = ''
   export let startingP7: string = ''
   export let startingP8: string = ''
-  export let fixedLabelColor: boolean = false
-  export let showMainDeck: boolean = true
-  export let showSideDeck: boolean = true
-  export let forwardRcore: boolean = true
-
+  let showMainDeck: boolean = true
+  let showSideDeck: boolean = true
+  let forwardRcore: boolean = true
   let sharingUrl: string = ''
   let entries: DecklistEntry[] = []
   let toggleMap: { [cardId: string]: boolean[] } = {}
@@ -203,30 +92,32 @@
     const p7x = extractDeck(p7.deckUrl)
     const p8x = extractDeck(p8.deckUrl)
 
-    async function getDeck(p: Player, x: ExtractResult): Promise<FetchDeckResult | null> {
+    async function fetchDeck(x: ExtractResult): Promise<FetchDeckResult | null> {
       if (x.deck === '') {
         return null
       }
-      const cards = await fetchDeckFromId(x.deck, x.source)
-      return cards
+      return await fetchDeckFromId(x.deck, x.source)
     }
 
-    const p1p = getDeck(p1, p1x)
-    const p2p = getDeck(p2, p2x)
-    const p3p = getDeck(p3, p3x)
-    const p4p = getDeck(p4, p4x)
-    const p5p = getDeck(p5, p5x)
-    const p6p = getDeck(p6, p6x)
-    const p7p = getDeck(p7, p7x)
-    const p8p = getDeck(p8, p8x)
-    p1r = await p1p
-    p2r = await p2p
-    p3r = await p3p
-    p4r = await p4p
-    p5r = await p5p
-    p6r = await p6p
-    p7r = await p7p
-    p8r = await p8p
+    const promises: Promise<FetchDeckResult | null>[] = [
+      fetchDeck(p1x),
+      fetchDeck(p2x),
+      fetchDeck(p3x),
+      fetchDeck(p4x),
+      fetchDeck(p5x),
+      fetchDeck(p6x),
+      fetchDeck(p7x),
+      fetchDeck(p8x),
+    ]
+    const awaited = await Promise.all(promises)
+    p1r = awaited[0]
+    p2r = awaited[1]
+    p3r = awaited[2]
+    p4r = awaited[3]
+    p5r = awaited[4]
+    p6r = awaited[5]
+    p7r = awaited[6]
+    p8r = awaited[7]
 
     p1 = {
       ...p1,
@@ -316,28 +207,28 @@
     toggleMap = {}
     overlappingEntries = []
     if (p1rr) {
-      fillIn(p1rr, 0, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
+      pushInCentralEntry(p1rr, 0, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p2rr) {
-      fillIn(p2rr, 1, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
+      pushInCentralEntry(p2rr, 1, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p3rr) {
-      fillIn(p3rr, 2, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
+      pushInCentralEntry(p3rr, 2, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p4rr) {
-      fillIn(p4rr, 3, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
+      pushInCentralEntry(p4rr, 3, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p5rr) {
-      fillIn(p5rr, 4, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
+      pushInCentralEntry(p5rr, 4, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p6rr) {
-      fillIn(p6rr, 5, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
+      pushInCentralEntry(p6rr, 5, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p7rr) {
-      fillIn(p7rr, 6, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
+      pushInCentralEntry(p7rr, 6, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     if (p8rr) {
-      fillIn(p8rr, 7, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
+      pushInCentralEntry(p8rr, 7, entries, forwardRcore, showMainDeck, showSideDeck, pdb)
     }
     const checkResult = checkOverlaps(entries, (c) => fdb.getCard(c).original.quantity)
     overlappingEntries.push(...checkResult.overlapReports)
@@ -360,6 +251,10 @@
   async function fastForwardAll() {
   }
 </script>
+
+<PageShortDescription>Collect all required cards of multiple decks into one freely sortable list. You can go through
+  your collection just once to gather cards for everyone. It has a deck overlap analyzer that also checks the Side Deck.
+</PageShortDescription>
 
 <div class='sharing-url'>
   <TextBox label='Sharing URL' currentText={sharingUrl} />
@@ -388,14 +283,6 @@
 			}}
     />
   {/if}
-  <Checkbox
-    label='Fixed Label Color'
-    checked={fixedLabelColor}
-    onCheckChanged={() => {
-			fixedLabelColor = !fixedLabelColor
-			reactFill(p1r, p2r, p3r, p4r, p5r, p6r, p7r, p8r)
-		}}
-  />
   <Checkbox
     label='Forward to Revised Core Set'
     checked={forwardRcore}

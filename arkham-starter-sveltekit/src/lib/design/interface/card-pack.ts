@@ -1,93 +1,96 @@
-import { CardPack as CardPackIcon } from '$lib/core/card-pack'
+import { CardPack } from '$lib/core/card-pack'
 
 import { imageIconPackPath, imageIconPackPathBlack, imageIconPackPathWhite } from './path'
-export { CardPackIcon }
+export { CardPack }
 
 export enum CardPackIconColor {
 	Black,
 	White,
 }
 
-export function getPackStaticUrl(pack: CardPackIcon, color: CardPackIconColor): string {
+export function getPackStaticUrl(pack: CardPack, color: CardPackIconColor): string {
 	const withColor =
 		imageIconPackPath +
 		(color === CardPackIconColor.White ? imageIconPackPathWhite : imageIconPackPathBlack)
 	let fileName: string
 	switch (pack) {
-		case CardPackIcon.CoreSet:
+		case CardPack.CoreSet:
 			fileName = 'core'
 			break
-		case CardPackIcon.RevisedCoreSet:
+		case CardPack.RevisedCoreSet:
 			fileName = 'core'
 			break
-		case CardPackIcon.ParallelInvestigator:
+		case CardPack.ParallelInvestigator:
 			fileName = 'parallel'
 			break
-		case CardPackIcon.Novella:
+		case CardPack.Novella:
 			fileName = 'promotional'
 			break
 
-		case CardPackIcon.NathanielCho:
+		case CardPack.NathanielCho:
 			fileName = 'nat'
 			break
-		case CardPackIcon.HarveyWalters:
+		case CardPack.HarveyWalters:
 			fileName = 'har'
 			break
-		case CardPackIcon.WinifredHabbamock:
+		case CardPack.WinifredHabbamock:
 			fileName = 'win'
 			break
-		case CardPackIcon.JacquelineFine:
+		case CardPack.JacquelineFine:
 			fileName = 'jac'
 			break
-		case CardPackIcon.StellaClark:
+		case CardPack.StellaClark:
 			fileName = 'ste'
 			break
 
-		case CardPackIcon.TheDunwichLegacy:
+		case CardPack.TheDunwichLegacy:
 			fileName = 'dwl'
 			break
-		case CardPackIcon.ThePathToCarcosa:
+		case CardPack.ThePathToCarcosa:
 			fileName = 'ptc'
 			break
-		case CardPackIcon.TheForgottenAge:
+		case CardPack.TheForgottenAge:
 			fileName = 'tfa'
 			break
-		case CardPackIcon.TheCircleUndone:
+		case CardPack.TheCircleUndone:
 			fileName = 'tcu'
 			break
-		case CardPackIcon.TheDreamEaters:
+		case CardPack.TheDreamEaters:
 			fileName = 'tde'
 			break
-		case CardPackIcon.TheInnsmouthConspiracy:
+		case CardPack.TheInnsmouthConspiracy:
 			fileName = 'tic'
 			break
-		case CardPackIcon.EdgeOfTheEarth:
+		case CardPack.EdgeOfTheEarth:
 			fileName = 'eote'
 			break
-		case CardPackIcon.TheScarletKeys:
+		case CardPack.TheScarletKeys:
 			fileName = 'tsk'
 			break
-		case CardPackIcon.TheFeastOfHemlockVale:
+		case CardPack.TheFeastOfHemlockVale:
 			fileName = 'fhv'
 			break
+		case CardPack.TheDrownedCity:
+			fileName = 'tdc'
+			break
 
-		case CardPackIcon.TheBlobThatAteEverythingElse:
+		case CardPack.TheBlobThatAteEverythingElse:
 			fileName = 'blbe'
 			break
 
-		case CardPackIcon.ReturnToTheNightOfTheZealot:
+		case CardPack.ReturnToTheNightOfTheZealot:
 			fileName = 'rtnotz'
 			break
-		case CardPackIcon.ReturnToTheDunwichLegacy:
+		case CardPack.ReturnToTheDunwichLegacy:
 			fileName = 'rtdwl'
 			break
-		case CardPackIcon.ReturnToThePathToCarcosa:
+		case CardPack.ReturnToThePathToCarcosa:
 			fileName = 'rtptc'
 			break
-		case CardPackIcon.ReturnToTheForgottenAge:
+		case CardPack.ReturnToTheForgottenAge:
 			fileName = 'rttfa'
 			break
-		case CardPackIcon.ReturnToTheCircleUndone:
+		case CardPack.ReturnToTheCircleUndone:
 			fileName = 'rttcu'
 			break
 		default:
@@ -96,19 +99,19 @@ export function getPackStaticUrl(pack: CardPackIcon, color: CardPackIconColor): 
 	return `${withColor}/${fileName}.png`
 }
 
-export function getCampaignStaticUrl(pack: CardPackIcon, color: CardPackIconColor): string {
+export function getCampaignStaticUrl(pack: CardPack, color: CardPackIconColor): string {
 	const withColor =
 		imageIconPackPath +
 		(color === CardPackIconColor.White ? imageIconPackPathWhite : imageIconPackPathBlack)
 	let fileName: string
 	switch (pack) {
-		case CardPackIcon.EdgeOfTheEarth:
+		case CardPack.EdgeOfTheEarth:
 			fileName = 'eotec'
 			break
-		case CardPackIcon.TheScarletKeys:
+		case CardPack.TheScarletKeys:
 			fileName = 'tskc'
 			break
-		case CardPackIcon.TheFeastOfHemlockVale:
+		case CardPack.TheFeastOfHemlockVale:
 			fileName = 'fhvc'
 			break
 		default:

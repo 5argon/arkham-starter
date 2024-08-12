@@ -12,7 +12,6 @@
 	import { addPackCount, countPacks } from '$lib/deck/deck-count'
 	import { calculateCardsXp } from '$lib/deck/deck-xp'
 	import { getRepresentativeCards } from '$lib/deck/get-representative-cards'
-	import { CardPackIcon } from '$lib/design/interface/card-pack'
 	import type {
 		ChosenClasses,
 		ChosenNumber,
@@ -65,10 +64,10 @@
 	const altBack = deck.decodedMeta.alternateBack
 	const parFront: boolean =
 		altFront !== undefined &&
-		(popupDatabase.getById(altFront)?.packIcon === CardPackIcon.ParallelInvestigator ?? false)
+		(popupDatabase.getById(altFront)?.packIcon === CardPack.ParallelInvestigator ?? false)
 	const parBack: boolean =
 		altBack !== undefined &&
-		(popupDatabase.getById(altBack)?.packIcon === CardPackIcon.ParallelInvestigator ?? false)
+		(popupDatabase.getById(altBack)?.packIcon === CardPack.ParallelInvestigator ?? false)
 
 	let chosenClasses: ChosenClasses | null = null
 	$: {

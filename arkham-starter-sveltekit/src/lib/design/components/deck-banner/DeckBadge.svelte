@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { iconToNameConversion } from '$lib/ahdb/conversion'
 import {
-		type CardPackIcon,
+		type CardPack,
 		CardPackIconColor,
 		getPackStaticUrl,
 	} from '$lib/design/interface/card-pack'
@@ -9,7 +9,7 @@ import {
 	import HoverFrame from '../inline/HoverFrame.svelte'
 	import { createPackRequirementText } from './pack-requirement-text'
 
-	export let packs: CardPackIcon[]
+	export let packs: CardPack[]
 	let badgeText: string = createPackRequirementText(packs)
 	let hovering = false
 	function mouseEnterHandler(e: MouseEvent & { currentTarget: EventTarget }) {

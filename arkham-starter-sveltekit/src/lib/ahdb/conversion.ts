@@ -27,6 +27,8 @@ export function iconToNameConversion(c: CardPack): string {
 			return 'The Scarlet Keys Investigator Expansion'
 		case CardPack.TheFeastOfHemlockVale:
 			return 'The Feast of Hemlock Vale Investigator Expansion'
+		case CardPack.TheDrownedCity:
+			return 'The Drowned City Investigator Expansion'
 
 		case CardPack.TheBlobThatAteEverythingElse:
 			return 'The Blob That Ate Everything ELSE!'

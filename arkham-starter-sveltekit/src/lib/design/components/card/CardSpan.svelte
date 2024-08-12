@@ -4,7 +4,7 @@
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { CardClass, classToFontColorCss } from '$lib/design/interface/card-class'
 	import {
-		CardPackIcon,
+		CardPack,
 		CardPackIconColor,
 		getPackStaticUrl,
 	} from '$lib/design/interface/card-pack'
@@ -26,7 +26,7 @@
 	export let xp: number | null = null
 	export let xpTaboo: number | null = null
 	export let exceptional: boolean = false
-	export let packIcon: CardPackIcon | null = null
+	export let packIcon: CardPack | null = null
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false
@@ -106,7 +106,7 @@
 				/>{/if}{#if myriad}<FaIcon path={allIcons.myraid} />{/if}
 			{#if !(packNumber !== null && isUnknownCardNumber(packNumber)) && (packIcon !== null || packNumber !== null)}
 				<span class="pips pack-span"
-					>({#if packIcon !== null && packIcon !== CardPackIcon.Unknown}<img
+					>({#if packIcon !== null && packIcon !== CardPack.Unknown}<img
 							class="pack-icon"
 							src={packStaticUrl}
 							alt="Pack icon"

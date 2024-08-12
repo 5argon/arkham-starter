@@ -7,10 +7,9 @@ import {
 	packCodeToIconConversion,
 } from '$lib/ahdb/conversion'
 import pdbJson from '$lib/data/popupdb.json'
-import { CardPackIcon } from '$lib/design/interface/card-pack'
 
 import type { CardClass } from './card-class'
-import type { CardPack } from './card-pack'
+import { CardPack } from './card-pack'
 export type LazyPopupDatabase = Promise<PopupDatabase>
 
 export class PopupDatabase {
@@ -22,11 +21,12 @@ export class PopupDatabase {
 
 	constructor(raw: PopupDatabaseRaw) {
 		this.byPack = {}
+		this.byPack[CardPack.TheDrownedCity] = []
 		this.allInvestigators = []
 		this.cards = raw.items.map<PopupDatabaseItem>((x) => {
 			let icon = packCodeToIconConversion(raw.packCodes[x.pc])
 			if (isRandomBasicWeakness(x.id)) {
-				icon = CardPackIcon.RandomBasicWeakness
+				icon = CardPack.RandomBasicWeakness
 			}
 			const p: PopupDatabaseItem = {
 				original: x,
@@ -91,7 +91,7 @@ export class PopupDatabase {
 }
 
 export interface PopupDatabaseItem {
-	packIcon: CardPackIcon
+	packIcon: CardPack
 	class1: CardClass
 	class2?: CardClass
 	class3?: CardClass

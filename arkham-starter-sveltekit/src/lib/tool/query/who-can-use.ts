@@ -1,7 +1,7 @@
 import type { AhdbDeckOption } from '$lib/ahdb/card'
 import { isOldCore } from '$lib/ahdb/conversion'
 import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
-import { CardPackIcon } from '$lib/design/interface/card-pack'
+import { CardPack } from '$lib/design/interface/card-pack'
 
 export interface WhoCanUseReturn {
 	investigator: FullDatabaseItem
@@ -16,7 +16,7 @@ export function whoCanUse(fdb: FullDatabase, cardIds: string[]): WhoCanUseReturn
 		.filter(
 			(x) =>
 				!isOldCore(x.original.code) &&
-				x.packIcon !== CardPackIcon.Novella &&
+				x.packIcon !== CardPack.Novella &&
 				x.original.spoiler === undefined,
 		)
 	const whoOfEach = cardIds.map((cardId) => {
@@ -39,6 +39,18 @@ export function whoCanUse(fdb: FullDatabase, cardIds: string[]): WhoCanUseReturn
 			}),
 		),
 	)
+	result.sort((a, b) => {
+		if (a.investigator.packIcon != b.investigator.packIcon) {
+			return a.investigator.packIcon - b.investigator.packIcon
+		}
+		if (a.investigator.original.code < b.investigator.original.code) {
+			return -1
+		}
+		if (a.investigator.original.code > b.investigator.original.code) {
+			return 1
+		}
+		return 0
+	})
 	return result
 }
 

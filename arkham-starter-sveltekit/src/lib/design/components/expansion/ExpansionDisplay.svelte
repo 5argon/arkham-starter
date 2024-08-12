@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation'
   import type { CardPack } from '$lib/core/card-pack'
   import {
-    CardPackIcon,
+    CardPack,
     CardPackIconColor,
     getCampaignStaticUrl,
     getPackStaticUrl,
@@ -10,7 +10,7 @@
 
   import { packToFile } from './pack-to-file'
 
-  export let set: CardPackIcon
+  export let set: CardPack
   export let text: string
   export let subText: string | undefined = undefined
   export let link: string | undefined = undefined

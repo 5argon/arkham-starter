@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { iconToNameConversion, packCodeToIconConversion } from '$lib/ahdb/conversion'
 	import {
-		type CardPackIcon,
+		type CardPack,
 		CardPackIconColor,
 		getPackStaticUrl,
 	} from '$lib/design/interface/card-pack'
 
 	import HoverFrame from '../inline/HoverFrame.svelte'
 
-	export let packIcon: CardPackIcon
+	export let packIcon: CardPack
 	$: name = iconToNameConversion(packIcon)
 	$: packStaticUrl = getPackStaticUrl(packIcon, CardPackIconColor.Black)
 </script>

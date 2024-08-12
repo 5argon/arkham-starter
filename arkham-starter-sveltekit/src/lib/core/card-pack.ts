@@ -11,6 +11,7 @@ export enum CardPack {
 	EdgeOfTheEarth,
 	TheScarletKeys,
 	TheFeastOfHemlockVale,
+	TheDrownedCity,
 
 	ReturnToTheNightOfTheZealot,
 	ReturnToTheDunwichLegacy,

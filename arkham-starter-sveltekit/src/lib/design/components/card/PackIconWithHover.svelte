@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { isReturnToPack, isStarterPack } from '$lib/core/card-pack'
 	import {
-		CardPackIcon,
+		CardPack,
 		CardPackIconColor,
 		getPackStaticUrl,
 	} from '$lib/design/interface/card-pack'
 
 	import PackIconHover from './PackIconHover.svelte'
 
-	export let pack: CardPackIcon
+	export let pack: CardPack
 	export let count: number | null = null
 	let hovering = false
 	function mouseEnterHandler(e: MouseEvent & { currentTarget: EventTarget }) {
@@ -23,47 +23,47 @@
 	let packStarter = isStarterPack(pack)
 	$: packColored = packReturnTo || packStarter
 	switch (pack) {
-		case CardPackIcon.RevisedCoreSet: {
+		case CardPack.RevisedCoreSet: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2021/6/24/revision-to-horror/'
 			break
 		}
-		case CardPackIcon.ParallelInvestigator: {
+		case CardPack.ParallelInvestigator: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2020/5/5/beyond-our-dimension/'
 			break
 		}
-		case CardPackIcon.TheDunwichLegacy: {
+		case CardPack.TheDunwichLegacy: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2021/11/18/reliving-the-legacy/'
 			break
 		}
-		case CardPackIcon.ThePathToCarcosa: {
+		case CardPack.ThePathToCarcosa: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2022/2/24/retreading-the-path/'
 			break
 		}
-		case CardPackIcon.TheForgottenAge: {
+		case CardPack.TheForgottenAge: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2022/12/1/an-unforgettable-quest/'
 			break
 		}
-		case CardPackIcon.TheCircleUndone: {
+		case CardPack.TheCircleUndone: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2023/3/9/breaking-the-spell/'
 			break
 		}
-		case CardPackIcon.EdgeOfTheEarth: {
+		case CardPack.EdgeOfTheEarth: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2021/6/3/to-edge-of-the-earth/'
 			break
 		}
-		case CardPackIcon.TheScarletKeys: {
+		case CardPack.TheScarletKeys: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2022/6/30/scarlet-keys/'
 			break
 		}
-		case CardPackIcon.TheFeastOfHemlockVale: {
+		case CardPack.TheFeastOfHemlockVale: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2023/8/4/a-feast-of-hemlock/'
 			break
 		}
-		case CardPackIcon.NathanielCho:
-		case CardPackIcon.HarveyWalters:
-		case CardPackIcon.WinifredHabbamock:
-		case CardPackIcon.JacquelineFine:
-		case CardPackIcon.StellaClark: {
+		case CardPack.NathanielCho:
+		case CardPack.HarveyWalters:
+		case CardPack.WinifredHabbamock:
+		case CardPack.JacquelineFine:
+		case CardPack.StellaClark: {
 			packLink = 'https://www.fantasyflightgames.com/en/news/2020/3/24/your-investigation-begins/'
 			break
 		}

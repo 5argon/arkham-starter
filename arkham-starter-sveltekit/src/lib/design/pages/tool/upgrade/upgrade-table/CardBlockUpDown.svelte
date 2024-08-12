@@ -3,7 +3,7 @@
 	import type { CardBlockButtonProp } from '$lib/design/components/card/CardBlockButton.svelte'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import type { CardClass } from '$lib/design/interface/card-class'
-	import type { CardPackIcon } from '$lib/design/interface/card-pack'
+	import type { CardPack } from '$lib/design/interface/card-pack'
 
 	export let singleMode: boolean = false
 	export let cardId: string
@@ -24,7 +24,7 @@
 	export let xp: number | null = null
 	export let xpTaboo: number | null = null
 	export let exceptional: boolean = false
-	export let packIcon: CardPackIcon | null = null
+	export let packIcon: CardPack | null = null
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
 	export let weakness: boolean = false

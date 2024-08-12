@@ -1,69 +1,69 @@
 <script lang="ts">
 	import ExpansionDisplay from '$lib/design/components/expansion/ExpansionDisplay.svelte'
 	import PageTitle from '$lib/design/components/layout/PageTitle.svelte'
-	import { CardPackIcon } from '$lib/design/interface/card-pack'
+	import { CardPack } from '$lib/design/interface/card-pack'
 	const campaignExpansion = 'Campaign Expansion'
 </script>
 
 <PageTitle title={'Campaign Expansion Setup References'} />
 <div class="flex">
 	<ExpansionDisplay
-		set={CardPackIcon.RevisedCoreSet}
+		set={CardPack.RevisedCoreSet}
 		text="Night of the Zealot"
 		link="/campaign/notz"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.TheDunwichLegacy}
+		set={CardPack.TheDunwichLegacy}
 		text="The Dunwich Legacy"
 		subText={campaignExpansion}
 		link="/campaign/dwl"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.ThePathToCarcosa}
+		set={CardPack.ThePathToCarcosa}
 		text="The Path to Carcosa"
 		subText={campaignExpansion}
 		link="/campaign/ptc"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.TheForgottenAge}
+		set={CardPack.TheForgottenAge}
 		text="The Forgotten Age"
 		subText={campaignExpansion}
 		link="/campaign/tfa"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.TheCircleUndone}
+		set={CardPack.TheCircleUndone}
 		text="The Circle Undone"
 		subText={campaignExpansion}
 		link="/campaign/tcu"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.TheDreamEaters}
+		set={CardPack.TheDreamEaters}
 		text="The Dream-Eaters*"
 		subText={campaignExpansion}
 		link="/campaign/tde"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.TheInnsmouthConspiracy}
+		set={CardPack.TheInnsmouthConspiracy}
 		text="The Innsmouth Conspiracy*"
 		subText={campaignExpansion}
 		link="/campaign/tic"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.EdgeOfTheEarth}
+		set={CardPack.EdgeOfTheEarth}
 		text="Edge of the Earth"
 		subText={campaignExpansion}
 		link="/campaign/eote"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.TheScarletKeys}
+		set={CardPack.TheScarletKeys}
 		text="The Scarlet Keys"
 		subText={campaignExpansion}
 		link="/campaign/tsk"
@@ -79,25 +79,25 @@
 </div>
 <div class="flex">
 	<ExpansionDisplay
-		set={CardPackIcon.ReturnToTheDunwichLegacy}
+		set={CardPack.ReturnToTheDunwichLegacy}
 		text="Return to the Dunwich Legacy"
 		link="/campaign/rtdwl"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.ReturnToThePathToCarcosa}
+		set={CardPack.ReturnToThePathToCarcosa}
 		text="Return to the Path to Carcosa*"
 		link="/campaign/rtptc"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.ReturnToTheForgottenAge}
+		set={CardPack.ReturnToTheForgottenAge}
 		text="Return to the Forgotten Age*"
 		link="/campaign/rttfa"
 		campaign
 	/>
 	<ExpansionDisplay
-		set={CardPackIcon.ReturnToTheCircleUndone}
+		set={CardPack.ReturnToTheCircleUndone}
 		text="Return to the Circle Undone*"
 		link="/campaign/rttcu"
 		campaign

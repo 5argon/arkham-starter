@@ -21,6 +21,7 @@
 	export let pdb: PopupDatabase
 	export let pageTitle: string
 	export let exploreInput: ExploreInput
+	export let spoilerSeason: boolean = false
 
 	$: packBanner = packToFile(exploreInput.packs[0])
 
@@ -121,12 +122,19 @@
 {/if}
 
 <!-- <ListDivider label="External Links" /> -->
+{#if spoilerSeason}
+	<h1 class="spoiler-season">Spoiler Season Incoming!</h1>
+	<p>
+		I'll keep adding links to spoiler cards from various content creators throughout the spoiler
+		season here. For now, let's patiently waiting for the first official announcement article...
+	</p>
+{/if}
 
 {#if exploreInput.links !== undefined}
 	<Button
 		label={showingLinks
 			? 'Back to Gallery'
-			: `Show ${exploreInput.links.length} External Content Links`}
+			: `Show ${exploreInput.links.length} Community Content Links`}
 		center
 		big
 		onClick={() => {
@@ -140,10 +148,6 @@
 {/if}
 
 {#if !showingLinks}
-	<p>
-		<b>Tips : </b> If you are organizing your collection, the card is clickable as a checklist.
-	</p>
-
 	<div class="tab">
 		<LimitedTab
 			onChangeActive={(i) => {
@@ -246,5 +250,38 @@
 
 	.tab {
 		margin-top: 8px;
+	}
+
+	.spoiler-season {
+		color: red;
+		animation:
+			color-change 2s infinite,
+			excite 0.4s infinite;
+		display: inline-block;
+		transform-origin: center left;
+	}
+
+	@keyframes color-change {
+		0% {
+			color: red;
+		}
+		50% {
+			color: blue;
+		}
+		100% {
+			color: red;
+		}
+	}
+
+	@keyframes excite {
+		0% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.05);
+		}
+		100% {
+			transform: scale(1);
+		}
 	}
 </style>

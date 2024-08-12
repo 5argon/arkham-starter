@@ -1,47 +1,51 @@
-import { CardPackIcon } from '$lib/design/interface/card-pack'
+import { CardPack } from '$lib/design/interface/card-pack'
 
-export function packToFile(pack: CardPackIcon): string | null {
+export function packToFile(pack: CardPack): string | null {
 	switch (pack) {
-		case CardPackIcon.CoreSet:
+		case CardPack.CoreSet:
 			return 'core'
-		case CardPackIcon.RevisedCoreSet:
+		case CardPack.RevisedCoreSet:
 			return 'core'
-		case CardPackIcon.TheDunwichLegacy:
+		case CardPack.TheDunwichLegacy:
 			return 'dwl'
-		case CardPackIcon.ThePathToCarcosa:
+		case CardPack.ThePathToCarcosa:
 			return 'ptc'
-		case CardPackIcon.TheForgottenAge:
+		case CardPack.TheForgottenAge:
 			return 'tfa'
-		case CardPackIcon.TheCircleUndone:
+		case CardPack.TheCircleUndone:
 			return 'tcu'
-		case CardPackIcon.TheDreamEaters:
+		case CardPack.TheDreamEaters:
 			return 'tde'
-		case CardPackIcon.TheInnsmouthConspiracy:
+		case CardPack.TheInnsmouthConspiracy:
 			return 'tic'
-		case CardPackIcon.EdgeOfTheEarth:
+		case CardPack.EdgeOfTheEarth:
 			return 'eote'
-		case CardPackIcon.TheScarletKeys:
+		case CardPack.TheScarletKeys:
 			return 'tsk'
-		case CardPackIcon.TheFeastOfHemlockVale:
+		case CardPack.TheFeastOfHemlockVale:
 			return 'fhv'
-		case CardPackIcon.NathanielCho:
+		case CardPack.TheDrownedCity:
+			return 'tdc'
+		case CardPack.NathanielCho:
 			return 'nat'
-		case CardPackIcon.HarveyWalters:
+		case CardPack.HarveyWalters:
 			return 'har'
-		case CardPackIcon.WinifredHabbamock:
+		case CardPack.WinifredHabbamock:
 			return 'win'
-		case CardPackIcon.JacquelineFine:
+		case CardPack.JacquelineFine:
 			return 'jac'
-		case CardPackIcon.StellaClark:
+		case CardPack.StellaClark:
 			return 'ste'
-		case CardPackIcon.ReturnToTheDunwichLegacy:
+		case CardPack.ReturnToTheDunwichLegacy:
 			return 'rtdwl'
-		case CardPackIcon.ReturnToThePathToCarcosa:
+		case CardPack.ReturnToThePathToCarcosa:
 			return 'rtptc'
-		case CardPackIcon.ReturnToTheForgottenAge:
+		case CardPack.ReturnToTheForgottenAge:
 			return 'rttfa'
-		case CardPackIcon.ReturnToTheCircleUndone:
+		case CardPack.ReturnToTheCircleUndone:
 			return 'rttcu'
+		case CardPack.ParallelInvestigator:
+			return 'par'
 		default:
 			return null
 	}

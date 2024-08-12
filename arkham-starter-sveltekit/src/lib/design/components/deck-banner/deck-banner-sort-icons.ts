@@ -1,6 +1,6 @@
-import { CardPackIcon } from '$lib/design/interface/card-pack'
+import { CardPack } from '$lib/design/interface/card-pack'
 
-export function sortIcons(icons: CardPackIcon[], investigatorPack: CardPackIcon): CardPackIcon[] {
+export function sortIcons(icons: CardPack[], investigatorPack: CardPack): CardPack[] {
 	const newArray = [...icons]
 	newArray.sort((a, b) => {
 		if (a === investigatorPack) {
@@ -8,11 +8,11 @@ export function sortIcons(icons: CardPackIcon[], investigatorPack: CardPackIcon)
 			return -1
 		}
 		if (
-			a === CardPackIcon.NathanielCho ||
-			a === CardPackIcon.HarveyWalters ||
-			a === CardPackIcon.WinifredHabbamock ||
-			a === CardPackIcon.JacquelineFine ||
-			a === CardPackIcon.StellaClark
+			a === CardPack.NathanielCho ||
+			a === CardPack.HarveyWalters ||
+			a === CardPack.WinifredHabbamock ||
+			a === CardPack.JacquelineFine ||
+			a === CardPack.StellaClark
 		) {
 			// Starter pack always come last.
 			return 1

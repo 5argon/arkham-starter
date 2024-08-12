@@ -1,7 +1,6 @@
 <script lang='ts'>
-  import { CardPack } from '$lib/core/card-pack.js'
   import ExpansionDisplay from '$lib/design/components/expansion/ExpansionDisplay.svelte'
-  import { CardPackIcon } from '$lib/design/interface/card-pack'
+  import { CardPack } from '$lib/design/interface/card-pack'
 
   const investigatorExpansion = 'Investigator Expansion'
   const investigatorStarterDeck = 'Investigator Starter Deck'
@@ -17,122 +16,138 @@
 
 <div class='flex'>
   <ExpansionDisplay
-    set={CardPackIcon.RevisedCoreSet}
-    disabled={isDisabled(CardPackIcon.RevisedCoreSet)}
+    set={CardPack.RevisedCoreSet}
+    disabled={isDisabled(CardPack.RevisedCoreSet)}
     text='Revised Core Set'
     link='/explore/rcore'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.TheDunwichLegacy}
-    disabled={isDisabled(CardPackIcon.TheDunwichLegacy)}
+    set={CardPack.TheDunwichLegacy}
+    disabled={isDisabled(CardPack.TheDunwichLegacy)}
     text='The Dunwich Legacy'
     subText={investigatorExpansion}
     link='/explore/dwl'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.ThePathToCarcosa}
-    disabled={isDisabled(CardPackIcon.ThePathToCarcosa)}
+    set={CardPack.ThePathToCarcosa}
+    disabled={isDisabled(CardPack.ThePathToCarcosa)}
     text='The Path to Carcosa'
     subText={investigatorExpansion}
     link='/explore/ptc'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.TheForgottenAge}
-    disabled={isDisabled(CardPackIcon.TheForgottenAge)}
+    set={CardPack.TheForgottenAge}
+    disabled={isDisabled(CardPack.TheForgottenAge)}
     text='The Forgotten Age'
     subText={investigatorExpansion}
     link='/explore/tfa'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.TheCircleUndone}
-    disabled={isDisabled(CardPackIcon.TheCircleUndone)}
+    set={CardPack.TheCircleUndone}
+    disabled={isDisabled(CardPack.TheCircleUndone)}
     text='The Circle Undone'
     subText={investigatorExpansion}
     link='/explore/tcu'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.TheDreamEaters}
-    disabled={isDisabled(CardPackIcon.TheDreamEaters)}
+    set={CardPack.TheDreamEaters}
+    disabled={isDisabled(CardPack.TheDreamEaters)}
     text='The Dream-Eaters'
     subText={investigatorExpansion}
     link='/explore/tde'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.TheInnsmouthConspiracy}
-    disabled={isDisabled(CardPackIcon.TheInnsmouthConspiracy)}
+    set={CardPack.TheInnsmouthConspiracy}
+    disabled={isDisabled(CardPack.TheInnsmouthConspiracy)}
     text='The Innsmouth Conspiracy'
     subText={investigatorExpansion}
     link='/explore/tic'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.EdgeOfTheEarth}
-    disabled={isDisabled(CardPackIcon.EdgeOfTheEarth)}
+    set={CardPack.EdgeOfTheEarth}
+    disabled={isDisabled(CardPack.EdgeOfTheEarth)}
     text='Edge of the Earth'
     subText={investigatorExpansion}
     link='/explore/eote'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.TheScarletKeys}
-    disabled={isDisabled(CardPackIcon.TheScarletKeys)}
+    set={CardPack.TheScarletKeys}
+    disabled={isDisabled(CardPack.TheScarletKeys)}
     text='The Scarlet Keys'
     subText={investigatorExpansion}
     link='/explore/tsk'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.TheFeastOfHemlockVale}
-    disabled={isDisabled(CardPackIcon.TheFeastOfHemlockVale)}
+    set={CardPack.TheFeastOfHemlockVale}
+    disabled={isDisabled(CardPack.TheFeastOfHemlockVale)}
     text='The Feast of Hemlock Vale'
     subText={investigatorExpansion}
     link='/explore/fhv'
+    onClick={onClick}
+  />
+  <ExpansionDisplay
+    set={CardPack.TheDrownedCity}
+    disabled={isDisabled(CardPack.TheDrownedCity)}
+    text='The Drowned City*'
+    subText={investigatorExpansion}
+    link='/explore/tdc'
+    onClick={onClick}
+  />
+  <ExpansionDisplay
+    set={CardPack.ParallelInvestigator}
+    disabled={isDisabled(CardPack.ParallelInvestigator)}
+    text='Parallel Investigator'
+    subText={"Print-and-Play Cards"}
+    link='/explore/par'
     onClick={onClick}
   />
 </div>
 
 <div class='flex'>
   <ExpansionDisplay
-    set={CardPackIcon.NathanielCho}
-    disabled={isDisabled(CardPackIcon.NathanielCho)}
+    set={CardPack.NathanielCho}
+    disabled={isDisabled(CardPack.NathanielCho)}
     text='Nathaniel Cho'
     subText={investigatorStarterDeck}
     link='/explore/nat'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.HarveyWalters}
-    disabled={isDisabled(CardPackIcon.HarveyWalters)}
+    set={CardPack.HarveyWalters}
+    disabled={isDisabled(CardPack.HarveyWalters)}
     text='Harvey Walters'
     subText={investigatorStarterDeck}
     link='/explore/har'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.WinifredHabbamock}
-    disabled={isDisabled(CardPackIcon.WinifredHabbamock)}
+    set={CardPack.WinifredHabbamock}
+    disabled={isDisabled(CardPack.WinifredHabbamock)}
     text='Winifred Habbamock'
     subText={investigatorStarterDeck}
     link='/explore/win'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.JacquelineFine}
-    disabled={isDisabled(CardPackIcon.JacquelineFine)}
+    set={CardPack.JacquelineFine}
+    disabled={isDisabled(CardPack.JacquelineFine)}
     text='Jacqueline Fine'
     subText={investigatorStarterDeck}
     link='/explore/jac'
     onClick={onClick}
   />
   <ExpansionDisplay
-    set={CardPackIcon.StellaClark}
-    disabled={isDisabled(CardPackIcon.StellaClark)}
+    set={CardPack.StellaClark}
+    disabled={isDisabled(CardPack.StellaClark)}
     text='Stella Clark'
     subText={investigatorStarterDeck}
     link='/explore/ste'

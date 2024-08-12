@@ -2,7 +2,7 @@
 	import type { CardClass } from '$lib/core/card-class'
 	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
 	import { classToBorderColorCss } from '$lib/design/interface/card-class'
-	import type { CardPackIcon } from '$lib/design/interface/card-pack'
+	import type { CardPack } from '$lib/design/interface/card-pack'
 	import { makePips } from '$lib/design/interface/string-util'
 
 	import CardHover from './CardHover.svelte'
@@ -15,7 +15,7 @@
 	export let class3: CardClass | null = null
 	export let cardId: string
 	// Used in the popup.
-	export let packIcon: CardPackIcon | null = null
+	export let packIcon: CardPack | null = null
 	// Used in the popup.
 	export let packNumber: number | null = null
 	export let investigator: boolean = false

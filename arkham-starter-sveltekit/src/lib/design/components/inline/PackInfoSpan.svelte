@@ -6,20 +6,20 @@
 </script>
 
 <script lang="ts">
-	import { CardPackIcon } from '$lib/design/interface/card-pack'
+	import { CardPack } from '$lib/design/interface/card-pack'
 
 	import PackIconWithHover from '../card/PackIconWithHover.svelte'
 	export let items: PackInfoSpanItem[]
 	$: filteredItems = items.filter(
-		(i) => i.pack !== CardPackIcon.Unknown && i.pack !== CardPackIcon.RandomBasicWeakness,
+		(i) => i.pack !== CardPack.Unknown && i.pack !== CardPack.RandomBasicWeakness,
 	)
 	$: packsSorted = filteredItems.sort((a, b) => {
 		if (
-			a.pack === CardPackIcon.NathanielCho ||
-			a.pack === CardPackIcon.HarveyWalters ||
-			a.pack === CardPackIcon.WinifredHabbamock ||
-			a.pack === CardPackIcon.JacquelineFine ||
-			a.pack === CardPackIcon.StellaClark
+			a.pack === CardPack.NathanielCho ||
+			a.pack === CardPack.HarveyWalters ||
+			a.pack === CardPack.WinifredHabbamock ||
+			a.pack === CardPack.JacquelineFine ||
+			a.pack === CardPack.StellaClark
 		) {
 			// Starter pack always come last.
 			return 1
