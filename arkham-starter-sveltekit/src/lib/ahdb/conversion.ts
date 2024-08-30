@@ -171,6 +171,8 @@ export function packCodeToIconConversion(p: string): CardPack {
 			return CardPack.TheScarletKeys
 		case 'fhvp':
 			return CardPack.TheFeastOfHemlockVale
+		case 'tdcp':
+			return CardPack.TheDrownedCity
 
 		case 'rtnotz':
 			return CardPack.ReturnToTheNightOfTheZealot

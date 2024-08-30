@@ -10,6 +10,7 @@
     "arkham-starter-sveltekit",
     "arkham-profile-sveltekit",
     "arkham-ui",
+    "arkhamdb-pulls",
     "functions-firestore"
   ],
   "devDependencies": {

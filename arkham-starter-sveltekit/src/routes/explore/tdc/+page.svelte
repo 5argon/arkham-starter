@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { CardPack } from '$lib/core/card-pack'
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import links from '$lib/explore/external-links/tdc.json'
 	import ExploreLayout from '$lib/design/pages/explore/ExploreLayout.svelte'
 
 	import type { PageData } from './$types'
@@ -20,5 +21,6 @@
 		groupings: [Grouping.Class],
 		sortings: [Sorting.Number],
 		packs: [CardPack.TheDrownedCity],
+		links: links,
 	}}
 />

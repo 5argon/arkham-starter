@@ -1,0 +1,21 @@
+[
+  {
+    "code": "11064",
+    "cost": 5,
+    "deck_limit": 2,
+    "faction_code": "rogue",
+    "illustrator": "Alexandre Dainche",
+    "name": "Gatling Gun",
+    "pack_code": "tdcp",
+    "position": 64,
+    "quantity": 2,
+    "skill_combat": 2,
+    "skill_agility": 1,
+    "skill_wild": 1,
+    "slot": "Hand x2",
+    "text": "",
+    "traits": "Item. Weapon. Firearm. Illicit.",
+    "type_code": "asset",
+    "xp": 5
+  }
+]

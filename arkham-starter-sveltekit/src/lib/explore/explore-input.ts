@@ -14,4 +14,5 @@ export interface ExploreLink {
 	url: string
 	date?: string
 	cards?: string[]
+	spoilerCard?: boolean
 }

@@ -1,5 +1,5 @@
 import { publicAllCards, publicTaboos } from "./scripts/public-api.ts"
-import { AhdbTaboo, extractTraits } from "./scripts/interfaces.ts"
+import { AhdbCard, AhdbTaboo, extractTraits } from "./scripts/interfaces.ts"
 import { emptyDir } from "./mod.ts"
 import { PopupDatabase, PopupDatabaseItem } from "./scripts/popup-database.ts"
 import { path } from "./mod.ts"
@@ -16,19 +16,19 @@ import { manualEdit } from "./scripts/manual-edit.ts"
 console.log("Downloading all cards to create popup database...")
 const allCards = await publicAllCards("/?encounter=1")
 // Read local json file as additional cards.
-// const localCardsString = await Deno.readTextFile(
-//   path.join("json-patch", "fhvp.json"),
-// )
-// const fhvCards = JSON.parse(localCardsString) as AhdbCard[]
-// for (const x of fhvCards) {
-//   // For each card, if it already exists in allCards, replace it.
-//   const index = allCards.findIndex((y) => y.code === x.code)
-//   if (index !== -1) {
-//     allCards[index] = x
-//   } else {
-//     allCards.push(x)
-//   }
-// }
+const localCardsString = await Deno.readTextFile(
+  path.join("json-patch", "tdcp.json"),
+)
+const fhvCards = JSON.parse(localCardsString) as AhdbCard[]
+for (const x of fhvCards) {
+  // For each card, if it already exists in allCards, replace it.
+  const index = allCards.findIndex((y) => y.code === x.code)
+  if (index !== -1) {
+    allCards[index] = x
+  } else {
+    allCards.push(x)
+  }
+}
 console.log("DONE")
 const taboos = await publicTaboos()
 const latestTaboo: AhdbTaboo | null = taboos.length > 0 ? taboos[0] : null
