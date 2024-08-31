@@ -314,15 +314,6 @@
 		margin-top: 8px;
 	}
 
-	.spoiler-season {
-		color: red;
-		animation:
-			color-change 2s infinite,
-			excite 0.4s infinite;
-		display: inline-block;
-		transform-origin: center left;
-	}
-
 	@keyframes color-change {
 		0% {
 			color: red;
