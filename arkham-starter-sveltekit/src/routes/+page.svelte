@@ -41,6 +41,7 @@
 		align-items: center;
 		margin: 0 auto;
 		width: 400px;
+		max-width: 90%;
 		padding: 8px 16px;
 		border-radius: 8px;
 		border: 1px solid #ccc;
@@ -49,7 +50,7 @@
 	.news-bg {
 		height: 50px;
 		width: 100%;
-		background-image: url('image/expansion/investigator/tdc.webp');
+		background-image: url('/image/expansion/investigator/tdc.webp');
 		background-size: cover;
 		border-radius: 4px;
 	}

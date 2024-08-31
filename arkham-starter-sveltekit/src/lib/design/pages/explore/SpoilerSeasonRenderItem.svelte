@@ -68,7 +68,7 @@
 	}
 
 	.left {
-		flex:0 0 120px;
+		flex: 0 0 120px;
 		padding: 16px 8px;
 		align-items: center;
 		justify-content: center;
@@ -100,5 +100,20 @@
 
 	.card-area {
 		margin-top: 8px;
+	}
+
+	@media (max-width: 600px) {
+		.flex {
+			flex-direction: column;
+		}
+
+		.left {
+			flex: auto;
+			padding: 4px 8px;
+		}
+
+		.right {
+			padding: 4px 8px;
+		}
 	}
 </style>

@@ -305,7 +305,8 @@
 
 <style>
 	.pack-banner {
-		max-width: 400px;
+		width: 400px;
+		max-width: 100%;
 		margin: 0 auto;
 	}
 
