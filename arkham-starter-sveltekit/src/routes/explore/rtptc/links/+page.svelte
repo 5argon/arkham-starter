@@ -12,12 +12,12 @@
 </svelte:head>
 
 <ExploreLinksLayout
-	pageTitle="Explore: Core Set"
+	pageTitle="Explore: Return to the Path to Carcosa"
 	pdb={data.pdb}
 	fdb={data.fdb}
 	exploreInput={{
 		groupings: [Grouping.Class],
 		sortings: [Sorting.Number],
-		packs: [CardPack.CoreSet],
+		packs: [CardPack.ReturnToThePathToCarcosa],
 	}}
 />

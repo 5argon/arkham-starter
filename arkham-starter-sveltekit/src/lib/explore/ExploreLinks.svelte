@@ -43,8 +43,8 @@
 </script>
 
 <p>
-	I've collected some links for you to indulge in content creators talking or writing about cards
-	inside this expansion!
+	Want some extra input for purchase decision, or just wanted to indulge in content creators talking
+	or writing about cards inside this expansion? I have curated links from the internet as many as I could here.
 </p>
 
 <p>

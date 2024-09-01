@@ -12,12 +12,12 @@
 </svelte:head>
 
 <ExploreLinksLayout
-	pageTitle="Explore: Core Set"
+	pageTitle="Explore: Return to the Dunwich Legacy"
 	pdb={data.pdb}
 	fdb={data.fdb}
 	exploreInput={{
 		groupings: [Grouping.Class],
 		sortings: [Sorting.Number],
-		packs: [CardPack.CoreSet],
+		packs: [CardPack.ReturnToTheDunwichLegacy],
 	}}
 />

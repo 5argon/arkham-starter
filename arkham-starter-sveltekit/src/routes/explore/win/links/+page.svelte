@@ -2,6 +2,7 @@
 	import { CardPack } from '$lib/core/card-pack'
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import ExploreLinksLayout from '$lib/design/pages/explore/ExploreLinksLayout.svelte'
+	import links from '$lib/explore/external-links/win.json'
 
 	import type { PageData } from './$types'
 	export let data: PageData
@@ -12,12 +13,13 @@
 </svelte:head>
 
 <ExploreLinksLayout
-	pageTitle="Explore: Core Set"
+	pageTitle="Explore: Winifred Habbamock"
 	pdb={data.pdb}
 	fdb={data.fdb}
 	exploreInput={{
 		groupings: [Grouping.Class],
 		sortings: [Sorting.Number],
-		packs: [CardPack.CoreSet],
+		packs: [CardPack.WinifredHabbamock],
+		links: links,
 	}}
 />

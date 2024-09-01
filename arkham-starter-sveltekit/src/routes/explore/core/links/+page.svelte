@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CardPack } from '$lib/core/card-pack'
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
-	import ExploreLinksLayout from '$lib/design/pages/explore/ExploreLinksLayout.svelte'
+	import ExploreLayout from '$lib/design/pages/explore/ExploreLayout.svelte'
 
 	import type { PageData } from './$types'
 	export let data: PageData
@@ -11,7 +11,7 @@
 	<title>arkham-starter.com | Explore</title>
 </svelte:head>
 
-<ExploreLinksLayout
+<ExploreLayout
 	pageTitle="Explore: Core Set"
 	pdb={data.pdb}
 	fdb={data.fdb}

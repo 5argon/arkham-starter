@@ -7,16 +7,16 @@
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
-	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import GrouperSorter from '$lib/design/components/deck-table/GrouperSorter.svelte'
 	import { packToFile } from '$lib/design/components/expansion/pack-to-file'
 	import type { ExploreInput } from '$lib/explore/explore-input'
-	import ExploreLinks from '$lib/explore/ExploreLinks.svelte'
 
 	import CardTableDoubleDisplay from './CardTableDoubleDisplay.svelte'
 	import ExploreMenu from './ExploreMenu.svelte'
 	import SpoilerSeasonRender from './SpoilerSeasonRender.svelte'
+	import NavigationButton from '$lib/design/components/basic/NavigationButton.svelte'
+	import { page } from '$app/stores'
 
 	export let fdb: FullDatabase
 	export let pdb: PopupDatabase
@@ -36,7 +36,6 @@
 	let showSpoilerSeason: boolean = spoilerSeason ? true : false
 	let showList: boolean = spoilerSeason ? false : true
 	let showScans: boolean = spoilerSeason ? false : true
-	let showingLinks: boolean = false
 
 	function onGroupingsChanged(g: Grouping[]) {
 		groupings = g
@@ -107,7 +106,7 @@
 	}
 </script>
 
-<a href="/explore">Back to Explore Home</a>
+<NavigationButton href="/explore" label="Back to Explore Home" />
 
 {#if packBanner !== null}
 	<img
@@ -119,9 +118,7 @@
 
 <h1><center>{iconToNameConversion(exploreInput.packs[0])}</center></h1>
 
-{#if !showingLinks}
-	<ExploreMenu />
-{/if}
+<ExploreMenu />
 
 <!-- <ListDivider label="External Links" /> -->
 {#if spoilerSeason}
@@ -144,163 +141,152 @@
 {/if}
 
 {#if !spoilerSeason && exploreInput.links !== undefined}
-	<Button
-		label={showingLinks
-			? 'Back to Gallery'
-			: `Show ${exploreInput.links.length} Community Content Links`}
+	<NavigationButton
 		center
-		big
-		onClick={() => {
-			showingLinks = !showingLinks
-		}}
+		label={`View ${exploreInput.links.length} Community Content Links`}
+		href={$page.url.pathname + '/links'}
 	/>
 {/if}
 
-{#if showingLinks && exploreInput.links !== undefined}
-	<ExploreLinks popupDatabase={pdb} fullDatabase={fdb} links={exploreInput.links} />
+{#if spoilerSeason}
+	<div class="tab">
+		<LimitedTab
+			onChangeActive={(i) => {
+				switch (i) {
+					case 0: {
+						showSpoilerSeason = true
+						showList = false
+						showScans = false
+						break
+					}
+					case 1: {
+						showSpoilerSeason = false
+						showList = true
+						showScans = true
+						break
+					}
+					case 2: {
+						showSpoilerSeason = false
+						showList = false
+						showScans = true
+						break
+					}
+					case 3: {
+						showSpoilerSeason = false
+						showList = true
+						showScans = false
+						break
+					}
+				}
+			}}
+		>
+			<div slot="tab1"><b> 🌟 Spoiler Season Links</b></div>
+			<div slot="content1" />
+			<div slot="tab2">List and Scans</div>
+			<div slot="content2" />
+			<div slot="tab3">Scans Only</div>
+			<div slot="content3" />
+			<div slot="tab4">List Only</div>
+			<div slot="content4" />
+		</LimitedTab>
+	</div>
+{:else}
+	<div class="tab">
+		<LimitedTab
+			onChangeActive={(i) => {
+				switch (i) {
+					case 0: {
+						showList = true
+						showScans = true
+						break
+					}
+					case 1: {
+						showList = false
+						showScans = true
+						break
+					}
+					case 2: {
+						showList = true
+						showScans = false
+						break
+					}
+				}
+			}}
+		>
+			<div slot="tab1">List and Scans</div>
+			<div slot="content1" />
+			<div slot="tab2">Scans Only</div>
+			<div slot="content2" />
+			<div slot="tab3">List Only</div>
+			<div slot="content3" />
+		</LimitedTab>
+	</div>
 {/if}
+{#if showSpoilerSeason}
+	<SpoilerSeasonRender {fdb} {pdb} {exploreInput} />
+{:else}
+	<ListDivider label="Investigators" />
+	<CardTableDoubleDisplay
+		{toggleMap}
+		singleRight
+		big={!showList && showScans}
+		entries={getByPackFromPdbInvestigator(pdb, packs)}
+		groupings={[]}
+		sortings={[Sorting.Number]}
+		taboo={true}
+		fullDatabase={fdb}
+		popupDatabase={pdb}
+		onClickToggle={(id, newToggles) => {
+			toggleMap[id] = newToggles
+			toggleMap = { ...toggleMap }
+		}}
+		{showList}
+		{showScans}
+	/>
 
-{#if !showingLinks}
-	{#if spoilerSeason}
-		<div class="tab">
-			<LimitedTab
-				onChangeActive={(i) => {
-					switch (i) {
-						case 0: {
-							showSpoilerSeason = true
-							showList = false
-							showScans = false
-							break
-						}
-						case 1: {
-							showSpoilerSeason = false
-							showList = true
-							showScans = true
-							break
-						}
-						case 2: {
-							showSpoilerSeason = false
-							showList = false
-							showScans = true
-							break
-						}
-						case 3: {
-							showSpoilerSeason = false
-							showList = true
-							showScans = false
-							break
-						}
-					}
-				}}
-			>
-				<div slot="tab1"><b> 🌟 Spoiler Season Links</b></div>
-				<div slot="content1" />
-				<div slot="tab2">List and Scans</div>
-				<div slot="content2" />
-				<div slot="tab3">Scans Only</div>
-				<div slot="content3" />
-				<div slot="tab4">List Only</div>
-				<div slot="content4" />
-			</LimitedTab>
-		</div>
-	{:else}
-		<div class="tab">
-			<LimitedTab
-				onChangeActive={(i) => {
-					switch (i) {
-						case 0: {
-							showList = true
-							showScans = true
-							break
-						}
-						case 1: {
-							showList = false
-							showScans = true
-							break
-						}
-						case 2: {
-							showList = true
-							showScans = false
-							break
-						}
-					}
-				}}
-			>
-				<div slot="tab1">List and Scans</div>
-				<div slot="content1" />
-				<div slot="tab2">Scans Only</div>
-				<div slot="content2" />
-				<div slot="tab3">List Only</div>
-				<div slot="content3" />
-			</LimitedTab>
-		</div>
-	{/if}
-	{#if showSpoilerSeason}
-		<SpoilerSeasonRender {fdb} {pdb} {exploreInput} />
-	{:else}
-		<ListDivider label="Investigators" />
-		<CardTableDoubleDisplay
-			{toggleMap}
-			singleRight
-			big={!showList && showScans}
-			entries={getByPackFromPdbInvestigator(pdb, packs)}
-			groupings={[]}
-			sortings={[Sorting.Number]}
-			taboo={true}
-			fullDatabase={fdb}
-			popupDatabase={pdb}
-			onClickToggle={(id, newToggles) => {
-				toggleMap[id] = newToggles
-				toggleMap = { ...toggleMap }
-			}}
-			{showList}
-			{showScans}
-		/>
+	<ListDivider label="Weakness" />
 
-		<ListDivider label="Weakness" />
+	<CardTableDoubleDisplay
+		{toggleMap}
+		big={!showList && showScans}
+		singleRight
+		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		entries={getByPackFromPdbWeakness(pdb, packs)}
+		groupings={[]}
+		sortings={[Sorting.Number]}
+		taboo={true}
+		fullDatabase={fdb}
+		popupDatabase={pdb}
+		onClickToggle={(id, newToggles) => {
+			toggleMap[id] = newToggles
+			toggleMap = { ...toggleMap }
+		}}
+		{showList}
+		{showScans}
+	/>
 
-		<CardTableDoubleDisplay
-			{toggleMap}
-			big={!showList && showScans}
-			singleRight
-			columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
-			entries={getByPackFromPdbWeakness(pdb, packs)}
-			groupings={[]}
-			sortings={[Sorting.Number]}
-			taboo={true}
-			fullDatabase={fdb}
-			popupDatabase={pdb}
-			onClickToggle={(id, newToggles) => {
-				toggleMap[id] = newToggles
-				toggleMap = { ...toggleMap }
-			}}
-			{showList}
-			{showScans}
-		/>
+	<ListDivider label="The Rest of Player Cards" />
 
-		<ListDivider label="The Rest of Player Cards" />
+	<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
-		<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
-
-		<CardTableDoubleDisplay
-			{toggleMap}
-			big={!showList && showScans}
-			columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
-			singleRight
-			entries={getByPackFromPdb(pdb, packs)}
-			{groupings}
-			{sortings}
-			taboo={true}
-			fullDatabase={fdb}
-			popupDatabase={pdb}
-			onClickToggle={(id, newToggles) => {
-				toggleMap[id] = newToggles
-				toggleMap = { ...toggleMap }
-			}}
-			{showList}
-			{showScans}
-		/>
-	{/if}
+	<CardTableDoubleDisplay
+		{toggleMap}
+		big={!showList && showScans}
+		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
+		singleRight
+		entries={getByPackFromPdb(pdb, packs)}
+		{groupings}
+		{sortings}
+		taboo={true}
+		fullDatabase={fdb}
+		popupDatabase={pdb}
+		onClickToggle={(id, newToggles) => {
+			toggleMap[id] = newToggles
+			toggleMap = { ...toggleMap }
+		}}
+		{showList}
+		{showScans}
+	/>
 {/if}
 
 <style>
@@ -312,29 +298,5 @@
 
 	.tab {
 		margin-top: 8px;
-	}
-
-	@keyframes color-change {
-		0% {
-			color: red;
-		}
-		50% {
-			color: blue;
-		}
-		100% {
-			color: red;
-		}
-	}
-
-	@keyframes excite {
-		0% {
-			transform: scale(1);
-		}
-		50% {
-			transform: scale(1.05);
-		}
-		100% {
-			transform: scale(1);
-		}
 	}
 </style>

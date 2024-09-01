@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { CardPack } from '$lib/core/card-pack'
-	import { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import { Sorting } from '$lib/deck-table/grouping'
 	import ExploreLinksLayout from '$lib/design/pages/explore/ExploreLinksLayout.svelte'
+	import links from '$lib/explore/external-links/tsk.json'
 
 	import type { PageData } from './$types'
 	export let data: PageData
@@ -12,12 +13,13 @@
 </svelte:head>
 
 <ExploreLinksLayout
-	pageTitle="Explore: Core Set"
+	pageTitle="Explore: The Scarlet Keys Investigator Expansion"
 	pdb={data.pdb}
 	fdb={data.fdb}
 	exploreInput={{
-		groupings: [Grouping.Class],
+		groupings: [],
 		sortings: [Sorting.Number],
-		packs: [CardPack.CoreSet],
+		packs: [CardPack.TheScarletKeys],
+		links: links,
 	}}
 />

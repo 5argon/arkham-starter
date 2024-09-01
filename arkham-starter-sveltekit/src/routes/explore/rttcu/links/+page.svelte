@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { CardPack } from '$lib/core/card-pack'
 	import { Grouping, Sorting } from '$lib/deck-table/grouping'
+	import ExploreLayout from '$lib/design/pages/explore/ExploreLayout.svelte'
 	import ExploreLinksLayout from '$lib/design/pages/explore/ExploreLinksLayout.svelte'
 
 	import type { PageData } from './$types'
@@ -12,12 +13,12 @@
 </svelte:head>
 
 <ExploreLinksLayout
-	pageTitle="Explore: Core Set"
+	pageTitle="Explore: Return to the Circle Undone"
 	pdb={data.pdb}
 	fdb={data.fdb}
 	exploreInput={{
 		groupings: [Grouping.Class],
 		sortings: [Sorting.Number],
-		packs: [CardPack.CoreSet],
+		packs: [CardPack.ReturnToTheCircleUndone],
 	}}
 />
