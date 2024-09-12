@@ -6,5 +6,29 @@
 		"date": "2024-08-30",
 		"spoilerCard": true,
 		"cards": ["11064"]
+	},
+	{
+		"site": "Fantasy Flight Games",
+		"url": "https://www.fantasyflightgames.com/en/news/2024/9/12/the-drowned-city",
+		"name": "The Drowned City",
+		"date": "2024-09-12",
+		"spoilerCard": true,
+		"cards": [
+			"11001",
+			"11002",
+			"11003",
+			"11007",
+			"11008",
+			"11009",
+			"11010",
+			"11024",
+			"11040",
+			"11072",
+			"11092",
+			"11099",
+			"11106",
+			"11111",
+			"11117"
+		]
 	}
 ]
