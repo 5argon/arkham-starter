@@ -1,9 +1,12 @@
+import { CardPack } from '$lib/core/card-pack'
+
 export const randomBasicWeakness = '01000'
 export function isRandomBasicWeakness(cardId: string): boolean {
 	return cardId === randomBasicWeakness
 }
 
-export function isUnknownCardNumber(num: number): boolean {
+export function isUnknownCardNumber(pack: CardPack | null, num: number): boolean {
+	if (pack === CardPack.TheScarletKeys && num > 123) return true
 	return num === 1000 || num === 0
 }
 
@@ -51,7 +54,8 @@ export interface AhdbCard {
 		| null
 		| string
 		| {
-				investigator: { [k: string]: string }
+				investigator?: { [k: string]: string }
+				trait?: string[]
 		  }
 	flavor?: string
 	illustrator: string
@@ -63,6 +67,7 @@ export interface AhdbCard {
 	imagesrc?: string
 	backimagesrc?: string
 	duplicated_by?: string[]
+	alternated_by?: string[]
 	customization_text?: string
 	customization_change?: string
 	customization_options?: {

@@ -90,7 +90,6 @@
 	filter={(pdbi) => {
 		return (
 			pdbi.original.inv !== true &&
-			pdbi.original.ir !== true &&
 			pdbi.original.sp !== true &&
 			pdbi.original.wk !== true &&
 			pdbi.original.hd !== true

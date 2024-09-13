@@ -1,5 +1,5 @@
 import type { AhdbDeckOption } from '$lib/ahdb/card'
-import { isOldCore } from '$lib/ahdb/conversion'
+import { coreToRcore, isOldCore } from '$lib/ahdb/conversion'
 import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
 import { CardPack } from '$lib/design/interface/card-pack'
 
@@ -127,20 +127,83 @@ function whoCode(card: FullDatabaseItem, investigators: FullDatabaseItem[]): Who
 		}
 	})
 	return expandedInvestigators.filter((x) => {
-		const options = x.options
-		return canUse(card, options)
+		return canUse(card, x)
 	})
 }
 
-function canUse(card: FullDatabaseItem, deckOptions: AhdbDeckOption[]): boolean {
-	const results = deckOptions.map((x) => qualify(card, x))
+function canUse(card: FullDatabaseItem, wcur: WhoCanUseReturn): boolean {
+	const results = wcur.options.map((x) => qualify(card, x, wcur.investigator))
 	return (
 		results.find((x) => x === 'pass') !== undefined &&
 		results.find((x) => x === 'fail') === undefined
 	)
 }
 
-function qualify(card: FullDatabaseItem, opt: AhdbDeckOption): 'pass' | 'fail' | 'next' {
+function qualify(
+	card: FullDatabaseItem,
+	opt: AhdbDeckOption,
+	inv: FullDatabaseItem,
+): 'pass' | 'fail' | 'next' {
+	const cardRestrictions = card.original.restrictions
+	if (cardRestrictions !== undefined && cardRestrictions !== null) {
+		let hasTraitRestriction = false
+		let passedTraitRestriction = false
+		let hasInvestigatorRestriction = false
+		let passedInvestigatorRestriction = false
+		const investigatorTraits: string[] =
+			inv.original.traits?.split(' ').map((x) => {
+				return x.replace('.', '').toLowerCase()
+			}) ?? []
+		const investigatorCode = inv.original.code
+
+		if (typeof cardRestrictions === 'string') {
+			// TODO: Still not following "alternated_by".
+
+			// String format won't appear naturally but I support it anyway.
+			// "restrictions": "trait:miskatonic, trait:scholar",
+			// "restrictions": "investigator:11007, investigator:11008",
+			const splitted = cardRestrictions.split(', ')
+			splitted.forEach((x) => {
+				const colonSplit = x.split(':')
+				if (colonSplit[0] === 'trait') {
+					hasTraitRestriction = true
+					if (investigatorTraits.includes(colonSplit[1])) {
+						passedTraitRestriction = true
+					}
+				}
+				if (colonSplit[0] === 'investigator') {
+					hasInvestigatorRestriction = true
+					if (investigatorCode === coreToRcore(colonSplit[1])) {
+						passedInvestigatorRestriction = true
+					}
+				}
+			})
+		} else if (cardRestrictions.investigator !== undefined) {
+			hasInvestigatorRestriction = true
+			Object.keys(cardRestrictions.investigator).forEach((k) => {
+				if (coreToRcore(k) === investigatorCode) {
+					passedInvestigatorRestriction = true
+				}
+			})
+		} else if (cardRestrictions.trait !== undefined) {
+			hasTraitRestriction = true
+			cardRestrictions.trait.forEach((k) => {
+				if (investigatorTraits?.includes(k)) {
+					passedTraitRestriction = true
+				}
+			})
+		}
+		if (hasTraitRestriction && !passedTraitRestriction) {
+			return 'fail'
+		}
+		if (hasInvestigatorRestriction && !passedInvestigatorRestriction) {
+			return 'fail'
+		}
+		if (hasInvestigatorRestriction && passedInvestigatorRestriction) {
+			return 'pass'
+		}
+	}
+
 	if (opt.trait !== undefined) {
 		const optTraits = opt.trait
 		const smallTraits = card.original.traits?.split(' ').map((x) => {
@@ -228,7 +291,7 @@ function qualify(card: FullDatabaseItem, opt: AhdbDeckOption): 'pass' | 'fail' |
 
 	if (opt.option_select !== undefined) {
 		const foundDisqualify = opt.option_select.find((x) => {
-			return qualify(card, x)
+			return qualify(card, x, inv)
 		})
 		if (foundDisqualify) {
 			return 'next'

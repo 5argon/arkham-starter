@@ -194,6 +194,17 @@ export interface PopupDatabaseItem {
    * Is a Myraid card.
    */
   myr?: boolean
+
+  /**
+   * List of investigator codes that can include this card.
+   */
+  resir?: string[]
+
+  /**
+   * List of investigator traits that can include this card.
+   * It also means it is a Specialist card.
+   */
+  restr?: string[]
 }
 
 export interface CustomizableStruct {

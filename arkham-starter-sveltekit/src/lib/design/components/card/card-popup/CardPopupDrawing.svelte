@@ -58,6 +58,7 @@
 									exceptional={c.original.ex}
 									restriction={c.original.ir ?? false}
 									investigator={c.original.inv ?? false}
+									specialist={c.original.restr !== undefined }
 									customizable={c.original.cus !== undefined}
 									color={true}
 									permanent={c.original.pe ?? false}

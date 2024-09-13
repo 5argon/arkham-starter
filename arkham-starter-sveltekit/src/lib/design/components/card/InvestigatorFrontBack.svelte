@@ -2,7 +2,6 @@
 </script>
 
 <script lang="ts">
-	import { rcoreToCore } from '$lib/ahdb/conversion'
 import { type FetchDeckResult,forwardDeckToRcore } from '$lib/ahdb/public-api/high-level'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'

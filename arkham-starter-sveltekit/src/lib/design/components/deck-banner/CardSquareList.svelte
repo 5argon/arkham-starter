@@ -35,6 +35,7 @@
 				packIcon={pc.packIcon}
 				packNumber={pc.original.ps}
 				investigator={pc.original.ir ?? false}
+				specialist={pc.original.restr !== undefined}
 				bonded={pc.original.bd ?? false}
 				myriad={pc.original.myr ?? false}
 				permanent={pc.original.pe ?? false}

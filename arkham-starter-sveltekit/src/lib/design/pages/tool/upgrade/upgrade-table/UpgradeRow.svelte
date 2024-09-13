@@ -145,6 +145,7 @@ nested inside this div. -->
 						class3={leftCard.class3 ?? null}
 						exceptional={useTaboo ? leftCard.original.ext : leftCard.original.ex}
 						restriction={leftCard.original.ir ?? false}
+						specialist={leftCard.original.restr !== undefined}
 						weakness={leftCard.original.wk ?? false}
 						permanent={leftCard.original.pe ?? false}
 						bonded={leftCard.original.bd ?? false}

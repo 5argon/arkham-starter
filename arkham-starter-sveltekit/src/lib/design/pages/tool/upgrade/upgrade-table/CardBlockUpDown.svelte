@@ -27,6 +27,7 @@
 	export let packIcon: CardPack | null = null
 	export let packNumber: number | null = null
 	export let restriction: boolean = false
+	export let specialist: boolean = false
 	export let weakness: boolean = false
 	export let customizable: boolean = false
 	export let permanent: boolean = false
@@ -79,6 +80,7 @@
 		{packIcon}
 		{packNumber}
 		{restriction}
+		{specialist}
 		{weakness}
 		{onDropSwap}
 		{disableHoverEffects}

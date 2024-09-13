@@ -19,6 +19,7 @@
 	// Used in the popup.
 	export let packNumber: number | null = null
 	export let investigator: boolean = false
+	export let specialist: boolean = false
 	export let customizable: boolean = false
 	export let permanent: boolean = false
 	export let bonded: boolean = false
@@ -64,6 +65,7 @@
 				{packIcon}
 				{packNumber}
 				{investigator}
+				{specialist}
 				{customizable}
 				{permanent}
 				{bonded}

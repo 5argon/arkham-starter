@@ -102,9 +102,13 @@ const sameNameDifferentSubname: {
 } = {}
 const bondedToInvestigatorRestriction = new Set<string>()
 
+const needExplicitSubnameCodes = new Set<string>()
 playerCards.forEach((x) => {
   if (x.subname === undefined) {
     return
+  }
+  if (x.type_code === "upgrade") {
+    needExplicitSubnameCodes.add(x.code)
   }
   const name = x.name
   if (!(name in sameNameDifferentSubname)) {
@@ -121,7 +125,6 @@ playerCards.forEach((x) => {
   }
 })
 
-const needExplicitSubnameCodes = new Set<string>()
 Object.entries(sameNameDifferentSubname).forEach(([_, v]) => {
   const subnameCheck = new Set<string>()
   v.forEach((x) => {
@@ -142,9 +145,54 @@ playerCards.forEach((x) => {
       return traitMap.toNum[x]
     })
   }
-  const technicallyIr = x.restrictions !== undefined && x.restrictions !== null
+  const investigatorRestrictionList: string[] = []
+  const traitRestrictionList: string[] = []
+  let technicallyIr = false
+  if (x.restrictions !== undefined && x.restrictions !== null) {
+    if (typeof x.restrictions === "string") {
+      // String Format
+      // "restrictions": "investigator:11001, investigator:11002",
+      const commaSplit = x.restrictions.split(", ")
+      for (const comma of commaSplit) {
+        const colonSplit = comma.split(":")
+        if (colonSplit[0] === "investigator") {
+          investigatorRestrictionList.push(colonSplit[1])
+        }
+      }
+    } else if (x.restrictions.investigator !== undefined) {
+      Object.keys(x.restrictions.investigator).forEach((k) => {
+        investigatorRestrictionList.push(k)
+      })
+    }
+  }
+  if (investigatorRestrictionList.length > 0) {
+    technicallyIr = true
+  }
   const effectiveIr =
     technicallyIr || bondedToInvestigatorRestriction.has(x.code)
+
+  let specialist = false
+  if (x.restrictions !== undefined && x.restrictions !== null) {
+    if (typeof x.restrictions === "string") {
+      // String Format
+      // "restrictions": "trait:traitone, trait:traittwo",
+      const commaSplit = x.restrictions.split(", ")
+      for (const comma of commaSplit) {
+        const colonSplit = comma.split(":")
+        if (colonSplit[0] === "trait") {
+          traitRestrictionList.push(colonSplit[1])
+        }
+      }
+    } else if (x.restrictions.trait !== undefined) {
+      x.restrictions.trait.forEach((k) => {
+        traitRestrictionList.push(k)
+      })
+    }
+  }
+  if (traitRestrictionList.length > 0) {
+    specialist = true
+  }
+
   popupDatabaseItems.push({
     id: x.code,
     n: x.name,
@@ -209,6 +257,12 @@ playerCards.forEach((x) => {
       x.double_sided && x.backimagesrc
         ? path.basename(x.backimagesrc)
         : undefined,
+    spe: specialist ? true : undefined,
+    resir:
+      investigatorRestrictionList.length === 0
+        ? undefined
+        : investigatorRestrictionList,
+    restr: traitRestrictionList.length === 0 ? undefined : traitRestrictionList,
   })
 })
 

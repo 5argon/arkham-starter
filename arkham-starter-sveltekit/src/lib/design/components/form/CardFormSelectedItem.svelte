@@ -34,6 +34,7 @@
 		subText={card.original.esn ? card.original.sn : null}
 		weakness={card.original.wk ?? false}
 		investigator={card.original.inv ?? false}
+		specialist={card.original.restr !== undefined}
 		bonded={card.original.bd ?? false}
 		myriad={card.original.myr ?? false}
 		xp={card.original.xp}

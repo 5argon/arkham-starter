@@ -58,6 +58,7 @@
 		subText={card.original.esn ? card.original.sn : null}
 		weakness={card.original.wk}
 		investigator={card.original.inv ?? false}
+		specialist={card.original.restr !== undefined}
 		xp={processedCust.xp > 0 ? processedCust.xp : card.original.xp}
 		xpTaboo={taboo ? card.original.xpat : null}
 		customizable={card.original.cus !== undefined}

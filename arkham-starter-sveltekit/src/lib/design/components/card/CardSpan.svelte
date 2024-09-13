@@ -31,6 +31,7 @@
 	export let restriction: boolean = false
 	export let weakness: boolean = false
 	export let investigator: boolean = false
+	export let specialist: boolean = false
 	export let customizable: boolean = false
 	export let permanent: boolean = false
 	export let bonded: boolean = false
@@ -99,12 +100,14 @@
 					path={allIcons.investigatorRestriction}
 				/>{/if}{#if investigator}<FaIcon
 					path={allIcons.investigator}
-				/>{/if}{#if customizable}<FaIcon path={allIcons.customizable} />{/if}{#if permanent}<FaIcon
+				/>{/if}{#if specialist}<FaIcon
+				path={allIcons.specialist}
+			/>{/if}{#if customizable}<FaIcon path={allIcons.customizable} />{/if}{#if permanent}<FaIcon
 					path={allIcons.permanent}
 				/>{/if}{#if exceptional}<FaIcon path={allIcons.exceptional} />{/if}{#if bonded}<FaIcon
 					path={allIcons.bonded}
 				/>{/if}{#if myriad}<FaIcon path={allIcons.myraid} />{/if}
-			{#if !(packNumber !== null && isUnknownCardNumber(packNumber)) && (packIcon !== null || packNumber !== null)}
+			{#if !(packNumber !== null && isUnknownCardNumber(packIcon, packNumber)) && (packIcon !== null || packNumber !== null)}
 				<span class="pips pack-span"
 					>({#if packIcon !== null && packIcon !== CardPack.Unknown}<img
 							class="pack-icon"

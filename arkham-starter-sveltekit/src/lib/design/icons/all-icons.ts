@@ -26,6 +26,7 @@ export const allIcons = {
 	checkBox: ic('square-regular'),
 	checkBoxChecked: ic('square-check-regular'),
 	investigator: ic('user-solid'),
+	specialist: ic('explosion-solid'),
 	expand: ic('arrow-up-right-and-arrow-down-left-from-center-regular'),
 	weakness: ic('weakness'),
 	anyWeakness: ic('virus-solid'),
