@@ -180,6 +180,14 @@
     "description": "Patrol in this scenario is cool but resolving it each Enemy Phase almost felt like it should have been a task for computer program. Make it more obvious which way they are going by sliding this card under the enemy. Enemies here walk in circle, and arrows surrounding this mini-card matches that. Depending on which part of the ring enemy is standing right now, you show a matching arrow on the mini-card. There should be only 1 arrow poking out from under the enemy card at all times. Recommended amount of 6 is still less than theoretical limit, but I think it is enough."
   },
   {
+    "hash": "SS-Midwinter Gala-Achievement",
+    "description": "In competitive mode you can enable achievements that grant bonus points only for the first table that gets it. Therefore if you have these cards, you can physically hand it out to that table and have it also gone from the central achievement pool."
+  },
+  {
+    "hash": "SS-Midwinter Gala-Task",
+    "description": "Make each task more visible on the table so you always see what to work towards. You can pick them and add to victory display once you get the points, which makes the remaining tasks more obvious too. Some task has a disabled side on the back that you can flip to when it is no longer possible to get, or currently not getting it."
+  },
+  {
     "hash": "TCUC-Abandoned Chapel",
     "description": "Reminders to subtract skill values. Note that this effect could stack. (e.g. Mythos Phase gets you one, then start of Investigation Phase you somehow get it again, then you fail investigation and get it again, etc.) The backside has -2 for poor soul who got wombo combo-ed by the haunt. I recommends 2 copies so you could share the pain or add them up to make -3 or -4."
   },
@@ -190,6 +198,10 @@
   {
     "hash": "TCUC-Diabolic Voices",
     "description": "Keep track of Diabolic Voices in the discard pile by placing this card near it, so when you get the next one you don't have to sift through the discard pile and count them. Only one mini-card is required, just hide it away on 0 or 3 count."
+  },
+  {
+    "hash": "TCUC-Disquieting Dreams",
+    "description": "A reminder to put near the encounter discard pile, so you don't forget to activate Forced on each copies in play on the reshuffle."
   },
   {
     "hash": "TCUC-Evil Past",
@@ -226,6 +238,18 @@
   {
     "hash": "TCUC-The Spectral Watcher",
     "description": "Show off your hardwork of defeating it by pasting this card on it. Take the card out instead of ready it."
+  },
+  {
+    "hash": "TDEC-Forced Into Hiding",
+    "description": "Lost action indicator."
+  },
+  {
+    "hash": "TDEC-Lit by Death Fire",
+    "description": "Lost action indicator."
+  },
+  {
+    "hash": "TDEC-Whispers of Hypnos",
+    "description": "Currently active debuff. Dedicated card for each stats because it is possible to get many in high player count."
   },
   {
     "hash": "TDEP-Ethereal Form",

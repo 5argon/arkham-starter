@@ -415,6 +415,21 @@
       {
         "setCode": "TCUC",
         "setName": "The Circle Undone (Campaign Expansion)",
+        "hash": "TCUC-Disquieting Dreams",
+        "name": "Disquieting Dreams",
+        "description": "A reminder to put near the encounter discard pile, so you don't forget to activate Forced on each copies in play on the reshuffle.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "TCUC-Disquieting Dreams-A.png",
+            "backName": "TCUC-Disquieting Dreams-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "TCUC",
+        "setName": "The Circle Undone (Campaign Expansion)",
         "hash": "TCUC-Evil Past",
         "name": "Evil Past",
         "description": "If a scenario uses City of Sins encounter set, put this card on the bottom of the encounter deck as a reminder to scan the play field whenever the encounter deck became empty. Note that in The Wages of Sin both decks could trigger the empty criteria.",
@@ -578,8 +593,8 @@
         ]
       }
     ],
-    "itemCount": 12,
-    "printedQuantity": 24
+    "itemCount": 13,
+    "printedQuantity": 25
   },
   {
     "index": 8,
@@ -604,6 +619,78 @@
     ],
     "itemCount": 1,
     "printedQuantity": 1
+  },
+  {
+    "index": 9,
+    "setCode": "TDEC",
+    "setName": "The Dream-Eaters (Campaign Expansion)",
+    "items": [
+      {
+        "setCode": "TDEC",
+        "setName": "The Dream-Eaters (Campaign Expansion)",
+        "hash": "TDEC-Forced Into Hiding",
+        "name": "Forced Into Hiding",
+        "description": "Lost action indicator.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "TDEC-Forced Into Hiding-A.png",
+            "backName": "TDEC-Forced Into Hiding-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "TDEC",
+        "setName": "The Dream-Eaters (Campaign Expansion)",
+        "hash": "TDEC-Lit by Death Fire",
+        "name": "Lit by Death Fire",
+        "description": "Lost action indicator.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "TDEC-Lit by Death Fire-A.png",
+            "backName": "TDEC-Lit by Death Fire-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "TDEC",
+        "setName": "The Dream-Eaters (Campaign Expansion)",
+        "hash": "TDEC-Whispers of Hypnos",
+        "name": "Whispers of Hypnos",
+        "description": "Currently active debuff. Dedicated card for each stats because it is possible to get many in high player count.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "TDEC-Whispers of Hypnos-1-A.png",
+            "backName": "TDEC-Whispers of Hypnos-1-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 1,
+            "frontName": "TDEC-Whispers of Hypnos-2-A.png",
+            "backName": "TDEC-Whispers of Hypnos-2-B.png"
+          },
+          {
+            "variation": 3,
+            "quantity": 1,
+            "frontName": "TDEC-Whispers of Hypnos-3-A.png",
+            "backName": "TDEC-Whispers of Hypnos-3-B.png"
+          },
+          {
+            "variation": 4,
+            "quantity": 1,
+            "frontName": "TDEC-Whispers of Hypnos-4-A.png",
+            "backName": "TDEC-Whispers of Hypnos-4-B.png"
+          }
+        ]
+      }
+    ],
+    "itemCount": 3,
+    "printedQuantity": 6
   },
   {
     "index": 11,
@@ -1857,10 +1944,142 @@
             "backName": "SS-Fortune and Folly-Patrol-x6-B.png"
           }
         ]
+      },
+      {
+        "setCode": "SS",
+        "setName": "Standalone Scenario",
+        "hash": "SS-Midwinter Gala-Achievement",
+        "name": "Midwinter Gala-Achievement",
+        "description": "In competitive mode you can enable achievements that grant bonus points only for the first table that gets it. Therefore if you have these cards, you can physically hand it out to that table and have it also gone from the central achievement pool.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Achievement-1-A.png",
+            "backName": "SS-Midwinter Gala-Achievement-1-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Achievement-2-A.png",
+            "backName": "SS-Midwinter Gala-Achievement-2-B.png"
+          },
+          {
+            "variation": 3,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Achievement-3-A.png",
+            "backName": "SS-Midwinter Gala-Achievement-3-B.png"
+          },
+          {
+            "variation": 4,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Achievement-4-A.png",
+            "backName": "SS-Midwinter Gala-Achievement-4-B.png"
+          },
+          {
+            "variation": 5,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Achievement-5-A.png",
+            "backName": "SS-Midwinter Gala-Achievement-5-B.png"
+          },
+          {
+            "variation": 6,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Achievement-6-A.png",
+            "backName": "SS-Midwinter Gala-Achievement-6-B.png"
+          }
+        ]
+      },
+      {
+        "setCode": "SS",
+        "setName": "Standalone Scenario",
+        "hash": "SS-Midwinter Gala-Task",
+        "name": "Midwinter Gala-Task",
+        "description": "Make each task more visible on the table so you always see what to work towards. You can pick them and add to victory display once you get the points, which makes the remaining tasks more obvious too. Some task has a disabled side on the back that you can flip to when it is no longer possible to get, or currently not getting it.",
+        "members": [
+          {
+            "variation": 1,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-1-A.png",
+            "backName": "SS-Midwinter Gala-Task-1-B.png"
+          },
+          {
+            "variation": 2,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-2-A.png",
+            "backName": "SS-Midwinter Gala-Task-2-B.png"
+          },
+          {
+            "variation": 3,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-3-A.png",
+            "backName": "SS-Midwinter Gala-Task-3-B.png"
+          },
+          {
+            "variation": 4,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-4-A.png",
+            "backName": "SS-Midwinter Gala-Task-4-B.png"
+          },
+          {
+            "variation": 5,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-5-A.png",
+            "backName": "SS-Midwinter Gala-Task-5-B.png"
+          },
+          {
+            "variation": 6,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-6-A.png",
+            "backName": "SS-Midwinter Gala-Task-6-B.png"
+          },
+          {
+            "variation": 7,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-7-A.png",
+            "backName": "SS-Midwinter Gala-Task-7-B.png"
+          },
+          {
+            "variation": 8,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-8-A.png",
+            "backName": "SS-Midwinter Gala-Task-8-B.png"
+          },
+          {
+            "variation": 9,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-9-A.png",
+            "backName": "SS-Midwinter Gala-Task-9-B.png"
+          },
+          {
+            "variation": 10,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-10-A.png",
+            "backName": "SS-Midwinter Gala-Task-10-B.png"
+          },
+          {
+            "variation": 11,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-11-A.png",
+            "backName": "SS-Midwinter Gala-Task-11-B.png"
+          },
+          {
+            "variation": 12,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-12-A.png",
+            "backName": "SS-Midwinter Gala-Task-12-B.png"
+          },
+          {
+            "variation": 13,
+            "quantity": 1,
+            "frontName": "SS-Midwinter Gala-Task-13-A.png",
+            "backName": "SS-Midwinter Gala-Task-13-B.png"
+          }
+        ]
       }
     ],
-    "itemCount": 2,
-    "printedQuantity": 9
+    "itemCount": 4,
+    "printedQuantity": 28
   },
   {
     "index": 19,
