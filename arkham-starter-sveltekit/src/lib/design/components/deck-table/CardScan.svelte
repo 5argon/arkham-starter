@@ -31,8 +31,10 @@
 	$: height = (vertical ? fixedHeight : fixedWidth) * sizeMultiplier
 
 	$: srcPath = small ? 'full-small' : 'full'
-	$: fullUrl =
+	$: finalUrl =
 		localization === 'en' ? `/image/card/${srcPath}/` : '/image/card/full-localized/' + localization + '/'
+	$: alwaysFullUrl =
+		localization === 'en' ? `/image/card/full/` : '/image/card/full-localized/' + localization + '/'
 
 
 	let investigatorClass: CardClass = CardClass.Neutral
@@ -117,7 +119,7 @@
 				{height}
 				class:normal-radius={!small}
 				class:small-radius={small}
-				src={fullUrl + cardId + '.webp'}
+				src={finalUrl + cardId + '.webp'}
 				alt={card.original.name}
 				loading="lazy"
 				draggable="false"
@@ -141,7 +143,7 @@
 					class:normal-radius={!small}
 					class:small-radius={small}
 					class={'alt-card'}
-					src={fullUrl + backCodeExtract(card.original.backimagesrc) + '.webp'}
+					src={alwaysFullUrl + backCodeExtract(card.original.backimagesrc) + '.webp'}
 					alt={card.original.name}
 					loading="lazy"
 					draggable="false"
@@ -164,7 +166,7 @@
 					class:normal-radius={!small}
 					class:small-radius={small}
 					class={'alt-card'}
-					src={fullUrl + card.original.linked_to_code + '.webp'}
+					src={finalUrl + card.original.linked_to_code + '.webp'}
 					alt={card.original.name}
 					loading="lazy"
 					draggable="false"
