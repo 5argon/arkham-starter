@@ -3,11 +3,8 @@
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
 	import { CardClass, classToFontColorCss } from '$lib/design/interface/card-class'
-	import {
-		CardPack,
-		CardPackIconColor,
-		getPackStaticUrl,
-	} from '$lib/design/interface/card-pack'
+	import { CardPack, CardPackIconColor, getPackStaticUrl } from '$lib/design/interface/card-pack'
+	import type { Localization } from '$lib/design/interface/localization'
 	import { makePips } from '$lib/design/interface/string-util'
 
 	import ClassIcon from '../inline/ClassIcon.svelte'
@@ -39,10 +36,15 @@
 	export let checkBoxes: number = 0
 	export let checkedBoxes: number = 0
 	export let forceSmall: boolean = false
+	export let localization: Localization = 'en'
 
 	$: hasBoxes = checkBoxes > 0 || checkedBoxes > 0
 	$: rbw = isRandomBasicWeakness(cardId)
-	$: effectiveText = rbw ? 'Random Basic Weakness' : text
+	$: effectiveText = rbw
+		? localization === 'th'
+			? 'สุ่มจุดอ่อนพื้นฐาน'
+			: 'Random Basic Weakness'
+		: text
 
 	let colorClass: string
 	$: {
@@ -98,11 +100,9 @@
 				<span class="pips taboo-pips">{tabooPips}</span>
 			{/if}{#if weakness || rbw}<FaIcon path={allIcons.anyWeakness} />{/if}{#if restriction}<FaIcon
 					path={allIcons.investigatorRestriction}
-				/>{/if}{#if investigator}<FaIcon
-					path={allIcons.investigator}
-				/>{/if}{#if specialist}<FaIcon
-				path={allIcons.specialist}
-			/>{/if}{#if customizable}<FaIcon path={allIcons.customizable} />{/if}{#if permanent}<FaIcon
+				/>{/if}{#if investigator}<FaIcon path={allIcons.investigator} />{/if}{#if specialist}<FaIcon
+					path={allIcons.specialist}
+				/>{/if}{#if customizable}<FaIcon path={allIcons.customizable} />{/if}{#if permanent}<FaIcon
 					path={allIcons.permanent}
 				/>{/if}{#if exceptional}<FaIcon path={allIcons.exceptional} />{/if}{#if bonded}<FaIcon
 					path={allIcons.bonded}

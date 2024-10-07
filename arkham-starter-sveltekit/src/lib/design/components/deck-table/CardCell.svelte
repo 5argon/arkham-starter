@@ -12,12 +12,14 @@
 	import { processCustomizable } from '$lib/deck/customizable'
 	import { allIcons } from '$lib/design/icons/all-icons'
 	import FaIcon from '$lib/design/icons/FaIcon.svelte'
+	import { getLocalizedCardName, type Localization } from '$lib/design/interface/localization'
 
 	import CardSpan from '../card/CardSpan.svelte'
 	import SkillIcon from '../inline/SkillIcon.svelte'
 
 	export let taboo: boolean
 	export let cardId: string
+	export let localization: Localization = 'en'
 	export let amount: number | null
 	export let customizableMetas: CustomizableMeta[] = []
 	export let popupDatabase: PopupDatabase
@@ -36,6 +38,9 @@
 	let cardName: string
 	$: {
 		cardName = card.original.n
+		if (localization != 'en') {
+			cardName = getLocalizedCardName(card.original.n, card.original.id, localization)
+		}
 	}
 </script>
 
@@ -48,6 +53,7 @@
 		class1={card.class1}
 		class2={card.class2 ?? null}
 		class3={card.class3 ?? null}
+		{localization}
 		exceptional={taboo ? card.original.ext : card.original.ex}
 		color={true}
 		packIcon={card.packIcon}
@@ -76,6 +82,7 @@
 					text={rc.text}
 					checkedBoxes={rc.checkedBoxes}
 					checkBoxes={rc.uncheckedBoxes}
+					{localization}
 					forceSmall
 				/>
 				<span class="detail">

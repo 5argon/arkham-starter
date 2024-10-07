@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { LimitedTab } from '@5argon/arkham-ui'
 
-	import { iconToNameConversion } from '$lib/ahdb/conversion'
-	import type { CardPack } from '$lib/core/card-pack'
+	import { iconToNameConversion, iconToNameConversionThai } from '$lib/ahdb/conversion'
+	import { CardPack } from '$lib/core/card-pack'
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
@@ -17,12 +17,16 @@
 	import SpoilerSeasonRender from './SpoilerSeasonRender.svelte'
 	import NavigationButton from '$lib/design/components/basic/NavigationButton.svelte'
 	import { page } from '$app/stores'
+	import PageShortDescription from '$lib/design/components/basic/PageShortDescription.svelte'
+	import PageStart from '$lib/design/components/basic/PageStart.svelte'
+	import Foldout from '$lib/design/components/basic/Foldout.svelte'
 
 	export let fdb: FullDatabase
 	export let pdb: PopupDatabase
 	export let pageTitle: string
 	export let exploreInput: ExploreInput
 	export let spoilerSeason: boolean = false
+	export let thai: boolean = false
 
 	$: packBanner = packToFile(exploreInput.packs[0])
 
@@ -36,6 +40,11 @@
 	let showSpoilerSeason: boolean = spoilerSeason ? true : false
 	let showList: boolean = spoilerSeason ? false : true
 	let showScans: boolean = spoilerSeason ? false : true
+
+	let errorExpanded: boolean = false
+	function onToggleErrorExpanded() {
+		errorExpanded = !errorExpanded
+	}
 
 	function onGroupingsChanged(g: Grouping[]) {
 		groupings = g
@@ -116,10 +125,38 @@
 	/>
 {/if}
 
-<h1><center>{iconToNameConversion(exploreInput.packs[0])}</center></h1>
+<h1>
+	<center
+		>{thai
+			? iconToNameConversionThai(exploreInput.packs[0])
+			: iconToNameConversion(exploreInput.packs[0])}</center
+	>
+</h1>
+
+{#if thai}
+	<PageShortDescription>
+		สวัสดีครับ ถึงเว็บนี้จะอิงภาษาอังกฤษแทบทั้งหมด
+		ผมทำหน้านี้ขึ้นมาเป็นพิเศษเพื่อเป็นแหล่งข้อมูลอ้างอิงของผู้เล่นอาถรรพ์แห่งอาร์คัมชาวไทย
+		หรือประกอบการตัดสินใจซื้อ สำหรับคนที่ยังลังเลอยู่ หรือใช้ตรวจสอบการ์ดหายก็ได้ครับ
+		(สามารถคลิกแต่ละใบเป็น Check List ได้)
+		มีแต่การ์ดผู้เล่นเพราะฉะนั้นไม่ต้องกังวลจะโดนสปอยล์ส่วนเนื้อเรื่องครับ
+	</PageShortDescription>
+	<PageShortDescription
+		>แล้วก็ถ้าใครทำคอนเทนต์เกี่ยวกับเกมนี้ลงช่องทางต่างๆ เซฟภาพเหล่านี้ไปใช้ได้เลยครับ
+		คอมมูนิตี้ของเกมนี้ในประเทศเราจะได้ขยายออกไปไวๆเนอะ
+		ทุกภาพตัดมุมโค้งใสและเป็นรูปแบบไฟล์ที่กินพื้นที่ต่ำ (WEBP) เพราะไม่งั้นมันจะเข้าเนื้อผม
+		ถ้าต้องการนามสกุลอื่นอย่าง PNG ก็เอาไปแปลงต่อในเครื่องเองนะ</PageShortDescription
+	>
+	<PageShortDescription>
+		เรามีกลุ่มอยู่บน Facebook ชื่อ <a
+			target="blank"
+			href="https://web.facebook.com/share/g/18KiYDBeei/"
+			>Arkham Horror : The Card Game — Thailand Fanclub</a
+		> ด้วยครับ หลังจากที่เกมแปลไทยแล้วสมาชิกพุ่งทะลุ 1,000 ไปเรียบร้อยครึกครื้นขึ้นมากเลย เข้ามาพบปะหรือถามปัญหาต่างๆได้ตลอดครับ
+	</PageShortDescription>
+{/if}
 
 <ExploreMenu />
-
 <!-- <ListDivider label="External Links" /> -->
 {#if spoilerSeason}
 	<p>
@@ -140,12 +177,40 @@
 	</p>
 {/if}
 
-{#if !spoilerSeason && exploreInput.links !== undefined}
+{#if !thai && !spoilerSeason && exploreInput.links !== undefined}
 	<NavigationButton
 		center
 		label={`View ${exploreInput.links.length} Community Content Links`}
 		href={$page.url.pathname + '/links'}
 	/>
+{/if}
+
+{#if !thai && exploreInput.packs[0] === CardPack.RevisedCoreSet}
+	<NavigationButton
+		center
+		label={'ดูการ์ดภาษาไทย / View Thai Localization'}
+		href={$page.url.pathname + '/th'}
+	/>
+{/if}
+
+{#if thai}
+	<Foldout
+		title={'⚠️ รายการข้อผิดพลาดที่พบ'}
+		expanded={errorExpanded}
+		onToggle={onToggleErrorExpanded}
+	>
+		<svelte:fragment slot="default">
+			<p>
+				ทาง Tower Tactic Games ได้ออกมาประกาศเรื่องข้อผิดพลาดที่มีผลกับกลไกเกมทั้งหมดแล้ว
+				และใครสั่งซื้อรอบที่มีข้อผิดพลาดไป จะมีการ์ดผลิตใหม่ที่แก้แล้วจัดส่งมาให้โดยไม่มีค่าใช้จ่าย <a
+					target="_blank"
+					href="https://web.facebook.com/towertacticgames/posts/pfbid02Wit8YrKKNtXirXXM4CdzXpGDNoV8rcLZrb6LXCf6UaJmyw5W8HfoHWhXcLtYLJEwl"
+					>ดูรายละเอียดทั้งหมดได้ที่นี่ครับว่าใบไหนบ้าง</a
+				> ถ้าผมได้รับการ์ดที่แก้ไขเรียบร้อยแล้ว ผมจะกลับมาอัพเดทภาพที่ถูกต้องที่นี่ด้วยครับ ตอนนี้เป็นแบบตามที่ผิดไปก่อนนะ
+			</p>
+		</svelte:fragment>
+		<svelte:fragment slot="right">(ณ รอบพิมพ์รอบแรก)</svelte:fragment>
+	</Foldout>
 {/if}
 
 {#if spoilerSeason}
@@ -182,11 +247,11 @@
 		>
 			<div slot="tab1"><b> 🌟 Spoiler Season Links</b></div>
 			<div slot="content1" />
-			<div slot="tab2">List and Scans</div>
+			<div slot="tab2">{thai ? 'ทั้งรายการและภาพการ์ด' : 'List and Scans'}</div>
 			<div slot="content2" />
-			<div slot="tab3">Scans Only</div>
+			<div slot="tab3">{thai ? 'เฉพาะภาพการ์ด' : 'Scans Only'}</div>
 			<div slot="content3" />
-			<div slot="tab4">List Only</div>
+			<div slot="tab4">{thai ? 'เฉพาะรายการการ์ด' : 'List Only'}</div>
 			<div slot="content4" />
 		</LimitedTab>
 	</div>
@@ -213,11 +278,11 @@
 				}
 			}}
 		>
-			<div slot="tab1">List and Scans</div>
+			<div slot="tab1">{thai ? 'ทั้งรายการและภาพการ์ด' : 'List and Scans'}</div>
 			<div slot="content1" />
-			<div slot="tab2">Scans Only</div>
+			<div slot="tab2">{thai ? 'เฉพาะภาพการ์ด' : 'Scans Only'}</div>
 			<div slot="content2" />
-			<div slot="tab3">List Only</div>
+			<div slot="tab3">{thai ? 'เฉพาะรายการการ์ด' : 'List Only'}</div>
 			<div slot="content3" />
 		</LimitedTab>
 	</div>
@@ -225,10 +290,11 @@
 {#if showSpoilerSeason}
 	<SpoilerSeasonRender {fdb} {pdb} {exploreInput} />
 {:else}
-	<ListDivider label="Investigators" />
+	<ListDivider label={thai ? 'นักสืบและการ์ดประจำตัว' : 'Investigators and Signatures'} />
 	<CardTableDoubleDisplay
 		{toggleMap}
 		singleRight
+		localization={thai ? 'th' : 'en'}
 		big={!showList && showScans}
 		entries={getByPackFromPdbInvestigator(pdb, packs)}
 		groupings={[]}
@@ -244,12 +310,13 @@
 		{showScans}
 	/>
 
-	<ListDivider label="Weakness" />
+	<ListDivider label={thai ? 'จุดอ่อน' : 'Weakness'} />
 
 	<CardTableDoubleDisplay
 		{toggleMap}
 		big={!showList && showScans}
 		singleRight
+		localization={thai ? 'th' : 'en'}
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 		entries={getByPackFromPdbWeakness(pdb, packs)}
 		groupings={[]}
@@ -265,7 +332,7 @@
 		{showScans}
 	/>
 
-	<ListDivider label="The Rest of Player Cards" />
+	<ListDivider label={thai ? 'การ์ดผู้เล่นที่เหลือ' : 'The Rest of Player Cards'} />
 
 	<GrouperSorter {groupings} {sortings} {onGroupingsChanged} {onSortingsChanged} />
 
@@ -274,6 +341,7 @@
 		big={!showList && showScans}
 		columns={[ExtraColumn.Cost, ExtraColumn.Icons]}
 		singleRight
+		localization={thai ? 'th' : 'en'}
 		entries={getByPackFromPdb(pdb, packs)}
 		{groupings}
 		{sortings}

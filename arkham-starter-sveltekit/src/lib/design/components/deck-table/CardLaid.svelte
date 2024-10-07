@@ -4,6 +4,7 @@
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { Grouping, Sorting } from '$lib/deck-table/grouping'
 	import { flattenGroupedCards, groupCards } from '$lib/deck-table/grouping/group-cards'
+	import type { Localization } from '$lib/design/interface/localization'
 
 	import CardScan from './CardScan.svelte'
 
@@ -17,6 +18,7 @@
 	export let big: boolean = false
 	export let showLabel: boolean = false
 	export let showOwner: boolean = false
+	export let localization: Localization = 'en'
 	export let onClickToggle:
 		| ((id: string, copy: number, maxCopy: number, t: boolean) => void)
 		| null = null
@@ -61,6 +63,7 @@
 				toggled={getToggled(en, i)}
 				investigatorStrip={getInvestigator(en)}
 				labels={getLabels(en)}
+				{localization}
 				onToggleChanged={onClickToggle === null
 					? undefined
 					: (c, maxCopy, t) => {

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase } from '$lib/core/popup-database'
-import { type DecklistEntry,type GroupedCards, isEntry } from '$lib/deck-table/decklist-entry'
+	import { type DecklistEntry, type GroupedCards, isEntry } from '$lib/deck-table/decklist-entry'
 	import type { ExtraColumn } from '$lib/deck-table/grouping'
+	import type { Localization } from '$lib/design/interface/localization'
 
 	import CardCell from './CardCell.svelte'
 	import CardGroup from './CardGroup.svelte'
@@ -15,6 +16,7 @@ import { type DecklistEntry,type GroupedCards, isEntry } from '$lib/deck-table/d
 	export let previousGroupedCards: GroupedCards[]
 	export let popupDatabase: PopupDatabase
 	export let columns: ExtraColumn[] = []
+	export let localization: Localization = 'en'
 	export let toggleMap: { [id: string]: boolean[] }
 	export let onClickToggle: ((id: string, copy: number, t: boolean) => void) | null = null
 	export let hideAmount: boolean = false
@@ -64,6 +66,7 @@ import { type DecklistEntry,type GroupedCards, isEntry } from '$lib/deck-table/d
 								}
 							}}
 					toggled={getCellToggled(toggleMap, en)}
+					{localization}
 					cardId={en.cardId}
 					{popupDatabase}
 					amount={hideAmount ? null : en.amount}
@@ -82,6 +85,7 @@ import { type DecklistEntry,type GroupedCards, isEntry } from '$lib/deck-table/d
 			{taboo}
 			level={level + 1}
 			{totalLevels}
+			{localization}
 			theOnlyGroup={false}
 			groupedCards={en}
 			previousGroupedCards={[...previousGroupedCards, groupedCards]}

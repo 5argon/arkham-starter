@@ -5,6 +5,7 @@
 	import type { DecklistEntry } from '$lib/deck-table/decklist-entry'
 	import type { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import { groupCards } from '$lib/deck-table/grouping/group-cards'
+	import type { Localization } from '$lib/design/interface/localization'
 
 	import CardTable from './CardTable.svelte'
 
@@ -19,6 +20,7 @@
 	export let sortings: Sorting[]
 	export let toggleMap: { [cardId: string]: boolean[] }
 	export let taboo: boolean
+	export let localization: Localization = 'en'
 	// TODO: Remove if possible
 	export let fullDatabase: FullDatabase
 	export let popupDatabase: PopupDatabase
@@ -34,6 +36,7 @@
 	{toggleMap}
 	{popupDatabase}
 	{taboo}
+	{localization}
 	groupedCards={gc}
 	{columns}
 	{centered}

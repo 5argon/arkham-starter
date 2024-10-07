@@ -11,12 +11,8 @@
 </div>
 
 <style>
-	.outer {
-		margin: 4px 0px;
-	}
-
 	.center {
-		margin: 0 auto;
+		margin: 2px auto;
 	}
 
 	.label {

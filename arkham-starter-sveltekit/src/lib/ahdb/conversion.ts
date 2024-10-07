@@ -76,6 +76,78 @@ export function iconToNameConversion(c: CardPack): string {
 	}
 }
 
+export function iconToNameConversionThai(c: CardPack): string {
+	switch (c) {
+		case CardPack.CoreSet:
+			return 'Core Set'
+		case CardPack.RevisedCoreSet:
+			return 'การ์ดผู้เล่น อาถรรพ์แห่งอาร์คัม เดอะการ์ดเกม กล่องหลัก'
+		case CardPack.NathanielCho:
+			return 'Nathaniel Cho'
+		case CardPack.HarveyWalters:
+			return 'Harvey Walters'
+		case CardPack.WinifredHabbamock:
+			return 'Winifred Habbamock'
+		case CardPack.JacquelineFine:
+			return 'Jacqueline Fine'
+		case CardPack.StellaClark:
+			return 'Stella Clark'
+
+		case CardPack.EdgeOfTheEarth:
+			return 'Edge of the Earth Investigator Expansion'
+		case CardPack.TheScarletKeys:
+			return 'The Scarlet Keys Investigator Expansion'
+		case CardPack.TheFeastOfHemlockVale:
+			return 'The Feast of Hemlock Vale Investigator Expansion'
+		case CardPack.TheDrownedCity:
+			return 'The Drowned City Investigator Expansion'
+
+		case CardPack.TheBlobThatAteEverythingElse:
+			return 'The Blob That Ate Everything ELSE!'
+
+		case CardPack.ReturnToTheNightOfTheZealot:
+			return 'Return to the Night of the Zealot'
+		case CardPack.ReturnToTheDunwichLegacy:
+			return 'Return to the Dunwich Legacy'
+		case CardPack.ReturnToThePathToCarcosa:
+			return 'Return to the Path to Carcosa'
+		case CardPack.ReturnToTheCircleUndone:
+			return 'Return to the Circle Undone'
+		case CardPack.ReturnToTheForgottenAge:
+			return 'Return to the Forgotten Age'
+		case CardPack.ReturnToTheDreamEaters:
+			return 'Return to the Dream-Eaters'
+		case CardPack.ReturnToTheInnsmouthConspiracy:
+			return 'Return to the Innsmouth Conspiracy'
+
+		case CardPack.TheDunwichLegacy:
+			return 'The Dunwich Legacy Investigator Expansion'
+		case CardPack.ThePathToCarcosa:
+			return 'The Path to Carcosa Investigator Expansion'
+		case CardPack.TheForgottenAge:
+			return 'The Forgotten Age Investigator Expansion'
+		case CardPack.TheCircleUndone:
+			return 'The Circle Undone Investigator Expansion'
+		case CardPack.TheDreamEaters:
+			return 'The Dream-Eaters Investigator Expansion'
+		case CardPack.TheInnsmouthConspiracy:
+			return 'The Innsmouth Conspiracy Investigator Expansion'
+
+		case CardPack.Unknown:
+			return '(Unknown Set)'
+		case CardPack.RandomBasicWeakness:
+			return 'Random Basic Weakness'
+
+		case CardPack.ParallelInvestigator:
+			return 'Parallel Investigator'
+		case CardPack.Novella:
+			return 'Novella'
+
+		default:
+			return '(Unknown Set)'
+	}
+}
+
 export function packCodeToIconConversion(p: string): CardPack {
 	switch (p) {
 		case 'unk':

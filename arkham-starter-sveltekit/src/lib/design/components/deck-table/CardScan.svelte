@@ -3,6 +3,7 @@
 	import type { FullDatabase } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import valid from '$lib/data/valid.json'
+	import type { Localization } from '$lib/design/interface/localization'
 
 	import CardSpan from '../card/CardSpan.svelte'
 	import ColumnLabel from './ColumnLabel.svelte'
@@ -19,6 +20,7 @@
 	export let labels: string[] | null = null
 	export let small: boolean = false
 	export let big: boolean = false
+	export let localization: Localization = 'en'
 
 	$: sizeMultiplier = small ? 0.5 : big ? 1.22 : 1
 	const fixedWidth = 215
@@ -29,6 +31,9 @@
 	$: height = (vertical ? fixedHeight : fixedWidth) * sizeMultiplier
 
 	$: srcPath = small ? 'full-small' : 'full'
+	$: fullUrl =
+		localization === 'en' ? `/image/card/${srcPath}/` : '/image/card/full-localized/' + localization + '/'
+
 
 	let investigatorClass: CardClass = CardClass.Neutral
 	$: {
@@ -112,7 +117,7 @@
 				{height}
 				class:normal-radius={!small}
 				class:small-radius={small}
-				src={`/image/card/${srcPath}/` + cardId + '.webp'}
+				src={fullUrl + cardId + '.webp'}
 				alt={card.original.name}
 				loading="lazy"
 				draggable="false"
@@ -136,7 +141,7 @@
 					class:normal-radius={!small}
 					class:small-radius={small}
 					class={'alt-card'}
-					src={'/image/card/full/' + backCodeExtract(card.original.backimagesrc) + '.webp'}
+					src={fullUrl + backCodeExtract(card.original.backimagesrc) + '.webp'}
 					alt={card.original.name}
 					loading="lazy"
 					draggable="false"
@@ -159,7 +164,7 @@
 					class:normal-radius={!small}
 					class:small-radius={small}
 					class={'alt-card'}
-					src={'/image/card/full/' + card.original.linked_to_code + '.webp'}
+					src={fullUrl + card.original.linked_to_code + '.webp'}
 					alt={card.original.name}
 					loading="lazy"
 					draggable="false"

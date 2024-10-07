@@ -2,12 +2,14 @@
 	import type { CustomizableMeta } from '$lib/ahdb/public-api/high-level'
 	import type { PopupDatabase } from '$lib/core/popup-database'
 	import type { GroupedCards } from '$lib/deck-table/decklist-entry'
-	import { type ExtraColumn,extraColumnToHeader } from '$lib/deck-table/grouping'
+	import { type ExtraColumn, extraColumnToHeader } from '$lib/deck-table/grouping'
+	import type { Localization } from '$lib/design/interface/localization'
 
 	import RenderGroupedCards from './RenderGroupedCards.svelte'
 
 	export let groupedCards: GroupedCards[]
 	export let toggleMap: { [cardId: string]: boolean[] }
+	export let localization: Localization = 'en'
 	export let taboo: boolean
 	export let totalLevels: number
 	export let popupDatabase: PopupDatabase
@@ -36,6 +38,7 @@
 		{#each groupedCards as gc}
 			<RenderGroupedCards
 				groupedCards={gc}
+				{localization}
 				{toggleMap}
 				level={0}
 				previousGroupedCards={[]}

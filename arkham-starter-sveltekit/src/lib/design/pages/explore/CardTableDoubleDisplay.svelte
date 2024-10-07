@@ -6,9 +6,11 @@
 	import type { ExtraColumn, Grouping, Sorting } from '$lib/deck-table/grouping'
 	import CardLaid from '$lib/design/components/deck-table/CardLaid.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
+		import type { Localization } from '$lib/design/interface/localization'
 
 	export let entries: DecklistEntry[]
 	export let singleRight: boolean = false
+	export let localization: Localization = 'en'
 	$: singleEntries = entries.map<DecklistEntry>((x) => {
 		return {
 			amount: 1,
@@ -46,6 +48,7 @@
 				{taboo}
 				{fullDatabase}
 				{popupDatabase}
+				{localization}
 				onClickToggle={(id, copy, toggle) => {
 					// Toggles all copies the same way.
 					if (onClickToggle === null) return
@@ -64,6 +67,7 @@
 				{sortings}
 				{popupDatabase}
 				{big}
+				{localization}
 				entries={singleRight ? singleEntries : entries}
 				showLabel={showLabelOnScans}
 				{fullDatabase}
