@@ -18,7 +18,6 @@
 	import NavigationButton from '$lib/design/components/basic/NavigationButton.svelte'
 	import { page } from '$app/stores'
 	import PageShortDescription from '$lib/design/components/basic/PageShortDescription.svelte'
-	import PageStart from '$lib/design/components/basic/PageStart.svelte'
 	import Foldout from '$lib/design/components/basic/Foldout.svelte'
 
 	export let fdb: FullDatabase
@@ -113,7 +112,24 @@
 			}
 		})
 	}
+
+	$: pageHeader = thai
+		? iconToNameConversionThai(exploreInput.packs[0])
+		: iconToNameConversion(exploreInput.packs[0])
+
+	$: metaDescription = thai
+		? 'ฐานข้อมูลการ์ดผู้่เล่นทั้งหมดในกล่อง'
+		: 'Explore all the player cards inside this product.'
 </script>
+
+<svelte:head>
+	<meta property="og:title" content={pageHeader} />
+	<meta
+		property="og:image"
+		content={'https://arkham-starter.com/image/expansion/investigator/' + packBanner + '.webp'}
+	/>
+	<meta property="og:description" content={metaDescription} />
+</svelte:head>
 
 <NavigationButton href="/explore" label="Back to Explore Home" />
 
@@ -126,24 +142,19 @@
 {/if}
 
 <h1>
-	<center
-		>{thai
-			? iconToNameConversionThai(exploreInput.packs[0])
-			: iconToNameConversion(exploreInput.packs[0])}</center
-	>
+	<center>{pageHeader}</center>
 </h1>
 
 {#if thai}
 	<PageShortDescription>
-		สวัสดีครับ ถึงเว็บนี้จะอิงภาษาอังกฤษแทบทั้งหมด
-		ผมทำหน้านี้ขึ้นมาเป็นพิเศษเพื่อเป็นแหล่งข้อมูลอ้างอิงของผู้เล่นอาถรรพ์แห่งอาร์คัมชาวไทย
+		ผมทำหน้าภาษาไทยนี้ขึ้นมาเป็นพิเศษ เพื่อเป็นแหล่งข้อมูลอ้างอิงของผู้เล่นอาถรรพ์แห่งอาร์คัมชาวไทย
 		หรือประกอบการตัดสินใจซื้อ สำหรับคนที่ยังลังเลอยู่ หรือใช้ตรวจสอบการ์ดหายก็ได้ครับ
-		(สามารถคลิกแต่ละใบเป็น Check List ได้)
-		มีแต่การ์ดผู้เล่นเพราะฉะนั้นไม่ต้องกังวลจะโดนสปอยล์ส่วนเนื้อเรื่องครับ
+		(สามารถคลิกแต่ละใบเป็น Check List ได้) มีแต่การ์ดผู้เล่น
+		ไม่ต้องกังวลจะโดนสปอยล์ส่วนเนื้อเรื่องครับ
 	</PageShortDescription>
 	<PageShortDescription
-		>แล้วก็ถ้าใครทำคอนเทนต์เกี่ยวกับเกมนี้ลงช่องทางต่างๆ เซฟภาพเหล่านี้ไปใช้ได้เลยครับ
-		คอมมูนิตี้ของเกมนี้ในประเทศเราจะได้ขยายออกไปไวๆเนอะ
+		>ใครทำคอนเทนต์เกี่ยวกับเกมนี้ลงช่องทางต่างๆ สามารถนำภาพเหล่านี้ไปใช้ได้ประกอบได้เลยครับ
+		คอมมูนิตี้ของเกมนี้ในประเทศเราจะได้เติบโตขึ้นไวๆเนอะ
 		ทุกภาพตัดมุมโค้งใสและเป็นรูปแบบไฟล์ที่กินพื้นที่ต่ำ (WEBP) เพราะไม่งั้นมันจะเข้าเนื้อผม
 		ถ้าต้องการนามสกุลอื่นอย่าง PNG ก็เอาไปแปลงต่อในเครื่องเองนะ</PageShortDescription
 	>
