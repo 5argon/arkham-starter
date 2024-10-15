@@ -1,8 +1,23 @@
 [Back to the main divider page.](/divider)
 
+# About the bleed
+
+![Bleed](../../../static/image/documentation/divider/bleed.png)
+
+After 15 October 2024, I have updated every dividers with [**bleed**](https://en.wikipedia.org/wiki/Bleed_(printing)) bringing them to printing standards. You can see very faint lines running inside the graphic indicating where the cut should be made, for your convenience if you don't have a cut guide running along the outer edge of your paper. This allow you to make a bit of mistake (outwards) while cutting and not getting whites.
+
+You should keep in mind that the resulting physical size of **93mm x 68mm** that makes this divider a "3mm Divider" is **after** cutting the bleed out. Each graphic needs to be specify at a larger size when printing. The bleeds are +3.5mm out from each edges, therefore they add 7mm to width and height.
+
+In summary : 
+
+- **Downloaded size** : 1182x886 pixels, physical size 100mm x 75mm at 300 DPI.
+- **After trimming the bleed out** : 1098 × 804 pixels, physical size 93mm x 68mm at 300 DPI.
+
 # General guidelines
 
-Send all picked graphics to any program that can laid them out on paper size then save a merged image for printing. Make sure size of each divider is **physically 93mm x 68mm** on the paper (1098x804 px at 300 DPI). Some programs like to offer scaling to fit. **Make sure that is off**. If using A4 paper, it helps if you pick multiple of 8 dividers to not waste the paper.
+Send all picked graphics to any program that can laid them out on paper size then save a merged image for printing. Make sure size of each divider is **physically 100mm x 75mm** on the paper, as outlined above, so they became 93mm x 68mm after cutting the bleed out.
+
+Some programs like to offer scaling to fit. **Make sure that is off**. If using A4 paper, it helps if you pick multiple of 8 dividers to not waste the paper.
 
 If you send the files to print shop they should be able to understand that. If you are doing it on your own, these examples might help.
 
@@ -10,13 +25,13 @@ If you send the files to print shop they should be able to understand that. If y
 
 ## macOS : Using Photos app
 
-![macOS printing](../../../static/image/documentation/divider/print-1.png)
+<!-- ![macOS printing](../../../static/image/documentation/divider/print-1.png) -->
 
 - Open "Photos" program.
 - Drag 1 divider folder to it to import all images inside.
 - Highlight all images you just imported.
 - Press `Cmd + P` to bring up print dialog.
-- Setup like in the image : A4, Color, Aspect Ratio : Custom, Photo Size : 93 x 68 mm. Then press Print.
+- Setup : A4 (or any paper size you want), Color, Aspect Ratio : Custom, Photo Size : **100 x 75 mm**. Then press Print.
 - The next dialog, do not press Print, but press the dropdown saying "PDF" then select the "PDF" choice to save a file out of it instead.
 - After it finished saving PDF, you can now go back and press delete to remove the highlighted images. If there are more than 8 images, the produced PDF will be multi-page.
 
@@ -52,8 +67,6 @@ The only good solution I found is this external program [IrfanView](https://www.
   
     But, depending on how tight on the edge your printer can perform, you may want to increase the margin. But beware that if margin is too large, **it will start shrinking images** to honor that margin and required columns and rows per page.
 	
-    On 300 DPI A4, size is 3508 x 2480. One divider is 1098 x 804. So on portrait A4 with 2 columns and 4 rows, remaining horizontal space is `2480 - (1098 * 2) = 284` and remaining vertical space is `3508 - (804 * 4) = 292`. Therefore, max margin before shrinking occurs is horizontal 142 and vertical 146, which when combined with spacings both 0, all dividers will stick tightly together at the center. (You may want to purposefully do this to reduce number of cuts, but missed cut will eat into the graphic of the other divider.)
-
   - On the Output section, use "Save all pages as files". Select destination and choose **PNG** as the format. PDF is there but I believe requires installing a plugin from this program's homepage, so PNG should be easier.
   - Press "Create" and check the output files. More than 8 files should overflow correctly to more sheets. Check one last time if they are all at size 3508 x 2480 or not. (If not, you may forgot to specify 300 DPI earlier.)
 
@@ -63,4 +76,4 @@ The only good solution I found is this external program [IrfanView](https://www.
 
 You may use rounded corner punch on them and maybe sleeve to make them last longer.
 
-The printed size 93mm x 68mm can fit inside KMC Character Sleeve just right. The trick to get it in is using the corner of divider or small ruler to stretch open up the 2 entry corners of the sleeve a bit. If you can get both corners in at the same time, the rest will be easy.
+The size 93mm x 68mm after cutting the bleed out can fit inside KMC Character Sleeve just right. The trick to get it in is using the corner of divider or small ruler to stretch open up the 2 entry corners of the sleeve a bit. If you can get both corners in at the same time, the rest will be easy.
