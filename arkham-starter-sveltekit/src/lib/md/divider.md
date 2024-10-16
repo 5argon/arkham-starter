@@ -1,3 +1,5 @@
+[คนไทยเชิญหน้านี้ได้ครับ / Thai Language](./divider/th)
+
 ![Intro image](../../../static/image/documentation/divider/head1.webp)
 
 ![Intro image](../../../static/image/documentation/divider/head2.webp)
