@@ -11,13 +11,13 @@ See photos of variety of organizations in action in the [Divider Gallery Page](.
 
 # Introduction
 
-![Player card dividers](../../../static/image/documentation/divider/main-1.jpg)
+![Player card dividers](../../../static/image/documentation/divider/main-1.webp)
 
-![Night of the Zealot dividers](../../../static/image/documentation/divider/main-2.jpg)
+![Night of the Zealot dividers](../../../static/image/documentation/divider/main-2.webp)
 
-![The Path to Carcosa dividers](../../../static/image/documentation/divider/ptc-1.jpg)
+![The Path to Carcosa dividers](../../../static/image/documentation/divider/ptc-1.webp)
 
-![Dividers on cutting board](../../../static/image/documentation/divider/main-3.jpg)
+![Dividers on cutting board](../../../static/image/documentation/divider/main-3.webp)
 
 Unlike other existing dividers, they have unusual traits gained from the divider size of 93mm x 68mm. To help visualize this size, the size of standard size card is 89mm x 64mm, which gets +1 mm to 90mm x 65mm when fitted with perfect sleeves. (+0.5mm for each side.)
 

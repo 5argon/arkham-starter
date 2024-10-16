@@ -2,7 +2,7 @@
 
 # About the bleed
 
-![Bleed](../../../static/image/documentation/divider/bleed.png)
+![Bleed](../../../static/image/documentation/divider/bleed.webp)
 
 After 15 October 2024, I have updated every dividers with [**bleed**](https://en.wikipedia.org/wiki/Bleed_(printing)) bringing them to printing standards. You can see very faint lines running inside the graphic indicating where the cut should be made, for your convenience if you don't have a cut guide running along the outer edge of your paper. This allow you to make a bit of mistake (outwards) while cutting and not getting whites.
 
@@ -25,7 +25,7 @@ If you send the files to print shop they should be able to understand that. If y
 
 ## macOS : Using Photos app
 
-<!-- ![macOS printing](../../../static/image/documentation/divider/print-1.png) -->
+<!-- ![macOS printing](../../../static/image/documentation/divider/print-1.webp) -->
 
 - Open "Photos" program.
 - Drag 1 divider folder to it to import all images inside.
@@ -51,12 +51,12 @@ The only good solution I found is this external program [IrfanView](https://www.
 - Download and install [IrfanView](https://www.irfanview.com/). This program is extremely small but really capable.
 - On Desktop, execute "IrfanView 64 Thumbnails" shortcut (Not the regular "IrfanView 64").
 
-  ![Windows printing](../../../static/image/documentation/divider/print-2.png)
+  ![Windows printing](../../../static/image/documentation/divider/print-2.webp)
 
 - Go to where your dividers are and highlight all you want to print. For example, I want to print these 10 images. (Can overflow 8, and can be any number not just multiple of 8. So you are free to mix just dividers you want from different folders.)
 - File > **Create contact sheet from selected files...**
 
-  ![Windows printing](../../../static/image/documentation/divider/print-3.png)
+  ![Windows printing](../../../static/image/documentation/divider/print-3.webp)
 
 - Setup like this : 
   - Press A4 button.
@@ -70,7 +70,7 @@ The only good solution I found is this external program [IrfanView](https://www.
   - On the Output section, use "Save all pages as files". Select destination and choose **PNG** as the format. PDF is there but I believe requires installing a plugin from this program's homepage, so PNG should be easier.
   - Press "Create" and check the output files. More than 8 files should overflow correctly to more sheets. Check one last time if they are all at size 3508 x 2480 or not. (If not, you may forgot to specify 300 DPI earlier.)
 
-    ![Windows printing](../../../static/image/documentation/divider/print-4.png)
+    ![Windows printing](../../../static/image/documentation/divider/print-4.webp)
 
 # Finishing touch
 
