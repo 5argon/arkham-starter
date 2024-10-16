@@ -8,15 +8,14 @@
 
 <svelte:head>
 	<title>arkham-starter.com | The 3mm Divider</title>
+	<meta property="og:title" content={'The 3mm Divider'} />
+	<meta property="og:image" content={'https://arkham-starter.com/image/resource/divider.webp'} />
+	<meta
+		property="og:description"
+		content="Minimum headroom dividers for AHLCG with dual orientations and multiple localizations."
+	/>
 </svelte:head>
 
 <PageTitle title={'The 3mm Divider'} />
-
-<meta property="og:title" content={'The 3mm Divider'} />
-<meta property="og:image" content={'https://arkham-starter.com/image/resource/divider.webp'} />
-<meta
-	property="og:description"
-	content="Minimum headroom dividers for AHLCG with dual orientations and multiple localizations."
-/>
 
 <SvelteMarkdown renderers={{ image: MarkdownImage }} source={helpMd} />
