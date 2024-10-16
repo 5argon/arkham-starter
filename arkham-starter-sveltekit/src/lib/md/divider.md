@@ -74,6 +74,7 @@ All encounter icons were obtained from combined effort in [this thread](https://
 - Portuguese (Contributed by : [@vinimsouza](https://boardgamegeek.com/user/vinimsouza), [@benq10r](https://boardgamegeek.com/user/benq10r))
 - Polish (Contributed by : ? (please let me know))
 - Czech (Contributed by : [@yorrkee](https://boardgamegeek.com/user/yorrkee))
+- Thai (Contributed by **ME**. Finally, it is our turn to get a localization in 2024...)
 
 If translation is missing, file is still rendered but text area will be empty.
 
@@ -94,5 +95,6 @@ After you have added some translations, you can ping me somewhere, like in [BGG 
 
 # Links
 
-- [BoardGameGeek Forum Thread](https://boardgamegeek.com/thread/2766339) : This is probably where I would be informed the quickest if you found any problem or have some requests of dividers.
+- [Mythos Busters Discord arkham-starter.com Dev Post](https://discord.com/channels/225349059689447425/1203293837389209650) : I'm the most active here. Mythos Busters provided a per-project space as long as they are related to AHLCG. If you have problems or request of dividers, you can go tell me there.
+- [BoardGameGeek Forum Thread](https://boardgamegeek.com/thread/2766339) : I go check this from time to time too, but not as active as the Discord post.
 - [GitHub Repository](https://github.com/5argon/AHLCG3mmDivider) : Hosts the Unity game engine project which automatically generates all these dividers in all languages. It has no documentation, but if you are experienced in Unity you maybe able to mess around with it.
