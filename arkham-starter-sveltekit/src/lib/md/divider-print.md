@@ -6,16 +6,18 @@
 
 After 15 October 2024, I have updated every dividers with [**bleed**](https://en.wikipedia.org/wiki/Bleed_(printing)) bringing them to printing standards. You can see very faint lines running inside the graphic indicating where the cut should be made, for your convenience if you don't have a cut guide running along the outer edge of your paper. This allow you to make a bit of mistake (outwards) while cutting and not getting whites.
 
-You should keep in mind that the resulting physical size of **93mm x 68mm** that makes this divider a "3mm Divider" is **after** cutting the bleed out. Each graphic needs to be specify at a larger size when printing. The bleeds are +3.5mm out from each edges, therefore they add 7mm to width and height.
+You should keep in mind that the resulting physical size of **93mm x 67mm** is **after** cutting the bleed out. Each graphic needs to be specify at a larger size at the time of printing such that you get that size after cutting the +3.5mm bleeds from each side. (Therefore they add 7mm to desired width and height.)
 
 In summary : 
 
-- **Downloaded size** : 1182x886 pixels, physical size 100mm x 75mm at 300 DPI.
-- **After trimming the bleed out** : 1098 × 804 pixels, physical size 93mm x 68mm at 300 DPI.
+- **Downloaded size** : 1182x873 pixels, physical size 100mm x 74mm at 300 DPI.
+- **After trimming the bleed out** : 1098 × 792 pixels, physical size 93mm x 67mm at 300 DPI. (That is, -7mm on each dimension, or -3.5mm on each side.)
+
+The outer sleeve is sized at **94 x 69 mm**. The short side being 2mm shorter than the sleeve helps you insert it easier, and also account for cutting mistakes outward from the cutline. The long side being 1mm shorter make the divider flush to the sleeve's edge once inserted all the way in. Inaccuracies on cutting long side will not impact how hard to insert into the sleeve.
 
 # General guidelines
 
-Send all picked graphics to any program that can laid them out on paper size then save a merged image for printing. Make sure size of each divider is **physically 100mm x 75mm** on the paper, as outlined above, so they became 93mm x 68mm after cutting the bleed out.
+Send all picked graphics to any program that can laid them out on paper size then save a merged image for printing. Make sure size of each divider is **physically 100mm x 74mm** on the paper, as outlined above, so they became 93mm x 67mm after cutting the bleed out.
 
 Some programs like to offer scaling to fit. **Make sure that is off**. If using A4 paper, it helps if you pick multiple of 8 dividers to not waste the paper.
 
@@ -31,7 +33,7 @@ If you send the files to print shop they should be able to understand that. If y
 - Drag 1 divider folder to it to import all images inside.
 - Highlight all images you just imported.
 - Press `Cmd + P` to bring up print dialog.
-- Setup : A4 (or any paper size you want), Color, Aspect Ratio : Custom, Photo Size : **100 x 75 mm**. Then press Print.
+- Setup : A4 (or any paper size you want), Color, Aspect Ratio : Custom, Photo Size : **100 x 74 mm**. Then press Print.
 - The next dialog, do not press Print, but press the dropdown saying "PDF" then select the "PDF" choice to save a file out of it instead.
 - After it finished saving PDF, you can now go back and press delete to remove the highlighted images. If there are more than 8 images, the produced PDF will be multi-page.
 
@@ -71,9 +73,3 @@ The only good solution I found is this external program [IrfanView](https://www.
   - Press "Create" and check the output files. More than 8 files should overflow correctly to more sheets. Check one last time if they are all at size 3508 x 2480 or not. (If not, you may forgot to specify 300 DPI earlier.)
 
     ![Windows printing](../../../static/image/documentation/divider/print-4.webp)
-
-# Finishing touch
-
-You may use rounded corner punch on them and maybe sleeve to make them last longer.
-
-The size 93mm x 68mm after cutting the bleed out can fit inside KMC Character Sleeve just right. The trick to get it in is using the corner of divider or small ruler to stretch open up the 2 entry corners of the sleeve a bit. If you can get both corners in at the same time, the rest will be easy.

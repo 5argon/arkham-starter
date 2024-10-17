@@ -18,14 +18,16 @@ For player card dividers, there are so many variations to fit whatever organizat
 
 1. Go to [Download page](./divider/download) and hand pick all the desired divider files you want.
 2. Go to [Printing page](./divider/print) on how to make all those files packed into a sheet you can then cut.
-3. Cut the sheet to remove the bleeds and get **93 x 68 mm** size.
+3. Cut the sheet to remove the bleeds and get **93 x 67 mm** size.
 4. Sleeve them in **94 x 69 mm** outer sleeves and enjoy.
 
 # How it works
 
-**Size is critical** on this divider. Each divider's graphic sized at **100 x 75 mm** includes bleed area and built-in cut line. After cutting it along the line you will get a **93 x 68 mm** size, which is a perfect fit inside the commercially available "Outer Sleeves" size of **94 x 69 mm**. (Also called a "character sleeve", as often used to protect colorful sleeve with character's artwork.)
+**Size is critical** on this divider. Each divider's graphic sized at **100 x 74 mm** includes bleed area and built-in cut line. After cutting it along the line you will remove **7 mm** out of width and height (that is, 3.5mm from each side) to get a **93 x 67 mm** size. It is a size to fit inside the commercially available "Outer Sleeves" size of **94 x 69 mm**. (Also called a "character sleeve", as often used to protect colorful sleeve with character's artwork.)
 
 ![In an outer sleeve](../../../static/image/documentation/divider/how1.webp)
+
+Notice that long side is 1 mm less (93 vs 94), but short side is 2 mm less (67 vs 69), because you insert on the short side and more clearance is needed on that side to not bend the divider while inserting.
 
 Once the divider is sleeved in the outer sleeve, the divider will show exactly the available **3 mm** (hence the project's name) content space above the upper clear edge of card's **perfect-fit sleeve**. It works like this on **both orientations**.
 
@@ -76,7 +78,7 @@ After you have added some translations, you can ping me somewhere using one of t
 
 1. Go to [Download page](./divider/download) and hand pick all the desired divider files you want.
 2. Go to [Printing page](./divider/print) on how to make all those files packed into a sheet you can then cut.
-3. Cut the sheet to remove the bleeds and get **93 x 68 mm** size.
+3. Cut the sheet to remove the bleeds and get **93 x 67 mm** size.
 4. Sleeve them in **94 x 69 mm** outer sleeves and enjoy.
 
 # Links
