@@ -106,3 +106,36 @@
 		<li>{l.text} (Folder: {l.code})</li>
 	{/each}
 </ul>
+
+<ListDivider label="Premade PDF (English Only)" />
+
+<img alt="PDF" src="/image/documentation/divider/pdf.webp" />
+
+<p>
+	Instead of picking individual graphics, these are PDF files with graphics already laid out and cut
+	lines extended to the paper's edge. When print shop see this file, they will be happy as layout
+	work is saved for them, and likely willing to cut them for you since the cut lines are there.
+</p>
+
+<p>
+	The disadvantage is that I cannot maintain this for all languages, you might not want all of what
+	I decided to pack in, and also paper size is locked to A4. This make it inefficient for print shop
+	that can print larger size to fit more dividers.
+</p>
+
+<ul>
+	<li>
+		<a
+			href="https://drive.google.com/file/d/1wN-ZsYtzIhRgoL4iMHm4BPDhHOXTR5l0/view?usp=share_link"
+			target="_blank"
+			><b>Massive All Campaign Dividers (Night of the Zealot to The Feast of Hemlock Vale)</b></a
+		>. 25 pages, 197 dividers, 277.9 MB.
+	</li>
+</ul>
+
+<style>
+	img {
+		max-width: 400px;
+		margin: 0 auto;
+	}
+</style>
