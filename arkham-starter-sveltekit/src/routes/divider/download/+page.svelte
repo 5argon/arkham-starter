@@ -132,17 +132,19 @@
 				>Massive All Campaign Dividers (Core Encounters, Night of the Zealot to The Feast of Hemlock
 				Vale)</b
 			></a
-		>. 27 pages, 211 dividers, 283.8 MB.
+		>. 27 pages, 211 dividers, 283.8 MB. Since they are sorted chronologically, maybe you can print
+		only pages for what you really want and discard minimal amount of dividers?
 	</li>
 	<li>
 		<a
 			href="https://drive.google.com/file/d/1wXM8Yj_z1IhBA_7UyB49N3jSP5wf6O0W/view?usp=share_link"
-			target="_blank"><b>Assortment of Player Card Dividers</b></a
+			target="_blank"><b>Selected Player Card Dividers</b></a
 		>. 4 pages, 32 dividers, 42.7 MB. I choose the Lv. 0 vs Lv. 1~5 per class organization, which I
-		think is the most popular way. There are dividers for investigator by their class, basic
-		weakness, etc. I also tried to cater to as many users as possible with stuff like Permanent or
-		Bonded dividers. You might have to discard some of them that you think are excessive if you
-		don't like separating them out of the class section.
+		think is the most popular way that could scale well. There are dividers for investigator by
+		their class, basic weakness, etc. I also tried to cater to as many users as possible with stuff
+		like Permanent, Bonded, or even Parallel Investigator dividers for when you decided to dip into
+		those and don't want to mix with regular ones. You might have to discard some of them that you
+		think are excessive if you don't like separating them out of the other section.
 	</li>
 </ul>
 
