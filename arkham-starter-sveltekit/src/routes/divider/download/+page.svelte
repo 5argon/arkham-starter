@@ -133,7 +133,7 @@
 				Vale)</b
 			></a
 		>. 27 pages, 211 dividers, 283.8 MB. Since they are sorted chronologically, maybe you can print
-		only pages for what you really want and discard minimal amount of dividers?
+		only pages of what you really want and discard minimal amount of dividers?
 	</li>
 	<li>
 		<a

@@ -27,15 +27,15 @@ For player card dividers, there are so many variations to fit whatever organizat
 
 ![In an outer sleeve](../../../static/image/documentation/divider/how1.webp)
 
-Notice that long side is 1 mm less (93 vs 94), but short side is 2 mm less (67 vs 69), because you insert on the short side and more clearance is needed on that side to not bend the divider while inserting.
+Notice that long side is 1 mm less (93 vs 94), but short side is 2 mm less (67 vs 69), because you insert on the short side and more clearance is needed on that side to not bend the divider while inserting. If you didn't make any mistake cutting it, after inserting all the way, you should get padding of 0.5 mm on short edges, and 1 mm on long edges.
 
-Once the divider is sleeved in the outer sleeve, the divider will show exactly the available **3 mm** (hence the project's name) content space above the upper clear edge of card's **perfect-fit sleeve**. It works like this on **both orientations**.
+![Padding around the card](../../../static/image/documentation/divider/in-sleeve.webp)
 
-![The final visible content area](../../../static/image/documentation/divider/how2.webp)
+The result works with both cards using standard size and perfect fit size. If you use standard sized sleeve, you get exactly **3mm** visible area as advertised. On perfect-fit sleeves, you can see a bit more of the divider.
 
-If you don't sleeve cards, you can see even more of the dividers. Conversely if you use standard-sized sleeve instead of a perfect-fit, **that's fine too**. As you can see there is a bit more space to take until it obscure the text. Bottom part of the encounter set icon in the circular area might be a bit obscured, though.
+![The final visible content area](../../../static/image/documentation/divider/sleeve-height.webp)
 
-It is not recommended to skip sleeving these dividers, as the outer sleeve adds around +1 mm to the height. Text might sink a bit without the additional height. Plus, as the design encourages moving together the sleeves to different containers, the sleeve will greatly extend their durability.
+If you keep cards in your collection sleeved, you should sleeve these dividers as the height added serves functional purpose rather than just durability. You lose 1mm or 0.5mm of the divider's height if you don't sleeve, depending on orientation.
 
 ## What outer sleeves are available?
 
