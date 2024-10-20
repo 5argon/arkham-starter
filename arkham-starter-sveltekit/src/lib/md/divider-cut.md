@@ -15,6 +15,14 @@ Also you have to weight between two strategies :
 
 Guillotine cutter fixes the ruler problem, since you don't need it the cutter can always land perpendicularly. But it also comes with its own problem such as high price to cover bigger paper, not portable, can't measure stuff unlike the ruler, and must cut edge to edge therefore you lose the cutting guide needed to perform cuts on the other side.
 
+# Cutting mat's function
+
+You must use a cutting mat. Do not cut on your glass table or floor tiles, even though you think cutter can't damage them, or even though you are ready to sacrifice cutter's sharpness. Cutting mat's main feature is not to protect your table or your cutter's sharpness (though those are indeed one of the issues).
+
+Its actual critical feature is to allow the knife to go **beyond** the thickness of paper, like temporarily digging through the ground as you cut. As you lift up the knife, the wound closes and give you illusion that it could "self-heal". Even though it doesn't actually heal itself back, knife going through the work completely is required to get a clean cut. Now this is definitely what you prioritize over your table's surface or the cutter's durability.
+
+In woodworking it is unthinkable that one would cut the work right on the table and expect to get a clean cut. They would instead clamp the work such that where they make the cut poke out from the workbench, so the saw can go through the work completely. Table saw also has a blade that is coming from a hole below. Using hand cutter with cutting mat is essentially a miniature version of that kind of thing.
+
 # Ruler is a clamp
 
 Good ruler makes straight cut, but great ruler **clamps** your work. It might not matter in thinner paper, but at 250~300 gsm, if ruler is not good enough on its contact with the paper and its length, it is possible for the cutter to dislocate the content you are cutting. If not immediately, it occurs later in the process since gripping area keeps getting smaller.
