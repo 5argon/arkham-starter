@@ -18,7 +18,7 @@ For player card dividers, there are so many variations to fit whatever organizat
 
 1. Go to [Download page](./divider/download) and hand pick all the desired divider files you want.
 2. Go to [Printing page](./divider/print) on how to make all those files packed into a sheet you can then cut.
-3. Cut the sheet to remove the bleeds and get **93 x 67 mm** size.
+3. Cut the sheet to remove the bleeds and get **93 x 67 mm** size. I have some [cutting tips](./divider/cut) for you too.
 4. Sleeve them in **94 x 69 mm** outer sleeves and enjoy.
 
 # How it works
@@ -78,7 +78,7 @@ After you have added some translations, you can ping me somewhere using one of t
 
 1. Go to [Download page](./divider/download) and hand pick all the desired divider files you want.
 2. Go to [Printing page](./divider/print) on how to make all those files packed into a sheet you can then cut.
-3. Cut the sheet to remove the bleeds and get **93 x 67 mm** size.
+3. Cut the sheet to remove the bleeds and get **93 x 67 mm** size. I have some [cutting tips](./divider/cut) for you too.
 4. Sleeve them in **94 x 69 mm** outer sleeves and enjoy.
 
 # Links
