@@ -32,7 +32,7 @@
 
 ข้อเสียคือบางตัวคั่นที่ไม่อยากได้ก็อาจจะติดมาด้วยในหน้าเดียวกันที่แพ็คไปให้ กับมัดมือชกนิดหน่อยเรื่องการจัดการ์ดผู้เล่น (เลือกแบบ Lv.0 + Lv. 1~5 ไปให้ ต่อคลาส) ถ้าไม่ชอบจัดแบบนี้ ก็คงต้องไปโหลดภาพแยกมาประกอบเป็นกระดาษเอง
 
-ไฟล์ PDF นี้มีทั้งหมด 5 หน้า ขนาด A4 โดยแต่ละหน้าจุได้ 8 ตัวคั่น [**ดาวน์โหลดที่นี่ (53.3 MB)**](https://drive.google.com/file/d/1HJ_o4cGdgkdqwET0YsOvHHVd0as5Og8y/view?usp=share_link)
+ไฟล์ PDF นี้มีทั้งหมด 5 หน้า ขนาด A4 โดยแต่ละหน้าจุได้ 8 ตัวคั่น [**ดาวน์โหลดที่นี่ (53.3 MB)**](https://drive.google.com/file/d/161q2SKUG7Ps1CDQtcqVWU5o6WMLIwx-v/view?usp=sharing)
  
 ![PDF list](../../../static/image/documentation/divider/thai-menu.webp)
 
