@@ -31,9 +31,13 @@
 	a challenge physically as they are laid on the table. (Like rogue-like games that show you talents
 	in form of cards and they look interesting that way.) The edits that the Refraction cause are also
 	more visible in a form of individual card to prevent misplays, just like many official
-	back-of-Act/Agenda effects can stay on the table to be used as a reminder. Graphic includes bleed
-	area (see the preview image above how much to cut out), and they are color coded according to
-	whether they are Ultimatums or Boons.
+	back-of-Act/Agenda effects can stay on the table to be used as a reminder.
+</p>
+
+<p>
+	Graphic includes bleed area. See the preview image above how much to cut out. (The throwing stars
+	thing should be at around the edge.) They are color coded according to whether they are Ultimatums
+	or Boons.
 </p>
 
 <ul>
