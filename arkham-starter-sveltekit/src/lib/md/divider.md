@@ -61,6 +61,7 @@ Why this is an advantage for **you**? When you choose to go with any divider, yo
 - Polish (Contributed by : ? (please let me know))
 - Czech (Contributed by : [@yorrkee](https://boardgamegeek.com/user/yorrkee))
 - Thai (Contributed by **ME**. Finally, it is our turn to get a localization in 2024...)
+- Hungarian (Contributed by [@Veghist](https://boardgamegeek.com/user/Veghist))
 
 If translation is missing, file is still rendered but text area will be empty.
 

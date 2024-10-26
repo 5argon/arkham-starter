@@ -100,6 +100,12 @@
 	image="utility.webp"
 />
 <ResourceItem
+	url="/ultimatum"
+	title="Ultimatums and Boons : Refraction Cards"
+	description="Print out each Refractions as an individual card so you can store with the campaign or scenario they apply to."
+	image="ultimatum.webp"
+/>
+<ResourceItem
 	url="/proxy"
 	title="Proxy Template"
 	description="Photocopier-friendly frame graphics that you can fill in the blank to make a proxy card."

@@ -37,6 +37,7 @@
 		{ code: 'pl', text: 'Polish' },
 		{ code: 'cs', text: 'Czech' },
 		{ code: 'th', text: 'Thai' },
+		{ code: 'hu', text: 'Hungarian' },
 	]
 	const dirs = jsonDir as DividerDir[]
 
