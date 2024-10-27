@@ -26,18 +26,28 @@
 </p>
 
 <p>
-	I made these cards so they can be stored in the same box as the scenario or campaign, so you see
-	them whenever you fancy playing that campaign again in the future, and perhaps tempt you to "pick"
-	a challenge physically as they are laid on the table. (Like rogue-like games that show you talents
-	in form of cards and they look interesting that way.) The edits that the Refraction cause are also
-	more visible in a form of individual card to prevent misplays, just like many official
-	back-of-Act/Agenda effects can stay on the table to be used as a reminder.
+	At this point you might see where I'm going now. I made these cards so they can be stored in the
+	same box as the scenario or campaign. You probably forget what Refractions are available for a
+	particular campaign if you have not played it for some time. Now they are already waiting in the
+	box.
+</p>
+
+<p>
+	The modifications that the Ultimatums and Boons perform are also more visible in a form of
+	individual card to prevent misplays, just like those back-of-Act/Agenda effects staying on the
+	table to be used as a reminder. As an individual card, you can point to "that" Ultimatum or pass
+	it around without recalling the name. You can shuffle them to randomize. You want to break the
+	rule and give the Boon card to only one player having trouble. Maybe you are making online content
+	and want viewers to look graphic instead of a FAQ entry when talking about what Ultimatums you
+	choose. I said all that reasons, but maybe you simply want more blings...
 </p>
 
 <p>
 	Graphic includes bleed area. See the preview image above how much to cut out. (The throwing stars
 	thing should be at around the edge.) They are color coded according to whether they are Ultimatums
-	or Boons.
+	or Boons. Some printing system supports only standard size card (MTG size), but AHLCG cards are a
+	little bit narrower. With large bleed available you can cut out as much as you want to suit how
+	your print shop works.
 </p>
 
 <ul>
@@ -46,6 +56,20 @@
 			href="https://drive.google.com/drive/folders/1Q8E-2x_ggq6ARe_3seBjZvx2SvI0d7b5?usp=share_link"
 			target="_blank"
 			rel="noreferrer">Google Drive Link : Physical Ultimatums and Boons.</a
+		>
+	</li>
+</ul>
+
+<p>
+	These are no bleed version, cut to MTG card aspect ratio. Intended for digital content creation.
+</p>
+
+<ul>
+	<li>
+		<a
+			href="https://drive.google.com/drive/folders/1UKVQ3W6XLZrzEquTBPHxSaDeS-5tmIY3?usp=share_link"
+			target="_blank"
+			rel="noreferrer">Google Drive Link : Physical Ultimatums and Boons. (No Bleed, MTG Size)</a
 		>
 	</li>
 </ul>
