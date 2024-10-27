@@ -4,6 +4,7 @@
 
 <svelte:head>
 	<title>arkham-starter.com | Physical Ultimatums and Boons</title>
+	<meta name="og:title" content="Physical Ultimatums and Boons" />
 	<meta name="og:description" content="Print out Ultimatums and Boons as an individual card." />
 	<meta name="og:image" content="https://arkham-starter.com/image/resource/ultimatum.webp" />
 </svelte:head>
@@ -13,9 +14,12 @@
 <img alt="Asset" src="/image/resource/ultimatum.webp" />
 
 <p>
-	The FAQ version 2.3 ("The Midwinter Gala Edition") comes with explanation about Ultimatums and
-	Boons which are essentially optional buffs and nerfs that are officially defined. So when you
-	found the game too easy or too hard, you can apply some designer-guided adjustments.
+	The <a
+		href="https://www.fantasyflightgames.com/en/news/2024/10/23/questions-and-ultimatums/"
+		target="_blank">FAQ version 2.3 ("The Midwinter Gala Edition")</a
+	> comes with explanation about Ultimatums and Boons which are essentially optional buffs and nerfs
+	that are officially defined. So when you found the game too easy or too hard, you can apply some designer-guided
+	adjustments.
 </p>
 
 <p>
