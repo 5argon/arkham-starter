@@ -15,6 +15,10 @@ Also you have to weight between two strategies :
 
 Guillotine cutter fixes the ruler problem, since you don't need it the cutter can always land perpendicularly. But it also comes with its own problem such as high price to cover bigger paper, not portable, can't measure stuff unlike the ruler, and must cut edge to edge therefore you lose the cutting guide needed to perform cuts on the other side.
 
+![Back damage](../../../static/image/documentation/divider/back-damage.webp)
+
+Sometimes you thought the cutter is still sharp enough looking at the cut result from the front, and it still takes same number of cuts to make it. Howerver the damage occurs on the back first. If cutting blade is getting blunt, you get white particles on the back side of whatever you are cutting. (The color dust of laser printer being torn out of paper.) So please check the back of your work often even when you are still mid-sheet. If it has problem then you can refresh the blade before continuing. It is better than cutting them all only to realize later that every card have white fluff on the back. Especially if back is a player / encounter back, that you want to blend with the rest.
+
 # Cutting mat's function
 
 You must use a cutting mat. Do not cut on your glass table or floor tiles, even though you think cutter can't damage them, or even though you are ready to sacrifice cutter's sharpness. Cutting mat's main feature is not to protect your table or your cutter's sharpness (though those are indeed one of the issues).
@@ -43,6 +47,12 @@ I don't know how international this ruler is, but I personally never seen any ru
 
 I could find it on Amazon, so I think maybe it is also available near you?
 
+# Use masking tape
+
+Masking tape doesn't damage the paper when removing. You should tape each corner of your work before cutting to help your ruler clamp the work even better.
+
+It can obscure the cut guide on the margin, and even be over the artwork, because you can cut through and remove it later. You can still see the cut guide because it is slightly see through.
+
 # Avoid noodles
 
 ![Noodles](../../../static/image/documentation/divider/noodle.webp)
@@ -50,6 +60,10 @@ I could find it on Amazon, so I think maybe it is also available near you?
 An uncut sheet with edge guides is designed to cut the center content out without cutting all the way to the edge. So you must either cut vertically first or horizontally first.
 
 To decide which side to go first, choose the side with bigger gaps between cuts. If you choose a side with small gaps, when you go make a perpendicular cut you will have to fight what I called "noodles". It is harder to clamp down these noodles and increase the risk that your cutter sliding the noodles and cause collateral damage.
+
+![Noodles](../../../static/image/documentation/divider/noodle-2.webp)
+
+Note that if your paper margin is small (in attempt to fit as many cards in the page as possible), then it might noodle at the edge too. You can combat this by stopping the cutter exactly at the last card's end instead of continuing to the margin. Using masking tape will also help prevent this problem.
 
 # Flip ruler on the last cut of each side
 
