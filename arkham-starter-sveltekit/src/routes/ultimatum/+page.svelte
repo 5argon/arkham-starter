@@ -65,6 +65,25 @@
 </ul>
 
 <p>
+	These are printer-ready files in A4 size. Downside is that I packed in all the cards you may not
+	want, but they do make exactly 4 sheets of A4 currently. Margin is rather small but if your
+	printer can't handle this, you still have a bit of bleed for the printer to eats into before
+	getting to the actual card. (Though you will lose the cut guide, in that case you can edit the
+	image so cut lines are drawn across the sheet.)
+</p>
+
+<ul>
+	<li>
+		<a
+			href="https://drive.google.com/drive/folders/1_2ow5-Y8FZ9Hh6oXw_8gollPyqH9Cc4E?usp=share_link"
+			target="_blank"
+			rel="noreferrer"
+			>Google Drive Link : Physical Ultimatums and Boons. (A4, 4 sheets, 9 cards each.)
+		</a>
+	</li>
+</ul>
+
+<p>
 	These are no bleed version, cut to MTG card aspect ratio. Intended for digital content creation.
 </p>
 
