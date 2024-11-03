@@ -43,7 +43,7 @@
 	/>
 	<ExpansionDisplay
 		set={CardPack.TheDreamEaters}
-		text="The Dream-Eaters*"
+		text="The Dream-Eaters"
 		subText={campaignExpansion}
 		link="/campaign/tde"
 		campaign
