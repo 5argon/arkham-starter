@@ -1,0 +1,1 @@
+export type Tag = "tag_a" | "tag_b"

@@ -1,0 +1,176 @@
+[
+  {
+    "code": "60102",
+    "name": "Randall Cho",
+    "text": "Nathaniel Cho deck only.\n[reaction] After Randall Cho enters play: Heal 3 damage or search your deck and discard pile for a [[Weapon]] asset, play it <i>(paying its cost)</i>, and shuffle your deck.",
+    "tags": []
+  },
+  {
+    "code": "60105",
+    "name": "Boxing Gloves",
+    "text": "You get +1 [combat] while fighting.\n[reaction] After you defeat an enemy, exhaust Boxing Gloves: Search the top 6 cards of your deck for a [[Spirit]] event and add it to your hand. Shuffle your deck.",
+    "tags": []
+  },
+  {
+    "code": "60106",
+    "name": "Flesh Ward",
+    "text": "Uses (4 charges).\n[reaction] When you are dealt damage and/or horror from an enemy attack, exhaust Flesh Ward and spend 1 charge: Cancel 1 damage or horror just dealt from that attack.",
+    "tags": []
+  },
+  {
+    "code": "60107",
+    "name": "Grete Wagner",
+    "text": "You get +1 [combat].\n[reaction] After you defeat an enemy, exhaust Grete Wagner and deal 1 damage to her: Discover 1 clue at your location.",
+    "tags": []
+  },
+  {
+    "code": "60108",
+    "name": "Physical Training",
+    "text": "[free] Spend 1 resource: You get +1 [willpower] for this skill test.\n[free] Spend 1 resource: You get +1 [combat] for this skill test.",
+    "tags": []
+  },
+  {
+    "code": "60109",
+    "name": "Relentless",
+    "text": "[reaction] When you deal excess damage to an enemy, exhaust Relentless: Place that excess damage on Relentless.\n[fast] Discard Relentless: Gain resources equal to the amount of damage on it.",
+    "tags": []
+  },
+  {
+    "code": "60110",
+    "name": "Safeguard",
+    "text": "[reaction] After another investigator moves from your location to a connecting location, exhaust Safeguard: Move to that location.",
+    "tags": []
+  },
+  {
+    "code": "60111",
+    "name": "Clean Them Out",
+    "text": "<b>Fight.</b> When this action begins, gain 2 resources.",
+    "tags": []
+  },
+  {
+    "code": "60112",
+    "name": "Counterpunch",
+    "text": "Fast. Play after an enemy attacks you, even if that attack was canceled.\n<b>Fight.</b> This attack targets the attacking enemy.",
+    "tags": []
+  },
+  {
+    "code": "60113",
+    "name": "Dodge",
+    "text": "Fast. Play when an enemy attacks an investigator at your location.\nCancel that attack.",
+    "tags": []
+  },
+  {
+    "code": "60114",
+    "name": "\"Get over here!\"",
+    "text": "<b>Engage.</b> <b>Fight.</b> Choose a non-[[Elite]] enemy at your location or a connecting location. Move that enemy to your location, engage it, and attack it.",
+    "tags": []
+  },
+  {
+    "code": "60115",
+    "name": "Glory",
+    "text": "Fast. Play after you defeat an enemy.\nDraw 2 cards.",
+    "tags": []
+  },
+  {
+    "code": "60116",
+    "name": "Monster Slayer",
+    "text": "<b>Fight.</b> This attack deals +1 damage.",
+    "tags": []
+  },
+  {
+    "code": "60117",
+    "name": "One-Two Punch",
+    "text": "<b>Fight.</b> You get +1 [combat] for this attack. If you succeed, you may fight that enemy again. You get +2 [combat] and deal +1 damage for that attack.",
+    "tags": []
+  },
+  {
+    "code": "60118",
+    "name": "Stand Together",
+    "text": "Choose another investigator at your location. Both you and that investigator gain 2 resources.",
+    "tags": []
+  },
+  {
+    "code": "60119",
+    "name": "Vicious Blow",
+    "text": "If this skill test is successful during an attack, that attack deals +1 damage.",
+    "tags": []
+  },
+  {
+    "code": "60120",
+    "name": "Evidence!",
+    "text": "Fast. Play after you defeat an enemy.\nDiscover 1 clue at your location (2 clues instead if you defeated enemies with a combined total of at least 4 printed health this turn).",
+    "tags": []
+  },
+  {
+    "code": "60121",
+    "name": "Galvanize",
+    "text": "Fast. Play only during your turn.\nReady a [guardian] asset you control. You may take an additional action during your turn, which can only be used to fight.",
+    "tags": []
+  },
+  {
+    "code": "60122",
+    "name": "Counterpunch",
+    "text": "Fast. Play when an enemy attacks you <i>(before resolving that attack)</i>.\n<b>Fight.</b> This attack targets the attacking enemy. You get +2 [combat] and deal +1 damage for this attack.",
+    "tags": []
+  },
+  {
+    "code": "60123",
+    "name": "\"Get over here!\"",
+    "text": "Fast. Play during any [free] window.\n<b>Engage. Fight.</b> Choose a non-[[Elite]] enemy up to 2 locations away. Move that enemy to your location, engage it, and attack it.",
+    "tags": []
+  },
+  {
+    "code": "60124",
+    "name": "Lesson Learned",
+    "text": "Fast. Play after you take damage from an enemy attack.\nDiscover 2 clues at your location.",
+    "tags": []
+  },
+  {
+    "code": "60125",
+    "name": "Mano a Mano",
+    "text": "Play only as your first action.\nDeal 2 damage to an enemy engaged with you. This action does not provoke attacks of opportunity.",
+    "tags": []
+  },
+  {
+    "code": "60126",
+    "name": "Overpower",
+    "text": "Max 1 committed per skill test.\nIf this test is successful, draw 1 card (2 cards instead if it succeeds by 2 or more).",
+    "tags": []
+  },
+  {
+    "code": "60127",
+    "name": "Boxing Gloves",
+    "text": "You get +2 [combat] while fighting.\n[reaction] After you defeat an enemy, exhaust Boxing Gloves: Search the top 9 cards of your deck for a [[Spirit]] event and add it to your hand. Shuffle your deck.",
+    "tags": []
+  },
+  {
+    "code": "60128",
+    "name": "Grete Wagner",
+    "text": "You get +1 [combat] and +1 [intellect].\n[reaction] After you defeat an enemy, exhaust Grete Wagner and deal 1 damage to her: Discover 1 clue at your location or a connecting location.",
+    "tags": []
+  },
+  {
+    "code": "60129",
+    "name": "Dynamite Blast",
+    "text": "Fast. Play during any [fast] window.\nChoose either your location or a connecting location. Deal 3 damage to each enemy and investigator at the chosen location.",
+    "tags": []
+  },
+  {
+    "code": "60130",
+    "name": "Taunt",
+    "text": "Fast. Play during any [fast] window.\nEngage any number of enemies at your location. For each enemy engaged this way, deal it 1 damage and draw 1 card.",
+    "tags": []
+  },
+  {
+    "code": "60131",
+    "name": "Physical Training",
+    "text": "Uses (2 resources). Replenish these resources at the start of each round.\n[free] Spend 1 resource from your resource pool or from Physical Training: You get +1 [willpower] or +1 [combat] for this skill test.",
+    "tags": []
+  },
+  {
+    "code": "60132",
+    "name": "One-Two Punch",
+    "text": "<b>Fight.</b> You automatically succeed and deal +1 damage for this attack. You may fight again. You get +3 [combat] and deal +2 damage for that attack.",
+    "tags": []
+  }
+]

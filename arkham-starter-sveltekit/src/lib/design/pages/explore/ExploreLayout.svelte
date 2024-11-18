@@ -82,13 +82,20 @@
 					!x.original.inv && !x.original.ir && (!x.original.wk || (x.original.wk && x.original.bd))
 				)
 			})
-		return notInvestigator.map<DecklistEntry>((x) => {
+		const byPack = notInvestigator.map<DecklistEntry>((x) => {
 			return {
 				amount: x.original.q,
 				cardId: x.original.id,
 				id: x.original.id,
 			}
 		})
+		console.log(
+			byPack
+				.sort((a, b) => a.cardId.localeCompare(b.cardId))
+				.map((x) => "'" + x.cardId)
+				.join('\t'),
+		)
+		return byPack
 	}
 
 	function getByPackFromPdbWeakness(pdb: PopupDatabase, ps: CardPack[]): DecklistEntry[] {
