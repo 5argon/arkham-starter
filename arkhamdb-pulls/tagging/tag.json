@@ -41,7 +41,11 @@
   },
   {
     "name": "additional_slot_hand",
-    "description": ""
+    "description": "Provides additional hand slots."
+  },
+  {
+    "name": "additional_slot_tome",
+    "description": "Provides additional hand slots specifically for Tome assets."
   },
   {
     "name": "any_investigator",
@@ -476,6 +480,10 @@
     "description": "Card can deal damage to investigator."
   },
   {
+    "name": "deck_restriction",
+    "description": "Indicates the card can only be used in a specific investigator's deck."
+  },
+  {
     "name": "difficulty_check_higher_2",
     "description": "Works or not depending on test's difficulty."
   },
@@ -622,6 +630,10 @@
   {
     "name": "end_your_turn",
     "description": "Cause you to end your turn, like Rite of Seeking or Fated cards."
+  },
+  {
+    "name": "enemy_cannot_attack",
+    "description": "Prevents enemies from attacking."
   },
   {
     "name": "enemy_manage_defeat",
@@ -1506,6 +1518,10 @@
   {
     "name": "trait_spell_event",
     "description": ""
+  },
+  {
+    "name": "trait_tome",
+    "description": "Card support positively to other cards of this trait."
   },
   {
     "name": "trait_tome",

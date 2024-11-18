@@ -3,31 +3,59 @@
     "code": "02006",
     "name": "Zoey's Cross",
     "text": "Zoey Samaras deck only.\n[reaction] After an enemy becomes engaged with you, exhaust Zoey's Cross and spend 1 resource: Deal 1 damage to that enemy.",
-    "tags": []
+    "tags": [
+      "deal_damage_enemy",
+      "engage_with_you",
+      "spend_resource",
+      "timing_reaction_after_enemy_engages",
+      "testless_damage"
+    ]
   },
   {
     "code": "02008",
     "name": "Search for the Truth",
     "text": "Rex Murphy deck only.\nDraw X cards, where X is the number of clues on Rex Murphy (to a maximum of 5).",
-    "tags": []
+    "tags": [
+      "draw_player",
+      "current_clue_value"
+    ]
   },
   {
     "code": "02010",
     "name": "Jenny's Twin .45s",
     "text": "Jenny Barnes deck only. Uses (X ammo).\n[action] Spend 1 ammo: <b>Fight.</b> You get +2 [combat] for this attack. This attack deals +1 damage.",
-    "tags": []
+    "tags": [
+      "bold_fight",
+      "boost_combat_2",
+      "damage_plus_1",
+      "spend_ammo",
+      "uses_type_ammo"
+    ]
   },
   {
     "code": "02012",
     "name": "Jim's Trumpet",
     "text": "Jim Culver deck only.\n[reaction] When a [skull] token is revealed during a skill test, exhaust Jim's Trumpet: Heal 1 horror from an investigator at your location or a connecting location.",
-    "tags": []
+    "tags": [
+      "chaos_reveal_token_skull",
+      "heal_horror",
+      "timing_reaction_chaos_reveal_after",
+      "your_location_investigator",
+      "connecting_location_investigator"
+    ]
   },
   {
     "code": "02014",
     "name": "Duke",
     "text": "\"Ashcan\" Pete deck only.\n[action] Exhaust Duke: <b>Fight.</b> You attack with a base [combat] skill of 4. This attack deals +1 damage.\n[action] Exhaust Duke: <b>Investigate.</b> You investigate with a base [intellect] skill of 4. You may move to a connecting location immediately before investigating with this effect.",
-    "tags": []
+    "tags": [
+      "bold_fight",
+      "bold_investigate",
+      "damage_plus_1",
+      "move_investigator_self",
+      "stat_base_combat_4",
+      "stat_base_intellect_4"
+    ]
   },
   {
     "code": "02016",

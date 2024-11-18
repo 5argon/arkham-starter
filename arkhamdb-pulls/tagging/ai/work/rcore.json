@@ -3,31 +3,61 @@
     "code": "01006",
     "name": "Roland's .38 Special",
     "text": "Roland Banks deck only.\nUses (4 ammo).\n[action] Spend 1 ammo: <b>Fight.</b> You get +1 [combat] for this attack (if there are 1 or more clues on your location, you get +3 [combat], instead). This attack deals +1 damage.",
-    "tags": []
+    "tags": [
+      "deck_restriction",
+      "uses_starting_4",
+      "uses_type_ammo",
+      "bold_fight",
+      "boost_combat_1",
+      "boost_combat_3",
+      "damage_plus_1",
+      "cost_action_spend_ammo",
+      "location_clue_exist"
+    ]
   },
   {
     "code": "01008",
     "name": "Daisy's Tote Bag",
     "text": "Daisy Walker deck only.\nYou have 2 additional hand slots, which can only be used to hold [[Tome]] assets.",
-    "tags": []
+    "tags": [
+      "deck_restriction",
+      "additional_slot_hand",
+      "additional_slot_tome"
+    ]
   },
   {
     "code": "01010",
     "name": "On the Lam",
     "text": "\"Skids\" O'Toole deck only.\nFast. Play after your turn begins.\nUntil the end of the round, non-[[Elite]] enemies cannot attack you.",
-    "tags": []
+    "tags": [
+      "deck_restriction",
+      "fast_play",
+      "duration_until_end_round",
+      "enemy_cannot_attack",
+      "elite_unusable"
+    ]
   },
   {
     "code": "01012",
     "name": "Heirloom of Hyperborea",
     "text": "Agnes Baker deck only.\n[reaction] After you play a [[Spell]] card: Draw 1 card.",
-    "tags": []
+    "tags": [
+      "deck_restriction",
+      "trait_spell",
+      "draw_player_1",
+      "timing_reaction_enters_play"
+    ]
   },
   {
     "code": "01014",
     "name": "Wendy's Amulet",
     "text": "Wendy Adams deck only.\nYou may play the topmost event in your discard pile as if it were in your hand.\n<b>Forced</b> - After you play an event or discard an event from play: Place it on the bottom of your deck instead of in your discard pile.",
-    "tags": []
+    "tags": [
+      "deck_restriction",
+      "to_play_from_discard",
+      "to_deck_from_play",
+      "timing_reaction_after_play"
+    ]
   },
   {
     "code": "01016",
@@ -1459,24 +1489,6 @@
   {
     "code": "01595",
     "name": "Elder Sign Amulet",
-    "tags": []
-  },
-  {
-    "code": "01601",
-    "name": "Mob Enforcer",
-    "text": "<b>Prey</b> - Bearer only.\nHunter.\n[action] Spend 4 resources: <b>Parley</b>. Discard Mob Enforcer.",
-    "tags": []
-  },
-  {
-    "code": "01602",
-    "name": "Silver Twilight Acolyte",
-    "text": "<b>Prey</b> - Bearer only.\nHunter.\n<b>Forced</b> - After Silver Twilight Acolyte attacks: Place 1 doom on the current agenda.",
-    "tags": []
-  },
-  {
-    "code": "01603",
-    "name": "Stubborn Detective",
-    "text": "<b>Prey</b> - Bearer only.\nHunter.\nWhile Stubborn Detective is at your location, treat your investigator as if his or her printed text box were blank (except for [[Traits]]).",
     "tags": []
   },
   {
