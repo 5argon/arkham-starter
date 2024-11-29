@@ -1,7 +1,14 @@
 import { AhdbCard } from "../interfaces.ts"
-import { path, emptyDir, Image, resize } from "../../mod.ts"
+import { path, emptyDir } from "../../mod.ts"
+import { decode, encode } from "npm:@jsquash/avif"
+import { encode as encodePng } from "npm:@jsquash/png"
+import { createCanvas } from "https://deno.land/x/canvas@v1.4.2/mod.ts"
 import {
-  baseUrl,
+  ImageMagick,
+  MagickFormat,
+  initialize,
+} from "https://deno.land/x/imagemagick_deno@0.0.31/mod.ts"
+import {
   pullsDirectory,
   pullsImages,
   pullsImagesTrue,
@@ -10,8 +17,12 @@ import {
   pullsImagesSquare,
   pullsImagesSquareSmall,
   pullsImagesStrip,
+  makeImageSorce,
 } from "../constants.ts"
 import { fetchWithRetries } from "../fetch.ts"
+
+const concurrentLimit = 3
+initialize()
 
 export async function downloadImages(cards: AhdbCard[]): Promise<void> {
   const pi = path.join(pullsDirectory, pullsImages)
@@ -30,19 +41,25 @@ export async function downloadImages(cards: AhdbCard[]): Promise<void> {
     emptyDir(stripPath),
     emptyDir(squareSmallPath),
   ])
-  await Promise.all(
-    cards.map((x) =>
-      downloadImageAndProcessSingleCard(
-        x,
-        truePath,
-        fullPath,
-        squarePath,
-        stripPath,
-        squareSmallPath,
-        fullSmallPath,
+  for (let i = 0; i < cards.length; i += concurrentLimit) {
+    const cardBatch = cards.slice(i, i + concurrentLimit)
+    console.log(
+      "Downloading images for cards " + i + " to " + (i + cardBatch.length),
+    )
+    await Promise.all(
+      cardBatch.map((x) =>
+        downloadImageAndProcessSingleCard(
+          x,
+          truePath,
+          fullPath,
+          squarePath,
+          stripPath,
+          squareSmallPath,
+          fullSmallPath,
+        ),
       ),
-    ),
-  )
+    )
+  }
 }
 
 async function downloadImageAndProcessSingleCard(
@@ -93,21 +110,27 @@ export async function downloadImageSingleCard(
     await tryPatch(fileName, destination)
     return
   }
-  const imagePath = path.join(baseUrl, imageSrc)
-  // console.log("Downloading card image : " + imagePath);
-  let imageResult: Response
-  try {
-    imageResult = await fetchWithRetries(imagePath)
-  } catch {
-    // console.log("Fetching failed for : " + imagePath);
+  const extractImageSrcCardCode = imageSrc.match(/([\w\d_-]*)\.?[^\\/]*$/i)?.[1]
+  if (extractImageSrcCardCode === undefined) {
     await tryPatch(fileName, destination)
     return
   }
+  const imagePath = makeImageSorce(extractImageSrcCardCode)
+  let imageResult: Response
+  try {
+    // console.log("Fetching : " + imagePath)
+    imageResult = await fetchWithRetries(imagePath)
+    // console.log("Fetching done : " + imagePath)
+  } catch {
+    console.log("Fetching failed for : " + imagePath)
+    await tryPatch(fileName, destination)
+    return
+  }
+  // console.log("Download done : " + imagePath)
   const abuf = await imageResult.arrayBuffer()
-  await Deno.writeFile(
-    path.join(destination, fileName + ".png"),
-    new Uint8Array(abuf),
-  )
+  const writeTo = path.join(destination, fileName + ".avif")
+  // console.log("Writing to : " + writeTo)
+  await Deno.writeFile(writeTo, new Uint8Array(abuf))
 }
 
 async function tryPatch(code: string, destination: string): Promise<boolean> {
@@ -124,6 +147,9 @@ async function tryPatch(code: string, destination: string): Promise<boolean> {
   }
 }
 
+/**
+ * Relative unit in 0.0 ~ 0.1
+ */
 interface CropTarget {
   x: number
   y: number
@@ -144,7 +170,7 @@ async function processSingleCard(
   fullSmallPath: string,
   backCode: string | null,
 ): Promise<void> {
-  const p = path.join(truePath, card.code + ".png")
+  const p = path.join(truePath, card.code + ".avif")
   let read: Uint8Array
   try {
     read = await Deno.readFile(p)
@@ -156,15 +182,13 @@ async function processSingleCard(
     }
     return
   }
-  let image: Image
+  let image: ImageData
   try {
-    image = await Image.decode(read)
+    image = await decode(read)
   } catch {
     console.log("Error decoding image " + card.code)
     return
   }
-  const w = image.width
-  const h = image.height
   let squareTarget: CropTarget | undefined
   let stripTarget: CropTarget | undefined
   switch (card.type_code) {
@@ -283,69 +307,116 @@ async function processSingleCard(
     default:
       break
   }
+
+  function cropImageData(image: ImageData, target: CropTarget): ImageData {
+    const croppedWidth = Math.floor(image.width * target.w)
+    const croppedHeight = Math.floor(image.height * target.h)
+    const cropStartX = Math.floor(image.width * target.x)
+    const cropStartY = Math.floor(image.height * target.y)
+    const canvas = createCanvas(image.width, image.height)
+    const ctx = canvas.getContext("2d")
+    ctx.putImageData(image, 0, 0)
+    const croppedImageData = ctx.getImageData(
+      cropStartX,
+      cropStartY,
+      croppedWidth,
+      croppedHeight,
+    )
+    return new ImageData(croppedImageData.data, croppedWidth, croppedHeight)
+  }
+
+  async function createAvifBufferWithResize(
+    image: ImageData,
+    keepAspectRatio: boolean,
+    width?: number,
+    height?: number,
+  ): Promise<Uint8Array> {
+    let resizedWidth: number
+    let resizedHeight: number
+
+    // Figure out width and height with keepAspectRatio option
+    if (keepAspectRatio) {
+      if (width !== undefined && height !== undefined) {
+        resizedWidth = width
+        resizedHeight = height
+      } else if (width !== undefined) {
+        resizedWidth = width
+        resizedHeight = Math.floor((width / image.width) * image.height)
+      } else if (height !== undefined) {
+        resizedWidth = Math.floor((height / image.height) * image.width)
+        resizedHeight = height
+      } else {
+        throw new Error("Either width or height must be provided.")
+      }
+    } else {
+      if (width === undefined || height === undefined) {
+        throw new Error("Both width and height must be provided.")
+      }
+      resizedWidth = width
+      resizedHeight = height
+    }
+
+    // Resize with good interpolation with imagemagick
+    const pngBuffer = await encodePng(image)
+    const pngByteArray = new Uint8Array(pngBuffer)
+    const resizedImageData = ImageMagick.read(pngByteArray, (image) => {
+      image.resize(resizedWidth, resizedHeight)
+      console.log("Resized to " + image.width + "x" + image.height)
+      return image.write(MagickFormat.Rgba, (buffer) => {
+        return new ImageData(
+          new Uint8ClampedArray(buffer),
+          image.width,
+          image.height,
+        )
+      })
+    })
+
+    const avif = await encode(resizedImageData)
+    return new Uint8Array(avif)
+  }
+
   if (squareTarget !== undefined && stripTarget !== undefined) {
-    const square = image
-      .clone()
-      .crop(
-        squareTarget.x * w,
-        squareTarget.y * h,
-        squareTarget.w * w,
-        squareTarget.h * h,
-      )
-    const strip = image
-      .clone()
-      .crop(
-        stripTarget.x * w,
-        stripTarget.y * h,
-        stripTarget.w * w,
-        stripTarget.h * h,
-      )
-    const squareSmall = image
-      .clone()
-      .crop(
-        squareTarget.x * w,
-        squareTarget.y * h,
-        squareTarget.w * w,
-        squareTarget.h * h,
-      )
-    const p1 = path.join(squarePath, card.code + ".png")
-    const p2 = path.join(stripPath, card.code + ".png")
-    const p3 = path.join(squareSmallPath, card.code + ".png")
+    const square = await cropImageData(image, squareTarget)
+    const strip = await cropImageData(image, stripTarget)
+    const squareSmall = await cropImageData(image, squareTarget)
+    const p1 = path.join(squarePath, card.code + ".avif")
+    const p2 = path.join(stripPath, card.code + ".avif")
+    const p3 = path.join(squareSmallPath, card.code + ".avif")
     const w1 = Deno.writeFile(
       p1,
-      await resize(await square.encode(), { width: 128, height: 128 }),
+      await createAvifBufferWithResize(square, false, 128, 128),
     )
     const w2 = Deno.writeFile(
       p2,
-      await resize(await strip.encode(), { width: 96, height: 32 }),
+      await createAvifBufferWithResize(strip, false, 96, 32),
     )
     const w3 = Deno.writeFile(
       p3,
-      await resize(await squareSmall.encode(), { width: 32, height: 32 }),
+      await createAvifBufferWithResize(squareSmall, false, 32, 32),
     )
     await Promise.all([w1, w2, w3])
   }
 
-  const p4 = path.join(fullSmallPath, card.code + ".png")
-  const p5 = path.join(fullPath, card.code + ".png")
-  const fullEncode = await image.encode()
+  const p4 = path.join(fullSmallPath, card.code + ".avif")
+  const p5 = path.join(fullPath, card.code + ".avif")
+  const fullEncode = new Uint8Array(image.data.buffer)
   const w4 = Deno.writeFile(
     p4,
-    await resize(fullEncode, { aspectRatio: true, height: 300 }),
+    await createAvifBufferWithResize(image, true, undefined, 300),
   )
 
   let resizedFull = fullEncode
   if (image.width > 640) {
-    resizedFull = await resize(fullEncode, { aspectRatio: true, width: 640 })
+    resizedFull = await createAvifBufferWithResize(image, true, 640, undefined)
   } else if (image.height > 640) {
-    resizedFull = await resize(fullEncode, { aspectRatio: true, height: 640 })
+    resizedFull = await createAvifBufferWithResize(image, true, undefined, 640)
   }
   const w5 = Deno.writeFile(p5, resizedFull)
   await Promise.all([w4, w5])
 
   if (backCode !== null) {
-    const pBack = path.join(truePath, backCode + ".png")
-    const destBack = path.join(fullPath, backCode + ".png")
+    const pBack = path.join(truePath, backCode + ".avif")
+    const destBack = path.join(fullPath, backCode + ".avif")
     let read: Uint8Array
     try {
       read = await Deno.readFile(pBack)
@@ -355,19 +426,29 @@ async function processSingleCard(
       }
       return
     }
-    let image: Image
+    let image: ImageData
     try {
-      image = await Image.decode(read)
+      image = await decode(read)
     } catch {
       console.log("Error decoding image (back) " + pBack)
       return
     }
-    const backEncode = await image.encode()
+    const backEncode = new Uint8Array(image.data.buffer)
     let resizedBack = backEncode
     if (image.width > 640) {
-      resizedBack = await resize(backEncode, { aspectRatio: true, width: 640 })
+      resizedBack = await createAvifBufferWithResize(
+        image,
+        true,
+        640,
+        undefined,
+      )
     } else if (image.height > 640) {
-      resizedBack = await resize(backEncode, { aspectRatio: true, height: 640 })
+      resizedBack = await createAvifBufferWithResize(
+        image,
+        true,
+        undefined,
+        640,
+      )
     }
     await Deno.writeFile(destBack, resizedBack)
   }

@@ -26,3 +26,7 @@ export const publicApiCards = "/api/public/cards/"
 export const publicApiDecklist = "/api/public/decklist/"
 export const publicApiPacks = "/api/public/packs/"
 export const publicApiTaboos = "/api/public/taboos/"
+
+export function makeImageSorce(code: string): string {
+  return `https://assets.arkham.build/optimized/${code}.avif`
+}
