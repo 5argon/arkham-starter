@@ -19,8 +19,8 @@ const allCards = await publicAllCards("/?encounter=1")
 const localCardsString = await Deno.readTextFile(
   path.join("json-patch", "tdcp.json"),
 )
-const fhvCards = JSON.parse(localCardsString) as AhdbCard[]
-for (const x of fhvCards) {
+const patchCards = JSON.parse(localCardsString) as AhdbCard[]
+for (const x of patchCards) {
   // For each card, if it already exists in allCards, replace it.
   const index = allCards.findIndex((y) => y.code === x.code)
   if (index !== -1) {
@@ -29,6 +29,7 @@ for (const x of fhvCards) {
     allCards.push(x)
   }
 }
+
 console.log("DONE")
 const taboos = await publicTaboos()
 const latestTaboo: AhdbTaboo | null = taboos.length > 0 ? taboos[0] : null
@@ -50,8 +51,29 @@ const uniquePackName = new Set<string>()
 const uniqueClassName = new Set<string>()
 const uniqueTrait = new Set<string>()
 
+function makeMap(s: Set<string>): {
+  toNum: { [k: string]: number }
+  fromNum: { [k: number]: string }
+} {
+  const m1: { [k: string]: number } = {}
+  const m2: { [k: number]: string } = {}
+  const st = Array.from(s)
+  st.forEach((x, i) => {
+    m1[x] = i
+    m2[i] = x
+  })
+  return { toNum: m1, fromNum: m2 }
+}
+
+const popupDatabaseItems: PopupDatabaseItem[] = []
+// Hidden card is kept, it is up to front end to not display them.
+const playerCards = allCards.filter((x) => {
+  return x.faction_code !== "mythos"
+})
+manualEdit(playerCards)
+
 // Preprocess to collect repeated strings.
-allCards.forEach((x) => {
+playerCards.forEach((x) => {
   uniqueClassName.add(x.faction_code)
   if (x.faction2_code !== undefined) {
     uniqueClassName.add(x.faction2_code)
@@ -68,39 +90,26 @@ allCards.forEach((x) => {
   uniquePackCode.add(x.pack_code)
   uniquePackName.add(x.pack_name)
 })
-
-function makeMap(s: Set<string>): {
-  toNum: { [k: string]: number }
-  fromNum: { [k: number]: string }
-} {
-  const m1: { [k: string]: number } = {}
-  const m2: { [k: number]: string } = {}
-  const st = Array.from(s)
-  st.forEach((x, i) => {
-    m1[x] = i
-    m2[i] = x
-  })
-  return { toNum: m1, fromNum: m2 }
-}
-
 const packCodeMap = makeMap(uniquePackCode)
 const packNameMap = makeMap(uniquePackName)
 const classNameMap = makeMap(uniqueClassName)
 const traitMap = makeMap(uniqueTrait)
 
-const popupDatabaseItems: PopupDatabaseItem[] = []
-// Hidden card is kept, it is up to front end to not display them.
-const playerCards = allCards.filter((x) => {
-  return x.faction_code !== "mythos"
-})
-manualEdit(playerCards)
-
 // Cards that need its subname shown to remove ambiguity are collected here.
 // It searches an entire game if there is a card with same name but different subname or not.
 const sameNameDifferentSubname: {
-  [name: string]: { code: string; subname: string }[]
+  [name: string]: { code: string; subname: string; xp?: number | null }[]
 } = {}
 const bondedToInvestigatorRestriction = new Set<string>()
+playerCards.forEach((x) => {
+  const technicallyIr = x.restrictions !== undefined && x.restrictions !== null
+  if (technicallyIr) {
+    // Make all its bonded cards IR too, because they are technically not.
+    x.bonded_cards?.forEach((y) => {
+      bondedToInvestigatorRestriction.add(y.code)
+    })
+  }
+})
 
 const needExplicitSubnameCodes = new Set<string>()
 playerCards.forEach((x) => {
@@ -114,26 +123,34 @@ playerCards.forEach((x) => {
   if (!(name in sameNameDifferentSubname)) {
     sameNameDifferentSubname[name] = []
   }
-  sameNameDifferentSubname[name].push({ code: x.code, subname: x.subname })
-
-  const technicallyIr = x.restrictions !== undefined && x.restrictions !== null
-  if (technicallyIr) {
-    // Make all its bonded cards IR too, because they are technically not.
-    x.bonded_cards?.forEach((y) => {
-      bondedToInvestigatorRestriction.add(y.code)
-    })
-  }
+  sameNameDifferentSubname[name].push({
+    code: x.code,
+    subname: x.subname,
+    xp: x.xp,
+  })
 })
 
-Object.entries(sameNameDifferentSubname).forEach(([_, v]) => {
-  const subnameCheck = new Set<string>()
-  v.forEach((x) => {
-    subnameCheck.add(x.subname)
-  })
-  if (subnameCheck.size > 1) {
-    v.forEach((x) => {
-      needExplicitSubnameCodes.add(x.code)
-    })
+// Cards with same name, same XP, different subname, need explicit subname.
+Object.entries(sameNameDifferentSubname).forEach(([, sameNameCards]) => {
+  let detected = false
+  for (let i = 0; i < sameNameCards.length; i++) {
+    for (let j = i + 1; j < sameNameCards.length; j++) {
+      if (sameNameCards[i].xp !== sameNameCards[j].xp) {
+        continue
+      }
+      if (sameNameCards[i].subname !== sameNameCards[j].subname) {
+        detected = true
+        break
+      }
+    }
+    if (detected) {
+      break
+    }
+  }
+  if (detected) {
+    for (let i = 0; i < sameNameCards.length; i++) {
+      needExplicitSubnameCodes.add(sameNameCards[i].code)
+    }
   }
 })
 
@@ -171,7 +188,6 @@ playerCards.forEach((x) => {
   const effectiveIr =
     technicallyIr || bondedToInvestigatorRestriction.has(x.code)
 
-  let specialist = false
   if (x.restrictions !== undefined && x.restrictions !== null) {
     if (typeof x.restrictions === "string") {
       // String Format
@@ -189,10 +205,6 @@ playerCards.forEach((x) => {
       })
     }
   }
-  if (traitRestrictionList.length > 0) {
-    specialist = true
-  }
-
   popupDatabaseItems.push({
     id: x.code,
     n: x.name,
@@ -257,7 +269,6 @@ playerCards.forEach((x) => {
       x.double_sided && x.backimagesrc
         ? path.basename(x.backimagesrc)
         : undefined,
-    spe: specialist ? true : undefined,
     resir:
       investigatorRestrictionList.length === 0
         ? undefined

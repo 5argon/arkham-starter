@@ -22,57 +22,57 @@ export function manualEdit(p: AhdbCard[]) {
 
   // Customizable
   manualEditOne(p, "09021", (c) => {
-    addCustLink(c, p, "09021", 124)
+    addCustCard(c, p, "09021", 124)
   })
   manualEditOne(p, "09022", (c) => {
-    addCustLink(c, p, "09022", 125)
+    addCustCard(c, p, "09022", 125)
   })
   manualEditOne(p, "09023", (c) => {
-    addCustLink(c, p, "09023", 126)
+    addCustCard(c, p, "09023", 126)
   })
 
   manualEditOne(p, "09040", (c) => {
-    addCustLink(c, p, "09040", 127)
+    addCustCard(c, p, "09040", 127)
   })
   manualEditOne(p, "09041", (c) => {
-    addCustLink(c, p, "09041", 128)
+    addCustCard(c, p, "09041", 128)
   })
   manualEditOne(p, "09042", (c) => {
-    addCustLink(c, p, "09042", 129)
+    addCustCard(c, p, "09042", 129)
   })
 
   manualEditOne(p, "09059", (c) => {
-    addCustLink(c, p, "09059", 130)
+    addCustCard(c, p, "09059", 130)
   })
   manualEditOne(p, "09060", (c) => {
-    addCustLink(c, p, "09060", 131)
+    addCustCard(c, p, "09060", 131)
   })
   manualEditOne(p, "09061", (c) => {
-    addCustLink(c, p, "09061", 132)
+    addCustCard(c, p, "09061", 132)
   })
 
   manualEditOne(p, "09079", (c) => {
-    addCustLink(c, p, "09079", 133)
+    addCustCard(c, p, "09079", 133)
   })
   manualEditOne(p, "09080", (c) => {
-    addCustLink(c, p, "09080", 134)
+    addCustCard(c, p, "09080", 134)
   })
   manualEditOne(p, "09081", (c) => {
-    addCustLink(c, p, "09081", 135)
+    addCustCard(c, p, "09081", 135)
   })
 
   manualEditOne(p, "09099", (c) => {
-    addCustLink(c, p, "09099", 136)
+    addCustCard(c, p, "09099", 136)
   })
   manualEditOne(p, "09100", (c) => {
-    addCustLink(c, p, "09100", 137)
+    addCustCard(c, p, "09100", 137)
   })
   manualEditOne(p, "09101", (c) => {
-    addCustLink(c, p, "09101", 138)
+    addCustCard(c, p, "09101", 138)
   })
 
   manualEditOne(p, "09119", (c) => {
-    addCustLink(c, p, "09119", 139)
+    addCustCard(c, p, "09119", 139)
   })
   // End Customizable
 
@@ -127,9 +127,10 @@ export function manualEdit(p: AhdbCard[]) {
 }
 
 /**
- * Adds customizable sheet graphic as a linked card of customizable card.
+ * Makes a customizable card as a valid card that comes in the same box as "tskp".
+ * Their code is the original code with a "b" at the end.
  */
-function addCustLink(card: AhdbCard, p: AhdbCard[], c: string, pos: number) {
+function addCustCard(card: AhdbCard, p: AhdbCard[], c: string, pos: number) {
   const n: Partial<AhdbCard> = {
     code: c + "b",
     name: card.name,

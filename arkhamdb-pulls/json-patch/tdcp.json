@@ -6,11 +6,36 @@
     "deck_limit": 1,
     "deck_options": [
       {
-        "faction": ["neutral"],
-        "level": {
-          "min": 0,
-          "max": 5
-        }
+        "faction": ["guardian", "neutral"],
+        "level": { "min": 0, "max": 5 }
+      },
+      {
+        "name": "Trait Choice",
+        "option_select": [
+          {
+            "id": "improvised",
+            "name": "Improvised",
+            "trait": ["improvised"],
+            "level": { "min": 0, "max": 2 }
+          },
+          {
+            "id": "gambit",
+            "name": "Gambit",
+            "trait": ["gambit"],
+            "level": { "min": 0, "max": 2 }
+          },
+          {
+            "id": "fortune",
+            "name": "Fortune",
+            "trait": ["fortune"],
+            "level": { "min": 0, "max": 2 }
+          }
+        ]
+      },
+      {
+        "faction": ["survivor"],
+        "level": { "min": 0, "max": 0 },
+        "limit": 5
       }
     ],
     "deck_requirements": "card:11002, card:11003",
@@ -50,53 +75,19 @@
     "type_code": "skill"
   },
   {
-    "pack_code": "tdcp",
     "code": "11003",
-    "position": 3,
     "deck_limit": 1,
     "faction_code": "neutral",
     "illustrator": "Aleksander Karcz",
     "name": "\"I'll do it myself\"",
+    "pack_code": "tdcp",
+    "position": 3,
     "quantity": 1,
     "restrictions": "investigator:11001",
     "subtype_code": "weakness",
     "text": "<b>Revelation</b> - Put \"I'll do it myself\" into play in your threat area.\nAs an additional cost for you to play an event, take 1 horror.\n[fast] Discard 3 events from your hand: Discard \"I'll do it myself.\"",
     "traits": "Flaw.",
     "type_code": "treachery"
-  },
-  {
-    "back_flavor": "",
-    "back_text": "",
-    "code": "11007",
-    "deck_limit": 1,
-    "deck_options": [
-      {
-        "faction": ["neutral"],
-        "level": {
-          "min": 0,
-          "max": 5
-        }
-      }
-    ],
-    "deck_requirements": "card:11009, card:11010",
-    "double_sided": true,
-    "faction_code": "seeker",
-    "health": 6,
-    "illustrator": "Magali Villeneuve",
-    "is_unique": true,
-    "name": "Agatha Crane",
-    "pack_code": "tdcp",
-    "position": 7,
-    "quantity": 1,
-    "sanity": 8,
-    "skill_agility": 3,
-    "skill_combat": 1,
-    "skill_intellect": 4,
-    "skill_willpower": 4,
-    "subname": "The Parapsychologist",
-    "text": "[reaction] When your turn ends, if you sealed, canceled, or ignored 1 or more chaos tokens this round: Play a [[Spell]] or [[Insight]] event from your discard pile. After that event resolves, remove it from the game.\n[elder_sign] effect: +2. You may cancel this token and draw another in its place. If you do, draw 1 card.",
-    "traits": "Miskatonic. Scholar.",
-    "type_code": "investigator"
   },
   {
     "back_flavor": "",
@@ -131,6 +122,40 @@
     "subname": "The Poet",
     "text": "[reaction] After you successfully evade an enemy by 2 or more: Discover 1 clue at your location. (Limit once per round.)\n[elder_sign] effect: +1 for each enemy at your location.",
     "traits": "Scholar. Dreamer.",
+    "type_code": "investigator"
+  },
+  {
+    "back_flavor": "",
+    "back_text": "",
+    "code": "11007",
+    "deck_limit": 1,
+    "deck_options": [
+      {
+        "faction": ["neutral"],
+        "level": {
+          "min": 0,
+          "max": 5
+        }
+      }
+    ],
+    "deck_requirements": "card:11009, card:11010",
+    "double_sided": true,
+    "faction_code": "seeker",
+    "health": 6,
+    "illustrator": "Magali Villeneuve",
+    "is_unique": true,
+    "name": "Agatha Crane",
+    "pack_code": "tdcp",
+    "position": 7,
+    "quantity": 1,
+    "sanity": 8,
+    "skill_agility": 3,
+    "skill_combat": 1,
+    "skill_intellect": 4,
+    "skill_willpower": 4,
+    "subname": "The Parapsychologist",
+    "text": "[reaction] When your turn ends, if you sealed, canceled, or ignored 1 or more chaos tokens this round: Play a [[Spell]] or [[Insight]] event from your discard pile. After that event resolves, remove it from the game.\n[elder_sign] effect: +2. You may cancel this token and draw another in its place. If you do, draw 1 card.",
+    "traits": "Miskatonic. Scholar.",
     "type_code": "investigator"
   },
   {
@@ -203,20 +228,28 @@
     "type_code": "treachery"
   },
   {
-    "back_flavor": "",
-    "back_text": "",
+    "back_flavor": "After spending a month in jail at the age of 19, George Barnaby felt compelled to become a lawyer. He found great success and notoriety in his career, and as retirement approached he made plans to sail around the world with his wife Maria. On the eve of his retirement, however, his home was attacked and Maria was murdered by cultists. Now, with a lifetime of wealth and contacts at his back, George has tracked the culprits to the city of Arkham, vowing to bring them to justice for their hideous crimes.",
+    "back_text": "<b>Deck Size</b>: 35.\n<b>Deckbuilding Options</b>: Survivor cards ([survivor]) level 0-5, Neutral cards level 0-5, up to 10 other level 0 Seeker and/or Rogue cards ([seeker]/[rogue]).\n<b>Deckbuilding Requirements</b> (do not count toward deck size): 3 copies of Grim Resolve, Cast Adrift, 1 random basic weakness.\n<b>Additional Setup</b>: After drawing your opening hand, you may place any number of cards in your hand facedown beneath George Barnaby.",
     "code": "11017",
     "deck_limit": 1,
     "deck_options": [
       {
-        "faction": ["neutral"],
+        "faction": ["survivor", "neutral"],
         "level": {
           "min": 0,
           "max": 5
         }
+      },
+      {
+        "faction": ["seeker", "rogue"],
+        "level": {
+          "min": 0,
+          "max": 0
+        },
+        "limit": 10
       }
     ],
-    "deck_requirements": "",
+    "deck_requirements": "size:35, card:11018, card:11019, random:subtype:basicweakness",
     "double_sided": true,
     "faction_code": "survivor",
     "health": 7,
@@ -237,6 +270,36 @@
     "type_code": "investigator"
   },
   {
+    "code": "11018",
+    "deck_limit": 3,
+    "faction_code": "neutral",
+    "illustrator": "Rob Laskey",
+    "name": "Grim Resolve",
+    "pack_code": "tdcp",
+    "position": 18,
+    "quantity": 3,
+    "restrictions": "investigator:11017",
+    "skill_wild": 1,
+    "text": "George Barnaby deck only.\nAfter this skill test resolves, you may swap any number of cards beneath George Barnaby with the same number of non-weakness cards in your hand.",
+    "traits": "Innate. Developed.",
+    "type_code": "skill"
+  },
+  {
+    "code": "11019",
+    "deck_limit": 1,
+    "faction_code": "neutral",
+    "illustrator": "Rob Laskey",
+    "name": "Cast Adrift",
+    "pack_code": "tdcp",
+    "position": 19,
+    "quantity": 1,
+    "restrictions": "investigator:11017",
+    "subtype_code": "weakness",
+    "text": "<b>Revelation</b> - If there are no cards beneath George Barnaby, shuffle Cast Adrift into your deck. Otherwise, discard each card beneath George Barnaby.",
+    "traits": "Hardship.",
+    "type_code": "treachery"
+  },
+  {
     "code": "11024",
     "cost": 1,
     "deck_limit": 2,
@@ -251,6 +314,22 @@
     "traits": "Spirit. Bold.",
     "type_code": "event",
     "xp": 0
+  },
+  {
+    "code": "11026",
+    "cost": 1,
+    "deck_limit": 2,
+    "faction_code": "guardian",
+    "illustrator": "Ethan Patrick Harris",
+    "name": "Hunter's Mark",
+    "pack_code": "tdcp",
+    "position": 26,
+    "quantity": 2,
+    "skill_wild": 1,
+    "text": "Fast. Attach to an enemy at your location. Limit 1 per enemy.\nInvestigators get +1 [combat] while fighting this enemy.\n[reaction] When damage is dealt to attached enemy, discard Hunter's Mark: Deal 1 additional damage to that enemy. Any investigator may trigger this ability.",
+    "traits": "Spell.",
+    "type_code": "event",
+    "xp": 1
   },
   {
     "code": "11040",
@@ -268,6 +347,22 @@
     "traits": "Insight.",
     "type_code": "event",
     "xp": 0
+  },
+  {
+    "code": "11059",
+    "cost": 1,
+    "deck_limit": 1,
+    "exceptional": true,
+    "faction_code": "rogue",
+    "illustrator": "Lin Hsiang",
+    "name": "Mob Connections",
+    "pack_code": "tdcp",
+    "position": 59,
+    "quantity": 1,
+    "text": "Exceptional.\n[action] Spend 2 resources: Draw the card attached to Mob Connections.\n[reaction] When an [[Illicit]] asset you control is discarded from play, exhaust Mob Connections: Attach that asset to this card, facedown. Limit 1 attached asset.",
+    "traits": "Connection. Illicit.",
+    "type_code": "asset",
+    "xp": 2
   },
   {
     "code": "11064",
@@ -288,6 +383,45 @@
     "xp": 5
   },
   {
+    "back_link": "11068b",
+    "code": "11068a",
+    "deck_limit": 1,
+    "faction_code": "mystic",
+    "illustrator": "Aleksander Karcz",
+    "is_unique": true,
+    "name": "The Great Work",
+    "pack_code": "tdcp",
+    "permanent": true,
+    "position": 68,
+    "quantity": 1,
+    "text": "Permanent. Limit 1 per deck. Purchase only at deck creation.\nYou earn 1 additional experience after each scenario of this campaign. If you are defeated, you are usurped by the homunculus (replace each signature card in your deck with a random basic weakness, flip this card, and swap it with your investigator for the remainder of the campaign).",
+    "traits": "Pact. Science.",
+    "type_code": "asset"
+  },
+  {
+    "code": "11068b",
+    "deck_limit": 1,
+    "pack_code": "tdcp",
+    "position": 68,
+    "quantity": 1,
+    "faction_code": "mystic",
+    "flavor": "You always wanted to be human.",
+    "health": 6,
+    "hidden": true,
+    "illustrator": "Aleksander Karcz",
+    "is_unique": true,
+    "name": "Lost Homunculus",
+    "sanity": 6,
+    "skill_agility": 2,
+    "skill_combat": 2,
+    "skill_intellect": 2,
+    "skill_willpower": 2,
+    "subname": "The Forgotten Child",
+    "text": "Cannot be chosen as a starting investigator.\nYou cannot add, remove, or upgrade cards from your deck.\nYou get +2 skill value while resolving abilities on [[Spell]] cards.\n<b>Forced</b> - When you are defeated: You are <b>killed</b>.\n[elder_sign] effect: +0. Draw 1 card.",
+    "traits": "Construct. Scion.",
+    "type_code": "investigator"
+  },
+  {
     "code": "11072",
     "cost": 3,
     "deck_limit": 2,
@@ -302,6 +436,28 @@
     "text": "<b>Parley.</b> Choose a non-weakness enemy at your location and test [willpower] (3). This test gets +X difficulty, where X is that enemy's horror value. If you succeed, defeat that enemy (or deal it 3 damage instead if it is [[Elite]]). If you fail, place 1 doom on that enemy.",
     "traits": "Spell. Cursed.",
     "type_code": "event",
+    "xp": 0
+  },
+  {
+    "code": "11083",
+    "cost": 3,
+    "deck_limit": 2,
+    "faction_code": "survivor",
+    "flavor": "\"Each block of clay hides all manner of fantastical things.\"",
+    "health": 1,
+    "illustrator": "Romana Kendelic",
+    "is_unique": true,
+    "name": "Lawrence Carlisle",
+    "pack_code": "tdcp",
+    "position": 83,
+    "quantity": 2,
+    "sanity": 1,
+    "skill_intellect": 1,
+    "slot": "Ally",
+    "subname": "Sculpting His Dreams",
+    "text": "You get +1 [intellect].\n[reaction] After you discard 1 or more cards from your hand during your turn, exhaust Lawrence Carlisle: Gain 1 resource.",
+    "traits": "Ally. Artist. Patron.",
+    "type_code": "asset",
     "xp": 0
   },
   {
@@ -320,15 +476,15 @@
     "xp": 2
   },
   {
-    "pack_code": "tdcp",
     "code": "11099",
-    "position": 99,
     "cost": 2,
     "deck_limit": 1,
     "faction_code": "neutral",
     "illustrator": "Pixoloid Studios",
     "is_unique": true,
     "name": "Library Pass",
+    "pack_code": "tdcp",
+    "position": 99,
     "quantity": 1,
     "restrictions": "trait:miskatonic, trait:scholar",
     "text": "[[Miskatonic]], [[Scholar]] deck only. Limit 1 per deck.\n[fast] During your turn, if there is no asset attached to Library Pass, spend 1 resource: Attach a [[Tome]] asset from your hand to this card. Attached asset takes up no slots. Limit 1 attached asset.\n<b>Forced</b> - When your turn ends: Place attached asset on the bottom of your deck.",
@@ -379,7 +535,7 @@
     "health": 2,
     "illustrator": "Alexandre Dainche",
     "is_unique": true,
-    "name": "Archibald Mac Veigh",
+    "name": "Archibald MacVeigh",
     "pack_code": "tdcp",
     "position": 117,
     "quantity": 2,
@@ -388,7 +544,7 @@
     "skill_intellect": 1,
     "skill_wild": 1,
     "slot": "Ally",
-    "subname": "Beleagured Lecturer",
+    "subname": "Beleaguered Lecturer",
     "text": "[[Assistant]], [[Reporter]], [[Scholar]] deck only. Uses (4 secrets).\nYou get +1 [intellect].\nSecrets on assets you control may be spent as resources to pay for [[Insight]] events you play.",
     "traits": "Ally.",
     "type_code": "asset",

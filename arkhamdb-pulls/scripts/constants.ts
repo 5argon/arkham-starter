@@ -1,10 +1,11 @@
 export const inputDirectory = "input"
 export const pullsDirectory = "pulls"
+export const patchDirectory = "patch"
 export const transformDirectory = "transform"
 
 export const pullsCards = "cards"
 export const pullsDecks = "decks"
-export const pullsImages = "card"
+export const pullsCard = "card"
 export const pullsJson = "json"
 
 export const pullsImagesTrue = "true"
@@ -27,6 +28,6 @@ export const publicApiDecklist = "/api/public/decklist/"
 export const publicApiPacks = "/api/public/packs/"
 export const publicApiTaboos = "/api/public/taboos/"
 
-export function makeImageSorce(code: string): string {
+export function makeCardImageDownloadUrl(code: string): string {
   return `https://assets.arkham.build/optimized/${code}.avif`
 }
