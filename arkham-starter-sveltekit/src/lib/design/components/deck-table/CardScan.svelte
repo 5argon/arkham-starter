@@ -26,7 +26,7 @@
 	const fixedWidth = 215
 	const fixedHeight = 300
 	$: card = fullDatabase.getCard(cardId)
-	$: vertical = card.original.type_code !== 'investigator'
+	$: vertical = card.original.type_code !== 'investigator' 
 	$: width = (vertical ? fixedWidth : fixedHeight) * sizeMultiplier
 	$: height = (vertical ? fixedHeight : fixedWidth) * sizeMultiplier
 
@@ -129,7 +129,7 @@
 		</span>
 	{/if}
 	{#if !unlink || linkedOnly}
-		{#if card.original.double_sided && amount === 1}
+		{#if (card.original.double_sided) && amount === 1}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<span

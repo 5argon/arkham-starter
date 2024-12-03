@@ -16,6 +16,14 @@
 		"cards": ["11064"]
 	},
 	{
+		"site": "Fantasy Flight Games",
+		"url": "https://www.youtube.com/watch?v=DNzJzWWZ0MQ",
+		"name": "Week of Horror : The Dream-Quest Eight-Hour Stream",
+		"date": "2024-10-24",
+		"spoilerCard": true,
+		"cards": ["11068a"]
+	},
+	{
 		"site": "BusterCon",
 		"url": "https://mythosbusters.com/bustercon/",
 		"name": "Preview card in Duke's Marion deck",
