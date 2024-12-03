@@ -15,13 +15,6 @@ import { decode as decodeWebp } from "npm:@jsquash/webp"
  * Then make a valid.json.
  */
 
-interface ValidJson {
-  /**
-   * Maps from language code to card code that its image exist.
-   */
-  languages: { [k: string]: string[] }
-}
-
 /**
  * Source can be jpg, jpeg, png, webp, or avif.
  * Destination is always avif.
@@ -42,7 +35,7 @@ async function patch(sourcePathWithExtension: string, destLanguage: string) {
   try {
     const fileInfo = await Deno.stat(destPathAvif)
     if (fileInfo.isFile) {
-      console.log(`Skipping ${sourcePathWithExtension} to ${destPathAvif}`)
+      // console.log(`Skipping ${sourcePathWithExtension} to ${destPathAvif}`)
       return
     }
   } catch {
@@ -50,7 +43,7 @@ async function patch(sourcePathWithExtension: string, destLanguage: string) {
   }
 
   const sourceExtension = path.extname(sourcePath).slice(1)
-  console.log("Reading " + sourcePathWithExtension)
+  console.log("Patching " + sourcePathWithExtension)
   const source = await Deno.readFile(sourcePath)
   let imageData: ImageData
   if (sourceExtension === "avif") {

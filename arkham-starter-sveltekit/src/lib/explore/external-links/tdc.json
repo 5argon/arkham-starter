@@ -1,11 +1,19 @@
 [
 	{
+		"site": "Little Geek",
+		"url": "https://www.youtube.com/live/TV0MOEffCiw?feature=shared&t=1117",
+		"name": "Обзор новых карт сыщиков \"The Drowned City\" | Spoiler season | Arkham Horror | Ужас Аркхэма",
+		"date": "2024-11-21",
+		"spoilerCard": true,
+		"cards": ["11059", ""]
+	},
+	{
 		"site": "Fantasy Flight Games",
 		"url": "https://www.youtube.com/live/TV0MOEffCiw?feature=shared&t=1117",
 		"name": "Arkham Horror: The Card Game - The Dream-Eaters Campaign Gameplay",
 		"date": "2024-08-30",
 		"spoilerCard": true,
-		"cards": ["11064"]
+		"cards": ["11064", "11083"]
 	},
 	{
 		"site": "Fantasy Flight Games",

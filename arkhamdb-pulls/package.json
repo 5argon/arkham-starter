@@ -5,6 +5,7 @@
     "download": "deno run --allow-read --allow-write --allow-net download.ts",
     "pull": "deno run --allow-read --allow-write --allow-net pull.ts",
     "patch": "deno run --allow-read --allow-write --allow-net patch.ts",
+    "process": "deno run --allow-read --allow-write --allow-net process.ts",
     "deletepng": "deno run --allow-read --allow-write --allow-net deletepng.ts"
   }
 }
