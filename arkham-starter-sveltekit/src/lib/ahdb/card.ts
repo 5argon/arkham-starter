@@ -85,6 +85,7 @@ export interface AhdbCard {
 	tags?: string
 	bonded_to?: null | string
 	bonded_cards?: { count: number; code: string }[]
+	back_link?: string
 }
 
 export interface AhdbDeckOption {

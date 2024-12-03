@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { isRandomBasicWeakness } from '$lib/ahdb/card'
 	import type { CardClass } from '$lib/core/card-class'
-	import valid from '$lib/data/valid.json'
 	import ClassIcon from '$lib/design/components/inline/ClassIcon.svelte'
 	import { classToBorderColorCss, classToFontColorCss } from '$lib/design/interface/card-class'
 	import { makePips } from '$lib/design/interface/string-util'
@@ -12,9 +12,8 @@
 	export let class2: CardClass | null = null
 	export let class3: CardClass | null = null
 	export let cardId: string | null = null
-	// export let imageBase64: string | null = null
-	const validArray: string[] = valid
-	$: exist = validArray.find((element) => element === cardId)
+
+	$: exist = cardId !== null && !isRandomBasicWeakness(cardId)
 
 	let showClasses: boolean
 	$: showClasses =
@@ -38,7 +37,7 @@
 		<img
 			draggable={false}
 			class="image-in-strip"
-			src={'/image/card/strip/' + cardId + '.webp'}
+			src={'/image/card/strip/' + cardId + '.avif'}
 			alt={''}
 		/>
 		{#if xp !== null}

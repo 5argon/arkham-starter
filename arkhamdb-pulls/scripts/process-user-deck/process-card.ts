@@ -61,16 +61,23 @@ export async function processImages(cards: AhdbCard[]): Promise<void> {
           fullSmallPath,
           false,
         )
-        function backCodeExtract(s: string): string {
-          const filename = s.match(/([\w\d_-]*)\.?[^\\/]*$/i)
-          return filename?.[1] ?? ""
+        function backCodeExtract(c: AhdbCard): string {
+          if (c.backimagesrc !== undefined) {
+            const s = c.backimagesrc ?? ""
+            const filename = s.match(/([\w\d_-]*)\.?[^\\/]*$/i)
+            return filename?.[1] ?? ""
+          } else if (c.back_link !== undefined) {
+            return c.back_link
+          } else {
+            return c.code + "b"
+          }
         }
         let backPromise = Promise.resolve()
         let backCode: string | null = null
         // If card is truly linked to back, that back card will have its own entry (hidden on) and use the first
         // processing function.
-        if (x.backimagesrc !== undefined) {
-          backCode = backCodeExtract(x.backimagesrc)
+        if (x.double_sided) {
+          backCode = backCodeExtract(x)
           backPromise = processSingleCard(
             backCode,
             x.backimagesrc,
@@ -225,6 +232,20 @@ export async function processSingleCard(
         y: 137.3 / 842,
         w: 446 / 606,
         h: 148.7 / 842,
+      }
+      break
+    case "story":
+      squareTarget = {
+        x: 169.5 / 606,
+        y: 541 / 842,
+        w: 259 / 606,
+        h: 259 / 842,
+      }
+      stripTarget = {
+        x: 14 / 606,
+        y: 555 / 842,
+        w: 578 / 606,
+        h: 192.7 / 842,
       }
       break
     case "upgrade":
@@ -391,12 +412,7 @@ export async function processSingleCard(
       await createAvifBufferWithResize(fullImage, true, 256, 256),
     )
     let resizedFull = fullEncode
-    resizedFull = await createAvifBufferWithResize(
-      fullImage,
-      true,
-      640,
-      640,
-    )
+    resizedFull = await createAvifBufferWithResize(fullImage, true, 640, 640)
     const fullPromise = Deno.writeFile(fullJoinedPath, resizedFull)
     await Promise.all([fullSmallPromise, fullPromise])
   }

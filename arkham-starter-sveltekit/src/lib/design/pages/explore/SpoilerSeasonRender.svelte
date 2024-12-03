@@ -7,7 +7,7 @@
 	export let exploreInput: ExploreInput
 	export let fdb: FullDatabase
 	export let pdb: PopupDatabase
-	const links = exploreInput.links
+	const links = exploreInput.links?.filter((link) => link.spoilerCard === true)
 	const sortedAll = links?.sort((a, b) => {
 		if (a.date === undefined) return 1
 		if (b.date === undefined) return -1

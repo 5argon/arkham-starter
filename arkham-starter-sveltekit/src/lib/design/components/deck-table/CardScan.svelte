@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { isRandomBasicWeakness, randomBasicWeakness } from '$lib/ahdb/card'
 	import { CardClass } from '$lib/core/card-class'
-	import type { FullDatabase } from '$lib/core/full-database'
+	import type { FullDatabase, FullDatabaseItem } from '$lib/core/full-database'
 	import type { PopupDatabase } from '$lib/core/popup-database'
-	import valid from '$lib/data/valid.json'
 	import type { Localization } from '$lib/design/interface/localization'
 
 	import CardSpan from '../card/CardSpan.svelte'
@@ -31,11 +31,7 @@
 	$: height = (vertical ? fixedHeight : fixedWidth) * sizeMultiplier
 
 	$: srcPath = small ? 'full-small' : 'full'
-	$: finalUrl =
-		localization === 'en' ? `/image/card/${srcPath}/` : '/image/card/full-localized/' + localization + '/'
-	$: alwaysFullUrl =
-		localization === 'en' ? `/image/card/full/` : '/image/card/full-localized/' + localization + '/'
-
+	$: finalUrl = `/image/card/${srcPath}/${localization}/`
 
 	let investigatorClass: CardClass = CardClass.Neutral
 	$: {
@@ -53,12 +49,18 @@
 		}
 	}
 
-	const validArray: string[] = valid
-	$: exist = validArray.find((element) => element === cardId)
+	$: exist = !isRandomBasicWeakness(cardId)
 
-	function backCodeExtract(s: string): string {
-		var filename = s.match(/([\w\d_-]*)\.?[^\\\/]*$/i)
-		return filename?.[1] ?? ''
+	function backCodeExtract(fullDatabaseItem: FullDatabaseItem): string {
+		if (card.original.backimagesrc !== undefined) {
+			const s = fullDatabaseItem.original.backimagesrc ?? ''
+			const filename = s.match(/([\w\d_-]*)\.?[^\\\/]*$/i)
+			return filename?.[1] ?? ''
+		} else if (card.original.back_link !== undefined) {
+			return card.original.back_link
+		} else {
+			return card.original.code + 'b'
+		}
 	}
 
 	function handler(e: MouseEvent & { currentTarget: HTMLElement }) {
@@ -119,7 +121,7 @@
 				{height}
 				class:normal-radius={!small}
 				class:small-radius={small}
-				src={finalUrl + cardId + '.webp'}
+				src={finalUrl + cardId + '.avif'}
 				alt={card.original.name}
 				loading="lazy"
 				draggable="false"
@@ -127,7 +129,7 @@
 		</span>
 	{/if}
 	{#if !unlink || linkedOnly}
-		{#if card.original.double_sided && card.original.backimagesrc !== undefined && amount === 1}
+		{#if card.original.double_sided && amount === 1}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<span
@@ -143,7 +145,7 @@
 					class:normal-radius={!small}
 					class:small-radius={small}
 					class={'alt-card'}
-					src={alwaysFullUrl + backCodeExtract(card.original.backimagesrc) + '.webp'}
+					src={finalUrl + backCodeExtract(card) + '.avif'}
 					alt={card.original.name}
 					loading="lazy"
 					draggable="false"
@@ -166,7 +168,7 @@
 					class:normal-radius={!small}
 					class:small-radius={small}
 					class={'alt-card'}
-					src={finalUrl + card.original.linked_to_code + '.webp'}
+					src={finalUrl + card.original.linked_to_code + '.avif'}
 					alt={card.original.name}
 					loading="lazy"
 					draggable="false"

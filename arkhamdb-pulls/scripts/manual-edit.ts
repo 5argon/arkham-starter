@@ -118,6 +118,10 @@ export function manualEdit(p: AhdbCard[]) {
     c.double_sided = true
     c.backimagesrc = "/bundles/cards/90062b.png"
   })
+  // Mateo
+  manualEditOne(p, "90081", (c) => {
+    c.position = 81
+  })
 
   // Reality Acid Table
   manualEditOne(p, "89005", (c) => {

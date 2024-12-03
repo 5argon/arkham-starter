@@ -68,7 +68,7 @@
 	}
 
 	.left {
-		flex: 0 0 120px;
+		flex: 0 0 130px;
 		padding: 16px 8px;
 		align-items: center;
 		justify-content: center;

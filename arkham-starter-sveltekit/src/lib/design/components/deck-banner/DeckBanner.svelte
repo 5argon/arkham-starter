@@ -164,7 +164,7 @@
         <div class='compact-investigator'>
           <img
             class={'investigator-img-compact ' + borderColorClass}
-            src={'/image/card/strip/' + investigatorCodeRCore + '.webp'}
+            src={'/image/card/strip/' + investigatorCodeRCore + '.avif'}
             alt={''}
             draggable='false'
           />
@@ -175,7 +175,7 @@
       {:else}
         <img
           class={'investigator-img ' + borderColorClass}
-          src={'/image/card/square/' + investigatorCodeRCore + '.webp'}
+          src={'/image/card/square/' + investigatorCodeRCore + '.avif'}
           alt={''}
           draggable='false'
         />

@@ -32,15 +32,22 @@ async function downloadSingleCard(
   card: AhdbCard,
   truePath: string,
 ): Promise<void> {
-  function backCodeExtract(s: string): string {
-    const filename = s.match(/([\w\d_-]*)\.?[^\\/]*$/i)
-    return filename?.[1] ?? ""
+  function backCodeExtract(c: AhdbCard): string {
+    if (c.backimagesrc !== undefined) {
+      const s = c.backimagesrc ?? ""
+      const filename = s.match(/([\w\d_-]*)\.?[^\\/]*$/i)
+      return filename?.[1] ?? ""
+    } else if (c.back_link !== undefined) {
+      return c.back_link
+    } else {
+      return c.code + "b"
+    }
   }
   const regularFileName = card.code
   await downloadImageSingleCard(regularFileName, truePath)
   let backCode: string | null = null
-  if (card.backimagesrc !== undefined) {
-    backCode = backCodeExtract(card.backimagesrc)
+  if (card.double_sided) {
+    backCode = backCodeExtract(card)
     await downloadImageSingleCard(backCode, truePath)
   }
 }

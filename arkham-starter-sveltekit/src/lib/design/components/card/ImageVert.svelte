@@ -82,7 +82,7 @@
 		<img
 			draggable={false}
 			class="image-in-strip"
-			src={'/image/card/square/' + cardId + '.webp'}
+			src={'/image/card/square/' + cardId + '.avif'}
 			alt={''}
 		/>
 		{#if xp !== null}

@@ -89,12 +89,6 @@
 				id: x.original.id,
 			}
 		})
-		console.log(
-			byPack
-				.sort((a, b) => a.cardId.localeCompare(b.cardId))
-				.map((x) => "'" + x.cardId)
-				.join('\t'),
-		)
 		return byPack
 	}
 

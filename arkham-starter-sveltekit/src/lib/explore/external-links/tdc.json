@@ -1,11 +1,11 @@
 [
 	{
 		"site": "Little Geek",
-		"url": "https://www.youtube.com/live/TV0MOEffCiw?feature=shared&t=1117",
+		"url": "https://www.youtube.com/watch?v=-wN_-83JFwM",
 		"name": "Обзор новых карт сыщиков \"The Drowned City\" | Spoiler season | Arkham Horror | Ужас Аркхэма",
 		"date": "2024-11-21",
 		"spoilerCard": true,
-		"cards": ["11059", ""]
+		"cards": ["11059", "11083"]
 	},
 	{
 		"site": "Fantasy Flight Games",
@@ -13,7 +13,15 @@
 		"name": "Arkham Horror: The Card Game - The Dream-Eaters Campaign Gameplay",
 		"date": "2024-08-30",
 		"spoilerCard": true,
-		"cards": ["11064", "11083"]
+		"cards": ["11064"]
+	},
+	{
+		"site": "BusterCon",
+		"url": "https://mythosbusters.com/bustercon/",
+		"name": "Preview card in Duke's Marion deck",
+		"date": "2024-09-24",
+		"spoilerCard": true,
+		"cards": ["11026"]
 	},
 	{
 		"site": "Fantasy Flight Games",
@@ -30,15 +38,13 @@
 			"11008",
 			"11009",
 			"11010",
-			"11017",
 			"11024",
 			"11040",
 			"11072",
 			"11092",
 			"11099",
 			"11106",
-			"11111",
-			"11117"
+			"11111"
 		]
 	},
 	{
@@ -46,5 +52,29 @@
 		"url": "https://www.youtube.com/watch?v=Sa8wio5w_hE",
 		"name": "The new expansion release article dropped, let's dive into THE DROWNED CITY | ARKHAM HORROR",
 		"date": "2024-09-15"
+	},
+	{
+		"site": "Drawn To The Flame",
+		"url": "https://drawntotheflame.podbean.com/e/episode-333-visions-of-futures-past-xxvii/",
+		"name": "Episode 333: Visions of Futures Past XXVII",
+		"date": "2024-11-28",
+		"spoilerCard": true,
+		"cards": ["11017", "11018", "11019"]
+	},
+	{
+		"site": "Until the End of Time - Arkham Horror LCG",
+		"url": "https://www.youtube.com/watch?v=lkeAK-c3nys",
+		"name": "Voice of the Messenger - Official The Drowned City Preview",
+		"date": "2024-12-03",
+		"spoilerCard": true,
+		"cards": ["11050"]
+	},
+	{
+		"site": "Mythos Busters Discord",
+		"url": "https://discord.com/channels/225349059689447425/741402402514665563/1313553042376753312",
+		"name": "Card of the Day",
+		"date": "2024-12-04",
+		"spoilerCard": true,
+		"cards": ["11112"]
 	}
 ]
