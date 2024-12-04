@@ -76,15 +76,14 @@ for await (const dir of Deno.readDir(patchFolder)) {
     if (!file.isFile) {
       continue
     }
+    if (
+      ![".jpg", ".jpeg", ".png", ".webp", ".avif"].includes(
+        path.extname(file.name),
+      )
+    ) {
+      continue
+    }
     patchPromises.push(patch(path.join(language, file.name), language))
   }
   await Promise.all(patchPromises)
 }
-
-// const truePath = path.join(pi, pullsImagesTrue)
-// const validImages: string[] = []
-// for await (const dir of Deno.readDir(truePath)) {
-//   if (dir.isFile) {
-//     validImages.push(path.basename(dir.name, ".avif"))
-//   }
-// }

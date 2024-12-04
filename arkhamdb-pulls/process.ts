@@ -14,16 +14,23 @@ import { processImages } from "./scripts/process-user-deck/process-card.ts"
  * Finally writes a `valid.json` file.
  */
 
-interface ValidJson {
-  /**
-   * Maps from language code to card code that its image exist.
-   */
-  languages: { [k: string]: string[] }
+const args = Deno.args
+const cleanFlagIndex = args.indexOf("-c")
+const clean = cleanFlagIndex !== -1
+
+if (clean) {
+  args.splice(cleanFlagIndex, 1)
 }
 
-const playerCards: AhdbCard[] = JSON.parse(
+let playerCards: AhdbCard[] = JSON.parse(
   await Deno.readTextFile(
     path.join(pullsDirectory, pullsJson, pullsUtilsPlayerDatabase),
   ),
 )
-await processImages(playerCards)
+
+if (args.length > 0) {
+  const cardCodes = new Set(args)
+  playerCards = playerCards.filter((card) => cardCodes.has(card.code))
+}
+
+await processImages(playerCards, clean)

@@ -16,7 +16,7 @@ export function whoCanUse(fdb: FullDatabase, cardIds: string[]): WhoCanUseReturn
 		.filter(
 			(x) =>
 				!isOldCore(x.original.code) &&
-				x.packIcon !== CardPack.Novella &&
+				(x.packIcon !== CardPack.Novella || x.original.code === '98019') &&
 				x.original.spoiler === undefined,
 		)
 	const whoOfEach = cardIds.map((cardId) => {

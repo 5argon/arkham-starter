@@ -52,6 +52,7 @@
 			"11092",
 			"11099",
 			"11106",
+			"11117",
 			"11111"
 		]
 	},
@@ -84,5 +85,13 @@
 		"date": "2024-12-04",
 		"spoilerCard": true,
 		"cards": ["11112"]
+	},
+	{
+		"site": "Duke Harrist's Instagram (Fantasy Flight Games)",
+		"url": "https://www.instagram.com/p/DDKa-BJupPR/?igsh=Y2s2MGVkOWN4djVj",
+		"name": "Sneak Preview",
+		"date": "2024-12-05",
+		"spoilerCard": true,
+		"cards": ["11079"]
 	}
 ]

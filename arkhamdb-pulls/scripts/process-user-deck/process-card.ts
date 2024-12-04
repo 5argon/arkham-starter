@@ -23,7 +23,10 @@ import { ensureDir } from "../../mod.ts"
 
 const concurrentLimit = 100
 
-export async function processImages(cards: AhdbCard[]): Promise<void> {
+export async function processImages(
+  cards: AhdbCard[],
+  clean: boolean,
+): Promise<void> {
   await initialize()
   const pi = path.join(pullsDirectory, pullsCard)
   await ensureDir(pi)
@@ -33,13 +36,15 @@ export async function processImages(cards: AhdbCard[]): Promise<void> {
   const squarePath = path.join(pi, pullsImagesSquare)
   const stripPath = path.join(pi, pullsImagesStrip)
   const squareSmallPath = path.join(pi, pullsImagesSquareSmall)
-  await Promise.all([
-    emptyDir(fullPath),
-    emptyDir(fullSmallPath),
-    emptyDir(squarePath),
-    emptyDir(stripPath),
-    emptyDir(squareSmallPath),
-  ])
+  if (clean) {
+    await Promise.all([
+      emptyDir(fullPath),
+      emptyDir(fullSmallPath),
+      emptyDir(squarePath),
+      emptyDir(stripPath),
+      emptyDir(squareSmallPath),
+    ])
+  }
   for (let i = 0; i < cards.length; i += concurrentLimit) {
     const cardBatch = cards.slice(i, i + concurrentLimit)
     console.log(
