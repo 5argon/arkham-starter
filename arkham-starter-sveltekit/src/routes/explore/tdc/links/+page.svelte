@@ -17,7 +17,6 @@
 	pageTitle="Explore: The Drowned City"
 	pdb={data.pdb}
 	fdb={data.fdb}
-	spoilerSeason
 	exploreInput={{
 		groupings: [Grouping.Class],
 		sortings: [Sorting.Number],

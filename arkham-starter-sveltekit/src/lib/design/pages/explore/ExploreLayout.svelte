@@ -28,6 +28,7 @@
 	export let thai: boolean = false
 
 	$: packBanner = packToFile(exploreInput.packs[0])
+	$: nonSpoilerLinksCount = exploreInput?.links?.filter((link) => !link.spoilerCard).length ?? 0
 
 	let toggleMap: { [cardId: string]: boolean[] } = {}
 
@@ -189,10 +190,10 @@
 	</p>
 {/if}
 
-{#if !thai && !spoilerSeason && exploreInput.links !== undefined}
+{#if !thai && nonSpoilerLinksCount > 0}
 	<NavigationButton
 		center
-		label={`View ${exploreInput.links.length} Community Content Links`}
+		label={`View ${nonSpoilerLinksCount} Community Content Links`}
 		href={$page.url.pathname + '/links'}
 	/>
 {/if}

@@ -7,16 +7,15 @@
 
 	import ExploreLinks from '$lib/explore/ExploreLinks.svelte'
 	import NavigationButton from '$lib/design/components/basic/NavigationButton.svelte'
-	import Layout from '../../../../routes/+layout.svelte'
 
 	export let fdb: FullDatabase
 	export let pdb: PopupDatabase
 	export let pageTitle: string
 	export let exploreInput: ExploreInput
-	export let spoilerSeason: boolean = false
 
 	$: packBanner = packToFile(exploreInput.packs[0])
 	$: packName = iconToNameConversion(exploreInput.packs[0])
+	$: nonSpoilerLinks = exploreInput?.links?.filter((link) => !link.spoilerCard)
 </script>
 
 <NavigationButton href="/explore" label="Back to Explore Home" />
@@ -32,13 +31,13 @@
 <h1>{packName}</h1>
 <h2>Community Content Links</h2>
 
-{#if !spoilerSeason && exploreInput.links !== undefined}
+{#if nonSpoilerLinks !== undefined}
 	<!-- That href is supposed to be self, but somehow it goes back? -->
 	<NavigationButton center label={'Back to Explore ' + packName} href="." />
 {/if}
 
-{#if exploreInput.links !== undefined}
-	<ExploreLinks links={exploreInput.links} popupDatabase={pdb} fullDatabase={fdb} />
+{#if nonSpoilerLinks !== undefined}
+	<ExploreLinks links={nonSpoilerLinks} popupDatabase={pdb} fullDatabase={fdb} />
 {/if}
 
 <style>
