@@ -30,8 +30,8 @@
       "11092",
       "11099",
       "11106",
-      "11117",
-      "11111"
+      "11111",
+      "11117"
     ]
   },
   {
@@ -40,7 +40,6 @@
     "name": "The Drowned City Spoiler Roundup #1",
     "date": "2024-09-13",
     "cards": [
-      "11064",
       "11001",
       "11002",
       "11003",
@@ -51,12 +50,13 @@
       "11010",
       "11024",
       "11040",
+      "11064",
       "11072",
       "11092",
       "11099",
       "11106",
-      "11117",
-      "11111"
+      "11111",
+      "11117"
     ]
   },
   {
@@ -82,6 +82,32 @@
     "spoilerCard": true,
     "cards": [
       "11026"
+    ]
+  },
+  {
+    "site": "The Barnaby Files",
+    "url": "https://barnabyfiles.wordpress.com/2024/10/17/analysis-on-the-drowned-city-article-cards-and-what-else-we-have-so-far/",
+    "name": "Analysis on the Drowned City Article cards (and what else we have so far)",
+    "date": "2024-10-17",
+    "cards": [
+      "11001",
+      "11002",
+      "11003",
+      "11004",
+      "11007",
+      "11008",
+      "11009",
+      "11010",
+      "11024",
+      "11026",
+      "11040",
+      "11064",
+      "11072",
+      "11092",
+      "11099",
+      "11106",
+      "11111",
+      "11117"
     ]
   },
   {

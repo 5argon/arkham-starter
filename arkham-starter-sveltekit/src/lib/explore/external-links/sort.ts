@@ -19,6 +19,12 @@ for await (const dirEntry of Deno.readDir(folderPath)) {
 			return a.name.localeCompare(b.name);
 		});
 
+		data.forEach(item => {
+			if (item.cards) {
+				item.cards.sort();
+			}
+		});
+
 		await Deno.writeTextFile(filePath, JSON.stringify(data, null, 2));
 	}
 }
