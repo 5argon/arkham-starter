@@ -184,5 +184,13 @@
 		"url": "https://www.youtube.com/watch?v=4tANXJpnPqI",
 		"name": "5 (Crazy?) Prediction For The Drowned City (Arkham Horror: The Card Game)",
 		"date": "2024-12-05"
+	},
+	{
+		"site": "¡Tengo un plan! (ko-fi.com)",
+		"url": "https://ko-fi.com/post/Forbidden-Sutra-S6S8171VPD",
+		"name": "Forbidden Sutra",
+		"date": "2024-12-06",
+		"spoilerCard": true,
+		"cards": ["11103"]
 	}
 ]

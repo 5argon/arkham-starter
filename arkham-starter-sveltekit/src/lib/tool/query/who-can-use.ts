@@ -213,7 +213,16 @@ function qualify(
 			return 'next'
 		}
 		const traitQualify = smallTraits.find((x) => {
-			return optTraits.includes(x)
+			const found = optTraits.includes(x)
+			const parallelRexCode = '90078'
+			if (inv.original.code === parallelRexCode && found) {
+				// Turn into not found if card is also Cursed.
+				if (smallTraits.includes('cursed')) {
+					return !found
+				}
+			} else {
+				return found
+			}
 		})
 		if (!traitQualify) {
 			return 'next'

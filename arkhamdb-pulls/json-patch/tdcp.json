@@ -569,5 +569,24 @@
     "traits": "Spirit.",
     "type_code": "event",
     "xp": 3
+  },
+  {
+    "code": "11103",
+    "cost": 2,
+    "deck_limit": 2,
+    "faction_code": "neutral",
+    "illustrator": "Dimitri Bielak",
+    "name": "Forbidden Sutra",
+    "pack_code": "tdcp",
+    "position": 103,
+    "quantity": 2,
+    "restrictions": "trait:blessed, trait:cursed, trait:sorcerer",
+    "skill_willpower": 1,
+    "skill_wild": 1,
+    "slot": "Hand",
+    "text": "",
+    "traits": "Item. Tome. Blessed. Cursed.",
+    "type_code": "asset",
+    "xp": 2
   }
 ]
