@@ -36,10 +36,34 @@
 			}
 		})
 	}
+
+	let selectedSite: string = '';
+	const siteCounts = links.reduce<{ [k: string]: number }>((acc, link) => {
+		acc[link.site] = (acc[link.site] || 0) + 1;
+		return acc;
+	}, {});
+
+	function filterLinksBySite(site: string) {
+		selectedSite = site;
+	}
+
+	function resetFilter() {
+		selectedSite = '';
+	}
 </script>
 
+<div class="controls">
+	<select bind:value={selectedSite} on:change="{(e) => filterLinksBySite(e.currentTarget.value)}">
+		<option value="">All Sites</option>
+		{#each Object.entries(siteCounts) as [site, count]}
+			<option value="{site}">{site} ({count})</option>
+		{/each}
+	</select>
+	<button on:click="{resetFilter}">Reset</button>
+</div>
+
 <div class="link-list">
-	{#each links as link}
+	{#each links.filter(link => selectedSite === '' || link.site === selectedSite) as link}
 		{@const formattedDate = link.date !== undefined ? new Date(link.date).toLocaleDateString() : ''}
 		<div class="link-item">
 			<a href={link.url} target="_blank" rel="noopener noreferrer">
@@ -116,5 +140,11 @@
 
 	dd {
 		margin: 0 0 1em 0;
+	}
+
+	.controls {
+		margin-bottom: 1em;
+		display: flex;
+		gap: 1em;
 	}
 </style>
