@@ -4,6 +4,12 @@
     "back_text": "<b>This is placeholder back text until the card is revealed.</b>",
     "code": "11001",
     "deck_limit": 1,
+    "deck_options": [
+      {
+        "faction": ["neutral"],
+        "level": { "min": 0, "max": 5 }
+      }
+    ],
     "deck_requirements": "card:11002, card:11003",
     "double_sided": false,
     "faction_code": "guardian",
@@ -424,6 +430,22 @@
     "xp": 0
   },
   {
+    "code": "11079",
+    "cost": 0,
+    "deck_limit": 2,
+    "faction_code": "mystic",
+    "illustrator": "Lin Hsiang",
+    "name": "Deliverance",
+    "pack_code": "tdcp",
+    "position": 79,
+    "quantity": 2,
+    "skill_willpower": 1,
+    "text": "Fast. Play when the \"draw encounter cards\" step of the mythos phase would begin.\nYou draw each encounter card that would normally be drawn this mythos phase. Cards drawn during this mythos phase cannot be cancelled, and the first card drawn gains surge.\nSkip the \"draw encounter cards\" step of the next mythos phase. Max twice per game.",
+    "traits": "Spirit.",
+    "type_code": "event",
+    "xp": 3
+  },
+  {
     "code": "11083",
     "cost": 3,
     "deck_limit": 2,
@@ -444,6 +466,22 @@
     "traits": "Ally. Artist. Patron.",
     "type_code": "asset",
     "xp": 0
+  },
+  {
+    "code": "11091",
+    "cost": 1,
+    "deck_limit": 3,
+    "faction_code": "survivor",
+    "illustrator": "Rob Laskey",
+    "name": "Good Weather",
+    "pack_code": "tdcp",
+    "position": 91,
+    "quantity": 3,
+    "skill_wild": 1,
+    "text": "Myriad. Fast. Play after the investigation phase begins. Group limit 1 in play.\nPut Good Weather into play next to the agenda deck and choose a skill. While this card is in play, each investigator gets +2 to the chosen skill.\n<b>Forced</b> - When the investigation phase begins: Discard Good Weather.",
+    "traits": "Blessed. Fortune.",
+    "type_code": "event",
+    "xp": 2
   },
   {
     "code": "11092",
@@ -476,6 +514,25 @@
     "traits": "Item. Miskatonic.",
     "type_code": "asset",
     "xp": 1
+  },
+  {
+    "code": "11103",
+    "cost": 2,
+    "deck_limit": 2,
+    "faction_code": "neutral",
+    "illustrator": "Dimitri Bielak",
+    "name": "Forbidden Sutra",
+    "pack_code": "tdcp",
+    "position": 103,
+    "quantity": 2,
+    "restrictions": "trait:blessed, trait:cursed, trait:sorcerer",
+    "skill_wild": 1,
+    "skill_willpower": 1,
+    "slot": "Hand",
+    "text": "[[Blessed]], [[Cursed]], [[Sorcerer]] deck only.\nYou get +1 skill value while resolving [[Spell]] events.\n[reaction] During a skill test on a [[Spell]] event, take up to 3 horror: For each horror taken, reveal an additional chaos token for this test. Choose 1 of the revealed tokens to resolve and ignore the rest.",
+    "traits": "Item. Tome. Blessed. Cursed.",
+    "type_code": "asset",
+    "xp": 2
   },
   {
     "code": "11106",
@@ -553,40 +610,5 @@
     "traits": "Ally.",
     "type_code": "asset",
     "xp": 5
-  },
-  {
-    "code": "11079",
-    "cost": 0,
-    "deck_limit": 2,
-    "faction_code": "mystic",
-    "illustrator": "Lin Hsiang",
-    "name": "Deliverance",
-    "pack_code": "tdcp",
-    "position": 79,
-    "quantity": 2,
-    "skill_willpower": 1,
-    "text": "",
-    "traits": "Spirit.",
-    "type_code": "event",
-    "xp": 3
-  },
-  {
-    "code": "11103",
-    "cost": 2,
-    "deck_limit": 2,
-    "faction_code": "neutral",
-    "illustrator": "Dimitri Bielak",
-    "name": "Forbidden Sutra",
-    "pack_code": "tdcp",
-    "position": 103,
-    "quantity": 2,
-    "restrictions": "trait:blessed, trait:cursed, trait:sorcerer",
-    "skill_willpower": 1,
-    "skill_wild": 1,
-    "slot": "Hand",
-    "text": "",
-    "traits": "Item. Tome. Blessed. Cursed.",
-    "type_code": "asset",
-    "xp": 2
   }
 ]

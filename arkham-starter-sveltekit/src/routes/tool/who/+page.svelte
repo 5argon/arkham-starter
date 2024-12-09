@@ -1,11 +1,14 @@
 <script lang="ts">
 	import {
+		CardClass,
 		cardClassToBackgroundClass,
 		cardClassToName,
 		classCodeToCardClass,
 	} from '$lib/core/card-class'
+	import { CardPack } from '$lib/core/card-pack'
 	import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
 	import { ExtraColumn } from '$lib/deck-table/grouping'
+	import Button from '$lib/design/components/basic/Button.svelte'
 	import ListDivider from '$lib/design/components/basic/ListDivider.svelte'
 	import CardLaid from '$lib/design/components/deck-table/CardLaid.svelte'
 	import CardTableGrouped from '$lib/design/components/deck-table/CardTableGrouped.svelte'
@@ -55,6 +58,66 @@
 				labels: labels,
 			}
 		})
+	}
+
+	function copyToClipboard(withEmoji:boolean) {
+		function cardClassToEmoji(cardClass: CardClass | undefined) {
+			if(!withEmoji){
+				return ''
+			}
+			switch (cardClass) {
+				case CardClass.Guardian:
+					return ':ClassGuardian:'
+				case CardClass.Seeker:
+					return ':ClassSeeker:'
+				case CardClass.Rogue:
+					return ':ClassRogue:'
+				case CardClass.Mystic:
+					return ':ClassMystic:'
+				case CardClass.Survivor:
+					return ':ClassSurvivor:'
+				default:
+					return ''
+			}
+		}
+
+		const whoCanUse = 'Who Can Use :'
+		const query = showingEntries.map((x) => {
+			const card = data.pdb.getByIdThrowNull(x.cardId)
+			const cardName = card.original.n
+			const cardClass1 = card.class1
+			const cardClass2 = card.class2
+			const cardClass3 = card.class3
+			const levelString =
+				card.original.xp !== undefined && card.original.xp > 0 ? `(${card.original.xp})` : ''
+			return `- ${cardClassToEmoji(cardClass1)}${cardClassToEmoji(cardClass2)}${cardClassToEmoji(
+				cardClass3,
+			)} ${cardName} ${levelString}`
+		})
+		const result = 'Result : '
+		const resultList = investigatorResult.map((x) => {
+			const investigator = data.fdb.getCard(x.cardId)
+			const parallelStatus = investigator.packIcon === CardPack.ParallelInvestigator
+			const investigatorName = parallelStatus
+				? '⇅ ' + investigator.original.name
+				: investigator.original.name
+			const investigatorClass = cardClassToEmoji(investigator.class1)
+			let labelString = ''
+			if (x.labels) {
+				labelString = '(' + x.labels.map((x) => x.text).join(', ') + ')'
+			}
+			const final: string[] = ['-']
+			if (investigatorClass.length > 0) {
+				final.push(investigatorClass)
+			}
+			final.push(investigatorName)
+			if (labelString.length > 0) {
+				final.push(labelString)
+			}
+			return final.join(' ')
+		})
+		const final = [whoCanUse, ...query, '', result, ...resultList]
+		navigator.clipboard.writeText(final.join('\n'))
 	}
 </script>
 
@@ -109,6 +172,18 @@
 {#if investigatorResult.length > 0}
 	<ListDivider label="Result" />
 	<div>
+		<Button
+			label="Copy Text"
+			onClick={() => {
+				copyToClipboard(false)
+			}}
+		/>
+		<Button
+			label="Copy Text with Discord Emoji"
+			onClick={() => {
+				copyToClipboard(true)
+			}}
+		/>
 		<CardTableGrouped
 			entries={investigatorResult}
 			groupings={[]}
