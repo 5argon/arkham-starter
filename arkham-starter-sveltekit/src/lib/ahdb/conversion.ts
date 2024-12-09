@@ -166,6 +166,7 @@ export function packCodeToIconConversion(p: string): CardPack {
 		case 'ptr':
 		case 'rop':
 		case 'hfa':
+		case 'pap':
 		case 'aof':
 			return CardPack.ParallelInvestigator
 		case 'books':
