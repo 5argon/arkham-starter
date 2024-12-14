@@ -191,6 +191,9 @@ export function packCodeToIconConversion(p: string): CardPack {
 		case 'ste':
 			return CardPack.StellaClark
 
+		case 'blbe':
+			return CardPack.TheBlobThatAteEverythingElse
+
 		case 'dwl':
 		case 'tmm':
 		case 'tece':

@@ -105,5 +105,6 @@ export interface AhdbDeckOption {
 	uses?: string[]
 	size?: number
 	type?: string[]
+	permanent?: boolean
 	deck_size_select?: string[]
 }

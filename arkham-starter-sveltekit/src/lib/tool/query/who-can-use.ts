@@ -312,6 +312,12 @@ function qualify(
 		return 'next'
 	}
 
+	if (opt.permanent !== undefined && opt.permanent === true) {
+		if (card.original.permanent === false) {
+			return 'next'
+		}
+	}
+
 	if (opt.not !== undefined && opt.not === true) {
 		return 'fail'
 	}
