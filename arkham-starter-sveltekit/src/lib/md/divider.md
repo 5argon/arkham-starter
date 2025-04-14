@@ -52,7 +52,7 @@ Why this is an advantage for **you**? When you choose to go with any divider, yo
 ## Languages
 
 - English
-- German (Contributed by : [@empty0911](https://boardgamegeek.com/user/empty0911), [@Miriamelbgg](https://boardgamegeek.com/user/Miriamelbgg), [@kabelrambo](https://boardgamegeek.com/user/kabelrambo))
+- German (Contributed by : [@empty0911](https://boardgamegeek.com/user/empty0911), [@Miriamelbgg](https://boardgamegeek.com/user/Miriamelbgg), [@kabelrambo](https://boardgamegeek.com/user/kabelrambo), pandemoneus#1283)
 - Italian (Contributed by : [@fabioflx](https://boardgamegeek.com/user/fabioflx))
 - Russian (Contributed by : [@khrabr](https://boardgamegeek.com/user/khrabr))
 - Spanish (Contributed by : [@colococolo](https://boardgamegeek.com/user/colococolo), [@Fran77](https://boardgamegeek.com/user/Fran77), [@Lisabo86](https://boardgamegeek.com/user/Lisabo86))

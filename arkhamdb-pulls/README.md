@@ -10,7 +10,7 @@ Blatantly steals images of all those cards from arkham.build as much as possible
 
 This empties the target folder on each run. As this use someone else's bandwidth, you shouldn't run this often.
 
-## `add`
+## `patch`
 
 Add additional card graphics to the `download` result, whether it's English or other languages. These came from `patch` folder. Now we are ready to create `valid.json` which tells you what images are available or missing.
 

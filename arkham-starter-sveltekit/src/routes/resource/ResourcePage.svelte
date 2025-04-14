@@ -2,19 +2,12 @@
 	import ResourceItem from './ResourceItem.svelte'
 </script>
 
-<ResourceItem
-	url="/starter-decks"
-	title="Starter Decks"
-	description="Welcome to Arkham Horror LCG! These are decks designed to use the fewest purchases possible ready to go with a complete play guide, so you can find many options no matter how small your collection is or which product you purchased first."
-	image="starter.webp"
-/>
-
 <h2>Reference Materials</h2>
 
 <ResourceItem
 	url="/explore"
 	title="Explore Investigator Expansions"
-	description="An interactive gallery of cards inside each Investigator Expansion to help you decide on your purchase."
+	description="Gallery of cards inside each product, along with links to read more about it from the community to help you decide on your purchase, which sets this apart from card database site such as arkhamdb.com or arkham.build"
 	image="explore.webp"
 />
 <ResourceItem
@@ -25,10 +18,8 @@
 />
 <ResourceItem
 	url="/card"
-	title="Player Card"
-	description="Search and take a look at the image of any player card. Multi Mode let you lay down multiple cards
-	side by side in any order, like on a physical table. This tool is fast and can handle fuzzy
-	search!"
+	title="Player Card Table"
+	description="A blank table where you can summon any player cards to be laid out by typing its name."
 	image="card.webp"
 />
 <ResourceItem

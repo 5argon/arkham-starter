@@ -51,9 +51,19 @@ async function patch(sourcePathWithExtension: string, destLanguage: string) {
   } else if (sourceExtension === "jpg" || sourceExtension === "jpeg") {
     imageData = await decodeJpeg(source)
   } else if (sourceExtension === "png") {
-    imageData = await decodePng(source)
+    try {
+      imageData = await decodePng(source)
+    } catch (e) {
+      console.log("Error decoding png", sourcePathWithExtension)
+      return
+    }
   } else if (sourceExtension === "webp") {
-    imageData = await decodeWebp(source)
+    try {
+      imageData = await decodeWebp(source)
+    } catch (e) {
+      console.log("Error decoding webp", sourcePathWithExtension)
+      return
+    }
   } else {
     throw new Error(`Unsupported source extension: ${sourceExtension}`)
   }
