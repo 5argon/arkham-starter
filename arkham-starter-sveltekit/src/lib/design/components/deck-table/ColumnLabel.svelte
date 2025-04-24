@@ -28,7 +28,7 @@
 	}
 </script>
 
-<div>
+<div class="flex">
 	{#if label.cardId !== undefined}
 		<CardSpan cardId={label.cardId} showImageStrip class1={cardClass} />
 	{/if}
@@ -38,6 +38,11 @@
 </div>
 
 <style>
+	.flex {
+		display: flex;
+		align-items: center;
+	}
+
 	.labelz {
 		font-size: x-small;
 		padding: 1px 4px;

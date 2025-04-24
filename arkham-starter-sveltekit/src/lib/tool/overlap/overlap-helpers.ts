@@ -1,5 +1,9 @@
 import { isRandomBasicWeakness } from '$lib/ahdb/card'
-import { type CardAndAmount, DeckSource, type FetchDeckResult } from '$lib/ahdb/public-api/high-level'
+import {
+	type CardAndAmount,
+	DeckSource,
+	type FetchDeckResult,
+} from '$lib/ahdb/public-api/high-level'
 import { cardClassToBackgroundClass } from '$lib/core/card-class'
 import type { FullDatabase } from '$lib/core/full-database'
 import type { DecklistEntry, DecklistLabel } from '$lib/deck-table/decklist-entry'
@@ -19,10 +23,10 @@ export function exhaustiveCheckOverlaps(decks: FetchDeckResult[], fdb: FullDatab
 		...k_combinations(indexes, 3),
 		...k_combinations(indexes, 4),
 	]
-	return toCheck.map((x) => check(x, decks, fdb))
+	return toCheck.map((x) => exhastiveCheckOverlapsCheck(x, decks, fdb))
 }
 
-function check(c: number[], allDecks: FetchDeckResult[], fdb: FullDatabase): Party {
+function exhastiveCheckOverlapsCheck(c: number[], allDecks: FetchDeckResult[], fdb: FullDatabase): Party {
 	const decks = c.map<FetchDeckResult>((v) => {
 		return allDecks[v]
 	})
@@ -40,7 +44,7 @@ function check(c: number[], allDecks: FetchDeckResult[], fdb: FullDatabase): Par
 					cardId: y.cardId,
 					amount: y.amount,
 					id: x.source === DeckSource.ArkhamDbPublished ? 'p:' : '' + x.id + suffix,
-					labels: [{ text: investigatorName + suffix, color: colorHex }],
+					labels: [{ text: investigatorName + suffix, color: colorHex , cardId: x.investigatorCode}],
 				}
 			})
 		}
@@ -144,8 +148,7 @@ export function checkOverlaps(
 							{
 								cardId: firstLabel.cardId,
 								color: firstLabel.color,
-								text:
-									(firstLabel.text ?? '') + ' ' + (found.amount ?? 0) + '/' + getQuantity(x.cardId),
+								text: (found.amount ?? 0) + '/' + getQuantity(x.cardId),
 							},
 						]
 					: undefined,
