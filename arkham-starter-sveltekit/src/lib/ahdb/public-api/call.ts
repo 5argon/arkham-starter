@@ -38,6 +38,9 @@ export async function fetchArkhamBuildDeck(deckId  :string) : Promise<AhdbDeck |
 	const publicDeck = joinPath(...arkhamBuildShareApiUrl, deckId)
 	try {
 		const ret2 = await fetchWithRetries(publicDeck)
+		if(ret2.status !== 200) {
+			return null
+		}
 		const s2 = (await ret2.json()) as AhdbDeck
 		return s2
 	} catch {
@@ -49,6 +52,9 @@ export async function fetchPublishedArkhamDbDeck(deckNumber: string): Promise<Ah
 	const publicDecklist = joinPath(...publicApiDecklist, deckNumber)
 	try {
 		const ret = await fetchWithRetries(publicDecklist)
+		if(ret.status !== 200) {
+			return null
+		}
 		const s = (await ret.json()) as AhdbDeck
 		//console.log(s)
 		return s
@@ -79,8 +85,10 @@ export async function fetchPublicArkhamDbDeck(deckNumber: string): Promise<AhdbD
 	const publicDeck = joinPath(...publicApiDeck, deckNumber)
 	try {
 		const ret2 = await fetchWithRetries(publicDeck)
+		if(ret2.status !== 200) {
+			return null
+		}
 		const s2 = (await ret2.json()) as AhdbDeck
-		//console.log(s2)
 		return s2
 	} catch {
 		return null
