@@ -699,6 +699,54 @@
         return import("../individual/svelte/AssimilatingSwarm.svelte");
       case EncounterSet.WarOfTheOuterGods:
         return import("../individual/svelte/WarOfTheOuterGods.svelte");
+      case EncounterSet.ArcaneLock:
+        return import("../individual/svelte/ArcaneLock.svelte");
+      case EncounterSet.ArkhamCh2:
+        return import("../individual/svelte/ArkhamCh2.svelte");
+      case EncounterSet.AshenPilgrims:
+        return import("../individual/svelte/AshenPilgrims.svelte");
+      case EncounterSet.BadWeather:
+        return import("../individual/svelte/BadWeather.svelte");
+      case EncounterSet.Bystanders:
+        return import("../individual/svelte/Bystanders.svelte");
+      case EncounterSet.CosmicEvils:
+        return import("../individual/svelte/CosmicEvils.svelte");
+      case EncounterSet.CultistsCh2:
+        return import("../individual/svelte/CultistsCh2.svelte");
+      case EncounterSet.DeadEnds:
+        return import("../individual/svelte/DeadEnds.svelte");
+      case EncounterSet.EldritchLore:
+        return import("../individual/svelte/EldritchLore.svelte");
+      case EncounterSet.EnthrallingEncore:
+        return import("../individual/svelte/EnthrallingEncore.svelte");
+      case EncounterSet.FireCh2:
+        return import("../individual/svelte/FireCh2.svelte");
+      case EncounterSet.FlyingTerrors:
+        return import("../individual/svelte/FlyingTerrors.svelte");
+      case EncounterSet.GangsOfArkham:
+        return import("../individual/svelte/GangsOfArkham.svelte");
+      case EncounterSet.Hallucinations:
+        return import("../individual/svelte/Hallucinations.svelte");
+      case EncounterSet.MadScience:
+        return import("../individual/svelte/MadScience.svelte");
+      case EncounterSet.MiskatonicUniversity:
+        return import("../individual/svelte/MiskatonicUniversity.svelte");
+      case EncounterSet.PeopleOfArkham:
+        return import("../individual/svelte/PeopleOfArkham.svelte");
+      case EncounterSet.QueenOfAsh:
+        return import("../individual/svelte/QueenOfAsh.svelte");
+      case EncounterSet.ReekingDecay:
+        return import("../individual/svelte/ReekingDecay.svelte");
+      case EncounterSet.Sewers:
+        return import("../individual/svelte/Sewers.svelte");
+      case EncounterSet.SmokeAndMirrors:
+        return import("../individual/svelte/SmokeAndMirrors.svelte");
+      case EncounterSet.SpreadingFlames:
+        return import("../individual/svelte/SpreadingFlames.svelte");
+      case EncounterSet.Torment:
+        return import("../individual/svelte/Torment.svelte");
+      case EncounterSet.WhippoorwillsCh2:
+        return import("../individual/svelte/WhippoorwillsCh2.svelte");
       default:
         const _exhaustive: never = set;
         throw new Error(`Unhandled encounter set: ${_exhaustive}`);
