@@ -8,14 +8,10 @@
 		onSignOut?: () => void;
 	}
 
-	/**
-	 * Desktop-program-style save indicator. The consuming app owns what "save" means
-	 * (e.g. arkham.life exports the database file) and feeds the current state here.
-	 */
+	/** Save indicator; the consuming app owns what "save" means and feeds the state here. */
 	interface SaveInfo {
 		/** 'unsaved' shows the Save button; 'saving' shows progress; 'saved' shows a subtle confirmation (no button). */
 		state: 'saved' | 'unsaved' | 'saving';
-		/** Invoked when the user clicks Save. */
 		onSave?: () => void;
 		/** Heightened (data-loss) styling for the unsaved state. */
 		escalated?: boolean;
@@ -27,7 +23,6 @@
 
 	/** A slim progress line pinned to the header's bottom edge — never shifts content. */
 	interface LoadingInfo {
-		/** Whether the bar is shown. */
 		active: boolean;
 		/** Determinate progress 0..1; omit for an indeterminate animation. */
 		progress?: number;
@@ -118,12 +113,14 @@
 				<span class="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true"></span>
 				<span class="hidden sm:inline">{m.layout_unsaved_changes()}</span>
 			</span>
-			<button
-				onclick={() => save?.onSave?.()}
-				class="cursor-pointer rounded px-2 py-1 text-xs font-semibold transition-colors {saveAccent.button}"
-			>
-				{m.layout_save()}
-			</button>
+			{#if save.onSave}
+				<button
+					onclick={save.onSave}
+					class="cursor-pointer rounded px-2 py-1 text-xs font-semibold transition-colors {saveAccent.button}"
+				>
+					{m.layout_save()}
+				</button>
+			{/if}
 			{#if save.help}
 				<a
 					href={save.help.href}
@@ -224,7 +221,7 @@
 				{/if}
 			</div>
 		{:else}
-			<!-- Identity shown but no account actions (local build): not clickable. -->
+			<!-- Identity shown without account actions: not clickable. -->
 			<div class="flex items-center gap-2 p-1">
 				<UserDisplay username={user.name} card={user.iconCard} size="sm" />
 			</div>

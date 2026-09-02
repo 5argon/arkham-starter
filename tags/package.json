@@ -2,7 +2,7 @@
   "name": "@5argon/arkham-tags",
   "type": "module",
   "scripts": {
-    "sync-unions": "deno run --allow-read --allow-write ./script/generate-unions.ts",
+    "sync-unions": "node ./script/generate-unions.ts",
     "seed-strings": "node ./script/seed-strings.ts",
     "build-strings": "node ./script/build-strings.ts",
     "export-json": "node ./script/export-json.ts",
@@ -30,10 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.55.0",
-    "@typescript-eslint/parser": "^8.55.0",
-    "eslint": "^9.39.2",
-    "prettier": "^3.8.1",
+    "jsdom": "^28.1.0",
     "typescript": "^5.9.3"
   }
 }
